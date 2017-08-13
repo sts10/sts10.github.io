@@ -1,11 +1,8 @@
-+++
-date = "2017-06-27T20:18:05-04:00"
-title = "Getting Started With KeePassXC"
-subtitle = ""
-tags = []
-comments = true
-draft = false
-+++
+---
+layout: post
+title: "Getting Started With KeePassXC"
+date: 2017-06-27 20:18:05 0400
+---
 
 ## What is KeePassXC
 
