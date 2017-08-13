@@ -1,8 +1,10 @@
-+++
-title= "A Social Media Editor Begins Learning to Code"
-date= "2014-02-05 10:46:08 -0500"
-comments = "true"
-+++
+---
+layout: post
+title: "A Social Media Editor Begins Learning to Code"
+date: 2014-02-05 10:46:08 -0500
+comments: true
+---
+
 _This post has been re-published from [my personal Tumblr](http://schlinkblog.tumblr.com/post/74943612048/a-social-media-editor-begins-learning-to-code-or-my) with some edits_.
 
 

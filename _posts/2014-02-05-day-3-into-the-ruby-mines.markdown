@@ -1,8 +1,9 @@
-+++
-title= "Day 3: Into the Ruby Mines"
-date= "2014-02-05 20:56:13 -0500"
-comments = "true"
-+++
+---
+layout: post
+title: "Day 3: Into the Ruby Mines"
+date: 2014-02-05 20:56:13 -0500
+comments: true
+---
 
 
 The pace is starting to pick up! Today marked our first tepid steps into Ruby, introducing not only a new topic, but a new way of thinking required by the course: programming logic. 

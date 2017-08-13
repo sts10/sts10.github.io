@@ -1,8 +1,9 @@
-+++
-title= "Ruby Golf: Finding the Perfect Method"
-date= "2014-05-28 14:06:12 -0400"
-comments = "true"
-+++
+---
+layout: post
+title: "Ruby Golf: Finding the Perfect Method"
+date: 2014-05-28 14:06:12 -0400
+comments: true
+---
 
 Last night I met up with some Rubyists in Chinatown for a round of Ruby Golf. What is Ruby Golf, you ask? From [the event's](http://www.meetup.com/Ruby-Fight-Club/events/183123092/) description: 
 

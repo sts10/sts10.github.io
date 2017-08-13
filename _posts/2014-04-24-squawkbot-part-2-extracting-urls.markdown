@@ -1,8 +1,9 @@
-+++
-title= "SquawkBot Part 2: Extracting URLs"
-date= "2014-04-24 13:52:39 -0400"
-comments = "true"
-+++
+---
+layout: post
+title: "SquawkBot Part 2: Extracting URLs"
+date: 2014-04-24 13:52:39 -0400
+comments: true
+---
 
 In my [first post](http://sts10.github.io/blog/2014/04/21/squawkbot-connecting-to-twitter/) about [SquawkBot](http://squawkbot.herokuapp.com/) ([public GitHub repo](https://github.com/sts10/squawk)), I went over how the app connects to the Twitter REST API. In this post, I'll be discussing the second main part of the app: extracting the URLs from the tweets. 
 

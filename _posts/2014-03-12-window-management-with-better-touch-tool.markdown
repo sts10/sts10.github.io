@@ -1,8 +1,9 @@
-+++
-title= "Window Management with Better Touch Tool"
-date= "2014-03-12 22:10:30 -0400"
-comments = "true"
-+++
+---
+layout: post
+title: "Window Management with Better Touch Tool"
+date: 2014-03-12 22:10:30 -0400
+comments: true
+---
 
 In my most-recent post I wrote about [some Sublime Text tips and tricks](http://sts10.github.io/blog/2014/03/01/some-sublime-text-tips-and-tricks/) I had picked up from an instructional video. I've since been using these new techniques almost constantly, especially the window management keyboard shortcuts (set via Sublime's key-bindings). I've found them to be super-helpful, especially as we moved into Sinatra and now Ruby on Rails, which involves projects with many files. Naturally, I began to explore ways in which I could set keyboard shortcuts to manage the windows of all my programs, not just Sublime Text. 
 

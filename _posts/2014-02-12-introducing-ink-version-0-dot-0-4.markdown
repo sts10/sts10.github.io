@@ -1,8 +1,9 @@
-+++
-title= "Introducing ink version 0.0.4"
-date= "2014-02-12 21:51:25 -0500"
-comments = "true"
-+++
+---
+layout: post
+title: "Introducing ink version 0.0.4"
+date: 2014-02-12 21:51:25 -0500
+comments: true
+---
 
 I’m happy to announce that I’ve made some decent improvements to [ink](https://github.com/sts10/ink), my shell script for making Octopress blogs a little easier. I’ve [just pushed version 0.0.4](https://github.com/sts10/ink), which introduces two new improvements. 
 

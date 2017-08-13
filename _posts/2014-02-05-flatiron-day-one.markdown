@@ -1,8 +1,9 @@
-+++
-title= "Flatiron Day One"
-date= "2014-02-05 12:31:35 -0500"
-comments = "true"
-+++
+---
+layout: post
+title: "Flatiron Day One"
+date: 2014-02-05 12:31:35 -0500
+comments: true
+---
 
 What a luxury it is to be a student again! It's amazing to raise your hand, ask a question, and get a definite answer. Hell, even when our T.A.s (T.A.s!) gave us cryptic answers to our questions, I was ecstatic. 
 

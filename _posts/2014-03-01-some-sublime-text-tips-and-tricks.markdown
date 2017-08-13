@@ -1,8 +1,9 @@
-+++
-title= "Some Sublime Text Tips and Tricks"
-date= "2014-03-01 17:54:50 -0500"
-comments = "true"
-+++
+---
+layout: post
+title: "Some Sublime Text Tips and Tricks"
+date: 2014-03-01 17:54:50 -0500
+comments: true
+---
 
 Thanks to [a blog post](http://ifeisshort.wordpress.com/2014/02/28/simply-sublime-part-1/) by fellow-Flatiron student Emma Ife I found a free tuts+ course called ["Perfect Workflow in Sublime Text 2"](https://tutsplus.com/course/improve-workflow-in-sublime-text-2/) by Jeffrey Way. 
 

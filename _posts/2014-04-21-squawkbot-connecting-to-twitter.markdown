@@ -1,8 +1,9 @@
-+++
-title= "SquawkBot Part 1: Connecting to Twitter"
-date= "2014-04-21 22:35:28 -0400"
-comments = "true"
-+++
+---
+layout: post
+title: "SquawkBot Part 1: Connecting to Twitter"
+date: 2014-04-21 22:35:28 -0400
+comments: true
+---
 
 Today Brian and I launched [SquawkBot](http://squawkbot.herokuapp.com/), a Rails web app that reads users' Twitter timeline, searching for URLs that appear more than once. Here's the [public GitHub repo](https://github.com/sts10/squawk). 
 

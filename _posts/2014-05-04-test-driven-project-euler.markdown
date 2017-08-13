@@ -1,8 +1,9 @@
-+++
-title= "Exploring Project Euler Problem #9"
-date= "2014-05-04 12:34:22 -0400"
-comments = "true"
-+++
+---
+layout: post
+title: "Exploring Project Euler Problem #9"
+date: 2014-05-04 12:34:22 -0400
+comments: true
+---
 
 For practice with Ruby and Rspec, I've been working through some Project Euler problems. One of my favorites so far is [#9](http://projecteuler.net/problem=9), which asks us to find the one Pythagorean triplet for which `a + b + c == 1000`. Here is the [GitHub repo with my solution](https://github.com/sts10/project_euler_num_9) for you to look at while you read long, if you're into that. 
 

@@ -1,8 +1,9 @@
-+++
-title= "Flatiron Day Two"
-date= "2014-02-05 12:33:24 -0500"
-comments = "true"
-+++
+---
+layout: post
+title: "Flatiron Day Two"
+date: 2014-02-05 12:33:24 -0500
+comments: true
+---
 
 It’s day 2 and I’m already thinking about my computer differently. As Avi says, for us it will become more of a tool to build things and less of a device to consume media (he doesn't like iPads either!). 
 

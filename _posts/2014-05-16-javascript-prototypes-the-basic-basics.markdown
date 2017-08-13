@@ -1,8 +1,9 @@
-+++
-title= "JavaScript Prototypes: The Basic Basics"
-date= "2014-05-16 12:48:41 -0400"
-comments = "true"
-+++
+---
+layout: post
+title: "JavaScript Prototypes: The Basic Basics"
+date: 2014-05-16 12:48:41 -0400
+comments: true
+---
 
 I was always understood JavaScript as a functional programming language, but it turns out there are in fact ways to create basic objects and even "object factories" (what Rubyists know as Classes). 
 

@@ -1,8 +1,9 @@
-+++
-title= "Successively Greater Things"
-date= "2014-02-15 03:34:30 -0500"
-comments = "true"
-+++
+---
+layout: post
+title: "Successively Greater Things"
+date: 2014-02-15 03:34:30 -0500
+comments: true
+---
 
 > “What we fight with is so small, and when we win, it makes us small. What we want is to be defeated, decisively, by successively greater things.” 
 

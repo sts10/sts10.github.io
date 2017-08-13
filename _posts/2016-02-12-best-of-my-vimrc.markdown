@@ -1,8 +1,9 @@
-+++
-title= "Best of My vimrc"
-date= "2016-02-12 23:06:59 -0500"
-comments = "true"
-+++
+---
+layout: post
+title: "Best of My vimrc"
+date: 2016-02-12 23:06:59 -0500
+comments: true
+---
 
 I just realized that I've been using Vim for just about a year now (here's [one of my early posts on starting to make the switch](http://sts10.github.io/post/2015-02-15-vim-update/)), so I figured it'd be a good time to go over some of favorite parts of [my vimrc](https://github.com/sts10/terminal_and_vim_settings/blob/master/vimrc). I'm certainly no Vim expert, but if nothing else than recording my "progress," here's a bit about how I use Vim at this point.
 

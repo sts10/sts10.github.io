@@ -1,8 +1,9 @@
-+++
-title= "Thoughts on Week 1"
-date= "2014-02-08 00:26:18 -0500"
-comments = "true"
-+++
+---
+layout: post
+title: "Thoughts on Week 1"
+date: 2014-02-08 00:26:18 -0500
+comments: true
+---
 
 Phew! My brain has been hurting (in a good way) for the first time in years. Looking back over the last 7 days, I’d say I spent at least 14 hours a day dealing with code. The best metaphor I can think of is that part in the Matrix when they plug Keanu Reeves in so he can learn things quickly. That’s what it feels like. 
 

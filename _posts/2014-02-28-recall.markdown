@@ -1,8 +1,9 @@
-+++
-title= "Recall"
-date= "2014-02-28 21:18:12 -0500"
-comments = "true"
-+++
+---
+layout: post
+title: "Recall"
+date: 2014-02-28 21:18:12 -0500
+comments: true
+---
 
 Troublingly, I've taken very few notes during lectures at Flatiron. How will I remember niche methods and strange, counter-intuitive syntaxes?! 
 

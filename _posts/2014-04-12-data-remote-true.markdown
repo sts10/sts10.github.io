@@ -1,8 +1,9 @@
-+++
-title= "How We Used the Data-Remote=True Pattern for AJAXing New Comments in XP"
-date= "2014-04-12 13:20:35 -0400"
-comments = "true"
-+++
+---
+layout: post
+title: "How We Used the Data-Remote=True Pattern for AJAXing New Comments in XP"
+date: 2014-04-12 13:20:35 -0400
+comments: true
+---
 
 For [xp](http://get-xp.herokuapp.com/) ([GitHub Repo](https://github.com/kronosapiens/xp)), our skillshare-like web app for the Flatiron community, Daniel and I knew that we had to make it easy for students and teachers to coordinate lesson logistics. They would need a place and a way to hash out details like what a lesson would cover, where and when it would meet, how long it would last, etc. One way I thought we could do this is to give users the ability to comment on individual lessons. 
 

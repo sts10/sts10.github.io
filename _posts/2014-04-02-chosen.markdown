@@ -1,8 +1,9 @@
-+++
-title= "Using Chosen with Rails"
-date= "2014-04-02 22:10:50 -0400"
-comments = "true"
-+++
+---
+layout: post
+title: "Using Chosen with Rails"
+date: 2014-04-02 22:10:50 -0400
+comments: true
+---
 
 Daniel and I are working on a Skillshare-like site for Flatiron students. Basically users can post lessons that they either want to teach as teachers or want to take as students. Then other users can sign up for these lessons, as either students or teachers.
 

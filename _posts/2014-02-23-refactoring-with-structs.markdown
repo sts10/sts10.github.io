@@ -1,8 +1,9 @@
-+++
-title= "Refactoring with POODR"
-date= "2014-02-23 18:45:07 -0500"
-comments = "true"
-+++
+---
+layout: post
+title: "Refactoring with POODR"
+date: 2014-02-23 18:45:07 -0500
+comments: true
+---
 
 Over the weekend I’ve been working a new side project in order to get more practice generating dynamic webpages using ERB. I’m calling it Recall and it’s supposed to take a Ruby method as a user input from the command line and then dynamically generate a new webpage that displays every time you’ve used that method, complete with the code line, the line number, and a link to the .rb file you used it in. 
 
