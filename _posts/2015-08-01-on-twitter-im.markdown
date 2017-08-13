@@ -1,8 +1,9 @@
-+++
-title= "On Twitter Image Ratios"
-date= "2015-08-01 13:45:47 -0400"
-comments = "true"
-+++
+---
+layout: post
+title: "On Twitter Image Ratios"
+date: 2015-08-01 13:45:47 -0400
+comments: true
+---
 
 Many websites and infographics I have consulted claim that on Twitter, shared images, images that users attach to their tweets as opposed to profile and banner images, are always displayed in a 2 to 1 ratio, whether in-stream or when "expanded." 
 

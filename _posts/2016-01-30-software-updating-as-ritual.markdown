@@ -1,8 +1,9 @@
-+++
-title= "Software Updating As Ritual"
-date= "2016-01-30 12:39:02 -0500"
-comments = "true"
-+++
+---
+layout: post
+title: "Software Updating As Ritual"
+date: 2016-01-30 12:39:02 -0500
+comments: true
+---
 
 A few weeks ago I read [a blog post](http://mirrorshades.net/post/132753032310) by [Bryan Horstmann-Allen](https://github.com/bdha) (h/t [Paul Ford](https://twitter.com/ftrain/status/671127035675353088)) about him getting frustrated with OS X. Here's how he framed his issue: 
 

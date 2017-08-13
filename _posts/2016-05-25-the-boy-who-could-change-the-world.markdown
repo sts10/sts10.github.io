@@ -1,8 +1,9 @@
-+++
-title= "The Boy Who Could Change the World"
-date= "2016-05-25 22:37:36 -0400"
-comments = "true"
-+++
+---
+layout: post
+title: "The Boy Who Could Change the World"
+date: 2016-05-25 22:37:36 -0400
+comments: true
+---
 
 I hadn't heard of Aaron Swartz until his suicide in January of 2013. Soon after, I hungrily read the news and remembrances I could about the young man (enough so that I ended up writing [a short note on those mourning him for The Daily Beast](http://www.thedailybeast.com/articles/2013/01/13/mourning-aaron-swartz-internet-activist-and-free-information-advocate.html)). At the time I thought (and still do, I suppose) that [this _New Yorker_ piece by Larissa MacFarquhar](http://www.newyorker.com/magazine/2013/03/11/requiem-for-a-dream) was the best. In general I was interested in Swartz's beliefs and his work, both technical and political, but from MacFarquhar's piece I particularly remember her focus on how Swartz, at least at times, felt like an imposition on his friends and the world at large:
 

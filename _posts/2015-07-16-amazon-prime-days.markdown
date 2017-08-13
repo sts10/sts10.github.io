@@ -1,8 +1,9 @@
-+++
-title= "Amazon Prime Days"
-date= "2015-07-16 21:02:47 -0400"
-comments = "true"
-+++
+---
+layout: post
+title: "Amazon Prime Days"
+date: 2015-07-16 21:02:47 -0400
+comments: true
+---
 
 Right, so yesterday, July 15th, 2015, was [Amazon's first "Prime Day"](http://www.theverge.com/2015/7/15/8968881/amazon-prime-day-best-deals). They offered a bunch of deals (which turned out to be [pretty](http://money.cnn.com/2015/07/15/news/amazon-walmart-prime-day-customers/) [crummy](http://www.wired.com/2015/07/shoppers-frustrated-prime-day/)) to their Prime customers. Whatever! 
 

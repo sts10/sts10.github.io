@@ -1,8 +1,9 @@
-+++
-title= "Catalog of Radiation Updates"
-date= "2014-10-16 22:10:40 -0400"
-comments = "true"
-+++
+---
+layout: post
+title: "Catalog of Radiation Updates"
+date: 2014-10-16 22:10:40 -0400
+comments: true
+---
 
 _On May 21st 2015, I migrated a handful of blog posts of mine from my [totallynuclear page](http://totallynuclear.club/~schlink/) back to [this GitHub blog](http://sts10.github.io/). (If the totallynuclear page is down, you might be able to find a back up of my posts in [this GitHub repo](https://github.com/sts10/radiation_posts).)_
 

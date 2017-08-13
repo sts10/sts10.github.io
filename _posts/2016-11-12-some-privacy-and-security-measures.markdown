@@ -1,8 +1,9 @@
-+++
-title= "Some Privacy and Security Measures I've Taken Recently"
-date= "2016-11-12 22:24:33 -0500"
-comments = "true"
-+++
+---
+layout: post
+title: "Some Privacy and Security Measures I've Taken Recently"
+date: 2016-11-12 22:24:33 -0500
+comments: true
+---
 
 Over the summer of 2016 I started to pay a little more attention to my privacy and security on the internet and when using computers more generally. Some of this impetus had been slowly growing since the Snowden/NSA revelations and catching the documentary _Citizen 4_. More recently I read a few books about computer security, most notably [_Data and Goliath_ by Bruce Schneier](https://www.amazon.com/Data-Goliath-Battles-Collect-Control/dp/039335217X), and a few on open-source software and Linux: [_The Cathedral and the Bazaar_](https://www.amazon.com/Cathedral-Bazaar-Musings-Accidental-Revolutionary/dp/0596001088/ref=sr_1_1?s=books&ie=UTF8&qid=1479008290&sr=1-1&keywords=cathedral+bazaar), [_Coding Freedom_](https://www.amazon.com/Coding-Freedom-Ethics-Aesthetics-Hacking/dp/0691144613/ref=sr_1_1?s=books&ie=UTF8&qid=1479008327&sr=1-1&keywords=coding+freedom) (which [I admired for its liberal art sensibility](https://twitter.com/sts10/status/778426748321005569)), and [_Code and Other Laws of Cyberspace_ by Lessig](https://www.amazon.com/Code-Other-Laws-Cyberspace-Version/dp/0465039146/ref=sr_1_1?ie=UTF8&qid=1470604763&sr=8-1&keywords=lessig+code), the last of which I wrote [a blog post](https://sts10.github.io/post/2016-08-31-how-we-screw-it-up/) if you're interested.
 

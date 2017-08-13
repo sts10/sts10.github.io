@@ -1,8 +1,9 @@
-+++
-title= "A Problem with Vim's gx Command, And One Solution"
-date= "2016-02-16 23:31:58 -0500"
-comments = "true"
-+++
+---
+layout: post
+title: "A Problem with Vim's gx Command, And One Solution"
+date: 2016-02-16 23:31:58 -0500
+comments: true
+---
 
 I've been playing around with Vim's `gx` command, which in normal mode, when on a URL, opens that URL in your default browser (see `:h gx`). However today I ran into an interesting problem-- if a URL has a `?` in it `gx` thinks the URL ends at the `?`. Note that I'm using OS X and Chrome is my default browser. I'm seeing this problem in both MacVim 7.4 (88) and Neovim v0.1.3-61-gf03ab69.
 

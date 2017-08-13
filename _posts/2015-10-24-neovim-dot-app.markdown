@@ -1,8 +1,9 @@
-+++
-title= "Neovim dot app"
-date= "2015-10-24 11:22:23 -0400"
-comments = "true"
-+++
+---
+layout: post
+title: "Neovim dot app"
+date: 2015-10-24 11:22:23 -0400
+comments: true
+---
 
 I was lurking in the [Neovim Gitter room](https://gitter.im/neovim/neovim) this morning and saw someone drop in a link to [this page on projects related to Neovim](https://github.com/neovim/neovim/wiki/Related-projects). 
 

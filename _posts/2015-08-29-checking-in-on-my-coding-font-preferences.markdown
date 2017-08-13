@@ -1,8 +1,9 @@
-+++
-title= "Checking In On My Coding Color and Font Preferences"
-date= "2015-08-29 10:39:11 -0400"
-comments = "true"
-+++
+---
+layout: post
+title: "Checking In On My Coding Color and Font Preferences"
+date: 2015-08-29 10:39:11 -0400
+comments: true
+---
 
 About 18 months ago I wrote a post on my [apps, fonts, and color preferences](http://sts10.github.io/blog/2014/02/14/my-current-coding-setup/) for my coding setup. Interestingly, not much has changed! 
 

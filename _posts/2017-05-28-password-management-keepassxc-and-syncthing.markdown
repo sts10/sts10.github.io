@@ -1,11 +1,10 @@
-+++
-date = "2017-05-28T15:50:47-04:00"
-subtitle = ""
-tags = ["passwords", "mac os", "linux", "syncthing", "keepassxc"]
-title = "Reexamining my Password Management System"
-comments = "true"
+---
+layout: post
+date : 2017-05-28 15:50:47 -0400
+title : "Reexamining my Password Management System"
+comments: true
 
-+++
+---
 
 For the last year and a half I've been using both [1Password](https://1password.com/) and [KeePassX](http://keepassx.org/) to manage my passwords. I've been storing most usernames and passwords using 1Password, since I can easily access it on my iPhone and I have the Chrome extension installed at home, making signing in that much easier. I use 1Password with Dropbox by purchasing the [license](https://agilebits.com/store) rather than pay a regular fee to 1Password (I took some [brief  notes](https://sts10.github.io/post/2015-09-29-1password-setup/) when I set it up in 2015). This means that my password database lives on my Dropbox account (though it's still actually lives on somebody else's computer).
 

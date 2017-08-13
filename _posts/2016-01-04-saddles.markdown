@@ -1,8 +1,9 @@
-+++
-title= "They Would Take Their Saddle With Them"
-date= "2016-01-04 23:16:58 -0500"
-comments = "true"
-+++
+---
+layout: post
+title: "They Would Take Their Saddle With Them"
+date: 2016-01-04 23:16:58 -0500
+comments: true
+---
 
 Via [r/MechanicalKeyboards](https://www.reddit.com/r/MechanicalKeyboards), the mechanical keyboards subbreddit, I found this interesting interview with Eiiti Wada, the creator of the Happy Hacking Keyboard (which I love and use and have [written about before](http://sts10.github.io/blog/2014/12/06/an-update-to-my-keyboard-game/)). The interview's introduction cites a previous interview with Wada where we apparently gave a quote that I think is just lovely: 
 

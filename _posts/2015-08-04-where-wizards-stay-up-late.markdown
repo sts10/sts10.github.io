@@ -1,8 +1,9 @@
-+++
-title= "Where Wizards Stay Up Late"
-date= "2015-08-04 19:44:43 -0400"
-comments = "true"
-+++
+---
+layout: post
+title: "Where Wizards Stay Up Late"
+date: 2015-08-04 19:44:43 -0400
+comments: true
+---
 
 As I [wrote yesterday](http://sts10.github.io/blog/2015/08/02/the-hacker-ethic/), the next book in my semi-impromptu study of late 20th century technological innovation has been [_Where Wizards Stay Up Late: The Origins of the Internet_](http://www.amazon.com/Where-Wizards-Stay-Up-Late/dp/0684832674/ref=sr_1_1?ie=UTF8&qid=1438731853&sr=8-1&keywords=where+wizards+stay+up+late) by Katie Hafner. (Previously: [_The Master Switch_](http://sts10.github.io/blog/2015/07/15/master-switch-and-hackers/) and [_Hackers_](http://sts10.github.io/blog/2015/08/02/the-hacker-ethic/).)
 

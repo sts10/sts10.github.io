@@ -1,8 +1,9 @@
-+++
-title= "Why I Want Text-File Preferences For Every Application I Use"
-date= "2015-02-18 20:14:35 -0400"
-comments = "true"
-+++
+---
+layout: post
+title: "Why I Want Text-File Preferences For Every Application I Use"
+date: 2015-02-18 20:14:35 -0400
+comments: true
+---
 
 I recently started using a text editor called Vim. For the uninitiated, Vim is a lightweight text editor often used for writing code. It comes pre-loaded on some if not all remote servers. Since it's designed to be used without a mouse, there are tons of keyboard shortcuts to learn. This part isn't a huge deal-- for now just know that Vim is a text editor, like Notepad or Sublime Text or Word. (And note that I am still pretty shitty at using it.)
 

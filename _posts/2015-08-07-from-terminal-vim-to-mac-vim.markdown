@@ -1,8 +1,9 @@
-+++
-title= "From Terminal Vim to MacVim"
-date= "2015-08-07 17:17:48 -0400"
-comments = "true"
-+++
+---
+layout: post
+title: "From Terminal Vim to MacVim"
+date: 2015-08-07 17:17:48 -0400
+comments: true
+---
 
 On my work computer I've been having some trouble getting the 2015 MacBook Pro's Terminal Vim to access the system clipboard. There is a chance that the version of Vim that shipped with the computer does not support the feature in which the `*` register is connected to the system clipboard. (I'll note the version number next time I'm in the office.)
 

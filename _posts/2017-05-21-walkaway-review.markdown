@@ -1,11 +1,11 @@
-+++
-date = "2017-05-21T21:44:19-04:00"
-subtitle = ""
-tags = []
-title = "A Sci-Fi Dystopia Reminds Me That Computers Are For Humans"
-draft = true
+---
+layout: post
+date : 2017-05-21 21:44:19 -0400
+title : "A Sci-Fi Dystopia Reminds Me That Computers Are For Humans"
+comments: true
+draft: true
 
-+++
+---
 
 A few months ago I saw this tweet from Tim Carmody about Steve Jobs, the iPhone, and disability. 
 

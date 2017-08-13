@@ -1,9 +1,10 @@
-+++
-title = "Installing Ricochet 1.1.4 on Lubuntu 16.04"
-date = "2017-01-24T21:10:42-04:00"
-comments = "true"
+---
+layout: post
+title : "Installing Ricochet 1.1.4 on Lubuntu 16.04"
+date : 2017-01-24 21:10:42 -0400
+comments: true
 
-+++
+---
 
 When I first installed [Ricochet IM](https://ricochet.im/) on my machine running Lubuntu, I either ran `sudo apt install ricochet-im`, or downloaded it through Ubuntu's GUI "Software" application. Regardless of which I chose, I think both methods install Ricochet version 1.1.2, as opposed the to latest release: [1.1.4](https://github.com/ricochet-im/ricochet/releases/tag/v1.1.4). Considering this is a secure instant messaging app and new versions may contain important security fixes, I wanted to be using the latest version available (which I'm actually thanked in, due to [some extremely minor documentation fixes](https://github.com/ricochet-im/ricochet/commit/fe40045cec8bed9a735c3cecbcca6ae2276d9902)). 
 

@@ -1,8 +1,9 @@
-+++
-title= "Using Ruby 2.3's dig method and safe navigation operator to navigate nested objects like the Facebook Insights object"
-date= "2016-01-06 22:37:24 -0500"
-comments = "true"
-+++
+---
+layout: post
+title: "Using Ruby 2.3's dig method and safe navigation operator to navigate nested objects like the Facebook Insights object"
+date: 2016-01-06 22:37:24 -0500
+comments: true
+---
 
 Ruby 2.3.0 was [released on Christmas](https://www.ruby-lang.org/en/news/2015/12/25/ruby-2-3-0-released/). Woohoo! 
 

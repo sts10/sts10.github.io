@@ -1,8 +1,9 @@
-+++
-title= "Getting Friendlier With Vim"
-date= "2015-02-15 18:47:39 -0400"
-comments = "true"
-+++
+---
+layout: post
+title: "Getting Friendlier With Vim"
+date: 2015-02-15 18:47:39 -0400
+comments: true
+---
 
 A few months ago I wrote [a post about my first time tipping a toe in the water of Vim](http://sts10.github.io/blog/2014/09/10/getting-started-with-vim/), an intensely keystroke-based text editor. Despite getting the basics down, I still did 95% of my coding in Sublime Text 2, my old go-to editor. 
 

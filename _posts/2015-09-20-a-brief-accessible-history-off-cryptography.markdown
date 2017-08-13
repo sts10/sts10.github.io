@@ -1,8 +1,9 @@
-+++
-title= "A Brief, Accessible History of Cryptography"
-date= "2015-09-20 21:21:06 -0400"
-comments = "true"
-+++
+---
+layout: post
+title: "A Brief, Accessible History of Cryptography"
+date: 2015-09-20 21:21:06 -0400
+comments: true
+---
 
 After reading [a history of Bell Labs](http://sts10.github.io/blog/2015/09/14/bell-labs-the-idea-factory/), I took a slight detour in my reading list. First, I read about half of [an introduction to information theory](http://www.amazon.com/Information-Theory-Introduction-James-Stone/dp/0956372856/ref=sr_1_1?ie=UTF8&qid=1442798583&sr=8-1&keywords=information+theory+tutorial), then sort of bailed when I got to calculating the information entropy of continuous variables and jumped to a lighter history of cryptography called [The Code Book: The Science of Secrecy from Ancient Egypt to Quantum Cryptography](http://www.amazon.com/Code-Book-Science-Secrecy-Cryptography/dp/0385495323/ref=sr_1_1?ie=UTF8&qid=1442798113&sr=8-1&keywords=code+book) by Simon Singh. 
 

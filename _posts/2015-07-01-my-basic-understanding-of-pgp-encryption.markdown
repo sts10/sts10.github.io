@@ -1,8 +1,9 @@
-+++
-title= "My Basic Understanding of PGP Encryption"
-date= "2015-07-01 21:25:48 -0400"
-comments = "true"
-+++
+---
+layout: post
+title: "My Basic Understanding of PGP Encryption"
+date: 2015-07-01 21:25:48 -0400
+comments: true
+---
 
 Last week I attended a class on basic digital security at the BuzzFeed office, which included some basic encryption techniques. Before the class I knew nothing about how PGP encryption works, but now that I've got a bit of a handle on it I figured I'd lay down what I know so far here. I'm going to err on the side of practical rather than philosophical here, since that was the gist of the class. 
 

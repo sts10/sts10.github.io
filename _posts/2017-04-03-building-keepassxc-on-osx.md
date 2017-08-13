@@ -1,11 +1,9 @@
-+++
-date = "2017-04-03T23:01:15-04:00"
-title = "Building KeePassXC from GitHub Source on MacOS 10.10.5"
-comments = "true"
-tags = []
-subtitle = ""
-
-+++
+---
+layout: post
+title: "Building KeePassXC from GitHub Source on MacOS 10.10.5"
+date: 2017-04-03 23:01:15 -0400
+comments: true
+---
 
 I'm excited about a community fork of [KeePassX](https://www.keepassx.org/) called [KeePassXC](https://keepassxc.org). They offer binary builds for the three major operating systems [on their website](https://keepassxc.org/download), however I wanted to build it from source for two reasons: (1) I was a little dubious of KeePassHTTP, which the developers are now building into the pre-built binaries (it appears to be disabled by default, but they have [a warning in the README](https://github.com/keepassxreboot/keepassxc#note-about-keepasshttp)), and (2) I simply wanted the latest version, which already sports some UI improvements from the last time they made the binaries. Plus, to my knowledge, I've never built a real application from the source code before.
 

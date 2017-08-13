@@ -1,8 +1,9 @@
-+++
-title= "Bell Labs: An Institute of Creative Technology"
-date= "2015-09-14 16:09:11 -0400"
-comments = "true"
-+++
+---
+layout: post
+title: "Bell Labs: An Institute of Creative Technology"
+date: 2015-09-14 16:09:11 -0400
+comments: true
+---
 
 This week I finished the most recent book in [my self-guided study of 20th century technology](http://sts10.github.io/blog/categories/books/), namely [_The Idea Factory: Bell Labs and the Great Age of American Innovation_](http://www.amazon.com/Idea-Factory-Great-American-Innovation/dp/0143122797/ref=sr_1_1?ie=UTF8&qid=1442262743&sr=8-1&keywords=ideas+factory), by Jon Gertner. As the title implies, it's a chronicle of research and development wing of AT&T, a history that lasts roughly from the 1920s to its demise in the 1980s. 
 

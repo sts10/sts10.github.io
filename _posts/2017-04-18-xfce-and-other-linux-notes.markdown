@@ -1,11 +1,10 @@
-+++
-date = "2017-04-18T19:55:57-04:00"
-subtitle = ""
-tags = []
-comments = "true"
-title = "Switching to Xfce and Other Linux Notes"
+---
+layout: post
+date: 2017-04-18 19:55:57 -0400
+title : "Switching to Xfce and Other Linux Notes"
+comments: true
 
-+++
+---
 
 This post is a bit of a sequel to my post about [installing Ubuntu on my old Macbook Pro](https://sts10.github.io/post/2016-11-07-installing-ubuntu-on-my-old-macbook-pro/). This is just a collection of notes on improvements I've made to my Ubuntu 16.04 Unity installation, the bulk of which has been changing my desktop environment from Unity to other options.
 

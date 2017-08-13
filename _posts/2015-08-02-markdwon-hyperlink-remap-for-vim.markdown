@@ -1,8 +1,9 @@
-+++
-title= "Markdown HyperLink Remap for Vim"
-date= "2015-08-02 21:53:23 -0400"
-comments = "true"
-+++
+---
+layout: post
+title: "Markdown HyperLink Remap for Vim"
+date: 2015-08-02 21:53:23 -0400
+comments: true
+---
 
 I've been writing these blog posts in Vim for a few months now. It's been a great way to practice and hone my Vim skills in a slower, less intense environment (as compared to deployed code). 
 

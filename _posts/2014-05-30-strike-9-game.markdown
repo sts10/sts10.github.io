@@ -1,8 +1,9 @@
-+++
-title= "Strike 9 Game"
-date= "2014-05-30 10:03:10 -0400"
-comments = "true"
-+++
+---
+layout: post
+title: "Strike 9 Game"
+date: 2014-05-30 10:03:10 -0400
+comments: true
+---
 
 At my second meet-up of this week, I ventured north to the east 20s for Building JavaScript Games. Our task was to build a seemingly simple game called Strike 9.
 

@@ -1,11 +1,10 @@
-+++
-date = "2017-03-30T22:28:41-04:00"
-title = "Moving to Hugo"
-comments = "true"
-tags = []
-subtitle = ""
+---
+layout: post
+date : 2017-03-30 22:28:41 -0400
+title : "Moving to Hugo"
+comments: true
 
-+++
+---
 
 A couple of weeks ago I was [proud of myself for switching from RVM to rbenv](https://twitter.com/sts10/status/839933857679949829). The reason I made the switch was that I wanted something light-weight and I didn't like the RVM installation process, in particular the need to use the GPG command line tool.
 

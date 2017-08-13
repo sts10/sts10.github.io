@@ -1,8 +1,9 @@
-+++
-title= "Negate Gods, Raise Rocks, and Hate Lies"
-date= "2015-05-27 19:15:44 -0400"
-comments = "true"
-+++
+---
+layout: post
+title: "Negate Gods, Raise Rocks, and Hate Lies"
+date: 2015-05-27 19:15:44 -0400
+comments: true
+---
 
 ![Albert Camus](http://images.popmatters.com/misc_art/r/reprint-albertcamus-650.jpg)
 

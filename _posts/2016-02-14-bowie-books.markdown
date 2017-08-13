@@ -1,8 +1,9 @@
-+++
-title= "Bowie Books"
-date= "2016-02-14 10:50:43 -0500"
-comments = "true"
-+++
+---
+layout: post
+title: "Bowie Books"
+date: 2016-02-14 10:50:43 -0500
+comments: true
+---
 
 On January 11th, the day after David Bowie died, The New York Public Library's blog posted [a list of the musician's 100 favorite books](http://www.nypl.org/blog/2016/01/11/david-bowies-top-100-books?hspace=332034), based off of [a Facebook post on his verified page from 2013](https://www.facebook.com/davidbowie/?target_post=10151603205477665&ref=story_permalink). A friend sent me the NYPL link and I, delighted by the idea of a project, looked up each of them on Amazon. 
 

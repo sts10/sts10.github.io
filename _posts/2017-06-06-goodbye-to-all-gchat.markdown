@@ -1,10 +1,9 @@
-+++
-date = "2017-06-06T22:18:05-04:00"
-subtitle = ""
-tags = []
-title = "Goodbye to All gchat"
-comments = true
-+++
+---
+layout: post
+date : 2017-06-06T22:18:05-04:00
+title : "Goodbye to All gchat"
+comments: true
+---
 
 As some of you may know, [Google is killing gchat (aka Google Talk) and moving users to Hangouts](https://gsuiteupdates.googleblog.com/2017/03/updates-in-g-suite-to-streamline-hangouts-and-gmail.html) after June 26th. 
 

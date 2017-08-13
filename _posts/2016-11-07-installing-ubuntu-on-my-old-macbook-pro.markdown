@@ -1,8 +1,9 @@
-+++
-title= "Installing Ubuntu on my old MacBook Pro"
-date= "2016-11-07 23:07:09 -0500"
-comments = "true"
-+++
+---
+layout: post
+title: "Installing Ubuntu on my old MacBook Pro"
+date: 2016-11-07 23:07:09 -0500
+comments: true
+---
 
 I had an old 17 inch MacBook Pro from 2009 (college) lying around and I figured it'd be a fun challenge to install Linux on it. I had never installed or even used Linux before (to my knowledge). I also, confusingly, hadn't found a clean, step-by-step guide for doing this, so I promised I'd write my process out as thoroughly but simply as I could once I got it done. 
 

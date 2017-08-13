@@ -1,6 +1,7 @@
 ---
+layout: post
 title: "My Favorite 32 MP3s"
-date: 2017-06-26T22:15:04-04:00
+date: 2017-06-26 22:15:04 -0400
 draft: true
 ---
 

@@ -1,8 +1,9 @@
-+++
-title= "Connecting Twitter Bots"
-date= "2015-08-25 19:40:59 -0400"
-comments = "true"
-+++
+---
+layout: post
+title: "Connecting Twitter Bots"
+date: 2015-08-25 19:40:59 -0400
+comments: true
+---
 
 Over the past few weeks I've been chipping away at a little side-project I dreamt-up around 3am one morning. I wanted to make two Twitter bots who would play Connect Four against each other over and over again. I got the idea after I, human Sam, played an emoji-based game of Connect Four with the Twitter account for the Las Vegas Review Journal after the account tweeted this:
 

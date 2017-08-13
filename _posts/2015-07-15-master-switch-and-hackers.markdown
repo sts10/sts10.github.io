@@ -1,8 +1,9 @@
-+++
-title= "Two Books About Computers"
-date= "2015-07-15 22:10:01 -0400"
-comments = "true"
-+++
+---
+layout: post
+title: "Two Books About Computers"
+date: 2015-07-15 22:10:01 -0400
+comments: true
+---
 
 Thanks in part to my two days of jury duty last week, I was able to speed through two books about information technology and computers recently. The first one, which was recommended to me, is called [_The Master Switch_](http://www.amazon.com/Master-Switch-Rise-Information-Empires/dp/0307390993/ref=sr_1_1?ie=UTF8&qid=1437012751&sr=8-1&keywords=master+switch) by Tim Wu, and the second is [_Hackers_](http://www.amazon.com/Hackers-Heroes-Computer-Revolution-Anniversary/dp/1449388396/ref=sr_1_3?ie=UTF8&qid=1437012859&sr=8-3&keywords=hackers) by Steven Levy. 
 

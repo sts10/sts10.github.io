@@ -1,8 +1,9 @@
-+++
-title= "Passing Notes, Or How I Quit Evernote"
-date= "2015-09-28 19:37:46 -0400"
-comments = "true"
-+++
+---
+layout: post
+title: "Passing Notes, Or How I Quit Evernote"
+date: 2015-09-28 19:37:46 -0400
+comments: true
+---
 
 About a week ago I started thinking about how I take notes on desktop and my iPhone. Sometimes I email links and information to myself, other times I use [Evernote](https://evernote.com/). But, like everyone else, my email inbox is a messy place (despite my GMail label just for emails from and to myself, which does help), and I found Evernote slow and clunky on both desktop and iOS. How could I improve on this system? My goal was to store notes taken on desktop and iOS in one place, but not necessarily use the same app suite to edit them in both environments. 
 

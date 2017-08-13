@@ -1,11 +1,9 @@
-+++
-title = "Attempting to Opt Out of SMS Password Reset"
-date = 2017-07-09T11:42:44-04:00
-subtitle = ""
-tags = ["security"]
-comments = true
-draft = false
-+++
+---
+layout: post
+title : "Attempting to Opt Out of SMS Password Reset"
+date: 2017-07-01 20:00:00 -0400
+comments: true
+---
 
 This past week someone gained access to the PayPal account a mobile applications developer named Justin Williams. 
 

@@ -1,8 +1,9 @@
-+++
-title= "Totally Nuclear Club and Radiation"
-date= "2014-10-15 18:47:39 -0400"
-comments = "true"
-+++
+---
+layout: post
+title: "Totally Nuclear Club and Radiation"
+date: 2014-10-15 18:47:39 -0400
+comments: true
+---
 
 I've joined [totallynuclear.club](http://totallynuclear.club/), a shared UNIX serve similar to Paul Ford's [tilde club](http://tilde.club/) (read more about [how tilde club got started](https://medium.com/message/tilde-club-i-had-a-couple-drinks-and-woke-up-with-1-000-nerds-a8904f0a2ebf)). 
 

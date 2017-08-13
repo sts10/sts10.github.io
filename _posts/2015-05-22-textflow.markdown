@@ -1,8 +1,9 @@
-+++
-title= "Formatting Text in OS X"
-date= "2015-05-22 21:00:04 -0400"
-comments = "true"
-+++
+---
+layout: post
+title: "Formatting Text in OS X"
+date: 2015-05-22 21:00:04 -0400
+comments: true
+---
 _Note: Neither of the solutions presented herein are quite right, so like, read through the post before you just start installing stuff._ 
 
 I was poking around Life Hacker just now and found [an interesting post](http://lifehacker.com/textflow-adds-tons-of-text-formatting-options-to-os-x-1706298617) on an Automator workflow called [TextFlow](https://github.com/vmdanilov/TextFlow). LH claimed that it allowed users to quickly and easily format text with options like "sentence case" or "title case," something that I've been meaning to research for a while now. I found success with [a Life Hacker post on saving screenshots](http://lifehacker.com/quickly-change-os-xs-default-screenshot-format-and-loc-1489014578) a while back, so I was down to try this out. 

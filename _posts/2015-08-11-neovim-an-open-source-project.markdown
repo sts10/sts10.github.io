@@ -1,8 +1,9 @@
-+++
-title= "Neovim, An Open-Source Project"
-date= "2015-08-11 21:38:40 -0400"
-comments = "true"
-+++
+---
+layout: post
+title: "Neovim, An Open-Source Project"
+date: 2015-08-11 21:38:40 -0400
+comments: true
+---
 
 When I was moving around [Watch People Code](http://www.watchpeoplecode.com/) the other day while figuring out how to livestream my work on [a new project](http://sts10.github.io/blog/2015/08/07/from-terminal-vim-to-mac-vim/), I found a interview by the site's administrator, [Alexander Putilin](https://github.com/eleweek), with [Justin M. Keyes](https://github.com/justinmk), a contributor to an open-source project called [Neovim](http://neovim.io/). 
 

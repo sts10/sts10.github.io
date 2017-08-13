@@ -1,8 +1,9 @@
-+++
-title= "Update on My Keyboard Usage: The Happy Hacking Keyboard"
-date= "2014-12-06 15:20:52 -0400"
-comments = "true"
-+++
+---
+layout: post
+title: "Update on My Keyboard Usage: The Happy Hacking Keyboard"
+date: 2014-12-06 15:20:52 -0400
+comments: true
+---
 
 Three months ago I [wrote a post on Medium](https://medium.com/adventures-in-consumer-technology/my-latest-obsession-mechanical-keyboards-ef9e28089327) about how I had gotten pretty deep into the world of mechanical keyboards. Over the course of my post, after explaining some of the benefits (as I understood them at the time) and a brief explanation of the key things to look for in a keyboard, I shared that I had ended up purchasing a KUL ES-87 Cherry MX Brown TKL keyboard ([Amazon link, where I bought it from](http://www.amazon.com/ES-87-Tenkeyless-Mechanical-Keyboard-Cherry/dp/B00KI1ZAHY/ref=sr_1_1?ie=UTF8&qid=1411184774&sr=8-1&keywords=kul+87+brown), [KUL product page](http://www.keyeduplabs.com/es-87.html)). 
 

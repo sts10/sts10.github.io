@@ -1,8 +1,9 @@
-+++
-title= "New Media as Wire Service: Will Social Networks and Distributed Publishing Tools Meet Halfway?"
-date= "2015-08-02 13:35:46 -0400"
-comments = "true"
-+++
+---
+layout: post
+title: "New Media as Wire Service: Will Social Networks and Distributed Publishing Tools Meet Halfway?"
+date: 2015-08-02 13:35:46 -0400
+comments: true
+---
 
 > Wire services have to provide a product all of their subscribers can use — no matter how they publish or design their paper. So wire copy needs to be simple. Stories the Associated Press sends to its customers can't be as innovative in their form as stories the New York Times or the Washington Post lovingly design for their front pages...
 > So it won't make much sense to pump endless energy into innovative, custom articles. Why spend so much of your time on a piece or a format that will only be available to a fraction of your audience? [I]nnovation will slow.

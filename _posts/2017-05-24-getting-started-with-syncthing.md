@@ -1,11 +1,9 @@
-+++
-date = "2017-05-24T18:46:34-04:00"
-subtitle = ""
-tags = ["syncthing", "max os", "linux"]
-title = "Getting Started with Syncthing"
-comments = "true"
-
-+++
+---
+layout: post
+date : 2017-05-24 18:46:34 -0400
+title : "Getting Started with Syncthing"
+comments: true
+---
 
 I was looking for an open-source, free, and secure way of frequently moving files between computers. [Privacytools.io](https://privacytoolsio.github.io/privacytools.io/) pointed me to [Syncthing](https://syncthing.net/). I subsequently found a few [blog](https://linuxctl.com/2017/04/syncthing---why-you-should-be-using-it/) [posts](https://blog.matthewurch.ca/?p=309) recommending it. It doesn't store any data in the cloud-- it merely keeps a list of folders in sync across any number of computers.
 

@@ -2,6 +2,7 @@
 layout: post
 title: "Getting Started With KeePassXC"
 date: 2017-06-27 20:18:05 0400
+comments: true
 ---
 
 ## What is KeePassXC

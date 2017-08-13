@@ -1,8 +1,9 @@
-+++
-title= "The Hacker Ethic"
-date= "2015-08-02 20:07:50 -0400"
-comments = "true"
-+++
+---
+layout: post
+title: "The Hacker Ethic"
+date: 2015-08-02 20:07:50 -0400
+comments: true
+---
 
 As I mentioned in [my post about _The Master Switch_](http://sts10.github.io/blog/2015/07/15/master-switch-and-hackers/), right after I finished Wu's book I dove into [_Hackers_](http://www.amazon.com/Hackers-Heroes-Computer-Revolution-Anniversary/dp/1449388396/ref=sr_1_3?ie=UTF8&qid=1437012859&sr=8-3&keywords=hackers) by Steven Levy. 
 

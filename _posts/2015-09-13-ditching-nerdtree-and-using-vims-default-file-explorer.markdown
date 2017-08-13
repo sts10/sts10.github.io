@@ -1,8 +1,9 @@
-+++
-title= "Ditching NERDTree and Using Vim's 'Default' File Explorer"
-date= "2015-09-13 12:43:56 -0400"
-comments = "true"
-+++
+---
+layout: post
+title: "Ditching NERDTree and Using Vim's 'Default' File Explorer"
+date: 2015-09-13 12:43:56 -0400
+comments: true
+---
 
 When I started using Vim the first plugin I downloaded was [NERDTree](https://github.com/scrooloose/nerdtree), a sidebar file explorer similar to what the text editor I was leaving, Sublime Text, had. It was a good crutch to get me into managing multiple files in Vim, but as I get more comfortable in Vim I'm running into a problem detailed in [this Vimcasts blog post](http://vimcasts.org/blog/2013/01/oil-and-vinegar-split-windows-and-project-drawer/), namely that when you open or split a new file from NERDTree, it is difficult to predict where the new window will open.
 

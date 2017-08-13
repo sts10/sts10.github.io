@@ -1,8 +1,9 @@
-+++
-title= "True HEX Colors with Neovim and iTerm2"
-date= "2015-10-24 14:05:03 -0400"
-comments = "true"
-+++
+---
+layout: post
+title: "True HEX Colors with Neovim and iTerm2"
+date: 2015-10-24 14:05:03 -0400
+comments: true
+---
 
 **Note: I've written [an updated version of this post that shows how to get true colors with terminal Vim or Neovim and iTerm2](https://sts10.github.io/post/2016-06-14-true-hex-colors-in-vim-with-iterm2/)**
 

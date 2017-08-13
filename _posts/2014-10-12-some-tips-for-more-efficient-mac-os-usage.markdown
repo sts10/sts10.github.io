@@ -1,8 +1,9 @@
-+++
-title= "Some Tips for More Efficient Mac OS Usage"
-date= "2014-10-12 00:06:20 -0400"
-comments = "true"
-+++
+---
+layout: post
+title: "Some Tips for More Efficient Mac OS Usage"
+date: 2014-10-12 00:06:20 -0400
+comments: true
+---
 
 We use our computers a lot. It pays to take some time to learn how to use them even just a little bit more efficiently. In general one way to be more efficient is to use your mouse less and your keyboard more, hence keyboard shortcuts. Yes, they can be pain to learn, but once you learn them it becomes worth the investment. 
 

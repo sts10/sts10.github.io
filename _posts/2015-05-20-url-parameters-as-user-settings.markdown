@@ -1,8 +1,9 @@
-+++
-title= "URL Parameters as Semi-Permanent User Settings"
-date= "2015-05-20 17:14:35 -0400"
-comments = "true"
-+++
+---
+layout: post
+title: "URL Parameters as Semi-Permanent User Settings"
+date: 2015-05-20 17:14:35 -0400
+comments: true
+---
 
 In my eight months at BuzzFeed I've written a fair bit of code when the occasion calls for it. 
 

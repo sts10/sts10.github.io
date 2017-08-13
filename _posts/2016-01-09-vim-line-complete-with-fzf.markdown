@@ -1,8 +1,9 @@
-+++
-title= "Vim Line Completion with FZF"
-date= "2016-01-09 21:10:06 -0500"
-comments = "true"
-+++
+---
+layout: post
+title: "Vim Line Completion with FZF"
+date: 2016-01-09 21:10:06 -0500
+comments: true
+---
 
 On [r/vim](http://reddit.com/r/vim) and [r/neovim](https://www.reddit.com/r/neovim) I've heard a lot about [fzf](https://github.com/junegunn/fzf), "A command-line fuzzy finder written in Go" by [junegunn](https://github.com/junegunn) that plays well with Vim and Neovim. 
 

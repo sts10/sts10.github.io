@@ -1,8 +1,10 @@
-+++
-title= "Why I Think Twitter's New Export Blocked User List Feature Is Super Important"
-date= "2015-06-10 19:54:02 -0400"
-comments = "true"
-+++
+---
+layout: post
+title: "Why I Think Twitter's New Export Blocked User List Feature Is Super Important"
+date: 2015-06-10 19:54:02 -0400
+comments: true
+---
+
 Today Twitter [announced that users can export and import lists of blocked users](https://blog.twitter.com/2015/sharing-block-lists-to-help-make-twitter-safer). I don't have the feature on my personal account yet, but a co-worker did and I saw that when you do export, you download a CSV file (Comma Separated Values--basically a software-agnostic spreadsheet). I'm assuming the import side of the feature expects the same file format. 
 
 ![export screenshot](https://g.twimg.com/blog/blog/image/Export_Screenshot_1.png)

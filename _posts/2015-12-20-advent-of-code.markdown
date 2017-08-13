@@ -1,8 +1,9 @@
-+++
-title= "Advent of Code: 25 Days of Coding Challenges"
-date= "2015-12-20 18:52:58 -0500"
-comments = "true"
-+++
+---
+layout: post
+title: "Advent of Code: 25 Days of Coding Challenges"
+date: 2015-12-20 18:52:58 -0500
+comments: true
+---
 
 I was jumping around Reddit earlier this month and stumbled upon [Advent of Code](http://adventofcode.com/), a site created by [Eric Wastl](http://was.tl/) that has "small programming puzzles" for each day of the 25 days of Christmas. Like [Project Euler](http://projecteuler.net/), they are presented in such a way that you can solve them any which way you please. And, having attempted six of them so far, I can say that the challenges are good for a variety of skill levels.
 

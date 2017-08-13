@@ -1,8 +1,9 @@
-+++
-title= "Vimium: Vim in Chrome"
-date= "2015-11-10 21:13:31 -0500"
-comments = "true"
-+++
+---
+layout: post
+title: "Vimium: Vim in Chrome"
+date: 2015-11-10 21:13:31 -0500
+comments: true
+---
 
 I was browsing [my vim multireddit](https://www.reddit.com/user/sts10/m/vim_multi) today and, a few turns down a rabbit hole, found a Chrome Extension called [Vimium](https://vimium.github.io). It's purpose is to provide Vim-like keyboard shortcuts for navigating the web. Here is [the link to the Chrome Store page](https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb). 
 

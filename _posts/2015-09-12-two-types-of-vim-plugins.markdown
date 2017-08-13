@@ -1,8 +1,9 @@
-+++
-title= "Two Types of Vim Plugins"
-date= "2015-09-12 11:11:31 -0400"
-comments = "true"
-+++
+---
+layout: post
+title: "Two Types of Vim Plugins"
+date: 2015-09-12 11:11:31 -0400
+comments: true
+---
 
 Last week I watched most of the videos in [this YouTube playlist of Vim meetups from Thoughtbot](https://www.youtube.com/playlist?list=PL8tzorAO7s0jy7DQ3Q0FwF3BnXGQnDirs). One of the more revelatory for me was [one from John Crepezzi](https://www.youtube.com/watch?v=BhwtnCaFTFk&list=PL8tzorAO7s0jy7DQ3Q0FwF3BnXGQnDirs&index=7) in which he simply goes over how he uses Vim, with an emphasis on the plugins that he uses.
 

@@ -1,8 +1,9 @@
-+++
-title= "1Password Setup"
-date= "2015-09-29 23:01:09 -0400"
-comments = "true"
-+++
+---
+layout: post
+title: "1Password Setup"
+date: 2015-09-29 23:01:09 -0400
+comments: true
+---
 
 ## Desktop
 

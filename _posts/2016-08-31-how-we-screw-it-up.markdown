@@ -1,8 +1,9 @@
-+++
-title= "Messy Technology"
-date= "2016-08-31 22:10:07 -0400"
-comments = "true"
-+++
+---
+layout: post
+title: "Messy Technology"
+date: 2016-08-31 22:10:07 -0400
+comments: true
+---
 
 In [_Master Switch_](https://sts10.github.io/blog/2015/07/15/master-switch-and-hackers/) I got in my head the book's central idea: that information technology goes through a certain Cycle. A refresher: 
 

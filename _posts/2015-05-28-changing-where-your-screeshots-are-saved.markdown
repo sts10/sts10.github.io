@@ -1,8 +1,9 @@
-+++
-title= "Changing Where Your Screeshots Are Saved"
-date= "2015-05-28 19:53:03 -0400"
-comments = "true"
-+++
+---
+layout: post
+title: "Changing Where Your Screenshots Are Saved"
+date: 2015-05-28 19:53:03 -0400
+comments: true
+---
 
 Earlier today BuzzFeed published these [17 Desktops So Untidy They Will Make You Seriously Uncomfortable](http://www.buzzfeed.com/lukebailey/desktop-stuff). From experience I know that since by default OS X saves screenshotted images to your Desktop, they often contribute to Desktop clutter. 
 

@@ -1,8 +1,9 @@
-+++
-title= "Getting Started With Vim"
-date= "2014-09-10 19:21:29 -0400"
-comments = "true"
-+++
+---
+layout: post
+title: "Getting Started With Vim"
+date: 2014-09-10 19:21:29 -0400
+comments: true
+---
 
 Since 2012-ish I've been using Sublime Text 2 as my primary text editor. It's very simple out of the box, but also allows for a fair amount of customization through its packages, settings, snippets, and custom keybindings. I've written about [how I use Sublime Text](http://sts10.github.io/blog/2014/03/01/some-sublime-text-tips-and-tricks/) before, and I still think it's a super powerful editor. 
 

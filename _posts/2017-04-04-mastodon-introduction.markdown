@@ -1,12 +1,11 @@
-+++
-title = "Using Mastodon: An Introduction"
-tags = []
-subtitle = ""
-comments = "true"
-draft = "true"
-date = "2017-04-04T16:11:17-04:00"
+---
+layout: post
+title: "Using Mastodon: An Introduction"
+comments: true
+date: "2017-04-04 16:11:17 -0400"
+draft: true
 
-+++
+---
 
 Back in October I caught wind of a new social network called Mastodon. It _looks_ like Twitter, but it has some incredibly interesting differences, the most notable of which is that it's decentralized, federated, and open-source.
 

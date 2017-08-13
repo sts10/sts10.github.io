@@ -1,8 +1,9 @@
-+++
-title= "True (HEX) Colors in Vim with iTerm2 3.0.1"
-date= "2016-06-14 20:59:32 -0400"
-comments = "true"
-+++
+---
+layout: post
+title: "True (HEX) Colors in Vim with iTerm2 3.0.1"
+date: 2016-06-14 20:59:32 -0400
+comments: true
+---
 
 Last fall I was delighted to figure out [how to get true HEX colors with Neovim and iTerm2](http://sts10.github.io/blog/2015/10/24/true-hex-colors-with-neovim-and-iterm2/). However I have recently learned that you can have these same colors available in regular old terminal Vim (aka command line Vim) and iTerm2. 
 
