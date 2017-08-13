@@ -5,9 +5,9 @@ date: 2015-08-29 10:39:11 -0400
 comments: true
 ---
 
-About 18 months ago I wrote a post on my [apps, fonts, and color preferences](http://sts10.github.io/blog/2014/02/14/my-current-coding-setup/) for my coding setup. Interestingly, not much has changed! 
+About 18 months ago I wrote a post on my [apps, fonts, and color preferences](http://sts10.github.io/2014/02/14/my-current-coding-setup.html) for my coding setup. Interestingly, not much has changed! 
 
-I do now [use MacVim](http://sts10.github.io/blog/2015/08/07/from-terminal-vim-to-mac-vim/) more often than Sublime Text, but I still use ST2 for some things. 
+I do now [use MacVim](http://sts10.github.io/2015/08/07/from-terminal-vim-to-mac-vim.html) more often than Sublime Text, but I still use ST2 for some things. 
 
 ### Colors: An Imperfect Understanding
 

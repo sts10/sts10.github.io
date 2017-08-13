@@ -5,7 +5,7 @@ date: 2014-03-12 22:10:30 -0400
 comments: true
 ---
 
-In my most-recent post I wrote about [some Sublime Text tips and tricks](http://sts10.github.io/blog/2014/03/01/some-sublime-text-tips-and-tricks/) I had picked up from an instructional video. I've since been using these new techniques almost constantly, especially the window management keyboard shortcuts (set via Sublime's key-bindings). I've found them to be super-helpful, especially as we moved into Sinatra and now Ruby on Rails, which involves projects with many files. Naturally, I began to explore ways in which I could set keyboard shortcuts to manage the windows of all my programs, not just Sublime Text. 
+In my most-recent post I wrote about [some Sublime Text tips and tricks](http://sts10.github.io/2014/03/01/some-sublime-text-tips-and-tricks.html) I had picked up from an instructional video. I've since been using these new techniques almost constantly, especially the window management keyboard shortcuts (set via Sublime's key-bindings). I've found them to be super-helpful, especially as we moved into Sinatra and now Ruby on Rails, which involves projects with many files. Naturally, I began to explore ways in which I could set keyboard shortcuts to manage the windows of all my programs, not just Sublime Text. 
 
 <!-- more -->
 
@@ -25,7 +25,7 @@ Below are my current settings:
 
 Basically, I have control + command + arrows set to move the current, or active, window. 'Left' moves it to the left half of the monitor, 'right' to the right half, 'up' maximizes it, and 'down' returns it to its original size ("Restore Old Window Size"). Since I have an external monitor at home, I set control + command + = to maximize on the other monitor, and control + command + - to simply have it switch monitors (which would basically undo the "maximize on the other monitor" command). 
 
-The control + command combo works well with [the Sublime key-bindings I already had in place](http://sts10.github.io/blog/2014/03/01/some-sublime-text-tips-and-tricks/)-- namely using alt + command + arrows to manage my Sublime displays. To switch between these two sets of functions all I have to do is move a finger from alt to control or visa versa. 
+The control + command combo works well with [the Sublime key-bindings I already had in place](http://sts10.github.io/2014/03/01/some-sublime-text-tips-and-tricks.html)-- namely using alt + command + arrows to manage my Sublime displays. To switch between these two sets of functions all I have to do is move a finger from alt to control or visa versa. 
 
 ### Notes
 

@@ -11,7 +11,7 @@ Today Twitter [announced that users can export and import lists of blocked users
 
 <!-- more -->
 
-I think this is super, super important. I've written previously about [why I want all my application preferences to be stored as text](http://sts10.github.io/blog/2015/02/18/text-file-preferences/)-- the main reasons are (1) your settings become extremely portable, and (2) your settings become very easy to share. By allowing all users to export and import CSV lists of block users, Twitter is effectively making this one setting-- a user's blocked user list-- a text-file preference. 
+I think this is super, super important. I've written previously about [why I want all my application preferences to be stored as text](http://sts10.github.io/2015/02/18/text-file-preferences.html)-- the main reasons are (1) your settings become extremely portable, and (2) your settings become very easy to share. By allowing all users to export and import CSV lists of block users, Twitter is effectively making this one setting-- a user's blocked user list-- a text-file preference. 
 
 (Note that the Twitter Rest API already offers developers [access to the authenticating user's block list](https://dev.twitter.com/rest/reference/get/blocks/list) and [ability to make new blocks](https://dev.twitter.com/rest/reference/post/blocks/create), so this _technically_ isn't a new functionality, but it is still a new text-file settings for users. I'm kicking myself for not figuring out the potential power of sharing blocked lists before today. But let's keep going here.)
 

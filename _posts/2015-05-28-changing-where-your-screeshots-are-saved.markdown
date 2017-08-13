@@ -9,7 +9,7 @@ Earlier today BuzzFeed published these [17 Desktops So Untidy They Will Make You
 
 <!-- more -->
 
-I've written about [how I take screenshots before](http://sts10.github.io/blog/2014/12/06/screenshots-mouse-trick/), but just to be thorough, I thought I'd write my own version of [this insightful Lifehacker post on how to change OS X's default screenshot format and location](http://lifehacker.com/quickly-change-os-xs-default-screenshot-format-and-loc-1489014578). 
+I've written about [how I take screenshots before](http://sts10.github.io/2014/12/06/screenshots-mouse-trick.html), but just to be thorough, I thought I'd write my own version of [this insightful Lifehacker post on how to change OS X's default screenshot format and location](http://lifehacker.com/quickly-change-os-xs-default-screenshot-format-and-loc-1489014578). 
 
 OK, let's get to it. 
 

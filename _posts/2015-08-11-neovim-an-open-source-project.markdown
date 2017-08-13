@@ -5,7 +5,7 @@ date: 2015-08-11 21:38:40 -0400
 comments: true
 ---
 
-When I was moving around [Watch People Code](http://www.watchpeoplecode.com/) the other day while figuring out how to livestream my work on [a new project](http://sts10.github.io/blog/2015/08/07/from-terminal-vim-to-mac-vim/), I found a interview by the site's administrator, [Alexander Putilin](https://github.com/eleweek), with [Justin M. Keyes](https://github.com/justinmk), a contributor to an open-source project called [Neovim](http://neovim.io/). 
+When I was moving around [Watch People Code](http://www.watchpeoplecode.com/) the other day while figuring out how to livestream my work on [a new project](http://sts10.github.io/2015/08/07/from-terminal-vim-to-mac-vim.html), I found a interview by the site's administrator, [Alexander Putilin](https://github.com/eleweek), with [Justin M. Keyes](https://github.com/justinmk), a contributor to an open-source project called [Neovim](http://neovim.io/). 
 
 <!-- more -->
 
@@ -21,9 +21,9 @@ But for me two specific points from Keyes stuck out to me:
 
 1. At about 16:20 in the YouTube video he talks about the notion of "intuition" and "taste," citing [Linus Torvald](https://en.wikipedia.org/wiki/Linus_Torvalds). 
 
-2. At 25:50 Keyes talks about how if you've [edited your vimrc file](http://sts10.github.io/blog/2015/02/18/text-file-preferences/)-- even just to add a custom key mapping, you're effectively a plug-in author. I think it's smart to erase the somewhat artificial line between those who package their vimscript functions and key mappings into plug-ins and someone who just adds their own key mappings and vimscript functions to their vimrc files. 
+2. At 25:50 Keyes talks about how if you've [edited your vimrc file](http://sts10.github.io/2015/02/18/text-file-preferences.html)-- even just to add a custom key mapping, you're effectively a plug-in author. I think it's smart to erase the somewhat artificial line between those who package their vimscript functions and key mappings into plug-ins and someone who just adds their own key mappings and vimscript functions to their vimrc files. 
 
-For example, I'm super-satisfied with [my little Markdown keymap](http://sts10.github.io/blog/2015/08/02/markdwon-hyperlink-remap-for-vim/) that I wrote the other day, and I'd be happy to offer it to others who had the same problem/need as I did when I wrote it. And of course, I'd be excited to see how they'd improve it. 
+For example, I'm super-satisfied with [my little Markdown keymap](http://sts10.github.io/2015/08/02/markdwon-hyperlink-remap-for-vim.html) that I wrote the other day, and I'd be happy to offer it to others who had the same problem/need as I did when I wrote it. And of course, I'd be excited to see how they'd improve it. 
 
 By the way, here are [the instructions I followed to install Neovim](https://github.com/neovim/homebrew-neovim/blob/master/README.md) on my machine using [Homebrew](http://brew.sh/). Apparently it's pretty stable as of this summer. 
 
@@ -37,7 +37,7 @@ configuration:
 See ':help nvim' for more information on Neovim.
 ```
 
-But for now I'm still going steady with [MacVim](http://sts10.github.io/blog/2015/08/07/from-terminal-vim-to-mac-vim/). 
+But for now I'm still going steady with [MacVim](http://sts10.github.io/2015/08/07/from-terminal-vim-to-mac-vim.html). 
 
 *Update:*
 

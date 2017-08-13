@@ -7,7 +7,7 @@ comments: true
 
 Today Brian and I launched [SquawkBot](http://squawkbot.herokuapp.com/), a Rails web app that reads users' Twitter timeline, searching for URLs that appear more than once. Here's the [public GitHub repo](https://github.com/sts10/squawk). 
 
-You can find part 2 of this explainer [here](http://sts10.github.io/blog/2014/04/24/squawkbot-part-2-extracting-urls/).
+You can find part 2 of this explainer [here](http://sts10.github.io/2014/04/24/squawkbot-part-2-extracting-urls.html).
 
 ### General Overview of SquawkBot
 
@@ -181,4 +181,4 @@ The twist here is that we defined *our own Tweet object* to better suit our own 
 
 Going back to the Timelines controller, you can probably guess that the `make_url_objs` calls `self.make_tweets` and then, using more instance methods, extracts the links contained in the tweets and creates Url objects, eventually letting us display the results users see on the `show` page.
 
-[Read Part 2 of my SquawkBot explainer](http://sts10.github.io/blog/2014/04/24/squawkbot-part-2-extracting-urls/)
+[Read Part 2 of my SquawkBot explainer](http://sts10.github.io/2014/04/24/squawkbot-part-2-extracting-urls.html)

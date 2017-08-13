@@ -5,9 +5,9 @@ date: 2016-02-12 23:06:59 -0500
 comments: true
 ---
 
-I just realized that I've been using Vim for just about a year now (here's [one of my early posts on starting to make the switch](http://sts10.github.io/post/2015-02-15-vim-update/)), so I figured it'd be a good time to go over some of favorite parts of [my vimrc](https://github.com/sts10/terminal_and_vim_settings/blob/master/vimrc). I'm certainly no Vim expert, but if nothing else than recording my "progress," here's a bit about how I use Vim at this point.
+I just realized that I've been using Vim for just about a year now (here's [one of my early posts on starting to make the switch](http://sts10.github.io/2015/02/15/vim-update.html)), so I figured it'd be a good time to go over some of favorite parts of [my vimrc](https://github.com/sts10/terminal_and_vim_settings/blob/master/vimrc). I'm certainly no Vim expert, but if nothing else than recording my "progress," here's a bit about how I use Vim at this point.
 
-I've already written about [a Markdown hyperlink remap](http://sts10.github.io/post/2015-08-02-markdwon-hyperlink-remap-for-vim/) that still works really well and [how I ditched NERDTree in favor of netrw](http://sts10.github.io/post/2015-09-13-ditching-nerdtree-and-using-vims-default-file-explorer/). But there's plenty of more, smaller tricks I've picked up since then.
+I've already written about [a Markdown hyperlink remap](http://sts10.github.io/2015/08/02/markdwon-hyperlink-remap-for-vim.html) that still works really well and [how I ditched NERDTree in favor of netrw](http://sts10.github.io/2015/09/13/ditching-nerdtree-and-using-vims-default-file-explorer.html). But there's plenty of more, smaller tricks I've picked up since then.
 
 <!-- more -->
 
@@ -15,7 +15,7 @@ I've already written about [a Markdown hyperlink remap](http://sts10.github.io/p
 
 ## Vim vs. MacVim vs. Neovim
 
-Basically I split my usage between [Neovim](https://github.com/neovim/neovim) and [MacVim](https://github.com/macvim-dev/macvim/releases/). Sometimes I want to stay in the terminal (in which case I fire up Neovim), and other times I want a separate GUI. I'll also admit that part of the reason I do this is because the iTerm2 + Neovim combo isn't super stable at this point, as I'm running a beta version of iTerm2 [in order to get better/more colors for Neovim](http://sts10.github.io/post/2015-10-24-true-hex-colors-with-neovim-and-iterm2/). 
+Basically I split my usage between [Neovim](https://github.com/neovim/neovim) and [MacVim](https://github.com/macvim-dev/macvim/releases/). Sometimes I want to stay in the terminal (in which case I fire up Neovim), and other times I want a separate GUI. I'll also admit that part of the reason I do this is because the iTerm2 + Neovim combo isn't super stable at this point, as I'm running a beta version of iTerm2 [in order to get better/more colors for Neovim](http://sts10.github.io/2015/10/24/true-hex-colors-with-neovim-and-iterm2.html). 
 
 One way to make using both easier is to use your existing configuration by making these two symlinks: 
 
@@ -115,7 +115,7 @@ And I set vim-move to `<c-j>` and `<c-k>` with `let g:move_key_modifier = 'C'`. 
 
 ![vim-move in action](https://camo.githubusercontent.com/c06acab07e6bf0bb27086c9694fe2f456101d21c/687474703a2f2f692e696d6775722e636f6d2f524d76384b734a2e676966)
 
-For more of my ~opinions~ plugins, I previously wrote about what I see as the [two types of vim plugins](http://sts10.github.io/post/2015-09-12-two-types-of-vim-plugins/).
+For more of my ~opinions~ plugins, I previously wrote about what I see as the [two types of vim plugins](http://sts10.github.io/2015/09/12/two-types-of-vim-plugins.html).
 
 ## Colorscheme
 
@@ -238,7 +238,7 @@ As mentioned above, I also wrote a handy little mapping for quickly creating lin
 autocmd FileType markdown vnoremap <c-a> <Esc>`<i[<Esc>`>la](<Esc>"*]pa)<Esc>
 ```
 
-Read more about my process coming to that mapping in [this slightly-too-long blog post](https://sts10.github.io/post/2015-08-02-markdwon-hyperlink-remap-for-vim/) if you like.
+Read more about my process coming to that mapping in [this slightly-too-long blog post](https://sts10.github.io/2015/08/02/markdwon-hyperlink-remap-for-vim.html) if you like.
 
 ## Backup, Swap, and Undo
 
@@ -310,7 +310,7 @@ Also, with `textobj-uri`, I can remap `gx` to work better and with more type of 
 
 ```text
 " map gx and go to visually select a URI and then open it in default browser
-" see: http://sts10.github.io/post/2016-02-16-one-solution-to-a-problem-with-vims-gx-command/
+" see: http://sts10.github.io/2016/02/16/one-solution-to-a-problem-with-vims-gx-command.html
 nmap gx mxviugx<Esc>`x
 ```
 
@@ -324,7 +324,7 @@ So for a while I just `set foldmethod=marker` and really only used it in my vimr
 
 Later I realized the power of `set foldmethod=indent`. I particularly liked that it was pretty intuitive to see how it would fold code (by indent!) but it also wouldn't slow Vim down like the `syntax` method could. 
 
-However I wanted to make opening folds easier so I eventually made my first Vim plugin called [vim-zipper](https://github.com/sts10/vim-zipper). You can read about it [on GitHub](https://github.com/sts10/vim-zipper) or in [another blog post](https://sts10.github.io/post/2016-03-20-vim-zipper-my-first-vim-plugin/). 
+However I wanted to make opening folds easier so I eventually made my first Vim plugin called [vim-zipper](https://github.com/sts10/vim-zipper). You can read about it [on GitHub](https://github.com/sts10/vim-zipper) or in [another blog post](https://sts10.github.io/2016/03/20/vim-zipper-my-first-vim-plugin.html). 
 
 ![vim-zipper in action](https://raw.githubusercontent.com/sts10/vim-zipper/master/vim-zipper-gif.gif)
 
@@ -438,7 +438,7 @@ In my early days I had remapped `<Esc>` to `ii` (`imap ii <Esc>`), since escape 
 
 ### File Management
 
-I've tried to find solutions for a couple of problems but have learned to just use Vim's defaults. One example would be file-management: I used to use NERDTree, but [now just use Vim's built-in file explorer](http://sts10.github.io/post/2015-09-13-ditching-nerdtree-and-using-vims-default-file-explorer/), netrw, combined with Tim Pope's [vim-vinegar](https://github.com/tpope/vim-vinegar). I do have [ctrlp.vim](https://github.com/ctrlpvim/ctrlp.vim) (a fuzzy finder) installed, and I even tried [fzf](http://sts10.github.io/post/2016-01-09-vim-line-complete-with-fzf/),but I find that I use netrw more frequently. Though granted I have yet to do a lot of work in a project that has many files, like a Rails project would have, which may necessitate a fuzzy finder.
+I've tried to find solutions for a couple of problems but have learned to just use Vim's defaults. One example would be file-management: I used to use NERDTree, but [now just use Vim's built-in file explorer](http://sts10.github.io/2015/09/13/ditching-nerdtree-and-using-vims-default-file-explorer.html), netrw, combined with Tim Pope's [vim-vinegar](https://github.com/tpope/vim-vinegar). I do have [ctrlp.vim](https://github.com/ctrlpvim/ctrlp.vim) (a fuzzy finder) installed, and I even tried [fzf](http://sts10.github.io/2016/01/09/vim-line-complete-with-fzf.html),but I find that I use netrw more frequently. Though granted I have yet to do a lot of work in a project that has many files, like a Rails project would have, which may necessitate a fuzzy finder.
 
 ### Closing Syntax
 
@@ -460,11 +460,11 @@ Update: If you're really missing Sublime Text's multiple cursor feature, [this s
 
 ### Other Vim Defaults That I Use Frequently
 
-Know that when your cursor is on a URL you can hit `gx` in normal mode Vim will open that URL in your default browser. I've found this to be more helpful than I thought it would be (though there appears to be at least [one strange problem with it](http://sts10.github.io/post/2016-02-16-one-solution-to-a-problem-with-vims-gx-command/)).
+Know that when your cursor is on a URL you can hit `gx` in normal mode Vim will open that URL in your default browser. I've found this to be more helpful than I thought it would be (though there appears to be at least [one strange problem with it](http://sts10.github.io/2016/02/16/one-solution-to-a-problem-with-vims-gx-command.html)).
 
 `o` in visual mode changes which "end" of a visual selection you're changing, which I love for its granularity. 
 
-`<C-x><C-l>` auto completes an entire line, looking within your current buffer for a line to match. (If you're looking for a command to auto-complete lines from your entire project, check out [my post on fzf](http://sts10.github.io/post/2016-01-09-vim-line-complete-with-fzf/).) You may also want to checkout the `:copy Ex` command, explained in [this great vimcast](http://vimcasts.org/episodes/long-range-line-duplication/).
+`<C-x><C-l>` auto completes an entire line, looking within your current buffer for a line to match. (If you're looking for a command to auto-complete lines from your entire project, check out [my post on fzf](http://sts10.github.io/2016/01/09/vim-line-complete-with-fzf.html).) You may also want to checkout the `:copy Ex` command, explained in [this great vimcast](http://vimcasts.org/episodes/long-range-line-duplication/).
 
 ## Things I Don't Really Have an Answer For At This Point
 

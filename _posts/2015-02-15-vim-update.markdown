@@ -5,7 +5,7 @@ date: 2015-02-15 18:47:39 -0400
 comments: true
 ---
 
-A few months ago I wrote [a post about my first time tipping a toe in the water of Vim](http://sts10.github.io/blog/2014/09/10/getting-started-with-vim/), an intensely keystroke-based text editor. Despite getting the basics down, I still did 95% of my coding in Sublime Text 2, my old go-to editor. 
+A few months ago I wrote [a post about my first time tipping a toe in the water of Vim](http://sts10.github.io/2014/09/10/getting-started-with-vim.html), an intensely keystroke-based text editor. Despite getting the basics down, I still did 95% of my coding in Sublime Text 2, my old go-to editor. 
 
 However in the last few weeks I had a need for a fresh project to take up, and, considering that at least some of my future work will be on remote servers which will force me away from editors like Sublime Text, I figured I'd resume my exploration of Vim.
 

@@ -7,7 +7,7 @@ comments: true
 
 Thanks to [a blog post](http://ifeisshort.wordpress.com/2014/02/28/simply-sublime-part-1/) by fellow-Flatiron student Emma Ife I found a free tuts+ course called ["Perfect Workflow in Sublime Text 2"](https://tutsplus.com/course/improve-workflow-in-sublime-text-2/) by Jeffrey Way. 
 
-As you may have gathered from [one of my previous posts](http://sts10.github.io/blog/2014/02/14/my-current-coding-setup/), I'm into this whole make-your-computer-your-personalized-tool concept. When I'm in the Ruby debugging trenches I want every advantage I can get, you know? Obviously having a better understanding of my main code editor, Sublime Text 2, fits into this category. 
+As you may have gathered from [one of my previous posts](http://sts10.github.io/2014/02/14/my-current-coding-setup.html), I'm into this whole make-your-computer-your-personalized-tool concept. When I'm in the Ruby debugging trenches I want every advantage I can get, you know? Obviously having a better understanding of my main code editor, Sublime Text 2, fits into this category. 
 
 The 4 (and a half) coolest things I picked up from Way's course are...
 

@@ -5,7 +5,7 @@ date: 2014-09-10 19:21:29 -0400
 comments: true
 ---
 
-Since 2012-ish I've been using Sublime Text 2 as my primary text editor. It's very simple out of the box, but also allows for a fair amount of customization through its packages, settings, snippets, and custom keybindings. I've written about [how I use Sublime Text](http://sts10.github.io/blog/2014/03/01/some-sublime-text-tips-and-tricks/) before, and I still think it's a super powerful editor. 
+Since 2012-ish I've been using Sublime Text 2 as my primary text editor. It's very simple out of the box, but also allows for a fair amount of customization through its packages, settings, snippets, and custom keybindings. I've written about [how I use Sublime Text](http://sts10.github.io/2014/03/01/some-sublime-text-tips-and-tricks.html) before, and I still think it's a super powerful editor. 
 
 However after meeting and talking to some Emacs and Vim users, I figured I should at least explore those two options. First, I looked into Emacs. 
 
@@ -105,17 +105,17 @@ NERDTree also has allowed me to not have to deal with the Vim buffer, which, whe
 
 ### Color Schemes
 
-Of course you can just roll with your terminal colors and the default Vim syntax highlighting. But I knew that if I actually wanted to use Vim instead of Sublime to code, I'd have to make it look and feel like [my Sublime Text](http://sts10.github.io/blog/2014/02/14/my-current-coding-setup/). I set my Terminal font-face to [DejaVu Sans Mono](http://dejavu-fonts.org/wiki/Download), so that my Vim running in Terminal would also use it. But I also needed to get the colors right to emulate my favorite Sublime theme, [Mustard](http://devthemez.com/themes/mustard).  
+Of course you can just roll with your terminal colors and the default Vim syntax highlighting. But I knew that if I actually wanted to use Vim instead of Sublime to code, I'd have to make it look and feel like [my Sublime Text](http://sts10.github.io/2014/02/14/my-current-coding-setup.html). I set my Terminal font-face to [DejaVu Sans Mono](http://dejavu-fonts.org/wiki/Download), so that my Vim running in Terminal would also use it. But I also needed to get the colors right to emulate my favorite Sublime theme, [Mustard](http://devthemez.com/themes/mustard).  
 
 I had a tough time figuring out how color schemes work in Vim. Part of my confusion stems from the fact that some color schemes you can download for Vim require your terminal have access to 256 colors rather than the usual 16.  
 
 Remember, I'm choosing to run Vim through the OS X's Terminal app, which I believe can only ever handle 16 colors. You can run Vim with 256 colors by downloading and running [MacVim](https://code.google.com/p/macvim/), but I just didn't want to do that (note that MacVim is also known as Cocoa Gui, or gvim. More info [here](http://www.vim.org/download.php#mac)).  
 
-Further adding to my confusion was [iTerm2](http://iterm2.com/)'s promise of being able to run Vim with 256 colors-- I just could not get that to work as expected. Maybe you'll have more luck. UPDATE: To get this feature, even as of December 2015, [you need to use iTerm2's Nightly build](http://sts10.github.io/blog/2015/10/24/true-hex-colors-with-neovim-and-iterm2/) and probably use Neovim.
+Further adding to my confusion was [iTerm2](http://iterm2.com/)'s promise of being able to run Vim with 256 colors-- I just could not get that to work as expected. Maybe you'll have more luck. UPDATE: To get this feature, even as of December 2015, [you need to use iTerm2's Nightly build](http://sts10.github.io/2015/10/24/true-hex-colors-with-neovim-and-iterm2.html) and probably use Neovim.
 
 Thankfully the basic methodology for installing and loading a colorscheme seems to be the same no matter if you're using Terminal, iTerm, or MacVim. You simply mkdir a directory `~/.vim/colors` and then you drop special `.vim` files in there. Once there in the `colors` directory, you can run `:colorscheme colorschemename` in your vim buffer or, to set the default color scheme, just put that same line your `.vimrc` file. 
 
-I needed some base16 Vim color schemes and I eventually found [this git repo](https://github.com/chriskempson/base16-vim) that claimed to be full of them, but when I loaded them their colors were off. This was probably due to the fact that I had modified the 16 ANSI colors in my Terminal preferences to suit [my Terminal setup](http://sts10.github.io/blog/2014/02/05/flatiron-day-two/).  
+I needed some base16 Vim color schemes and I eventually found [this git repo](https://github.com/chriskempson/base16-vim) that claimed to be full of them, but when I loaded them their colors were off. This was probably due to the fact that I had modified the 16 ANSI colors in my Terminal preferences to suit [my Terminal setup](http://sts10.github.io/2014/02/05/flatiron-day-two.html).  
 
 So I set out to make my own base16 color scheme, based off the one I've been using in Sublime Text for months, which is called [Mustard](http://devthemez.com/themes/mustard). It took me a few hours to figure what color affected what part of Ruby, Python, and HTML code, but I ended up with a pretty good match-- [here's the mustard.vim file I created](https://github.com/sts10/terminal_and_vim_settings/blob/master/mustard.vim).
 

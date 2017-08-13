@@ -5,11 +5,11 @@ date: 2014-04-24 13:52:39 -0400
 comments: true
 ---
 
-In my [first post](http://sts10.github.io/blog/2014/04/21/squawkbot-connecting-to-twitter/) about [SquawkBot](http://squawkbot.herokuapp.com/) ([public GitHub repo](https://github.com/sts10/squawk)), I went over how the app connects to the Twitter REST API. In this post, I'll be discussing the second main part of the app: extracting the URLs from the tweets. 
+In my [first post](http://sts10.github.io/2014/04/21/squawkbot-connecting-to-twitter.html) about [SquawkBot](http://squawkbot.herokuapp.com/) ([public GitHub repo](https://github.com/sts10/squawk)), I went over how the app connects to the Twitter REST API. In this post, I'll be discussing the second main part of the app: extracting the URLs from the tweets. 
 
 <!-- more -->
 
-In [part one](http://sts10.github.io/blog/2014/04/21/squawkbot-connecting-to-twitter/) we left off in the Timeline model and we were just about to push our custom Tweet objects into an instance variable called `@tweets`. Again, we're not shoveling in the Tweet objects that Twitter gives us directly. We're pushing in oru own Tweet objects. Let's review this part for a second. 
+In [part one](http://sts10.github.io/2014/04/21/squawkbot-connecting-to-twitter.html) we left off in the Timeline model and we were just about to push our custom Tweet objects into an instance variable called `@tweets`. Again, we're not shoveling in the Tweet objects that Twitter gives us directly. We're pushing in oru own Tweet objects. Let's review this part for a second. 
 
 At the end of the `make_tweets` instance method in the Timeline model, we have this `each` loop, where `timeline` is the array of all the Tweet objects we got from Twitter:
 

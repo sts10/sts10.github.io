@@ -10,13 +10,13 @@ When I first installed [Ricochet IM](https://ricochet.im/) on my machine running
 
 <!-- more --> 
 
-So I went over to [ricochet.im](https://ricochet.im/), found the [releases page](https://ricochet.im/releases/1.1.4/) and downloaded the latest release for Linux, which is currently 1.1.4. I'm running Linux on a 64-bit machine ([an old Macbook Pro](https://sts10.github.io/blog/2016/11/07/installing-ubuntu-on-my-old-macbook-pro/)), so I went with `ricochet-1.1.4-linux-x86_64.tar.bz2`. I downloaded this compressed file to my `Downloads/` directory.
+So I went over to [ricochet.im](https://ricochet.im/), found the [releases page](https://ricochet.im/releases/1.1.4/) and downloaded the latest release for Linux, which is currently 1.1.4. I'm running Linux on a 64-bit machine ([an old Macbook Pro](https://sts10.github.io/2016/11/07/installing-ubuntu-on-my-old-macbook-pro.html)), so I went with `ricochet-1.1.4-linux-x86_64.tar.bz2`. I downloaded this compressed file to my `Downloads/` directory.
 
 ## Verifying the downloaded tar file
 
 To verify the contents of the downloaded tar file, I also downloaded the `.asc` signature file associated with the release I downloaded from to the [releases page](https://ricochet.im/releases/1.1.4/). I then went to the [ricochet.im website](https://ricochet.im/) and downloaded [John Brooks' public gpg key](https://ricochet.im/john-brooks.asc). 
 
-Then in terminal I navigated to my `~/Downloads` directory (`cd ~/Downloads`) and ran `gpg2 --import john-brooks.asc`. gpg2 informed me that 1 key was successfully imported-- woohoo. To double check that this was actually John Brooks' public key that he signs Ricochet releases with, I ran `gpg2 --fingerprint` to list the fingerprints of the ekys on my key ring. I saw the fingerprint for the Brooks key was `9032 CAE4 CBFA 933A 5A21 45D5 FF97 C53F 183C 045D`, which is exactly the same fingerprint listed in [the Ricochet Github README](https://github.com/ricochet-im/ricochet#downloads). 
+Then in terminal I navigated to my `~/Downloads` directory (`cd ~/Downloads`) and ran `gpg2 --import john-brooks.asc`. gpg2 informed me that 1 key was successfully imported-- woohoo. To double check that this was actually John Brooks' public key that he signs Ricochet releases with, I ran `gpg2 --fingerprint` to list the fingerprints of the keys on my key ring. I saw the fingerprint for the Brooks key was `9032 CAE4 CBFA 933A 5A21 45D5 FF97 C53F 183C 045D`, which is exactly the same fingerprint listed in [the Ricochet Github README](https://github.com/ricochet-im/ricochet#downloads). 
 
 Next I needed to actually verify the tar file, so I ran `gpg2 --verify ricochet-1.1.4-linux-x86_64.tar.bz2.asc`. gpg2 correctly assumed that the signed data was in `ricochet-1.1.4-linux-x86_64.tar.bz2` and gave me the message:
 

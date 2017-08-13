@@ -11,7 +11,7 @@ I’ve also been reading [_Practical Object Oriented Design in Ruby_](http://www
 
 <!-- more -->
 
-Here’s a bit of the recall code. This first snippet is a method called ```parse_results``` from a class called Results that lives in lib/models. ```parse_results``` performs a grep search with an instance variable called ```query``` (yes, I’ve hard-coded my flatiron directory in for now). 
+Here’s a bit of the recall code. This first snippet is a method called `parse_results` from a class called Results that lives in lib/models. `parse_results` performs a grep search with an instance variable called `query` (yes, I’ve hard-coded my flatiron directory in for now). 
 
 ``` ruby 
 
@@ -26,13 +26,13 @@ Here’s a bit of the recall code. This first snippet is a method called ```pars
 
 ```
 
-Grep returns a long string of search results, with each result separated by a line-break, or ```/n```. Now ```results``` is an array of strings, with each string being one result. Each one of these results contains the file path, the line of code where the query was found, and (thanks to the ```-n``` flag in the grep call) the line number where grep found the query. These 3 pieces of information are separated by colons, like this:
+Grep returns a long string of search results, with each result separated by a line-break, or `/n`. Now `results` is an array of strings, with each string being one result. Each one of these results contains the file path, the line of code where the query was found, and (thanks to the `-n` flag in the grep call) the line number where grep found the query. These 3 pieces of information are separated by colons, like this:
 
 ```
 /Users/samschlinkert/Documents/code/flatiron/labs/week3/playlister-cli-ruby-004/lib/models/playlistercli.rb:42:    APPROVED_COMMANDS.include?(input.downcase.to_sym)
 ```
 
-So we have to iterate over each of these results and perform another split, which will produce an array of arrays. To help myself remember what’s going on, I called the array of each line a ```line_array```. We know that ```line_array[0]``` is the file path, ```line_array[1]``` is the line number, and ```line_array[2]``` is the actual code snippet. 
+So we have to iterate over each of these results and perform another split, which will produce an array of arrays. To help myself remember what’s going on, I called the array of each line a `line_array`. We know that `line_array[0]` is the file path, `line_array[1]` is the line number, and `line_array[2]` is the actual code snippet. 
 
 Thus the corresponding ERB template looks like this: 
 
@@ -76,11 +76,11 @@ Let’s at least break the grep search out into a new, clearly-name method:
 
 Cool. 
 
-So I totally could have gone one further and created an intermediary ```split_results``` method to run the ```.split(“\n”)``` line, but I didn’t. I figure that is still part of “parsing” the results. 
+So I totally could have gone one further and created an intermediary `split_results` method to run the `.split(“\n”)` line, but I didn’t. I figure that is still part of “parsing” the results. 
 
 ### Reducing Dependencies 
 
-Now let’s think about what the new parse_results method is returning. I’m using Ruby’s implicit return to return the variably ```array_of_arrays```, where each item in the big array of all results is a line_array for each result. This kind of sucks though because whenever we use this array (in this case, in an ERB template) we have to know that ```line_array[0]``` is the file path, ```line_array[1]``` is the line number, and ```line_array[2]``` is the actual code snippet. That doesn’t seem right… 
+Now let’s think about what the new parse_results method is returning. I’m using Ruby’s implicit return to return the variably `array_of_arrays`, where each item in the big array of all results is a line_array for each result. This kind of sucks though because whenever we use this array (in this case, in an ERB template) we have to know that `line_array[0]` is the file path, `line_array[1]` is the line number, and `line_array[2]` is the actual code snippet. That doesn’t seem right… 
 
 Now, I definitely could use a hash here. Something like: 
 
@@ -92,7 +92,7 @@ result = {
 }
 ```
 
-and then use ```result[:file_path]``` to call the file path (I think that’s right?). But on page 27 of POODR I found Sandi having the same problem with her gear and wheel example. Rather than use a hash, Sandi opts (at least temporarily, before telling us we should make a separate class) for creating a [Struct](http://www.ruby-doc.org/core-2.1.0/Struct.html). 
+and then use `result[:file_path]` to call the file path (I think that’s right?). But on page 27 of POODR I found Sandi having the same problem with her gear and wheel example. Rather than use a hash, Sandi opts (at least temporarily, before telling us we should make a separate class) for creating a [Struct](http://www.ruby-doc.org/core-2.1.0/Struct.html). 
 
 From the Ruby docs: “A Struct is a convenient way to bundle a number of attributes together, using accessor methods, without having to write an explicit class.” Sounds good. Let’s jump to my refactored code:
 
@@ -119,7 +119,7 @@ From the Ruby docs: “A Struct is a convenient way to bundle a number of attrib
 
 ```
 
-Now the parse_results method returns an array of Result structs, rather than an array of arrays. Each Result struct has three attr_accessors in it: ```:file_path, :line_number, :code_snippet```. Since we can all the readers methods of these variables, the corresponding ERB is much cleaner and more intuitive: 
+Now the parse_results method returns an array of Result structs, rather than an array of arrays. Each Result struct has three attr_accessors in it: `:file_path, :line_number, :code_snippet`. Since we can all the readers methods of these variables, the corresponding ERB is much cleaner and more intuitive: 
 
 ```erb
     <ul>

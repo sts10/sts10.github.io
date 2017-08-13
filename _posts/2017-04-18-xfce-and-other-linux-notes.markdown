@@ -6,7 +6,7 @@ comments: true
 
 ---
 
-This post is a bit of a sequel to my post about [installing Ubuntu on my old Macbook Pro](https://sts10.github.io/post/2016-11-07-installing-ubuntu-on-my-old-macbook-pro/). This is just a collection of notes on improvements I've made to my Ubuntu 16.04 Unity installation, the bulk of which has been changing my desktop environment from Unity to other options.
+This post is a bit of a sequel to my post about [installing Ubuntu on my old Macbook Pro](https://sts10.github.io/2016/11/07/installing-ubuntu-on-my-old-macbook-pro.html). This is just a collection of notes on improvements I've made to my Ubuntu 16.04 Unity installation, the bulk of which has been changing my desktop environment from Unity to other options.
 
 Hope this helps you! 
 

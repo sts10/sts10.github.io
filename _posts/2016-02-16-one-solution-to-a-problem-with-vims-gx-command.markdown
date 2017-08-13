@@ -33,7 +33,7 @@ nmap gx viugx<Esc>
 
 As you can probably guess, this mapping visually selects the URI, then runs `gx` (from visual mode), then Escapes you back into normal mode. 
 
-Later I refined this in two ways. First, I chose to use my `x` mark in order to preserve my cursor position in the URI. And secondly, thanks to [a comment from Carudo](https://sts10.github.io/blog/2016/02/16/one-solution-to-a-problem-with-vims-gx-command/#comment-2793361989), I found that I could use the preferable `nnoremap` by doing this:
+Later I refined this in two ways. First, I chose to use my `x` mark in order to preserve my cursor position in the URI. And secondly, thanks to [a comment from Carudo](https://sts10.github.io/2016/02/16/one-solution-to-a-problem-with-vims-gx-command.html/#comment-279336198), I found that I could use the preferable `nnoremap` by doing this:
 
 ```
 nnoremap gx :normal mxviugx<Esc>`x

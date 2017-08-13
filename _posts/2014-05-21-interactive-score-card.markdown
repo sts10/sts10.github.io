@@ -65,7 +65,7 @@ function calculateAndPostPlayerTotal(player_num){
 
 Beyond that I added some extra bells and whistles. If a player's name is greater than 7 characters all of the player's names rotate 55 degrees, decreases in font size, and the first row of the table gets taller to accomodate. The jQuery there is just an `addClass` and `removeClass`.  
 
-Also, if a player missed a hand (i.e. they joined the game late, which we usually allow), the scorekeeper can input a '*' and the app will get the highest (worst) score from that hand and replace the asterick with that penalty score. This cluttered up that `keyup` listener callback function, but I think it's a neat trick. 
+Also, if a player missed a hand (i.e. they joined the game late, which we usually allow), the scorekeeper can input a `*` and the app will get the highest (worst) score from that hand and replace the asterick with that penalty score. This cluttered up that `keyup` listener callback function, but I think it's a neat trick. 
 
 ### Interesting Challenges 
 
@@ -94,7 +94,7 @@ The second part of the problem was a little trickier to see at first. So let's s
 
 There's plenty I like about this code but also some parts that I do not. For example, I'm not sure how tightly the JavAscript should depend on the CSS. In one case I'm getting the player's number with this line `var player_number = ($(this).attr('id')).charAt(6);`, which of course relies heavily on the CSS id having the player's number at position 6. But that may just be the nature of this stack. 
 
-Going forward, if I can, I think it'd be a fun exercise to re-write the JavaScript for this as all [object-oriented](http://sts10.github.io/blog/2014/05/16/javascript-prototypes-the-basic-basics/). The simple approach would be to define a prototype for 'player' and instantiate them as names are typed in. Each player would know his or her score on any given hand plus their current total. A more elaborate OO schema could have a `hand` prototype and probably a `player-hand` prototype, but that might be drifting too far into the Rails mindset. 
+Going forward, if I can, I think it'd be a fun exercise to re-write the JavaScript for this as all [object-oriented](http://sts10.github.io/2014/05/16/javascript-prototypes-the-basic-basics.html). The simple approach would be to define a prototype for 'player' and instantiate them as names are typed in. Each player would know his or her score on any given hand plus their current total. A more elaborate OO schema could have a `hand` prototype and probably a `player-hand` prototype, but that might be drifting too far into the Rails mindset. 
 
 
 

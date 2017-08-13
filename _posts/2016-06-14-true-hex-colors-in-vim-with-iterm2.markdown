@@ -5,7 +5,7 @@ date: 2016-06-14 20:59:32 -0400
 comments: true
 ---
 
-Last fall I was delighted to figure out [how to get true HEX colors with Neovim and iTerm2](http://sts10.github.io/blog/2015/10/24/true-hex-colors-with-neovim-and-iterm2/). However I have recently learned that you can have these same colors available in regular old terminal Vim (aka command line Vim) and iTerm2. 
+Last fall I was delighted to figure out [how to get true HEX colors with Neovim and iTerm2](http://sts10.github.io/2015/10/24/true-hex-colors-with-neovim-and-iterm2.html). However I have recently learned that you can have these same colors available in regular old terminal Vim (aka command line Vim) and iTerm2. 
 
 <!-- more -->
 
@@ -21,7 +21,7 @@ Anyway, if you only ever use iTerm2 and never OS X's Terminal app and want true 
 2. If necessary, upgrade your terminal Vim to 7.4.1799 or higher ([I recommend using Homebrew to do this](https://github.com/sts10/terminal_and_vim_settings#flavors-of-vim), though I'm not totally confident that this method is without downsides)
 3. Put `set termguicolors` in your vimrc. 
 
-If you only want to run this setting when using iTerm, wrap it in this nifty if statement that [Chris Lesage](https://twitter.com/chrislesage) was nice enough to [leave in a comment](http://sts10.github.io/blog/2015/10/24/true-hex-colors-with-neovim-and-iterm2/#comment-2632598645) on my previous blog post:
+If you only want to run this setting when using iTerm, wrap it in this nifty if statement that [Chris Lesage](https://twitter.com/chrislesage) was nice enough to [leave in a comment](http://sts10.github.io/2015/10/24/true-hex-colors-with-neovim-and-iterm2.html/#comment-2632598645) on my previous blog post:
 
 ```vim
 " gui colors if running iTerm

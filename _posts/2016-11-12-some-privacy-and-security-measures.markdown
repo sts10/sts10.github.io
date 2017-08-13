@@ -5,7 +5,7 @@ date: 2016-11-12 22:24:33 -0500
 comments: true
 ---
 
-Over the summer of 2016 I started to pay a little more attention to my privacy and security on the internet and when using computers more generally. Some of this impetus had been slowly growing since the Snowden/NSA revelations and catching the documentary _Citizen 4_. More recently I read a few books about computer security, most notably [_Data and Goliath_ by Bruce Schneier](https://www.amazon.com/Data-Goliath-Battles-Collect-Control/dp/039335217X), and a few on open-source software and Linux: [_The Cathedral and the Bazaar_](https://www.amazon.com/Cathedral-Bazaar-Musings-Accidental-Revolutionary/dp/0596001088/ref=sr_1_1?s=books&ie=UTF8&qid=1479008290&sr=1-1&keywords=cathedral+bazaar), [_Coding Freedom_](https://www.amazon.com/Coding-Freedom-Ethics-Aesthetics-Hacking/dp/0691144613/ref=sr_1_1?s=books&ie=UTF8&qid=1479008327&sr=1-1&keywords=coding+freedom) (which [I admired for its liberal art sensibility](https://twitter.com/sts10/status/778426748321005569)), and [_Code and Other Laws of Cyberspace_ by Lessig](https://www.amazon.com/Code-Other-Laws-Cyberspace-Version/dp/0465039146/ref=sr_1_1?ie=UTF8&qid=1470604763&sr=8-1&keywords=lessig+code), the last of which I wrote [a blog post](https://sts10.github.io/post/2016-08-31-how-we-screw-it-up/) if you're interested.
+Over the summer of 2016 I started to pay a little more attention to my privacy and security on the internet and when using computers more generally. Some of this impetus had been slowly growing since the Snowden/NSA revelations and catching the documentary _Citizen 4_. More recently I read a few books about computer security, most notably [_Data and Goliath_ by Bruce Schneier](https://www.amazon.com/Data-Goliath-Battles-Collect-Control/dp/039335217X), and a few on open-source software and Linux: [_The Cathedral and the Bazaar_](https://www.amazon.com/Cathedral-Bazaar-Musings-Accidental-Revolutionary/dp/0596001088/ref=sr_1_1?s=books&ie=UTF8&qid=1479008290&sr=1-1&keywords=cathedral+bazaar), [_Coding Freedom_](https://www.amazon.com/Coding-Freedom-Ethics-Aesthetics-Hacking/dp/0691144613/ref=sr_1_1?s=books&ie=UTF8&qid=1479008327&sr=1-1&keywords=coding+freedom) (which [I admired for its liberal art sensibility](https://twitter.com/sts10/status/778426748321005569)), and [_Code and Other Laws of Cyberspace_ by Lessig](https://www.amazon.com/Code-Other-Laws-Cyberspace-Version/dp/0465039146/ref=sr_1_1?ie=UTF8&qid=1470604763&sr=8-1&keywords=lessig+code), the last of which I wrote [a blog post](https://sts10.github.io/2016/08/31/how-we-screw-it-up.html) if you're interested.
 
 <!-- more -->
 
@@ -246,7 +246,7 @@ Though note that [Wire currently stores a good amount of metadata on their serve
 
 These encrypted communications only work if your contacts use them, so I'm hoping that the non-encryption-based benefits of Wire help sway some of my friends from things like gchat and iMessage. 
 
-I wrote [more about Wire in another blog post](https://sts10.github.io/post/goodbye-to-all-gchat/) if you want more of my thoughts on it.
+I wrote [more about Wire in another blog post](https://sts10.github.io/2017/06/06/goodbye-to-all-gchat.html) if you want more of my thoughts on it.
 
 ### Don't Need Mobile Access? Ricochet: A different approach to metadata
 
@@ -270,7 +270,7 @@ Note that both Signal and Wire offer desktop applications as well.
 
 Apparently encrypting email is (still) hard. 
 
-A standard method that's been around for a while is [PGP ("Pretty Good Privacy")](https://en.wikipedia.org/wiki/Pretty_Good_Privacy), for which I wrote [a basic explainer when I first learned how to use it](https://sts10.github.io/post/2015-07-01-my-basic-understanding-of-pgp-encryption/). Shelton, in [a post called "Security Compromises in Journalism"](https://medium.com/@mshelton/security-compromises-in-journalism-4cc32ba0709d#.sofplhy72), writes:
+A standard method that's been around for a while is [PGP ("Pretty Good Privacy")](https://en.wikipedia.org/wiki/Pretty_Good_Privacy), for which I wrote [a basic explainer when I first learned how to use it](https://sts10.github.io/2015/07/01/my-basic-understanding-of-pgp-encryption.html). Shelton, in [a post called "Security Compromises in Journalism"](https://medium.com/@mshelton/security-compromises-in-journalism-4cc32ba0709d#.sofplhy72), writes:
 
 > PGP is a protocol for encrypting messages, and it's become a tool both security specialists and journalists both love to hate. Today, its open source implementation, GnuPG, is widely used by journalists and media activists around the world to encrypt the body of their emails. PGP isn't easy to set up, and once it's running, users can very easily make mistakes. For example, users can send an encrypted message using an incorrect or expired key, essentially making the message unreadable to the recipient.
 
@@ -280,7 +280,7 @@ As Shelton observes, PGP is (still) difficult to use, but [GPG Tools](https://gp
 
 This set of tools includes GPGMail, "an open source plugin for Apple Mail" which does seem to make the process easier when using OS X's default mail app. However, for encrypting email with PGP, both [the EFF](https://ssd.eff.org/en/module/how-use-pgp-mac-os-x) and the [Free Software Foundation](https://emailselfdefense.fsf.org/en/mac.html) recommend using Thunderbird and Enigmail. If you use Gmail's web interface, you can look in to [Mailvelope](https://www.mailvelope.com/). I'm sure there are other plugins and pieces of software that attempt to make usage easier.
 
-I admit I don't have a full grasp of how to use PGP. For example, the idea of signing the keys of others, as described in [the FSF guide](https://emailselfdefense.fsf.org/en/mac.html), continues to elude me. Regardless, my public PGP key is [here](https://pgp.mit.edu/pks/lookup?op=get&search=0x5BF6E5C2B80500F2). I've also purchased a YubiKey and put a new PGP key on it, [which you can read about](https://sts10.github.io/post/2016-12-06-yubikey-and-gpg/). 
+I admit I don't have a full grasp of how to use PGP. For example, the idea of signing the keys of others, as described in [the FSF guide](https://emailselfdefense.fsf.org/en/mac.html), continues to elude me. Regardless, my public PGP key is [here](https://pgp.mit.edu/pks/lookup?op=get&search=0x5BF6E5C2B80500F2). I've also purchased a YubiKey and put a new PGP key on it, [which you can read about](https://sts10.github.io/2016/12/06/yubikey-and-gpg.html). 
 
 As you might expect, it's difficult to get friends into PGP, so I haven't used it to communicate in a while. However I have found GPG Tools' "GPG Services" (included in GPG Tools) useful for quickly encrypting specific files on my Mac, either for safe storage or safely emailing to myself.
 
@@ -290,7 +290,7 @@ I'm honestly not sure how difficult it would be for me to change email addresses
 
 ### What I Did
 
-I set myself up on Ricochet, Signal, Wire and Cryptocat and created a public PGP key and put all that information online in [a GitHub gist](https://gist.github.com/sts10/4a4e01021b3a5ad42e9b73e0abd7b7e3). I then linked to that gist in my the bio of my Twitter account, which is verified. Of all of those I'm using Wire the most (which [I wrote more about here](https://sts10.github.io/post/goodbye-to-all-gchat/)). 
+I set myself up on Ricochet, Signal, Wire and Cryptocat and created a public PGP key and put all that information online in [a GitHub gist](https://gist.github.com/sts10/4a4e01021b3a5ad42e9b73e0abd7b7e3). I then linked to that gist in my the bio of my Twitter account, which is verified. Of all of those I'm using Wire the most (which [I wrote more about here](https://sts10.github.io/2017/06/06/goodbye-to-all-gchat.html)). 
 
 ## Encrypting Your Hard Drive
 

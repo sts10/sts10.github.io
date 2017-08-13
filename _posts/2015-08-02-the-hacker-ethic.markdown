@@ -5,7 +5,7 @@ date: 2015-08-02 20:07:50 -0400
 comments: true
 ---
 
-As I mentioned in [my post about _The Master Switch_](http://sts10.github.io/blog/2015/07/15/master-switch-and-hackers/), right after I finished Wu's book I dove into [_Hackers_](http://www.amazon.com/Hackers-Heroes-Computer-Revolution-Anniversary/dp/1449388396/ref=sr_1_3?ie=UTF8&qid=1437012859&sr=8-3&keywords=hackers) by Steven Levy. 
+As I mentioned in [my post about _The Master Switch_](http://sts10.github.io/2015/07/15/master-switch-and-hackers.html), right after I finished Wu's book I dove into [_Hackers_](http://www.amazon.com/Hackers-Heroes-Computer-Revolution-Anniversary/dp/1449388396/ref=sr_1_3?ie=UTF8&qid=1437012859&sr=8-3&keywords=hackers) by Steven Levy. 
 
 The 31-year-old book is broken into three main sections: MIT hackers in the '50s, Wozniak and hardware hackers in the '70s, and video game creators in the '80s. I saw each part as less and less interesting personally-- the MIT kids were inspiring, the [Homebrew Club](https://en.wikipedia.org/wiki/Homebrew_Computer_Club) interesting, the [On-Line Systems](https://en.wikipedia.org/wiki/Sierra_Entertainment) a bit egotistical and off. 
 
@@ -23,7 +23,7 @@ From my reading of the MIT section of _Hackers_, [the Hacker Ethic](https://en.w
 
 3. You can create art and beauty on a computer: There is a certain beauty in elegant solutions, whether in code or elsewhere. And furthermore, elegance is a worthy pursuit, even after a working solution to the present-day problem is found. Continued refinement, in the name of solution elegance or otherwise, may lead to new and important discoveries previously un-thought-of. 
 
-This notion of solution elegance is the richest part of the ethic for me. It reminds me of the [practical object-oriented design ideas](http://sts10.github.io/blog/2014/02/23/refactoring-with-structs/) espoused by Sandi Metz and others. Getting a bit above the actual code, Metz's idea is that programmers should write code in such a way that prepares for the inevitable changes to the code's requirements, applications, and adaptations that the future will bring: Keep system loosely tied together, so that they can be re-organized; make sure each part of the code as one single responsibility; reduce dependencies whenever possible, etc. 
+This notion of solution elegance is the richest part of the ethic for me. It reminds me of the [practical object-oriented design ideas](http://sts10.github.io/2014/02/23/refactoring-with-structs.html) espoused by Sandi Metz and others. Getting a bit above the actual code, Metz's idea is that programmers should write code in such a way that prepares for the inevitable changes to the code's requirements, applications, and adaptations that the future will bring: Keep system loosely tied together, so that they can be re-organized; make sure each part of the code as one single responsibility; reduce dependencies whenever possible, etc. 
 
 In my experience programming, solving problems "inelegantly"-- for example, hard-coding settings that a user will likely want to change frequently down the road-- leads directly to increasing a system's [technical debt](https://en.wikipedia.org/wiki/Technical_debt), a problem that will most likely grow until a programmer has to fix it later. ([POODR](http://www.amazon.com/Practical-Object-Oriented-Design-Ruby-Addison-Wesley/dp/0321721330/ref=sr_1_1?s=books&ie=UTF8&qid=1393199505&sr=1-1&keywords=practical+object-oriented+design+in+ruby) is still a good and worthy read, even on this more philosophical level.)
 

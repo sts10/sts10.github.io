@@ -45,7 +45,7 @@ Also, in Sublime Text 2’s `Preferences > Settings - User` I switched “drag_t
 }
 ```
 
-In my terminal, the customization of which [I wrote about last week](http://sts10.github.io/blog/2014/02/05/flatiron-day-two/), I’m sticking with [Droid Sans Mono](http://www.fontsquirrel.com/fonts/droid-sans-mono) size 13 px. I can’t find any other font that looks good with the terminal’s formatting. 
+In my terminal, the customization of which [I wrote about last week](http://sts10.github.io/2014/02/05/flatiron-day-two.html), I’m sticking with [Droid Sans Mono](http://www.fontsquirrel.com/fonts/droid-sans-mono) size 13 px. I can’t find any other font that looks good with the terminal’s formatting. 
 
 ### Less-Frequently Used Applications
 

@@ -5,7 +5,7 @@ date: 2014-12-06 21:34:51 -0400
 comments: true
 ---
 
-[Previously](http://sts10.github.io/blog/2014/10/12/some-tips-for-more-efficient-mac-os-usage/) I had recommended a not-free app called [Glui](http://glui.me/) for taking screenshots on Macs (in addition to the standard Command + Shift + 4 shortcut). Advantages to using Glui were and still are two-fold: (a) you can add arrows and text to your screen shot right in Glui and (b) you can connect your Dropbox account and, with one click, upload the image to Dropbox and get the URL copied to your clipboard. But I have since realized two things that have drastically improved the Command + Shift + 4 method. 
+[Previously](http://sts10.github.io/2014/10/12/some-tips-for-more-efficient-mac-os-usage.html) I had recommended a not-free app called [Glui](http://glui.me/) for taking screenshots on Macs (in addition to the standard Command + Shift + 4 shortcut). Advantages to using Glui were and still are two-fold: (a) you can add arrows and text to your screen shot right in Glui and (b) you can connect your Dropbox account and, with one click, upload the image to Dropbox and get the URL copied to your clipboard. But I have since realized two things that have drastically improved the Command + Shift + 4 method. 
 
 <!-- more -->
 

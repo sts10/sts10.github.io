@@ -20,7 +20,7 @@ The most immediate reason I wanted to be able to take my private keys with me wh
 
 **Note**: I'm not an expert. While I think I've gotten pretty far with this, I don't understand everything yet. This blog post is mostly for my personal reference of how I got this to work, while consulting a combination of tutorials written by others linked to just below. If that doesn't sound like what you're looking for, check out the tutorials themselves and close this tab-- no hard feelings!
 
-I have a basic understanding of PGP (I also have [an earlier post outlining some basics of PGP](https://sts10.github.io/blog/2015/07/01/my-basic-understanding-of-pgp-encryption/) if you like), but I knew setting up and using a YubiKey would be tricky for me and I still don't have a full grasp of it. So I spent the $40 and figured I could figure it out. Here's what I did.
+I have a basic understanding of PGP (I also have [an earlier post outlining some basics of PGP](https://sts10.github.io/2015/07/01/my-basic-understanding-of-pgp-encryption.html) if you like), but I knew setting up and using a YubiKey would be tricky for me and I still don't have a full grasp of it. So I spent the $40 and figured I could figure it out. Here's what I did.
 
 ![A YubiKey 4](https://hao0uteruy2io8071pzyqz13-wpengine.netdna-ssl.com/wp-content/uploads/2015/04/YubiKey-4-1000-2016-444x444.png)
 

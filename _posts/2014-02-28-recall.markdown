@@ -7,11 +7,11 @@ comments: true
 
 Troublingly, I've taken very few notes during lectures at Flatiron. How will I remember niche methods and strange, counter-intuitive syntaxes?! 
 
-Of course, we do have awesome labs that we can reference anytime. Whenever I have needed to remember how I used ```inject``` that one time, or how to set up a module, I just remember which lab we did that in. The problem with this approach, of course, is that as the course progresses my labs directory has grown seemingly exponentially. How are we supposed to remember which lab has that great example of a rake test?
+Of course, we do have awesome labs that we can reference anytime. Whenever I have needed to remember how I used `inject` that one time, or how to set up a module, I just remember which lab we did that in. The problem with this approach, of course, is that as the course progresses my labs directory has grown seemingly exponentially. How are we supposed to remember which lab has that great example of a rake test?
 
 Since it's important for a programmer not to remember anything he or she doesn't absolutely have to, I figured it'd be helpful to build a little search app that would return snippets of code based on a user's query. 
 
-So! I've put together a little Ruby app I'm calling Recall and pushed it up to Github. You can find the public repo [here](https://github.com/sts10/recall) (I actually referred to it in a blog post [earlier this week](http://sts10.github.io/blog/2014/02/23/refactoring-with-structs/)).
+So! I've put together a little Ruby app I'm calling Recall and pushed it up to Github. You can find the public repo [here](https://github.com/sts10/recall) (I actually referred to it in a blog post [earlier this week](http://sts10.github.io/2014/02/23/refactoring-with-structs.html)).
 
 <!-- more -->
 

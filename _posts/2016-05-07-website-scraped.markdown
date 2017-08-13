@@ -163,7 +163,7 @@ var baseURL = window.location.toString().split("?")[0];
 history.replaceState({}, document.title, baseURL + "?" + post_url); 
 ```
 
-This is a technique I first used on [my GIF rank](http://samschlinkert.com/gif_rank/) project, and I think it's pretty sweet. I've also [written about the idea of storing non-sensitive, user-specific data in URL parameters before](http://sts10.github.io/blog/2015/05/20/url-parameters-as-user-settings/).
+This is a technique I first used on [my GIF rank](http://samschlinkert.com/gif_rank/) project, and I think it's pretty sweet. I've also [written about the idea of storing non-sensitive, user-specific data in URL parameters before](http://sts10.github.io/2015/05/20/url-parameters-as-user-settings.html).
 
 ## Epilogue: Headlines with Node.js
 
