@@ -1,0 +1,49 @@
++++
+title= "Formatting Text in OS X"
+date= "2015-05-22 21:00:04 -0400"
+comments = "true"
++++
+_Note: Neither of the solutions presented herein are quite right, so like, read through the post before you just start installing stuff._ 
+
+I was poking around Life Hacker just now and found [an interesting post](http://lifehacker.com/textflow-adds-tons-of-text-formatting-options-to-os-x-1706298617) on an Automator workflow called [TextFlow](https://github.com/vmdanilov/TextFlow). LH claimed that it allowed users to quickly and easily format text with options like "sentence case" or "title case," something that I've been meaning to research for a while now. I found success with [a Life Hacker post on saving screenshots](http://lifehacker.com/quickly-change-os-xs-default-screenshot-format-and-loc-1489014578) a while back, so I was down to try this out. 
+
+<!-- more -->
+
+First off, I didn't even know OS X had a built-in application called [Automator](http://en.wikipedia.org/wiki/Automator_%28software%29) until I read this post. Definitely something to check out going forward. But for now let's talk about TextFlow. 
+
+### Why I Want This Functionality
+
+At work I often have to convert headline case into more-soothing-to-read sentence case for Tweets or Facebook posts. I also sometimes have to change smart punctuation to "dumb" punctuation. Note that these aren't needs I have when coding-- it's usually during general usage or social media stuff. 
+
+I've always meant to investigate a method for doing this more efficiently than the arrow keys or, in Sublime Text using Command+d, but I had never really found one that worked... 
+
+### TextFlow Installation Experience 
+
+Intrigued by the promises made in the Life Hacker post, I headed on over to [the TextFlow github repo page](https://github.com/vmdanilov/TextFlow) and followed the installation instructions. I then chose to only install "Paste and Transform Text" and "Transform Selected Text". I installed these two "workflows" by simply double clicking those files and selecting the install option. I avoided installing the "Paste as Plan Text" workflow because I've grown quite used to OS X's default "paste as plain text" functionality (invoked via the Shift + Command + v shortcut) and didn't want to screw with that. 
+
+Once I had installed those two workflows, I restarted Chrome, typed some text into a new GMail window, highlighted the text and went up to Chrome > Services > Transform Selected Text. And I think on the first try I was presented with the menu that the [GitHub readme describes](https://github.com/vmdanilov/TextFlow/raw/master/screenshots/screenshot-textflow-transforms.png), with options like "Sentence Case" and "Title Case". And it seemed to work, but... 
+
+### Problems with TextFlow
+
+Strangely, when I converted some text to Title Case and then tried to convert the same text to Sentence Case, nothing happened. I then learned that Life Hacker had picked this up from [a Hacker News post from a day ago](https://news.ycombinator.com/item?id=9585115). I then re-examined [the GitHub repo](https://github.com/vmdanilov/TextFlow) and realized this thing is pretty new and thus bugs may be present. However I submitted [an issue](https://github.com/vmdanilov/TextFlow/issues/3) to the repo and [vmdanilov](https://github.com/vmdanilov) fixed it promptly. I re-installed and it's working better now.
+
+### An Alfred Workflow 
+
+Discouraged by this solution after finding a bug so quickly, I Googled for another way to transform text quickly. I came upon this [pair of Alfred workflows](http://www.alfredforum.com/topic/2180-case-converter-including-title-case/) and decided to give them a try (note: Alfred work-flows are, I believe, only available if you buy the [PowerPack](http://www.alfredapp.com/powerpack/), which is totally worth it for clipboard history alone). 
+
+I installed both the standard version and the hotkey version. On the standard version I made the one that simply 'changes the case of the text on the clipboard' from "case" to "casec" and the one that converts the clipboard text AND pastes from "casep" to "case" since I figured I'd use that more often. Then on the hotkey version I made paste in sentence case (the last hotkey -> script listed) Control + Option + Command + v and paste in title case (the first hotkey -> script listed) Control + Shift + Option + Command + v. 
+
+![Alfred Case Hotkeys settings](http://dl.dropboxusercontent.com/s/vagqvtrtjjvcjho/2015-05-22%20at%2010.28%20PM.png) 
+
+However this solution isn't as smooth as I'd want it to be either. The hotkeys work in Chrome but there's a bit of a lag (by design I think) and seem to either insert a carriage return at the end of the pasted text or navigate the cursor one line down. The standard version works in Sublime (no shortcut overlap) and is a bit quicker I think, if you can accept having to call Alfred and type "case" each time. 
+
+Going forward the Alfred route isn't bad, but I think the search continues. Ultimately I want one that uses the OS X dictionary when applying sentence case, so that proper nouns (places, famous and common names, etc.) get or stay capitalized. If you have an a solution that you like, [hit me up on Twitter](http://twitter.com/sts10).
+
+
+### Update
+
+As I mentioned above, I submitted [a GitHub issue](https://github.com/vmdanilov/TextFlow/issues/3) for TextFlow and the sentence case works great now. I changed the keyboard shortcuts to Option + Control + v for paste and Option + Control + t for transform. It's working in Google Chrome (where I thin kI need it most often), but not in Sublime Text 2-- again, perhaps due to shortcut overlap problems. 
+
+But yeah, if you just want to use this in your browser(s), I'd recommend the new version of [TextFlow](https://github.com/vmdanilov/TextFlow), roughly following the installation process I outline above (though I'd check the GitHub page to see if anything has changed since I wrote this). 
+
+

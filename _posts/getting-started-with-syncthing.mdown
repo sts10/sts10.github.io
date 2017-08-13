@@ -1,0 +1,154 @@
++++
+date = "2017-05-24T18:46:34-04:00"
+subtitle = ""
+tags = ["syncthing", "max os", "linux"]
+title = "Getting Started with Syncthing"
+comments = "true"
+
++++
+
+I was looking for an open-source, free, and secure way of frequently moving files between computers. [Privacytools.io](https://privacytoolsio.github.io/privacytools.io/) pointed me to [Syncthing](https://syncthing.net/). I subsequently found a few [blog](https://linuxctl.com/2017/04/syncthing---why-you-should-be-using-it/) [posts](https://blog.matthewurch.ca/?p=309) recommending it. It doesn't store any data in the cloud-- it merely keeps a list of folders in sync across any number of computers.
+
+> Syncthing replaces proprietary sync and cloud services with something open, trustworthy and decentralized. Your data is your data alone and you deserve to choose where it is stored, if it is shared with some third party and how it's transmitted over the Internet.
+
+My thought was that Syncthing would be a good way to have one KeePass database across two, three, or four computers. Apparently you can also have it work with an Android phone, but I'm currently rocking an iPhone so I'll have to figure out mobile access to my KeePass database some other way (there are iOS apps that read KeePass databases, like [MiniKeePass](https://itunes.apple.com/us/app/minikeepass-secure-password/id451661808?mt=8) and [KeePass Touch](https://itunes.apple.com/in/app/keepass-touch/id966759076?mt=8&ign-mpt=uo%3D8), but I'm not ready to trust those yet). 
+
+Anyway, let's do this Syncthing thing! Our goal is to securely share a folder between a MacBook Air and an old MacBook Pro that is running Ubuntu 16.04 and the Xfce4 desktop environment. 
+
+Since I'm pretty comfortable with the Unix command line, I opted to install that "version" of Syncthing on both machines. In the docs there is [a page with links to community-contributed GUI wrappers](https://docs.syncthing.net/users/contrib.html#contributions), etc., including three Mac OS GUIs, if that's more your jam. (To be honest, on my Linux machine I probably should have just run `snap install syncthing` or [followed these instructions](https://apt.syncthing.net/), as updating Syncthing would be way easier... there's always next time with Linux though, right?)
+
+## Setup on MacOS (10.10.5)
+
+From [the Github releases page](https://github.com/syncthing/syncthing/releases/), I downloaded the Mac OSX version of the latest stable release, which at the time was `syncthing-macosx-amd64-v0.14.28.tar.gz`. As I'm a bit security cautious, I also downloaded the file named `sha1sum.txt.asc` to verify my download, a process I describe below. Feel free to skip if you don't care to do this.
+
+### Verifying my Download
+
+As described on [the Syncthing Security page](https://syncthing.net/security.html), I navigated to my `~/Downloads` directory and ran `shasum -c sha1sum.txt.asc`. In a mess of "Failed"s, I did get the line `syncthing-macosx-amd64-v0.14.28.tar.gz: OK`. 
+
+I then imported both the new and old Syncthing public PGP keys with one nifty line: `gpg2 --keyserver pool.sks-keyservers.net --recv-key 49F5AEC0BCE524C7 D26E6ED000654A3E` then ran `gpg2 --verify sha1sum.txt.asc` and confirmed the line: `gpg: Good signature from "Syncthing Release Management <release@syncthing.net>" [unknown]`. Looking good! 
+
+### Installing the CLI
+
+In Finder, I doubled clicked the tar file to expand it. I then got a new Syncthing folder in my Downloads folder. Inside that folder I found a binary named `syncthing`. To make this binary easily executable on my Mac I then ran in the terminal: `cp syncthing /usr/local/bin`. 
+
+### Launching the GUI from the binary 
+
+After that, following [a section of the Getting Started doc](https://docs.syncthing.net/intro/getting-started.html#syncthing), I simply ran `syncthing` in my terminal and my default browser automatically opened a new tab pointed to `http://127.0.0.1:8384/`. For lack of better phrase I'll call this the Web GUI.
+
+### Figuring the Web GUI out 
+
+At this point we're at [the Configuring section of the Getting Started doc](https://docs.syncthing.net/intro/getting-started.html#configuring)
+
+I confirmed that Syncthing created a new "default" share directory for me at `~/Sync`. To test the listener out, I navigated to the directory in terminal (`cd ~/Sync`) and created a short test file (`touch test.mdown`). A few seconds later, the web GUI registered one file to sync, weighing in at ~18 B. 
+
+But this isn't any fun without a remote device to sync with. Looks like we're ready to do the Linux (Ubuntu) set up!
+
+## Setting up Syncthing on Linux (Ubuntu 16.04 with Xfce4 desktop environment)
+
+This process was delightfully similar to the process on my Mac. But let's write it out in case you skipped down to the this section.
+
+From [the Github releases page](https://github.com/syncthing/syncthing/releases/), I downloaded the latest stable release for a 64-bit Linux machine, which at the time was `syncthing-linux-amd64-v0.14.28.tar.gz`. As I'm a bit security cautious, I also downloaded the file named `sha1sum.txt.asc` to verify my download, a process I describe below. Feel free to skip if you don't care to do this.
+
+### Verifying my Download
+
+As described on [the Syncthing Security page](https://syncthing.net/security.html), I navigated to my `~/Downloads` directory and ran `shasum -c sha1sum.txt.asc`. In a mess of "Failed"s, I did get the line `syncthing-linux-amd64-v0.14.28.tar.gz: OK`. 
+
+I then imported both the new and old Syncthing public PGP keys with one nifty line: `gpg2 --keyserver pool.sks-keyservers.net --recv-key 49F5AEC0BCE524C7 D26E6ED000654A3E` then ran `gpg2 --verify sha1sum.txt.asc` and confirmed the line: `gpg: Good signature from "Syncthing Release Management <release@syncthing.net>" [unknown]`. Looking good! 
+
+### Installing the binary/command line tool
+
+Note that I am pretty new to Linux so this may be a bad way to do this. 
+
+To "install" the Syncthing binary-- i.e. to make it easier to run, I followed [this Ask Ubuntu answer](https://askubuntu.com/a/877995), but others say it's best to [create a symlink](https://askubuntu.com/questions/427818/how-to-run-scripts-without-typing-the-full-path). My guess is that it depends on the context and the program. Since it seems like the syncthing binary can live on it's own, I figured the following solution would work fine.
+
+In my Linux file manager (Thunar on Xfce), I doubled clicked the tar file to expand it. I then got a new Syncthing directory in my Downloads file. Inside that folder I found a binary named `syncthing`. To make this binary easily executable I ran in the terminal: `sudo cp syncthing ~/.local/bin/` (a folder on my path that I hopefully have good permissions on). I could then run `syncthing` from any directory in my terminal.
+
+### Launching the GUI from the binary 
+
+After that, following [a section of the Getting Started doc](https://docs.syncthing.net/intro/getting-started.html#syncthing), I simply ran `syncthing` in my terminal and my default browser automatically opened a new tab pointed to `http://127.0.0.1:8384/`. (For lack of better phrase I'll call this the Web GUI.) Also note that this action, when run the first time, also created a `~/Sync` directory for me. 
+
+### Creating a Desktop file for Syncthing
+
+Next (and this seems to be optional) I created a "desktop" icon for Syncthing. Again, note that I am new to Linux and this may not be the best way to get this done.
+
+I did this by first downloading [a medium-sized Syncthing logo png](https://github.com/syncthing/syncthing/blob/master/assets/logo-256.png) from the Github repo and moving it into `~/.icons` (which I had created earlier). I then created a `Syncthing.desktop` file in `/.local/share/applications/` that looks like this:
+
+```
+[Desktop Entry]
+Type=Application
+Name=Syncthing
+Exec=syncthing
+Icon=/home/oldmbp/.icons/syncthing.png
+Terminal=true
+Categories=Network;Internet;
+```
+
+Not sure if it's right to set "Terminal" to "true"-- what this seems to do is launch a new terminal window with the Syncthing process running in it. This is advantageous because (a) you can see warnings, and (b) you can shut Syncthing down from there with control+C. 
+
+## Connecting my Mac and my Linux machines
+
+OK we're back to the [Configuring](https://docs.syncthing.net/intro/getting-started.html#configuring) section of the Getting Started doc. 
+
+On my Linux machine, which the `syncthing` process still running in a terminal window, I went to the Web GUI I clicked "Actions" and then "Show ID", which displayed my Linux's machine ID. I then sent that long string to my Mac, where, again in the Web GUI, clicked the "Add Remote Device" button in the bottom right. 
+
+I pasted in my Linux device ID (which I IMed to my Mac), named the device, left the "Addresses" as "dynamic" and Compression as "Metadata Only" (which I'm hoping is only the setting for compression, and that this setting doesn't effect encryption), and I checked to share the "Default Folder". 
+
+A few seconds later I got a new window in the Web GUI on my Linux machine, informing me that a device was trying to connect and displaying its ID. I clicked confirm. After the initial sync completed, I open a new terminal window and navigated to `~/Sync` and, lo and behold, my `test.mdown` was there!
+
+The docs note that: 
+
+> Each device scans for changes every 60 seconds, so changes can take a little over a minute to propagate to the other side, although some contributed wrappers include file system "watcher" features to speed this up. The rescan interval can be changed for each folder by clicking on a folder, clicking “Edit” and entering a new value for "Rescan Interval".
+
+## Adding a folder that's not ~/Sync
+
+You may have a folder on your system already that you want to sync to another computer. Say, on computer A, I have `~/Documents/code/projects/blog/`) and I want to sync it with computer B, but on computer B I want it to live at a new directory: `~/Documents/blog`. This is pretty easy it turns out. 
+
+On one machine, let's say computer A, hit the "Add Folder" button. The "Folder Path" field here should be the path to the folder on computer A. Check which other devices you want to share this folder with-- in this case computer B, and hit Save. At the next sync time on computer B you'll get a notification and request to share this folder. You'll then get to specify a new path for the folder on computer B. Note that the dialog window asks for "Path to the folder on the local computer. Will be created if it does not exist." Wait for another sync and you should be all good!
+
+## How Syncthing Handles Upgrading Itself
+
+Since I've been using Syncthing, v0.14.29 went from being a release candidate to a stable release. Delightfully, on both my Mac and my Linux machines, the Syncthing web GUI gave me a simple prompt that a new stable version was available (you can change a setting in the web GUI to get the release candidates as upgrades as well). I clicked upgrade and after a quick download and restart, Syncthing was running the 0.14.29. 
+
+Note that there's [a stable release about every two weeks](https://docs.syncthing.net/users/releases.html#life-cycle).
+
+If you installed Syncthing NOT via the binary packages, as I describe above, note [this paragraph in the docs](https://docs.syncthing.net/users/faq.html?#how-do-i-upgrade-syncthing):
+
+> If you use a package manager such as Debians apt-get, you should upgrade using the package manager. If you use the binary packages linked from Syncthing.net, you can use Syncthing built in automatic upgrades.
+
+### Automatic Upgrades
+
+As I describe above, I had to click a button to perform the upgrade. Interestingly, [the docs](https://docs.syncthing.net/users/faq.html?#how-do-i-upgrade-syncthing) seem to imply that this upgrade would have happened automatically after 24 hours:
+
+> If automatic upgrades is enabled (which is the default), Syncthing will upgrade itself automatically within 24 hours of a new release.
+
+Cool! This means I can leave Syncthing running for weeks at a time and it'll stay up-to-date.
+
+## Some notes at this point
+
+As I understand it, the syncing only happens while the `syncthing` command is running in a terminal window of BOTH computers involved. This is a bit crappy, as I can't run Syncthing for a minute on computer A, close it down, then commute to computer B, run Syncthing, and expect changes made on computer A to sync to computer B. That's a behavior I'm used with cloud-based solutions like Dropbox. 
+
+With Syncthing, in this scenario, I'd have to leave Syncthing running on computer A while I went to computer B. Or, better yet, have a Computer C that I start up Syncthing on and just leave running. Not a dealbreaker, but different from the Dropbox/Google Drive model you might be used to.
+
+In addition to the Getting Started section of the docs, which, as you can see, I found helpful, there's also [a User FAQ here](https://docs.syncthing.net/users/faq.html). 
+
+## Setting Up Syncthing on a Raspberry Pi
+
+In an effort to have a machine that functions more like an always-on server/cloud, I dusted off my old Raspberry Pi 2 and plugged it in. I hadn't turned it on in a while (I had set it up about a year before-- pretty sure I installed the default Raspberry Pi OS, [Raspbian](https://www.raspbian.org/)). Here's how I got Syncthing running on it (though there are plenty of other [blog posts](http://www.pebra.net/blog/2015/08/23/syncthing/) on this.)
+
+1. When greeted by the Terminal, run `startx` to launch the GUI.
+2. Log in. The default username is `pi`, and the default password is `raspberry`.
+3. Let's update the Raspberry Pi. Open a Terminal and run: `sudo apt-get update` then `sudo apt-get upgrade` and finally `sudo apt-get dist-upgrade`. I ran another `sudo apt-get upgrade` after that just to be sure.
+4. To find out which version of Syncthing we're going to want, I ran `uname -a` and spotted something about "ARM". So over on [Syncthing's releases page on Github](https://github.com/syncthing/syncthing/releases/) I downloaded `syncthing-linux-arm-v0.14.30.tar.gz` and `sha1sum.txt.asc`
+5. To verify the download, I first ran `shamsum -c sha1sum.txt.asc` and got an OK for the ARM file. 
+6. I then manually imported Syncthing's latest release PGP key from [their Security page](https://syncthing.net/security.html) by copying and pasting the public key into a new file called `syncthing_key.asc` and running `gpg --import syncthing_key.asc`. I then ran `gpg --verify sha1sum.txt.asc` and got a `Good signature`. 
+7. Extract the tar file by double clicking on it and clicking something like "Extract all" somewhere. 
+8. We're going to move the syncthing executable to a new "Applications" directory. So let's run `mkdir ~/Applications`, then run `sudo mv ~/Downloads/syncthing ~/Applications/syncthing`. 
+9. Open `~/.bashrc` with a text editor. I use vim so I ran `vim ~/.bashrc`. I then added a new line to this text file: `alias syncthing='~/Applications/syncthing'`. Save and quit your text editor.
+10. Now refresh your `bashrc` by running `source ~/.bashrc`
+11. Run `syncthing` anywhere in the Terminal. Configure as needed in the Web GUI, just like on any other computer. I then unplugged my keyboard, mouse, and monitor and let it run. 
+
+Note: Apparently another way to put the `syncthing` executable into your PATH is to move it to `usr/bin`. However this route necessitates you to give the system permission to edit the `syncthing` executable for automatic upgrading (see above). So, following part of [this blog post](http://www.pebra.net/blog/2015/08/23/syncthing/), you would run (something like) `sudo mv ~/Downloads/syncthing /usr/bin/synthing` and then `sudo chmod a+x /usr/bin/syncthing`. However when I tried this the system was unable to upgrade syncthing.
+
+I'm not sure how long the Raspberry Pi 2 will run for. I didn't change any settings on the Raspberry in an attempt to ensure this... I figured I'd just unplug my keyboard, mouse, and monitor and see how long the remote device stays up to date. 
+
+Ideally I think I'd want to configure the Raspberry Pi to automatically run Syncthing whenever it boots up, but I couldn't get this work tonight.

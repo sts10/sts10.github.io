@@ -1,0 +1,141 @@
++++
+title= "Recall"
+date= "2014-02-28 21:18:12 -0500"
+comments = "true"
++++
+
+Troublingly, I've taken very few notes during lectures at Flatiron. How will I remember niche methods and strange, counter-intuitive syntaxes?! 
+
+Of course, we do have awesome labs that we can reference anytime. Whenever I have needed to remember how I used ```inject``` that one time, or how to set up a module, I just remember which lab we did that in. The problem with this approach, of course, is that as the course progresses my labs directory has grown seemingly exponentially. How are we supposed to remember which lab has that great example of a rake test?
+
+Since it's important for a programmer not to remember anything he or she doesn't absolutely have to, I figured it'd be helpful to build a little search app that would return snippets of code based on a user's query. 
+
+So! I've put together a little Ruby app I'm calling Recall and pushed it up to Github. You can find the public repo [here](https://github.com/sts10/recall) (I actually referred to it in a blog post [earlier this week](http://sts10.github.io/blog/2014/02/23/refactoring-with-structs/)).
+
+<!-- more -->
+
+## What is Recall?
+
+Basically it's a command line interface to search the .rb files of your local code directory for a phrase-- say a method you don't quite remember how to use but know you've used before. It dumps the output into a new .rb file and immediately opens that file with your default .rb editor (Sublime Text 2 for me). 
+
+It's really not much more than a formatted grep search. But in the week that I've been working on it on-and-off I've used it a handful of times and it's actually helped! So I decided to push it to GitHub. Hopefully it will be heplful for you too! 
+
+Again, here's [a link to the public repo on Github](https://github.com/sts10/recall). 
+
+## Some Interesting Bits From the Code
+
+### 1. Prepping the Query
+
+The program takes in the user's query through a ```gets``` in the runner. Then, in the results model, we take the ```@query``` through a series of small methods before running the grep search. Behold! 
+
+```ruby 
+  def method?
+    @query[0] == '.'
+  end
+
+  def symbol?
+    @query[0] == ':'
+  end
+
+  def format_query
+    if method? 
+      a = @query.split('')
+      a[0] = '\.'
+      @query = a.join('')
+    end
+
+    if !symbol? # For some reason queries starting with ':' did not 
+                # jibe well with the regex below
+      c = @query.split('')
+      c.unshift('\b')
+      c.push('\b')
+      @query = c.join('')
+    end
+  end
+
+  def get_grep_results
+    format_query  
+    return `grep -r -n -i --include=*.rb "#{@query}" /Users/samschlinkert/Documents/code/flatiron | sort -r`
+  end
+```
+
+Sandi Metz would be proud (I hope?)! I tried to keep to the Single Responsibility Principle-- that is, ensuring each method does one thing. For example, the ```format_query``` method escapes the '.' if the user searches for a method, and it puts '\b' (regex for word border) on either side of the query (unless it's a symbol... for whatever reason the '\b's didn't work with symbols). OK, maybe that method does two things but you get the point. 
+
+### 2. The Struct
+
+I've actually been reading Metz's [_Practical Object Oriented Design in Ruby_](http://www.amazon.com/Practical-Object-Oriented-Design-Ruby-Addison-Wesley/dp/0321721330/ref=sr_1_1?s=books&ie=UTF8&qid=1393199505&sr=1-1&keywords=practical+object-oriented+design+in+ruby) (aka POODR) this week, so I was inspired to use a Struct in the next portion of the results model. 
+
+```ruby 
+  # define the struct
+  Result = Struct.new(:file_path, :line_number, :code_snippet, :full_code) 
+
+  def parse_results
+    results = get_grep_results.split("\n")
+  
+    results.map do |result|
+      line_array = []
+      line_array = result.split(":")
+      Result.new(line_array[0], line_array[1], line_array[2], [''])
+    end 
+
+  end
+
+  def get_full_snippet 
+    results = parse_results # array of Result structs
+    results.each do |result| # iterate over the Result structs    
+      line_num = 0
+      File.open("#{result.file_path}", "r") do |f|
+        f.each_line do |line|
+          line_num = line_num + 1 
+          if line_num < (result.line_number.to_i - 5) || line_num > (result.line_number.to_i + 15)
+            next
+          else 
+            result.full_code << line
+          end
+        end
+      end
+
+    end
+  end 
+```
+
+With the struct defined as such, I get to call ```result.file_path``` rather than the uglier, non-semantic ```line_array[0]```. This is especially helpful when I write the .rb.erb file (yes, I wrote a .rb.erb file). Here's what that looks like with the struct in place:
+
+```
+### Output from Recall search
+<% @results.each do |result| %>
+
+###########################
+
+# File: <%= result.file_path %>
+# Starting at line number: <%= result.line_number %>... 
+
+  <% result.full_code.each { |line| %><%= line %><% } %>
+<% end %>
+```
+
+### 3. Reading the "full_code" snippet from each file 
+
+Another fun bit was figuring out how to get the 20 lines surrounding the query in the result file. Let's say we're searching for ```.to_s```. The grep search returns just the single line that ```.to_s``` is on. But I knew that wouldn't be very helpful to the user-- they'd want more context than that. 
+
+I figured I'd give them the 5 lines before the query, and 15 lines after. The way I did this (in results.rb) is a little janky, but it works OK.
+
+Calling ```result.line_number``` gives the line number that the grep search found the query on. (It returns the line number in its results thanks to the -n flag I hard-code into the call.) I also make a counter called ```line_num``` that iterates each time we read another line in the file. 
+
+```ruby 
+  File.open("#{result.file_path}", "r") do |f|
+        f.each_line do |line|
+          line_num = line_num + 1 
+          if line_num < (result.line_number.to_i - 5) || line_num > (result.line_number.to_i + 15)
+            next
+          else 
+            result.full_code << line
+          end
+        end
+      end
+```
+
+I call ```next``` if the counter is too far above or below the query's line number. 
+
+Obviously feel free to [fork](https://github.com/sts10/recall) and submit a pull request-- plenty to improve on. 
+
