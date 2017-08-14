@@ -7,15 +7,15 @@ comments: true
 
 ## What is KeePassXC
 
-[KeePassXC](https://keepassxc.org) is a cross-platform, modern open-source password manager. It is a community fork of [KeePassX](https://www.keepassx.org/), a native cross-platform port of [KeePass Password Safe](http://keepass.info/), with the goal to extend and improve it with new features and bug fixes.
+[KeePassXC](https://keepassxc.org) is a cross-platform, modern open-source password manager. As the project owners (of which I am not) put it: It is a community fork of [KeePassX](https://www.keepassx.org/), a native cross-platform port of [KeePass Password Safe](http://keepass.info/), with the goal to extend and improve it with new features and bug fixes.
 
-This is a basic guide of how to get started with KeePassXC. This guide is **for OS X / macOS users** (hereto referred to as "macOS"), though note that KeePassXC is built to work with Linux and Windows as well, and this guide may be helpful for those users too. Note that I'm not a security expert or professional, so buyer beware from this point on. If you spot any errors or have any suggestions for this post, feel free to contact me via [Twitter](https://twitter.com/sts10) or [elsewhere](https://gist.github.com/sts10/4a4e01021b3a5ad42e9b73e0abd7b7e3).
+This is a basic guide of how to get started with KeePassXC. This guide is **for OS X / macOS users** (hereto referred to as "macOS"), though note that KeePassXC is built to work with Linux and Windows as well, and this guide may be helpful for those users too. Note that I'm not a security expert or security professional, just a social media editor with 100+ accounts to manage, so buyer beware from this point on. If you spot any errors or have any suggestions for this post, feel free to contact me via [Twitter](https://twitter.com/sts10) or [elsewhere](https://gist.github.com/sts10/4a4e01021b3a5ad42e9b73e0abd7b7e3).
 
-KeePassXC is a bit different from other password managers like [1Password](https://1password.com/) or [LastPass](https://www.lastpass.com/) in that it simply creates and manages an encrypted password database that lives on your computer like any other file. There are pretty convenient ways to "sync" your password database with other devices (I go over some options below), but "by default" your passwords simply live on your computer in an encrypted file that you can only open with a master password. 
+KeePassXC is a bit different from other password managers like [1Password](https://1password.com/) or [LastPass](https://www.lastpass.com/) in that it simply creates and manages an encrypted password database that lives on your computer like any other file. In other words, by default it is "offline". There are some convenient methods to "sync" your password database with other devices (I go over some options below), but "by default" your passwords simply live on your computer in an encrypted file that you can only open with a master password. 
 
 Note that, unlike 1Password and other options, KeePassXC is free (as in costs zero dollars), but also that there is no company behind the product to offer formal support.
 
-(I'd like to note that I drew some inspiration and methodology from [Martin Shelton's "KeePass for Beginners" post](https://medium.com/@mshelton/keypass-for-beginners-dc8adfcdad54).)
+(I'd like to note that I drew some inspiration and methodology from [Martin Shelton's "KeePass for Beginners" post](https://medium.com/@mshelton/keypass-for-beginners-dc8adfcdad54), which you may also find useful.)
 
 ## Level 0: Starting Out
 
@@ -45,11 +45,11 @@ KeePassXC should now be installed on your computer.
 
 ## A general overview of how KeePassXC works as a password manager
 
-Before we go any further, lets talk a bit about how KeePassXC works. As we have learned, KeePassXC is a password manager-- it saves your passwords (and associated usernames) securely for you. 
+As we have learned, KeePassXC is a password manager-- it saves your passwords (and associated usernames) securely for you. Before we go any further, lets talk a bit about how KeePassXC works.  
 
-We're going to use KeePassXC, an application, to create and edit KeePass password databases. It may be helpful to think of it like Microsoft Excel: You use Excel to create and edit files on our computer that are spreadsheets. Similarly, KeePassXC enables us create and edit files on our computer that are databases of usernames and passwords.
+We're going to use KeePassXC, an application, to create and edit KeePass password databases. It may be helpful to think of it like Microsoft Excel: You use Excel to create and edit files on your computer. These files are spreadsheets. Similarly, KeePassXC enables us create and edit files on our computer that are databases of usernames and passwords.
 
-Of course one significant difference here is that these database files are always encrypted when not in use. To access them, you first open the database using KeePassXC (just as you would open a spreadsheet with Excel), then you must enter the "master key", which is usually a long master password, in order to access the database.
+Of course one significant difference here is that these database files are always encrypted when not in use. To access them, you first open the database using KeePassXC (just as you would open a spreadsheet with Excel), at which point you must enter the "master key", which is usually a long master password, in order to access the database.
 
 So let's create a KeePass database and see how we use it to save and manage passwords securely.
 
@@ -83,13 +83,13 @@ First, find the button with the key and the green downward arrow.
 
 ![Add new entry button](/img/keepassxc-blank-add-new-entry.png)
 
-We'll be presented with an interface to create our new entry. Let's fill in a title (Reddit), Username (our Reddit username), our Reddit password (Password) twice, and then the URL of the site (https://www.reddit.com), which you can of course paste in.
+We'll be presented with an interface to create our new entry. Let's fill in a title (Reddit), Username (our Reddit username), our Reddit password twice, and then the URL of the site (https://www.reddit.com), which you can of course paste in.
 
 ![Our first entry](/img/keepassxc-entry-creation.gif)
 
 If you want to view your password, you can click the button with the eye icon on the right. 
 
-Note that KeePassXC has the ability to generate random passwords for us, which we can do by clicking the black die icon. We'll go over that below, but for now let's pretend we're simply storing your existing password.
+Note that KeePassXC has the ability to generate random passwords for us, which we can do by clicking the black die icon. We'll go over that below, but for now let's pretend we're simply storing your existing password that you hopefully know by heart (but won't have to for much longer!).
 
 Once we've filled in this basic information, we'll click the OK button to save these changes to our database. We'll now see our new entry in our database. 
 
@@ -163,7 +163,7 @@ Let's say we're creating a new GitHub account and want to store our username and
 
 First, we'll hit the key + green arrow button to create a new entry. Then fill out the title and username as we did above. However now, instead of just making up a password, we're going to use KeePassXC's password generator to create a random password for our yet-to-be-created GitHub account. 
 
-The password generator has a few options. First, we can chose between a "Password" (a series of random characters) and a "Passphrase" (a series of random words). Passphrases have to be longer in length to be as secures as passwords, but they are easier to remember. 
+The password generator has a few options. First, we can chose between a "Password" (a series of random characters) and a "Passphrase" (a series of random words). Passphrases have to be longer in length to be as secure as passwords, but they may be easier for you to remember and type in on a mobile device.
 
 If we were **creating a random password**, we have a number of options. We can increase or decrease the length, choose to include or exclude uppercase letters, lowercase letters, numbers, or special characters. And we can even choose to "exclude look-alike characters" and whether to "Pick characters from every group". Most of these options exist to help you, the user, get around password requirements like "must contain at least one number and one uppercase letter" or "cannot include any special characters", etc.
 
