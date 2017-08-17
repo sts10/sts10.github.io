@@ -1,7 +1,7 @@
 ---
 layout: post
 title : "Attempting to Opt Out of SMS Password Reset"
-date: 2017-07-01 20:00:00 -0400
+date: 2017-07-09 20:00:00 -0400
 comments: true
 ---
 
