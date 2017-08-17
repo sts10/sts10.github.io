@@ -104,6 +104,6 @@ From the [Minima README](https://github.com/jekyll/minima#enabling-comments-via-
 
 The only downsides for me so far have been:
 
-1. I stuck with the default theme because I don't really care about that sort of thing these days
+1. I stuck with the default theme because I don't really care about that sort of thing these days, but it doesn't seem like there are a ton of theme options (which surprises me). Also, the themes are installed as Ruby gems, so the layout files are not contained in your Jekyll directory but elsewhere, wherever your Ruby gems get installed.
 2. All my blog post permaURLs changed, such that all the old ones I made with Hugo over the last few months are dead.
-3. The workflow to create a new post is a little lo-fi for me, but I could definitely write a bashj script to do it for me.
+3. The workflow to create a new post is a little lo-fi for me, but I could definitely write a bash script to do it for me.
