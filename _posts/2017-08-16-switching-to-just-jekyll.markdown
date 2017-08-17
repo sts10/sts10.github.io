@@ -67,10 +67,12 @@ You can also have `tags` but I forget that exact syntax right now. I think it'd 
 
 First, be sure you're in your Jekyll site's directory (for me `sts10.github.io/`). And then run:
 
-`jekyll build`
-`git add .`
-`git commit -m "update"`
-`git push origin master`
+```bash
+jekyll build
+git add .
+git commit -m "update"
+git push origin master
+```
 
 In a minute or two your site should be updated.
 
@@ -82,3 +84,5 @@ If you're using Jekyll's default theme, [Minima](https://github.com/jekyll/minim
 disqus: 
   shortname: <your-disqus-shortname>
 ```
+
+From the [Minima README](https://github.com/jekyll/minima#enabling-comments-via-disqus): "You can find out more about Disqus' shortnames [here](https://help.disqus.com/customer/portal/articles/466208)." (I didn't know what mine was off the top of my head.) Also: "If you don't want to display comments for a particular post you can disable them by adding comments: false to that post's YAML Front Matter."
