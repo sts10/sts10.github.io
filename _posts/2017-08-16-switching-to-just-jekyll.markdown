@@ -59,9 +59,22 @@ comments: true
 
 You can also have `tags` but I forget that exact syntax right now. I think it'd be like this: `tags: [Jekyll, blogging]`
 
+Note that when I transitioned from Hugo to Jekyll I had to change the front matter of all of my existing posts. This wasn't _terrible_ thanks to Vim macros.
+
 ### How to Preview Your Jekyll Site
 
 `bundle exec jekyll serve`
+
+### How to Create a New Post for Your Jekyll Site
+
+At this point I'm just creating a new Markdown file in the `_posts` and copying the correct front matter over from my most recent post. Note that it's crucial that you name the file like so: 
+
+```
+YYY-MM-DD-my-blog-post-title.markdown
+```
+
+I think the `.md` filename gave Jekyll trouble, or maybe it was `.mdown`.
+
 
 ### How to Publish Changes to Your Jekyll Site
 
@@ -86,3 +99,11 @@ disqus:
 ```
 
 From the [Minima README](https://github.com/jekyll/minima#enabling-comments-via-disqus): "You can find out more about Disqus' shortnames [here](https://help.disqus.com/customer/portal/articles/466208)." (I didn't know what mine was off the top of my head.) Also: "If you don't want to display comments for a particular post you can disable them by adding comments: false to that post's YAML Front Matter."
+
+## Downsides to the Switch
+
+The only downsides for me so far have been:
+
+1. I stuck with the default theme because I don't really care about that sort of thing these days
+2. All my blog post permaURLs changed, such that all the old ones I made with Hugo over the last few months are dead.
+3. The workflow to create a new post is a little lo-fi for me, but I could definitely write a bashj script to do it for me.
