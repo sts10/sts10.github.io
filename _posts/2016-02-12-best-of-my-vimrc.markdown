@@ -306,7 +306,7 @@ Plug 'kana/vim-textobj-indent'
 Plug 'kana/vim-textobj-line'         
 ```
 
-Also, with `textobj-uri`, I can remap `gx` to work better and with more type of URLs (see [this blog post for more](https://github.com/kana/vim-textobj-user/wiki)):
+Also, with `textobj-uri`, I can remap `gx` to work better and with more type of URLs (see [this blog post for more](https://sts10.github.io/2016/02/16/one-solution-to-a-problem-with-vims-gx-command.html)):
 
 ```text
 " map gx and go to visually select a URI and then open it in default browser
