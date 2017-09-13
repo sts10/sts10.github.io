@@ -107,7 +107,7 @@ Let's open [https://reddit.com/login](https://reddit.com/login) in a browser. Wi
 
 ![log in gif 1](/img/keepassxc-reddit-login.gif)
 
-There are keyboard shortcuts to make this process slightly quicker.
+There are keyboard shortcuts to make this process slightly quicker. For example, on macOS, `Command + b` will copy the highlighted entry's username to your clipboard. `Command + c` will copy the entry's password.
 
 #### Auto-Type: A more convenient login workflow
 
