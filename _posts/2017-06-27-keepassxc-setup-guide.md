@@ -124,7 +124,7 @@ To invoke Auto-Type, move focus from your browser to KeePassXC, then right-click
 
 #### Global Auto-Type
 
-KeePassXC's _Global_ Auto-Type feature allows us to create a global (i.e. operating-system wide) keyboard shortcut to Auto-Type information from a KeePassXC entry. For example, let's say we set out Global Auto-Type shortcut to `Control + Option + v` (which we can do in Settings > General > Auto-Type), then, when we have our cursor in a login screen in our browser, we can just do the shortcut and, if our database is open, our credentials will be filled in automatically. 
+KeePassXC's _Global_ Auto-Type feature allows us to create a global (i.e. operating-system wide) keyboard shortcut to Auto-Type information from a KeePassXC entry. For example, let's say we set our Global Auto-Type shortcut to `Control + Option + v` (which we can do in Settings > General > Auto-Type). Now, when we have our cursor in a login screen in our browser, we can do the shortcut and, if KeePassXC is open and our database is unlocked, our credentials will be filled in automatically. 
 
 ![Set global Auto-Type shortcut](/img/keepassxc-global-auto-type.png)
 
