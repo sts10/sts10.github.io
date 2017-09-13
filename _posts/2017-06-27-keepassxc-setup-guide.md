@@ -119,7 +119,18 @@ To invoke Auto-Type, move focus from your browser to KeePassXC, then right-click
 
 (Note: `{USERNAME}{TAB}{PASSWORD}{ENTER}` is the default Auto-Type sequence. However you can edit this sequence on a per-entry level. Just edit the entry by clicking the button with the key and blue pen icon, navigate to the Auto-Type section of the menu, and write a custom Auto-Type sequence. [More info on writing these custom sequences](http://keepass.info/help/base/autotype.html#autoseq).)
 
-![Custom auto-type sequence](/img/keepassxc-custom-auto-type-sequence.png)
+![Custom Auto-type sequence](/img/keepassxc-custom-auto-type-sequence.png)
+
+
+#### Global Auto-Type
+
+KeePassXC's _Global_ Auto-Type feature allows us to create a global (i.e. operating-system wide) keyboard shortcut to Auto-Type information from a KeePassXC entry. For example, let's say we set out Global Auto-Type shortcut to `Control + Option + v` (which we can do in Settings > General > Auto-Type), then, when we have our cursor in a login screen in our browser, we can just do the shortcut and, if our database is open, our credentials will be filled in automatically. 
+
+![Set global Auto-Type shortcut](/img/keepassxc-global-auto-type.png)
+
+With the shortcut set (and it doesn't have to be `Control + Option + v` of course), whenever our KeePassXC database is unlocked we can use the shortcut to Auto-Type our usernames and passwords, much like the normal Auto-Type functionality described above. 
+
+One nice advantage to the Global Auto-Type is that KeePass will find the relevant entry based on the entry title and URL, as opposed to having to find it ourselves as the normal AutoType workflow described above requires. If you have more than entry for a given service-- say a Google/gmail account for work and another for personal use-- KeePassXC will ask you which one you want it to Auto-Type.
 
 #### KeePassHTTP: Browser autofill, with a catch
 
