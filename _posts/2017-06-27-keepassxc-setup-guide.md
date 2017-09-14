@@ -7,13 +7,13 @@ comments: true
 
 ## What is KeePassXC
 
-[KeePassXC](https://keepassxc.org) is a cross-platform, modern open-source password manager. As the project owners (of which I am not) put it: It is a community fork of [KeePassX](https://www.keepassx.org/), a native cross-platform port of [KeePass Password Safe](http://keepass.info/), with the goal to extend and improve it with new features and bug fixes.
+[KeePassXC](https://keepassxc.org) is a cross-platform, modern open-source password manager. As the project owners (of which I am not) put it: It is a community fork of [KeePassX](https://www.keepassx.org/), a native cross-platform port of [KeePass Password Safe](http://keepass.info/), with the goal to extend and improve it with new features and bug fixes. KeePassXC is open-source, which means [its code](https://github.com/keepassxreboot/keepassxc) is open to inspection by all.
 
 This is a basic guide of how to get started with KeePassXC. This guide is **for OS X / macOS users** (hereto referred to as "macOS"), though note that KeePassXC is built to work with Linux and Windows as well, and this guide may be helpful for those users too. Note that I'm not a security expert or security professional, just a social media editor with 100+ accounts to manage, so buyer beware from this point on. If you spot any errors or have any suggestions for this post, feel free to contact me via [Twitter](https://twitter.com/sts10) or [elsewhere](https://gist.github.com/sts10/4a4e01021b3a5ad42e9b73e0abd7b7e3).
 
 KeePassXC is a bit different from other password managers like [1Password](https://1password.com/) or [LastPass](https://www.lastpass.com/) in that it simply creates and manages an encrypted password database that lives on your computer like any other file. In other words, by default it is "offline". There are some convenient methods to "sync" your password database with other devices (I go over some options below), but "by default" your passwords simply live on your computer in an encrypted file that you can only open with a master password. 
 
-Note that, unlike 1Password and other options, KeePassXC is free (as in costs zero dollars), but also that there is no company behind the product to offer formal support.
+Also note that, unlike 1Password and other options, KeePassXC is free (as in costs zero dollars), and its code is open source, but also that there is no company behind the product to offer formal support.
 
 (I'd like to note that I drew some inspiration and methodology from [Martin Shelton's "KeePass for Beginners" post](https://medium.com/@mshelton/keypass-for-beginners-dc8adfcdad54), which you may also find useful.)
 
