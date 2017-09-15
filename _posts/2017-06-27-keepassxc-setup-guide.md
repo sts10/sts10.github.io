@@ -5,13 +5,29 @@ date: 2017-06-27 20:18:05 0400
 comments: true
 ---
 
-## What is KeePassXC
+## Table of Contents
 
-[KeePassXC](https://keepassxc.org) is a cross-platform, modern open-source password manager. As the project owners (of which I am not) put it: It is a community fork of [KeePassX](https://www.keepassx.org/), a native cross-platform port of [KeePass Password Safe](http://keepass.info/), with the goal to extend and improve it with new features and bug fixes. KeePassXC is open-source, which means [its code](https://github.com/keepassxreboot/keepassxc) is public and thus open to inspection by all.
+[What is KeePassXC?](#what-is-keepassxc)
+- [Level 0: Starting Out](#level-0-starting-out)
+- [Level 1: Getting Setup](#level-1-getting-setup)
+- [Level 2: More Security Tips](#level-2-more-security-tips)
+- [Level 3: Getting Organized](#level-3-getting-organized)
+- [Level 4: Locking Our Database With Multiple Factors](#level-4-locking-our-database-with-multiple-factors)
+
+[Appendix: Verifying Your KeePassXC Download Without Using the Command Line](#appendix-verifying-your-keepassxc-download-without-using-the-command-line)
+
+
+## What is KeePassXC?
+
+[KeePassXC](https://keepassxc.org) is an open-source password manager. As the project owners (of which I am not) put it: It is a community fork of [KeePassX](https://www.keepassx.org/), a native cross-platform port of [KeePass Password Safe](http://keepass.info/), with the goal to extend and improve it with new features and bug fixes. KeePassXC is open-source, which means [its code](https://github.com/keepassxreboot/keepassxc) is public and thus open to inspection by all.
 
 This is a basic guide of how to get started with KeePassXC. This guide is **for OS X / macOS users** (hereto referred to as "macOS"), though KeePassXC is built to work with Linux and Windows as well, and this guide may be helpful for those users too. 
 
-I'm not a security expert or security professional, just a social media editor, so buyer beware from this point on. If you spot any errors or have any suggestions for this post, feel free to contact me via [Twitter](https://twitter.com/sts10) or [elsewhere](https://gist.github.com/sts10/4a4e01021b3a5ad42e9b73e0abd7b7e3).
+### Disclosure of Amateurism
+
+I'm not a security expert or security professional, just a social media editor who manages a lot of accounts, so buyer beware from this point on. If you spot any errors or have any suggestions for this post, feel free to contact me via [Twitter](https://twitter.com/sts10) or [elsewhere](https://gist.github.com/sts10/4a4e01021b3a5ad42e9b73e0abd7b7e3).
+
+### How is KeePassXC Different from Other Password Managers?
 
 KeePassXC is a bit different from other password managers like [1Password](https://1password.com/) or [LastPass](https://www.lastpass.com/) in that it simply creates and manages an encrypted password database that lives on your computer like any other file. In other words, by default it is "offline". There are some convenient methods to "sync" your password database with other devices (I go over some options below), but "by default" your passwords simply live on your computer in an encrypted file that you can only open with a master password. 
 
