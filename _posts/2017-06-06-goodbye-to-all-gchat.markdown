@@ -31,15 +31,15 @@ Of course even if you agree with that sentiment, most of your friends may just r
 
 My first instant messenger was AIM, and then sometime early in college everyone seemed to just switch to gchat, I assume because we had soon emailed each others' gmail addresses and that added them to our lists. So if you're like me, you've only switched instant messengers once-- and it was to a service that came with a gmail email address (if you've also used Facebook Messenger or Twitter DMs a lot, those are obviously other examples of messengers that came bundled with something else entirely). Notably, I don't remember needing to be encouraged to switch to gchat, nor do I remember having to ask others to switch. I remember it just sort of happened. 
 
-Most of the options I talk about below don't have any external benefit to installing on beyond that chat client itself (which I think, other things equal, is a good thing). And none allow you to easily message someone using Hangouts. 
+Most of the alternatives to Google Talk/Hangouts I talk about below don't have any external benefit to installing on beyond that chat client itself (which I think, other things equal, is a good thing). And none allow you to easily message someone using Hangouts. 
 
-Plus, considering that I don't imagine my friends will abandon gmail anytime soon, and that when they're automatically rolled over, Hangouts will still work in their gmail browser tab, to ask friends to "switch" is effectively to ask them to set up and be on a _second_ (if not third) messaging service. Plus when they get there, you might be the only contact they have on the new service.
+Furthermore, considering that I don't imagine my friends will abandon gmail anytime soon, and that when they're automatically rolled over, Hangouts will still work in their gmail browser tab, to ask friends to "switch" is effectively to ask them to set up and be on a _second_ (if not third) messaging service. Plus when they get there, you might be the only contact they have on the new service.
 
-All this to say this is an uphill battle. But hey, maybe this Talk-to-Hangouts shift is the push you need to take on this network effect and have a look around (it was for me). What are our current options that aren't Hangouts? You and your gang may already be using something like Facebook Messenger or Slack or Skype or WhatsApp and be all set. If so, congrats! But I don't have more than one or two contacts on any of those platforms, so none of them had an advantage on the network effect. Plus none of them had some of the features I'd want if I had my pick of service.
+All this to say this is an uphill battle. But hey, maybe this Talk-to-Hangouts shift is the push you need to take on this network effect and have a look around at alternative IM services (it was for me). What are our current options that aren't Hangouts? You and your gang may already be using something like Facebook Messenger or Slack or Skype or WhatsApp and be all set. If so, congrats! But I don't have more than one or two contacts on any of those platforms, so none of them had an advantage on the network effect. Plus none of them had some of the features I'd want if I had my pick of service.
 
 ## My Criteria 
 
-Let's say I could make a switch to something else. For this new service, I'd want something that (A) worked well on the desktop (since that's where I use gchat) and (B) didn't require a cell phone number, and, unlike gchat, \(C) was relatively secure. It also had to be super easy to install and use, and hopefully run in as many environments as possible (a solid desktop app at home, in any browser at work, on Android or iOS, etc.)
+Let's say I could make a switch to something else and bring all or most of your contacts. For this new service, I'd want something that (A) worked well on the desktop (since that's where I use gchat) and (B) didn't require a cell phone number, and, unlike gchat, \(C) was relatively secure. It also had to be super easy to install and use, and hopefully run in as many environments as possible (a solid desktop app at home, in any browser at work, on Android and iOS, etc.)
 
 By "relatively secure", I was hoping for a feature called [end-to-end-encryption](https://en.wikipedia.org/wiki/End-to-end_encryption), which means that even the service can't read your messages. Wikipedia, [citing Wired](https://www.wired.com/2014/11/hacker-lexicon-end-to-end-encryption/), defines it as such:
 
@@ -47,7 +47,7 @@ By "relatively secure", I was hoping for a feature called [end-to-end-encryption
 
 (The Electronic Frontier Foundation also has a [definition](https://ssd.eff.org/en/glossary/end-end-encryption).)
 
-If you don't care about encryption that's fine of course. 
+This encryption had to "just work", meaning that not only users didn't need to do anything to to use or even to enable it, but also that it didn't negatively effect other functionality too much.
 
 ## Alternatives
 
@@ -55,8 +55,8 @@ There are a lot of ways to send text messages to other people these days. And I'
 
 There are a couple of services that meet some or all of the requirements I list above:  
 
-- Slack: Lots of features, but I'm writing it off because it's too entwined with my work persona, which turns me off but I also think it would turn others off.
-- [Signal](https://whispersystems.org/): Arguably the most secure option, but it requires phone number, and its desktop apps are a little funky.
+- Slack: Lots of features, but I'm writing it off because it's too entwined with my work persona, which turns me off personally. And even if I was cool with that, I think it would turn others off.
+- [Signal](https://whispersystems.org/): Arguably the most secure option, but it requires phone number, and its desktop apps are a little flakey and are integrated into Chrome.
 - WhatsApp: [employs end-to-end encryption](https://www.eff.org/deeplinks/2016/04/whatsapp-rolls-out-end-end-encryption-its-1bn-users), but, like Signal, it seems to be pretty mobile-first-- the desktop app seem a bit lacking. Plus, it's owned by Facebook, which has implemented a data sharing scheme that the Electronic Frontier Foundation [wrote about](https://www.eff.org/deeplinks/2016/08/what-facebook-and-whatsapps-data-sharing-plans-really-mean-user-privacy-0) and later highlighted as a concern about the service in [a blog post in October 2016](https://www.eff.org/deeplinks/2016/10/where-whatsapp-went-wrong-effs-four-biggest-security-concerns). Plus, currently, I don't use it to talk to anyone.
 - Facebook Messenger: Interestingly, its display is the most gchat-like in that it can run in a browser tab with the messages are all housed in small discreet boxes starting from the bottom right. And likely everyone I'd want to talk to is on it already. But the last thing I want is Facebook knowing more of my personal information. 
 - [Cryptocat](https://crypto.cat/): Solid encryption, allows large file transfers, and has a very AIM feel, but no mobile app. And I don't know anyone who uses it.
