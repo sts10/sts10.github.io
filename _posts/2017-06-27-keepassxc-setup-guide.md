@@ -31,9 +31,9 @@ I'd like to note that I drew some inspiration and methodology from [Martin Shelt
 
 ### How is KeePassXC Different from Other Password Managers?
 
-KeePassXC is a bit different from other password managers like [1Password](https://1password.com/) or [LastPass](https://www.lastpass.com/) in that it simply creates and manages an encrypted password database that lives on your computer like any other file. In other words, by default it is "offline." There are some convenient methods to "sync" your password database with other devices (I go over some options below), but "by default" your passwords simply live on your computer in an encrypted file that you can only open with a master password. 
+KeePassXC is a bit different from other password managers like [1Password](https://1password.com/) or [LastPass](https://www.lastpass.com/) in that it simply creates and manages an encrypted password database that lives on your computer like any other file. In other words, by default it is a local or "offline" password manager. There are some convenient methods to "sync" your password database with other devices (I go over some options below), but "out of the box" your passwords simply live on your computer in an encrypted file that you can only open with a master password. 
 
-Also note that, unlike 1Password and other options, KeePassXC is free (as in costs zero dollars), and its code is open-source. However, know that there is no company behind the product to offer formal support, as you might be used to with other products (or not!).
+Also note that, unlike 1Password and other options, KeePassXC is free (as in costs zero dollars), and its code is open-source. However, know that there is no company behind the product to offer formal support, as you might be used to with other products.
 
 ## Level 0: Starting Out
 
@@ -47,7 +47,7 @@ Select your desired operating system (the current options are Linux, macOS, and 
 
 ### Verifying our Download
 
-Before you install KeePassXC from this downloaded file, **it is recommended that you verify your download**. By verifying the signatures of KeePassXC releases, you can prove the authenticity and integrity of the downloaded file. This guarantees that the file you just downloaded was originally created by the KeePassXC Team and that its contents haven't been tampered with on the way. 
+Before you install KeePassXC from this downloaded file, **it is recommended that you verify your download**. By verifying the signatures of your KeePassXC download, you can prove the authenticity and integrity of the downloaded file. This guarantees that the file you just downloaded was originally created by the KeePassXC Team and that its contents haven't been tampered with on the way to your hard drive.
 
 If you're comfortable using the command line, you can learn how to verify your download on [the Verifying Signatures page](https://keepassxc.org/verifying-signatures) of the KeePassXC website.
 
@@ -67,7 +67,7 @@ As we have learned, KeePassXC is a password manager-- it saves your passwords (a
 
 We're going to use KeePassXC, an application, to create and edit KeePass password databases. It may be helpful to think of it like Microsoft Excel: You use Excel to create and edit files on your computer. These files are spreadsheets. Similarly, KeePassXC enables us create and edit files on our computer that are databases of usernames and passwords.
 
-Of course one significant difference here is that these database files are always encrypted when not in use. To access them, you first open the database using KeePassXC (just as you would open a spreadsheet with Excel), at which point you must enter the "master key", which is usually a long master password, in order to access the database.
+Of course one significant difference between Excel and KeePassXC is that KeePassXC database files are always encrypted when not in use. To access them, you first open the database using KeePassXC (just as you would open a spreadsheet with Excel), at which point you must enter the "master key", which is usually a long master password, in order to access the database.
 
 So let's create a KeePass database and see how we use it to save and manage passwords securely.
 
@@ -85,13 +85,13 @@ When we launch KeePassXC for the first time, we're greeted with the screen above
 
 First, we're asked to choose a name and a location to save this database file we're creating. I created a new folder called "passwords" in my Documents folder, then I named my new database "my-passwords" (the full file name will be `my-passwords.kdbx`), but you can name it whatever you want. 
 
-![Setting master key](/img/keepassxc-entering-master-password.gif)
-
 Next, we're asked to set up a master key. For now, let's focus on the section under the "Password" section and ignore the "Key file" and "Challenge Response" sections. 
 
-Here, we're going to enter a long password or _passphrase_ that we'll need to use every time we want to open this database. There are multiple methods for creating nice long, random passphrases that are difficult for attackers to guess-- we'll discuss how to use KeePassXC to generate a random passphrase for us below. (Another method involves [using physical dice](https://theintercept.com/2015/03/26/passphrases-can-memorize-attackers-cant-guess/).)
+![Setting master key](/img/keepassxc-entering-master-password.gif)
 
-Enter your master password twice and then hit "OK". 
+Here, we're going to enter a long password or _passphrase_ that we'll need to use every time we want to open this database. There are multiple methods for creating nice long, random passphrases that are difficult for attackers to guess, but relatively easy to remember-- we'll discuss how to use KeePassXC to generate a random passphrase for us below. (Another method involves [using physical dice](https://theintercept.com/2015/03/26/passphrases-can-memorize-attackers-cant-guess/).)
+
+Enter your master password twice and then hit "OK". Cool, now we have a new, and currently empty, database.
 
 ### Creating your first entry
 
@@ -135,6 +135,8 @@ To invoke Auto-Type, move focus from your browser to KeePassXC, then right-click
 
 ![autotype gif](/img/keepassxc-auto-type.gif)
 
+Alternatively, the Auto-Type keyboard shortcut on macOS is `Command + v`.
+
 (Note: `{USERNAME}{TAB}{PASSWORD}{ENTER}` is the default Auto-Type sequence. However you can edit this sequence on a per-entry level. Just edit the entry by clicking the button with the key and blue pen icon, navigate to the Auto-Type section of the menu, and write a custom Auto-Type sequence. [More info on writing these custom sequences](http://keepass.info/help/base/autotype.html#autoseq).)
 
 ![Custom Auto-type sequence](/img/keepassxc-custom-auto-type-sequence.png)
@@ -142,11 +144,13 @@ To invoke Auto-Type, move focus from your browser to KeePassXC, then right-click
 
 #### Global Auto-Type
 
-KeePassXC's _Global_ Auto-Type feature allows us to create a global (i.e. operating-system wide) keyboard shortcut to Auto-Type information from a KeePassXC entry. For example, let's say we set our Global Auto-Type shortcut to `Control + Option + v` (which we can do in Settings > General > Auto-Type). Now, when we have our cursor in a login screen in our browser, we can do the shortcut and, if KeePassXC is open and our database is unlocked, our credentials will be filled in automatically. 
+KeePassXC's _Global_ Auto-Type feature allows us to create a global (i.e. operating-system wide) keyboard shortcut to Auto-Type information from a KeePassXC entry. For example, let's say we set our Global Auto-Type shortcut to `Control + Option + v` (which we can do in Settings > General > Auto-Type). 
 
 ![Set global Auto-Type shortcut](/img/keepassxc-global-auto-type.png)
 
-With the shortcut set (and it doesn't have to be `Control + Option + v` of course), whenever our KeePassXC database is unlocked we can use the shortcut to Auto-Type our usernames and passwords, much like the normal Auto-Type functionality described above. 
+Now, when we have our cursor in a login screen in our browser, we can do the shortcut and, if KeePassXC is open and our database is unlocked, our credentials will be filled in automatically. If your database is locked, KeePassXC should prompt you to unlock your database, though as of version 2.2.1 I've found this workflow [a bit buggy](https://github.com/keepassxreboot/keepassxc/issues/1023).
+
+<!-- With the shortcut set (and it doesn't have to be `Control + Option + v` of course), whenever our KeePassXC database is unlocked we can use the shortcut to Auto-Type our usernames and passwords, much like the normal Auto-Type functionality described above. --> 
 
 One nice advantage to the Global Auto-Type is that KeePass will find the relevant entry based on the entry title and URL, as opposed to having to find it ourselves as the normal AutoType workflow described above requires. If you have more than entry for a given service-- say a Google/gmail account for work and another for personal use-- KeePassXC will ask you which one you want it to Auto-Type.
 
@@ -166,7 +170,7 @@ Due to these security concerns, and the need to install the browser extensions, 
 
 ### Locking your database
 
-If you're stepping away from your computer, it's wise to lock your KeePass database. To do this, go to Tools > Lock database (or hit command + l). Once locked, you'll have to enter your master password to unlock your database. 
+If you're stepping away from your computer, it's wise to lock your KeePass database. To do this, go to Tools > Lock database (or hit `Command + l`). Once locked, you'll have to enter your master password to unlock your database. 
 
 ![Lock it down](/img/keepassxc-lock-database.gif)
 
