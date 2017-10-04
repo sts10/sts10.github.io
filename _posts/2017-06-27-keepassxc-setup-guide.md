@@ -194,9 +194,9 @@ Let's say we're creating a new GitHub account and want to store our username and
 
 ![Creating a new entry with a randomly generated passphrase](/img/keepassxc-new-random-entry.gif)
 
-First, we'll hit the key + green arrow button to create a new entry. Then fill out the title and username as we did above. However now, instead of just making up a password, we're going to use KeePassXC's password generator to create a random password for our yet-to-be-created GitHub account. 
+First, we'll hit the key + green arrow button to create a new entry. Then fill out the title and username as we did above. However now, instead of just typing in our existing password (or making one up), we're going to use KeePassXC's password generator to create a random password for our yet-to-be-created GitHub account. 
 
-The password generator has a few options. First, we can chose between a "Password" (a series of random characters) and a "Passphrase" (a series of random words). Passphrases have to be longer in length to be as secure as passwords, but they may be easier for you to remember and type in on a mobile device.
+The password generator has a few options. First, we can choose between a "Password" (a series of random characters) and a "Passphrase" (a series of random words). Passphrases have to be longer in length to be as secure as passwords, but they may be easier for you to remember and type in on a mobile device.
 
 If we were **creating a random password**, we have a number of options. We can increase or decrease the length, choose to include or exclude uppercase letters, lowercase letters, numbers, or special characters. And we can even choose to "exclude look-alike characters" and whether to "Pick characters from every group". Most of these options exist to help you, the user, get around password requirements like "must contain at least one number and one uppercase letter" or "cannot include any special characters", etc.
 
@@ -212,33 +212,33 @@ We can also use KeePassXC's built-in password generator to generate random passp
 
 To change the master password of an existing KeePass database, go to the "Database" menu and select "Change master key". Next click the black die icon to generate a new random passphrase.
 
-Switch the random generator mode from "Password" to "Passphrase", then set the Length to six words. You then may want to change the "Word Separator" from the default of a space to a hyphen, or even to no character (nothing).
+Switch the random generator mode from "Password" to "Passphrase", then set the Word Count to six words or more. You then may want to change the "Word Separator" from the default of a space to a hyphen, or even to no character (nothing).
 
 ![randomly generating a master passphrase](/img/keepassxc-random-master-passphrase.gif)
 
-Once you've got a 6-word passphrase with your desired word separator, write your new passphrase on a piece of paper and keep it somewhere safe. 
+Once you've got a 6-or-more word passphrase with your desired word separator, write your new passphrase on a piece of paper and keep it somewhere safe. 
 
-It's very important to note that you're going to need to remember this passphrase (as it's not going to be stored in your KeePass database). Basically, **don't change your master password to the generated passphrase unless you have it written down somewhere or memorized.**
+NOTE: It's very important to note that you're going to need to remember this passphrase (as it's not going to be stored in your KeePass database). Basically, **don't actually change your master password to the generated passphrase unless you have it written down somewhere or memorized.**
 
 Now click the Copy button to copy your new passphrase to the clipboard. Then click the Close button to close the password generator. 
 
 At this point we're ready to change your master password to your new passphrase by pasting it into the "Enter password" field and the "Repeat password" field. Clicking the OK button will change your database's master password to your new passphrase. Again, don't do this unless you've written the new passphrase down somewhere safe and/or memorized it.
 
+One trick for remembering your new passphrase is to [create a little story about them](https://www.xkcd.com/936/) in your head about them.
+
 ![XKCD long passprhases](https://imgs.xkcd.com/comics/password_strength.png)
 
-One way to remember these long passphrases is to [create a little story about them](https://www.xkcd.com/936/) in your head.
-
-### Setting number of transform rounds by benchmark
+### Setting the number of transform rounds by benchmark
 
 Another way we'll want to make our KeePass database a bit more secure is to increase the number of "transform rounds" needed to be performed for every master password guess. 
 
-The basic idea is that we want to create a time delay for every master password guess. If we can slow down the process such that it takes roughly one second per guess, we'll be able to hamper a brute force dictionary attack, in which an attacker would systematically guess every possible password. 
+The basic idea here is that we want to create a time delay for every master password guess. If we can slow down the process such that it takes roughly one second per guess, we'll be able to hamper a brute force dictionary attack, in which an attacker would systematically guess every possible password. 
 
-The way KeePassXC allows for us to create this time delay is to change the way your database in encrypted such that any computer attempting to unlock it will be forced to run your master key through a high number of rounds of encryption before actually trying the password they want to try. You can read more about it in [this blog post](http://www.laurencegellert.com/2015/02/a-keepass-setting-that-might-save-your-online-identity/).
+The way KeePassXC allows for us to create this time delay is to change the way your database is encrypted such that any computer attempting to unlock it will be forced to run your master key through a high number of "rounds" of encryption before actually trying the password they want to try. You can read more about it in [this blog post](http://www.laurencegellert.com/2015/02/a-keepass-setting-that-might-save-your-online-identity/).
 
-How many rounds should you set? Conveniently, KeePassXC has a "Benchmark" button that tests your current machine to see how many transform rounds it can do in 1 second. It then enters that number in the "Transform rounds" field. 
+How many rounds should you set? Conveniently, KeePassXC has a "Benchmark" button that tests your current machine to see how many transform rounds it can do in 1 second. It then enters that number in the "Transform rounds" field for you.
 
-To set the number of transform rounds, with your database unlocked go to the Database menu and select "Database settings". Then click the "Benchmark" button, wait one second for the higher number to appear in the form, and hit OK.
+To set the number of transform rounds to this one-second benchmark, with your database unlocked go to the Database menu and select "Database settings". Then click the "Benchmark" button, wait one second for the higher number to appear in the form, and hit OK.
 
 ![Benchmarking transform round](/img/keepassxc-benchmarking.gif)
 
@@ -248,11 +248,11 @@ Now your database should take about one second to try a master password guess (w
 
 ### Syncing options
 
-If you want keep you KeePass database synchronized across multiple devices, you'll need to share your database between those devices. The easiest way to do that is to use a cloud storage service like [Google Drive](https://www.google.com/drive/download/) or [Dropbox](https://www.dropbox.com/). You simply move your KeePass database (which, remember, is well-encrypted) into a folder on your Google Drive or Dropbox. 
+If you want keep you KeePass database synchronized across multiple devices, you'll need to share your database between those devices. The easiest way to do that is to use a cloud storage service like [Google Drive](https://www.google.com/drive/download/), [Dropbox](https://www.dropbox.com/), or iCloud. You simply move your KeePass database (which, remember, is well-encrypted) into a folder on your Google Drive or Dropbox. 
 
-If you're wary of your password database being stored on servers you don't own, you could explore [Syncthing](https://syncthing.net/), a program that keeps a folder or multiple folders "in-sync" across multiple computers that you own. (Think Dropbox but without the Dropbox server involved.) However note that Syncthing involves a bit more set up (I wrote [a getting started guide to Syncthing a few weeks ago](https://sts10.github.io/2017/05/24/getting-started-with-syncthing.html) if you want a quick preview of what you'd be getting into).
+If you're wary of your password database being stored on servers you don't own, you can explore other options like [Syncthing](https://syncthing.net/), a program that keeps a folder or multiple folders "in-sync" across multiple computers that you own (think Dropbox but without the Dropbox server involved.) However note that Syncthing involves a bit more set up (I wrote [a getting started guide to Syncthing a few weeks ago](https://sts10.github.io/2017/05/24/getting-started-with-syncthing.html) if you want a quick preview of what you'd be getting into).
 
-To access your passwords from a smartphone, you'll need to use an app that can open KeePass databases. There are a handful for both iOS and Android, but I haven't used any of them so I won't comment further.
+To access your passwords from a smartphone, you'll need to use an app that can open KeePass databases. There are a handful of such apps for both iOS and Android, but I haven't used any of them so I won't comment further.
 
 ### Using Groups
 
@@ -266,7 +266,7 @@ You can later drag entries in and out of groups. You can even create groups with
 
 To beautify your KeePass database even further, you can automatically download the favicon (usually the service's logo) from the website of the service. 
 
-To do this, edit an entry, then click the "icon" button on the left. While you can select from any of the given options, you can also click the "Download favicon" button in the bottom right. Be sure to have the full URL of the service in your entry (in this case `https://github.com/`), so KeePassXC knows where to download the favicon from.
+To do this, edit an entry, then click the "icon" button on the left. While you can select from any of the default options, you can also click the "Download favicon" button in the bottom right. Be sure to have the full URL of the service in your entry (in this case `https://github.com/`), so KeePassXC knows where to download the favicon from.
 
 ![custom icon](/img/keepassxc-custom-icon.png)
 
@@ -276,7 +276,7 @@ Once the favicon downloads (it might take a second), be sure to select it and th
 
 KeePassXC, as you may have already observed by this point, has search functionality via a text field in the top right of the program. As of KeePassXC v 2.2.0 it searches all of your folders, regardless of which folder you're currently in, which is nice.
 
-On a Mac it can be invoked by the usual Command + f keyboard shortcut.
+On a Mac it can be invoked by the familiar `Command + f` keyboard shortcut.
 
 ## Level 4: Locking our database with multiple factors
 
@@ -284,13 +284,13 @@ As we've learned, KeePassXC lets us lock our database behind a master password. 
 
 ### Using a Key File
 
-The simpler example is a key file. A key file is a file that needs to be present for the database to be opened. It's not your database file-- it's usually just a text file with a bunch of random characters. 
+The simpler example of a second factor is a key file. A key file is a file that needs to be present for the database to be opened. It's not your database file-- it's usually just a text file with a bunch of random characters. 
 
-On its face, this may seem not very useful. If an attacker has access to your database file, they likely have access to other files on your computer. However things get more interesting if, for example, you put your key file on a USB flash drive. With this setup, you'll need to enter your master password AND have the USB stick plugged into the computer to open your database.
+On its face, this may seem not very useful. If an attacker has access to your database file, they likely have access to other files on your computer. However things get more interesting if, for example, you have your database on your computer's hard drive but you have your key file on a USB flash drive. With this setup, you'll need to enter your master password AND have the USB stick plugged into the computer to open your database.
 
 To assign a key file to an existing KeePass database, go to the "Database" menu and select "Change master key". First, enter your master password twice (if you want to change it you can at this juncture, or just enter your old one). 
 
-Now check the check box labeled "Key file" and then either select an existing file to be your key file, or have KeePassXC create a key file for you. I'd highly recommend that you have KeePassXC create a key file for you. 
+Now check the check box labeled "Key file" and then either select an existing file to be your key file, or have KeePassXC create a key file for you. For a variety of reasons I'd recommend that you have KeePassXC create a key file for you. 
 
 ![Key file](/img/keepassxc-keyfile.png)
 
@@ -298,37 +298,37 @@ Click the OK button for these changes to take effect. Once you have, KeePassXC w
 
 ### Challenge Response
 
-KeePassXC version 2.2.0 offers support for using a token like a YubiKey to lock your database (described as "YubiKey challenge-response support"). [YubiKey](https://www.yubico.com/) is a "smart key" that plugs into a USB port on your computer and helps you verify your identity. This is that third option for a master key labeled "Challenge Response". 
+KeePassXC version 2.2.0 offers support for using a "token", like a YubiKey, to unlock your database (also described as "YubiKey challenge-response support"). A [YubiKey](https://www.yubico.com/) is a "smart key" that plugs into a USB port on your computer and helps you verify your identity. This is that third option for a KeePassXC master key, labeled "Challenge Response". 
 
 This feature is relatively new to KeePassXC, and does not yet exist in KeePassX. For these reasons I'm not going to go over how to use it at this time. However if you're feeling adventurous, go for it.  
 
 ---
 
-## Appendix: Verifying Your KeePassXC Download without Using the Command Line 
+## Appendix: Verifying Your KeePassXC Download Without Using The Command Line 
 
-You should follow these steps after downloading the KeePassXC dmg file but _before_ you install it. 
+You should follow these steps _after_ downloading the KeePassXC dmg file, but _before_ you install it. 
 
 ### 1. Download GPG Suite
 
-Let's head over to [gpgtools.org](https://gpgtools.org/). At the time of this writing, there's a "GPG Suite beta" (number 3) and a regular version of "GPG Suite". If you're running macOS Sierra (10.12), I'd advise you go with the beta version. If you're running an older version of macOS (10.11 or earlier), go for the not beta version. 
+Let's head over to [gpgtools.org](https://gpgtools.org/). At the time of this writing, there's a beta version of this software called "GPG Suite 2017.1" and a regular version of "GPG Suite". If you're running macOS Sierra (10.12) or higher, I'd advise you go with the beta version. If you're running an older version of macOS (10.11 or earlier), you should be good with the not beta version. 
 
 After downloading the proper version of GPG Suite, install it as you would any other Mac application. The GPG Suite website provides [a guide to verifying your GPG Suite download, as well as any downloaded file](https://gpgtools.tenderapp.com/kb/how-to/how-to-verify-the-downloaded-gpg-suite).
 
 ### 2. Download and Import the KeePassXC GPG Public Master Key
 
-Once GPG Suite is installed, go to [the KeePassXC page on verifying downloads](https://keepassxc.org/download). We're looking to download and import KeePassXC's public master key. 
+Once GPG Suite is installed, go to [the KeePassXC page on verifying downloads](https://keepassxc.org/verifying-signatures). 
 
-One way to do this is to find the link in the sentence "Manual download from our website and import with gpg". Right-click (or control + click on Mac) the link and select "Save Link As..." and save it to your Downloads folder. 
+We're looking to download and import KeePassXC's public master key.  One way to do this is to find the link in the sentence "Manual download from our website and import with gpg". Right-click (or control + click on Mac) the link and select "Save Link As..." and save it to your Downloads folder. 
 
 ![Download KeePassXC Master Public Key](/img/keepassxc-save-master-key-as.png)
 
-Now open a program called "GPG Keychain" (it should be part of the GPG Suite we installed earlier. In the top-left, click the "Import" button and select the master public key you just downloaded.
+Now open a program called "GPG Keychain" (it should be part of the GPG Suite we installed earlier). In the top-left, click the "Import" button and select the master public key file you just downloaded.
 
 If you successfully imported the key, you should get a message to that effect.
 
 ### 3. Download the GPG signature of your KeePassXC Release
 
-Now, let's head back over to [the KeePassXC download page](https://keepassxc.org/download). Click the "macOS" tab if it's not already highlighted and then click the link called "GPG signature". Save this file to your Downloads file, where you downloaded the KeePassXC dmg file earlier). It's important that they're in the same folder (this folder is likely the Downloads folder).
+Now, let's head back over to [the KeePassXC download page](https://keepassxc.org/download). Click the "macOS" tab if it's not already highlighted and then click the link called "GPG signature". Save this file to your Downloads file, where you downloaded the KeePassXC dmg file earlier. It's important that they're in the same folder (this folder is likely the Downloads folder).
 
 ![Signature next to DMG](/img/keepassxc-signature-same-folder.png)
 
