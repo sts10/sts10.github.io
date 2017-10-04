@@ -312,7 +312,7 @@ You should follow these steps after downloading the KeePassXC dmg file but _befo
 
 Let's head over to [gpgtools.org](https://gpgtools.org/). At the time of this writing, there's a "GPG Suite beta" (number 3) and a regular version of "GPG Suite". If you're running macOS Sierra (10.12), I'd advise you go with the beta version. If you're running an older version of macOS (10.11 or earlier), go for the not beta version. 
 
-After downloading the proper version of GPG Suite, install it as you would any other Mac application. 
+After downloading the proper version of GPG Suite, install it as you would any other Mac application. The GPG Suite website provides [a guide to verifying your GPG Suite download, as well as any downloaded file](https://gpgtools.tenderapp.com/kb/how-to/how-to-verify-the-downloaded-gpg-suite).
 
 ### 2. Download and Import the KeePassXC GPG Public Master Key
 
@@ -338,11 +338,11 @@ Now, right-click the .dmg file and go to Services > "OpenPGP: Validate". You sho
 
 ![Signed by Release](/img/keepassxc-signed-by.png)
 
-Now back in the GPG Keychain, double click the entry called "KeePassXC Release", and in the window pane that slides out, click the "Subkeys" tab. 
+If you saw "Signed by: KeePassXC Release..." your download is likely safe. But to be on the safe side, we can return to the GPG Keychain, double click the entry called "KeePassXC Release", and in the window pane that slides out, click the "Subkeys" tab. 
 
 ![Comparing keys](/img/keepassxc-comparing-subkeys.png)
 
-It's important that the fingerprint you got in your Verification Results pop up matches one of the Subkeys. If it matches one of them, you can be more confident your KeePassXC download has not been tampered with. Congratulations! Now it's time to install KeePassXC!
+Here we'll check that the fingerprint you got in your Verification Results dialog matches one of the Subkeys of the KeePassXC Release public key. If it matches one of them, you can be even more confident your KeePassXC download has not been tampered with. Congratulations! Now you can install KeePassXC more confident that your downloaded file has not been tampered with!
 
 
 _Again, if you spot any errors or have any suggestions for this post, feel free to contact me via [Twitter](https://twitter.com/sts10) or [elsewhere](https://gist.github.com/sts10/4a4e01021b3a5ad42e9b73e0abd7b7e3)._
