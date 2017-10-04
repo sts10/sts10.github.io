@@ -338,7 +338,9 @@ Now, right-click the .dmg file and go to Services > "OpenPGP: Validate". You sho
 
 ![Signed by Release](/img/keepassxc-signed-by.png)
 
-If you saw "Signed by: KeePassXC Release..." your download is likely safe. But to be on the safe side, we can return to the GPG Keychain, double click the entry called "KeePassXC Release", and in the window pane that slides out, click the "Subkeys" tab. 
+If you saw "Signed by: KeePassXC Release..." your download likely has not been tampered with. 
+
+But to be even more sure that your download hasn't been altered in any way, we can return to the GPG Keychain application, double click the entry called "KeePassXC Release", and in the window pane that slides out, click the "Subkeys" tab. 
 
 ![Comparing keys](/img/keepassxc-comparing-subkeys.png)
 
