@@ -41,7 +41,7 @@ Also note that, unlike 1Password and other options, KeePassXC is free (as in cos
 
 First, let's head over to the KeePassXC's [Download page](https://keepassxc.org/download).
 
-![KeePassXC Download page, with macOS selected](/img/keepassxc-download-page-screenshot.png)
+![KeePassXC Download page, with macOS selected](/img/keepassxc/download-page-screenshot.png)
 
 Select your desired operating system (the current options are Linux, macOS, and Windows), or to compile KeePassXC from source code. If we're using macOS, we'll go to the "macOS" tab and click the link labeled "Binary bundle for macOS 10.7 and later" to download the latest macOS release of KeePassXC to our computer.
 
@@ -57,7 +57,7 @@ If you're not comfortable pasting commands into Terminal, no worries. Scroll dow
 
 Now that we've downloaded and verified our .dmg file, simply double click it to mount the disk image.  Next drag the KeePassXC icon into you Applications folder. 
 
-![Installation](/img/keepassxc-install.gif)
+![Installation](/img/keepassxc/install.gif)
 
 KeePassXC should now be installed on your computer.
 
@@ -81,13 +81,13 @@ Now that KeePassXC is installed on our machine, let's create a password database
 
 When we launch KeePassXC for the first time, we're greeted with the screen above. Since we don't have any databases yet, let's click the "Create new database" button. 
 
-![Save Database](/img/keepassxc-save-database-as.png)
+![Save Database](/img/keepassxc/save-database-as.png)
 
 First, we're asked to choose a name and a location to save this database file we're creating. I created a new folder called "passwords" in my Documents folder, then I named my new database "my-passwords" (the full file name will be `my-passwords.kdbx`), but you can name it whatever you want. 
 
 Next, we're asked to set up a master key. For now, let's focus on the section under the "Password" section and ignore the "Key file" and "Challenge Response" sections. 
 
-![Setting master key](/img/keepassxc-entering-master-password.gif)
+![Setting master key](/img/keepassxc/entering-master-password.gif)
 
 Here, we're going to enter a long password or _passphrase_ that we'll need to use every time we want to open this database. There are multiple methods for creating nice long, random passphrases that are difficult for attackers to guess, but relatively easy to remember-- we'll discuss how to use KeePassXC to generate a random passphrase for us below. (Another method involves [using physical dice](https://theintercept.com/2015/03/26/passphrases-can-memorize-attackers-cant-guess/).)
 
@@ -99,11 +99,11 @@ Let's add our first entry. As an example, let's say we want to store our Reddit 
 
 First, find the button with the key and the green downward arrow. 
 
-![Add new entry button](/img/keepassxc-blank-add-new-entry.png)
+![Add new entry button](/img/keepassxc/blank-add-new-entry.png)
 
 We'll be presented with an interface to create our new entry. Let's fill in a title (Reddit), Username (our Reddit username), our Reddit password twice, and then the URL of the site (https://www.reddit.com), which you can of course paste in.
 
-![Our first entry](/img/keepassxc-entry-creation.gif)
+![Our first entry](/img/keepassxc/entry-creation.gif)
 
 If you want to view your password, you can click the button with the eye icon on the right. 
 
@@ -111,7 +111,7 @@ Note that KeePassXC has the ability to generate random passwords for us, which w
 
 Once we've filled in this basic information, we'll click the OK button to save these changes to our database. We'll now see our new entry in our database. 
 
-![one little entry](/img/keepassxc-one-entry.png)
+![one little entry](/img/keepassxc/one-entry.png)
 
 Make sure to save your database at this point, either by clicking the button with floppy disk icon or going to Database > Save database.
 
@@ -123,7 +123,7 @@ OK now let's actually use KeePassXC to log in to Reddit. KeePassXC has a few way
 
 Let's open [https://reddit.com/login](https://reddit.com/login) in a browser. With KeePassXC open to the side and our lone entry highlighted (single clicking it), click the person + paper icon to copy your Reddit username to the clipboard. Go paste that into the Reddit login page. Then return to KeePassXC to click the lock + paper icon to copy your Reddit password to your clipboard. Paste that into the Reddit login page, and click the "LOG IN" button (or press enter).
 
-![log in gif 1](/img/keepassxc-reddit-login.gif)
+![log in gif 1](/img/keepassxc/reddit-login.gif)
 
 There are keyboard shortcuts to make this process slightly quicker. For example, on macOS, `Command + b` will copy the highlighted entry's username to your clipboard. `Command + c` will copy the entry's password.
 
@@ -133,20 +133,23 @@ KeePassXC has a feature called Auto-Type that, as the name implies, automaticall
 
 To invoke Auto-Type, move focus from your browser to KeePassXC, then right-click the entry you want to Auto-Type and click "Perform Auto-Type". KeePassXC will type your username, hit tab, type your password, and then hit enter. 
 
-![autotype gif](/img/keepassxc-auto-type.gif)
+![autotype gif](/img/keepassxc/auto-type.gif)
 
 Alternatively, the Auto-Type keyboard shortcut on macOS is `Command + v`.
 
-(Note: `{USERNAME}{TAB}{PASSWORD}{ENTER}` is the default Auto-Type sequence. However you can edit this sequence on a per-entry level. Just edit the entry by clicking the button with the key and blue pen icon, navigate to the Auto-Type section of the menu, and write a custom Auto-Type sequence. [More info on writing these custom sequences](http://keepass.info/help/base/autotype.html#autoseq).)
+(Note: `{USERNAME}{TAB}{PASSWORD}{ENTER}` is the default Auto-Type sequence. However you can edit this sequence on a per-group or per-entry level. Just edit the entry by clicking the button with the key and blue pen icon, navigate to the Auto-Type section of the menu, and write a custom Auto-Type sequence. [More info on writing these custom sequences](http://keepass.info/help/base/autotype.html#autoseq).)
 
-![Custom Auto-type sequence](/img/keepassxc-custom-auto-type-sequence.png)
+![Custom Auto-type sequence](/img/keepassxc/custom-auto-type-sequence.png)
 
+**BONUS Tip:** If you use multiple "spaces" or multiple physical displays with macOS, you'll want to allow KeePassXC to access all of your desktops. This will allow you to use Auto-Type even if KeePassXC and your browser are on different monitors or desktops. To enable this, right-click on the KeePassXC icon in your dock, go to Options, and click on "All Desktops". 
+
+![Allow on all desktops](/img/keepassxc/all-desktops.png)
 
 #### Global Auto-Type
 
 KeePassXC's _Global_ Auto-Type feature allows us to create a global (i.e. operating-system wide) keyboard shortcut to Auto-Type information from a KeePassXC entry. For example, let's say we set our Global Auto-Type shortcut to `Control + Option + v` (which we can do in Settings > General > Auto-Type). 
 
-![Set global Auto-Type shortcut](/img/keepassxc-global-auto-type.png)
+![Set global Auto-Type shortcut](/img/keepassxc/global-auto-type.png)
 
 Now, when we have our cursor in a login screen in our browser, we can do the shortcut and, if KeePassXC is open and our database is unlocked, our credentials will be filled in automatically. If your database is locked, KeePassXC should prompt you to unlock your database, though as of version 2.2.1 I've found this workflow [a bit buggy](https://github.com/keepassxreboot/keepassxc/issues/1023).
 
@@ -172,11 +175,11 @@ Due to these security concerns, and the need to install the browser extensions, 
 
 If you're stepping away from your computer, it's wise to lock your KeePass database. To do this, go to Tools > Lock database (or hit `Command + l`). Once locked, you'll have to enter your master password to unlock your database. 
 
-![Lock it down](/img/keepassxc-lock-database.gif)
+![Lock it down](/img/keepassxc/lock-database.gif)
 
 Note that you can set KeePassXC to lock your databases after a specific number of seconds of inactivity by going to KeePassXC Preference > Security.
 
-![auto lock setting](/img/keepassxc-set-lock-time.png)
+![auto lock setting](/img/keepassxc/set-lock-time.png)
 
 ## Level 2: More Security Tips
 
@@ -192,7 +195,7 @@ KeePassXC has a built-in random password generator just for creating passwords y
 
 Let's say we're creating a new GitHub account and want to store our username and password in our KeePass database. First, we'll create an entry for GitHub and create a random password for our yet-to-be-created GitHub account.
 
-![Creating a new entry with a randomly generated passphrase](/img/keepassxc-new-random-entry.gif)
+![Creating a new entry with a randomly generated passphrase](/img/keepassxc/new-random-entry.gif)
 
 First, we'll hit the key + green arrow button to create a new entry. Then fill out the title and username as we did above. However now, instead of just typing in our existing password (or making one up), we're going to use KeePassXC's password generator to create a random password for our yet-to-be-created GitHub account. 
 
@@ -214,7 +217,7 @@ To change the master password of an existing KeePass database, go to the "Databa
 
 Switch the random generator mode from "Password" to "Passphrase", then set the Word Count to six words or more. You then may want to change the "Word Separator" from the default of a space to a hyphen, or even to no character (nothing).
 
-![randomly generating a master passphrase](/img/keepassxc-random-master-passphrase.gif)
+![randomly generating a master passphrase](/img/keepassxc/random-master-passphrase.gif)
 
 Once you've got a 6-or-more word passphrase with your desired word separator, write your new passphrase on a piece of paper and keep it somewhere safe. 
 
@@ -240,7 +243,7 @@ How many rounds should you set? Conveniently, KeePassXC has a "Benchmark" button
 
 To set the number of transform rounds to this one-second benchmark, with your database unlocked go to the Database menu and select "Database settings". Then click the "Benchmark" button, wait one second for the higher number to appear in the form, and hit OK.
 
-![Benchmarking transform round](/img/keepassxc-benchmarking.gif)
+![Benchmarking transform round](/img/keepassxc/benchmarking.gif)
 
 Now your database should take about one second to try a master password guess (whether it's correct or incorrect). Assuming you, knowing the passphrase, can get it in one or maybe a handful of guesses, this is not much of a delay. But to a program systematically guessing millions of passwords, it can be a road block.
 
@@ -258,7 +261,7 @@ To access your passwords from a smartphone, you'll need to use an app that can o
 
 As you've likely noticed, on the left-hand side of KeePassXC there's a folder tree. Using these folders, you can keep your accounts organized in groups like "work", "finance" and whatever other categories you like. 
 
-![groups](/img/keepassxc-groups.png)
+![groups](/img/keepassxc/groups.png)
 
 You can later drag entries in and out of groups. You can even create groups within groups.
 
@@ -268,7 +271,7 @@ To beautify your KeePass database even further, you can automatically download t
 
 To do this, edit an entry, then click the "icon" button on the left. While you can select from any of the default options, you can also click the "Download favicon" button in the bottom right. Be sure to have the full URL of the service in your entry (in this case `https://github.com/`), so KeePassXC knows where to download the favicon from.
 
-![custom icon](/img/keepassxc-custom-icon.png)
+![custom icon](/img/keepassxc/custom-icon.png)
 
 Once the favicon downloads (it might take a second), be sure to select it and then hit "OK" to save the changes to the entry.
 
@@ -292,7 +295,7 @@ To assign a key file to an existing KeePass database, go to the "Database" menu 
 
 Now check the check box labeled "Key file" and then either select an existing file to be your key file, or have KeePassXC create a key file for you. For a variety of reasons I'd recommend that you have KeePassXC create a key file for you. 
 
-![Key file](/img/keepassxc-keyfile.png)
+![Key file](/img/keepassxc/keyfile.png)
 
 Click the OK button for these changes to take effect. Once you have, KeePassXC will require access to that key file to unlock your database.
 
@@ -320,7 +323,7 @@ Once GPG Suite is installed, go to [the KeePassXC page on verifying downloads](h
 
 We're looking to download and import KeePassXC's public master key.  One way to do this is to find the link in the sentence "Manual download from our website and import with gpg". Right-click (or control + click on Mac) the link and select "Save Link As..." and save it to your Downloads folder. 
 
-![Download KeePassXC Master Public Key](/img/keepassxc-save-master-key-as.png)
+![Download KeePassXC Master Public Key](/img/keepassxc/save-master-key-as.png)
 
 Now open a program called "GPG Keychain" (it should be part of the GPG Suite we installed earlier). In the top-left, click the "Import" button and select the master public key file you just downloaded.
 
@@ -330,21 +333,26 @@ If you successfully imported the key, you should get a message to that effect.
 
 Now, let's head back over to [the KeePassXC download page](https://keepassxc.org/download). Click the "macOS" tab if it's not already highlighted and then click the link called "GPG signature". Save this file to your Downloads file, where you downloaded the KeePassXC dmg file earlier. It's important that they're in the same folder (this folder is likely the Downloads folder).
 
-![Signature next to DMG](/img/keepassxc-signature-same-folder.png)
+![Signature next to DMG](/img/keepassxc/signature-same-folder.png)
 
 ### 4. Verifying your Download
 
 Now, right-click the .dmg file and go to Services > "OpenPGP: Validate". You should get a pop up that says "Signed by: KeePassXC Release <release@keepassxc.org>" and then a fingerprint in parentheses (I got `B59076A8`). Do not worry about the words "undefined trust".
 
-![Signed by Release](/img/keepassxc-signed-by.png)
+![Signed by Release](/img/keepassxc/signed-by.png)
 
-If you saw "Signed by: KeePassXC Release..." your download likely has not been tampered with. 
+If you see "Signed by: KeePassXC Release..." your download likely has not been tampered with. 
+
+<!--
+** I have commented out this section, rather than delete it, as I'm not 100% that it's redundant. **
 
 But to be even more sure that your download hasn't been altered in any way, we can return to the GPG Keychain application, double click the entry called "KeePassXC Release", and in the window pane that slides out, click the "Subkeys" tab. 
 
-![Comparing keys](/img/keepassxc-comparing-subkeys.png)
+![Comparing keys](/img/keepassxc/comparing-subkeys.png)
 
-Here we'll check that the fingerprint you got in your Verification Results dialog matches one of the Subkeys of the KeePassXC Release public key. If it matches one of them, you can be even more confident your KeePassXC download has not been tampered with. Congratulations! Now you can install KeePassXC more confident that your downloaded file has not been tampered with!
+Here we'll check that the fingerprint you got in your Verification Results dialog matches one of the Subkeys of the KeePassXC Release public key. If it matches one of them, you can be even more confident your KeePassXC download has not been tampered with. 
+-->
 
+Congratulations! Now you can install KeePassXC more confident that your downloaded file has not been tampered with!
 
 _Again, if you spot any errors or have any suggestions for this post, feel free to contact me via [Twitter](https://twitter.com/sts10) or [elsewhere](https://gist.github.com/sts10/4a4e01021b3a5ad42e9b73e0abd7b7e3)._
