@@ -141,7 +141,7 @@ Alternatively, the Auto-Type keyboard shortcut on macOS is `Command + v`.
 
 ![Custom Auto-type sequence](/img/keepassxc/custom-auto-type-sequence.png)
 
-**BONUS Tip:** If you use multiple "spaces" or multiple physical displays with macOS, you'll want to allow KeePassXC to access all of your desktops. This will allow you to use Auto-Type even if KeePassXC and your browser are on different monitors or desktops. To enable this, right-click on the KeePassXC icon in your dock, go to Options, and click on "All Desktops". 
+**BONUS Tip:** If you use multiple "spaces" or multiple physical displays with macOS, you'll want to allow KeePassXC to access all of your desktops. This will allow you to use Auto-Type even if KeePassXC and your browser window are on different monitors or desktops. To enable this, right-click on the KeePassXC icon in your dock, go to Options, and click on "All Desktops". 
 
 ![Allow on all desktops](/img/keepassxc/all-desktops.png)
 
