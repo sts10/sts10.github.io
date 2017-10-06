@@ -115,6 +115,10 @@ Once we've filled in this basic information, we'll click the OK button to save t
 
 Make sure to save your database at this point, either by clicking the button with floppy disk icon or going to Database > Save database.
 
+If you're moving to KeePassXC from another password manager, you'll likely want to convert your existing database into a KeePass database (a .kdbx file).
+
+The easiest way to do this is to export your previous database to a CSV file (stands for Comma Separated Values-- this file will be _unencrypted_, so be careful with it), then, in KeePassXC, go to Database menu > Import > "Import from CSV file..." Once it's all imported and your new KeePass database is all set and you save it, you'll very likely want to delete the unencrypted CSV file.
+
 ### Logging in to Reddit
 
 OK now let's actually use KeePassXC to log in to Reddit. KeePassXC has a few ways to do this-- we'll start with the simplest. 
