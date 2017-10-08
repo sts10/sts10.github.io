@@ -27,7 +27,7 @@ This is a basic guide of how to get started with KeePassXC. This guide is **for 
 
 I'm not a security expert or security professional, just a social media editor who manages a lot of accounts, so buyer beware from this point on. If you spot any errors or have any suggestions for this post, feel free to contact me via [Twitter](https://twitter.com/sts10) or [elsewhere](https://gist.github.com/sts10/4a4e01021b3a5ad42e9b73e0abd7b7e3).
 
-I'd like to note that I drew some inspiration and methodology from [Martin Shelton's "KeePass for Beginners" post](https://medium.com/@mshelton/keypass-for-beginners-dc8adfcdad54), which you may also find useful.
+Thanks to [@com](https://twitter.com/com) for various tips throughout. I'd also like to note that I drew some inspiration and methodology from [Martin Shelton's "KeePass for Beginners" post](https://medium.com/@mshelton/keypass-for-beginners-dc8adfcdad54), which you may also find useful.
 
 ### How is KeePassXC Different from Other Password Managers?
 
@@ -259,7 +259,7 @@ If you want keep you KeePass database synchronized across multiple devices, you'
 
 If you're wary of your password database being stored on servers you don't own, you can explore other options like [Syncthing](https://syncthing.net/), a program that keeps a folder or multiple folders "in-sync" across multiple computers that you own (think Dropbox but without the Dropbox server involved.) However note that Syncthing involves a bit more set up (I wrote [a getting started guide to Syncthing a few weeks ago](https://sts10.github.io/2017/05/24/getting-started-with-syncthing.html) if you want a quick preview of what you'd be getting into).
 
-To access your passwords from a smartphone, you'll need to use an app that can open KeePass databases. There are a handful of such apps for both iOS and Android, but I haven't used any of them so I won't comment further. However I will note that one of KeePassXC's lead developers, Jonathan White, aka [droidmonkey](https://github.com/droidmonkey), says he uses [Keepass2Android](https://play.google.com/store/apps/details?id=keepass2android.keepass2android&hl=en) with his Android phone in [this interview at about 18:37](https://soundcloud.com/user-98066669/042-a-conversation-with-keepassxc#t=18:37) (hat tip to [@com](https://twitter.com/com)).
+To access your passwords from a smartphone, you'll need to use an app that can open KeePass databases. There are a handful of such apps for both iOS and Android, but I haven't used any of them so I won't comment further. However I will note that one of KeePassXC's lead developers, Jonathan White, aka [droidmonkey](https://github.com/droidmonkey), says he uses [Keepass2Android](https://play.google.com/store/apps/details?id=keepass2android.keepass2android&hl=en) with his Android phone in [this interview at about 18:37](https://soundcloud.com/user-98066669/042-a-conversation-with-keepassxc#t=18:37).
 
 ### Using Groups
 
