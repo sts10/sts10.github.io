@@ -163,13 +163,16 @@ One nice advantage to the Global Auto-Type is that KeePass will find the relevan
 
 #### KeePassHTTP: Browser autofill, with a catch
 
+_(The following section was updated October 18, 2017, to incorporate [a change](https://github.com/keepassxreboot/keepassxreboot.github.io/commit/b6d301e48e4079ef04fa13dc6f41c88337548ca1) in recommendations from the KeePassXC developers following [this discussion](https://github.com/keepassxreboot/keepassxc/issues/998).)_
+
 In addition to Auto-Type, KeePassXC offers another way to quickly and easily enter your login information into a browser form. It's called KeePassHTTP. From my understanding, KeePassHTTP is a protocol for ferrying your login data from the program reading your KeePass database (in our case, KeePassXC) to a browser extension that will automatically fill in forms in your browser for you. (If you've ever used the 1Password or LastPass browser add-ons, it's a lot like that.)
 
-The KeePassXC developers [list](https://keepassxc.org/project) these browser extensions and add-ons as supported by KeePassXC and KeePassHTTP: [PassIFox](https://addons.mozilla.org/en-us/firefox/addon/passifox/) in Mozilla Firefox, [chromeIPass](https://chrome.google.com/webstore/detail/chromeipass/ompiailgknfdndiefoaoiligalphfdae) in Google Chrome and Chromium and [passafari](https://github.com/mmichaa/passafari.safariextension/) in Safari. 
+To use KeePassHTTP with KeePassXC, the KeePassXC developers [highlight](https://keepassxc.org/project) 
+KeePassHTTP-Connector, which is currently available as [an add-on for Mozilla Firefox](https://addons.mozilla.org/en-US/firefox/addon/keepasshttp-connector/) and [as an extension for Google Chrome](https://chrome.google.com/webstore/detail/keepasshttp-connector/dafgdjggglmmknipkhngniifhplpcldb). For Safari, the developers list [passafari](https://github.com/mmichaa/passafari.safariextension/). 
 
 However it's important to note that there are some security concerns when using KeePassHTTP. On [the KeePassXC website](https://keepassxc.org/project) the developers posted a note about the security of KeePassHTTP: 
 
-> KeePassHTTP is not a highly secure protocol and has certain flaws which allow an attacker to decrypt your passwords if they manage to intercept communication between a KeePassHTTP server and PassIFox/chromeIPass over a network connection (see [here](https://github.com/pfn/keepasshttp/issues/258) and [here](https://github.com/keepassxreboot/keepassxc/issues/147)). KeePassXC therefore strictly limits communication between itself and the browser plugin to your local computer. As long as your computer is not compromised, your passwords are fairly safe that way, but use it at your own risk! 
+> KeePassHTTP is not a highly secure protocol and has certain flaws which allow an attacker to decrypt your passwords if they manage to intercept communication between a KeePassHTTP server and KeePassHTTP-Connector over a network connection (see [here](https://github.com/pfn/keepasshttp/issues/258) and [here](https://github.com/keepassxreboot/keepassxc/issues/147)). KeePassXC therefore strictly limits communication between itself and the browser plugin to your local computer. As long as your computer is not compromised, your passwords are fairly safe that way, but use it at your own risk!
 
 I believe it's as a result of these security concerns that KeePassHTTP is _turned off by default_ in KeePassXC (at least it is in version 2.2.0). If you'd like to enable it, go to your KeePassXC preferences, then click on the "Browser Integration" icon and check the "Enable KeePassHTTP server" option.
 
