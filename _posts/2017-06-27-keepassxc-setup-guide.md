@@ -254,6 +254,15 @@ To set the number of transform rounds to this one-second benchmark, with your da
 
 Now your database should take about one second to try a master password guess (whether it's correct or incorrect). Assuming you, knowing the passphrase, can get it in one or maybe a handful of guesses, this is not much of a delay. But to a program systematically guessing millions of passwords, it can be a road block.
 
+### Backing Up Your Database
+
+Now we've got a nice and secure database with all of our important password in it, some of which you won't possibly be able to remember without your database. But what if you lose your database file? To protect ourselves from this, we're going to periodically create back-up copies of our database.
+
+To do this, we'll copy our database file  (the file extension of which is `.kdbx`) somewhere safe as a back-up. This could be a USB drive, an external harddrive, a second computer, or even a cloud-based storage solution like DropBox. Remember: this database is well encrypted, so even if an attacker gets a hold of it, they'll need to know your master password to get access to your information. 
+
+Note that unless you employ one of the syncing options listed below, you'll have to manually keep this back-up copy of your database up-to-date. That means periodically replacing your back-up copy with a fresh copy of your database.
+
+
 ## Level 3: Getting Organized
 
 ### Syncing options
