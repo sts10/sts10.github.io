@@ -20,6 +20,8 @@ The most immediate reason I wanted to be able to take my private keys with me wh
 
 **Note**: I'm not an expert. While I think I've gotten pretty far with this, I don't understand everything yet. This blog post is mostly for my personal reference of how I got this to work, while consulting a combination of tutorials written by others linked to just below. If that doesn't sound like what you're looking for, check out the tutorials themselves and close this tab-- no hard feelings!
 
+**Note 2 (October 2017)**: I've added a note below about **a security issue** related to this procedure called the "Infineon RSA Key Generation Issue". This issue was announced publicly in October of 2017. See below for more, but [here's Yubico's page on the issue](https://www.yubico.com/keycheck/) and [an Ars Technica article about it](https://arstechnica.com/information-technology/2017/10/crypto-failure-cripples-millions-of-high-security-keys-750k-estonian-ids/).
+
 I have a basic understanding of PGP (I also have [an earlier post outlining some basics of PGP](https://sts10.github.io/2015/07/01/my-basic-understanding-of-pgp-encryption.html) if you like), but I knew setting up and using a YubiKey would be tricky for me and I still don't have a full grasp of it. So I spent the $40 and figured I could figure it out. Here's what I did.
 
 ![A YubiKey 4](https://hao0uteruy2io8071pzyqz13-wpengine.netdna-ssl.com/wp-content/uploads/2015/04/YubiKey-4-1000-2016-444x444.png)
@@ -93,6 +95,22 @@ If `gpg` gives you version 1, you may have GPG version 2 but need to use `gpg2` 
 In order to use an RSA key with a length of 4,096 with your YubiKey 4, you'll need to use `gpg` version 2 (as the tutorial notes: "If you are using a YubiKey 4 and want to work with 4096 key sizes, you need to use GPG v 2")
 
 ## A Choice: "Orphan" vs. "Mothership"
+
+**IMPORTANT SECURITY UPDATE (October 2017): A security issue has been discovered that affects, among other things, OpenPGP functionality of the YubiKey 4 platform.** It's been labeled the "Infineon RSA Key Generation Issue" by Yubico, and it comes into play in the section of this guide below. _Handling and mitigating this issue is a bit over my head, but I thought I should add a note here. Please rely heavily on the links provided below and/or your own research of this issue._
+
+[From the Yubico notice on their website](https://www.yubico.com/keycheck/): Yubikey 4 / 4C / 4 nano Versions 4.2.6-4.3.4 are "possibly affected - Use of onboard RSA key generation with PIV smart card and OpenPGP card onboard RSA key generation." [Here's how to find out what version your YubiKey is](https://www.yubico.com/keycheck/firmware_guide). Note that Yubico [says that](https://www.yubico.com/keycheck/) "Yubico has addressed this issue in all shipments of YubiKey 4, YubiKey 4 Nano, and YubiKey 4C, since June 6, 2017," so if you bought your YubiKey after that date, you should be OK.
+
+Here's [Ars Technica's write-up of the issue](https://arstechnica.com/information-technology/2017/10/crypto-failure-cripples-millions-of-high-security-keys-750k-estonian-ids/).
+
+From [the relevant Yubico mitigation page](https://www.yubico.com/keycheck/mitigation_recommendations):
+
+> The mitigation strategy for OpenPGP is to generate keys outside of the YubiKey and import them onto the device. For more information refer to the Yubico Knowledge Base document "[Generating the key on your local system](https://www.yubico.com/support/knowledge-base/categories/articles/use-yubikey-openpgp/#generatelocal)".
+
+Given this mitigation advice, my understanding is that if your YubiKey is one of the affected versions, you are advised NOT to generate your PGP key on your YubiKey (a process I describe as the "orphan" method below). Instead, you should generate your GPGP keys on your computer, and then put them onto your YubiKey (a process I describe as the "mothership" method below). 
+
+If you have GPG keys that you generated on your affected YubiKey, you're to revoke them and then trash them and generate a new pair on a device that is not your affect YubiKey (like your laptop). This process is the very one I attempt to describe below, however please convince yourself that these actions will result in key that is safe enough for you to use before proceeding. Again, I am far from an expert-- I'm just outlining a procedure that worked for me.
+
+**END UPDATE**
 
 As the [official tutorial](https://www.yubico.com/support/knowledge-base/categories/articles/use-yubikey-openpgp/) explains: 
 
