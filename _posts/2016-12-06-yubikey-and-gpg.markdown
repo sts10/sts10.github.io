@@ -100,7 +100,8 @@ In order to use an RSA key with a length of 4,096 with your YubiKey 4, you'll ne
 
 [From the Yubico notice on their website](https://www.yubico.com/keycheck/): Yubikey 4 / 4C / 4 nano Versions 4.2.6-4.3.4 are "possibly affected - Use of onboard RSA key generation with PIV smart card and OpenPGP card onboard RSA key generation." [Here's how to find out what version your YubiKey is](https://www.yubico.com/keycheck/firmware_guide). Note that Yubico [says that](https://www.yubico.com/keycheck/) "Yubico has addressed this issue in all shipments of YubiKey 4, YubiKey 4 Nano, and YubiKey 4C, since June 6, 2017," so if you bought your YubiKey after that date, you should be OK.
 
-Here's [Ars Technica's write-up of the issue](https://arstechnica.com/information-technology/2017/10/crypto-failure-cripples-millions-of-high-security-keys-750k-estonian-ids/).
+Here's [Ars Technica's write-up of the issue](https://arstechnica.com/information-technology/2017/10/crypto-failure-cripples-millions-of-high-security-keys-750k-estonian-ids/). 
+
 
 From [the relevant Yubico mitigation page](https://www.yubico.com/keycheck/mitigation_recommendations):
 
@@ -109,6 +110,8 @@ From [the relevant Yubico mitigation page](https://www.yubico.com/keycheck/mitig
 Given this mitigation advice, my understanding is that if your YubiKey is one of the affected versions, you are advised NOT to generate your PGP key on your YubiKey (a process I describe as the "orphan" method below). Instead, you should generate your GPGP keys on your computer, and then put them onto your YubiKey (a process I describe as the "mothership" method below). 
 
 If you have GPG keys that you generated on your affected YubiKey, you're to revoke them and then trash them and generate a new pair on a device that is not your affect YubiKey (like your laptop). This process is the very one I attempt to describe below, however please convince yourself that these actions will result in key that is safe enough for you to use before proceeding. Again, I am far from an expert-- I'm just outlining a procedure that worked for me.
+
+If you have an existing key or keys that you think may be affected, [the Ars Techncia article](https://arstechnica.com/information-technology/2017/10/crypto-failure-cripples-millions-of-high-security-keys-750k-estonian-ids/) links to [this site](https://keychest.net/roca), which claims to allow you to test your keys by submitting your _public_ key.
 
 **END UPDATE**
 
