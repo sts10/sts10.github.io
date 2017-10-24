@@ -12,7 +12,7 @@ comments: true
 - [Level 1: Getting Setup](#level-1-getting-setup)
 - [Level 2: More Security Tips](#level-2-more-security-tips)
 - [Level 3: Getting Organized](#level-3-getting-organized)
-- [Level 4: Locking Our Database With Multiple Factors](#level-4-locking-our-database-with-multiple-factors)
+- [Level 4: Securing Our Database With Multiple Factors](#level-4-locking-our-database-with-multiple-factors)
 
 [Appendix: Verifying Your KeePassXC Download Without Using the Command Line](#appendix-verifying-your-keepassxc-download-without-using-the-command-line)
 
@@ -178,6 +178,16 @@ I believe it's as a result of these security concerns that KeePassHTTP is _turne
 
 Due to these security concerns, and the need to install the browser extensions, I prefer to use KeePassXC's Auto-Type feature rather than KeePassHTTP.
 
+### My Recommended Settings 
+
+Below are my recommended settings for KeePassXC. 
+
+![Recommended Settings](/img/keepassxc/recommended-settings.png)
+
+I would highly recommended having "Automatically reload the database when modified externally" checked. Having this setting _unchecked_, at least in version 2.2.2, [can, in specific cases, lead to your database being corrupted](https://github.com/keepassxreboot/keepassxc/issues/1113).
+
+Other that feel free to try other settings. For example, you may prefer to have "Automatically save after every change" checked.
+
 ### Locking your database
 
 If you're stepping away from your computer, it's wise to lock your KeePass database. To do this, go to Tools > Lock database (or hit `Command + l`). Once locked, you'll have to enter your master password to unlock your database. 
@@ -297,7 +307,7 @@ KeePassXC, as you may have already observed by this point, has search functional
 
 On a Mac it can be invoked by the familiar `Command + f` keyboard shortcut.
 
-## Level 4: Locking our database with multiple factors
+## Level 4: Securing our database with multiple factors
 
 As we've learned, KeePassXC lets us lock our database behind a master password. However we can also require those who wish to open our database to have other factors as well. 
 
