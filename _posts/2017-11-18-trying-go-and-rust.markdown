@@ -271,14 +271,33 @@ In writing my Rust version of tic-tac-toe-- which I called [Rusty Tac](https://g
 
 #### References and Types and Borrowing
 
+I hit a pretty big snag while writing my first Rust function-- one to draw the tic-tac-toe board. As with Go, Rust mandates that we specify the type of a function's inputs and outputs. In both Go and Rust I started with this `present_board` function, since it only has one input and no outputs. But with Rust I got tripped up. 
 
-```go
-// Figuring out how pass this array was a BITCH. Errors, both intentional (board[2].what_the_fuck_type_is_this;) 
+Here's how I declare the `board` variable in `main()`:
+
+```rust
+let mut board = [0,0,0, 0,0,0, 0,0,0];
+```
+
+This isn't so bad-- other than the `mut`, to make the values mutable, it looks a lot like Ruby or JavaScript. We're relying on the compiler to interpret not only that board is an array, but also that its elements. It turns out that Rust assumes integers like this are `i32`s ([a signed, 32-bit integer](https://doc.rust-lang.org/stable/book/second-edition/ch03-02-data-types.html#integer-types)).
+
+My problem was that I didn't know how to refer to this data type-- an array of integers-- when writing a function that takes it as an input. 
+
+Additionally, I needed to pass a "_reference_" to this array, since I only wanted this function to "_borrow_" the `board` array-- this explains the `&` in the signature (see: [Ownership](https://doc.rust-lang.org/stable/book/second-edition/ch04-01-what-is-ownership.html) and [References and Borrowing](https://doc.rust-lang.org/stable/book/second-edition/ch04-02-references-and-borrowing.html#references-and-borrowing)). 
+
+So at first I thought the parameters would be `fn present_board(&b [int])`-- with the amperstand on the `b`, and a type of `int`. I also wasn't sure how to refer to my `board` inside the function itself-- `b` or `&b`. 
+
+Oddly, there doesn't seem to be a straight-forward way to check a variable's type. I ended up causing an intentional error by running `board[2].what_type_is_this`, though that threw me off by giving this error: "error[E0610]: `{integer}` is a primitive type and therefore doesn't have fields". If it had said `i32 is a primitive type...` I would have had a better chance.
+
+Eventually, after much trial and not-so-helpful error, I figured it out:
+
+```rust
 // and not, kept referring to "integer" or "Integer" rather than i32. Using "int" threw unhelpful
 // error
 fn present_board(b: &[i32]){
     println!("---------");
     let mut i = 0;
+    // inside the function, we refer to `b` not `&b`
     while i < b.len() {
         match b[i] {
             // if empty, print the number that a user would enter to move
@@ -300,6 +319,10 @@ fn present_board(b: &[i32]){
     println!("---------");
 }
 ```
+
+(I also used Go's `match` statement, which is like a `switch` statement in other languages. Apparently the Go devs like `match` over long `if`/`else if` chain.
+
+And here's how I called this function: `present_board(&board);`, passing a _reference_ to `board`, rather than ownership.
 
 #### The `player` variable
 
@@ -362,7 +385,7 @@ fn main() {
 }
 ```
 
-All good. But if you change it to the more concise: `sum += v;` you get an error: `expected usize, found &usize`. You would think that `sum = sum + v;` would be the equivalent to `sum += v;`, but that did not seem to the be the case in this case. The tl;dr here is that this was likely a bug in Rust that has since been fixed in the latest Nightly version. If you [run this ocde with the Nightly version](http://play.integer32.com/?gist=10851a4f3ac6f986686256a5fe29bab0&version=nightly), `sum += v;` does not throw that error.
+All good. But if you change it to the more concise: `sum += v;` you get an error: `expected usize, found &usize`. You would think that `sum = sum + v;` would be the equivalent to `sum += v;`, but that did not seem to the be the case in this case. The tl;dr here is that this was likely a bug in Rust that has since been fixed in the latest Nightly version. If you [run this code with the Nightly version](http://play.integer32.com/?gist=10851a4f3ac6f986686256a5fe29bab0&version=nightly), which the playground has as an option, `sum += v;` does not throw that error.
 
 For the record, in my confusion I did [file an issue with Clippy](https://github.com/rust-lang-nursery/rust-clippy/issues/2233), a tool that helps Rust users with hints. Clippy suggested I use `+=`.
 
