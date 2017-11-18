@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Trying Go and Rust"
-date: 2017-08-16 21:13:50 -0400
+date: 2017-11-18 17:13:50 -0400
 comments: true
 ---
 
