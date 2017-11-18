@@ -33,11 +33,11 @@ Here's my [GitHub repo](https://github.com/sts10/tic-tac-go) of the game, but re
 
 To check for a winner, I'm using a second array called `sums` that adds up each of the possible wins in the game of tic-tac-toe. (Fun fact: I used this idea (and drew the sketch below) back in 2013 as part of my admission test to The Flatiron School.)
 
-![sums explained](img/map.png)
+![sums explained](img/go-and-rust/map.png)
 
 While writing the program I made some notes on sticking points I ran into. In general the Go program went pretty smoothly!
 
-### Issue #1: Getting User Input
+### Getting User Input
 
 I had some trouble taking an input from the console and then converting it to an integer. My assumption that the input would come in as a String, and that it would somehow have to converted to a integer, was correct.
 
@@ -54,7 +54,7 @@ func askForPlay() int{
 
 As I was working on this function, I include the line `fmt.Printf("moveInt is type: %T\n", moveInt)`, which was a helpful debug step, as it printed the type of the variable `moveInt`. Thankfully, in my final code I don't think `moveInt` is ever _not_ of type "int".
 
-### Issue #2: Declaring and Re-Assigning vs. Just Re-Assigning
+### Declaring and Re-Assigning vs. Just Re-Assigning
 
 Go has the symbol `:=`, which is syntactic sugar for both declaring and assigning a variable. Also, when using `:=` you don't need to specify its type (Go's compiler will infer it-- think the technical term is "type inference"). Nice!
 
@@ -148,7 +148,7 @@ fmt.Printf("isOver40 is type %T. ", isOver40)
 [Playground of the above](https://play.golang.org/p/yf_CnG76Rw)
 
 
-### Strict Typing (Though Much More Lax Than Rust)
+### Strict Typing 
 
 When declaring the `presentBoard` function, I found that you need to not only specify the type of each input and any outputs, but, if one of the inputs or outputs is an array, you also need to tell the function how big the array will be. 
 
@@ -165,8 +165,9 @@ func presentBoard(b [9]int) {
 
 At first I just wrote `func presentBoard(b []int) { ` figuring that'd be cool, but the Go compiler threw me an error: `cannot use board (type [9]int as type []int in argument...)`. My guess is that `[]int` is actually a Slice rather than an Array. It makes sense spelled out but it took me a bit.
 
+Plus this is way more lax than Rust, as we'll see.
 
-### Function signatures were a bit unintuitive (compared to Rust's arrow)
+### Function signatures were a bit unintuitive 
 
 When declaring a function, we have to specify quite a bit. First, the functions name, obviously. Next, in parenthesis is all of the inputs. Then finally, and strangely for a Rubyist, the outputs. Specifying the _types_ in not only the inputs, but the outputs, was different for me. A couple examples:
 
@@ -230,7 +231,9 @@ Rust's official documentation, referred to as ["the book"](https://doc.rust-lang
 
 In addition to skimming the first few sections of the book, I also did some exercises called [rustlings](https://github.com/carols10cents/rustlings). Lastly I will here give a shout-out to the [#rust-beginners IRC channel](https://chat.mibbit.com/?server=irc.mozilla.org&channel=%23rust-beginners) -- At one point I was so stuck I made [a share-able playground link](https://play.rust-lang.org/?gist=40257dc021809a8c8a6750ab2f133a8a&version=stable) and hopped into the #rust-beginners IRC channel. Even though there were only a few people active on a Friday morning, I got insanely concise help I needed. 
 
-![My IRC chat](img/irc-chat.png)
+![My IRC chat](img/go-and-rust/irc-chat.png)
+
+Big thanks to those users!
 
 I also learned a bit about Rust's concept of ownership from this [Intro to Rust video](https://www.youtube.com/watch?v=agzf6ftEsLU).
 
@@ -369,7 +372,7 @@ println!("Player {}'s turn", player);
 
 ### A Bug in Stable Rust
 
-So part of Rusty Tac (tic-tac-toe in Rust) involved a function where we have to check the board to see if it's full (meaning there had been a tie-- no one had win). The board is basically an array, so the task here is to sum up an array of integers (and check if that sum is 45).
+So part of Rusty Tac (my writing of tic-tac-toe in Rust) involved a function where we have to check the board to see if it's full (meaning there had been a tie-- no one had won the game). The board is basically an array, so the task here is to sum up an array of integers (and check if that sum is 45).
 
 My understanding is that there are a couple of approved ways to iterate through an array in Rust. One is to iterate through a reference to the array (i.e. `&my_array`). The strange thing here is that the `value` yielded to the inside of the loop are also references to the elements of the array. 
 
@@ -385,7 +388,9 @@ fn main() {
 }
 ```
 
-All good. But if you change it to the more concise: `sum += v;` you get an error: `expected usize, found &usize`. You would think that `sum = sum + v;` would be the equivalent to `sum += v;`, but that did not seem to the be the case in this case. The tl;dr here is that this was likely a bug in Rust that has since been fixed in the latest Nightly version. If you [run this code with the Nightly version](http://play.integer32.com/?gist=10851a4f3ac6f986686256a5fe29bab0&version=nightly), which the playground has as an option, `sum += v;` does not throw that error.
+All good. But if you change it to the more concise: `sum += v;` you get an error: `expected usize, found &usize`. You would think that `sum = sum + v;` would be the equivalent to `sum += v;`, but that did not seem to the be the case in this case. 
+
+The tl;dr here is that my guess is that this is a bug in Rust 1.21.0 (`rustc 1.21.0 (3b72af97e 2017-10-09)`). However, if you [run this code with the Nightly version](http://play.integer32.com/?gist=10851a4f3ac6f986686256a5fe29bab0&version=nightly), which the playground has as an option, `sum += v;` does not throw that error. So my guess is that the issue has been fixed in the Nightly version.
 
 For the record, in my confusion I did [file an issue with Clippy](https://github.com/rust-lang-nursery/rust-clippy/issues/2233), a tool that helps Rust users with hints. Clippy suggested I use `+=`.
 
@@ -420,7 +425,7 @@ cargo run
 ```
 
 
-[Reference](https://doc.rust-lang.org/book/second-edition/ch01-02-hello-world.html#building-and-running-a-cargo-project)
+[[Reference](https://doc.rust-lang.org/book/second-edition/ch01-02-hello-world.html#building-and-running-a-cargo-project)]
 
 I used [rustup](https://rustup.rs/) to manage my versions (or channels) of Rust. 
 
