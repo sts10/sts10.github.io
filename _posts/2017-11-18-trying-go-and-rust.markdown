@@ -272,7 +272,7 @@ Reader, I would come to resent this old hacker.
 
 In writing my Rust version of tic-tac-toe-- which I called [Rusty Tac](https://github.com/sts10/rusty-tac)-- I ran into tons of errors. Here are some concrete examples of when the compiler forced me to change my code, likely for the better.
 
-#### References and Types and Borrowing
+#### Types, References, and Borrowing
 
 I hit a pretty big snag while writing my first Rust function-- one to draw the tic-tac-toe board. As with Go, Rust mandates that we specify the type of a function's inputs and outputs. In both Go and Rust I started with this `present_board` function, since it only has one input and no outputs. But with Rust I got tripped up. 
 
@@ -290,13 +290,11 @@ Additionally, I needed to pass a "_reference_" to this array, since I only wante
 
 So at first I thought the parameters would be `fn present_board(&b [int])`-- with the amperstand on the `b`, and a type of `int`. I also wasn't sure how to refer to my `board` inside the function itself-- `b` or `&b`. 
 
-Oddly, there doesn't seem to be a straight-forward way to check a variable's type. I ended up causing an intentional error by running `board[2].what_type_is_this`, though that threw me off by giving this error: "error[E0610]: `{integer}` is a primitive type and therefore doesn't have fields". If it had said `i32 is a primitive type...` I would have had a better chance.
+Oddly, there doesn't seem to be a straight-forward way to check a variable's type. I ended up causing an intentional error by running `board[2].what_type_is_this`, though that threw me off by giving this error: "error[E0610]: `{integer}` is a primitive type and therefore doesn't have fields". I then tried things like `fn present_board(&b [integer])` but no dice. If the error had said `i32 is a primitive type...` I would have had a better chance.
 
-Eventually, after much trial and not-so-helpful error, I figured it out:
+I'd say this was by far my worst snag with either Go or Rust. Maybe if I had read the Rust book online more thoroughly I would have caught it early on, but [the Array section](https://doc.rust-lang.org/book/second-edition/ch03-02-data-types.html#arrays) isn't very helpful. Eventually, after much trial and not-so-helpful error, I figured it out:
 
 ```rust
-// and not, kept referring to "integer" or "Integer" rather than i32. Using "int" threw unhelpful
-// error
 fn present_board(b: &[i32]){
     println!("---------");
     let mut i = 0;
@@ -323,7 +321,7 @@ fn present_board(b: &[i32]){
 }
 ```
 
-(I also used Go's `match` statement, which is like a `switch` statement in other languages. Apparently the Go devs like `match` over long `if`/`else if` chain.
+(I also used Rust's [`match` statement](https://doc.rust-lang.org/1.5.0/book/match.html), which is like a `switch` statement in other languages. Apparently the Rust devs like `match` over long `if`/`else if` chain.)
 
 And here's how I called this function: `present_board(&board);`, passing a _reference_ to `board`, rather than ownership.
 
