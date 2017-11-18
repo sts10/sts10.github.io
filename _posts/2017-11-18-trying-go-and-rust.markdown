@@ -33,7 +33,7 @@ Here's my [GitHub repo](https://github.com/sts10/tic-tac-go) of the game, but re
 
 To check for a winner, I'm using a second array called `sums` that adds up each of the possible wins in the game of tic-tac-toe. (Fun fact: I used this idea (and drew the sketch below) back in 2013 as part of my admission test to The Flatiron School.)
 
-![sums explained](img/go-and-rust/map.png)
+![sums explained](/img/go-and-rust/map.png)
 
 While writing the program I made some notes on sticking points I ran into. In general the Go program went pretty smoothly!
 
@@ -231,7 +231,7 @@ Rust's official documentation, referred to as ["the book"](https://doc.rust-lang
 
 In addition to skimming the first few sections of the book, I also did some exercises called [rustlings](https://github.com/carols10cents/rustlings). Lastly I will here give a shout-out to the [#rust-beginners IRC channel](https://chat.mibbit.com/?server=irc.mozilla.org&channel=%23rust-beginners) -- At one point I was so stuck I made [a share-able playground link](https://play.rust-lang.org/?gist=40257dc021809a8c8a6750ab2f133a8a&version=stable) and hopped into the #rust-beginners IRC channel. Even though there were only a few people active on a Friday morning, I got insanely concise help I needed. 
 
-![My IRC chat](img/go-and-rust/irc-chat.png)
+![My IRC chat](/img/go-and-rust/irc-chat.png)
 
 Big thanks to those users!
 
