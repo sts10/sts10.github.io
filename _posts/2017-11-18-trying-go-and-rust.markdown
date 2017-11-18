@@ -392,6 +392,15 @@ The tl;dr here is that my guess is that this is a bug in Rust 1.21.0 (`rustc 1.2
 
 For the record, in my confusion I did [file an issue with Clippy](https://github.com/rust-lang-nursery/rust-clippy/issues/2233), a tool that helps Rust users with hints. Clippy suggested I use `+=`.
 
+### First Impressions of Rust
+
+Writing Rust was a really different experience for me. I could see how the '70s mainframe hacker could make me a more efficient programmer. It was interesting trying to learn what it wanted, what patterns it was trying to instill in me. I swear I wrote one of the functions parameters-to-bracket without an error! which felt pretty awesome-- and hopeful. I kept wondering if, at some point relatively soon, I'd be able to write Rust without so many errors. But even Dunham, in the talk, warns that developers will hit errors, errors they won't quite understand, for years. 
+
+More realistically, I can also see that Rust's enforced efficiency is overkill for anything I'd want to do. Put another way-- there's not much I would want to write in Rust that I couldn't write in Go. But beyond that, one thing I've avoided talking about is what I'd want to do with either Go or Rust. I think you can do more with Rust or Go than with Ruby or JavaScript. And I'd love to contribute to a desktop application like KeePassXC or something like that. And even if I don't make any contributions to Go or Rust projects, at the very least learning a little Go and Rust has expanded my mind a bit.
+
+I like the idea of Rust. It comes out of Mozilla, it's new and the community seems smart and helpful with a respectful code of conduct. The compiler is strict, I see the advantage-- if I were to submit a pull request another Rust developer would know my code didn't have certain errors if it compiles. My understanding is that even a auditor of a cryptographic project could start with a leg up if it's all in safe rust. But for me, of the two, I think Go is a more... realistic language to go forward with, if I go forward with either of them.
+
+
 ## Appendix (Rust)
 
 ### Running a Simple Rust program with rustc rather than Cargo
@@ -423,7 +432,7 @@ cargo run
 ```
 
 
-[[Reference](https://doc.rust-lang.org/book/second-edition/ch01-02-hello-world.html#building-and-running-a-cargo-project)]
+[Reference](https://doc.rust-lang.org/book/second-edition/ch01-02-hello-world.html#building-and-running-a-cargo-project)
 
 I used [rustup](https://rustup.rs/) to manage my versions (or channels) of Rust. 
 
