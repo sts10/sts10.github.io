@@ -11,6 +11,8 @@ However I was also aware that there were newer, shinier statically typed languag
 
 My basic process was to seek out each language's tutorial, play around with it, then eventually make a command line tic-tac-toe game.
 
+Note that I really only learned enough of both languages to do what I wanted. Both Go and Rust have tons of features that I didn't even try to learn about. For example, I didn't even use structs in either version of tic-tac-toe, nor did I learn much about Go's [interfaces](https://tour.golang.org/methods/10) or any [goroutines](https://tour.golang.org/concurrency/1), or Rust's [enums](https://doc.rust-lang.org/book/second-edition/ch06-01-defining-an-enum.html) or [vectors](https://doc.rust-lang.org/book/second-edition/ch08-01-vectors.html) or whatever other cool stuff Rust has. So this post is far from any sort of "Go vs. Rust". It's just a casual Rubyist's initial impressions of both.
+
 ## Go 
 
 From [Wikipedia](https://en.wikipedia.org/wiki/Go_(programming_language)):
@@ -35,11 +37,11 @@ To check for a winner, I'm using a second array called `sums` that adds up each 
 
 ![sums explained](/img/go-and-rust/map.png)
 
-While writing the program I made some notes on sticking points I ran into. In general the Go program went pretty smoothly!
+In general the Go program went pretty smoothly! But while writing the program I made some notes on sticking points I ran into. 
 
 ### Getting User Input
 
-I had some trouble taking an input from the console and then converting it to an integer. My assumption that the input would come in as a String, and that it would somehow have to converted to a integer, was correct.
+I had some trouble taking an input from the console and then converting it to an integer. My assumption that the input would come in as a String, and that it would somehow have to be converted to a integer, was correct.
 
 After a bunch of Googling and false starts, I found `fmt.Scan(&moveInt)` which somehow did both things I wanted-- prompt the user for input _while also_ maintaining type `int` for the variable `moveInt`. Awesome-- but, you know, weird how cryptic it is. Though to be fair I never fully understood Ruby's `scan` method either.
 
@@ -52,11 +54,11 @@ func askForPlay() int{
 }
 ```
 
-As I was working on this function, I include the line `fmt.Printf("moveInt is type: %T\n", moveInt)`, which was a helpful debug step, as it printed the type of the variable `moveInt`. Thankfully, in my final code I don't think `moveInt` is ever _not_ of type "int".
+As I was working on this function, I included the line `fmt.Printf("moveInt is type: %T\n", moveInt)`, which was a helpful debug step, as it printed the type of the variable `moveInt`. Thankfully, in my final code I don't think `moveInt` is ever _not_ of type "int".
 
 ### Declaring and Re-Assigning vs. Just Re-Assigning
 
-Go has the symbol `:=`, which is syntactic sugar for both declaring and assigning a variable. Also, when using `:=` you don't need to specify its type (Go's compiler will infer it-- think the technical term is "type inference"). Nice!
+Go has the symbol `:=`, which I think is syntactic sugar for both declaring and assigning a variable. Also, when using `:=` you don't need to specify its type (Go's compiler will infer it-- think the technical term is "type inference"). Nice!
 
 However I got tripped up when I lazily forgot that using the colon not only assigns but declares, and thus should really only be used once per scope. Basically I was re-declaring a variable when I really meant to just re-assign it. Here's the code:
 
@@ -83,7 +85,7 @@ The code above gave me the following error:
 ./game.go:22:44: undefined: player
 ```
 
-Weird, right? Clearly I do define `player`, either on line 4 or line 7 depending on the conditional on line 3. The issue is that `player` is only within the scopes of those `if` statements, so when I tryto pass to it the `executePlayerMove` function, it's undefined.
+Weird, right? Clearly I do define `player`, either on line 4 or line 7 depending on the conditional on line 3. The issue is that `player` is only within the scopes of those `if` statements, so when I try to pass to it the `executePlayerMove` function, it's undefined.
 
 So I (sloppily) added `player := 0` above the if statement and ran it again. I then got this error:
 
@@ -93,7 +95,7 @@ So I (sloppily) added `player := 0` above the if statement and ran it again. I t
 ./game.go:22:17: player declared and not used
 ```
 
-Now problem is that the lines in the conditionals that read `player := 1` and `player := 2` _declare_ the variable `player`, as well as re-assign it, even though it's already been declared. What I want to do is simply re-assign the variable. To do that, I changed the block to:
+Now the problem is that the lines in the conditionals that read `player := 1` and `player := 2` _declare_ the variable `player`, as well as re-assign it, even though it's already been declared. What I want to do is simply re-assign the variable. To do that, I changed the block to:
 
 ```go
 for gameOver != true{
@@ -113,7 +115,7 @@ for gameOver != true{
 }
 ```
 
-and the compiler and I all were all good.
+and the compiler and I were all good.
 
 ### String Interpolation Symbols were Confusing
 
