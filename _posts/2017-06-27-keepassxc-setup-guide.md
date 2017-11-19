@@ -21,7 +21,7 @@ comments: true
 
 [KeePassXC](https://keepassxc.org) is an open-source password manager. As the project owners (of which I am not) put it: It is a community fork of [KeePassX](https://www.keepassx.org/), a native cross-platform port of [KeePass Password Safe](http://keepass.info/), with the goal to extend and improve it with new features and bug fixes. KeePassXC is open-source, which means [its code](https://github.com/keepassxreboot/keepassxc) is public and thus open to inspection by all.
 
-This is a basic guide of how to get started with KeePassXC. This guide is **for OS X / macOS users** (hereto referred to as "macOS"), though KeePassXC is built to work with Linux and Windows as well, and this guide may be helpful for those users too. 
+This is a basic guide of how to get started with KeePassXC. This guide is **for OS X / macOS users** (hereto referred to as "macOS"), though KeePassXC is built to work with Linux and Windows as well, and this guide may be helpful for those users too. Another good resource is [KeePassXC's official FAQ page](https://keepassxc.org/docs#faq).
 
 ### Disclosure of Amateurism
 
@@ -329,7 +329,7 @@ Click the OK button for these changes to take effect. Once you have, KeePassXC w
 
 KeePassXC version 2.2.0 offers support for using a "token", like a YubiKey, to unlock your database (also described as "YubiKey challenge-response support"). A [YubiKey](https://www.yubico.com/) is a "smart key" that plugs into a USB port on your computer and helps you verify your identity. This is that third option for a KeePassXC master key, labeled "Challenge Response". 
 
-This feature is relatively new to KeePassXC, and does not yet exist in KeePassX. For these reasons I'm not going to go over how to use it at this time. However if you're feeling adventurous, go for it.  
+This feature is relatively new to KeePassXC, and does not yet exist in KeePassX. For these reasons I'm not going to go over how to use it at this time. However if you're feeling adventurous, I'd start with [this section of the official KeePassXC FAQ](https://keepassxc.org/docs#faq-yubikey-2fa).  
 
 ---
 
