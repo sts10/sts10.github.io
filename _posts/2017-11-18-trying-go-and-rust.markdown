@@ -48,18 +48,18 @@ func checkForWin(b [9]int) int {
   for _, v := range b[6:8] { sums[5] += v }
 
   sums[0] = b[2]+b[4]+b[6]
-    sums[1] = b[0]+b[3]+b[6]
-    sums[2] = b[1]+b[4]+b[7]
-    sums[3] = b[2]+b[5]+b[8]
-    sums[4] = b[0]+b[4]+b[8]
+  sums[1] = b[0]+b[3]+b[6]
+  sums[2] = b[1]+b[4]+b[7]
+  sums[3] = b[2]+b[5]+b[8]
+  sums[4] = b[0]+b[4]+b[8]
 
-    for _, v := range sums {
-      if v == 3{
-        return 1
-      } else if v == 30{
-        return 2
-      }
+  for _, v := range sums {
+    if v == 3{
+      return 1
+    } else if v == 30{
+      return 2
     }
+  }
   return 0
 }
 ```
