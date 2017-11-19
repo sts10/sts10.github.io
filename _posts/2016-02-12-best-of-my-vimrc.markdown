@@ -19,14 +19,14 @@ Basically I split my usage between [Neovim](https://github.com/neovim/neovim) an
 
 One way to make using both easier is to use your existing configuration by making these two symlinks: 
 
-```vim
+```text
 To use your existing Vim configuration:
     ln -s ~/.vim ~/.config/nvim
     ln -s ~/.vimrc ~/.config/nvim/init.vim
 See ':help nvim' for more information on Neovim.
 ```
 
-Or you can maintain a separate Vim config file for Neovim, but simply putting your config into `~/.config/nvim/init.vim`. If you choose this route, obviously our Vim config file is no longer called `vimrc`, but note that, throughout this post I'll likely keep referring to my Vim config file as "my vimrc".
+Or you can maintain a separate Vim config file for Neovim by simply putting your config code into `~/.config/nvim/init.vim`. (Just to be clear, most settings work in both regualr Vim and Neovim.) If you choose this route, obviously your config file is no longer called `vimrc` but rather `init.vim`. Just note that, throughout this post I'll likely keep referring to my Vim config file as "my vimrc".
 
 Neovim + iTerm2 is a pretty great combo, but for somethings I like using a GUI (MacVim). (I haven't found a good Neovim GUI yet, though there are some other there, including [Neovim dot app](https://github.com/rogual/neovim-dot-app).) 
 
@@ -64,6 +64,7 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-markdown'
+Plug 'sts10/vim-pink-moon'
 Plug 'sts10/vim-mustard'
 Plug 'junegunn/seoul256.vim'
 Plug 'altercation/vim-colors-solarized'
@@ -73,9 +74,6 @@ Plug 'bronson/vim-visual-star-search'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'junegunn/goyo.vim'
 Plug 'tmhedberg/matchit'
-Plug 'AndrewRadev/splitjoin.vim'
-Plug 'dhruvasagar/vim-table-mode'
-Plug 'alvan/vim-closetag'
 Plug 'kana/vim-textobj-user'
 Plug 'lucapette/vim-textobj-underscore' | Plug 'kana/vim-textobj-user'
 Plug 'jceb/vim-textobj-uri'             | Plug 'kana/vim-textobj-user'
