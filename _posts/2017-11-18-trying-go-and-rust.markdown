@@ -117,7 +117,7 @@ for gameOver != true{
 
 and the compiler and I were all good.
 
-### String Interpolation Symbols were Confusing
+### String Interpolation Symbols Were A Little Confusing
 
 Coming from Ruby, I'm used to pretty simple string interpolation. In Go it can be a bit more sophisticated. `fmt.Println` is more straight forward-- you can use the `,` to switch from strings to variables. 
 
@@ -132,7 +132,7 @@ fmt.Println("My name is",len(myName), "characters long")
 fmt.Println("Pi is ", pi)
 ```
 
-`fmt.Printf` is more sophisticated-- it can read given variables in multiple ways. `%d` stands for digit, so it's oppriate for integers. `%f` is for float64s, and can accept a number to round the float64 to. `%T` gives the type of the variable, which proves pretty useful for debugging purposes.
+`fmt.Printf` allows more granularity-- it can read given variables in multiple ways. `%d` stands for digit, so it's appropriate for integers. `%f` is for `float64`s, and can accept a decimal point to round the `float64` to. `%T` gives the type of the variable, which proved pretty useful for debugging purposes for me, who is still learning types-- it seems simple right!
 
 ```go
 fmt.Printf("Hello %s\n", myName)
@@ -165,13 +165,13 @@ func presentBoard(b [9]int) {
 }
 ```
 
-At first I just wrote `func presentBoard(b []int) { ` figuring that'd be cool, but the Go compiler threw me an error: `cannot use board (type [9]int as type []int in argument...)`. My guess is that `[]int` is actually a Slice rather than an Array. It makes sense spelled out but it took me a bit.
+At first I just wrote `func presentBoard(b []int) { ` figuring that'd be cool, but the Go compiler threw me an error: `cannot use board (type [9]int as type []int in argument...)`. It makes sense spelled out but it took me a bit. Risking a guess, I think `[]int` is actually a Slice rather than an Array. 
 
 Plus this is way more lax than Rust, as we'll see.
 
 ### Function signatures were a bit unintuitive 
 
-When declaring a function, we have to specify quite a bit. First, the functions name, obviously. Next, in parenthesis is all of the inputs. Then finally, and strangely for a Rubyist, the outputs. Specifying the _types_ in not only the inputs, but the outputs, was different for me. A couple examples:
+When declaring a function, we have to specify quite a bit. First, the function's name, obviously. Next, in parenthesis is all of the inputs. Then finally, and strangely for a Rubyist, the outputs. Specifying the _types_ in not only the inputs, but the outputs, was different for me. A couple examples:
 
 This function takes two integers (type `int`) and an array of 9 integers. It outputs an array of 9 integers.
 ```go
@@ -229,9 +229,13 @@ Rust is a pretty intense language/system. I found that just writing Rust code th
 
 This ["Rust 101" talk by E. Dunham](https://www.youtube.com/watch?v=FMqydRampuo) is a _great_ video for learning about the language, its goals, and the community surrounding Rust. The community seems to be very creative and supportive, and I dig that they have a strong [code of conduct](https://www.rust-lang.org/en-US/conduct.html) that promotes "a friendly, safe and welcoming environment for all, regardless of level of experience, gender identity and expression, sexual orientation, disability, personal appearance, body size, race, ethnicity, age, religion, nationality, or other similar characteristic."
 
-Rust's official documentation, referred to as ["the book"](https://doc.rust-lang.org/stable/book/), is a little messy but also well-written. In hindsight, I really should have gone through it more slowly before attempting to make this tic-tac-toe game. For completeness sake here is their [homepage](https://www.rust-lang.org/en-US/index.html) and [Official Rust blog](https://blog.rust-lang.org/). [Rust playgorund](https://play.rust-lang.org) is their REPL, allowing you to run Rust in a browser-- ironically, it worked better in Chrome than Firefox 57 for me.
+Rust's official documentation, referred to as ["the Book"](https://doc.rust-lang.org/stable/book/), is a little messy but also well-written (which reminder me a little of [\_why's poignant guide to Ruby](http://poignant.guide/book/), though it is [thankfully] not as irreverent). In hindsight, I really should have gone through it more slowly and thoroughly before attempting to make this tic-tac-toe game. In many ways my whining about how difficult Rust is at first blush (see below) isn't really fair to the authors of the Book, since I didn't read it close enough.
 
-In addition to skimming the first few sections of the book, I also did some exercises called [rustlings](https://github.com/carols10cents/rustlings). Lastly I will here give a shout-out to the [#rust-beginners IRC channel](https://chat.mibbit.com/?server=irc.mozilla.org&channel=%23rust-beginners) -- At one point I was so stuck I made [a share-able playground link](https://play.rust-lang.org/?gist=40257dc021809a8c8a6750ab2f133a8a&version=stable) and hopped into the #rust-beginners IRC channel. Even though there were only a few people active on a Friday morning, I got insanely concise help I needed. 
+For completeness sake here is their [homepage](https://www.rust-lang.org/en-US/index.html) and [Official Rust blog](https://blog.rust-lang.org/). [Rust playground](https://play.rust-lang.org) is their REPL, allowing you to run Rust in a browser-- ironically, it worked better in Chrome (v. 62.0.32...) than Firefox 57 for me.
+
+In addition to skimming the first few sections of the Book, I also did some exercises called [rustlings](https://github.com/carols10cents/rustlings), which were really helpful-- they felt more helpful than the Tour of Go, especially with their links to the relevant section in the Book and hints you could scroll down to. 
+
+Lastly I will here give a shout-out to the [#rust-beginners IRC channel](https://chat.mibbit.com/?server=irc.mozilla.org&channel=%23rust-beginners) -- At one point I was so stuck I made [a share-able playground link](https://play.rust-lang.org/?gist=40257dc021809a8c8a6750ab2f133a8a&version=stable) and hopped into the #rust-beginners IRC channel. Even though there were only a few people active on a Friday morning, I got insanely concise help I needed. 
 
 ![My IRC chat](/img/go-and-rust/irc-chat.png)
 
@@ -329,7 +333,7 @@ And here's how I called this function: `present_board(&board);`, passing a _refe
 
 #### The `player` variable
 
-Here's a "soft" example of the compiler nudging me. In my tic-tac-go game, there's a simple part where we alternate between player 1 and player 2.
+Here's an example of the compiler nudging me a bit more softly-- with warnings rather than errors. In my tic-tac-go game, there's a simple part where we alternate between player 1 and player 2.
 
 So here's what I initially wrote:
 
@@ -347,11 +351,11 @@ if turn_number % 2 == 1{
 println!("Player {}'s turn", player);
 ```
 
-That line `let mut player = 0;` is problematic, the compiler told me. First, know that, by default, Rust variables are immutable(!), meaning their value can't be changed. You have to use the keyword `mut` if you want to change the value at some point later on.
+That line `let mut player = 0;` is problematic, the compiler told me. First, know that, by default, Rust variables are immutable(!), meaning their value can't be changed. You have to use the keyword `mut` if you want to change the value at some point later on. At first I thought this was crazy, but I can now glimpse how it's a really strong default for predictability-- that the programmer has to assert that a value will be changed.
 
 Rust compiler gives me a warning here: "warning: value assigned to `player` is never read". It's basically saying, "why did you assign `player` to 0 when you never use that value 0?".
 
-When I edited that line to `let mut player;`, a new warning appeared: "warning: variable does not need to be mutable". This was a little harder for me to understand, but it makes sense once I realized that, for each time `player` is declared in its scope, it's only ever assigned one value one time (either `1` or `2`, based on this conditional). Thus it never needs to _mutate_ from one value to another value.
+When I edited that line to `let mut player;`, a new warning appeared: "warning: variable does not need to be mutable". This was a little harder for me to understand, but it makes sense once I realized that, for each time `player` is declared in its scope, it's only ever assigned one value one time (either `1` or `2`, based on this conditional). Thus it never needs to _mutate_ from one value to another value. Again, I can see how, when you're throwing variables between all sorts of functions, it's powerful to know a value will never change-- thus the warning that, hey, make it immutable if you can.
 
 Here's what the Rust compiler and I ended up with (no errors, no warnings):
 
@@ -369,13 +373,13 @@ if turn_number % 2 == 1{
 println!("Player {}'s turn", player);
 ```
 
+An interesting pattern, but even more interesting that a compiler taught it to me.
 
 ### A Bug in Stable Rust
 
 So part of Rusty Tac (my writing of tic-tac-toe in Rust) involved a function where we have to check the board to see if it's full (meaning there had been a tie-- no one had won the game). The board is basically an array, so the task here is to sum up an array of integers (and check if that sum is 45).
 
-My understanding is that there are a couple of approved ways to iterate through an array in Rust. One is to iterate through a reference to the array (i.e. `&my_array`). The strange thing here is that the `value` yielded to the inside of the loop are also references to the elements of the array. 
-
+My understanding is that there are a couple of approved ways to iterate through an array in Rust, including [an Iterator class](https://doc.rust-lang.org/std/iter/trait.Iterator.html). One is to iterate through a reference to the array (i.e. `&my_array`) with a `for` loop. The strange thing here is that the `value` yielded to the inside of the loop are also references to the elements of the array. 
 
 ```rust
 fn main() {
@@ -388,7 +392,7 @@ fn main() {
 }
 ```
 
-All good. But if you change it to the more concise: `sum += v;` you get an error: `expected usize, found &usize`. You would think that `sum = sum + v;` would be the equivalent to `sum += v;`, but that did not seem to the be the case in this case. 
+All good. But if you change it to the more concise: `sum += v;` you get an error: `expected usize, found &usize`. Apparently `sum = sum + v;` can add a usize to a reference to a usize, but `sum += v;` cannot. You would think that `sum = sum + v;` would be the equivalent to `sum += v;`, but that did not seem to the be the case here. 
 
 The tl;dr here is that my guess is that this is a bug in Rust 1.21.0 (`rustc 1.21.0 (3b72af97e 2017-10-09)`). However, if you [run this code with the Nightly version](http://play.integer32.com/?gist=10851a4f3ac6f986686256a5fe29bab0&version=nightly), which the playground has as an option, `sum += v;` does not throw that error. So my guess is that the issue has been fixed in the Nightly version.
 
@@ -407,13 +411,15 @@ fn check_if_board_full(b: &[i32]) -> bool {
 
 ```
 
+Think that's what Rust is supposed to look like, if I may say so!
+
 ### First Impressions of Rust
 
-Writing Rust was a really different experience for me. I could see how the '70s mainframe hacker could make me a more efficient programmer. It was interesting trying to learn what it wanted, what patterns it was trying to instill in me. I swear I wrote one of the functions parameters-to-bracket without an error! which felt pretty awesome-- and hopeful. I kept wondering if, at some point relatively soon, I'd be able to write Rust without so many errors. But even Dunham, in the talk, warns that developers will hit errors, errors they won't quite understand, for years. 
+Writing Rust was a really different-- and sometimes trying-- experience for me. I could see how the '70s mainframe hacker could make me a more efficient programmer. It was interesting trying to learn what it wanted, what patterns it was trying to instill in me. I swear I wrote one of the functions parameters-to-bracket without an error! which felt pretty awesome-- and hopeful. I kept wondering if, at some point relatively soon, I'd be able to write Rust without so many errors. But even Dunham, in the talk, warns that developers will hit errors, errors they won't quite understand, for years. 
 
-More realistically, I can also see that Rust's enforced efficiency is overkill for anything I'd want to do. Put another way-- there's not much I would want to write in Rust that I couldn't write in Go. But beyond that, one thing I've avoided talking about is what I'd want to do with either Go or Rust. I think you can do more with Rust or Go than with Ruby or JavaScript. And I'd love to contribute to a desktop application like KeePassXC or something like that. And even if I don't make any contributions to Go or Rust projects, at the very least learning a little Go and Rust has expanded my mind a bit.
+More realistically, I can also see that Rust's enforced efficiency is overkill for anything I'd want to do. I don't think I'll be writing a browser any time soon. Put another way-- I can't see there being much I would want to write in Rust that I couldn't write in Go. But beyond that, one thing I've avoided talking about is what I'd want to do with either Go or Rust. I definitely think you can do more with Rust or Go than with Ruby or JavaScript. And I'd love to contribute to a desktop application like KeePassXC or something like that, more of which will hopefully be written in Go or Rust soon. And even if I don't make any contributions to Go or Rust projects, at the very least learning a little Go and Rust has expanded my mind a bit.
 
-I like the idea of Rust. It comes out of Mozilla, it's new and the community seems smart and helpful with a respectful code of conduct. The compiler is strict, I see the advantage-- if I were to submit a pull request another Rust developer would know my code didn't have certain errors if it compiles. My understanding is that even a auditor of a cryptographic project could start with a leg up if it's all in safe rust. But for me, of the two, I think Go is a more... realistic language to go forward with, if I go forward with either of them.
+I like the idea of Rust. It comes out of Mozilla, it's new, and the community seems smart and helpful with a respectful code of conduct. The compiler is strict, I see the advantage-- if I were to submit a pull request another Rust developer would know my code didn't have certain errors if it compiles. My understanding is that even a auditor of a cryptographic project could start with a leg up if it's all in safe rust. But for me, of the two, I think Go is a more... comfortable, realistic language to go forward with, if I go forward with either of them.
 
 
 ## Appendix (Rust)
