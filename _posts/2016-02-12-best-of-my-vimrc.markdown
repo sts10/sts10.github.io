@@ -26,6 +26,8 @@ To use your existing Vim configuration:
 See ':help nvim' for more information on Neovim.
 ```
 
+Or you can maintain a separate Vim config file for Neovim, but simply putting your config into `~/.config/nvim/init.vim`. If you choose this route, obviously our Vim config file is no longer called `vimrc`, but note that, throughout this post I'll likely keep referring to my Vim config file as "my vimrc".
+
 Neovim + iTerm2 is a pretty great combo, but for somethings I like using a GUI (MacVim). (I haven't found a good Neovim GUI yet, though there are some other there, including [Neovim dot app](https://github.com/rogual/neovim-dot-app).) 
 
 ## My Plugin Manager
@@ -119,9 +121,13 @@ For more of my ~opinions~ plugins, I previously wrote about what I see as the [t
 
 ## Colorscheme
 
-I adapted a colorscheme I used in Sublime Text 2 called Mustard (located [here](https://github.com/panrafal/mustard-theme)) to make a colorscheme that I also called [Mustard](https://github.com/sts10/vim-mustard). 
+![Pink Moon colorscheme screenshot from GitHub repo](https://github.com/sts10/vim-pink-moon/raw/master/img/pink-moon-frontend.png)
 
-Thanks to its file structure, you can have vim-plug install and manage it by including `Plug 'sts10/vim-mustard'` in your vimrc (Mustard should work with other plugin managers too). Then be sure to have `colorscheme mustard` and `set background=dark` in your vimrc.
+For a long time I used a colorscheme called [Mustard](https://github.com/sts10/vim-mustard), which I adapted from a Sublime Text 2 colorscheme also called Mustard (located [here](https://github.com/panrafal/mustard-theme)). However I've since switched to [Pink Moon](https://github.com/sts10/vim-pink-moon), a colorscheme I wrote for myself basically from scratch.
+
+Thanks to the file structure of both Mustard and Pink Moon, you can have vim-plug install and manage them by including `Plug 'sts10/vim-pink-moon'` and/or `Plug 'sts10/vim-mustard'` in your Vim config file (likely your vimrc) (they should work with other plugin managers too). Then be sure to have `colorscheme pink-moon` or `colorscheme mustard` in your Vim config file. With Mustard, you'll have to also have `set background=dark` in your Vim config file.
+
+Of course there are tons of other Vim colorschemes a few Google searches away!
 
 ## Line Numbers
 
