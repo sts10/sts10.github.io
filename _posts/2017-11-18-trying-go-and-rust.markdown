@@ -394,7 +394,7 @@ The tl;dr here is that my guess is that this is a bug in Rust 1.21.0 (`rustc 1.2
 
 For the record, in my confusion I did [file an issue with Clippy](https://github.com/rust-lang-nursery/rust-clippy/issues/2233), a tool that helps Rust users with hints. Clippy suggested I use `+=`.
 
-Later, thanks to [a tip from Mastodon user seanlinsley](https://mastodon.social/@seanlinsley/99028194647041640), I learned that Rust's Iterator class has a `sum` method, which makes the overall `check_if_board_full` function much cleaner:
+Later, thanks to [a tip from Mastodon user seanlinsley](https://mastodon.social/@seanlinsley/99028194647041640), I learned that Rust's Iterator class [has a handy `sum` method](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.sum), which makes the overall `check_if_board_full` function much cleaner:
 
 ```rust
 fn check_if_board_full(b: &[i32]) -> bool {
