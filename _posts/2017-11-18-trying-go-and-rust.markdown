@@ -439,7 +439,6 @@ fn check_if_board_full(b: &[i32]) -> bool {
         _  => return false,
     }
 }
-
 ```
 
 You can also see here how Rust handles specifying the type of a function's output-- with a `->` (this function outputs a boolean of true or false-- if the board is full or not. Fun!
