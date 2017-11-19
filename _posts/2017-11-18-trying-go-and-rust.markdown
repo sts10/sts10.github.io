@@ -5,7 +5,7 @@ date: 2017-11-18 17:13:50 -0400
 comments: true
 ---
 
-This past week I got the feeling that I hadn't really given myself any programming challenges in a while. I had also been thinking about trying a statically typed, compiled language for a few weeks. I had C++ in mind, mostly because I actually wrote some in my high school AP Computer Science class, and KeePassXC, an application I use to store my passwords, is written in C++. 
+This past week I got the feeling that I hadn't really given myself any programming challenges in a while. I had also been thinking about trying a statically typed, compiled language for a few weeks. I had C++ in mind, mostly because I actually wrote some in my high school AP Computer Science class, and [KeePassXC](https://www.keepassxc.org/), an application I use to store my passwords, is [written in C++](https://github.com/keepassxreboot/keepassxc). 
 
 However I was also aware that there were newer, ~ shinier ~ statically typed languages out there that, if I was starting basically from scratch anyway, I might as well explore. The two I decided to try were Go (or Golang) and Rust, in that order.
 
@@ -197,9 +197,7 @@ func presentBoard(b [9]int) {
 }
 ```
 
-At first I just wrote `func presentBoard(b []int) { ` figuring that'd be cool, but the Go compiler threw me an error: `cannot use board (type [9]int as type []int in argument...)`. It makes sense spelled out but it took me a bit. Risking a guess, I think `[]int` is actually a Slice rather than an Array. 
-
-Plus this is more lax than Rust, as we'll see.
+At first I just wrote `func presentBoard(b []int) { ` figuring that'd be cool, but the Go compiler threw me an error: `cannot use board (type [9]int as type []int in argument...)`. It makes sense spelled out but it took me a bit. Risking a guess, I think `[]int` is actually a Slice rather than an Array.
 
 ### Function signatures were a bit unintuitive 
 
@@ -235,9 +233,7 @@ If you do want to use the index (like Ruby's `each_with_index`), you'd want `for
 
 ### First Impressions of Go
 
-Given the languages I've played with, Go feels like JavaScript; though if I was more familiar with the C languages I assume I'd be saying Go feels most like them. 
-
-Go does have structs, so you can get some Object-Oriented Programming in that way if you need, but I didn't use any in my game. Rather, my code is organized into different functions, as I would do if writing JavaScript.
+Given the languages I've played with, Go feels like JavaScript; though if I was more familiar with the C languages I assume I'd be saying Go feels most like them. Go does have structs, so you can get some Object-Oriented Programming in that way if you need, but I didn't use any in my game. Rather, my code is organized into different functions, as I would do if writing JavaScript. Functions seem to be king in both Go and Rust.
 
 Syntactically it also felt more like JavaScript than Ruby. For example, functions are not usually pegged to an object, so they are usually called with the pattern: `funcName(parameterVariable)` as opposed to `parameterVariable.funcName` (like Ruby or a heavily object-oriented language). However Go apparently does sometimes use this syntax like this: `day := time.Now().Weekday()`.
 
@@ -414,6 +410,8 @@ Part of Rusty Tac (my writing of tic-tac-toe in Rust) involved a function where 
 
 My understanding is that there are a couple of approved ways to iterate through an array in Rust, including [an Iterator class](https://doc.rust-lang.org/std/iter/trait.Iterator.html) which is probably what I should have used from the get-go (see below). One is to iterate through a reference to the array (i.e. `&my_array`) with a `for` loop. The strange thing here is that the `value`s yielded to the inside of the loop are also references to the elements of the array. 
 
+Here is a stand-alone example (not from my game).
+
 ```rust
 fn main() {
   let my_array: [usize; 8] = [2, 1, 3, 5, 3, 1, 3, 3];
@@ -444,6 +442,8 @@ fn check_if_board_full(b: &[i32]) -> bool {
 
 ```
 
+You can also see here how Rust handles specifying the type of a function's output-- with a `->` (this function outputs a boolean of true or false-- if the board is full or not. Fun!
+
 Think that's what Rust is supposed to look like, if I may say so!
 
 ### First Impressions of Rust
@@ -454,7 +454,9 @@ More realistically, I can also see that Rust's enforced efficiency is overkill f
 
 I like the idea of Rust. It comes out of Mozilla, it's new, and the community seems smart and helpful with a respectful code of conduct. The compiler is strict, I see the advantage-- if I were to submit a pull request another Rust developer would know my code didn't have certain errors if it compiles. My understanding is that even a auditor of a cryptographic project could start with a leg up if it's all in safe rust. But for me, of the two, I think Go is a more... comfortable, realistic language to go forward with, if I go forward with either of them.
 
-One thing I've avoided talking about here is what I'd want to do with either Go or Rust. I definitely understand that you can do more with Rust or Go than with Ruby or JavaScript, especially in creating desktop applications. I'd love to contribute to a desktop application like KeePassXC or something like that, more of which will hopefully be written in Go or Rust soon. And even if I don't make any contributions to Go or Rust projects, at the very least learning a little Go and Rust has expanded my mind a bit. But I can also see how throwing more time into improving my JavaScript is probably a more efficient use of my time, from a practical perspective.
+One thing I've avoided talking about here is what I'd want to do with either Go or Rust. I definitely understand that you can do more with Rust or Go than with Ruby or JavaScript, especially in creating desktop applications. I'd love to contribute to a desktop application like KeePassXC or something like that, more of which will hopefully be written in Go or Rust soon. And even if I don't make any contributions to Go or Rust projects, at the very least learning a little Go and Rust has expanded my mind a bit. 
+
+I can definitely see how throwing more time into improving my JavaScript is probably a more efficient use of my time, from a practical perspective. But sometimes it's fun to try playing with some shiny, new things.
 
 ## Appendix A: Hello World in Go
 
@@ -474,13 +476,21 @@ To run this file, you can either build an executable with `go build hello.go` an
 
 ## Appendix B: Hello World in Rust
 
-### Running a Simple Rust Program with Cargo (which comes installed with Rust)
+### Running a simple Rust program with Cargo (which comes installed with Rust)
 
 [Best to consult the Book on this](https://doc.rust-lang.org/book/second-edition/ch01-02-hello-world.html#hello-cargo), but here are the basics:
 
 Creating a new Cargo project: `cargo new hello_cargo --bin`
 
-Your `main` function is going to be written in `src/main.rs`.
+Your `main` function is going to be written in `src/main.rs`:
+
+```rust
+fn main() {
+  println!("Hello, world!");
+}
+```
+
+Note that the top level of your new Cargo project contains a Cargo.toml configuration file with some important stuff (again, see the Book).
 
 Compiling your project and running an executable:
 ```
@@ -489,14 +499,12 @@ cargo build
 ./target/debug/hello_cargo
 ```
 
-"Build and execute src/main.rs":
+"Build and execute src/main.rs"-- this is probably what you're going to be running often as you work on your code:
 ```
 cargo run
 ```
 
-
-
-### Running a Simple Rust program with rustc rather than Cargo
+### Running a simple Rust program with rustc rather than Cargo
 
 If you don't want to use Cargo, here's a more bare bones approach to running Rust:
 
@@ -514,9 +522,11 @@ rustc main.rs
 ./main
 ```
 
+### Managing Versions of Rust 
+
 I used [rustup](https://rustup.rs/) to manage my versions (or channels) of Rust. 
 
-For my fellow Rubyists, `rustc` is like `ruby`, while [rustup](https://rustup.rs/) (easy install using `curl`) is like `rvm` or `rbenv` (version manager). `cargo` doesn't really have a Ruby equivalent, but I would recommend using it over `rustc`. 
+For my fellow Rubyists, `rustc` is like `ruby`, while [rustup](https://rustup.rs/) is like `rvm` or `rbenv` (your version manager). `cargo` doesn't really have a Ruby equivalent (unless you call it like `rails`, but it's more lightweight), but I would recommend using it over `rustc`. 
 
-The versions-- called "channels"-- of Rust that you can manage with `rustup` are stable, beta, and nightly. I did all my work for this project with stable.
+The versions-- called "channels"-- of Rust that you can manage with `rustup` are stable, beta, and nightly. I did all my work for this project with stable, but as you can read above, I would have avoided a bug if I had used Nightly.
 
