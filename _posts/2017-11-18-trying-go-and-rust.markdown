@@ -323,7 +323,7 @@ fn present_board(b: &[i32]){
 }
 ```
 
-(I also used Rust's [`match` statement](https://doc.rust-lang.org/1.5.0/book/match.html), which is like a `switch` statement in other languages. Apparently the Rust devs like `match` over long `if`/`else if` chain.)
+(I also used Rust's [`match` statement](https://doc.rust-lang.org/1.5.0/book/match.html), which is like a `switch` statement in other languages, but more robust-- i.e. it can accept ranges, handle errors, [and more](https://mastodon.social/@seanlinsley/99028194647041640). Apparently the Rust devs like `match` over long `if`/`else if` chain.)
 
 And here's how I called this function: `present_board(&board);`, passing a _reference_ to `board`, rather than ownership.
 
@@ -393,6 +393,19 @@ All good. But if you change it to the more concise: `sum += v;` you get an error
 The tl;dr here is that my guess is that this is a bug in Rust 1.21.0 (`rustc 1.21.0 (3b72af97e 2017-10-09)`). However, if you [run this code with the Nightly version](http://play.integer32.com/?gist=10851a4f3ac6f986686256a5fe29bab0&version=nightly), which the playground has as an option, `sum += v;` does not throw that error. So my guess is that the issue has been fixed in the Nightly version.
 
 For the record, in my confusion I did [file an issue with Clippy](https://github.com/rust-lang-nursery/rust-clippy/issues/2233), a tool that helps Rust users with hints. Clippy suggested I use `+=`.
+
+Later, thanks to [a tip from Mastodon user seanlinsley](https://mastodon.social/@seanlinsley/99028194647041640), I learned that Rust's Iterator class has a `sum` method, which makes the overall `check_if_board_full` function much cleaner:
+
+```rust
+fn check_if_board_full(b: &[i32]) -> bool {
+    let sum: i32 = b.iter().sum();
+    match sum {
+        45 => return true,
+        _  => return false,
+    }
+}
+
+```
 
 ### First Impressions of Rust
 
