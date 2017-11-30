@@ -204,9 +204,9 @@ Below are my recommended settings for KeePassXC. To access this menu on macOS, c
 
 ![Recommended Settings](/img/keepassxc/recommended-settings.png)
 
-I would highly recommended having "Automatically reload the database when modified externally" checked. Having this setting _unchecked_, at least in version 2.2.2, [can, in specific cases, lead to your database being corrupted](https://github.com/keepassxreboot/keepassxc/issues/1113).
+I would highly recommend having "Automatically reload the database when modified externally" checked. Having this setting _unchecked_, at least in version 2.2.2, [can, in specific cases, lead to your database being corrupted](https://github.com/keepassxreboot/keepassxc/issues/1113).
 
-Other that feel free to try other settings. For example, you may prefer to have "Automatically save after every change" checked.
+Other than that particular setting, you are pretty safe to try other settings other than the ones I recommend. For example, you may prefer to have "Automatically save after every change" checked.
 
 ### Locking your database
 
