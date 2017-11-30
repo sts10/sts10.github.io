@@ -137,31 +137,35 @@ There are keyboard shortcuts to make this process slightly quicker. For example,
 
 KeePassXC has a feature called Auto-Type that, as the name implies, automatically types your username and password into a form. 
 
-To invoke Auto-Type, start with your cursor in the username field of the browser form you want to sign in to. Then right-click the entry you want to Auto-Type in KeePassXC and click "Perform Auto-Type". KeePassXC will type your username, hit tab, type your password, and then hit enter. 
+To invoke Auto-Type, start with your cursor in the username field of the browser form you want to sign in to. Then, over in KeePassXC, right-click the entry you want to Auto-Type and select "Perform Auto-Type". KeePassXC will type your username, hit tab, type your password, and then hit enter. 
 
 ![autotype gif](/img/keepassxc/auto-type.gif)
 
-Note that the Auto-Type keyboard shortcut on macOS is `Command + v`.
+(Note that the Auto-Type keyboard shortcut on macOS is `Command + v`.)
 
-(Also note: `{USERNAME}{TAB}{PASSWORD}{ENTER}` is the default Auto-Type sequence. However you can edit this sequence on a per-group or per-entry level. 
+`{USERNAME}{TAB}{PASSWORD}{ENTER}` is the default Auto-Type sequence. However you can edit this sequence on a per-group or per-entry level. 
 
-To do edit the Auto-Type sequence for a single entry, we'll first choose toe edit the entry by clicking the button with the key and blue pen icon. Next, we'll look in the menu of large icons on the left side of the window and click on the Auto-Type section of the menu. Finally, we'll click the "Use custom Auto-Type sequence" radio button and write a custom Auto-Type sequence. [More info on writing these custom sequences](http://keepass.info/help/base/autotype.html#autoseq).)
+To do edit the Auto-Type sequence for a single entry, we'll first choose to edit the entry-- we can do this by clicking the button with the key and blue pen icon. Next, we'll look in the menu of large icons on the left side of the window and click on the Auto-Type section of the menu (you may have to scroll down a little). Finally, we'll click the "Use custom Auto-Type sequence" radio button and write a custom Auto-Type sequence. [More info on writing these custom sequences](http://keepass.info/help/base/autotype.html#autoseq).)
 
 ![Custom Auto-type sequence](/img/keepassxc/custom-auto-type-sequence.png)
 
-**BONUS Tip:** If you use multiple "spaces" or multiple physical displays with macOS, you'll want to allow KeePassXC to access all of your desktops. This will allow you to use Auto-Type even if KeePassXC and your browser window are on different monitors or desktops. To enable this, right-click on the KeePassXC icon in your dock, go to Options, and click on "All Desktops". 
+**BONUS Tip:** If you use multiple "spaces" or multiple physical displays with macOS, you'll want to allow KeePassXC to access all of your desktops. This will allow you to use Auto-Type even if KeePassXC and your browser window are on different monitors or desktops. 
 
 ![Allow on all desktops](/img/keepassxc/all-desktops.png)
 
+To enable this, right-click on the KeePassXC icon in your dock, go to Options, and click on "All Desktops". 
+
 #### Global Auto-Type
 
-KeePassXC's _Global_ Auto-Type feature allows us to create a global (i.e. operating-system wide) keyboard shortcut to Auto-Type information from a KeePassXC entry. 
+KeePassXC also has a _Global_ Auto-Type feature which allows us to create a global (i.e. operating-system wide) keyboard shortcut to Auto-Type information from a KeePassXC entry. 
 
-For this example, let's say we want to set our Global Auto-Type shortcut to `Control + Option + v`. To do this, we'll go to KeePassXC menu, then click Preferences. We'll be taken to the "General" settings menu. Next, click the "Auto-Type" tab (located in the center of the window to the right of "Basic Settings"). Finally, left-click inside the text box to the right of the text that says "Global Auto-Type shortcut". You may not see a cursor appear-- that's OK. Just hit your key combination-- in our example that's `Control + Option + v`. 
+For this example, let's say we want to set our Global Auto-Type shortcut to `Control + Option + v`. To do this, we'll go to KeePassXC menu (in the way top left of your screen, next to the Apple icon), then click Preferences to get to the "Application Settings" menu. We'll be taken to the "General" settings menu. Next, click the "Auto-Type" tab (located in the center of the window to the right of "Basic Settings"). Finally, left-click inside the text box to the right of the text that says "Global Auto-Type shortcut". You may not see a cursor appear-- that's OK. Just hit your key combination-- in our example that's `Control + Option + v`. 
 
 If you do all that successfully you'll be looking at a screen like the one below.
 
 ![Set global Auto-Type shortcut](/img/keepassxc/global-auto-type.png)
+
+Hit the OK button in the bottom-right corner.
 
 Awesome-- now let's use our Global Auto-Type shortcut. 
 
@@ -181,7 +185,7 @@ One nice advantage to the Global Auto-Type is that KeePass will find the relevan
 
 _(The following section was updated October 18, 2017, to incorporate [a change](https://github.com/keepassxreboot/keepassxreboot.github.io/commit/b6d301e48e4079ef04fa13dc6f41c88337548ca1) in recommendations from the KeePassXC developers following [this discussion](https://github.com/keepassxreboot/keepassxc/issues/998).)_
 
-In addition to Auto-Type, KeePassXC offers another way to quickly and easily enter your login information into a browser form. It's called KeePassHTTP. From my understanding, KeePassHTTP is a protocol for ferrying your login data from the program reading your KeePass database (in our case, KeePassXC) to a browser extension that will automatically fill in forms in your browser for you. (If you've ever used the 1Password or LastPass browser add-ons, it's a lot like that.)
+In addition to Auto-Type, KeePassXC offers another way to quickly and easily enter your login information into a browser form called KeePassHTTP. From my understanding, KeePassHTTP is a protocol for ferrying your login data from the program reading your KeePass database (in our case, KeePassXC) to a browser extension that will automatically fill in forms in your browser for you. (If you've ever used the 1Password or LastPass browser add-ons, it's a lot like that.)
 
 To use KeePassHTTP with KeePassXC, the KeePassXC developers [highlight](https://keepassxc.org/project) 
 KeePassHTTP-Connector, which is currently available as [an add-on for Mozilla Firefox](https://addons.mozilla.org/en-US/firefox/addon/keepasshttp-connector/) and [as an extension for Google Chrome](https://chrome.google.com/webstore/detail/keepasshttp-connector/dafgdjggglmmknipkhngniifhplpcldb). For Safari, the developers list [passafari](https://github.com/mmichaa/passafari.safariextension/). 
