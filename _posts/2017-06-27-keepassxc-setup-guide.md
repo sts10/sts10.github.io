@@ -127,7 +127,7 @@ OK now let's actually use KeePassXC to log in to Reddit. KeePassXC has a few way
 
 Let's open either [https://reddit.com](https://redditcom) in a browser. With KeePassXC open to the side and our lone entry highlighted (single clicking it), click the person + paper icon to copy your Reddit username to the clipboard. Go paste that into the Reddit login page. Then return to KeePassXC to click the lock + paper icon to copy your Reddit password to your clipboard. Paste that into the Reddit login page, and click the "LOG IN" button (or press enter).
 
-(In the GIFs below I log in from [https://reddit.com/login](https://reddit.com/login) for clarity-- these procedures should work in either form.)
+(In the GIFs below I actually log in from the page [https://reddit.com/login](https://reddit.com/login). I did this to make the GIFs a little cleaner-- these procedures should work in either form.)
 
 ![log in gif 1](/img/keepassxc/reddit-login.gif)
 
