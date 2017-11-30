@@ -12,7 +12,7 @@ comments: true
 - [Level 1: Getting Setup](#level-1-getting-setup)
 - [Level 2: More Security Tips](#level-2-more-security-tips)
 - [Level 3: Getting Organized](#level-3-getting-organized)
-- [Level 4: Securing Our Database With Multiple Factors](#level-4-locking-our-database-with-multiple-factors)
+- [Level 4: Securing Our Database With Multiple Factors](#level-4-securing-our-database-with-multiple-factors)
 
 [Appendix: Verifying Your KeePassXC Download Without Using the Command Line](#appendix-verifying-your-keepassxc-download-without-using-the-command-line)
 
@@ -125,7 +125,9 @@ OK now let's actually use KeePassXC to log in to Reddit. KeePassXC has a few way
 
 #### Basic Copy and Paste
 
-Let's open [https://reddit.com/login](https://reddit.com/login) in a browser. With KeePassXC open to the side and our lone entry highlighted (single clicking it), click the person + paper icon to copy your Reddit username to the clipboard. Go paste that into the Reddit login page. Then return to KeePassXC to click the lock + paper icon to copy your Reddit password to your clipboard. Paste that into the Reddit login page, and click the "LOG IN" button (or press enter).
+Let's open either [https://reddit.com](https://redditcom) in a browser. With KeePassXC open to the side and our lone entry highlighted (single clicking it), click the person + paper icon to copy your Reddit username to the clipboard. Go paste that into the Reddit login page. Then return to KeePassXC to click the lock + paper icon to copy your Reddit password to your clipboard. Paste that into the Reddit login page, and click the "LOG IN" button (or press enter).
+
+(In the GIFs below I log in from [https://reddit.com/login](https://reddit.com/login) for clarity-- these procedures should work in either form.)
 
 ![log in gif 1](/img/keepassxc/reddit-login.gif)
 
@@ -135,13 +137,15 @@ There are keyboard shortcuts to make this process slightly quicker. For example,
 
 KeePassXC has a feature called Auto-Type that, as the name implies, automatically types your username and password into a form. 
 
-To invoke Auto-Type, move focus from your browser to KeePassXC, then right-click the entry you want to Auto-Type and click "Perform Auto-Type". KeePassXC will type your username, hit tab, type your password, and then hit enter. 
+To invoke Auto-Type, start with your cursor in the username field of the browser form you want to sign in to. Then right-click the entry you want to Auto-Type in KeePassXC and click "Perform Auto-Type". KeePassXC will type your username, hit tab, type your password, and then hit enter. 
 
 ![autotype gif](/img/keepassxc/auto-type.gif)
 
-Alternatively, the Auto-Type keyboard shortcut on macOS is `Command + v`.
+Note that the Auto-Type keyboard shortcut on macOS is `Command + v`.
 
-(Note: `{USERNAME}{TAB}{PASSWORD}{ENTER}` is the default Auto-Type sequence. However you can edit this sequence on a per-group or per-entry level. Just edit the entry by clicking the button with the key and blue pen icon, navigate to the Auto-Type section of the menu, and write a custom Auto-Type sequence. [More info on writing these custom sequences](http://keepass.info/help/base/autotype.html#autoseq).)
+(Also note: `{USERNAME}{TAB}{PASSWORD}{ENTER}` is the default Auto-Type sequence. However you can edit this sequence on a per-group or per-entry level. 
+
+To do edit the Auto-Type sequence for a single entry, we'll first choose toe edit the entry by clicking the button with the key and blue pen icon. Next, we'll look in the menu of large icons on the left side of the window and click on the Auto-Type section of the menu. Finally, we'll click the "Use custom Auto-Type sequence" radio button and write a custom Auto-Type sequence. [More info on writing these custom sequences](http://keepass.info/help/base/autotype.html#autoseq).)
 
 ![Custom Auto-type sequence](/img/keepassxc/custom-auto-type-sequence.png)
 
@@ -151,11 +155,23 @@ Alternatively, the Auto-Type keyboard shortcut on macOS is `Command + v`.
 
 #### Global Auto-Type
 
-KeePassXC's _Global_ Auto-Type feature allows us to create a global (i.e. operating-system wide) keyboard shortcut to Auto-Type information from a KeePassXC entry. For example, let's say we set our Global Auto-Type shortcut to `Control + Option + v` (which we can do in Settings > General > Auto-Type). 
+KeePassXC's _Global_ Auto-Type feature allows us to create a global (i.e. operating-system wide) keyboard shortcut to Auto-Type information from a KeePassXC entry. 
+
+For this example, let's say we want to set our Global Auto-Type shortcut to `Control + Option + v`. To do this, we'll go to KeePassXC menu, then click Preferences. We'll be taken to the "General" settings menu. Next, click the "Auto-Type" tab (located in the center of the window to the right of "Basic Settings"). Finally, left-click inside the text box to the right of the text that says "Global Auto-Type shortcut". You may not see a cursor appear-- that's OK. Just hit your key combination-- in our example that's `Control + Option + v`. 
+
+If you do all that successfully you'll be looking at a screen like the one below.
 
 ![Set global Auto-Type shortcut](/img/keepassxc/global-auto-type.png)
 
-Now, when we have our cursor in a login screen in our browser, we can do the shortcut and, if KeePassXC is open and our database is unlocked, our credentials will be filled in automatically. If your database is locked, KeePassXC should prompt you to unlock your database, though as of version 2.2.1 I've found this workflow [a bit buggy](https://github.com/keepassxreboot/keepassxc/issues/1023).
+Awesome-- now let's use our Global Auto-Type shortcut. 
+
+Now that we've set this shortcut here's the workflow to perform the Auto-Type: 
+
+With our KeePassXC database open and **unlocked**, place your cursor in the username field of a browser form. Then hit the Global Auto-Type shortcut (which, if you followed our example, is `Control + Option + v`). KeePassXC should then find the right entry based on its title and URL and fill it in for you.
+
+Note #1: For Reddit in particular, I've found that using [https://www.reddit.com/login](https://www.reddit.com/login), as opposed to https://reddit.com, works better for _Global_ Auto-Type.
+
+Note #2: There's a bug here as of version 2.2.1: If your database is locked, KeePassXC _should_ prompt you to unlock your database, but as of version 2.2.1 I've found this workflow [a bit buggy](https://github.com/keepassxreboot/keepassxc/issues/1023). So be sure to have your database _unlocked_ before doing a Global Auto-Type.
 
 <!-- With the shortcut set (and it doesn't have to be `Control + Option + v` of course), whenever our KeePassXC database is unlocked we can use the shortcut to Auto-Type our usernames and passwords, much like the normal Auto-Type functionality described above. --> 
 
@@ -180,7 +196,7 @@ Due to these security concerns, and the need to install the browser extensions, 
 
 ### My Recommended Settings 
 
-Below are my recommended settings for KeePassXC. 
+Below are my recommended settings for KeePassXC. To access this menu on macOS, click the "KeePassXC" menu in the top-left of your screen and click Preferences.
 
 ![Recommended Settings](/img/keepassxc/recommended-settings.png)
 
