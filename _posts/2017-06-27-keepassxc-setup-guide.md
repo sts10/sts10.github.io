@@ -145,7 +145,7 @@ To invoke Auto-Type, start with your cursor in the username field of the browser
 
 `{USERNAME}{TAB}{PASSWORD}{ENTER}` is the default Auto-Type sequence. However you can edit this sequence on a per-group or per-entry level. 
 
-To do edit the Auto-Type sequence for a single entry, we'll first choose to edit the entry-- we can do this by clicking the button with the key and blue pen icon. Next, we'll look in the menu of large icons on the left side of the window and click on the Auto-Type section of the menu (you may have to scroll down a little). Finally, we'll click the "Use custom Auto-Type sequence" radio button and write a custom Auto-Type sequence. [More info on writing these custom sequences](http://keepass.info/help/base/autotype.html#autoseq).)
+To edit the Auto-Type sequence for a single entry, we'll first choose to edit the entry-- we can do this by clicking on the entry we want to edit and then clicking button with the key and blue pen icon. Next, we'll look in the menu of large icons on the left side of the window and click on the Auto-Type section of the menu (you may have to scroll down a little). Finally, we'll click the "Use custom Auto-Type sequence" radio button and write a custom Auto-Type sequence. ([More info on writing these custom sequences](http://keepass.info/help/base/autotype.html#autoseq).)
 
 ![Custom Auto-type sequence](/img/keepassxc/custom-auto-type-sequence.png)
 
