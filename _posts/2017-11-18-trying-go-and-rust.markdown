@@ -427,6 +427,8 @@ All good. But if you change it to the more concise: `sum += v;` you get an error
 
 The tl;dr here is that my guess is that this is a bug in Rust 1.21.0 (`rustc 1.21.0 (3b72af97e 2017-10-09)`). However, if you [run this code with the Nightly version](http://play.integer32.com/?gist=10851a4f3ac6f986686256a5fe29bab0&version=nightly), which the playground allows you to do, `sum += v;` does not throw that error. So my guess is that the issue has been fixed in the Nightly version.
 
+**Update**: This bug was fixed in the next stable release. I have no evidence it was because of this blog post, so I assume it was just coincidence!
+
 For the record, in my confusion I did [file an issue with Clippy](https://github.com/rust-lang-nursery/rust-clippy/issues/2233), a tool that helps Rust users with hints. Clippy suggested I use `+=`.
 
 Later, thanks to [a tip from Mastodon user seanlinsley](https://mastodon.social/@seanlinsley/99028194647041640), I learned that Rust's Iterator class [has a handy `sum` method](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.sum), which makes the overall `check_if_board_full` function much cleaner:
