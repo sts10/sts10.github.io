@@ -6,4 +6,6 @@
    4. cd into the repo
    5. `bundle exec install`
 
+To preview the Jekyll site: run `bundle exec jekyll serve`
+
 To publish changes: git add and git commit changes, then run `bundle exec jekyll build`, then `git push origin master`
