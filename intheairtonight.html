@@ -46,11 +46,10 @@
           // we want it to play if there's 3 minutes and 44 seconds before a ten minute
           // OR minute == 6 and second == 16
 
-          // Though we might need to give it 2 seconds to get warmed up, so lets say second == 14
+          // Though we might need to give it 1 second to get warmed up, so lets say second == 15
 
 
-          //if ((minutes%10==9) && seconds== 38){
-          if ( (minutes == 6 || minutes == 1) && seconds== 14){
+          if ( (minutes == 6 || minutes == 1) && seconds== 15){
             console.log("play!");
             event.target.playVideo();
             return;
