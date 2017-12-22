@@ -1,10 +1,34 @@
 
 <html>
+  <head>
+    <style>
+      body { 
+        margin: 100px auto 300px auto;
+        width: 650px;
+      }
+    </style>
   <body>
+
     <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
     <div id="player"></div>
     <div id="updatetime"></div>
-    <span id="minutes"></span> : <span id="seconds"></span>
+    <!-- <span id="minutes"></span> : <span id="seconds"></span> -->
+    <div id="about">
+      <p>
+        This page should auto-start the above video automatically such that every 10 minutes of the hour the drum break hits. Including on the hour. Do not start it early! Or pause it once it starts playing.
+      </p>
+      <p>
+        Inspired by <a href="https://twitter.com/tmcripple/status/942099020733755392">this @tmcripple tweet</a> 
+        and <a href="https://twitter.com/PhilCollinsFeed/status/943876830947405824">this Phil Collins tweet</a>:
+      </p>
+
+      <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">If you play &#39;In The Air Tonight’ by Phil Collins on December 31st at 11:56:40 the drum break will play right as the clock strikes midnight. Start off your new year right.</p>&mdash; Phil Collins (@PhilCollinsFeed) <a href="https://twitter.com/PhilCollinsFeed/status/943876830947405824?ref_src=twsrc%5Etfw">December 21, 2017</a></blockquote>
+      <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+      <p>
+        <a href="https://github.com/sts10/sts10.github.io/blob/master/intheairtonight.html">Github</a>
+      </p>
+    </div>
 
     <script>
       // 2. This code loads the IFrame Player API code asynchronously.
@@ -49,7 +73,7 @@
           // Though we might need to give it 1 second to get warmed up, so lets say second == 15
 
 
-          if ( (minutes%10 == 6 || minutes%10 == 1) && seconds== 15){
+          if ( (minutes%10 == 6) && seconds== 15){
             console.log("play!");
             event.target.playVideo();
             return;
@@ -59,22 +83,6 @@
 
 
       }
-
-      // 5. The API calls this function when the player's state changes.
-      //    The function indicates that when playing a video (state=1),
-      //    the player should play for six seconds and then stop.
-/*
-      var done = false;
-      function onPlayerStateChange(event) {
-        if (event.data == YT.PlayerState.PLAYING && !done) {
-          setTimeout(stopVideo, 6000);
-          done = true;
-        }
-      }
-      function stopVideo() {
-        player.stopVideo();
-      }
-      */
     </script>
   </body>
 </html>
