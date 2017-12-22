@@ -49,7 +49,7 @@
           // Though we might need to give it 1 second to get warmed up, so lets say second == 15
 
 
-          if ( (minutes == 6 || minutes == 1) && seconds== 15){
+          if ( (minutes%10 == 6 || minutes%10 == 1) && seconds== 15){
             console.log("play!");
             event.target.playVideo();
             return;
