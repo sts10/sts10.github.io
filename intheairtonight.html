@@ -1,17 +1,22 @@
 
 <html>
   <head>
+    <title>Start off your new year right</title>
     <style>
       body { 
-        margin: 100px auto 300px auto;
+        margin: 5px auto 300px auto;
         width: 650px;
+      }
+      #updatetime {
+        font-size:50px;
+        text-align:center;
       }
     </style>
   <body>
 
+    <div id="updatetime"></div>
     <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
     <div id="player"></div>
-    <div id="updatetime"></div>
     <!-- <span id="minutes"></span> : <span id="seconds"></span> -->
     <div id="about">
       <p>
@@ -61,10 +66,10 @@
           var d = new Date();
 
           var minutes = d.getMinutes();
-          document.getElementById("minutes").innerHTML = minutes;
+          //document.getElementById("minutes").innerHTML = minutes;
 
           var seconds = d.getSeconds();
-          document.getElementById("seconds").innerHTML = seconds;
+          // document.getElementById("seconds").innerHTML = seconds;
 
 
           // we want it to play if there's 3 minutes and 44 seconds before a ten minute
