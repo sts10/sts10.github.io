@@ -355,7 +355,7 @@ This feature is relatively new to KeePassXC, and does not yet exist in KeePassX.
 
 ## Appendix: Verifying Your KeePassXC Download Without Using The Command Line 
 
-You should follow these steps _after_ downloading the KeePassXC dmg file, but _before_ you install it. 
+You should follow these steps _after_ downloading the KeePassXC dmg file, but _before_ you install it. KeePassXC's official site now has [pretty good instructions too](https://keepassxc.org/verifying-signatures).
 
 ### 1. Download GPG Suite
 
@@ -374,6 +374,8 @@ We're looking to download and import KeePassXC's public master key.  One way to 
 Now open a program called "GPG Keychain" (it should be part of the GPG Suite we installed earlier). In the top-left, click the "Import" button and select the master public key file you just downloaded.
 
 If you successfully imported the key, you should get a message to that effect.
+
+Now, if the KeePassXC website is compromised, this public key could be compromised as well. To mitigate this risk, you can import the KeePassXC's public by [other methods found here](https://keepassxc.org/verifying-signatures) and make sure it's the same public key we got above.
 
 ### 3. Download the GPG signature of your KeePassXC Release
 
