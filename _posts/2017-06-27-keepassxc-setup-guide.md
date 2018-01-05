@@ -27,11 +27,13 @@ This is a basic guide of how to get started with KeePassXC. This guide is **for 
 
 I'm not a security expert or security professional, just a social media editor who manages a lot of accounts, so buyer beware from this point on. If you spot any errors or have any suggestions for this post, feel free to contact me via [Twitter](https://twitter.com/sts10) or [elsewhere](https://gist.github.com/sts10/4a4e01021b3a5ad42e9b73e0abd7b7e3).
 
-Thanks to [@com](https://twitter.com/com) for various tips throughout. I'd also like to note that I drew some inspiration and methodology from [Martin Shelton's "KeePass for Beginners" post](https://medium.com/@mshelton/keypass-for-beginners-dc8adfcdad54), which you may also find useful.
+Thanks to [@com](https://twitter.com/com) for various tips throughout. I'd also like to note that I drew some inspiration and methodology from [Martin Shelton's "KeePass for Beginners" post](https://medium.com/@mshelton/keypass-for-beginners-dc8adfcdad54), which you may also find useful. I'll also note that [the Electronic Freedom Foundation has a guide to KeePassXC](https://ssd.eff.org/en/module/how-use-keepassxc). 
 
 ### How is KeePassXC Different from Other Password Managers?
 
-KeePassXC is a bit different from other password managers like [1Password](https://1password.com/) or [LastPass](https://www.lastpass.com/) in that it simply creates and manages an encrypted password database that lives on your computer like any other file. In other words, by default it is a local or "offline" password manager. There are some convenient methods to "sync" your password database with other devices (I go over some options below), but "out of the box" your passwords simply live on your computer in an encrypted file that you can only open with a master password. 
+KeePassXC is a bit different from other password managers like [1Password](https://1password.com/) or [LastPass](https://www.lastpass.com/) in that it simply creates and manages an encrypted password database that lives on your computer like any other file. In other words, by default it is a local or "offline" password manager, while 1Password, LastPass, and their ilk can be thought of as "cloud-based" password managers. 
+
+There are some convenient methods to "sync" your KeePass password database with other devices (I go over some options below), but "out of the box" your passwords simply live on your computer in an encrypted file that you can only open with a master password. 
 
 Also note that, unlike 1Password and other options, KeePassXC is free (as in costs zero dollars), and its code is open-source. However, know that there is no company behind the product to offer formal support, as you might be used to with other products.
 
@@ -234,7 +236,7 @@ Let's say we're creating a new GitHub account and want to store our username and
 
 ![Creating a new entry with a randomly generated passphrase](/img/keepassxc/new-random-entry.gif)
 
-First, we'll hit the key + green arrow button to create a new entry. Then fill out the title and username as we did above. However now, instead of just typing in our existing password (or making one up), we're going to use KeePassXC's password generator to create a random password for our yet-to-be-created GitHub account. 
+First, we'll hit the button that looks like a key with a green down arrow to create a new entry. Then fill out the title and username as we did above. However now, instead of just typing in our existing password (or making one up), we're going to use KeePassXC's password generator to create a random password for our yet-to-be-created GitHub account. 
 
 The password generator has a few options. First, we can choose between a "Password" (a series of random characters) and a "Passphrase" (a series of random words). Passphrases have to be longer in length to be as secure as passwords, but they may be easier for you to remember and type in on a mobile device.
 
@@ -248,7 +250,7 @@ Now go to [GitHub's sign-up page](https://github.com/join?source=header-home) an
 
 ### Generating a long, random passphrase for your master password
 
-We can also use KeePassXC's built-in password generator to generate random passphrases to be used as our master password. Since you actually have to type in this password, we're going to generate as passphrase rather than a password.
+We can also use KeePassXC’s built-in password generator to generate a random passphrase to be used as our master password. Since you actually have to type in this password, we're going to generate as passphrase rather than a password.
 
 To change the master password of an existing KeePass database, go to the "Database" menu and select "Change master key". Next click the black die icon to generate a new random passphrase.
 
@@ -258,7 +260,7 @@ Switch the random generator mode from "Password" to "Passphrase", then set the W
 
 Once you've got a 6-or-more word passphrase with your desired word separator, write your new passphrase on a piece of paper and keep it somewhere safe. 
 
-NOTE: It's very important to note that you're going to need to remember this passphrase (as it's not going to be stored in your KeePass database). Basically, **don't actually change your master password to the generated passphrase unless you have it written down somewhere or memorized.**
+NOTE: It's very important to know that you're going to need to remember this passphrase (as it's not going to be stored in your KeePass database). Basically, **don't actually change your master password to the generated passphrase unless you have it written down somewhere or memorized.**
 
 Now click the Copy button to copy your new passphrase to the clipboard. Then click the Close button to close the password generator. 
 
