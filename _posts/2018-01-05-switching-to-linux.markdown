@@ -16,7 +16,11 @@ Broadly, all of them touch on the concept of "free software" or "open source sof
 
 ## Blooming Most Recklessly
 
-_Coding Freedom_, which is also [available for free as a PDF](https://gabriellacoleman.org/Coleman-Coding-Freedom.pdf), in particular gradually convinced me that there was something grand about using free software (like Firefox) and that, conversely, some real negatives to using proprietary software (like Microsoft Word). Whereas companies made propietary software, people made free software, often on their free time. This means their incentivized by something other than money, which turns out is a really good thing when it comes to writing software. As Coleman writes (page 120):
+_Coding Freedom_, which is also [available for free as a PDF](https://gabriellacoleman.org/Coleman-Coding-Freedom.pdf), in particular gradually convinced me that there was something grand about using free software (like Firefox) and that, conversely, some real negatives to using proprietary software (like Microsoft Word). 
+
+There are some basic benefits of free software. For example code that is open source is public, so anyone can read it and find bugs (this is a particularly strong advantage for any software that has to handle secure data, like a password manager or secure messenger). Also there's no one company that can end the life of a piece of software -- if there are other developers who want to pick a project up, they can. Or if one team of developers is taking the software down a path that some users don't like, it can be "forked" to create a wholly new project.
+
+While Coleman is interested in those dynamics, her book gets at something a bit larger. Whereas companies make proprietary software, people made free software, often on their free time. This means their incentivized by something other than money, which turns out is a really good thing when it comes to writing software. As Coleman writes (page 120):
 
 <!-- Free software is created and improved by people working on their free time or by the generosity of their employers. Yes, some of these people are coders, but many contribute by writing up bug reports (or "issues") or documentation or websites promoting the software. -->
 
@@ -24,7 +28,7 @@ _Coding Freedom_, which is also [available for free as a PDF](https://gabriellac
 
 These hackers, as Coleman often refers to then, don't want or need to sell you their product, or the new version of their product, or, crucially, any of their other products. Their often making tools that they need or want, and they share them. And through this process there is a sort of technical independence (44) gained.
 
-And earlier in the book, quoting another hacker (41): 
+With the peskiness of money out of the way, since the code is so easy (both technically and legally) to modify, free software projects can take on a life of their own. Earlier in the book, quoting another hacker (41): 
 
 > The important difference for me is whether I come away feeling that I have created something of lasting intrinsic value or not... [most] often when I am done with corporate software, it's dead, and when I am done with free software, it is alive.
 
@@ -32,9 +36,9 @@ If this reverence for free software wasn't made clear from the above quotations,
 
 > The world of hacking, as is the case with many cultural worlds, is one of reckless blossoming, or in the words of Rilke: "Everything is blooming most recklessly; if it were voices instead of colors, there world be an unbelievable shrieking into the heart of the night."
 
-I have gotten to bloom some small colors myself, and some of my most significant didn't even involve me writing code. As one example, here's [a bug report I wrote](https://github.com/keepassxreboot/keepassxc/issues/1113) for my password manager, KeePassXC. I had only heard about the bug because an anonymous user had read my blog post on the program and contacted me describing a problem. I reproduced the problem he or sshe was having, and then wrote up the issue in the clearest way I could. 
+I have gotten to bloom some small colors myself, and some of my most significant didn't even involve me writing code. As one example, here's [a bug report I wrote](https://github.com/keepassxreboot/keepassxc/issues/1113) for my password manager, KeePassXC. I had only heard about the bug because an anonymous user had read my blog post on the program and contacted me describing a problem. I reproduced the problem he or she was having, and then wrote up the issue in the clearest way I could. 
 
-At first two of the lead developers dismissed the bug as being impossible. But after a pretty substantial discussion in the comments, most of which I didn't quite understand (I don't write C), it was eventually solved with [two](https://github.com/keepassxreboot/keepassxc/pull/1119) [changes](https://github.com/keepassxreboot/keepassxc/pull/1219) to the code, and when the [new version](https://github.com/keepassxreboot/keepassxc/releases/tag/2.2.4) of the software was released, every one got access to it for zero dollars. It was a thrill.
+At first, two of the lead developers [dismissed the bug as being impossible](https://github.com/keepassxreboot/keepassxc/issues/1113#issuecomment-338902241). But after a pretty substantial discussion in the comments, most of which I didn't quite understand (I don't even write C), it was eventually solved with [two](https://github.com/keepassxreboot/keepassxc/pull/1119) separate [changes](https://github.com/keepassxreboot/keepassxc/pull/1219) to the code (called "pull requests" in GitHub lingo), and when the [new version](https://github.com/keepassxreboot/keepassxc/releases/tag/2.2.4) of the software was released, every one got access to it for zero dollars. It was a thrill.
 
 ## Baby Steps
 
@@ -174,6 +178,8 @@ First off, let's get this out of the way early: I did not want to switch to Wind
 
 The spoiler here is that I ended up deciding on Linux. Other options include ChromeOS or OpenBSD and its variants, but Linux is, of course, what Coleman wrote about in _Coding Freedom_. But could Linux do all the things I wanted to do?
 
+------
+
 ## So, What is Linux?
 
 Coincidentally, the _New York Times_ just this week published [a very short "tech tips" about Linux as an alternative to Windows](https://www.nytimes.com/2018/01/04/technology/personaltech/taking-a-look-at-linux.html?smid=tw-nytimesbits&smtyp=cur&_r=0&pagewanted=all). J. D. Biersdorfer writes:
@@ -188,11 +194,24 @@ I'm not going to go in to a ton of specifics about what Linux is or even what it
 
 The biggest difference is that a lot of software that you may have used on macOS or Windows-- like Microsoft Word or Adobe Photoshop-- cannot run on Linux. I obviously knew this going in, and was in fact excited to be forced to use software that runs on Linux, which is generally ["free software"](https://en.wikipedia.org/wiki/Free_software)-- meaning its code is public and legally available to manipulate; it's [free as in freedom, not as in beer](https://twitter.com/sts10/status/814886130705383424). As discussed above, this has some interesting intrinsic benefits.
 
-The second point is about the flexibility of Linux. As Biersdorfer writes, Linux comes in different versions, known as distributions (examples include Ubuntu, Mint, Fedora, Manjaro, Arch, etc.). _Additionally_, most of these distributions can use a variety of different _desktop environments_ (e.g. Gnome, KDE, Xfce, etc.). A desktop environment is the part of the operating system that the user interacts with most -- it includes the file manager, the menus, some the default applications, notifications, all that stuff. [Wikipedia defines it as](https://en.wikipedia.org/wiki/Desktop_environment): 
+The second point is about the flexibility of Linux. As Biersdorfer writes, Linux comes in different versions, known as distributions (examples include Ubuntu, Mint, Fedora, Manjaro, Arch, etc.). _Additionally_, most of these distributions can use a variety of different _desktop environments_ (e.g. Gnome, KDE, Xfce, etc.). A desktop environment is the part of the operating system that the user interacts with most -- it includes the file manager, the menus like wifi, date and time, etc., some the default applications, notifications, all that stuff. [Wikipedia defines it as](https://en.wikipedia.org/wiki/Desktop_environment): 
 
 > A desktop environment (DE) is an implementation of the desktop metaphor made of a bundle of programs running on top of a computer operating system, which share a common graphical user interface (GUI), sometimes described as a graphical shell. 
 
-This flexibility-- being able to choose not only the Linux distribution (or "distro") you want, but also what desktop environment, is pretty powerful. For example, [when I installed Ubuntu on my 2009 MacBook](https://sts10.github.io/2016/11/07/installing-ubuntu-on-my-old-macbook-pro.html), I knew it was underpowered in terms of resources by modern standards, particularly in terms of RAM. After some research I opted for a desktop environment called Xfce, since I had learned it did not require a lot of resources, including RAM. Since it costs nothing to install a new distro or DE, it seems to be a pretty common thing to ["distro-hop"](https://www.reddit.com/r/DistroHopping/) every few months. (You just have to be sure to back-up your files.)
+Here's a nice video that shows five different desktop environments:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/SBz5A-fqnb4" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+
+That YouTuber, [Joe Collins](https://www.youtube.com/channel/UCTfabOKD7Yty6sDF4POBVqA), has a slightly more involved and technical video called ["The Linux Desktop Demystied"](https://www.youtube.com/watch?v=WzhNDlz8X2s) that helped me better understand some of the ins and outs.
+
+And here are some videos showing the basics of one Linux desktop environment called Gnome 3:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/BB7pBRi9Bbk" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/wbVtMJrljsQ?start=402" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+
+
+This flexibility-- being able to choose not only the Linux distribution (or "distro") you want, but also what desktop environment -- seems very powerful to me. For example, [when I installed Ubuntu on my 2009 MacBook](https://sts10.github.io/2016/11/07/installing-ubuntu-on-my-old-macbook-pro.html), I knew it was underpowered in terms of resources by modern standards, particularly in terms of RAM. After some research I opted for a desktop environment called Xfce, since I had learned it did not require a lot of resources, including RAM. Since it costs nothing to install a new distro or DE, it seems to be a pretty common thing to ["distro-hop"](https://www.reddit.com/r/DistroHopping/) every few months. (You just have to be sure to back-up your files.)
 
 By contrast, MacOS only offers one desktop environment (which I believe is called [Aqua](https://en.wikipedia.org/wiki/Aqua_(user_interface\))), and I'm almost positive that that 2009 MacBook Pro would barely be able to run macOS High Sierra. 
 
@@ -217,7 +236,23 @@ One of the first things I did on Ubuntu was to create a spreadsheet using [Libre
 
 The tl;dr here is that Linux _can_ handle most of my common tasks. I really only have two major hang ups at this point: I can't run iMessage, and I still haven't gotten HBO Go to work (Netflix is fine, and Hulu works in Chrome).
 
+
 <!-- On the 12th, tangentially relatedly, I pushed [a blog post about some privacy and security measures I had taken recently](https://sts10.github.io/2016/11/12/some-privacy-and-security-measures.html) -->
+
+
+## What It's Like to Install Software on Linux
+
+How you install software on Linux depends quite a bit on which distro you're running. For Pop!\_OS and Ubuntu, there are a number of ways. The simplest is to use the built-in application store. Other times the recommended installation process is to download an installer, often with the `.deb` extension. 
+
+But often times a piece of software requires us to run a command or two from the command line. For example, [installing the Signal desktop client](https://signal.org/download/) on Mac follows the familiar flow of downloading an installer file. By contrast, for Debian-based Linux (Ubuntu is Debian based), users need to run these three commands from the terminal:
+
+```
+curl -s https://updates.signal.org/desktop/apt/keys.asc | sudo apt-key add -
+echo "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" | sudo tee -a /etc/apt/sources.list.d/signal-xenial.list
+sudo apt update && sudo apt install signal-desktop
+```
+
+Once you run those three commands Signal is installed. You don't need to write any code, but you do have to often paste commands like these into the terminal to install software on Linux.
 
 ## Finding a Modern Computer to Buy to Run Linux
 
@@ -321,9 +356,9 @@ Firefox seems to be the default on most Linux distributions, including Pop!\_OS.
 
 For **chat/IM**, I'm pretty sure I can run gchat in Chrome through gmail's web interface if I need to. However over the course of the last year I've moved most of my friends to other messaging services like Wire or Signal, both of which offer Linux apps. One bummer here, as mentioned, is that I can't run iMessage, but I can obvious still send iMessages from my iPhone.
 
-For **cloud-synced notes** I use [Standard Notes](https://standardnotes.org/), which has a Linux app. DropBox works on Linux too if that's your bag.
+For **cloud-synced notes** I use [Standard Notes](https://standardnotes.org/), which has a Linux app. [DropBox works on Linux too](https://www.dropbox.com/install-linux) if that's your bag.
 
-For updating my personal website I can keep my **FTP client**, [Filezilla](https://filezilla-project.org/), which I had been using on my Mac. For **making GIFs** I was sad to give up GIF Brewery and GIPHY Capture, but I've been playing with [Peek](http://www.omgubuntu.co.uk/2017/03/peek-gif-recorder-1-0-flatpak).
+For updating my personal website I can keep my **FTP client**, [Filezilla](https://filezilla-project.org/), which I had been using on my Mac. For **making GIFs** I was sad to give up GIF Brewery and GIPHY Capture, but I've been playing with [Peek](http://www.omgubuntu.co.uk/2017/03/peek-gif-recorder-1-0-flatpak). [VLC](https://www.videolan.org/vlc/) works just fine on Linux for playing videos. If I used an email client, I'd likely install [Thunderbird](https://www.mozilla.org/en-US/thunderbird/).
 
 For more on what I did when I initially booted up Pop!\_OS, here's a Github repo [where I took notes](https://github.com/sts10/linux-config).
 
@@ -331,6 +366,11 @@ For more on what I did when I initially booted up Pop!\_OS, here's a Github repo
 - For RAW photo editing I could use [Dark Table](https://www.darktable.org/) rather than Adobe Lightroom, which I used on my Mac. I haven't installed Dark Table yet though-- that'll be a project for another day.
 - For editing video, which I generally only do at work, there's [Kdenlive](https://kdenlive.org/) and [Openshot](https://www.openshot.org/)
 - [Spotify runs on Linux](http://www.omgubuntu.co.uk/2017/12/spotify-now-available-snap-app-ubuntu), which is super cool. But for playing MP3s, there are a lot of options here. Two I've heard good things about are [Clementine](https://www.clementine-player.org/) or [Lollypop](https://github.com/gnumdk/lollypop/). Honestly I'm pretty confident I can find something better than iTunes, which doesn't seem to be much of a focus for Apple in recent years.
+
+## One Month On
+
+
+Do I now only use free software. Well, no. As mentioned Chrome and Spotify are not free. And I could go even farther, behind the software on my computer to services I use on the internet-- 
 
 ## Should I Switch to Linux?
 
