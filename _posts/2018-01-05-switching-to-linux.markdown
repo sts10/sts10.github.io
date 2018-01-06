@@ -5,7 +5,7 @@ date: 2018-01-05 22:13:50 -0400
 comments: true
 ---
 
-Back in autumn of 2016 I read three books about technology that left a bit of mark on me: [_Coding Freedom_](https://www.amazon.com/Coding-Freedom-Ethics-Aesthetics-Hacking/dp/0691144613/ref=sr_1_1?s=books&ie=UTF8&qid=1479008327&sr=1-1&keywords=coding+freedom), [_Code and Other Laws of Cyberspace_](https://www.amazon.com/Cathedral-Bazaar-Musings-Accidental-Revolutionary/dp/0596001088/ref=sr_1_1?s=books&ie=UTF8&qid=1479008290&sr=1-1&keywords=cathedral+bazaar), and [_The Cathedral and the Bazaar_](https://www.amazon.com/Cathedral-Bazaar-Musings-Accidental-Revolutionary/dp/0596001088/ref=sr_1_1?s=books&ie=UTF8&qid=1479008290&sr=1-1&keywords=cathedral+bazaar)
+Back in autumn of 2016 I read three books about technology that left a bit of mark on me: [_Coding Freedom_](https://www.amazon.com/Coding-Freedom-Ethics-Aesthetics-Hacking/dp/0691144613/ref=sr_1_1?s=books&ie=UTF8&qid=1479008327&sr=1-1&keywords=coding+freedom), [_Code and Other Laws of Cyberspace_](https://www.amazon.com/Cathedral-Bazaar-Musings-Accidental-Revolutionary/dp/0596001088/ref=sr_1_1?s=books&ie=UTF8&qid=1479008290&sr=1-1&keywords=cathedral+bazaar), and [_The Cathedral and the Bazaar_](https://www.amazon.com/Cathedral-Bazaar-Musings-Accidental-Revolutionary/dp/0596001088/ref=sr_1_1?s=books&ie=UTF8&qid=1479008290&sr=1-1&keywords=cathedral+bazaar).
 
 <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">The *intro* of <a href="https://twitter.com/BiellaColeman?ref_src=twsrc%5Etfw">@BiellaColeman</a>&#39;s &#39;Coding Freedom&#39; quotes from Marx, Barthes(!) and Rilke(!!) as well as Richard Stallman, <a href="https://twitter.com/StevenLevy?ref_src=twsrc%5Etfw">@StevenLevy</a>, &amp; xkcd</p>&mdash; Sam Schlinkert (@sts10) <a href="https://twitter.com/sts10/status/778426748321005569?ref_src=twsrc%5Etfw">September 21, 2016</a></blockquote>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -159,7 +159,7 @@ Two months after I read that post, Christine Teigen tweeted something really sim
 
 Besides the updates, I've had macOS seemingly randomly but frequently ask me for my AppleID password. This is even more annoying because I had two-factor authentication enabled on my Apple account. I'm still running 10.10 so this may have been improved by now, but, once I enter my text password, I get this cryptic pop-up:
 
-![verification code](img/apple-id-verification-code-required.png)
+![verification code](/img/apple-id-verification-code-required.png)
 
 My iPhone usually gets a verification code, but when I enter my text password with the code tacked on, half the time the prompt just reappears asking for my password again. Again, this totally could be an issue with 10.10 that's been smoothed out in 10.12 or 10.13.
 
@@ -169,9 +169,6 @@ My iPhone usually gets a verification code, but when I enter my text password wi
 Cast out into the non-Apple wilderness, I slowly began to do some research.
 
 I started a list of requirements: For hardware, I wrote that I wanted 8GB or more of RAM, 3 USB ports, 13" screen at least, and decent battery life. Software and operating system was a bit more tricky, as I needed to learn about Linux enough to be able to commit to it.
-
-
-
 
 First off, let's get this out of the way early: I did not want to switch to Windows. One of my initial motivations to leave Apple was to use more free and open source software, which Microsoft is very far from. But on top of that, Windows 10 is apparently a bit of privacy nightmare and collects a lot of private information (see: ["Even when told not to, Windows 10 just can't stop talking to Microsoft"](https://arstechnica.com/information-technology/2015/08/even-when-told-not-to-windows-10-just-cant-stop-talking-to-microsoft/) and ["Windows 10 Reserves The Right To Block Pirated Games And 'Unauthorized' Hardware"](https://www.techdirt.com/articles/20150820/06171332012/windows-10-reserves-right-to-block-pirated-games-unauthorized-hardware.shtml)), though [there are apparently some steps you can take to protect yourself for Microsoft](https://arstechnica.com/information-technology/2015/08/windows-10-doesnt-offer-much-privacy-by-default-heres-how-to-fix-it/).
 
@@ -330,7 +327,7 @@ For more on what I did when I initially booted up Pop!\_OS, here's a Github repo
 
 ### Software I'll Eventually Install
 - For RAW photo editing I could use [Dark Table](https://www.darktable.org/) rather than Adobe Lightroom, which I used on my Mac. I haven't installed Dark Table yet though-- that'll be a project for another day.
-- for editing video, which I generally only do at work, there's [Kdenlive](https://kdenlive.org/) and [Openshot](https://www.openshot.org/)
+- For editing video, which I generally only do at work, there's [Kdenlive](https://kdenlive.org/) and [Openshot](https://www.openshot.org/)
 - [Spotify runs on Linux](http://www.omgubuntu.co.uk/2017/12/spotify-now-available-snap-app-ubuntu), which is super cool. But for playing MP3s, there are a lot of options here. Two I've heard good things about are [Clementine](https://www.clementine-player.org/) or [Lollypop](https://github.com/gnumdk/lollypop/). Honestly I'm pretty confident I can find something better than iTunes, which doesn't seem to be much of a focus for Apple in recent years.
 
 ## Should I Switch to Linux?
