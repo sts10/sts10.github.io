@@ -16,7 +16,7 @@ Broadly, all of them touch on the concept of "free software" or "open source sof
 
 ## Blooming Most Recklessly
 
-_Coding Freedom_ in particular gradually convinced me that their was something grand about using free software (like Firefox) and that, conversely, some real negatives to using proprietary software (like Microsoft Word). Whereas companies made propietary software, people made free software, often on their free time. This means their incentivized by something other than money, which turns out is a really good thing when it comes to writing software. AS Coleman writes (page 120):
+_Coding Freedom_, which is also [available for free as a PDF](https://gabriellacoleman.org/Coleman-Coding-Freedom.pdf), in particular gradually convinced me that there was something grand about using free software (like Firefox) and that, conversely, some real negatives to using proprietary software (like Microsoft Word). Whereas companies made propietary software, people made free software, often on their free time. This means their incentivized by something other than money, which turns out is a really good thing when it comes to writing software. As Coleman writes (page 120):
 
 <!-- Free software is created and improved by people working on their free time or by the generosity of their employers. Yes, some of these people are coders, but many contribute by writing up bug reports (or "issues") or documentation or websites promoting the software. -->
 
@@ -281,7 +281,7 @@ The [Oryx Pro](https://system76.com/laptops/oryx) is the computer I finally boug
 
 I got the model with a 15.6" screen and configured it with an i7-7700HQ processor (2.8 GHz up to 2.8 GHz), 32 GB of DDR4 RAM, a 512 GB NVMe solid state hard drive with an addition 1 TB hard drive, and a Nvidia GTX 1060 graphics card (6 GB). It's given weight is 5.5 lbs and its dimensions are 15.2″ × 10.7″ × 0.9″ (38.51 × 27.10 × 2.49 cm). It's also got a ton of ports, including 2 MiniDisplay ports, 3 USB-A ports, 2 USB-C ports, an Ethernet port, and more. It's not super pretty (here's [a video that gives you a good look at it](https://www.youtube.com/watch?v=B57JwEdPRUE)), but it is, by almost any measure, a beast of a laptop. 
 
-System76 offers a choice of two distros: Ubuntu 16.04 or their own distro, called Pop!\_OS. But given how similar different versions of Linux are, I figured I could put any distribution on it that I wanted on it. Thus I was mostly looking for plenty of ports (check) and a basic level of sturdiness. I can now agree with most reviews I read: it feels pretty sturdy. The trackpad is fine-- I appreciate the dedciated button-- and while the keyboard isn't as "snappy" as on my Air, I actually like it. Though I knew I would be mostly using [my mechanical keyboard](https://sts10.github.io/2014/12/06/an-update-to-my-keyboard-game.html) and [a Logitech mouse](https://www.logitechg.com/en-us/product/g602-wireless-gaming-mouse). 
+System76 offers a choice of two distros: Ubuntu 16.04 or their own distro, called [Pop!\_OS](https://system76.com/pop), which is [on GitHub](https://github.com/pop-os/pop). But given how similar different versions of Linux are, I figured I could put any distribution on it that I wanted on it. Thus I was mostly looking for plenty of ports (check) and a basic level of sturdiness. I can now agree with most reviews I read: it feels pretty sturdy. The trackpad is fine-- I appreciate the dedciated button-- and while the keyboard isn't as "snappy" as on my Air, I actually like it. Though I knew I would be mostly using [my mechanical keyboard](https://sts10.github.io/2014/12/06/an-update-to-my-keyboard-game.html) and [a Logitech mouse](https://www.logitechg.com/en-us/product/g602-wireless-gaming-mouse). 
 
 Given the choice of those two distros, I opted for System76's new, homegrown distribution, Pop!\_OS, which comes with a desktop environment called Gnome. This combination, thanks in part to efforts of System76's engineers, work well together out of the box. I paid about $2,200, with some savings from their holiday sale.
 
@@ -293,13 +293,15 @@ Also, from my perspective the people at System76 seem almost comically awesome. 
 
 After I had an ordered my machine, [a security issue involving something called Intel's Management Engine was made public](https://www.wired.com/story/intel-management-engine-vulnerabilities-pcs-servers-iot/). System76 promptly announced that it was [disabling it in all of its laptops, including the ones it sold in the past few years, through a firmware update](http://blog.system76.com/post/168050597573/system76-me-firmware-updates-plan), something that [Dell is only doing on some very expensive models](https://liliputing.com/2017/12/dell-also-sells-laptops-intel-management-engine-disabled.html). The System76 CEO and one of their engineers did an [interview](https://www.youtube.com/watch?v=MujjuTWpQJk) with Bryan Lunduke about it (Note: System76 is a sponsor of Lunduke's YouTube show, which he discloses in the interview), plus another engineer held [an impromptu AMA on a Reddit post about the Intel ME issue](https://www.reddit.com/r/linux/comments/7gpcu5/system76_will_disable_intel_management_engine_on/dqktr8m/).
 
+Lastly, reflecting their commitment to some of the ethos Coleman discusses, I love how the fourth link down on [their Pop!\_OS documentation page](http://pop.system76.com/docs/) is titled ["Getting Started with Bitesize Bugs"](http://pop.system76.com/docs/bite-sized-bugs/). It's almost impossible to imagine Apple having something like that.
+
 OK so I like the company, but what kind of free software would I have to be using with Linux? 
 
 <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/rbQQTXLNxjM" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe> -->
 
 ## What Software I'm Using on Linux
 
-Overall I haven't had to sacrifice much. The category where Linux and free software is furthest behind seems to be in photo and video editing -- think about Adobe's monopoly on that sector.
+Overall I haven't had to sacrifice much. The category where Linux and free software is furthest behind seems to be in photo and video editing -- think about Adobe's monopoly on that sector. (You may also find the examples in [System76's article on switching from Apple helpful](http://support.system76.com/articles/switch/)).
 
 **[LibreOffice](https://www.libreoffice.org/) instead of Microsoft Office**: Seems fine. Again, I rarely used Office on my Mac. I suppose if I have to make a spreadsheet and chart at home I'll have to Google "Libre Office calc [my problem]" rather than "Excel [my problem]" to get help, but I'll take my chances.
 
