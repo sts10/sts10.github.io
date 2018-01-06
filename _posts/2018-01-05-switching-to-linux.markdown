@@ -367,10 +367,13 @@ For more on what I did when I initially booted up Pop!\_OS, here's a Github repo
 - For editing video, which I generally only do at work, there's [Kdenlive](https://kdenlive.org/) and [Openshot](https://www.openshot.org/)
 - [Spotify runs on Linux](http://www.omgubuntu.co.uk/2017/12/spotify-now-available-snap-app-ubuntu), which is super cool. But for playing MP3s, there are a lot of options here. Two I've heard good things about are [Clementine](https://www.clementine-player.org/) or [Lollypop](https://github.com/gnumdk/lollypop/). Honestly I'm pretty confident I can find something better than iTunes, which doesn't seem to be much of a focus for Apple in recent years.
 
+<!--
 ## One Month On
 
 
 Do I now only use free software. Well, no. As mentioned Chrome and Spotify are not free. And I could go even farther, behind the software on my computer to services I use on the internet-- 
+
+-->
 
 ## Should I Switch to Linux?
 
