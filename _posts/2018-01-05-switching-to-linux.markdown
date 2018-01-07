@@ -153,7 +153,7 @@ In 2015 Tim Wu titled a New Yorker blog post ["No One Asks To Be Buried With His
 
 > Just how demanding do we want our technologies to be? It is a question faced by the designers of nearly every tool, from tablet computers to kitchen appliances. A dominant if often unexamined logic favors making everything as easy as possible. Innovators like Alan Kay and Steve Jobs are celebrated for making previously daunting technologies usable by anyone.
 
-It's easy to see this in the video of the October 2016 Apple event. You can plug the power cord into any of the four Thunderbolt ports! Slide your finger on this pretty screen and your photos get better! It just works!
+It's easy to see this in the video of the October 2016 Apple event. You can plug the power cord into any of the four Thunderbolt ports! Slide your finger on this pretty screen and your photos get better! It just works! And if, for some weird reason, it doesn't, well there's always a Genius Bar nearby.
 
 <!-- Like the Touch Bar, I can't help but read into Apple's decision to only provide Thunderbolt 3 ports on their professional laptop. It feels like they're both trying to make everything as plug-and-play as possible, but also trying to use their industry dominance to set a third-party standard. -->
 
@@ -168,7 +168,7 @@ In Mary H.K. Choi's 2016 piece ["LIKE. FLIRT. GHOST: A JOURNEY INTO THE SOCIAL M
 
 ## MacBook Alternatives
 
-Cast out into the non-Apple wilderness, I slowly began to do some research.
+Out into the non-Apple wilderness, I slowly began to do some research.
 
 I started a list of requirements: For hardware, I wrote that I wanted at least 8GB of RAM, 3 USB ports, 13" screen at least, and decent battery life. But what about operating system and software?
 
