@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Switching to Linux"
+title: "A Small Rebellion: Switching from macOS to Linux"
 date: 2018-01-05 22:13:50 -0400
 comments: true
 ---
