@@ -373,9 +373,11 @@ So, do I now only use free software? Well, no. As mentioned Chrome and Spotify a
 
 ## Should I Switch to Linux?
 
-First off, I have glossed over a lot of little tricky things I had to either know or do to feel comfortable using Linux. I'm really glad I took a year to learn about little things, like the difference between X Org and [Wayland](https://en.wikipedia.org/wiki/Wayland_%28display_server_protocol%29), the pros and cons of Nvidia drivers, what a [PPA](https://askubuntu.com/questions/4983/what-are-ppas-and-how-do-i-use-them) is and how they're different from snaps, etc.. And I'm also glad that I was already comfortable using a terminal (as we saw, even installing software sometimes requires using the command line. While many distros, including Pop!\_OS, have GUI software stores similar to Apple's App Store (except that EVERYTHING IS FREE), I'm not sure I can recommend Linux to users who have never touched a command line.) In general I'm glad I was able to deal with a little messiness, to not be too pissed when something breaks and I need to Google an error message with the faith that someone has had it before and recorded how they fixed it, so I can colve it without an appointment at the Apple Genius Bar and maybe learn something about computers in the process.
+First off, I have glossed over a lot of little tricky things I had to either know or do to feel comfortable using Linux. I'm really glad I took a year to learn about little things, like the difference between X Org and [Wayland](https://en.wikipedia.org/wiki/Wayland_%28display_server_protocol%29), the pros and cons of Nvidia drivers, what a [PPA](https://askubuntu.com/questions/4983/what-are-ppas-and-how-do-i-use-them) is and how they're different from snaps, etc.. And I'm also glad that I was already comfortable using a terminal (as we saw, even installing software sometimes requires using the command line. While many distros, including Pop!\_OS, have GUI software stores similar to Apple's App Store (except that EVERYTHING IS FREE), I'm not sure I can recommend Linux to users who have never touched a command line.) 
 
-It's pretty great to be at least a little more free.
+In general I'm glad I was able to deal with a little messiness, to not be too pissed when something breaks and I need to Google an error message with the faith that someone has had it before and recorded how they fixed it, so I can solve it without an appointment at the Apple Genius Bar and maybe learn something about computers in the process.
+
+It's pretty great to be at least a little more free, blooming a few more colors.
 
 
 
