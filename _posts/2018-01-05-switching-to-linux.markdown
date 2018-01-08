@@ -111,23 +111,23 @@ Two months after I read that post, Christine Teigen tweeted something really sim
 <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Hate this macbook relationship. &quot;When do you want to update?&quot; &quot;Later&quot; &quot;later today or later tomorrow?&quot; Oh my god just fucking LATER</p>&mdash; christine teigen (@chrissyteigen) <a href="https://twitter.com/chrissyteigen/status/690584538121015296?ref_src=twsrc%5Etfw">January 22, 2016</a></blockquote>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-Besides the updates, I've had macOS seemingly randomly but frequently ask me for my AppleID password. This frequent ask is made even more annoying because I had two-factor authentication enabled on my Apple account. I'm still running 10.10 so this may have been improved by now, but, once I enter my text password, I get this cryptic pop-up:
+Besides the updates, I've had macOS seemingly randomly but frequently ask me for my AppleID password. This frequent ask is made even more annoying because I have two-factor authentication enabled on my Apple account. I'm still running 10.10 so this may have been improved by now, but, once I enter my text password, I get this cryptic pop-up:
 
 ![verification code](/img/apple-id-verification-code-required.png)
 
-My iPhone usually gets a verification code, but when I enter my text password with the code tacked on, half the time the prompt just reappears asking for my password again. In addition to this being annoying, it's also debatably a security risk, as Apple is training users to enter their Apple ID credentials into a pop-up dialogue that appears at seemingly random times. Again, this totally could be an issue with 10.10 that's been smoothed out in 10.11+.
+My iPhone usually gets a verification code, but when I enter my text password with the code tacked on, half the time the prompt just reappears asking for my password again. In addition to this being annoying, it's also debatably a security risk, as Apple is training users to enter their Apple ID credentials into a pop-up dialog that appears at seemingly random times. Again, this totally could be an issue with 10.10 that's been smoothed out in 10.11+.
 
 ### The iPad-ification of the MacBook
 
 #### Touch Bar
 
-The Touch Bar seems like an iPad-ification of my precious platonic ideal of a laptop. Would a DJ really use it? Would I use it when editing video or coding? I've gotten pretty efficient with my keyboard and mouse. Admittedly, having a Touch Bar wouldn't have _prevented_ me from doing anything I would want to do with a laptop, but if it signaled what Apple thinks its customers want, and the direction they want to go.
+The Touch Bar seems like an iPad-ification of my precious platonic ideal of a laptop. Would a DJ really use it? Would I use it when editing video or coding? I've gotten pretty efficient with my keyboard and mouse. Admittedly, having a Touch Bar wouldn't have _prevented_ me from doing anything I would want to do with a laptop, but if it signals what Apple thinks its customers want, I'm not too jazzed about the direction.
 
 Owen Williams titled his post about the event ["Apple just told the world it has no idea who the Mac is for"](https://medium.com/charged-tech/apple-just-told-the-world-it-has-no-idea-who-the-mac-is-for-722a2438389b):
 
 > It took four years to add a touch bar to the keyboard, which delayed any meaningful progress in the meantime? Apple's customers are those that need powerful machines, but it delayed them infinitely for what amounts to a vanity project that the core demographic of Apple's customers probably won't even use.
 
-Of course you can get a new Pro without the Touch Bar, but then you only get two Thunderbolt ports, one of which would be used for charging.
+Currently you can get a new Pro without the Touch Bar, but then you only get two Thunderbolt ports, one of which would be used for charging.
 
 #### MacOS De-prioritization 
 
@@ -168,9 +168,9 @@ In Mary H.K. Choi's 2016 piece ["LIKE. FLIRT. GHOST: A JOURNEY INTO THE SOCIAL M
 
 ## MacBook Alternatives
 
-Out into the non-Apple wilderness, I slowly began to do some research.
+If not a Macbook, then what? I slowly began to do some research.
 
-I started a list of requirements: For hardware, I wrote that I wanted at least 8GB of RAM, 3 USB ports, 13" screen at least, and decent battery life. But what about operating system and software?
+I started a list of requirements: For hardware, I wrote that I wanted at least 16 GB of RAM, 3 USB ports, 13" screen at least, and decent battery life. But what about operating system and software?
 
 First off, let's get this out of the way early: I did not want to switch to Windows. One of my initial motivations to leave Apple was to use more free and open source software, which Microsoft is very far from. But on top of that, Windows 10 is apparently a bit of privacy nightmare and collects a lot of private information (see: ["Even when told not to, Windows 10 just can't stop talking to Microsoft"](https://arstechnica.com/information-technology/2015/08/even-when-told-not-to-windows-10-just-cant-stop-talking-to-microsoft/) and ["Windows 10 Reserves The Right To Block Pirated Games And 'Unauthorized' Hardware"](https://www.techdirt.com/articles/20150820/06171332012/windows-10-reserves-right-to-block-pirated-games-unauthorized-hardware.shtml)), though [there are apparently some steps you can take to protect yourself](https://arstechnica.com/information-technology/2015/08/windows-10-doesnt-offer-much-privacy-by-default-heres-how-to-fix-it/).
 
@@ -192,7 +192,7 @@ I'm not going to go in to a ton of specifics about what Linux is or even what it
 
 ### The Flexibility of Linux
 
-I've already written about free software and some of its (hypothetical) benefits. I was excited to be forced to find free alternatives to proprietary software like Microsoft Excel and iTunes, since most closed source software can't run on Linux.
+I've already written about free software and some of its (at least theoretical) benefits. I was in fact excited to be forced to find free alternatives to proprietary software like Microsoft Excel and iTunes, since most closed-source software can't run on Linux.
 
 <!-- The biggest difference is that a lot of software that you may have used on macOS or Windows-- like Microsoft Word or Adobe Photoshop-- cannot run on Linux. I obviously knew this going in, and was in fact excited to be forced to use software that runs on Linux, which is generally ["free software"](https://en.wikipedia.org/wiki/Free_software)-- meaning its code is public and legally available to manipulate; it's [free as in freedom, not as in beer](https://twitter.com/sts10/status/814886130705383424). As discussed above, this has some interesting intrinsic benefits. -->
 
@@ -210,7 +210,7 @@ It's not too hard to install a completely new distro or DE, and of course it cos
 
 This flexibility-- being able to choose not only the Linux distribution (or "distro") you want, but also what desktop environment -- seems very powerful to me. For example, [when I installed Ubuntu on my 2009 MacBook](https://sts10.github.io/2016/11/07/installing-ubuntu-on-my-old-macbook-pro.html), I knew it was underpowered in terms of resources by modern standards, particularly in terms of RAM. After some research I opted for a desktop environment called Xfce, since I had learned it did not require a lot of resources, including RAM. 
 
-By contrast, MacOS only offers one desktop environment (which I believe is called [Aqua](https://en.wikipedia.org/wiki/Aqua_(user_interface\))), and I'm almost positive that that 2009 MacBook Pro would barely be able to run macOS High Sierra. 
+By contrast, MacOS only offers one desktop environment (which I believe is called [Aqua](https://en.wikipedia.org/wiki/Aqua_(user_interface\))), and I'm almost positive that my old 2009 MacBook Pro would barely be able to run macOS High Sierra. 
 
 This flexibility also offers a certain amount of protection against any design changes that a given distribution's or DE's developers choose to implement -- if a user disagrees with a sharp change, he or she can just install a new distro or DE easily and at no cost. [Apple doesn't make a ton of changes to macOS these days](https://arstechnica.com/gadgets/2017/09/macos-10-13-high-sierra-the-ars-technica-review/), but if they did, regular Mac users wouldn't have much recourse.
 
@@ -319,7 +319,7 @@ Given the choice of those two distros, I opted for System76's new, homegrown dis
 
 ### A Note on System76 
 
-Let me just note here that one of the less tangible things I bought with my Oryx Pro was support from System76. While I only got the minimum 1 year warranty for "limits parts and labor," the company says they offer a lifetime of Linux support. By abandoning Apple I was also losing all those Genius Bars! And while I had witnessed how helpful the online linux community was, I wanted something a little more than that if I was going to dump over $2,000 into a machine. 
+Let me just note here that one of the less tangible things I bought with my Oryx Pro was support from System76. While I only got the minimum 1 year warranty for "limits parts and labor," the company says they offer a lifetime of Linux support. By abandoning Apple I was also losing all those Genius Bars! And while I had witnessed how helpful the online Linux community was, I wanted something a little more than that if I was going to dump over $2,000 into a machine. 
 
 Also, from my perspective the people at System76 seem almost comically awesome. One of their engineers [answered](https://mastodon.rocks/@cassidyjames/99289298842949288) a number of questions I threw at him on Mastodon. Another is [building an operating system written in Rust as a side project](https://www.youtube.com/watch?v=eH5JgMlNE8o). I haven't asked a question any questions through the official System76 support portal, but I have no reason to think they wouldn't handle it quickly and thoroughly.
 
