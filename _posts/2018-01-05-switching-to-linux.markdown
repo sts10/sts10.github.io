@@ -62,7 +62,7 @@ Given my options as of November 2017, if I were sticking with Apple I'd likely h
 
 I plug a lot of stuff into my laptop. When I'm at home I have a external keyboard, mouse, monitor, speakers, and hard drive plugged in to my 2012 MacBook Air almost all of the time. This, in addition to the Mag-Safe power plug, occupies every port my Air has. 
 
-If I went with the MacBook Pro model that only has two Thunderbolt ports, that'd be one for power and another for everything else (which remind me: we lose the convenience and safety of Mag-Safe). Is there a single dongle that accepts two USB ports and a mini-display port or two? Or would I have to pay up for the version with four ports? 
+If I went with the MacBook Pro model that only has two Thunderbolt ports, that'd be one for power and another for everything else (we lose the convenience and safety of Mag-Safe). Is there a single dongle that accepts two USB ports and a mini-display port or two? Or would I have to pay up for the version with four ports? 
 
 Of course if I bought [this 5K LG monitor for a cool $1,299.95 that Apple sells on its site](https://www.apple.com/shop/product/HKN62/lg-ultrafine-5k-display), I'd get that monitor and power, plus it'd 3 extra Thunderbolt ports. But I don't want to buy that particular monitor-- I don't need 5K resolution and I've already got a 27" Dell monitor that I use with a DVI-to-mini-Display Port, [the updated version of which currently sells for $445](https://www.amazon.com/dp/B01D402Z28/?tag=thewire06-20&linkCode=xm2&ascsubtag=AgEAAAAAAAAAAK0B).
 
