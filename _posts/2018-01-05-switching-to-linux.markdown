@@ -26,6 +26,11 @@ While Coleman is interested in those dynamics, her book gets at something a bit 
 
 > Over years of coding software with other developers in free software projects where discourses about liberty run rampant, many many developers come to view F/OSS as the apex of writing software... It has, they say, the necessary legal and material feautres that can indduce as well as fertilize creative production. In contrast to the corporate sphere, the F/OSS domain is seen as establishing the freedom necessary to pursue _personally_ defined technical interests in a way that draws on the resources and skills of other individuals who are chasing down their own interests... One developer told me during an interview that "managers [...] decide the shape of the project," while the F/OSS arena allows either the individual or collective of hackers to make the decision instead. F/OSS allows for technical sovereignty. 
 
+As software engineer Jessie Frazelle [puts it](https://twitter.com/jessfraz/status/952946789375729665), "As much as you think open source is all about the code, it's really about the people."
+
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">As much as you think open source is all about the code, it’s really about the people.</p>&mdash; jessie frazelle (@jessfraz) <a href="https://twitter.com/jessfraz/status/952946789375729665?ref_src=twsrc%5Etfw">January 15, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
 These hackers, as Coleman often refers to then, don't want or need to sell you their product, or the new version of their product, or, crucially, any of their other products. They're often making tools that they themselves need or want, and they share them. And through this process there is a sort of technical independence (44) gained.
 
 With the peskiness of money out of the way, since the code is so easy (both [technically](https://en.wikipedia.org/wiki/Git) and [legally](https://en.wikipedia.org/wiki/GNU_General_Public_License)) to modify, free software projects can take on a life of their own, ready, if the original creator chooses, to accept new code to the program, either to fix bugs or add new features. Earlier in the book, quoting another hacker (41): 
@@ -231,7 +236,7 @@ Could I do all of these things on a computer running Linux? To find out, I neede
 
 One of the first things I did on Ubuntu was to create a spreadsheet using [LibreOffice](https://www.libreoffice.org/)-- the free version of Microsoft Office included with Ubuntu 16.04. I called the first column "Task name" and a second labeled "Result" and slowly went down the list.
 
-The tl;dr here is that Linux _can_ handle most of my common tasks. I really only have two major hang ups at this point: I can't run iMessage, and I still haven't gotten HBO Go to work (Netflix is fine, and Hulu works in Chrome).
+The tl;dr here is that Linux _can_ handle most of my common tasks. I really only have two major hang ups at this point: I can't run iMessage, and while Hulu works in Chrome, I still haven't gotten HBO Go to work. But this isn't a big deal because, since I pay for HBO through my Hulu account, I can watch HBO content through [Hulu's beta site](https://beta.hulu.com).
 
 
 <!-- On the 12th, tangentially relatedly, I pushed [a blog post about some privacy and security measures I had taken recently](https://sts10.github.io/2016/11/12/some-privacy-and-security-measures.html) -->
