@@ -333,11 +333,15 @@ On a Mac it can be invoked by the familiar `Command + f` keyboard shortcut.
 
 As we've learned, KeePassXC lets us lock our database behind a master password. However we can also require those who wish to open our database to have other factors as well. 
 
-### Using a Key File
+### Key File
 
 The simpler example of a second factor is a key file. A key file is a file that needs to be present for the database to be opened. It's not your database file-- it's usually just a text file with a bunch of random characters. 
 
-On its face, this may seem not very useful. If an attacker has access to your database file, they likely have access to other files on your computer. However things get more interesting if, for example, you have your database on your computer's hard drive but you have your key file on a USB flash drive. With this setup, you'll need to enter your master password AND have the USB stick plugged into the computer to open your database.
+On its face, this may seem not very useful. If an attacker has access to your database file, they likely have access to other files on your computer. However things get more interesting if, for example, you have your database on your computer's hard drive but you have your key file on a USB flash drive. With this setup, you'll need to enter your master password AND have the USB stick plugged into the computer to open your database. 
+
+A second example of where a key file could potentially give you more security is: if you store your database file on a cloud service (DropBox, Google Drive, etc.) to more easily keep it in sync between devices, you could create a key file that is never shared on the cloud service (you'd move it around via USB stick or something similar). Since the key file never changes, you don't have to keep in sync-- just get it on each device at setup time and you're done.
+
+#### Using a Key File
 
 To assign a key file to an existing KeePass database, go to the "Database" menu and select "Change master key". First, enter your master password twice (if you want to change it you can at this juncture, or just enter your old one). 
 
