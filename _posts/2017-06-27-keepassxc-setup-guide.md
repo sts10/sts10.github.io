@@ -27,7 +27,7 @@ This is a basic guide of how to get started with KeePassXC. This guide is **for 
 
 I'm not a security expert or security professional, just a social media editor who manages a lot of accounts, so buyer beware from this point on. If you spot any errors or have any suggestions for this post, feel free to contact me via [Twitter](https://twitter.com/sts10) or [elsewhere](https://gist.github.com/sts10/4a4e01021b3a5ad42e9b73e0abd7b7e3).
 
-Thanks to [@com](https://twitter.com/com) for various tips throughout. I'd also like to note that I drew some inspiration and methodology from [Martin Shelton's "KeePass for Beginners" post](https://medium.com/@mshelton/keypass-for-beginners-dc8adfcdad54), which you may also find useful. I'll also note that [the Electronic Freedom Foundation has a guide to KeePassXC](https://ssd.eff.org/en/module/how-use-keepassxc). 
+Thanks to [@com](https://twitter.com/com) for various tips throughout. I'd also like to note that I drew some inspiration and methodology from [Martin Shelton's "KeePass for Beginners" post](https://medium.com/@mshelton/keypass-for-beginners-dc8adfcdad54), which you may also find useful. I'll also note that KeePassXC has [a quickstart guide on their site](https://keepassxc.org/quickstart/), and [the Electronic Freedom Foundation has there own guide to KeePassXC](https://ssd.eff.org/en/module/how-use-keepassxc). 
 
 ### How is KeePassXC Different from Other Password Managers?
 
