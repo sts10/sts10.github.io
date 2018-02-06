@@ -27,7 +27,7 @@ This is a basic guide of how to get started with KeePassXC. This guide is **for 
 
 I'm not a security expert or security professional, just a social media editor who manages a lot of accounts, so buyer beware from this point on. If you spot any errors or have any suggestions for this post, feel free to contact me via [Twitter](https://twitter.com/sts10) or [elsewhere](https://gist.github.com/sts10/4a4e01021b3a5ad42e9b73e0abd7b7e3).
 
-Thanks to [@com](https://twitter.com/com) for various tips throughout. I'd also like to note that I drew some inspiration and methodology from [Martin Shelton's "KeePass for Beginners" post](https://medium.com/@mshelton/keypass-for-beginners-dc8adfcdad54), which you may also find useful. I'll also note that KeePassXC has [a quickstart guide on their site](https://keepassxc.org/quickstart/), and [the Electronic Freedom Foundation has there own guide to KeePassXC](https://ssd.eff.org/en/module/how-use-keepassxc). 
+Thanks to [@com](https://twitter.com/com) for various tips throughout. I'd also like to note that I drew some inspiration and methodology from [Martin Shelton's "KeePass for Beginners" post](https://medium.com/@mshelton/keypass-for-beginners-dc8adfcdad54), which you may also find useful. I'll also note that KeePassXC has [a quickstart guide on their site](https://keepassxc.org/quickstart/), as well as [a wiki](https://github.com/keepassxreboot/keepassxc/wiki), and [the Electronic Freedom Foundation has there own guide to KeePassXC](https://ssd.eff.org/en/module/how-use-keepassxc). I'll also note that KeePassXC is [on Twitter](https://twitter.com/KeePassXC).
 
 ### How is KeePassXC Different from Other Password Managers?
 
@@ -147,7 +147,7 @@ To invoke Auto-Type, start with your cursor in the username field of the browser
 
 `{USERNAME}{TAB}{PASSWORD}{ENTER}` is the default Auto-Type sequence. However you can edit this sequence on a per-group or per-entry level. 
 
-To edit the Auto-Type sequence for a single entry, we'll first choose to edit the entry-- we can do this by clicking on the entry we want to edit and then clicking button with the key and blue pen icon. Next, we'll look in the menu of large icons on the left side of the window and click on the Auto-Type section of the menu (you may have to scroll down a little). Finally, we'll click the "Use custom Auto-Type sequence" radio button and write a custom Auto-Type sequence. ([More info on writing these custom sequences](http://keepass.info/help/base/autotype.html#autoseq).)
+To edit the Auto-Type sequence for a single entry, we'll first choose to edit the entry-- we can do this by clicking on the entry we want to edit and then clicking button with the key and blue pen icon. Next, we'll look in the menu of large icons on the left side of the window and click on the Auto-Type section of the menu (you may have to scroll down a little). Finally, we'll click the "Use custom Auto-Type sequence" radio button and write a custom Auto-Type sequence. (You can find more info on writing these custom sequences [in the KeePassXC wiki](https://github.com/keepassxreboot/keepassxc/wiki/Autotype-Custom-Sequence) and [on the original KeePass's website](http://keepass.info/help/base/autotype.html#autoseq).)
 
 ![Custom Auto-type sequence](/img/keepassxc/custom-auto-type-sequence.png)
 
