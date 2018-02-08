@@ -304,6 +304,46 @@ After consulting [this short GPGTools article](https://gpgtools.tenderapp.com/kb
 
 Once I got imported the public key and had it appear in GPG Suite Keychain (under "type" it says `pub`, indicating it's just the public key present), I plugged in my YubiKey and simply ran `gpg --card-status` in the terminal, as per [that GPGTools article](https://gpgtools.tenderapp.com/kb/gpg-keychain-faq/gpg-keychain-not-showing-key-from-smart-card). After a few seconds the terminal sent back some kind of success message that I forget now, and when I restarted the GPG Suite Keychain the key had `sec/pub` as its "type". I was then able to decrypt a message I had emailed myself, and was _unable_ to decrypt it after I removed the YubiKey. Success! 
 
-## Learning More About What I Did (An Appendix of Sorts)
+## Appendix A: Learning More About What I Did
 
 In my search to learn more about key management, Duck Duck Go led me to [this GnuPG manual](https://www.gnupg.org/gph/en/manual.html), specifically [the key management section](https://www.gnupg.org/gph/en/manual.html#MANAGEMENT), which helped me a bit.
+
+
+## Appendix B: Can I get my secret key off my YubiKey without it being present? 
+
+February 2018: One of my lingering questions after following these steps was what, exactly, remains on computers after I import the public key and run `gpg --card-status`. I assumed that, once I unplug my YubiKey, the only key left is the public key. However, rather unnervingly, my GUI GPG applications said things like "The key has both a private and a public part", even when my YubiKey was unplugged. 
+
+I hoped that this "private part" was simply a cryptographically useless "stub" of my secret key, and that the real secret key file was safe and sound on my unplugged YubiKey. 
+
+To test this, I devised the experiment below, which I ran on my new Linux machine. It seems like we're safe from this basic attack.
+
+Below is a step-by-step guide to test whether I could get a secret PGP key off of my YubiKey.
+
+1. On Computer 1, generate a GPG key pair. 
+2. More your secret key to a YubiKey, following the [instructions on this wedpage under "Generating the key on your local system"](https://www.yubico.com/support/knowledge-base/categories/articles/use-yubikey-openpgp/)
+3. On computer 2, import the public key of the key pair. 
+4. Still on computer 2, insert your YubiKey. Then create a stub for the secret key by running `gpg --card-status` [source](https://gpgtools.tenderapp.com/kb/gpg-keychain-faq/gpg-keychain-not-showing-key-from-smart-card)
+5. Unplug YubiKey. 
+6. On computer 2, run `gpg --export-secret-keys -a KEYID > secret.asc`, filling in the KEYID with the key id. 
+7. A private key is now in the file `secret.asc` 
+
+Question: is the key in `secret.asc` the private key of the key pair? Did we just successfully get a secret key off of a YubiKey without it even being plugged in? Or is the key in the `secrets.asc` merely some "stub" placeholder? 
+
+In an attempet to answer these questions, I took the following steps. I never plugged the YubiKey into the computer. 
+
+8. On computer 2, with the YubiKey unplugged, run `mkdir export && cd export`
+9. `gpg --export -a KEYID > public.asc`
+10. `gpg --export-secret-keys -a KEYID > secret.asc`
+11. Using a GUI application, delete key pair from this computer
+12. Import key pair from `export` folder
+13. Encrypt a test file for this key pair: `gpg -e test.txt`, then when prompted, enter KEYID
+14. Attempt to decrypt this file: `gpg -d test.txt.gpg` 
+
+Thankfully, step 14 seems to fail with the following error:
+
+```bash
+gpg: public key decryption failed: Card error
+gpg: decryption failed: No secret key
+``` 
+
+which seems to mean the secret key we exported in step 6 is not the _real_ secret key contained on the YubiKey.
