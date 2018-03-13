@@ -81,7 +81,7 @@ I think the `.md` filename gave Jekyll trouble, or maybe it was `.mdown`.
 First, be sure you're in your Jekyll site's directory (for me `sts10.github.io/`). And then run:
 
 ```bash
-jekyll build
+bundle exec jekyll build
 git add .
 git commit -m "update"
 git push origin master
