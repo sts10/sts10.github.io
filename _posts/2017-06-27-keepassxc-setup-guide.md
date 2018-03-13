@@ -39,6 +39,8 @@ Also note that, unlike 1Password and other options, KeePassXC is free (as in cos
 
 ## Level 0: Starting Out
 
+**NOTE**: This guide was written for KeePassXC 2.2.0 back in June 2017. Currently (March 2018), KeePassXC is up to version 2.3.1. I definitely recommend you get the latest version. However note that some of the content, below, particularly the screenshots and GIFs may be a bit outdated now. That said, KeePassXC's basic concepts remain the same, so I think this guide will still be helpful. I've made some minor edits throughout. If you're migrating from version 2.2.x to 2.3.x, [this (unofficial) migration guide may be helpful](https://theorangeone.net/posts/keepassxc-2.3-migration/).
+
 ### Downloading KeePassXC
 
 First, let's head over to the KeePassXC's [Download page](https://keepassxc.org/download).
@@ -139,7 +141,9 @@ There are keyboard shortcuts to make this process slightly quicker. For example,
 
 KeePassXC has a feature called Auto-Type that, as the name implies, automatically types your username and password into a form. 
 
-To invoke Auto-Type, start with your cursor in the username field of the browser form you want to sign in to. Then, over in KeePassXC, right-click the entry you want to Auto-Type and select "Perform Auto-Type". KeePassXC will type your username, hit tab, type your password, and then hit enter. 
+In version 2.3.1, KeePassXC added an Auto-Type button in the toolbar. To perform an Auto-Type using this button, start with your cursor in the username field of the browser form you want to sign in to. Then, over in KeePassXC, single-click the entry you want to Auto-Type and then click the Auto-Type button. KeePassXC will type your username, hit tab, type your password, and then hit enter. 
+
+Alternatively you can _right-click_ the entry you want to Auto-Type and select "Perform Auto-Type" (see slightly outdated GIF below).
 
 ![autotype gif](/img/keepassxc/auto-type.gif)
 
@@ -177,38 +181,26 @@ With our KeePassXC database open and **unlocked**, place your cursor in the user
 
 Note #1: For Reddit in particular, I've found that using [https://www.reddit.com/login](https://www.reddit.com/login), as opposed to https://reddit.com, works better for _Global_ Auto-Type.
 
-Note #2: There's a bug here as of version 2.2.1: If your database is locked, KeePassXC _should_ prompt you to unlock your database, but as of version 2.2.1 I've found this workflow [a bit buggy](https://github.com/keepassxreboot/keepassxc/issues/1023). So be sure to have your database _unlocked_ before doing a Global Auto-Type.
+Note #2: There's a bug here as of version 2.3.1: If your database is locked, KeePassXC _should_ prompt you to unlock your database, then perform the AutoType. But as of version 2.3.1 I've found this workflow [a bit buggy](https://github.com/keepassxreboot/keepassxc/issues/1216). However if your database _unlocked_ before doing a Global Auto-Type you should be fine.
 
 <!-- With the shortcut set (and it doesn't have to be `Control + Option + v` of course), whenever our KeePassXC database is unlocked we can use the shortcut to Auto-Type our usernames and passwords, much like the normal Auto-Type functionality described above. --> 
 
 One nice advantage to the Global Auto-Type is that KeePass will find the relevant entry based on the entry title and URL, as opposed to having to find it ourselves as the normal AutoType workflow described above requires. If you have more than entry for a given service-- say a Google/gmail account for work and another for personal use-- KeePassXC will ask you which one you want it to Auto-Type.
 
-#### KeePassHTTP: Browser autofill, with a catch
+#### Browser autofill with extensions
 
-_(The following section was updated October 18, 2017, to incorporate [a change](https://github.com/keepassxreboot/keepassxreboot.github.io/commit/b6d301e48e4079ef04fa13dc6f41c88337548ca1) in recommendations from the KeePassXC developers following [this discussion](https://github.com/keepassxreboot/keepassxc/issues/998).)_
+_(The following section was shortened on March 12, 2017, to reflect changes in version 2.3.0 of KeePassXC.)_
 
-In addition to Auto-Type, KeePassXC offers another way to quickly and easily enter your login information into a browser form called KeePassHTTP. From my understanding, KeePassHTTP is a protocol for ferrying your login data from the program reading your KeePass database (in our case, KeePassXC) to a browser extension that will automatically fill in forms in your browser for you. (If you've ever used the 1Password or LastPass browser add-ons, it's a lot like that.)
+In addition to Auto-Type, KeePassXC offers another way to quickly and easily enter your login information into a browser form called KeePassXC-Browser. They have extensions for both Firefox and Chrome -- you can learn more about it in [the KeePassXC official docs](https://keepassxc.org/docs/keepassxc-browser-migration/).
 
-To use KeePassHTTP with KeePassXC, the KeePassXC developers [highlight](https://keepassxc.org/project) 
-KeePassHTTP-Connector, which is currently available as [an add-on for Mozilla Firefox](https://addons.mozilla.org/en-US/firefox/addon/keepasshttp-connector/) and [as an extension for Google Chrome](https://chrome.google.com/webstore/detail/keepasshttp-connector/dafgdjggglmmknipkhngniifhplpcldb). For Safari, the developers list [passafari](https://github.com/mmichaa/passafari.safariextension/). 
 
-However it's important to note that there are some security concerns when using KeePassHTTP. On [the KeePassXC website](https://keepassxc.org/project) the developers posted a note about the security of KeePassHTTP: 
+### KeePassXC Settings 
 
-> KeePassHTTP is not a highly secure protocol and has certain flaws which allow an attacker to decrypt your passwords if they manage to intercept communication between a KeePassHTTP server and KeePassHTTP-Connector over a network connection (see [here](https://github.com/pfn/keepasshttp/issues/258) and [here](https://github.com/keepassxreboot/keepassxc/issues/147)). KeePassXC therefore strictly limits communication between itself and the browser plugin to your local computer. As long as your computer is not compromised, your passwords are fairly safe that way, but use it at your own risk!
+_(The following section was shortened on March 12, 2017, to reflect changes in version 2.3.0 of KeePassXC.)_
 
-I believe it's as a result of these security concerns that KeePassHTTP is _turned off by default_ in KeePassXC (at least it is in version 2.2.0). If you'd like to enable it, go to your KeePassXC preferences, then click on the "Browser Integration" icon and check the "Enable KeePassHTTP server" option.
+To access the KeePassXC settings menu on macOS, click the "KeePassXC" menu in the top-left of your screen and click Preferences. As of version 2.3.1, I think the default settings are fine for most users. 
 
-Due to these security concerns, and the need to install the browser extensions, I prefer to use KeePassXC's Auto-Type feature rather than KeePassHTTP.
-
-### My Recommended Settings 
-
-Below are my recommended settings for KeePassXC. To access this menu on macOS, click the "KeePassXC" menu in the top-left of your screen and click Preferences.
-
-![Recommended Settings](/img/keepassxc/recommended-settings.png)
-
-I would highly recommend having "Automatically reload the database when modified externally" checked. Having this setting _unchecked_, at least in version 2.2.2, [can, in specific cases, lead to your database being corrupted](https://github.com/keepassxreboot/keepassxc/issues/1113).
-
-Other than that particular setting, you are pretty safe to try other settings other than the ones I recommend. For example, you may prefer to have "Automatically save after every change" checked.
+Though you may want to enable "Backup database file before saving" -- this creates a copy of your database in the same directory as your database, but named `<your-database-name>.old.kdbx`. While this feature may save you in a pinch, see the section below for more of my tips on backing up your database.
 
 ### Locking your database
 
@@ -280,7 +272,9 @@ The way KeePassXC allows for us to create this time delay is to change the way y
 
 How many rounds should you set? Conveniently, KeePassXC has a "Benchmark" button that tests your current machine to see how many transform rounds it can do in 1 second. It then enters that number in the "Transform rounds" field for you.
 
-To set the number of transform rounds to this one-second benchmark, with your database unlocked go to the Database menu and select "Database settings". Then click the "Benchmark" button, wait one second for the higher number to appear in the form, and hit OK.
+To set the number of transform rounds to this one-second benchmark, with your database unlocked go to the Database menu and select "Database settings". Then click the "Benchmark" button, wait one second for the higher number to appear in the form, and hit OK. 
+
+**Update**: The GIF below is from KeePassXC 2.2.0. Versions after 2.3.0 also give users a choice of using different Key Derivation Functions. You may want to use the newer and recommended Argon2 function. If you do, your transform rounds will be much lower (for example, 20) -- that's perfectly fine, since Argon2 is much more computer intensive than AES-KDF. For more on this, you may find [this KeePassXC 2.3.x migration guide](https://theorangeone.net/posts/keepassxc-2.3-migration/) helpful.
 
 ![Benchmarking transform round](/img/keepassxc/benchmarking.gif)
 
