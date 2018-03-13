@@ -39,7 +39,9 @@ Also note that, unlike 1Password and other options, KeePassXC is free (as in cos
 
 ## Level 0: Starting Out
 
-**NOTE**: This guide was written for KeePassXC 2.2.0 back in June 2017. Currently (March 2018), KeePassXC is up to version 2.3.1. I definitely recommend you get the latest version. However note that some of the content, below, particularly the screenshots and GIFs may be a bit outdated now. That said, KeePassXC's basic concepts remain the same, so I think this guide will still be helpful. I've made some minor edits throughout. If you're migrating from version 2.2.x to 2.3.x, [this (unofficial) migration guide may be helpful](https://theorangeone.net/posts/keepassxc-2.3-migration/).
+**NOTE**: This guide was written for KeePassXC version 2.2.0 back in June 2017. Currently (March 2018), KeePassXC is up to version 2.3.1. 
+
+I definitely recommend you get the latest version. Just know that some of the content below, particularly the screenshots and GIFs, may be a bit outdated now. That said, KeePassXC's basic concepts remain the same, so I think this guide will still be helpful. Plus I've made some minor edits throughout to roughly get the guide up to 2.3.1. If you're migrating from version 2.2.x to 2.3.x, [this (unofficial) migration guide may be helpful](https://theorangeone.net/posts/keepassxc-2.3-migration/).
 
 ### Downloading KeePassXC
 
@@ -181,7 +183,7 @@ With our KeePassXC database open and **unlocked**, place your cursor in the user
 
 Note #1: For Reddit in particular, I've found that using [https://www.reddit.com/login](https://www.reddit.com/login), as opposed to https://reddit.com, works better for _Global_ Auto-Type.
 
-Note #2: There's a bug here as of version 2.3.1: If your database is locked, KeePassXC _should_ prompt you to unlock your database, then perform the AutoType. But as of version 2.3.1 I've found this workflow [a bit buggy](https://github.com/keepassxreboot/keepassxc/issues/1216). However if your database _unlocked_ before doing a Global Auto-Type you should be fine.
+Note #2: There's a bug here as of version 2.3.1: If your database is locked, KeePassXC prompts you to unlock your database, then perform the AutoType. But as of version 2.3.1 I've found this workflow [a bit buggy](https://github.com/keepassxreboot/keepassxc/issues/1216). However if your database _unlocked_ when you perform a Global Auto-Type you should be fine.
 
 <!-- With the shortcut set (and it doesn't have to be `Control + Option + v` of course), whenever our KeePassXC database is unlocked we can use the shortcut to Auto-Type our usernames and passwords, much like the normal Auto-Type functionality described above. --> 
 
@@ -198,9 +200,9 @@ In addition to Auto-Type, KeePassXC offers another way to quickly and easily ent
 
 _(The following section was shortened on March 12, 2017, to reflect changes in version 2.3.0 of KeePassXC.)_
 
-To access the KeePassXC settings menu on macOS, click the "KeePassXC" menu in the top-left of your screen and click Preferences. As of version 2.3.1, I think the default settings are fine for most users. 
+To access the KeePassXC settings menu on macOS, click the "KeePassXC" menu in the top-left of your screen and click Preferences. As of version 2.3.1, I think the default settings are fine for most users, but it's good practice to read through them and make sue you understand most of them and they're set to what you need and prefer.
 
-Though you may want to enable "Backup database file before saving" -- this creates a copy of your database in the same directory as your database, but named `<your-database-name>.old.kdbx`. While this feature may save you in a pinch, see the section below for more of my tips on backing up your database.
+For example, you may want to enable "Backup database file before saving" -- this creates a copy of your database in the same directory as your database, but named `<your-database-name>.old.kdbx`. While this feature may save you in a pinch, see the section below for more of my tips on backing up your database.
 
 ### Locking your database
 
@@ -274,7 +276,7 @@ How many rounds should you set? Conveniently, KeePassXC has a "Benchmark" button
 
 To set the number of transform rounds to this one-second benchmark, with your database unlocked go to the Database menu and select "Database settings". Then click the "Benchmark" button, wait one second for the higher number to appear in the form, and hit OK. 
 
-**Update**: The GIF below is from KeePassXC 2.2.0. Versions after 2.3.0 also give users a choice of using different Key Derivation Functions. You may want to use the newer and recommended Argon2 function. If you do, your transform rounds will be much lower (for example, 20) -- that's perfectly fine, since Argon2 is much more computer intensive than AES-KDF. For more on this, you may find [this KeePassXC 2.3.x migration guide](https://theorangeone.net/posts/keepassxc-2.3-migration/) helpful.
+**Update**: The GIF below is from KeePassXC 2.2.0. Versions after 2.3.0 also give users a choice of using different Key Derivation Functions. You may want to use the newer and recommended Argon2 function. If you do, your benchmarked transform rounds will be much lower than the 10900000 number in the GIF below (for example, 20) -- that's perfectly fine, since Argon2 is much more computational intensive than AES-KDF. For more on this, you may find [this KeePassXC 2.3.x migration guide](https://theorangeone.net/posts/keepassxc-2.3-migration/) helpful.
 
 ![Benchmarking transform round](/img/keepassxc/benchmarking.gif)
 
@@ -298,6 +300,10 @@ If you want keep you KeePass database synchronized across multiple devices, you'
 If you're wary of your password database being stored on servers you don't own, you can explore other options like [Syncthing](https://syncthing.net/), a program that keeps a folder or multiple folders "in-sync" across multiple computers that you own (think Dropbox but without the Dropbox server involved.) However note that Syncthing involves a bit more set up (I wrote [a getting started guide to Syncthing a few weeks ago](https://sts10.github.io/2017/05/24/getting-started-with-syncthing.html) if you want a quick preview of what you'd be getting into).
 
 To access your passwords from a smartphone, you'll need to use an app that can open KeePass databases. There are a handful of such apps for both iOS and Android, but I haven't used any of them so I won't comment further. However I will note that one of KeePassXC's lead developers, Jonathan White, aka [droidmonkey](https://github.com/droidmonkey), says he uses [Keepass2Android](https://play.google.com/store/apps/details?id=keepass2android.keepass2android&hl=en) with his Android phone in [this interview at about 18:37](https://soundcloud.com/user-98066669/042-a-conversation-with-keepassxc#t=18:37).
+
+#### Troubleshooting Syncing 
+
+Note that KeePassXC 2.3.0 added a new setting called "Safely save database files". If you're having trouble syncing your database you may want to try disabling this feature. You can read more about this issue and setting [here](https://github.com/keepassxreboot/keepassxc/issues/197).
 
 ### Using Groups
 
