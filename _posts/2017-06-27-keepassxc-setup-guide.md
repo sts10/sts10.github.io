@@ -264,7 +264,7 @@ One trick for remembering your new passphrase is to [create a little story about
 
 ![XKCD long passprhases](https://imgs.xkcd.com/comics/password_strength.png)
 
-### Setting the number of transform rounds by benchmark
+### Choosing a key derivation function and setting the number of transform rounds by benchmark
 
 Another way we'll want to make our KeePass database a bit more secure is to increase the number of "transform rounds" needed to be performed for every master password guess. 
 
@@ -276,7 +276,7 @@ How many rounds should you set? Conveniently, KeePassXC has a "Benchmark" button
 
 To set the number of transform rounds to this one-second benchmark, with your database unlocked go to the Database menu and select "Database settings". Then click the "Benchmark" button, wait one second for the higher number to appear in the form, and hit OK. 
 
-**Update**: The GIF below is from KeePassXC 2.2.0. Versions after 2.3.0 also give users a choice of using different Key Derivation Functions. You may want to use the newer and recommended Argon2 function. If you do, your benchmarked transform rounds will be much lower than the 10900000 number in the GIF below (for example, 20) -- that's perfectly fine, since Argon2 is much more computational intensive than AES-KDF. For more on this, you may find [this KeePassXC 2.3.x migration guide](https://theorangeone.net/posts/keepassxc-2.3-migration/) helpful.
+**Update**: The GIF below is from KeePassXC 2.2.0. Versions after 2.3.0 also give users a choice of using different Key Derivation Functions. You may want to use the newer and [recommended](https://twitter.com/KeePassXC/status/973532345482571776) Argon2 function. If you do (and I do now), hit the "Benchmark 1-second delay" button again. Your new, Argon2 number of benchmarked transform rounds will be much lower than the 10900000 number in the GIF below (for example, 28 rounds) -- that's perfectly fine, since Argon2 is much more computational intensive than AES-KDF. For more on this, you may find [this (unofficial) KeePassXC 2.3.x migration guide](https://theorangeone.net/posts/keepassxc-2.3-migration/) helpful.
 
 ![Benchmarking transform round](/img/keepassxc/benchmarking.gif)
 
