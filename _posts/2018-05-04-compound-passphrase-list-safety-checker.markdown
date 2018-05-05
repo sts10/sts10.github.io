@@ -75,7 +75,7 @@ I found [2,661 compound words](https://github.com/sts10/compound-passphrase-list
 
 The tool also found 2,117 problematic overlaps in the 1Password list, and marked 2,117 words for removal.
 
-All told, the tool removed 2,225 unique words from the 1Password list to make a new, compound-safe list. Thus [my compound-safe version of the Agile list](https://github.com/sts10/compound-passphrase-list-safety-checker/blob/master/word_lists/agile_words-compound-safe.txt) has 16,103 words, down from the original 18,828 words. With 16,103, each word from this list would add about 13.98 bits of entropy to a passphrase, compared to the original 1Password list, which adds about 14.20 bits.
+All told, the tool removed 2,225 unique words from the 1Password list to make a new, compound-safe list. Thus [my compound-safe version of the Agile list](https://github.com/sts10/compound-passphrase-list-safety-checker/blob/master/word_lists/agile_words-compound-safe.txt) has 16,103 words, down from the original 18,328 words. With 16,103, each word from this list would add about 13.98 bits of entropy to a passphrase, compared to the original 1Password list, which adds about 14.16 bits.
 
 Now, listen, I don't recommend you go download the 16,103 word list and start generating phrases without punctuation. I'm a social media editor, not a security researcher. 
 
@@ -83,13 +83,17 @@ Again, with emphasis: 1Password's software, as far as I know, does NOT allow use
 
 ## How Often Are Non-Safe Passphrases Generated
 
-As I [note in the tool's README](https://github.com/sts10/compound-passphrase-list-safety-checker#realistically-what-are-the-odds-of-either-a-compounding-or-a-problematic-overlap-occurring-in-a-randomly-generated-passphrase), I don't really know. I'm just not that strong at probability math. That said, I'd be wary of accepting an argument that the chances are so low as to not matter. 
+As I [note in the tool's README](https://github.com/sts10/compound-passphrase-list-safety-checker#realistically-what-are-the-odds-of-either-a-compounding-or-a-problematic-overlap-occurring-in-a-randomly-generated-passphrase), I don't really know. I'm just not that strong at probability math. I appreciate any insight on this -- and I'd be curious what an "acceptable" probability would be, if any.
 
 ## A Practical Use?
 
 KeePassXC still lets user generate phrases without punctuation, and it now also lets users use their own word list ([source](https://github.com/keepassxreboot/keepassxc/issues/978#issuecomment-331441600)) (though it appears to be not very easy to do). This is certainly a nice feature, particularly for non-English speaking users. However I wonder if the lists added by users will be as carefully constructed as the EFF list. This tool could be used to "clean" lists before use (I have no reason to believe it wouldn't work for languages other than English, assuming special characters are handled well). Or it could even be re-written in C++ and integrated into KeePassXC, to be run on any user-selected word list. 
 
 It may seem more practical to have a random passphrase generator like KeePassXC's check _individual_ generated passphrases for compound-safety (and maybe only when the user chooses to have no punctuation between words). But I think this would decrease the entropy-per-word of the passphrases in a complex, unintuitive way. But that's just a guess really. Of course KeePassXC could also force users to use a word separator, like 1Password does.
+
+## Caveat about "Three-Word Compounding"
+
+While we've explored "two-word compounding", where two words are actually one, I accept that there is a possibility of a three-word compounding -- where three words become two. No idea how likely that is, or how to efficiently check for that, but know that this tool does NOT currently check for this, and thus I can't actually guarantee that the lists outputted by the tool are completely compound-safe.
 
 ## Toward a more theoretical understanding of compound safety
 
