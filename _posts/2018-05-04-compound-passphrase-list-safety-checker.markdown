@@ -75,7 +75,7 @@ I found [2,661 compound words](https://github.com/sts10/compound-passphrase-list
 
 The tool also found 2,111 problematic overlaps in the 1Password list, and marked 2,111 words for removal.
 
-All told, the tool removed 2,225 unique words from the 1Password list to make a new, compound-safe list. Thus [my compound-safe version of the Agile list](https://github.com/sts10/compound-passphrase-list-safety-checker/blob/master/word_lists/agile_words-compound-safe.txt) has 16,103 words, down from the original 18,828 words. 
+All told, the tool removed 2,225 unique words from the 1Password list to make a new, compound-safe list. Thus [my compound-safe version of the Agile list](https://github.com/sts10/compound-passphrase-list-safety-checker/blob/master/word_lists/agile_words-compound-safe.txt) has 16,103 words, down from the original 18,828 words. With 16,103, each word from this list would add about 13.98 bits of entropy to a passphrase, compared to the original 1Password list, which adds about 14.20 bits.
 
 Now, listen, I don't recommend you go download the 16,103 word list and start generating phrases without punctuation. I'm a social media editor, not a security researcher. 
 
