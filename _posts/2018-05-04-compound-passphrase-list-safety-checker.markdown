@@ -29,13 +29,28 @@ I knew that my chosen password manager, [KeePassXC](https://keepassxc.org), allo
 
 When generating passphrases, I generally put a hyphen or space between the words (as seen in the GIF), but what if for some I had not, and one of them had one of the "collisions" that Dr. Pound describes in the video? More broadly, was there a way to check or edit word lists in order to make this problem impossible (and thus more foolproof?). 
 
+## Prefix Codes
+
+Apparently the traditional way of preventing these sorts of issues is to ensure that your "code system" has the "prefix property", and thus would be referred to a [prefix code](https://en.wikipedia.org/wiki/Prefix_code). 
+
+> A prefix code is a type of code system (typically a variable-length code) distinguished by its possession of the "prefix property", which requires that there is no whole code word in the system that is a prefix (initial segment) of any other code word in the system. For example, a code with code words {9, 55} has the prefix property; a code consisting of {9, 5, 59, 55} does not, because "5" is a prefix of "59" and also of "55". A prefix code is a uniquely decodable code: given a complete and accurate sequence, a receiver can identify each word without requiring a special marker between words. However, there are uniquely decodable codes that are not prefix codes; for instance, the reverse of a prefix code is still uniquely decodable (it is a suffix code), but it is not necessarily a prefix code.
+
+This "prefix code" idea is more broad than the task I set out for myself -- it's a possible property of all code systems, not just diceware passphrases. 
+
+I later learned that the EFF, in [making their long wird list for generating random passphrases](https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases), "ensured that no word is an exact prefix of any other word," which seems like exactly the definition of a prefix code.
+
+The process I outline below was undertaken _before_ I understood that "[ensuring] that no word is an exact prefix of any other word" also ensured compound-safety as I came to define it. For example, [this diceware tool](https://github.com/ulif/diceware) has a specific section in its README dedicated to warning users about ["the prefix code problem"](https://github.com/ulif/diceware#id3).
+
+With the benefit of hindsight, I'll say that my work below was an attempt to create a program that would make a given word list compound-safe **more efficiently** that simply making it a prefix code. By more efficient I mean that it could remove fewer words from the original, compound-unsafe list than removing words that are exact prefixes of other words, thus providing more bits of entropy per word. More on this hypothesis below.
+
+Just a note: Thanks to [phoerious](https://github.com/phoerious) for leaving an extremely illuminating [comment](https://sts10.github.io/2018/05/05/compound-passphrase-list-safety-checker.html#comment-3886800478) on the original version of this blog post.
+
 ## First Results
 
 By the end of February I had slapped together [a quick Rust script](https://github.com/sts10/compound-passphrase-list-safety-checker/tree/3ed1b56507559dd926e10da79fd1918db875afb9) in an attempt to answer this question. I was specifically interested in testing the word list that KeePassXC uses, namely the [EFF long word list](https://www.eff.org/files/2016/07/18/eff_large_wordlist.txt), which is 7,776 words long. 
 
 I'm new to Rust, so I had to use poor logic to get the program to work: It mashes every pair of words together, then check that "mashed" word is one of the other 7,774 words on the list. Since this program had to run `7776^2` checks against the list, it was pretty slow (I also didn't know to run Rust as a release rather than in debug mode). But 11 hours later the program informed be that it found no "bad words" in the EFF long word list. This means that, even without punctuation between words, there's no way to encounter the problem described by Dr. Pound.
 
-I later learned that this is likely because the EFF, in [making the list](https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases), "ensured that no word is an exact prefix of any other word."
 
 ## Taking it a Step Further: Compound Safety
 
@@ -81,6 +96,10 @@ Now, listen, I don't recommend you go download the 16,103 word list and start ge
 
 Again, with emphasis: 1Password's software, as far as I know, does NOT allow users to generate random passphrases without punctuation or spaces between words. Users must choose to separate words with a period, hyphen, space, comma, or underscore. So these findings do NOT constitute a security issue with 1Password.
 
+## Back to my Hypothesis
+
+Now the question is: If take the 1Password list and remove all words that are exact prefixes of other words on the list, how many words would remain? To answer this question, I wrote [a separate Rust script](https://github.com/sts10/prefix-safety-checker) that did simply this. Fascinatingly, [the "no-prefix" 1Password list](https://github.com/sts10/prefix-safety-checker/blob/master/word_lists/agile_words.txt.no-prefix) has just 15,190 words. Each word from this list adds 13.89 bits of entropy.
+
 ## How Often Are Non-Safe Passphrases Generated
 
 As I [note in the tool's README](https://github.com/sts10/compound-passphrase-list-safety-checker#realistically-what-are-the-odds-of-either-a-compounding-or-a-problematic-overlap-occurring-in-a-randomly-generated-passphrase), I don't really know. I'm just not that strong at probability math. I appreciate any insight on this -- and I'd be curious what an "acceptable" probability would be, if any.
@@ -97,6 +116,16 @@ While we've explored "two-word compounding", where two words are actually one, I
 
 ## Toward a more theoretical understanding of compound safety
 
-EFF notes that, in [making the list](https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases), they "ensured that no word is an exact prefix of any other word." My compound-safe lists have words that are exact prefixes of other words, prompting the question: Is the no prefix-rule _too strict_? In other words, are there word lists that don't satisfy the prefix rule but are compound-safe? My compound-safe version of the 1Password list purports to be this, but I don't know if there are further conditions necessary to ensuring compound-safety. 
+My compound-safe lists have words that are exact prefixes of other words, prompting the question: Is the no prefix-rule _too strict_? In other words, are there word lists that don't satisfy the prefix rule but are compound-safe? My compound-safe version of the 1Password list purports to be this by a mere 913 words, but  again, I don't know if there are further conditions necessary to ensuring _true_ compound-safety. 
 
-At present I'm not sure why EFF fellow Joseph Bonneau avoided exact prefixes. But considering [his extensive experience in this area](http://www.jbonneau.com/doc/jbonneau_cv.pdf) I'd assume it was to avoid problems at least related to the one I've been describing. What I'm more interested in is understanding a more formal definition of what makes a good word list, and, if possible, developing a tool to check if a given list is safe to use in the most ways possible. Toward that end, I'd say my tool is a proof of concept at best. Hopefully someone far smarter than me has been working on something like this already.
+At present I'm not sure why EFF fellow Joseph Bonneau avoided exact prefixes. But considering [his extensive experience in this area](http://www.jbonneau.com/doc/jbonneau_cv.pdf) I'd assume it was to avoid problems at least related to the one I've been describing. What I'm more interested in is understanding a more formal definition of what makes a good word list, and, if possible, developing a tool to check if a given list is safe to use in the most number of ways and contexts possible. Toward that end, I'd say my tool is a proof of concept at best. 
+
+
+## Appendix
+
+In case I move blog systems and lose my Disqus comments again, here is [phoerious](https://github.com/phoerious)'s [comment](https://sts10.github.io/2018/05/05/compound-passphrase-list-safety-checker.html#comment-3886800478), referred to above, in full: 
+
+> I think the whole matter becomes easier to grasp when you don't think about it in terms of words, but in terms of pieces of information. Imagine a three-sided die with sides for "a", "b", and "ab". The first two sides each have 0.5 bits of entropy, but the third side is redundant and adds no further information. A message "ab" is always "ab" no matter if it was created by one or two tosses. If we add a separator between code words, we artificially make "ab" distinguishable and the entropy per character rises to 0.52 bits. I say "artificially", because it's the same as if we replaced "ab" with a third code word "c". But what do we do when we run out of unique characters? Then we have to use combinations, but must take some things into consideration if we don't want to lose information (and therefore reduce entropy of the message). 
+> Here we come into the field of minimal prefix-free codes, also called Huffman coding or entropy coding. It's the fundamental building block for compression, where we try to find a minimal code for a message given a certain alphabet. As an example, take an alphabet of three words, which we want to encode in binary. We only have 0 and 1 at our disposal, so we need to use combinations. We could naively encode them as 00, 01, and 10. But that is clearly over-encoded (two bits can encode four words). However, if we use variable-length codes 0, 1, and 10, we would need separators, otherwise we wouldn't know if 010 is 0,1,0, or 0,10. Thus, we need a prefix-free code. Such a code would be 0, 10, 11. Here we have our prefect compromise between the number of encoding bits needed and unambiguity, i.e., we don't lose any information.
+
+> I think at this point you can easily do the transfer back to word lists. Each word is a code word and we need them to be prefix-free to not lose information. Does it matter if "underdog" is an English word if only "under" and "dog" are on the list? No. All that matters is what else is on the list. The same is true for "underdog" and "dog". As long as "under" is not a word on the list, we are fine.
