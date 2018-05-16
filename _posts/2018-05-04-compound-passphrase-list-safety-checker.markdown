@@ -96,32 +96,37 @@ Now, listen, I don't recommend you go download the 16,103 word list and start ge
 
 Again, with emphasis: 1Password's software, as far as I know, does NOT allow users to generate random passphrases without punctuation or spaces between words. Users must choose to separate words with a period, hyphen, space, comma, or underscore. So these findings do NOT constitute a security issue with 1Password.
 
-## Back to my Hypothesis
+## Back to my hypothesis
 
 Now the question is: If take the 1Password list and remove all words that are exact prefixes of other words on the list, how many words would remain? To answer this question, I wrote [a separate Rust script](https://github.com/sts10/prefix-safety-checker) that did simply this. Fascinatingly, [the "no-prefix" 1Password list](https://github.com/sts10/prefix-safety-checker/blob/master/word_lists/agile_words.txt.no-prefix) has just 15,190 words. Each word from this list adds 13.89 bits of entropy.
 
-## How Often Are Non-Safe Passphrases Generated
+This is fewer words and fewer entropy-per-word than my "compound safety" script preserves (16,103 words, good for 13.98 bits of entropy per word). Pretty cool! 
+
+It's 100% possible that these "compound safe" lists that my script generates aren't actually safe for use in random passphrases without spaces between words. For one obvious example, there could be problematic examples I haven't thought of. So if you're actually going to clean a word list, I'd probably advice you use the [no-prefix script](https://github.com/sts10/prefix-safety-checker) rather than [the compound safety script](https://github.com/sts10/compound-passphrase-list-safety-checker), mostly because that's what the EFF did. 
+
+## Toward a more theoretical understanding of compound safety
+
+Given that my compound-safe 1Password list is longer than the no-prefix 1Password list, we can wonder: Is the no prefix-rule _too strict_? In other words, are there word lists that don't satisfy the prefix rule but are compound-safe? My compound-safe version of the 1Password list purports to be this by a mere 913 words, but again, I don't know if there are further conditions necessary to ensuring _true_ compound-safety. 
+
+Also, relatedly, is it problematic that my compound-safe lists have words that are exact prefixes of other words that remain on the list?
+
+At present I'm not sure why EFF fellow Joseph Bonneau avoided exact prefixes. But considering [his extensive experience in this area](http://www.jbonneau.com/doc/jbonneau_cv.pdf) I'd assume it was to avoid problems at least related to the one I've been describing. What I'm more interested in is understanding a more formal definition of what makes a good word list, and, if possible, developing a tool to check if a given list is safe to use in the most number of ways and contexts possible. Toward that end, I'd say my tool is a proof of concept at best. 
+
+## Appendix A: How Often Are Non-Safe Passphrases Generated
 
 As I [note in the tool's README](https://github.com/sts10/compound-passphrase-list-safety-checker#realistically-what-are-the-odds-of-either-a-compounding-or-a-problematic-overlap-occurring-in-a-randomly-generated-passphrase), I don't really know. I'm just not that strong at probability math. I appreciate any insight on this -- and I'd be curious what an "acceptable" probability would be, if any.
 
-## A Practical Use?
+## Appendix B: A Practical Use? 
 
 KeePassXC still lets user generate phrases without punctuation, and it now also lets users use their own word list ([source](https://github.com/keepassxreboot/keepassxc/issues/978#issuecomment-331441600)) (though it appears to be not very easy to do). This is certainly a nice feature, particularly for non-English speaking users. However I wonder if the lists added by users will be as carefully constructed as the EFF list. This tool could be used to "clean" lists before use (I have no reason to believe it wouldn't work for languages other than English, assuming special characters are handled well). Or it could even be re-written in C++ and integrated into KeePassXC, to be run on any user-selected word list. 
 
 It may seem more practical to have a random passphrase generator like KeePassXC's check _individual_ generated passphrases for compound-safety (and maybe only when the user chooses to have no punctuation between words). But I think this would decrease the entropy-per-word of the passphrases in a complex, unintuitive way. But that's just a guess really. Of course KeePassXC could also force users to use a word separator, like 1Password does.
 
-## Caveat about "Three-Word Compounding"
+## Appendix C: Caveat about "Three-Word Compounding"
 
 While we've explored "two-word compounding", where two words are actually one, I accept that there is a possibility of a three-word compounding -- where three words become two. No idea how likely that is, or how to efficiently check for that, but know that this tool does NOT currently check for this, and thus I can't actually guarantee that the lists outputted by the tool are completely compound-safe.
 
-## Toward a more theoretical understanding of compound safety
-
-My compound-safe lists have words that are exact prefixes of other words, prompting the question: Is the no prefix-rule _too strict_? In other words, are there word lists that don't satisfy the prefix rule but are compound-safe? My compound-safe version of the 1Password list purports to be this by a mere 913 words, but  again, I don't know if there are further conditions necessary to ensuring _true_ compound-safety. 
-
-At present I'm not sure why EFF fellow Joseph Bonneau avoided exact prefixes. But considering [his extensive experience in this area](http://www.jbonneau.com/doc/jbonneau_cv.pdf) I'd assume it was to avoid problems at least related to the one I've been describing. What I'm more interested in is understanding a more formal definition of what makes a good word list, and, if possible, developing a tool to check if a given list is safe to use in the most number of ways and contexts possible. Toward that end, I'd say my tool is a proof of concept at best. 
-
-
-## Appendix
+## Appendix D: Preserving a Comment left on the original version of this post
 
 In case I move blog systems and lose my Disqus comments again, here is [phoerious](https://github.com/phoerious)'s [comment](https://sts10.github.io/2018/05/05/compound-passphrase-list-safety-checker.html#comment-3886800478), referred to above, in full: 
 
