@@ -35,6 +35,10 @@ The one-way function that 1Password actually uses to hash its master passwords i
 
 Now I'm pretty sure that the tool you're _supposed_ to use for something like this is [hashcat](https://hashcat.net/hashcat/) or [John the Ripper](http://www.openwall.com/john/) -- here's [one user's screenshot of hashcat or something similar](https://twitter.com/netmux/status/992086115459977217). But I've been slowly teaching myself a programming language called Rust, and I wanted to learn more about password hashing (plus, with only access to my personal laptop, I felt I didn't really have a chance of winning the challenge no matter the method I used). Note: during almost every step of the way outlined below I got some help from Fediverse users (if any of y'all want a shout-out here, let me know, though I assumed you wouldn't).
 
+Here's my Github repo-- [the master branch](https://github.com/sts10/crackme-rust/tree/master) uses Rayon to use threading, while [the "no-threads" branch](https://github.com/sts10/crackme-rust/tree/no-threads) does not (it's easier to read my crappy Rust without the threading).
+
+### PDKDF2 from the Ring crate
+
 I found a Rust "crate" or library called [Ring](https://github.com/briansmith/ring) that has [a pdkdf2 function already defined](https://briansmith.org/rustdoc/ring/pbkdf2/index.html) (it's [defined here](https://github.com/briansmith/ring/blob/b73e2a248b9239d86f45711238499189d256fe29/src/pbkdf2.rs#L142)). It takes five variables as inputs: algorithm type, number of iterations, the "salt", the secret (aka our password guess), and the output variable you want to store the derived hash in.
 
 To actually use Ring's pdkdf2 function to attack the 1Password challenge format, I found that I needed to write a wrapper function that did some basic text formatting before and after actually calling the function from the Ring crate. Here is that wrapper function, plus some global variables I grabbed from [the example the Ring library gave](https://briansmith.org/rustdoc/ring/pbkdf2/index.html#password-database-example):
@@ -83,12 +87,13 @@ fn guess(password_guess: &str, iterations: u32, salt: &str, derived: &str) -> bo
 
 Obviously we're going to be running this guess function a lot (we are going to be mixing a lot of shades of red and comparing the outputted shade of purple with the given shade of purple).
 
+### The guessing loops
 
 1Password tells us that the passwords will be three words [RANDOMLY chosen](https://github.com/agilebits/crackme/tree/master/cmd) from [this word list](https://github.com/agilebits/crackme/blob/master/doc/AgileWords.txt), with a space in between each word. (To understand why it's important to have a character in between each word, you can read [an earlier post of mine](https://sts10.github.io/2018/05/05/compound-passphrase-list-safety-checker.html).)
 
 We want to run through every possible password (since their made up of three words we could also call them passphrases), performing what's called a brute force attack. For example, our first guess is going to be `aardvark aardvark aardvark`, and then our second guess will be `aardvark aardvark abaci`, and so on, until our produced derived hash matches the given derived hash.
 
-Here is the `run_crack` function (from [this old commit](https://github.com/sts10/crackme-rust/blob/0a4abdd7cf9f6783095988dc8e6d2ee2752b037b/src/main.rs)). It sports three nested `for` loops, each of which work through the same array of words created from the word list text file. If the `guess` function (shown above) returns `true`, it prints the correct guess and then returns it; else it prints the incorrect guess and moves on to the next guess.
+Here is the `run_crack` function (as seen in [the "no-threads" branch of the Github repo](https://github.com/sts10/crackme-rust/blob/no-threads/src/main.rs)). It sports three nested `for` loops, each of which work through the same array of words created from the word list text file. If the `guess` function (shown above) returns `true`, it prints the correct guess and then returns it; else it prints the incorrect guess and moves on to the next guess.
 
 ```rust
 fn run_crack(given_iterations: u32, given_salt: &str, given_derived: &str) -> Option<String> {
@@ -112,6 +117,8 @@ fn run_crack(given_iterations: u32, given_salt: &str, given_derived: &str) -> Op
 ```
 
 At this point you may be wondering how many different passphrases are possible given 1Password's stated rules. The number of words on the word list is 18,328, so the number of possible passphrases is 18,328 * 18,328 * 18,328 -- roughly 6,156,000,000,000, or over 6 trillion. 
+
+## So... How long?
 
 So how long would it take my System76 Oryx Pro with a not-too-shabby Intel i7-7700HQ? As a test I set the mystery password as `aardvark aardvark accolade`, the 100th passphrase that my program would guess. My janky benchmark code tells me I do those 100 guesses in about 4,167 milliseconds. Extrapolating from there, it would take 8,193 years to check all of the passphrases (using one core). 
 
