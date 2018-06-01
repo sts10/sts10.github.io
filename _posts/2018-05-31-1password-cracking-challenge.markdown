@@ -7,7 +7,7 @@ comments: true
 
 Ahead of this year's World Password Day, 1Password -- maker of password management software -- announced [a password cracking challenge](https://blog.agilebits.com/2018/04/26/how-strong-should-your-master-password-be-for-world-password-day-wed-like-to-know/). The company ostensibly wanted to find out how hard it would be to crack a three-word passphrase master password on one of their vaults, assuming that the attacker had the derived hash of the passphrase.
 
-(As of the evening of May 31th, none of the passwords has been cracked.)
+(As of the evening of May 31st, [none of the passwords have been cracked](https://bugcrowd.com/onepasswordgame).)
 
 ## Wait, What? 
 
@@ -73,7 +73,7 @@ The entries a bit further down in that file are the actual challenges, and they 
 
 Now I'm pretty sure that the tool you're _supposed_ to use for something like this is [hashcat](https://hashcat.net/hashcat/) or [John the Ripper](http://www.openwall.com/john/) -- here's [one user's screenshot of hashcat or something similar](https://twitter.com/netmux/status/992086115459977217). But I've been slowly teaching myself a programming language called Rust, and I wanted to learn more about password hashing (plus, with only access to my personal laptop, I felt I didn't really have a chance of winning the challenge no matter the method I used). Note: during almost every step of the way outlined below I got some help from Fediverse users (if any of y'all want a shout-out here, let me know, though I assumed you wouldn't).
 
-For the eager, here's my Github repo-- [the master branch](https://github.com/sts10/crackme-rust/tree/master) uses Rayon to use threading, while [the "no-threads" branch](https://github.com/sts10/crackme-rust/tree/no-threads) does not (it's easier to read my crappy Rust without my implementation of threading).
+For the eager, here's my Github repo: [the master branch](https://github.com/sts10/crackme-rust/tree/master) uses Rayon to use threading, while [the "no-threads" branch](https://github.com/sts10/crackme-rust/tree/no-threads) does not (it's easier to read my crappy Rust without my implementation of threading).
 
 ### PDKDF2 from the Ring crate
 
