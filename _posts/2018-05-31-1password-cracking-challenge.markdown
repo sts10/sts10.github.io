@@ -37,7 +37,7 @@ The one-way function that 1Password actually uses to hash its master passwords i
 
 ## How 1Password's Challenge Works
 
-Right when the challenge started, a 1Password employee pushed the actual challenges to [this Github repo](https://github.com/agilebits/crackme). [Here's the json file](https://github.com/agilebits/crackme/blob/master/password-day-2018.json), which has three samples and then seven actual challenges. 
+Right when the challenge started, a 1Password employee pushed the actual challenges to [this Github repo](https://github.com/agilebits/crackme). [Here's the json file](https://github.com/agilebits/crackme/blob/master/password-day-2018.json), which has three samples and then seven actual challenges. Let me just be super clear here: neither the samples nor that challenges are actual passwords of users! This is all for research purposes. Don't use my program to crack actual hashes of real user passwords!
 
 Here's the first sample (think of it as for practice): 
 
