@@ -201,3 +201,6 @@ I'm hoping that the code works slowly because my CPUs just aren't powerful enoug
 
 Unfazed, I ran the finished script (using `cargo run --release`) for about 36 hours for the lulz, figuring I might get lucky. I didn't trust my benchmark -- maybe it was guessing faster--, and as I fell asleep to the sounds of my laptop's fan working at what was presumably its top speed, I fell asleep daring to dream about miraculously winning the $4,096 top prize, and the fame it would gain me, a mere social media producer who just started writing Rust. But of course, I was just mixing the wrong shades of paint very quickly, casting for fish in a very large sea.
 
+## How I Might Go About Solving This
+
+Without a single powerful computer, I think the only way to make progress on the trillions of guesses is to use multiple computers. 
