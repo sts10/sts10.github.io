@@ -66,6 +66,10 @@ So I initially got the Type-S (the S stands for silent) for the office. But I lo
 
 I find the sound of both of them very pleasant and rhythmic. If I had to describe it it's like rolling thunder in the distance. Just awesome. 
 
+### And on Color Choice
+
+I read reviews of the "dark gray" HHKB models that said it was difficult to read the letters on the keycaps due to the lack of contrast, so went with the white color for both of mine. I'd recommend doing that as well even if your a touch typist (I'm not), for things like complex passwords, etc..
+
 ### An Attempt to Help the KUL Out a Little
 
 Part of the allure of the KUL for me was that its Cherry keyswitches meant I could buy other keycaps and switch the standard ones out for new, better ones. I saw how frequently Reddit users on the subreddit were doing this and I like the idea of being able to customize a bit (unfortunately it's harder to find Topre keycaps for the HHKB, but I already like the standard ones). 
@@ -89,3 +93,4 @@ With the new caps the KUL definitely feels better than before. I don't know how 
 I'm super happy with my two HHKB Pro-2s (the Type-S and the normal). I got the Vortex keycaps for fun to upgrade the KUL, but in truth I definitely had the feeling the HHKB would be my main keyboard even when the KUL had the Vortex keycaps on. And that's proven to be true. I have found that typing on the HHKB Pro 2 I make fewer typos and it feels more comfortable than the KUL and definitely more comfortable than the keyboard on my Mac.
 
 I highly recommend this keyboard-- you can get one from [Elite Keyboards](https://elitekeyboards.com/products.php?sub=pfu_keyboards,hhkbpro2) like I did or, apparently now, from Amazon: [Type-S](https://www.amazon.com/PFU-Hacking-Keyboard-Professional2-English/dp/B008GXQWOG/ref=sr_1_5?s=pc&ie=UTF8&qid=1477834744&sr=1-5&keywords=Happy+Hacking+Keyboard+Professional2) or [non- Type-S](https://www.amazon.com/Happy-Hacking-Keyboard-Professional2-White/dp/B000EXZ0V2/ref=sr_1_4?s=pc&ie=UTF8&qid=1477834744&sr=1-4&keywords=Happy+Hacking+Keyboard+Professional2). 
+
