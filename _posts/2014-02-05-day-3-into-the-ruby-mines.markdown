@@ -8,7 +8,7 @@ comments: true
 
 The pace is starting to pick up! Today marked our first tepid steps into Ruby, introducing not only a new topic, but a new way of thinking required by the course: programming logic. 
 
-This morning we got a quick intro to RSPEC, which is basically a way to test pieces of Ruby code. For the course, it works as an auto-grader of our work that we can run as many times as we like before turning in our code (we now submit our work via GitHub forking and pull-requesting). 
+This morning we got a quick intro to [RSPEC](http://rspec.info/), which is basically a way to test pieces of Ruby code. For the course, it works as an auto-grader of our work that we can run as many times as we like before turning in our code (we now submit our work via GitHub forking and pull-requesting). 
 
 <!-- more -->
 
