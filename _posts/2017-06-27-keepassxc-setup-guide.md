@@ -404,6 +404,7 @@ Now, let's head back over to [the KeePassXC download page](https://keepassxc.org
 
 Now, right-click the .dmg file and go to Services > "OpenPGP: Validate". You should get a pop up that says "Signed by: KeePassXC Release <release@keepassxc.org>" and then a "key ID" in parentheses. For us, what's critical is that you see "ultimate trust" printed at the end of the line. If you do, you're good! 
 
+![Ultimate trust](/img/keepassxc/signed-ultimate-trust.png)
 
 <!--
 ** I have commented out this section, rather than delete it, as I'm not 100% that it's redundant. **
