@@ -373,7 +373,7 @@ After downloading the proper version of GPG Suite, install it as you would any o
 
 Once GPG Suite is installed, go to [the KeePassXC page on verifying downloads](https://keepassxc.org/verifying-signatures). 
 
-We're looking to download and import KeePassXC's public master key.  One way to do this is to find the link in the sentence "Manual download from our website and import with gpg". Right-click (or control + click on Mac) the link and select "Save Link As..." and save it to your Downloads folder. 
+We're looking to download and import KeePassXC's public master key, which should be below the heading "Importing the Public Master Key". One way to do this is to find the link in the sentence "Manual download from our website and import with gpg". Right-click (or control + click on Mac) the link and select "Save Link As..." and save it to your Downloads folder. 
 
 ![Download KeePassXC Master Public Key](/img/keepassxc/save-master-key-as.png)
 
@@ -381,21 +381,29 @@ Now open a program called "GPG Keychain" (it should be part of the GPG Suite we 
 
 If you successfully imported the key, you should get a message to that effect.
 
-Now, if the KeePassXC website is compromised, this public key could be compromised as well. To mitigate this risk, you can import the KeePassXC's public by [other methods found here](https://keepassxc.org/verifying-signatures) and make sure it's the same public key we got above.
 
-### 3. Download the GPG signature of your KeePassXC Release
+### 3. Crosscheck the Public Master Key You Downloaded
+
+Now, if the KeePassXC website is compromised, this public key could be compromised as well. To mitigate this risk, we're going to crosscheck the key you downloaded with other sources. Another one of these sources is [KeePassXC's Twitter account](https://twitter.com/KeePassXC): the developers should have a pinned tweet that contains what's called a "fingerprint" of their master key, or at least the last 16 characters of the fingerprint. 
+
+In GPG Tools, double-click the "KeePassXC Release" key. In the sidebar that pops up, look for the fingerprint of the key you downloaded -- it should be 40 characters spaced out in 4-character segments. The last 16 characters of it should match the 16 characters in the pinned tweet exactly. 
+
+Another source is [the Github repository of the KeePassXC website](https://github.com/keepassxreboot/keepassxreboot.github.io). The key fingerprint should be displayed somewhere around [line 86 of this page](https://github.com/keepassxreboot/keepassxreboot.github.io/blob/master/verifying-signatures.html#L86).
+
+Once you're satisfied that you downloaded and imported the actual key, change the "Ownertrust" setting to "Ultimate", via the dropdown menu.
+
+![Ultimate trust](/img/keepassxc/ultimate-trust-dropdown.png)
+
+### 4. Download the GPG signature of your KeePassXC Release
 
 Now, let's head back over to [the KeePassXC download page](https://keepassxc.org/download). Click the "macOS" tab if it's not already highlighted and then click the link called "GPG signature". Save this file to your Downloads file, where you downloaded the KeePassXC dmg file earlier. It's important that they're in the same folder (this folder is likely the Downloads folder).
 
 ![Signature next to DMG](/img/keepassxc/signature-same-folder.png)
 
-### 4. Verifying your Download
+### 5. Verifying your Download
 
-Now, right-click the .dmg file and go to Services > "OpenPGP: Validate". You should get a pop up that says "Signed by: KeePassXC Release <release@keepassxc.org>" and then a fingerprint in parentheses (I got `B59076A8`). Do not worry about the words "undefined trust".
+Now, right-click the .dmg file and go to Services > "OpenPGP: Validate". You should get a pop up that says "Signed by: KeePassXC Release <release@keepassxc.org>" and then a "key ID" in parentheses. For us, what's critical is that you see "ultimate trust" printed at the end of the line. If you do, you're good! 
 
-![Signed by Release](/img/keepassxc/signed-by.png)
-
-If you see "Signed by: KeePassXC Release..." your download likely has not been tampered with. 
 
 <!--
 ** I have commented out this section, rather than delete it, as I'm not 100% that it's redundant. **
