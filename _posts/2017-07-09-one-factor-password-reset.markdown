@@ -58,11 +58,6 @@ I only knew (a) that it was likely turned on and (b) to turn it off because I sp
 
 Even then, last month, I knew to quickly disabled this (I explain how I did this below).
 
-Breathing a bit easier, I then asked Martin Shelton, a security UX researcher at Google, what he thought of this automatic recovery option being enabled. He agree with my friend Dan that it should be shut off.
-
-<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr">Yeah, +1 for shutting off SMS after setting up Authenticator (or security keys). SMS is a much bigger attack surface than an auth app or key</p>&mdash; martin shelton (@mshelton) <a href="https://twitter.com/mshelton/status/871748959894720514">June 5, 2017</a></blockquote>
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
 A lot of people disparage SMS as a second factor for login, and the fact that it's pretty easy to attack shows that, but I'm not sure it's fair to blame it for attacks that exploit SMS password reset. These two settings can (and maybe should) be totally separate-- I'm pretty sure Google could leave SMS password recover as an option but have it turned off by default.
 
 #### How to remove SMS password recovery for your Google account
@@ -136,6 +131,10 @@ One creative solution would be to switch the number PayPal has for me to a Googl
 Beyond PayPal, I'm going to be on the lookout for the ability to disable SMS password reset on all of my online accounts going forward, especially if that reset bypasses any and all forms of two factor authentication I may have set up. I also can see now how clicking the "I forget my password" link next to various login screens would give me a good clue as to what recovery options that particular service offers.
 
 I'm sure SMS password reset has saved some people's bacon in some cases, but disabling it seems to be an important step toward greater security after (1) enabling the best form of two-factor authentication and (2) using unique, random passwords for all your accounts. I'd almost say we need a site like [Two Factor  Auth](https://twofactorauth.org/) but that shows sites and services where users may have SMS password reset on without knowing it, and with instructions on how to turn it off (if possible). 
+
+## Update: A Decent Solution
+
+Taking advice from [this article](https://motherboard.vice.com/en_us/article/zm8a9y/how-to-protect-yourself-from-sim-swapping-hacks), I ended up creating and using a Google Voice number to help mitigate these issues. 
 
 ## Epilogue: Beyond 2-Factor?
 
