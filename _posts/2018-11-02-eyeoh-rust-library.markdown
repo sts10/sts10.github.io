@@ -16,7 +16,7 @@ I decided to call my library [eyeoh](https://github.com/sts10/eyeoh) and it's up
 
 ## A more concise version of the `ensure` function
 
-With a lot of help from Sergey Bugaev, who answered a lot of questions for me, I ended up with a function called `ensure` that I'm pretty proud of. From the README:
+With a lot of help from [Sergey Bugaev](https://mastodon.technology/@bugaevc), who answered a lot of questions for me (and ended up basically writing some early drafts of the function), I ended up with a function called `ensure` that I'm pretty proud of. From the README:
 
 > `ensure` attempts to parse the user's input into the type that you're calling to (in the example below, that `f64`). If the user's input can't be parsed into the assigned type, the function will loop and ask the user to try again, displaying the string (`str`) that is passed to ensure.
 
