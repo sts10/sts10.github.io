@@ -143,7 +143,9 @@ There are keyboard shortcuts to make this process slightly quicker. For example,
 
 KeePassXC has a feature called Auto-Type that, as the name implies, automatically types your username and password into a form. 
 
-In version 2.3.1, KeePassXC added an Auto-Type button in the toolbar. To perform an Auto-Type using this button, start with your cursor in the username field of the browser form you want to sign in to. Then, over in KeePassXC, single-click the entry you want to Auto-Type and then click the Auto-Type button. KeePassXC will type your username, hit tab, type your password, and then hit enter. 
+**Note**: If you're using MacOS Mojave, you'll need to go to Mac Settings > Security & Privacy > Privacy > Accessibility and allow KeePassXC to control your computer in order to use Auto-Type. More information [here](https://github.com/keepassxreboot/keepassxc/issues/2349#issuecomment-427660472).
+
+One way to use Auto-Type is the Auto-Type button in the toolbar. To perform an Auto-Type using this button, start with your cursor in the username field of the browser form you want to sign in to. Then, over in KeePassXC, single-click the entry you want to Auto-Type and then click the Auto-Type button. KeePassXC will type your username, hit tab, type your password, and then hit enter. 
 
 Alternatively you can _right-click_ the entry you want to Auto-Type and select "Perform Auto-Type" (see slightly outdated GIF below).
 
