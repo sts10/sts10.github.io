@@ -89,10 +89,10 @@ Now we have the secret stored securely. So let's say we want to use this secret 
 For my Twitter account (@sts10), I'd run: 
 
 ```bash
-qrencode -s 10 -o generated_twitter_qr_code.png 'otpauth://totp/Twitter:@sts10?secret=hereisthesecret&issuer=Twitter'
+qrencode -s 10 -o generated_twitter_qr_code.png 'otpauth://totp/Twitter:@sts10?secret=hereismysecret&issuer=Twitter'
 ```
 
-Alternatively, Google Authenicator has an option to manually enter an account name and its key (secret).
+Alternatively, Google Authenticator has an option to manually enter an account name and its key (secret).
 
 To get your secret out of a KeePassXC entry, Edit the entry > Click the Advanced icon > Highlight "TOTP Seed" under Additional Attributes > click the "Reveal" button on the right. 
 
