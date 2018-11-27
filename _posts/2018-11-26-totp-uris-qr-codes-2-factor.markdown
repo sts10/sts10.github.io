@@ -96,6 +96,10 @@ Alternatively, Google Authenticator has an option to manually enter an account n
 
 To get your secret out of a KeePassXC entry, Edit the entry > Click the Advanced icon > Highlight "TOTP Seed" under Additional Attributes > click the "Reveal" button on the right. 
 
+## A KeePassXC Feature Request
+
+It'd be super handy if users of KeePassXC could simply _drag_ a screenshot (or image) of a QR code containing a otpauth URI and drop it into a KeePass database entry to setup TOTP in one go. Likewise, it'd be nice if, once users set up TOTP for a given entry, KeePassXC had an option to show or create the corresponding for QR code.
+
 ## Appendix 
 
 Here's [a shell script that takes an otpauth URI and presents the current 6-digit code](https://github.com/shello/2fa_scripts), among other things ([h/t @shello@octodon.social](https://octodon.social/@shello/101099361987648303)).
