@@ -51,7 +51,7 @@ I ended up installing two separate command line tools to accomplish my goal, one
 
 As mentioned above, I dislike Twitter's handling of back-up codes. First, because Twitter only gives me one back-up code (as opposed to 8 or 10 like other services), but also because it's my understanding that every time I ask to view the back-up code, it gives me a new one, implying that the previous back-up codes will no longer work.
 
-So I went about getting a new QR code form Twitter, getting the secret out of the QR code and storing it in a KeePass database using [KeePassXC](https://keepassxc.org/). 
+So I went about getting a new QR code from Twitter, getting the secret out of the QR code and finally storing it in a KeePass database using [KeePassXC](https://keepassxc.org/). 
 
 Here are the steps I took to do this.
 
@@ -91,6 +91,8 @@ For my Twitter account (@sts10), I'd run:
 ```bash
 qrencode -s 10 -o generated_twitter_qr_code.png 'otpauth://totp/Twitter:@sts10?secret=hereisthesecret&issuer=Twitter'
 ```
+
+Alternatively, Google Authenicator has an option to manually enter an account name and its key (secret).
 
 To get your secret out of a KeePassXC entry, Edit the entry > Click the Advanced icon > Highlight "TOTP Seed" under Additional Attributes > click the "Reveal" button on the right. 
 
