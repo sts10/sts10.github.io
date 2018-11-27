@@ -94,6 +94,7 @@ qrencode -s 10 -o generated_twitter_qr_code.png 'otpauth://totp/Twitter:@sts10?s
 
 To get your secret out of a KeePassXC entry, Edit the entry > Click the Advanced icon > Highlight "TOTP Seed" under Additional Attributes > click the "Reveal" button on the right. 
 
+## Appendix 
 
-
+Here's [a shell script that takes an otpauth URI and presents the current 6-digit code](https://github.com/shello/2fa_scripts), among other things ([h/t @shello@octodon.social](https://octodon.social/@shello/101099361987648303)).
 
