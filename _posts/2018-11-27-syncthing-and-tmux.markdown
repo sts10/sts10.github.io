@@ -51,4 +51,28 @@ Now you should be able to run `ss` in your terminal to Start Syncthing, and `se`
 
 So for me, when I boot up any of my computers, I just run `ss` in a terminal window. Syncthing runs in a tmux session, so I can either use that terminal window for something else or safely close it. If I need to stop Syncthing for any reason (which is rare) I can run `se`.
 
+## Update: Slightly more complex versions of the BASH functions
 
+Thanks to [some help](https://gist.github.com/shello/dea96c183f9e8e7fe181ef12335b44cf) from [@shello](https://octodon.social/@shello/101146148206158754) we've added some conditionals to the functions above. This should make them a bit safer, so you could use these instead of the ones listed above. 
+
+```bash
+function ss {
+  if tmux has-session -t synct; then
+    echo "Syncthing session already started." >&2
+    return 1
+  fi
+
+  echo "Starting up Syncthing at http://127.0.0.1:8384/"
+  tmux new-session -d -s synct "syncthing -no-browser"
+}
+function se {
+  if ! tmux has-session -t synct; then
+    echo "No Syncthing session to end." >&2
+    return 1
+  fi
+
+  echo "Stopping Syncthing and killing the tmux session"
+  tmux send-keys -t synct C-c
+  tmux kill-session -t synct
+}
+```
