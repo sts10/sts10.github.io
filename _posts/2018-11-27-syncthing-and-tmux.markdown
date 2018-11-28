@@ -13,20 +13,6 @@ Our goal here is to run Syncthing "in the background", so that we don't have to 
 
 First, let's install [tmux](https://github.com/tmux/tmux). On macOS, I used Homebrew and ran `brew install tmux`. On Linux, `sudo apt-get install tmux`. Here's ["A Gentle Introduction to tmux"](https://hackernoon.com/a-gentle-introduction-to-tmux-8d784c404340) that I found helpful, but for this tutorial you'll mostly be copying and pasting tmux commands into shell/bash functions.
 
-Next, let's create a tmux config file: `touch ~/.tmux.conf`. Enter this code into that file:
-
-```
-# in ~/.tmux.conf
-
-# Neovim color help (https://github.com/neovim/neovim/issues/7764#issuecomment-411995268)
-set -g terminal-overrides ',xterm-256color:Tc'
-set -g default-terminal "tmux-256color"
-set -as terminal-overrides ',xterm*:sitm=\E[3m'
-
-
-# Set Neovim escape delay to 0 milliseconds (https://github.com/neovim/neovim/wiki/FAQ#esc-in-tmux-or-gnu-screen-is-delayed) 
-set -sg escape-time 0
-```
 
 Next, in your `~/.bash_profile` or `~/.bashrc`, add these two functions:
 
@@ -62,7 +48,23 @@ Now you should be able to run `ss` in your terminal to Start Syncthing, and `se`
 
 So for me, when I boot up any of my computers, I just run `ss` in a terminal window. Syncthing runs in a tmux session, so I can either use that terminal window for something else or safely close it. If I need to stop Syncthing for any reason (which is rare) I can run `se`.
 
-## Simpler versions of the functions
+## Appendix A: Some nice tmux settings if you'll be using Vim and/or Neovim within tmux sessions
+
+While we're here, if you want to start doing any text editing with Vim or Neovim within tmux sessions, you may find these settings helpful. First, let's create a tmux config file: `touch ~/.tmux.conf`. Enter this code into that file:
+
+```
+# in ~/.tmux.conf
+
+# Neovim color help (https://github.com/neovim/neovim/issues/7764#issuecomment-411995268)
+set -g terminal-overrides ',xterm-256color:Tc'
+set -g default-terminal "tmux-256color"
+set -as terminal-overrides ',xterm*:sitm=\E[3m'
+
+# Set Neovim escape delay to 0 milliseconds (https://github.com/neovim/neovim/wiki/FAQ#esc-in-tmux-or-gnu-screen-is-delayed) 
+set -sg escape-time 0
+```
+
+## Appendix B: Simpler versions of the Syncthing shell functions
 
 If the functions above are giving you problems, you can try these simpler versions I used at first:
 
