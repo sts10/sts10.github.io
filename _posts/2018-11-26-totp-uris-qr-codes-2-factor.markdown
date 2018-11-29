@@ -76,6 +76,8 @@ shred -ufv --iterations=20 ~/Pictures/generated_qr_code.png
 shred -ufv --iterations=20 ~/Pictures/<original screenshot of QR code>
 ```
 
+Then open `~/.bash_history` in your text editor of choice and delete the lines the contain your secret. This isn't a perfect way to cover your tracks, but it doesn't hurt.
+
 ### Notes on Other Methods of Twitter Login Verification
 
 The above procedure will leave SMS (text message) login verification **enabled**. If you don't want this enabled (for example if you're afraid of [a SIM-swapping attack](https://motherboard.vice.com/en_us/article/zm8a9y/how-to-protect-yourself-from-sim-swapping-hacks)), you'll have to disable it yourself.
