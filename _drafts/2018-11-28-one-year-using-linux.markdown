@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "One Year Using Linux"
-date: 2018-11-27 18:12:30 -0400
+date: 2018-11-28 21:12:30 -0400
 comments: true
 published: true
 ---
