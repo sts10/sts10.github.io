@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "8 Lessons from First Days of Advent of Code 2018"
+title: "9 Lessons from First Days of Advent of Code 2018"
 date: 2018-12-02 19:22:00 -0400
 comments: true
 ---
@@ -310,7 +310,17 @@ fn main() {
 }
 ```
 
-### Bonus: `continue 'next_line`???
+## Lesson 9: A note on Cargo and the organization of my AoC repo
+
+At first I had nested git projects, one for the overall project and one for each day (created by running `cargo new`). However this was messy and problematic as I had to manage tons of sets of branches, and more with each day. So I learned somethings about Cargo projects and did some reorganization, and now it's all within [one git project](https://github.com/sts10/advent-of-code-2018).
+
+Now each day's challenge (1 through, hopefully, theoretically, 25) is a Rust executable in `src/bin`. Thus the code for, say, Day 2's executable is located in `src/bin/day02.rs`. To run the Day 2 executable, from the root directory run `cargo run --bin day02`. (`cargo run` runs `src/main.rs`, which doesn't have any AoC code in it.)
+
+To run tests, if there are any, run `cargo test --bin day02`. The input for each challenge is located in `inputs` and named by the day (so for example, `inputs/day02.txt`).
+
+And there's now only [one git project](https://github.com/sts10/advent-of-code-2018)-- the overall one.
+
+## Bonus: `continue 'next_line`???
 
 In reading others' solutions to Day 2, I found [something strange](https://github.com/anowell/advent-of-code/blob/master/src/day2.rs#L48):
 
