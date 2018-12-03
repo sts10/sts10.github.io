@@ -151,7 +151,11 @@ I'm going try to remember this ranges/index trick next time I'm messing around w
 
 That code above only returned the pair of strings that were off by exactly one character (to solve the puzzle, I used my eyes to see the differing character, then removed it and submitted that as my answer). 
 
-But the puzzle actually asks for common characters, so it'd be good to have Rust do that for us. Plus, I think the more Rust way is to have that helper function return an `Option`. So I replaced it with a new function called `find_common_characters_if_there_is_only_one_that_is_different` (especially when doing AoC, I'm into really descriptive function and variable names).
+But the puzzle actually asks for common characters, so it'd be good to have Rust do that for us -- meaning our function should return a `String`. 
+
+But given how I was going to use this function, I figured that the real Rust thing to do would be to have the helper function return an `Option` instead. This also means that it can return a nice-to-use `None` whenever it didn't find what it was looking for.
+
+So I re-wrote the helper function and re-named it to `find_common_characters_if_there_is_only_one_that_is_different` (especially when doing AoC, I'm into really descriptive function and variable names).
 
 ```rust
 fn find_common_characters_if_there_is_only_one_that_is_different(
@@ -205,9 +209,9 @@ for index_of_box_id in 0..number_of_ids {
 
 I still don't love all those lines in `find_common_characters_if_there_is_only_one_that_is_different` that are used to build the Vectors, but I don't know how to make it any smoother.
 
-### `If let`
+### if let
 
-Next, Clippy informed me that I could use an `if let` rather than a `match` in `main()`. Honestly, I only recently got any sort of a handle of `if let`... it still seems very strange to me. But it is pretty concise.
+Next, [Clippy](https://github.com/rust-lang/rust-clippy) informed me that I could use an `if let` rather than a `match` in `main()`. Honestly, I only recently got any sort of a handle of `if let`... it still seems very strange to me. ([Here's the section in the Rust Book on it](https://doc.rust-lang.org/book/second-edition/ch06-03-if-let.html).) But admittedly it is pretty concise.
 
 I've left the `match` statement below, commented out, for reference.
 
