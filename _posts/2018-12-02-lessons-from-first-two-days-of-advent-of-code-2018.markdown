@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Lessons from First Days of Advent of Code 2018"
+title: "8 Lessons from First Days of Advent of Code 2018"
 date: 2018-12-02 19:22:00 -0400
 comments: true
 ---
@@ -11,11 +11,11 @@ If you're still working on either day 1 or 2 (and there's no shame in that... I'
 
 Note: Almost all of these lessons/tricks I snagged from either the code of others or Fediverse friends, some of whom I credit below and some of whom I don't. I don't think the uncredited will be upset, but if so please drop me a line on [Octodon](https://octodon.social/@schlink) or [elsewhere](https://gist.github.com/sts10/4a4e01021b3a5ad42e9b73e0abd7b7e3).
 
-Here's [my 2018 repo](https://github.com/sts10/advent-of-code-2018).
+Here's [my AoC 2018 repo](https://github.com/sts10/advent-of-code-2018) that you might want open as you read.
 
 ## Lessons from Day 1
 
-### cycle
+### 1. cycle
 
 Did you know [Rust has a `cycle` method](https://doc.rust-lang.org/std/iter/struct.Cycle.html) (similar to Ruby's) that you can use on Vectors? I didn't!
 
@@ -28,7 +28,7 @@ for frequency_change in frequency_changes.iter().cycle() {
 ```
 
 
-### HashSets
+### 2. HashSets
 
 In part 2 of day 1, I had a long vector that I had to perform a lot of look-ups with (actually a call to `contains`). In fact there were so many progressively more cumbersome `contains` calls that it took so long to run that I just assumed the compiler was in an infinite loop and I forced it to quit. In reality it was slowing down significantly and I wasn't just wasn't patient enough (it probably would have taken about 20 to 30 seconds I think).
 
@@ -61,7 +61,7 @@ for frequency_change in frequency_changes.iter().cycle() {
 }
 ```
 
-### `insert` returns a bool of `false` if value you're trying to add is already present
+### 3. `insert` returns a bool of `false` if value you're trying to add is already present
 
 As with a HashMap, you can add to a HashSet with [`insert`](https://doc.rust-lang.org/std/collections/struct.HashSet.html#method.insert).  (as opposed to `push`ing to a Vector). Interestingly, again while perusing others' code, I learned that `insert` returns `false` if the set already has the value you're trying to add. [From the docs](https://doc.rust-lang.org/std/collections/struct.HashSet.html#method.insert):
 
@@ -71,7 +71,7 @@ Thus, I think I could have removed that `contains` call and just recorded the re
 
 ## Lessons from Day 2
 
-### Sometimes it's good to iterate through ranges (and indexes) rather than collections (with `for` loops in this case)
+### 4. Sometimes it's good to iterate through ranges (and indexes) rather than collections (with `for` loops in this case)
 
 Day 2's 2nd part, at least [for me](https://github.com/sts10/advent-of-code-2018/blob/master/day02-rust/src/main.rs#L17), involves some tricky nested loops. Crucially, both loops need to iterate through the same data (a Vector of Vectors in the case below). 
 
@@ -147,7 +147,7 @@ Obviously you can make the names of the index variables shorter if you like!
 
 I'm going try to remember this ranges/index trick next time I'm messing around with nested loops in Rust (I could even use `while` loops and handle the iterators myself...). 
 
-### A Good Use Case for Returning an `Option`
+### 5. A Good Use Case for Returning an `Option`
 
 That code above only returned the pair of strings that were off by exactly one character (to solve the puzzle, I used my eyes to see the differing character, then removed it and submitted that as my answer). 
 
@@ -209,7 +209,7 @@ for index_of_box_id in 0..number_of_ids {
 
 I still don't love all those lines in `find_common_characters_if_there_is_only_one_that_is_different` that are used to build the Vectors, but I don't know how to make it any smoother.
 
-### if let
+### 6. if let
 
 Next, [Clippy](https://github.com/rust-lang/rust-clippy) informed me that I could use an `if let` rather than a `match` in `main()`. Honestly, I only recently got any sort of a handle of `if let`... it still seems very strange to me. ([Here's the section in the Rust Book on it](https://doc.rust-lang.org/book/second-edition/ch06-03-if-let.html).) But admittedly it is pretty concise.
 
@@ -240,7 +240,7 @@ for index_of_box_id in 0..number_of_ids {
 
 ```
 
-### The `entry` / `and_modify` / `or_insert` pattern for HashMaps
+### 7. The `entry` / `and_modify` / `or_insert` pattern for HashMaps
 
 If you want to make a [HashMap](https://doc.rust-lang.org/std/collections/struct.HashMap.html) of counts of things, there's some handy methods like `and_modify` and `or_insert`. When set up in a chain, it searches for a key. If it has the key already, it adds one (or whatever you tell it to do in the block. If the key isn't already present, it inserts it with the value you give to `or_insert`. 
 
@@ -272,7 +272,7 @@ fn main() {
 
 ```
 
-### Concatenating (adding) multiple strings with `format!`
+### 8. Concatenating (adding) multiple strings with `format!`
 
 In my limited experience, `format!` is the most dependable and flexible way to concatenate `&str`s in Rust.
 
