@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "9 Lessons from First Days of Advent of Code 2018"
+title: "8 Lessons from First Days of Advent of Code 2018"
 date: 2018-12-02 19:22:00 -0400
 comments: true
 ---
@@ -275,42 +275,22 @@ fn main() {
     println!("{:?}", pair);
   }
 }
-
 ```
 
-### 8. Concatenating (adding) multiple strings with `format!`
-
-In my limited experience, `format!` is the most dependable and flexible way to concatenate `&str`s in Rust.
+We could also use `sort_by_key` to sort the `count_vec`. We'll need to reverse it to get the highest counts at the top:
 
 ```rust
-fn main() {
-  let str1 = "Merry";
-  let str2 = "Christmas";
-  let str3 = "Happy";
-  let str4 = "New Year";
-  
-  let all_together = format!("{} {} and a {} {}!", str1, str2, str3, str4);
-  
-  println!("{}", all_together);
+// Now let's sort by counts 
+// best way I know how is by making a new vector of tuples
+let mut count_vec: Vec<(char, usize)> = counts_hashmap.into_iter().collect();
+count_vec.sort_by_key(|&(_c, num)| num);
+count_vec.reverse();
+for pair in &count_vec {
+  println!("{:?}", pair);
 }
 ```
 
-You can even concatenate `String`s with `&str`s:
-
-```rust
-fn main() {
-  let str1 = "Merry";
-  let str2 = "Christmas".to_string();
-  let str3 = "Happy";
-  let str4 = "New Year".to_string();
-  
-  let all_together = format!("{} {} and a {} {}!", str1, str2, str3, str4);
-  
-  println!("{}", all_together);
-}
-```
-
-## Lesson 9: A note on Cargo and the organization of my AoC repo
+## Lesson 8: A note on Cargo and the organization of my AoC repo
 
 At first I had nested git projects, one for the overall project and one for each day (created by running `cargo new`). However this was messy and problematic as I had to manage tons of sets of branches, and more with each day. So I learned somethings about Cargo projects and did some reorganization, and now it's all within [one git project](https://github.com/sts10/advent-of-code-2018).
 
