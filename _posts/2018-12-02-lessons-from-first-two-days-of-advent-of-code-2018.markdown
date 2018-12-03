@@ -5,7 +5,7 @@ date: 2018-12-02 19:22:00 -0400
 comments: true
 ---
 
-I've got two days of [Advent of Code 2018](https://adventofcode.com/) under my belt and four stars to show for it! But I'll be the first to admit that I had plenty of help, so I thought it only fair that I write out some of the things I've _already_ learned about Rust.
+I've got two days of [Advent of Code 2018](https://adventofcode.com/2018) under my belt and four stars to show for it! But I'll be the first to admit that I had plenty of help, so I thought it only fair that I write out some of the things I've _already_ learned about Rust.
 
 If you're still working on either day 1 or 2 (and there's no shame in that... I've yet to get to Day 10), heads up that there are SPOILERS below.
 
@@ -15,7 +15,10 @@ Here's [my AoC 2018 repo](https://github.com/sts10/advent-of-code-2018) that you
 
 ## Lessons from Day 1
 
-### 1. cycle
+- [The AoC challenge](https://adventofcode.com/2018/day/1)
+- [My solutions](https://github.com/sts10/advent-of-code-2018/blob/master/src/bin/day01.rs)
+
+### 1. Rust has a `cycle` method
 
 Did you know [Rust has a `cycle` method](https://doc.rust-lang.org/std/iter/struct.Cycle.html) (similar to Ruby's) that you can use on Vectors? I didn't!
 
@@ -71,9 +74,12 @@ Thus, I think I could have removed that `contains` call and just recorded the re
 
 ## Lessons from Day 2
 
+- [The AoC challenge](https://adventofcode.com/2018/day/2)
+- [My solutions](https://github.com/sts10/advent-of-code-2018/blob/master/src/bin/day02.rs)
+
 ### 4. Sometimes it's good to iterate through ranges (and indexes) rather than collections (with `for` loops in this case)
 
-Day 2's 2nd part, at least [for me](https://github.com/sts10/advent-of-code-2018/blob/master/day02-rust/src/main.rs#L17), involves some tricky nested loops. Crucially, both loops need to iterate through the same data (a Vector of Vectors in the case below). 
+Day 2's 2nd part, at least [for me](https://github.com/sts10/advent-of-code-2018/blob/master/src/bin/day02.rs#L18), involves some tricky nested loops. Crucially, both loops need to iterate through the same data (a Vector of Vectors in the case below). 
 
 At first, I tried two `for` loops, each in a pattern familiar to me. 
 
