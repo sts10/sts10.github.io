@@ -1,4 +1,4 @@
---
+---
 layout: post
 title: "Lessons from First Days of Advent of Code 2018"
 date: 2018-12-02 19:22:00 -0400
