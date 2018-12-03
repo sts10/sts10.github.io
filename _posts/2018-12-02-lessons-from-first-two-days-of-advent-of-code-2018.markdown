@@ -300,7 +300,7 @@ fn main() {
 }
 ```
 
-### Bonus `continue 'next_line`???
+### Bonus: `continue 'next_line`???
 
 In reading others' solutions to Day 2, I found [something strange](https://github.com/anowell/advent-of-code/blob/master/src/day2.rs#L48):
 
@@ -338,4 +338,4 @@ fn part2(input: &str) -> Result<String, Error> {
 }
 ```
 
-I'm assuming that `continue 'next_line;` makes the compiler jump up to the line that has `'next_line: for j in i..line_count {`. I'm wondering if that's a way for us to `continue` or `break` out of multiple loops if we wanted to. Something to checkout.
+I'm assuming that `continue 'next_line;` makes the compiler jump up to the line that has `'next_line: for j in i..line_count {`. I'm wondering if that's a way to `continue` or `break` out of multiple loops if we wanted to. Something to checkout.
