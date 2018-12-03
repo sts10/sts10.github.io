@@ -1,21 +1,23 @@
----
+--
 layout: post
 title: "Lessons from First Days of Advent of Code 2018"
 date: 2018-12-02 19:22:00 -0400
 comments: true
 ---
 
-I've got two days of [Advent of Code 2018](https://adventofcode.com/) under my belt and four stars to show for it! But I had plenty of help.
+I've got two days of [Advent of Code 2018](https://adventofcode.com/) under my belt and four stars to show for it! But I'll be the first to admit that I had plenty of help, so I thought it only fair that I write out some of the things I've _already_ learned about Rust.
 
-I thought I'd take a second to write out some the lessons I've _already_ learned. Note: Almost all of these lessons/tricks I snagged from either the code of others or fediverse friends, some of whom I credit and some of whom I don't. I don't think the uncredited will be upset, but if so please drop me a line on [Octodon](https://octodon.social/@schlink) or [elsewhere](https://gist.github.com/sts10/4a4e01021b3a5ad42e9b73e0abd7b7e3).
+If you're still working on either day 1 or 2 (and there's no shame in that... I've yet to get to Day 10), heads up that there are SPOILERS below.
+
+Note: Almost all of these lessons/tricks I snagged from either the code of others or Fediverse friends, some of whom I credit below and some of whom I don't. I don't think the uncredited will be upset, but if so please drop me a line on [Octodon](https://octodon.social/@schlink) or [elsewhere](https://gist.github.com/sts10/4a4e01021b3a5ad42e9b73e0abd7b7e3).
 
 Here's [my 2018 repo](https://github.com/sts10/advent-of-code-2018).
 
 ## Lessons from Day 1
 
-### `cycle`
+### cycle
 
-Did you know [Rust has a `cycle` method](https://doc.rust-lang.org/std/iter/struct.Cycle.html) similar to Ruby's that you can use on Vectors? I didn't!
+Did you know [Rust has a `cycle` method](https://doc.rust-lang.org/std/iter/struct.Cycle.html) (similar to Ruby's) that you can use on Vectors? I didn't!
 
 ```rust
 // The cycle method is key here-- it makes the for loop go
@@ -23,8 +25,9 @@ Did you know [Rust has a `cycle` method](https://doc.rust-lang.org/std/iter/stru
 for frequency_change in frequency_changes.iter().cycle() {
   // <loop content here>
 }
-
 ```
+
+
 ### HashSets
 
 In part 2 of day 1, I had a long vector that I had to perform a lot of look-ups with (actually a call to `contains`). In fact there were so many progressively more cumbersome `contains` calls that it took so long to run that I just assumed the compiler was in an infinite loop and I forced it to quit. In reality it was slowing down significantly and I wasn't just wasn't patient enough (it probably would have taken about 20 to 30 seconds I think).
@@ -32,12 +35,15 @@ In part 2 of day 1, I had a long vector that I had to perform a lot of look-ups 
 On the advice of some of my livestream viewers, I replaced the Vector with a HashSet:
 
 ```rust
+use std::collections::HashSet;
+// ...
+
 // To decrease look-up times, we're going to use a HashSet where I might have
 // used a Vector
 let mut recorded_frequencies = HashSet::new();
 ```
 
-A [HashSet](https://doc.rust-lang.org/std/collections/struct.HashSet.html) is basically a HashMap without keys, only values. Sounds like a Vector, right? It sort of is, but my understanding is that, like [HashMaps](https://doc.rust-lang.org/std/collections/struct.HashMap.html), it's optimized for look-ups rather than iteration. In my case, the "look-up" was a [`contains`](https://doc.rust-lang.org/std/collections/struct.HashSet.html#method.contains) call.
+A [HashSet](https://doc.rust-lang.org/std/collections/struct.HashSet.html) is basically a HashMap with only values (no keys). Sounds like a Vector, right? It sort of is, but my understanding is that, like [HashMaps](https://doc.rust-lang.org/std/collections/struct.HashMap.html), it's optimized for look-ups rather than iteration. In my case, the "look-up" was a [`contains`](https://doc.rust-lang.org/std/collections/struct.HashSet.html#method.contains) call.
 
 ```rust
 for frequency_change in frequency_changes.iter().cycle() {
@@ -57,7 +63,7 @@ for frequency_change in frequency_changes.iter().cycle() {
 
 ### `insert` returns a bool of `false` if value you're trying to add is already present
 
-As with a HashMap, you add to a HashSet with [`insert`](https://doc.rust-lang.org/std/collections/struct.HashSet.html#method.insert). Interestingly, again while perusing others' code, I learned that `insert` returns `false` if the set already has the value you're trying to add. [From the docs](https://doc.rust-lang.org/std/collections/struct.HashSet.html#method.insert):
+As with a HashMap, you can add to a HashSet with [`insert`](https://doc.rust-lang.org/std/collections/struct.HashSet.html#method.insert).  (as opposed to `push`ing to a Vector). Interestingly, again while perusing others' code, I learned that `insert` returns `false` if the set already has the value you're trying to add. [From the docs](https://doc.rust-lang.org/std/collections/struct.HashSet.html#method.insert):
 
 > Adds a value to the set. If the set did not have this value present, true is returned. If the set did have this value present, false is returned.
 
@@ -87,7 +93,9 @@ for box_id_vec in vector_of_box_ids_as_vecs {
 
 But, given my experience with nested loops in Rust (see [this beast](https://github.com/sts10/crackme-rust/blob/master/src/main.rs#L34)), I knew this would through a lot of borrow checker errors (spoiler alert: it did). 
 
-I wrestled with it and started adding `&`s and `ref`s willy nilly, but it just wouldn't compile. Eventually I made two distinct copes of the Vector in question, and got the right answer. I left it at that for an hour or two and checked solutions from other people doing AoC in Rust. One of them (I can't find it now, but here's [one](https://git.gitano.org.uk/personal/dsilvers/aoc.git/tree/2018/src/bin/day2.rs#n33)) used two for loops that both looped through _ranges_ of `0..vector.len()`, which nicely avoids a lot borrowing issues.
+I wrestled with it and started adding `&`s and `ref`s willy nilly, but it just wouldn't compile. Eventually I made two distinct copies of the Vector in question, and got the right answer and the gold star.
+
+I left it at that for an hour or two and then started checking solutions from other people doing AoC in Rust. One of them (I can't find it now, but here's a similar [one](https://git.gitano.org.uk/personal/dsilvers/aoc.git/tree/2018/src/bin/day2.rs#n33)) used two `for` loops that, rather than iterating through Vectors, instead both looped through _ranges_ of `0..vector.len()`. This seems to nicely avoid a lot or the ownership and borrowing issues I hit with the code above.
 
 I also switched the main data source, from a `Vec<Vec<char>>` called `vector_of_box_ids_as_vecs` to a more simple `Vec<String>` called `vector_of_box_ids`.
 
@@ -133,7 +141,6 @@ fn do_two_strs_differ_by_one_character_in_the_same_position(a: &str, b: &str) ->
 
   how_many_characters_are_different == 1
 }
-
 ``` 
 
 Obviously you can make the names of the index variables shorter if you like!
@@ -263,7 +270,7 @@ fn main() {
 
 ### Concatenating (adding) multiple strings with `format!`
 
-`format!` is the most dependable and flexible way to concatenate `&str`s.
+In my limited experience, `format!` is the most dependable and flexible way to concatenate `&str`s in Rust.
 
 ```rust
 fn main() {
