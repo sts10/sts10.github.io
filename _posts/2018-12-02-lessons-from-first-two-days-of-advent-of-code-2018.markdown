@@ -189,7 +189,7 @@ fn find_common_characters_if_there_is_only_one_that_is_different(
 
 However, I didn't love all those lines in `find_common_characters_if_there_is_only_one_that_is_different` that are used to build the Vectors, but I didn't know how to make it any smoother. 
 
-Then, again with even more help from aforementioned Fediverse friend, we worked out a much better function, including my first use of [`zip`](https://doc.rust-lang.org/std/iter/struct.Zip.html) in Rust, which, I _think_, basically takes to iterators and zips them into a new iterator with tuples of the original iterators.
+Then, again with even more help from aforementioned Fediverse friend, we worked out a much better function, including my first use of [`zip`](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.zip) in Rust, which, I _think_, basically takes to iterators and zips them into a new iterator with tuples of the original iterators.
 
 ```rust
 fn find_common_characters_if_there_is_only_one_that_is_different(
