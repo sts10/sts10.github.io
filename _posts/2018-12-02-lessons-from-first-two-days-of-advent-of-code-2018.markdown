@@ -77,7 +77,7 @@ Thus, I think I could have removed that `contains` call and just recorded the re
 - [The AoC challenge](https://adventofcode.com/2018/day/2)
 - [My solutions](https://github.com/sts10/advent-of-code-2018/blob/master/src/bin/day02.rs)
 
-### 4. Sometimes it's good to iterate through ranges (and indexes) rather than collections (with `for` loops in this case)
+### 4. What to borrow when nesting `for` loops
 
 Day 2's 2nd part, at least [for me](https://github.com/sts10/advent-of-code-2018/blob/master/src/bin/day02.rs#L18), involves some tricky nested loops. Crucially, both loops need to iterate through the same data (a Vector of Vectors in the case below). 
 
@@ -125,43 +125,36 @@ for index_of_box_id in 0..number_of_ids {
 }
 ```
 
-And here's that helper function (more on it below):
-
-```rust
-fn do_two_strs_differ_by_one_character_in_the_same_position(a: &str, b: &str) -> bool {
-  let mut a_vec: Vec<char> = [].to_vec();
-  let mut b_vec: Vec<char> = [].to_vec();
-
-  for c in a.chars() {
-    a_vec.push(c);
-  }
-  for c in b.chars() {
-    b_vec.push(c);
-  }
-  let mut how_many_characters_are_different = 0;
-  for (index, c) in a_vec.iter().enumerate() {
-    if *c != b_vec[index] {
-      how_many_characters_are_different += 1;
-    }
-  }
-
-  how_many_characters_are_different == 1
-}
-``` 
-
 Obviously you can make the names of the index variables shorter if you like!
 
 I'm going try to remember this ranges/index trick next time I'm messing around with nested loops in Rust (I could even use `while` loops and handle the iterators myself...). 
 
-### 5. A Good Use Case for Returning an `Option`
+*Update*: With some help from a Fediverse friend, we got the original `for` loop pattern to compile and work. My original attempt was _sort of_ close?
 
-That code above only returned the pair of strings that were off by exactly one character (to solve the puzzle, I used my eyes to see the differing character, then removed it and submitted that as my answer). 
+```rust
+// new, better version of part 2
+for box_id_vec in &vector_of_box_ids {
+    for box_id_vec_to_compare in &vector_of_box_ids {
+        if let Some(common_characters) = find_common_characters_if_there_is_only_one_that_is_different(
+                box_id_vec,
+                box_id_vec_to_compare,
+            ) {
+            println!("common characters are {}", common_characters);
+            if common_characters == "lujnogabetpmsydyfcovzixaw" {
+                println!("Correct!");
+            }
+        }
+    }
+}
+```
 
-But the puzzle actually asks for common characters, so it'd be good to have Rust do that for us -- meaning our function should return a `String`. 
+Hooray! (Though I'm still going to keep that range/index pattern in my bag of tricks.)
 
-But given how I was going to use this function, I figured that the real Rust thing to do would be to have the helper function return an `Option` instead. This also means that it can return a nice-to-use `None` whenever it didn't find what it was looking for.
+### 5. `Option`s and `zip`s, oh my
 
-So I re-wrote the helper function and re-named it to `find_common_characters_if_there_is_only_one_that_is_different` (especially when doing AoC, I'm into really descriptive function and variable names).
+Now let's look at the helper function called `find_common_characters_if_there_is_only_one_that_is_different`. 
+
+Given how I was going to use this function, I figured that the real Rust thing to do would be to have the helper function return an `Option`. This also means that it can return a nice-to-use `None` whenever it didn't find what it was looking for.
 
 ```rust
 fn find_common_characters_if_there_is_only_one_that_is_different(
@@ -194,6 +187,44 @@ fn find_common_characters_if_there_is_only_one_that_is_different(
 }
 ```
 
+However, I didn't love all those lines in `find_common_characters_if_there_is_only_one_that_is_different` that are used to build the Vectors, but I didn't know how to make it any smoother. 
+
+Then, again with even more help from aforementioned Fediverse friend, we worked out a much better function, including my first use of [`zip`](https://doc.rust-lang.org/std/iter/struct.Zip.html) in Rust, which, I _think_, basically takes to iterators and zips them into a new iterator with tuples of the original iterators.
+
+```rust
+fn find_common_characters_if_there_is_only_one_that_is_different(
+    a: &str,
+    b: &str,
+) -> Option<String> {
+    let mut common_characters: String = "".to_string();
+    let mut how_many_characters_are_different = 0;
+
+    // make the zip
+    let zipped = a.chars().zip(b.chars());
+
+    // iterate through the zip
+    for (a_char, b_char) in zipped {
+        if a_char != b_char {
+            how_many_characters_are_different += 1;
+        } else {
+            // add c to the end of common_characters using format!
+            common_characters.push(b_char);
+        }
+
+        if how_many_characters_are_different > 1 {
+            // there are already more than 1 character different,
+            // so we don't need to keep checking for difference
+            break;
+        }
+    }
+    if how_many_characters_are_different == 1 {
+        Some(common_characters)
+    } else {
+        None
+    }
+}
+```
+
 And here's how I use the new function in `main()`:
 
 ```rust
@@ -213,7 +244,7 @@ for index_of_box_id in 0..number_of_ids {
 
 ```
 
-I still don't love all those lines in `find_common_characters_if_there_is_only_one_that_is_different` that are used to build the Vectors, but I don't know how to make it any smoother.
+I even wrote [a series of tests](https://github.com/sts10/advent-of-code-2018/blob/master/src/bin/day02.rs#L133) for `find_common_characters_if_there_is_only_one_that_is_different` to make sure it did what we wanted.
 
 ### 6. if let
 
