@@ -140,9 +140,6 @@ for box_id_vec in &vector_of_box_ids {
                 box_id_vec_to_compare,
             ) {
             println!("common characters are {}", common_characters);
-            if common_characters == "lujnogabetpmsydyfcovzixaw" {
-                println!("Correct!");
-            }
         }
     }
 }
