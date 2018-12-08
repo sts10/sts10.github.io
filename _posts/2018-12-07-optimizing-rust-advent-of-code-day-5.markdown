@@ -29,9 +29,9 @@ In solving it, I wrote a `react` function that takes one of these polymer string
 
 If we indeed find a canceling pair, we remove them from the vector and `break` out of the inner `for` loop to an outer loop, where we begin all over, starting at the first two characters.
 
-You can find my current solution here, but I wanted to walk us through some of the refactoring and optimizations two of the key functions went through. 
+You can find my current solution [here](https://github.com/sts10/advent-of-code-2018/blob/master/src/bin/day05.rs), but I wanted to walk us through some of the refactoring and optimizations two of the key functions went through. 
 
-Let's start by looking at my first, successful solution. Here are the originally versions of two functions:
+Let's start by looking at my original versions of these two functions. This code both compiles successfully and solves the puzzle, but running `cargo build --bin day05 --release & time cargo run --bin day05 --release` shows that solving part 2 of the challenge (which basically involves running through 26 long polymers) takes my Oryx Pro a whopping 2 minutes and 20 seconds.
 
 ```rust
 fn react(mut p_vec: Vec<char>) -> Vec<char> {
@@ -105,7 +105,9 @@ fn react(mut p_vec: Vec<char>) -> Vec<char> {
 }
 ```
 
-This led to a huge boost in efficiency... on the order of 250x by Daniel's calculations. I didn't do a speed test myself, but it was way faster. 
+This led to a huge boost in efficiency... when doing part 2 of the challenge (which effectively requires you react/solve 26 long polymers), Daniel says his run time went from ~30 minutes to ~7 seconds! I didn't do a speed test myself, but I saw a tremendous improvement. 
+
+Of course, this change would likely increase the overall program's efficiency no matter what programming language I used. But the next two are (relatively) particular to Rust.
 
 ## Don't make a String when sticking with `&str`s will do
 
@@ -120,14 +122,24 @@ error[E0369]: binary operation `==` cannot be applied to type `std::char::ToLowe
 
 I dropped the `.to_string()` calls in there out of necessity: `if a.is_uppercase() && b.is_lowercase() && a.to_lowercase().to_string() == b.to_string()`
 
-But with time to go back, I found a similar method that did work on `char`s: [`to_ascii_lowercase()`](https://doc.rust-lang.org/std/primitive.char.html#method.to_ascii_lowercase). I also took the time to clean up the conditional logic, so in the end I got:
+But with time to go back, I found a similar method that did work on `char`s: [`to_ascii_lowercase()`](https://doc.rust-lang.org/std/primitive.char.html#method.to_ascii_lowercase). I also took the time to clean up the conditional logic and got:
 
 ```rust
 fn do_these_two_chars_cancel(a: char, b: char) -> bool {
   a.to_ascii_lowercase() == b.to_ascii_lowercase() && a.is_uppercase() == b.is_lowercase()
 }
 ```
-As I wrote in a comment, while two `<char>.to_lowercase()` can't be compared for equality, two `<char>.to_ascii_lowercase()`s can be.  Informally, I found that this version of the function was about 9x faster than my original. I could be a little less verbose if I chose to use [`eq_ignore_ascii_case()`](https://doc.rust-lang.org/std/primitive.char.html#method.eq_ignore_ascii_case).
+
+As I wrote in a comment, while two `<char>.to_lowercase()` can't be compared for equality, two `<char>.to_ascii_lowercase()`s can be.  Informally, I found that this version of the function was about 9x faster than my original. 
+
+In order to be a little less verbose, I ended up using [`eq_ignore_ascii_case()`](https://doc.rust-lang.org/std/primitive.char.html#method.eq_ignore_ascii_case), so it became just: 
+
+```rust
+fn do_these_two_chars_cancel(a: char, b: char) -> bool {
+  a.eq_ignore_ascii_case(&b) && a.is_uppercase() == b.is_lowercase()
+}
+
+```
 
 ## One `drain` is faster than two `remove`s
 
@@ -194,9 +206,10 @@ fn react(mut p_vec: Vec<char>) -> Vec<char> {
 }
 
 fn do_these_two_chars_cancel(a: char, b: char) -> bool {
-  // it's MUCH faster to not convert the chars into Strings before comparing them.
-  // While two <char>.lowercase() can't be compared for eqaulity, two <char>.to_ascii_lowercase() 's
-  // can be
-  a.to_ascii_lowercase() == b.to_ascii_lowercase() && a.is_uppercase() == b.is_lowercase()
+  a.eq_ignore_ascii_case(&b) && a.is_uppercase() == b.is_lowercase()
 }
 ```
+
+## How much faster? 
+
+With this version of the two functions, solving part 2 (again running `cargo build --bin day-05 --release && time cargo run --bin day05 --release`), on my Oryx Pro takes only about 1.1 _seconds_, about 127x faster than the original version. 
