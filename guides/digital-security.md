@@ -4,12 +4,13 @@ title: Digital Security Guide for Friends and Loved Ones
 comments: true
 ---
 
-
 As 2019 approaches, I thought I'd write a new, updated version of [my casual security guide from 2016](https://sts10.github.io/2016/11/13/some-privacy-and-security-measures.html). Same disclaimers apply: I am still not an expert. I'm writing this mostly to have something to send to friends and family who ask me questions about this stuff. Note: I reference a lot of work by [Martin Shelton](https://twitter.com/mshelton), a researcher at Google. Also, this is a work in progress!
 
 ## Level 1: Enable 2-factor authentication (at the very least, on your email)
 
-Turning on two-factor authentication (2FA) for an online account means that whenever you log into the account, a code will be sent to your phone that you’ll have to enter after entering your correct password. The idea here is that even if an attacker gets your password, they would also need your phone to get this code. 
+Turning on two-factor authentication (2FA) for an online account means that whenever you log into the account, a code will be sent to your phone that you’ll have to enter after entering your correct password. The idea here is that even if someone gets ahold of your password, they would also need your phone to get this code. 
+
+<img src="https://cdn-images-1.medium.com/max/800/1*TMyswLat4xWqrEt8_o7N-Q.png" width="250" align="center" />
 
 You should set up 2-factor authentication for all of your online accounts that support it. Here's [a general guide](https://medium.com/@mshelton/two-factor-authentication-for-beginners-b29b0eec07d7), and here are some how-to guides from some popular services: [GMail](https://www.google.com/landing/2step/), [Twitter](https://support.twitter.com/articles/20170388), [Facebook](https://www.facebook.com/help/148233965247823), [Dropbox](https://www.dropbox.com/help/security/enable-two-step-verification), [GitHub](https://help.github.com/articles/securing-your-account-with-two-factor-authentication-2fa/) and [a list of other services](https://twofactorauth.org/). If you enable 2-factor for only one account, do it on your email.
 
@@ -54,7 +55,7 @@ Google/GMail users should also periodically complete Google's ["Security Checkup
  
 ## Level 3: Use better passwords
 
-You should use long, randomly generated passwords for every account, but even more important is that you should **never reuse passwords** (even if you give them small variations). This is because services get breached and passwords leak all the time, and attackers simply try your password from the leaked service for your other services (you can see which services you use that have been breached at [haveibeenpwned.com](https://haveibeenpwned.com/)).
+You should use long, randomly generated passwords for every account, but even more important is that you should **never reuse passwords** (even if you give them small variations). This is because services get breached and passwords leak all the time, and someone could simply try your password from the leaked service for your other services (you can see which services you use that have been breached at [haveibeenpwned.com](https://haveibeenpwned.com/)).
 
 What's a good password look like? `Vy<{t/W~Ee.5}k(D[Bm(N` and `uncoiled armful polymer appeasing shredder recast` are both examples of strong passwords. `StarWars13`... not so much.
 
@@ -62,7 +63,7 @@ Since our goal is to not reuse any passwords, we're going to have tens if not hu
 
 As long as you choose a good manager (see below) and make the password to open this vault very strong, you'll likely be more secure overall. 
 
-One way to create a strong, but memorable password is to generate a _passphrase_ [using dice](https://www.eff.org/dice) ([more info on diceware passphrases](https://theintercept.com/2015/03/26/passphrases-can-memorize-attackers-cant-guess/)). This process will create a passphrase like "rubdown cytoplasm sculptor kindred unsubtle roamer", which should be easy for you to memorize, but very hard for an attacker to guess ([this invaluable xkcd comic explains the concept well](https://xkcd.com/936/)). 
+One way to create a strong, but memorable password is to generate a _passphrase_ [using dice](https://www.eff.org/dice) ([more info on diceware passphrases](https://theintercept.com/2015/03/26/passphrases-can-memorize-attackers-cant-guess/)). This process will create a passphrase like "rubdown cytoplasm sculptor kindred unsubtle roamer", which should be easy for you to memorize, but very hard for anyone else to guess ([this invaluable xkcd comic explains the concept well](https://xkcd.com/936/)). 
 
 ### Password manager recommendations
 
@@ -80,13 +81,19 @@ You can [read more about creating and storing strong passwords from the EFF](htt
 
 ### Don't get phished
 
-Basically don't click on sketchy looking links, especially in your email. One attacker trick is to send you an email ("Fraud alert" it might say) with a link to go log into an account, like your bank account. It may _look_ like your bank's website, but it could be faked to steal your password. To avoid this, just open your browser and type in your bank's website and log in there. 
+Basically don't click on sketchy looking links, especially in your email. One apparently common trick is to send you an email ("Fraud alert" it might say) with a link to go log into an account, like your bank account. It may _look_ like your bank's website, but it could be faked to steal your password. To avoid this, just open your browser and type in your bank's website and log in there. 
+
+Here are [some examples of phishing emails](https://motherboard.vice.com/en_us/article/ezpmyw/fake-gmail-alerts-phishing). Don't click anywhere inside of emails like this!
+
+<img src="https://motherboard-images.vice.com/content-images/contentimage/no-id/1476977290821129.png" width="450" />
+
+<img src="https://motherboard-images.vice.com/content-images/contentimage/no-id/1476977310675950.png" width="450" />
 
 Here's [the EFF's guide to avoid phishing attacks](https://ssd.eff.org/en/module/how-avoid-phishing-attacks) and [one from Security in a Box](https://securityinabox.org/en/guide/malware/). If you see a suspicious-looking URL and want to check if it's safe, [Google has a service for that](https://transparencyreport.google.com/safe-browsing/search).
 
 ### Keep your apps and operating systems up-to-date
 
-It may be annoying to keep everything up-to-date, but it's often important for security. 
+It may be annoying to keep everything up-to-date, but it's often important for security. Hackers are constantly looking for vulnerabilities in software, and software companies are constantly "patching," or updating their software to prevent this. But you only get the benefit of these patches if you click that sometimes-annoying "Update" button, rather than continuously put it off till tomorrow. 
 
 ### Your browser
 
@@ -120,7 +127,7 @@ I use [Standard Notes](https://standardnotes.org/) for taking notes (rather than
 
 ## Level 5: Understanding methods by which your passwords can be reset
 
-This section is probably only necessary for journalists/activists/political folks, but we'll press on. If an attacker can easily reset your account's password, they can also gain access and lock you out. While this is sometimes mitigated by 2-factor authentication, it's worth thinking through some examples. 
+This section is probably only necessary for journalists/activists/political folks, but we'll press on. If someone can easily reset your account's password, they can also gain access and lock you out. While this is sometimes mitigated by 2-factor authentication, it's worth thinking through some examples. 
 
 For example, [SIM-jacking](https://motherboard.vice.com/en_us/article/zm8a9y/how-to-protect-yourself-from-sim-swapping-hacks) or SIM-swapping is when attackers get your cellphone service provider to route your calls and text messages to their phone rather than yours. They can then (usually) do a bunch of other things at this point, like reset passwords to your online accounts. [Scary](https://motherboard.vice.com/en_us/article/vbqax3/hackers-sim-swapping-steal-phone-numbers-instagram-bitcoin), right?  
 
@@ -142,6 +149,6 @@ To do this, first go to [the "Signing in" section of Google's security page](htt
 
 ## See Something Say Something
 
-I’m low-key terrified that there is misinformation above. If you see something wrong or misleading here, or you have suggestions, feel free to ping me on [Twitter](https://twitter.com/sts10) or [Mastodon](https://octodon.social/@schlink), or [send me an encrypted message using one of the services listed here](https://gist.github.com/sts10/4a4e01021b3a5ad42e9b73e0abd7b7e3).
+I'm low-key terrified that there is misinformation above. If you see something wrong or misleading here, or you have suggestions, feel free to ping me on [Twitter](https://twitter.com/sts10) or [Mastodon](https://octodon.social/@schlink), or [send me an encrypted message using one of the services listed here](https://gist.github.com/sts10/4a4e01021b3a5ad42e9b73e0abd7b7e3).
 
-Last updated: December 29, 2018
+Last updated: January 2, 2019
