@@ -1,0 +1,331 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Installing Ubuntu on my 2009 MacBook Pro - Linux Notes</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">var path_to_root = "";</script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { } 
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <ol class="chapter"><li><a href="installing-on-oryx.html"><strong aria-hidden="true">1.</strong> Installing a Fresh Distro on Oryx Pro</a></li><li><a href="initial-setup/index.html"><strong aria-hidden="true">2.</strong> Initial Setup</a></li><li><ol class="section"><li><a href="initial-setup/basics.html"><strong aria-hidden="true">2.1.</strong> Basics</a></li><li><a href="initial-setup/git.html"><strong aria-hidden="true">2.2.</strong> Git</a></li><li><a href="initial-setup/neovim.html"><strong aria-hidden="true">2.3.</strong> Neovim</a></li><li><a href="initial-setup/keepassxc.html"><strong aria-hidden="true">2.4.</strong> KeePassXC</a></li><li><a href="initial-setup/syncthing.html"><strong aria-hidden="true">2.5.</strong> Syncthing</a></li><li><a href="initial-setup/pgp.html"><strong aria-hidden="true">2.6.</strong> PGP</a></li><li><a href="initial-setup/other-apps.html"><strong aria-hidden="true">2.7.</strong> Other Apps to Install</a></li><li><a href="initial-setup/chrome-and-flash.html"><strong aria-hidden="true">2.8.</strong> Chrome and Flash</a></li><li><a href="initial-setup/dev-env/index.html"><strong aria-hidden="true">2.9.</strong> Development Environment</a></li><li><ol class="section"><li><a href="initial-setup/dev-env/python-pyenv.html"><strong aria-hidden="true">2.9.1.</strong> Python and pyenv</a></li><li><a href="initial-setup/dev-env/ruby-and-rbenv.html"><strong aria-hidden="true">2.9.2.</strong> Ruby and rbenv</a></li><li><a href="initial-setup/dev-env/rust.html"><strong aria-hidden="true">2.9.3.</strong> Rust</a></li><li><a href="initial-setup/dev-env/github-and-ssh.html"><strong aria-hidden="true">2.9.4.</strong> GitHub and ssh keys</a></li><li><a href="initial-setup/dev-env/jekyll.html"><strong aria-hidden="true">2.9.5.</strong> GitHub blog with Jekyll</a></li></ol></li><li><a href="initial-setup/gnome-setup.html"><strong aria-hidden="true">2.10.</strong> GNOME Setup</a></li><li><a href="initial-setup/kde-setup.html"><strong aria-hidden="true">2.11.</strong> KDE Setup and Troubleshooting</a></li><li><a href="initial-setup/redshift.html"><strong aria-hidden="true">2.12.</strong> Redshift</a></li><li><a href="initial-setup/images-and-video.html"><strong aria-hidden="true">2.13.</strong> Images and Video</a></li></ol></li><li><a href="installing-ubuntu-on-an-old-macbook-pro.html" class="active"><strong aria-hidden="true">3.</strong> Installing Ubuntu on my 2009 MacBook Pro</a></li><li><a href="lubuntu/index.html"><strong aria-hidden="true">4.</strong> Lubuntu</a></li><li><ol class="section"><li><a href="lubuntu/switching-to-lubuntu.html"><strong aria-hidden="true">4.1.</strong> Switching to Lubuntu</a></li><li><a href="lubuntu/improving-lubuntu.html"><strong aria-hidden="true">4.2.</strong> Improving Lubuntu</a></li><li><a href="lubuntu/remapping-control-and-caps-lock-lubuntu.html"><strong aria-hidden="true">4.3.</strong> Remapping Caps Lock to Control</a></li><li><a href="lubuntu/using-neovim-in-lubuntu.html"><strong aria-hidden="true">4.4.</strong> Using Neovim</a></li><li><a href="lubuntu/rbenv-on-lubuntu.html"><strong aria-hidden="true">4.5.</strong> Using Rbenv</a></li><li><a href="lubuntu/configuring-openbox-on-lubuntu.html"><strong aria-hidden="true">4.6.</strong> Configuring OpenBox</a></li></ol></li><li><a href="security/index.html"><strong aria-hidden="true">5.</strong> Security Apps and Tools</a></li><li><ol class="section"><li><a href="security/installing-gnu-privacy-guard-on-ubuntu.html"><strong aria-hidden="true">5.1.</strong> Installing GNU Privacy Guard</a></li><li><a href="security/keepassxc-from-snap.html"><strong aria-hidden="true">5.2.</strong> KeePassXC as a Snap</a></li><li><a href="security/ricochet-114-lubuntu-1604.html"><strong aria-hidden="true">5.3.</strong> Ricochet</a></li><li><a href="security/python-pip-and-magic-wormhole-on-lubuntu.html"><strong aria-hidden="true">5.4.</strong> Magic Wormhole</a></li><li><a href="security/using-a-yubikey-from-a-smartcard-on-ubuntu.html"><strong aria-hidden="true">5.5.</strong> YubiKey</a></li><li><a href="security/pidgin-google-and-otr.html"><strong aria-hidden="true">5.6.</strong> Pidgin, Gchat, and OTR</a></li></ol></li><li><a href="other-des/index.html"><strong aria-hidden="true">6.</strong> Other DEs</a></li><li><ol class="section"><li><a href="other-des/customizing-appearance-of-xfce-ubuntu.html"><strong aria-hidden="true">6.1.</strong> Customizing XFCE (Ubuntu base)</a></li><li><a href="other-des/notes-on-i3.html"><strong aria-hidden="true">6.2.</strong> Notes on i3</a></li><li><a href="other-des/other-desktop-environments.html"><strong aria-hidden="true">6.3.</strong> Other DEs</a></li></ol></li></ol>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light <span class="default">(default)</span></button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">Linux Notes</h1> 
+
+                        <div class="right-buttons">
+                            <a href="print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <a class="header" href="#installing-ubuntu-on-my-2009-macbook-pro" id="installing-ubuntu-on-my-2009-macbook-pro"><h1>Installing Ubuntu on my 2009 MacBook Pro</h1></a>
+<p>I had an old 17-inch MacBook Pro from 2009 (college) lying around and I figured it'd be a fun challenge to install Linux on it. I had never installed or even used Linux before (to my knowledge). I also, confusingly, hadn't found a clean, step-by-step guide for doing this, so I promised I'd write my process out as thoroughly but simply as I could once I got it done.</p>
+<p>I now realize, I think, that the reason the process of installing even a popular Linux distribution on a common (if old) model computer isn't written out or easily findable is that the process is a bit different for everyone, depending on the distro, the version, and the hardware you're starting with. Note that I didn't want to partition my hard drive to allow myself to dual-boot either in OS X or Ubuntu-- I was going for a full replacement, and thus would and did lose all the files on applications I had on the old Mac.</p>
+<p>But regardless, here is the process I took.</p>
+<a class="header" href="#about-this-mac" id="about-this-mac"><h2>About This Mac</h2></a>
+<pre><code>Model name: MacBook Pro
+Model Identifier: MacBookPro3,1
+Processor Name: Intel Core 2 Duo
+Processor Speed: 2.4GHz
+Number of Processors: 1
+Total number of cores: 2
+L2 Cache: 4 MB
+Memory: 2GB
+Boot ROM Version: MBP31.0070.B07
+
+It's a 17 inch screen. I believe I bought it in the summer of 2009.
+
+was running:
+OS X 10.9.2 (13C64)
+</code></pre>
+<a class="header" href="#how-i-got-ubuntu-16-installed" id="how-i-got-ubuntu-16-installed"><h2>How I Got Ubuntu 16 Installed</h2></a>
+<p>Again, note, this worked for me and my machine but may not for you. For example I believe I had to do steps 4, 5, 8, 9, 10, and 11 only because I have a MBP with an Intel chip.</p>
+<p>Also, <strong>WARNING</strong>, this procedure completely wiped my OS X and all the files and applications on that installation, as I intended. There are ways to dual-boot both, but I wasn't interested in that as Mavericks was running super slow on this computer. Furthermore I think all the data I had on my USB stick is lost due to it being formatted in a certain way at some point in the procedure.</p>
+<p><strong>UPDATE (February 2017)</strong>: Before moving ahead, you may want to consider the following. A helpful commenter, Brian Moran, writes that, when installing Ubuntu on an older Mac with a NVIDIA graphics card, it may be better to &quot;boot in 'Legacy BIOS mode', not in 'EFI' mode&quot;:</p>
+<blockquote>
+<p>Apparently what is happening is that both the open source and Nvidia drivers are buggy when doing an &quot;EFI Install&quot; on Mac machines. If full graphics performance is desired, a &quot;Legacy BIOS Install&quot; is needed.</p>
+</blockquote>
+<p>From <a href="https://ubuntuforums.org/showthread.php?t=2209602">the forum post that the commenter cites</a>, which is concerned with a MacBook Air 3,2:</p>
+<blockquote>
+<p>The core problem with the [generic] installation is this. The graphic driver that Ubuntu installs by default (Nouveau) has bugs with the MacBook Air 3 graphic processor, the nvidia GeForce 320M (G320M). You can do a default install, it will boot normally, but you'll soon see little glitches here and there and the computer will normally crash after a few minutes of use (especially when transparency or shadow effects are used, it seems). The problem exists with Raring and I expect it arises with Precise (though see ''alternative solutions&quot; below).</p>
+</blockquote>
+<blockquote>
+<p>To avoid that, you need to install the proprietary nvidia driver. But here is the catch: the driver requires the computer to boot in &quot;Legacy BIOS mode&quot;, not in &quot;EFI&quot; mode (see here or here). If you install the nvidia drivers while Ubuntu is in EFI mode, you'll get a blank/black screen at the beginning of the boot. (If you got to that stage, see the ''recovery for nvidia drivers EFI crash'' below). On a PC you can force Ubuntu to install in BIOS Legacy mode by selecting that mode in the computer BIOS. But on a Mac you can't (easily) do that, and if you install from a USB key by default you will be in EFI mode.</p>
+</blockquote>
+<blockquote>
+<p>So summing up, if you do a default installation of Ubuntu from a USB on a MacBook Air 3,1 or 3,2, you'll either have buggy graphics and random crashes, or you'll install the nvdida drivers and have a blank/black screen at startup.</p>
+</blockquote>
+<p>For the record, I followed the procedure detailed below with my MackBook Pro 3,1 and while I now believe that my nvidia card is NOT being used, basic computing (web browser, document editing coding, simple games) are working just fine. Not being a gamer I don't know much about graphics cards, but for what it's worth I believe my MacBook Pro has a G84M [GeForce 8600M GT] card, which is <em>not</em> the same model listed in the forum post the commenter cites.</p>
+<p>But if I were starting over I might instead consider the procedure outlined in <a href="https://ubuntuforums.org/showthread.php?t=2209602">the forum post</a> the commenter links to in hopes of even better performance. End of February 2017 update.</p>
+<p>Alright, with all that said here's what I think I would do if I were starting fresh, knowing what I know now:</p>
+<a class="header" href="#what-i-did-to-install-ubuntu" id="what-i-did-to-install-ubuntu"><h3>What I Did to Install Ubuntu</h3></a>
+<ol>
+<li>Get a USB drive with at least 2 GB of storage. Know that it's going to get wiped, so move important files off it first. Then use the MacOS Disk Utility to format the USB stick as DOS FAT32.</li>
+<li>I'd follow <a href="https://www.ubuntu.com/download/desktop/create-a-usb-stick-on-mac-osx">this guide</a> to download Ubuntu 16.04 LTS and get it onto the USB stick, using UNetbootin.</li>
+<li>As described in the final step in that guide, when you restart, hold down the option key on your Mac. In the resulting menu, select the &quot;EFI&quot; device as the device to boot from.</li>
+<li>You'll be confronted with a text-only menu that's from a piece of software called GNU GRUB. Key down so your cursor is on &quot;Install Ubuntu&quot;, but instead of pressing enter, press <code>e</code> to edit the commands before booting.</li>
+<li>This opens an options file in a basic text editor. Find the line that has <code>ro quiet splash</code> in it and make that bit of the line read <code>ro nomodeset quiet splash</code>. Then press either F10 or Ctrl-X to boot (read the text at the bottom of the screen to be sure of the key(s) to press).</li>
+<li>If presented with a choice in GRUB (a text menu) with an option to <code>install Ubuntu</code>, choose that option.</li>
+<li>You should be then presented with a nice GUI (not text only) Ubuntu installer, or maybe an icon that says <code>Install Ubuntu</code>. Double click the icon if you see it. Go through everything, decide whether or not to connect your Wifi to download updates, decide whether or not to encrypt your home folder, and then choose restart.</li>
+<li>We now need to boot Ubuntu in <a href="https://wiki.ubuntu.com/RecoveryMode">recovery mode</a>. To do this, as the computer is starting up again after restart, right after you hear the Apple/Mac start-up sound, hold the SHIFT key. Repeat step #3 above if you're presented with the EFI option. Once you're at a text-only menu, press <code>e</code> and add <code>nomodeset</code> to the line of code discussed above. Then press the key(s) to boot. Ubuntu should boot up-- though the display may be screwy. In either case, we're not done yet.</li>
+<li>Now we need to make that <code>nomodeset</code> setting permanent. Open terminal (ctrl+option+t) and run <code>sudo nano /etc/default/grub</code>. (<a href="https://askubuntu.com/questions/38780/how-do-i-set-nomodeset-after-ive-already-installed-ubuntu#38782">Reference</a>)</li>
+<li>In that file, add <code>nomodeset</code> to <code>GRUB_CMDLINE_LINUX_DEFAULT</code> as seen below:</li>
+</ol>
+<pre><code>GRUB_DEFAULT=0
+GRUB_HIDDEN_TIMEOUT=0
+GRUB_HIDDEN_TIMEOUT_QUIET=true
+GRUB_TIMEOUT=5
+GRUB_DISTRIBUTOR=`lsb_release -i -s 2&gt; /dev/null || echo Debian`
+GRUB_CMDLINE_LINUX_DEFAULT=&quot;quiet splash nomodeset&quot;
+GRUB_CMDLINE_LINUX=&quot;&quot;
+</code></pre>
+<ol start="11">
+<li>Save this text file by hitting Ctrl+O, then exit nano with Ctrl+X, then, back in Terminal, run: <code>sudo update-grub</code></li>
+<li>Restart the computer (the menu for which is in the top-right corner of Ubuntu 16).</li>
+</ol>
+<p>I think that would do it. I don't think I needed rEFInd. And apparently the warning on UNetbootin that I could run the device on Macs was not accurate.</p>
+<p><strong>For completeness sake, here is the actual process I went through over three days.</strong></p>
+<a class="header" href="#attempt-1-ubuntu-1604" id="attempt-1-ubuntu-1604"><h2>Attempt #1: Ubuntu 16.04</h2></a>
+<p>I found <a href="https://www.ubuntu.com/download/desktop/create-a-usb-stick-on-mac-osx">this guide</a> which involved downloading and using the <a href="https://unetbootin.github.io/">UNetbootin USB installer</a>.</p>
+<p>I believe I successfully downloaded the Ubuntu 16.04 ISO and UNetbootin. I then installed UNetbootin (by dragging it into Application) and then I used UNetbootin as described in the tutorial. However at step 7 when I restarted my Mac and held the option key I was presented with a menu to try or install Ubuntu. Every time I selected &quot;install&quot; it just went to a black screen. I waited minutes but no installation screen appeared. I then held down the power button and the computer rebooted in OS X, back to square one.</p>
+<p>I will say that after using UNetbootin to load the USB stick the program warned the device could only boot the new OS on PCs, not on Macs. I chose to ignore that warning and try anyway, but as I reported above, it didn't work.</p>
+<p>Upon further research I believe the Ubuntu 16.04 may not work on Intel-based MBPs made circa 2009. One page, https://help.ubuntu.com/community/MacBookPro, seemed to encourage those with MBPs this old should instead opt for Ubuntu 14.04.</p>
+<p>I didn't want to run an old version of a distro I wasn't particualrly excited about if I could find a distro that I could run the lastest version of. Plus I couldn't quite figure out how to download an (official) copy of version 14.04.</p>
+<a class="header" href="#attempt-2-mint-18-sarah-cinnamon-64-bit" id="attempt-2-mint-18-sarah-cinnamon-64-bit"><h2>Attempt #2: Mint 18 (&quot;Sarah&quot;) Cinnamon 64-bit</h2></a>
+<p>I understand that <a href="https://lifehacker.com/5993297/ubuntu-vs-mint-which-linux-distro-is-better-for-beginners">the other distro well-reviewed for beginners</a> is <a href="https://www.linuxmint.com">Mint</a>. And I saw that Mint 18 was itself <a href="http://arstechnica.com/information-technology/2016/08/mint-18-review-just-works-linux-doesnt-get-any-better-than-this/">got good reviews</a>.</p>
+<p>So I headed over to <a href="https://www.linuxmint.com/download.php">their download page</a> and chose <a href="https://www.linuxmint.com/edition.php?id=217">&quot;Cinnamon 64-bit&quot;</a> and downloaded it via a torrent.</p>
+<p>The <a href="https://community.linuxmint.com/tutorial/view/744">only tutorial that I found for installing Linux Mint via USB</a> seemed strange and brief. Thus my current plan is to try to use UNetbootin again, following <a href="https://www.ubuntu.com/download/desktop/create-a-usb-stick-on-mac-osx">the Ubuntu guide</a> but with Mint this time rather than Ubuntu 16.04.</p>
+<p>However, as before, after using UNetbootin it told me the device could only boot the new OS on PCs, not on Macs.</p>
+<p>When I restarted my Mac and held down the option key, I got a similar menu as when I tried Ubuntu, but eventually came to a dark black screen. I waited a few minutes, and then forced the computer to shut down by holding down the power button.</p>
+<a class="header" href="#attempt-3-back-to-ubuntu-1604-by-a-different-method" id="attempt-3-back-to-ubuntu-1604-by-a-different-method"><h2>Attempt #3: Back to Ubuntu 16.04 by a different method</h2></a>
+<p>I followed <a href="https://help.ubuntu.com/community/How%20to%20install%20Ubuntu%20on%20MacBook%20using%20USB%20Stick">the instructions presented here</a>, which I was optimistic about it because it avoided using UNetbootin, along with the potentially helpful warning:</p>
+<blockquote>
+<p>UNetbootin for Mac OS X can be used to automate the process of extracting the Ubuntu ISO file to USB, and making the USB drive bootable. The resulting USB drive, however, can be booted on PCs only.</p>
+</blockquote>
+<p>Which mirrors the warning UNetbootin gave me.</p>
+<p>However the method described in the link above failed in the same way the others did-- I restarted, held down the option key, chose the EFI boot, chose to install Ubuntu, and then was met with a black screen. For the first time I thought to check the light on my USB stick to see if it was at least thinking but it was off.</p>
+<a class="header" href="#attempt-4-using-refind-boot-manager" id="attempt-4-using-refind-boot-manager"><h2>Attempt #4: Using rEFInd Boot Manager</h2></a>
+<p>From <a href="http://www.linux-on-laptops.com/apple.html">here</a> I found <a href="http://research.naumachiarius.com/articles/macbook-debian.html">an article about installing Debian</a> (a more advanced distro of Linux).</p>
+<p>That let me to believe <a href="http://www.rodsbooks.com/refind/">rEFInd</a> was something I needed to <a href="http://www.rodsbooks.com/refind/installing.html">install</a> first.</p>
+<p>However this program (I admittedly didn't take the time to figure out what it actually does) did not seem to help. Afterward, and before my next attempt, I <a href="http://www.rodsbooks.com/refind/installing.html#uinst_osx">bypassed rEFInd</a> by going to System Preferences &gt; Start Up Disk, selecting my hard drive and hitting the restart button. Thus I do not think I actually needed to install rEFInd to successfully get Ubuntu installed, however I'm not 100% of this, since <a href="http://www.rodsbooks.com/refind/installing.html#uinst_osx">the rEFInd uninstall instructions for OS X</a> recommend bypassing rEFInd rather than actually uninstalling it.</p>
+<a class="header" href="#attempt-5-having-bypassed-refind-i-replace-quiet-splash-with-nomodeset" id="attempt-5-having-bypassed-refind-i-replace-quiet-splash-with-nomodeset"><h2>Attempt #5: Having bypassed rEFInd, I replace <code>quiet splash</code> with <code>nomodeset</code></h2></a>
+<p>Big success!</p>
+<p>Somewhere else I remember seeing someone recommend turning on an option called <code>nomodeset</code> in GNU GRUB, but for some reason didn't think I had that option in the menu that I kept getting. Turns out, as described <a href="http://askubuntu.com/a/38834">here</a>, when you get to the GRUB menu you hit the <code>e</code> key. Then you add <code>nomodeset</code> as a parameter in one of the lines of code in the text file that opens. Removing <code>quiet splash</code> seems to just present more text as output-- the <code>nomodeset</code> solved the problem.</p>
+<p>After maybe 40 seconds I was presented with an Ubuntu desktop and a shortcut icon to an Ubuntu installer. I double-clicked the installer and followed the wizard.</p>
+<p>I connected to my wifi network and told it to download updates as it installed to make things quicker. The only hard choice was whether to encrypt my home folder (which I believe you can't do later). I decided not to based on <a href="https://askubuntu.com/questions/37/when-installing-im-given-the-option-of-encrypting-my-home-folder-what-does-t#62">this answer</a> as I was worried about the performance hit on decrypting on a machine with 2GB memory. Then I just waited for Ubuntu 16.04.1 LTS to install.</p>
+<p>After installation it asked me to restart. I clicked yes. I then got an ugly error message that said something like &quot;remove the installation device and hit enter&quot;. I still had the USB stick in, unsure when I was to remove it. I pulled it out and hit enter. The computer then restarted, making the familiar Mac start-up sound and presenting the familiar Mac gray, but then it switched to a purple Ubuntu-like color and stayed there for a minute.</p>
+<a class="header" href="#setting-nomodeset-permanently" id="setting-nomodeset-permanently"><h2>Setting <code>nomodeset</code> permanently</h2></a>
+<p>When I came back from that restart it was stuck on a purple screen. I figured I needed to set <code>nomodeset</code> permanently on. I needed to get back to the GRUB screen, which I figured out from somewhere:</p>
+<ol>
+<li>Switch on your computer.</li>
+<li>Wait until the BIOS has finished loading, or has almost finished. (During this time you will probably see a logo of your computer manufacturer.)</li>
+<li>Quickly press and hold the Shift key, which will bring up the GNU GRUB menu. (If you see the Ubuntu logo, you've missed the point where you can enter the GRUB menu.)</li>
+</ol>
+<p>Then, to set <code>nomodeset</code> to be on permanently, I followed <a href="https://askubuntu.com/questions/38780/how-do-i-set-nomodeset-after-ive-already-installed-ubuntu#38782">this Ask Ubuntu answer</a> that reads:</p>
+<pre><code>You should add this option to /etc/default/grub, firstly:
+
+sudo nano /etc/default/grub
+
+and then add nomodeset to GRUB_CMDLINE_LINUX_DEFAULT:
+
+GRUB_DEFAULT=0
+GRUB_HIDDEN_TIMEOUT=0
+GRUB_HIDDEN_TIMEOUT_QUIET=true
+GRUB_TIMEOUT=5
+GRUB_DISTRIBUTOR=`lsb_release -i -s 2&gt; /dev/null || echo Debian`
+GRUB_CMDLINE_LINUX_DEFAULT=&quot;quiet splash nomodeset&quot;
+GRUB_CMDLINE_LINUX=&quot;&quot;
+
+And then save by hitting Ctrl+O, then exit nano with Ctrl+X, then simply run:
+
+sudo update-grub
+
+</code></pre>
+<p>I saved that file and ran <code>sudo update-grub</code> as instructed. I then restarted my computer once again and I think that's when things went smoothly for the first time.</p>
+<p>(FYI a similar process to the one described above seems to be given <a href="https://ubuntuforums.org/showthread.php?t=1613132">here</a> but with some other stuff as well, if you need more help at this stage.)</p>
+<a class="header" href="#initial-thoughts" id="initial-thoughts"><h2>Initial Thoughts</h2></a>
+<p>Woohoo! It seems snappier that OS X 10.9, but it's not a speed demon like my 2012 MacBook Air with 8 GB of memory.</p>
+<p>But the desktop and dock are familiar enough to me. It comes with Firefox, <a href="https://www.libreoffice.org/">Libre Office</a>, a basic text editor, and a link to Amazon.com(?) in the dock that's on the left by default. I got terminal Vim and <a href="https://rvm.io/">RVM</a> running with a few Google-able tweaks from the OS X installation process. Remapping caps lock to control was <a href="http://askubuntu.com/a/614664">one line in Terminal</a> (<code>setxkbmap -option caps:ctrl_modifer</code>), however that did not persist when restarted. I followed <a href="https://askubuntu.com/questions/53038/how-do-i-remap-the-caps-lock-key#comment460778_336988">this AskUbuntu answer</a> and went to Startup Applications &gt; Add &gt; and entered <code>setxkbmap -option caps:ctrl_modifer</code>. It seems to persist on restart now.</p>
+<p>I was able to install git by running <code>sudo apt install git</code>. Similarly I was able to install KeePassX by running <code>sudo apt-get install keepassx</code> (I'm not 100% in the difference between <code>apt</code> and <code>apt-get</code> here but that's what I saw on the internet help sites I found). I also installed a fresh version of vim but I forget what line I ran in terminal.</p>
+<p>To run a general update and upgrade, I run <code>sudo apt update &amp;&amp; sudo apt upgrade</code>, which seems to work.</p>
+<p>We'll see how much I use this old computer going forward, and what for.</p>
+<p>Update: Just found <a href="https://linuxjourney.com/">this website that aims to teach Linux for beginners</a>, which I might checkout. There's also this series of YouTube videos: <a href="https://www.youtube.com/watch?v=1dQTEw8n9yc">Ubuntu Beginners Guide</a> that looks nice, is Ubuntu-specific, and is, as of this writing, only one month old.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="initial-setup/images-and-video.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="lubuntu/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="initial-setup/images-and-video.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="lubuntu/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>
