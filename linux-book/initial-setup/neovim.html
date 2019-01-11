@@ -138,10 +138,12 @@
                     <main>
                         <a class="header" href="#neovim" id="neovim"><h1>Neovim</h1></a>
 <p>I think I used the stable ppa and followed <a href="https://github.com/neovim/neovim/wiki/Installing-Neovim#ubuntu">these instructions</a>, though given <a href="https://github.com/neovim/neovim#install-from-package">this page</a>, we might be able to just do <code>sudo apt install neovim</code> at this point?</p>
+<p>Before proceeding, make sure git is installed.</p>
 <p>A decent init.vim file is contained in <a href="https://github.com/sts10/linux-config">my linux-config repo</a>.</p>
-<pre><code>mkdir ~/.config/nvim
+<pre><code class="language-bash">mkdir ~/.config/nvim
 curl -o ~/.config/nvim/init.vim https://raw.githubusercontent.com/sts10/linux-config/master/neovim/init.vim
 </code></pre>
+<p>Next, we can install our plugins by running <code>nvim +PlugInstall +qa</code>.</p>
 <a class="header" href="#deoplete--neovim" id="deoplete--neovim"><h2>Deoplete / Neovim</h2></a>
 <p>For Deoplete to work well, first I'd recommend setting up <a href="dev-env/python-pyenv.html">pyenv</a>.</p>
 <p>To update Deoplete, you may need to run <code>:UpdateRemotePlugins</code> in Neovim. Neovim's <code>:CheckHealth</code> is your friend here.</p>
