@@ -49,7 +49,15 @@ One night out at a bar with a friend, early on in my Linux experiment, I started
 
 I admit I was stumped. (There are some things Linux does better than MacOS, no philosophical sales pitch needed, but in my experience these are mostly things having to do with running and/or compiling code from source.) 
 
-But now, months later, at least at this point, if forced to give one answer to the question of why some users should switch to Linux, it's that it allows you (or forces you) to be a more conscientious and ethical consumer of technology. As Manjoo writes, 
+### What it's like to use Linux
+
+If Linux has an underlying mantra, it's that, for better or worse, **you're** running your computer. You _can_ (and very well might) accidentally render your computer unusable (known as "bricking"). There's a bit of a learning curve. But this also means you're more free to make it work, look, and act the way you want. Want lots of updates? Use a "rolling" distro like Arch Linux. Have old hardware? You've got XFCE. There's [a whole subbreddit of users showing off their aesthetic tweaks](http://reddit.com/r/unixporn). As Tim Wu writes, [some technology should be a little demanding](https://www.newyorker.com/tech/annals-of-technology/the-problem-with-easy-technology). Once you get the hang of Linux, and you know which compatible apps you like, it _can be_ very smooth. 
+
+I've also found a certain humility in the Linux community. Rarely is anything advertised as "it just works" -- there's no economic incentive for such claims. So when things aren't quite right, support is generally easy to find, without much defensive posturing as preamble. 
+
+## My top reason to use Linux, at this point
+
+At this point, if forced to give one answer to the question of why some users should switch to Linux, it's that it allows you (or forces you) to be a more conscientious and ethical consumer of technology. As Manjoo writes, 
 
 > But you don't have to wait for politicians to weigh in. Your choices as a consumer matter, too -- and for a better, healthier tech industry ... The lesson of the last decade is that our private tech choices can alter economies and societies. They matter. And they matter most in the mindless rush, when everyone seems to be jumping on board the latest new thing, because it's in these heady moments that we lose sight of the precise risks of turning ourselves over to tech.
 
