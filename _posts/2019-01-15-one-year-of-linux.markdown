@@ -39,7 +39,7 @@ So, after a lot of more research, in November of 2017 I ordered a laptop from a 
 
 I've been using my [Oryx Pro](https://system76.com/laptops/oryx) for about 15 months now, and overall I love it. I don't _think_ I'll be going back to Apple for a computer any time soon. That said, to use it, I've had to do things that most users of computers I know would balk at, like opening the terminal. (I'll note that I did have to ship my laptop back to System76 for a repair, but with my one-year warranty it was all free. And System76 offers a lifetime of _software_ support.) 
 
-While Linux, which was created in 1991 by Linus Torvalds, has apparently made solid improvements for everyday users in the last few years, it is still a bit rough around the edges. As of the beginning of 2019, Linux is still not for everyone. But some folks are containing the work to change that, most notably the folks running a version of Linux (known as a "distribution" or "distro") called [Elementary OS](https://elementary.io/), which seems to be aimed more directly at replacing Mac and Windows for everyday computer users.
+While Linux, which was created in 1991 by Linus Torvalds, has apparently made solid improvements for everyday users in the last few years, it is still a bit rough around the edges. As of the beginning of 2019, Linux is still not for everyone. That said some folks are continuing the work to change that. When I think of a non-technical user wanting to run Linux, in my eyes the best bet seems to be the work of the folks running a version of Linux (known as a "distribution" or "distro") called [elementary OS](https://elementary.io/), which is aimed directly at replacing Mac and Windows for everyday computer users.
 
 ![screenshot of Elementary OS Juno 5](https://elementary.io/images/screenshots/desktop.jpg)
 
@@ -55,7 +55,7 @@ If Linux has an underlying mantra, it's that, for better or worse, **you're** ru
 
 I've also found a certain humility in the Linux community. Rarely is anything advertised as "it just works" -- there's no economic incentive for such claims. So when things aren't quite right, support is generally easy to find online -- without much defensive posturing as preamble -- and if something isn't right, there are places non-developers can post about it where it may get fixed.
 
-That said, I'm not _quite_ ready to say Linux is for everyone.... though I should push myself, in the future, to enumerate the reasons more specifically. At this point it's mostly: Foreignness of the command line, loss of applications users rely on, and maybe some hardware compatibility.
+That said, I'm not _quite_ ready to say Linux is for everyone.... though I should push myself, in the future, to enumerate the reasons more specifically. At this point it's mostly: Foreignness of the command line, loss of applications users rely on, and maybe some hardware compatibility. When I think about this question I think about whether I could install Linux on my parents' computers. Granted, most of the issues I foresee are the same types of issues I'd anticipate if they suddenly jumped from Mac to Windows, for example.
 
 ## My top reason to use Linux, at this point
 
