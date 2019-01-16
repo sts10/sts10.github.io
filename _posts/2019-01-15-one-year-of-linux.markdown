@@ -53,7 +53,9 @@ I admit I was stumped. (There are some things Linux does better than MacOS, no p
 
 If Linux has an underlying mantra, it's that, for better or worse, **you're** running your computer. You _can_ (and very well might) accidentally render your computer unusable (known as "bricking"). There's a bit of a learning curve. But this also means you're more free to make it work, look, and act the way you want. Want lots of updates? Use a "rolling" distro like Arch Linux. Have old hardware? You've got XFCE. There's [a whole subbreddit of users showing off their aesthetic tweaks](http://reddit.com/r/unixporn). As Tim Wu writes, [some technology should be a little demanding](https://www.newyorker.com/tech/annals-of-technology/the-problem-with-easy-technology). Once you get the hang of Linux, and you know which compatible apps you like, it _can be_ very smooth. 
 
-I've also found a certain humility in the Linux community. Rarely is anything advertised as "it just works" -- there's no economic incentive for such claims. So when things aren't quite right, support is generally easy to find, without much defensive posturing as preamble. 
+I've also found a certain humility in the Linux community. Rarely is anything advertised as "it just works" -- there's no economic incentive for such claims. So when things aren't quite right, support is generally easy to find online -- without much defensive posturing as preamble -- and if something isn't right, there are places non-developers can post about it where it may get fixed.
+
+That said, I'm not _quite_ ready to say Linux is for everyone.... though I should push myself, in the future, to enumerate the reasons more specifically. At this point it's mostly: Foreignness of the command line, loss of applications users rely on, and maybe some hardware compatibility.
 
 ## My top reason to use Linux, at this point
 
