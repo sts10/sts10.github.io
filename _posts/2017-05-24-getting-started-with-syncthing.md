@@ -129,6 +129,8 @@ With Syncthing, in this scenario, I'd have to leave Syncthing running on compute
 
 In addition to the Getting Started section of the docs, which, as you can see, I found helpful, there's also [a User FAQ here](https://docs.syncthing.net/users/faq.html). 
 
+If you want to make it slightly easier to start and stop Syncthing from the command line, I'd recommend using tmux. [I explain how I did this here](https://sts10.github.io/2018/11/27/syncthing-and-tmux.html).
+
 ## Setting Up Syncthing on a Raspberry Pi
 
 In an effort to have a machine that functions more like an always-on server/cloud, I dusted off my old Raspberry Pi 2 and plugged it in. I hadn't turned it on in a while (I had set it up about a year before-- pretty sure I installed the default Raspberry Pi OS, [Raspbian](https://www.raspbian.org/)). Here's how I got Syncthing running on it (though there are plenty of other [blog posts](http://www.pebra.net/blog/2015/08/23/syncthing/) on this.)
