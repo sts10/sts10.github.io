@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "One Year of Running Linux"
+title: "One Year of Slightly More Ethical Tech Usage"
 date: 2019-01-15 22:15:00 -0400
 comments: true
 ---
@@ -11,7 +11,9 @@ While five years ago, Manjoo writes, "technology felt thrilling and world-changi
 
 Manjoo then offers three maxims for "an ethical and upstanding user of tech, navigate this misbegotten industry": "Don't just look at the product. Look at the business model," "Avoid feeding the giants," and "Adopt late. Slow down." 
 
-I think those are all worthy resolutions for users of technology (nearly everyone with access to the internet) to carry into 2019. But one thing that stuck out for me about a column that primarily addresses tech business models is that there's no mention of free or open source software, software licensing, or Linux. I think this is more a failure of the free software movement to make in-roads in what I'll call "mainstream tech," but nevertheless the omission made me a bit sad for both parties.
+As "the giants" ("Apple, Google, Facebook, Amazon and Microsoft") get more powerful, I think those are all worthy resolutions for users of technology to carry into 2019. 
+
+But one thing that stuck out for me about a column that primarily addresses tech business models is that there's no mention of free or open source software, software licensing, or Linux. I think this is more a failure of the free software movement to make in-roads in what I'll call "mainstream tech," but nevertheless the omission made me a bit sad for both parties.
 
 ## Free software
 
@@ -25,9 +27,11 @@ What you (at least theoretically) end up with is software that effectively has n
 
 Crucially, these funding schemes seem to have very little in common with the traditional venture capital system most of us our used to from places like Silicon Valley, in which money will have to be made at some point, one way or the other, sometimes at the cost of the user's privacy. 
 
+## A personal challenge
+
 About a year ago, with some of these ideas in mind, I set out on a personal challenge to use more free software. While I learned that I could switch from Google's Chrome to Mozilla's Firefox, from Microsoft Office to Libre Office, from Twitter to Mastodon even, I soon realized that to really jump into the world of free software, I'd have to ditch MacOS, a closed-source operating system owned by Apple, to an open operating system licensed as free software.
 
-After a bit of research I decided Linux was at least worth a shot. I learned that, with Linux, I wouldn't be able to use Adobe applications like Light Room and Photoshop (which is, understandably, a show-stopper for some people), nor could I use Microsoft Office programs, or run iMessage or Airplay or most other Apple-made applications, not to mention access to the Apple Store and their Genius Bars (admittedly this could be a pro or a con, given your experience). 
+After a bit of research I decided Linux was at least worth a shot. I learned that, with Linux, I wouldn't be able to use Adobe applications like Light Room and Photoshop (which is, understandably, a show-stopper for some people), nor could I use Microsoft Office programs, or run iMessage, iTunes (which, frankly, might be a pro for you), Airplay or most other Apple-made applications, not to mention access to the Apple Store and their Genius Bars (admittedly this could be a pro or a con, given your experience). Here's [a basic, slightly outdated overview on what it's like to switch from Mac to one version of Linux called Ubuntu](https://support.system76.com/articles/switch/).
 
 But once I confirmed that I could watch Netflix, load GMail's site, listen to Spotify, write text, run code, open and edit a PowerPoint presentation in an application that's not PowerPoint, and use my password manager, I figured I could get the hang of the rest as I went along. (Aside: Making a list of what you use your non-work computer to do is an interesting exercise! Especially considering how much you can do in a browser (i.e. Slack) and/or on a smartphone.) 
 
@@ -35,7 +39,7 @@ But once I confirmed that I could watch Netflix, load GMail's site, listen to Sp
 
 ## Buying into Linux
 
-So, after a lot of more research, in November of 2017 I ordered a laptop from a company based in Colorado called [System76](https://system76.com/), which sells computers built for running Linux. ([I wrote about all of this at the time.](https://sts10.github.io/2018/01/06/switching-to-linux.html)) System76 is not a "tech giant" by any means, in fact they actively contribute to and support free software that they of course know their users will use (to be fair, [most large tech companies encourage their employees to create and contribute to open source software](https://www.techrepublic.com/article/why-microsoft-and-google-are-now-leading-the-open-source-revolution/)).
+So, after [a lot of more research which you can read about](https://sts10.github.io/2018/01/06/switching-to-linux.html), in November of 2017 I ordered a laptop from a company based in Colorado called [System76](https://system76.com/), which sells computers built for running Linux. System76 is not a "tech giant" by any means, in fact they actively contribute to and support free software that they of course know their users will use (to be fair, [most large tech companies encourage their employees to create and contribute to open source software](https://www.techrepublic.com/article/why-microsoft-and-google-are-now-leading-the-open-source-revolution/)).
 
 I've been using my [Oryx Pro](https://system76.com/laptops/oryx) for about 15 months now, and overall I love it. I don't _think_ I'll be going back to Apple for a computer any time soon. That said, to use it, I've had to do things that most users of computers I know would balk at, like opening the terminal. (I'll note that I did have to ship my laptop back to System76 for a repair, but with my one-year warranty it was all free. And System76 offers a lifetime of _software_ support.) 
 
@@ -51,11 +55,19 @@ I admit I was stumped. (There are some things Linux does better than MacOS, no p
 
 ### What it's like to use Linux
 
-If Linux has an underlying mantra, it's that, for better or worse, **you're** running your computer. You _can_ (and very well might) accidentally render your computer unusable (known as "bricking"). There's a bit of a learning curve. But this also means you're more free to make it work, look, and act the way you want. Want lots of updates? Use a "rolling" distro like Arch Linux. Have old hardware? You've got XFCE. There's [a whole subbreddit of users showing off their aesthetic tweaks](http://reddit.com/r/unixporn). As Tim Wu writes, [some technology should be a little demanding](https://www.newyorker.com/tech/annals-of-technology/the-problem-with-easy-technology). Once you get the hang of Linux, and you know which compatible apps you like, it _can be_ very smooth. 
+If Linux has an underlying mantra, it's that, for better or worse, **you're** running your computer. You _can_ (and very well might) accidentally render your computer unusable (known as "bricking"). There's a bit of a learning curve. But this also means you're more free to make it work, look, and act the way you want. Want lots of updates? Use a "rolling" distro like Arch Linux. Have old hardware? You've got XFCE. There's [a whole subbreddit full of users showing off their aesthetic tweaks](https://www.reddit.com/r/unixporn/top/?t=year), which were and still are strikingly diverse to me, each customized to the users liking and workflow. As Tim Wu writes, [some technology should be a little demanding](https://www.newyorker.com/tech/annals-of-technology/the-problem-with-easy-technology). Once you get the hang of Linux, and you know which compatible apps you like, both setting up and using Linux _can be_ very [smooth](https://www.reddit.com/r/unixporn/comments/a9eeuw/plasma_i_have_mastered_the_moves/). 
 
-I've also found a certain humility in the Linux community. Rarely is anything advertised as "it just works" -- there's no economic incentive for such claims. So when things aren't quite right, support is generally easy to find online -- without much defensive posturing as preamble -- and if something isn't right, there are places non-developers can post about it where it may get fixed.
+<blockquote class="reddit-card" data-card-created="1547690125"><a href="https://www.reddit.com/r/unixporn/comments/a9eeuw/plasma_i_have_mastered_the_moves/">[Plasma] i have mastered the moves</a> from <a href="http://www.reddit.com/r/unixporn">r/unixporn</a></blockquote>
+<script async src="//embed.redditmedia.com/widgets/platform.js" charset="UTF-8"></script>
 
-That said, I'm not _quite_ ready to say Linux is for everyone.... though I should push myself, in the future, to enumerate the reasons more specifically. At this point it's mostly: Foreignness of the command line, loss of applications users rely on, and maybe some hardware compatibility. When I think about this question I think about whether I could install Linux on my parents' computers. Granted, most of the issues I foresee are the same types of issues I'd anticipate if they suddenly jumped from Mac to Windows, for example.
+I've also found a certain humility in the Linux community. Rarely is anything advertised as "it just works" -- there's no economic incentive for such claims. So when things aren't quite right, support is generally easy to find online -- without much defensive posturing as preamble -- and other users are generally very helpful and invested. And if something really isn't right in the software, there are forums and other places non-developers can post about it where it may get fixed, including Mastodon and a number of [subreddits](https://www.reddit.com/r/linux4noobs).
+
+Some other benefits of using Linux: Once I got it setup right, it's been pretty stable; but if something ever does go wrong, re-building my operating system from scratch (or more specifically, a downloaded file burned on to a USB stick) is pretty easy once you've done it a few times. Software update notifications are also very unobtrusive (something that was always [annoying](https://medium.com/s/thenewnew/why-we-dread-new-software-updates-54abc5b62bb1) when using MacOS, particularly in the last few years) -- Linux [gets out of my way](https://kevq.uk/why-i-use-linux/). And Linux distros generally respect user privacy, which, granted, apparently draws a sharper contrast with Microsoft Windows 10 than MacOS at this point.
+
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">We are proud to have played our small part in <a href="https://twitter.com/NASAInSight?ref_src=twsrc%5Etfw">@NASAInSight</a>&#39;s <a href="https://twitter.com/hashtag/MarsLanding?src=hash&amp;ref_src=twsrc%5Etfw">#MarsLanding</a>. Congratulations <a href="https://twitter.com/NASA?ref_src=twsrc%5Etfw">@NASA</a>! <a href="https://t.co/W06g3VGmH9">pic.twitter.com/W06g3VGmH9</a></p>&mdash; KDE Community (@kdecommunity) <a href="https://twitter.com/kdecommunity/status/1067356235790524416?ref_src=twsrc%5Etfw">November 27, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+All that said, I'm not _quite_ ready to say Linux is for everyone.... though I should push myself, in the future, to enumerate the reasons more specifically. At this point it's mostly: Foreignness of the command line, loss of applications users rely on, and maybe some hardware compatibility. When I think about this question I think about whether I could install Linux on my parents' computers. Granted, most of the issues I foresee are the same types of issues I'd anticipate if they suddenly jumped from Mac to Windows, for example.
 
 ## My top reason to use Linux, at this point
 
@@ -63,4 +75,4 @@ At this point, if forced to give one answer to the question of why some users sh
 
 > But you don't have to wait for politicians to weigh in. Your choices as a consumer matter, too -- and for a better, healthier tech industry ... The lesson of the last decade is that our private tech choices can alter economies and societies. They matter. And they matter most in the mindless rush, when everyone seems to be jumping on board the latest new thing, because it's in these heady moments that we lose sight of the precise risks of turning ourselves over to tech.
 
-Yes, it's an adjustment. Yes, it's not as smooth as MacOS. No, you can't use Photoshop. But it's fun to need to take a wrench to your computer every once in a while. Nobody asks to be buried with their iPad.
+Yes, it's an adjustment: you'll almost certainly have to switch some apps. Yes, it's not as smooth as MacOS. No, you can't use Photoshop. But it's fun to need to take a wrench to your computer every once in a while. Nobody asks to be buried with their iPad.
