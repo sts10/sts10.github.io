@@ -47,7 +47,9 @@ While Linux, which was created in 1991 by Linus Torvalds, has apparently made so
 
 ![screenshot of Elementary OS Juno 5](https://elementary.io/images/screenshots/desktop.jpg)
 
-(I should note that I haven't tried Elementary OS yet; I've stuck with a different "distribution" called [Kubuntu](https://kubuntu.org/), which fits me well. There are many different distributions of Linux, most of which can be paired with a number of "desktop environments"... it gets nerdy real quick with this stuff. But tl;dr users get a ton of choices, which protects them further from the tyranny of one team of developers or one company. Crucially, switching isn't super hard-- for example, if I had to, I'm confident I could switch from Kubuntu to Elementary in a few hours. Most of these distributions take user privacy very seriously, and none of them are much like the "giants" Manjoo warns us of.
+(I should note that I haven't tried Elementary OS yet; I've stuck with a different "distribution" called [Kubuntu](https://kubuntu.org/), which fits me well.) 
+
+There are many different distributions of Linux, most of which can be paired with a number of "desktop environments"... it gets nerdy real quick with this stuff. But tl;dr users get a ton of choices, which protects them further from the tyranny of one team of developers or one company. Crucially, switching isn't super hard-- for example, if I had to, I'm confident I could switch from Kubuntu to Elementary in a few hours. Most of these distributions take user privacy very seriously, and none of them are much like the "giants" Manjoo warns us of.
 
 One night out at a bar with a friend, early on in my Linux experiment, I started breathlessly talking about how I'd made the switch and maybe preaching about how great it was. My friend finally got a question in: "Why should I switch?" In my mind I thought he was asking, essentially, "What's Linux's killer app?" or more basically, what can I do on Linux that I can't do on, say, MacOS?" 
 
