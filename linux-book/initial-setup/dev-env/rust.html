@@ -138,17 +138,9 @@
                     <main>
                         <a class="header" href="#rust" id="rust"><h1>Rust</h1></a>
 <ol>
-<li><a href="https://www.rust-lang.org/en-US/install.html">Install Rust</a></li>
-</ol>
-<ul>
 <li>
-<p>I needed to add <code>export PATH=&quot;$HOME/.cargo/bin:$PATH&quot;</code> to end of <code>~/.bashrc</code>, though this line is likely in the included bashrc in this repo.</p>
+<p><a href="https://www.rust-lang.org/en-US/install.html">Install Rust</a> - Make sure to add <code>export PATH=&quot;$HOME/.cargo/bin:$PATH&quot;</code> to end of <code>~/.bashrc</code>. Note: you can uninstall at anytime with <code>rustup self uninstall</code></p>
 </li>
-<li>
-<p>Note: you can uninstall at anytime with <code>rustup self uninstall</code></p>
-</li>
-</ul>
-<ol start="2">
 <li>
 <p>Install <a href="https://github.com/rust-lang-nursery/rustfmt">rustfmt</a> and <a href="https://github.com/rust-lang/rust.vim#formatting-with-rustfmt">its Vim counterpart, rust.vim</a></p>
 </li>
@@ -188,6 +180,56 @@ let g:racer_experimental_completer = 1
 <ol start="5">
 <li>Make sure you you've got the rust.vim Vim plugin installed: <code>Plug 'rust-lang/rust.vim'</code></li>
 </ol>
+<a class="header" href="#language-server" id="language-server"><h2>Language Server</h2></a>
+<ol>
+<li>Install <a href="https://github.com/rust-lang/rls#setup">Rust Language Server</a></li>
+<li>Get <a href="https://github.com/autozimu/LanguageClient-neovim">LanguageClient-Neovim</a> setup.</li>
+</ol>
+<p>Altogether your Neovim <code>init.vim</code> is going to look something like this:</p>
+<pre><code class="language-vim">&quot; Rust Language Server
+Plug 'autozimu/LanguageClient-neovim', {
+\ 'branch': 'next',
+\ 'do': 'bash install.sh',
+\ }
+
+Plug 'junegunn/fzf'
+
+&quot; Auto-complete
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+
+&quot; Language or filetype specific
+Plug 'rust-lang/rust.vim'
+Plug 'racer-rust/vim-racer'
+
+
+&quot; ...
+
+
+&quot; Language Server Config
+let g:LanguageClient_serverCommands = {
+\ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+\ }
+
+nnoremap &lt;silent&gt; K :call LanguageClient#textDocument_hover()&lt;CR&gt;
+nnoremap &lt;silent&gt; gd :call LanguageClient#textDocument_definition()&lt;CR&gt;
+&quot; got an error with this on only attempt
+nnoremap &lt;silent&gt; gr :call LanguageClient#textDocument_rename()&lt;CR&gt;
+
+&quot; Deoplete (auto-complete)
+let g:deoplete#enable_at_startup = 1
+
+&quot;Racer (Rust)
+let g:racer_cmd = &quot;~/.cargo/bin/racer&quot;
+let g:racer_experimental_completer = 1
+
+</code></pre>
+<p>Then, from the command line, run <code>nvim +PlugInstall +UpdateRemotePlugins +qa</code> to install all that right.</p>
 
                     </main>
 
