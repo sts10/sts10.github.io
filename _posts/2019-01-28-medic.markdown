@@ -213,9 +213,9 @@ E38AD214943DAAD1D64C102FAEC29DE4AFE9DA3D:2401761
 8CB2237D0679CA88DB6464EAC60DA96345513964:2333232
 ```
 
-The format is `<SHA-1 hash of the password>` and then a colon, then the number of times that particular password appeared in the various breaches (a number I didn't have much interest in). The last 10 lines are very similar, but all the number-of-appearances are `1`
+The format is `<SHA-1 hash of the password>` ([what's a SHA-1 hash?](https://en.wikipedia.org/wiki/SHA-1))and then a colon, then the number of times that particular password appeared in the various breaches (a number I didn't have much interest in). The last 10 lines are very similar, but all of the number-of-appearances are `1`.
 
-So, to review, our task is to open up a KeePass database, make SHA-1 hashes (digests) of all the passwords, then see if they in this 550-million-line text document. 
+So, to review, our task is to open up a KeePass database (see above), make SHA-1 hashes (digests) of all the passwords (I do this when I build the `Entry` objects), then see if they appear in this 550-million-line text document. 
 
 My first problem: figuring out how to read this massive amount of data in to my Rust program in order to work with it.
 
