@@ -110,7 +110,9 @@ fn get_entries_from_keepass_db(file_path: &str) -> Vec<Entry> {
 }
 ```
 
-I read this data into a Vector of Entries, which is a Rust `struct` I defined like this: 
+Once the entry's data is exposed (in this case, in `e`) I "build" a new Entry struct called `this_entry` -- we use some emthods laid out in the keepass-rs documentation to get at the title, username and `pass`word. Then we use the password again to create a SHA-1 hash digest that we'll also need later. Once the entry is built I `push` the entry into a Vector simply called `entries`. 
+
+For reference, here's the definition of the `Entry` struct:
 
 ```rust
 #[derive(Debug, Clone)]
@@ -123,9 +125,11 @@ pub struct Entry {
 }
 ```
 
+Believe it or not, the above code represents an early, partially simplified version. Below I discuss how the current version of Medic handles this task (the `Entry` struct definition remained unchanged though).
+
 ### How I read in a KeePass database in the current version of Medic
 
-As I wrote more code and added more features to the program -- including taking a keyfile or a CSV export of the user's database, I broke the "Read KeePass database entries into Vector of Structs" task into a couple of functions, all located in `src/lib.rs`
+As I wrote more code and added more features to the program -- including the ability to take a keyfile or a CSV export of the user's database, I broke this "Read KeePass database entries into Vector of Structs" task into a couple of functions, all located in `src/lib.rs`
 
 ```rust
 pub fn get_entries(file_path: &str, keyfile_path: Option<&str>) -> Vec<Entry> {
@@ -219,13 +223,15 @@ fn unlock_keepass_database(
 }
 ```
 
-When I started this project the keepass-rs crate wasn't able to unlock KeePass databases that were locked with keyfiles. Feeling lucky, I opened [an issue](https://github.com/sseemayer/keepass-rs/issues/8) on the crate's GitHub repo and just hours later the maintainer responded. The next day he wrote the feature into the crate, and I bumped it version `0.3.1`. Open source ftw! 
+When I started this project the keepass-rs crate wasn't able to unlock KeePass databases that were locked with keyfiles. Feeling lucky, I opened [an issue](https://github.com/sseemayer/keepass-rs/issues/8) on the crate's GitHub repo and just hours later the maintainer responded. The next day he wrote the feature into the crate -- basically `Database::open` takes an optionally third argument -- , and I bumped the version in my `Cargo.toml` to `0.3.1`. Open source ftw! 
 
-Now I made an interesting UI choice here -- I decided to only prompt for a keyfile location if the user entering his or her password fails to decrypt the database (see the bottom part of `fn unlock_keepass_database`). This isn't _great_, since the user might have simply typed their master password incorrectly. If that happens they're going to be in for a bad time, because the program immediately prompts them for a keyfile, something they might not even know about. If anyone has a better way for the user to easily indicate that their database requires a keyfile, let me know in the comments!
+Now, I made an "interesting" (probably bad) UI choice here -- I decided to only prompt for a keyfile location if the user entering his or her password fails to decrypt the database (see the bottom part of `fn unlock_keepass_database`). This isn't _great_, since the user might have simply typed their master password incorrectly. If that happens they're going to be in for a bad time, because the program immediately prompts them for a keyfile, something they might not even know about. If anyone has a better way for the user to easily indicate that their database requires a keyfile, let me know in the comments!
+
+At this point I could read the entries of a KeePass database into a Vector of custom-made `Entry` objects (even if the KeePass database was locked with a keyfile). Sweet! Onward!
 
 ## Using the HaveIBeenPwned API to offer users an online check
 
-You're welcome to checkout the code to the API/"online" check, but again, I mostly copied it from [this very clean project](https://github.com/davidhewitt/password-check). Hope that's cool, David!
+As mentioned above, HIBP offers an API To check passwords. You're welcome to checkout the code to the API/"online" check, but again, I mostly copied it from [this very clean project](https://github.com/davidhewitt/password-check). Hope that's cool, David!
 
 ## The offline check: Splitting the work into chunks
 
@@ -314,17 +320,17 @@ fn check_database_offline(passwords_file_path: &str, entries: Vec<Entry>) -> io:
 }
 ```
 
-The `for line in files.lines()` loop loops through each line of the file. When the `len` of the chunk gets larger than the designated `chunk_size`, it dips into that `match` statement, which sends `this_chunk`, as well as a reference to the users `entries`, to another function called `check_this_chunk`. If `check_this_chunk` finds any passwords from your KeePass entries in that chunk, it returns them in a `Result`, then `append`s them to a Vector called `breached_entries` (if no matches, does nothing). Next, _crucially_ it `clear`s `this_chunk` before continuing through the big file. 
+The `for line in files.lines()` loop loops through each line of the file, `push`ing them into `this_chunk`. When the `len` of the chunk gets larger than the designated `chunk_size`, it dips into that `match` statement, which sends `this_chunk`, as well as a reference to the users `entries`, to another function called `check_this_chunk`. If `check_this_chunk` finds any passwords from your KeePass entries in that chunk, it returns them in a `Result`, then `append`s them to a Vector called `breached_entries` (if no matches, does nothing). Next, _crucially_ it `clear`s `this_chunk` -- removing all the digests from memory -- before continuing through the big file. 
 
 Then it moves on to building the next chunk.
 
-The result is that we never have more than 10 million password hashes stores in RAM at one time. 
+The result is that we never have more than 10 million hash digests stored in RAM at one time. 
 
 This works pretty well! Running rustc in release mode, it takes about 70 seconds to check a test KeePass database of 5 or so entries. To check my ~80-entry database, it was more like 2 minutes. Not terrible! 
 
 ## Doing the checking
 
-Once I got this chunk thing figured out, doing the actual hash digest comparisons was relatively easier -- nested `for` loops.
+Once I got this chunk thing figured out, doing the actual hash digest comparisons was relatively easier -- I used nested `for` loops.
 
 ```rust
 fn check_this_chunk(entries: &[Entry], chunk: &[String]) -> io::Result<Vec<Entry>> {
@@ -332,7 +338,6 @@ fn check_this_chunk(entries: &[Entry], chunk: &[String]) -> io::Result<Vec<Entry
 
     for line in chunk {
         let this_hash = &line[..40];
-
         for entry in entries {
             if this_hash == entry.digest {
                 breached_entries.push(entry.clone());
@@ -345,19 +350,27 @@ fn check_this_chunk(entries: &[Entry], chunk: &[String]) -> io::Result<Vec<Entry
 
 I made it a little easier on myself here and used `clone()` so that I wouldn't have to worry as much about ownership. I figured this was OK resource-wise, since (hopefully) no one's going to have thousands or even hundreds of breached entries in a single KeePass database.
 
-I did experiment a little with [Rust's `HashSet`](https://doc.rust-lang.org/std/collections/struct.HashSet.html) collection type, in an effort to speed up this check, but -- the way I implemented them at least -- it wasn't noticeably faster. Could be a good future project though, along with adding threading.
+In an effort to speed up this check, I did experiment a little with [Rust's `HashSet`](https://doc.rust-lang.org/std/collections/struct.HashSet.html) collection type, but -- the way I implemented them at least -- it wasn't noticeably faster. Could be a good future project though, along with adding threading.
 
 ### Adding a progress bar and learning that line counting is pretty slow?! 
 
-While this offline check worked reasonably well, it still took 1 to 3 minutes to complete. While, in [my previous experience](https://sts10.github.io/2018/12/07/optimizing-rust-advent-of-code-day-5.html), if you work hard enough you can speed Rust up significantly, I thought that before banging my head on that it'd be fun to see if I could implement a progress bar. I found two crates for just this: [pb](https://github.com/a8m/pb) and [indicatif](https://github.com/mitsuhiko/indicatif). I found indicatif's API a little more sensible, and it allowed for colors, so I went with that (though pb seems more lightweight).
+While this offline check worked reasonably well, it still took 1 to 3 minutes to complete. In [my previous experience](https://sts10.github.io/2018/12/07/optimizing-rust-advent-of-code-day-5.html), if you work hard enough you can speed Rust up significantly, but I figured before banging my head on that it'd be fun to see if I could implement a progress bar. 
+
+I found two crates for just this: [pb](https://github.com/a8m/pb) and [indicatif](https://github.com/mitsuhiko/indicatif). I found indicatif's API a little more sensible, and it allowed for colors, so I went with that (though pb seems more lightweight).
+
+![GIF of an example progress bar](https://github.com/mitsuhiko/indicatif/raw/master/screenshots/download.gif)
 
 I hit a sticking point here though: both progress bar libraries require you to set some value for when the progress bar should be done. For example, if you're cranking through 550M lines, you might want to set this value to `550_000_000`, and you'd call `pb.inc(chunk_size as u64)` each time you finished checking a chunk. Obviously hardcoding the `550_000_000` is one option here, but it's not ideal -- what if the file HaveIBeenPwned offers gets larger over time? 
 
-So I tried having Rust count the lines of the inputed file -- something like `f.lines().unwrap().len()` -- but this turned to take a real long time for a 550-million line text file -- like a minute at least. Since I was only doing this for the progress bar, that was unacceptable. But rather than ditch the progress bar or resort to hard-coding a value, I ended up using `f.metadata.unwrap().len()` to get the _number of bytes_ of the file. This call is much quicker, which kind of makes sense intuitively? 
+So I tried having Rust count the lines of the inputed file -- something like `f.lines().unwrap().len()` -- but this takes a pretty long time for a 550-million-line text file -- like a minute at least. Since I was only doing this for the progress bar, that was unacceptable. But rather than ditch the progress bar or resort to hard-coding a value, I ended up using `f.metadata.unwrap().len()` to get the _number of bytes_ of the file. This call is much quicker, which kind of makes sense intuitively? 
 
-My next problem was estimated the size of each chunk in bytes rather than line numbers. 500 MB felt like a good RAM requirement for the user -- I felt OK hard-coding that value. But now I had to figure out how to check the byte size of a Rust Vector as I added to it.
+#### Counting by bytes, rather than lines
 
-I kind of forget how I did this -- maybe [`std::mem::size_of`](https://doc.rust-lang.org/std/mem/fn.size_of.html) -- but by my first measure I found that one line of the text file was 24 bytes. But when I tried using this value, the progress bar would get to 50% and the process would end, so I just doubled it to `48` and went with that. Again, if you have a more scientific way of correctly
+My next problem was I had to estimate the size of each chunk in bytes rather than in numbers of lines. 500 MB felt like a good RAM requirement for the user -- I felt OK hard-coding that value. But now I had to figure out how to check the byte size of a Rust Vector as I added to it.
+
+I kind of forget how I did this -- maybe [`std::mem::size_of`](https://doc.rust-lang.org/std/mem/fn.size_of.html) -- but by my first measure I found that one line of the text file was 24 bytes. But when I tried using this value, the progress bar would get to 50% and the process would end, so I just doubled it to `48` and went with that. Again, if you have a more scientific way of correctly reading the size of a Rust String stored in a Vector, let me know. 
+
+Anyway, here's where I landed:
 
 ```rust
 pub fn check_database_offline(
@@ -374,8 +387,6 @@ pub fn check_database_offline(
     };
     let passwords_file_size = f.metadata().unwrap().len() as usize;
 
-    // times via `cargo test --release can_check_offline --no-run && time cargo test --release can_check_offline -- --nocapture`
-    // let chunk_size = 1_000_000_000; // real 1m6.354s
     let chunk_size = 500_000_000; // real 1m7.686s
 
     let pb = ProgressBar::new(passwords_file_size as u64);
@@ -383,7 +394,6 @@ pub fn check_database_offline(
         pb.set_style(
                 ProgressStyle::default_bar()
                 .template("{spinner} [{elapsed_precise}] [{bar:40}] ({eta})"),
-                // .progress_chars("#>-"),
                 );
     }
 
@@ -451,13 +461,13 @@ fn give_feedback(feedback: Option<zxcvbn::feedback::Feedback>) {
 
 Two cool things here: First, that second argument to `zxcvbn` is a Vector of related words, like username or service title, to assist zxcvbn in estimating the password's strength. For example, `github_rocks123` might be an OK password for Tumblr, but it's a worse choice for GitHub.
 
-Second, the  function returns "feedback", which I wrote a helper function to display. Examples of feedback are like, "Don't use dates".
+Second, the function returns "feedback", which I wrote a helper function to display. Examples of feedback are like, "Don't use dates".
 
 ## Using a HashMap to find and organize duplicate passwords 
 
 Next, I figured I'd offer the option of finding re-used or duplicate passwords. To do this, I used a Rust HashMap and this neat `entry`/`and_modify`/`or_insert` pattern [I've used before](https://sts10.github.io/2018/12/02/lessons-from-first-two-days-of-advent-of-code-2018.html#7-the-entry--and_modify--or_insert-pattern-for-hashmaps) that's great for counting things. 
 
-To be a _little_ safer, I decided to use the password hash digests for the keys of the HashMap. The values are a Vector of all the entries whose password digest is the same. So if none of your KeePass databases entries share passwords, all of the keys of this HashMap will only have one Entry in their attached Vectors. But if, say, three entries share a password, the digest of that password will be a key and it's value will be a Vector with 3 Entries in it.
+To be a _little_ safer, I decided to use the password hash digests for the keys of the HashMap (called `digest_map` below). The values are a Vector (`group`) of all the entries whose password digest is the same. So if none of your KeePass database's entries share passwords, all of the keys of this HashMap will only have one Entry in their attached Vectors. But if, say, three entries share a password, the digest of that password will be a key and its value will be a Vector with 3 Entries in it.
 
 ```rust
 pub fn make_digest_map(entries: &[Entry]) -> io::Result<HashMap<String, Vec<Entry>>> {
@@ -477,10 +487,11 @@ pub fn present_duplicated_entries<S: ::std::hash::BuildHasher>(
         digest_map: HashMap<String, Vec<Entry>, S>,
         ) {
     let mut has_duplicated_entries = false;
-    for groups in digest_map.values() {
-        if groups.len() > 1 {
+    for group in digest_map.values() {
+        // print if there is more than 1 element in the vector, since that represents a repeated password
+        if group.len() > 1 {
             println!("The following entries have the same password:\n");
-            for entry in groups {
+            for entry in group {
                 println!("   - {}", entry);
             }
             has_duplicated_entries = true;
@@ -509,8 +520,7 @@ So, for now, I've scrapped this feature. If you have any ideas on how to better 
 
 As I spent more hours on this project, I wondered if any other users would trust it with their passwords. In an effect to make the program more trustworthy, I made what I call "paranoid mode". In paranoid mode, Medic can only accept user passwords if it can not connect to the internet. So user must disconnect their internet connection before using Medic. The idea here is to assure the user that the program isn't "phoning home" and/or sending their passwords somewhere without their knowledge. 
 
-To be honest, now that I've thought about it more it's kind of security theater, but it was a weird challenge to implement. Here's some of it:
-
+To be honest, now that I've thought about it more, this could be seen as a kind of security theater, but it was a weird challenge to implement and I'm glad I did it. Here's some of it:
 
 ```rust
 pub fn is_allowed_access_to_user_passwords(paranoid_mode: bool) -> bool {
@@ -609,7 +619,7 @@ fn unlock_keepass_database(
 }
 ```
 
-## Epilogue: Collection #2 through #5
+## Epilogue: Collections #2 through #5
 
 On January 31, 2019, Collections #2 through #5 dropped. [Wired reports](https://www.wired.co.uk/article/collection-data-breach-dump-leak):
 
