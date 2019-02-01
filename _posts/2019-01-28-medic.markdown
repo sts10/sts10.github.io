@@ -1,24 +1,27 @@
 ---
 layout: post
 title: "Medic: A Rust CLI that checks the passwords of a KeePass database"
-date: 2019-01-15 22:15:00 -0400
-published: false
+date: 2019-01-31 21:15:00 -0400
 comments: true
 ---
 
-Earlier this month news broke of a large cache of emails and passwords, dubbed ["Collection #1"](https://www.troyhunt.com/the-773-million-record-collection-1-data-reach/), surfacing on the internet. Troy Hunt writes that it includes 772,904,991 unique email addresses and 21,222,975 unique passwords. Hunt cleaned and loaded the data into his service called HaveIBeenPwned, which allows non-technical users to enter either their [email](https://haveibeenpwned.com/) or [password(s)](https://haveibeenpwned.com/Passwords) to see if their data was included in the breach (or earlier breaches that he's cataloged). Hunt's total list now includes more than half a billion unique passwords.
+Earlier this month news broke of a large cache of emails and passwords, dubbed ["Collection #1"](https://www.troyhunt.com/the-773-million-record-collection-1-data-reach/), surfacing on the internet. Troy Hunt writes that it includes 772,904,991 unique email addresses and 21,222,975 unique passwords. Wow! Hunt cleaned and loaded the data into his service called HaveIBeenPwned, which allows (non-technical) users to enter either their [email](https://haveibeenpwned.com/) or [password(s)](https://haveibeenpwned.com/Passwords) to see if their data was included in the breach (or earlier breaches that he's cataloged). Hunt's total list of passwords now includes more than half a billion unique passwords.
 
-While I'm reasonably OK entering my email address into the HaveIBeenPwned website, I was a bit more skeptical about entering any of my passwords. Hunt employs something called [k-anonymity](https://www.troyhunt.com/ive-just-launched-pwned-passwords-version-2/#cloudflareprivacyandkanonymity) to make the password search safer. You can check your passwords this way either by manually entering it in [a webpage](https://haveibeenpwned.com/Passwords), or via [a lovely little API](https://haveibeenpwned.com/API/v2). Users only need to send the first 5 characters of the SHA-1 hash of their password over the internet. The API then returns all the hashes that have that 5-character prefix, and the user does the rest of the work. I copied most of this code from [David Hewitt's Password Check](https://github.com/davidhewitt/password-check).
+While I'm reasonably OK entering my email address into the HaveIBeenPwned website, I was a bit more skeptical about entering any of my passwords. Hunt employs something called [k-anonymity](https://www.troyhunt.com/ive-just-launched-pwned-passwords-version-2/#cloudflareprivacyandkanonymity) to make the password search safer. You can check your passwords this way either by manually entering it in [a webpage](https://haveibeenpwned.com/Passwords), or via [a lovely little API](https://haveibeenpwned.com/API/v2). If using the API, users only need to send the first 5 characters of the SHA-1 hash of their password over the internet. The API then returns all the hashes that have that 5-character prefix, and the user does the rest of the work. I copied most of this code from [David Hewitt's Password Check](https://github.com/davidhewitt/password-check).
 
-Additionally, though, Hunt makes the (very large) text file of current, half-billion password list [available to the general public for download](https://haveibeenpwned.com/Passwords), either as a torrent or hosted by Cloudflare. After the recnet breach, I was curious to check my passwords against the list, but I'm a bit paranoid, so I wanted to download the big text file and check my passwords against it offline, nice and safely. 
+Additionally, Hunt makes the (very large) text file of current, half-billion password list [available to the general public for download](https://haveibeenpwned.com/Passwords), either as a torrent or hosted by Cloudflare. After the recent breach, I was curious to check my passwords against the list, but I'm a bit paranoid, so I wanted to download the big text file and check my passwords against it offline, nice and safely. 
 
-I use a password manager called KeePassXC, so all of my passwords are stored in an encrypted file -- a KeePass database -- and I use a program called [KeePassXC](https://keepassxc.org/), a free and open-source password manager, to manage them (I wrote [a beginner's user guide to KeePassXC](https://sts10.github.io/2017/06/27/keepassxc-setup-guide.html) a while back if you're interested!). So ideally, to check these passwords against the big list, I'd have a tool that checks all the passwords in a given KeePass database against the entire HaveIBeenPwned list of passwords, preferably against the downloaded file (i.e. "offline"), rather than the API. After poking around a bit I decided to write it myself in Rust, with [this script](https://github.com/davidhewitt/password-check/blob/master/src/main.rs) and [this crate](https://github.com/sseemayer/keepass-rs) as useful references.
+I use a password manager called KeePassXC, so all of my passwords are stored in an encrypted file -- a KeePass database -- and I use a program called [KeePassXC](https://keepassxc.org/), a free and open-source password manager, to manage them (I wrote [a beginner's user guide to KeePassXC](https://sts10.github.io/2017/06/27/keepassxc-setup-guide.html) a while back if you're interested!). So ideally, to check my passwords against the big list, I'd have a tool that checks all the passwords in a given KeePass database against the entire HaveIBeenPwned list of passwords, preferably against the downloaded file (i.e. "offline"), rather than the API. After poking around a bit I decided to write it myself in Rust, with [this script](https://github.com/davidhewitt/password-check/blob/master/src/main.rs) and [this crate](https://github.com/sseemayer/keepass-rs) as useful references.
 
-[Later that night](https://octodon.social/@schlink/101435557185250079) I pushed [a working version up to GitHub](https://github.com/sts10/medic/tree/79a0c3721e4cec263d7d0f3691a67855f4ab4856), but it only let users connect to the HaveIBeenPwned API [to check the passwords of a KeePass database](https://github.com/sts10/medic/blob/79a0c3721e4cec263d7d0f3691a67855f4ab4856/src/main.rs#L94). The reason I couldn't write a function to do the offline check is that the torrent hadn't finished downloading! 
+## What I wrote
+
+[Medic](https://github.com/sts10/medic) is a Rust CLI that can perform a variety of "health" checks on a KeePass database. It works! But I'm going to give a big ol' "buyer beware" on it -- I am a social media producer by trade, and have never written software so close to sensitive data before. (Of course, part of the promise of Rust is that it enables more people to write "safe" code, so this was a natural challenge for me.)
+
+Please refer to the [ReadMe](https://github.com/sts10/medic/blob/master/readme.markdown) for setup and usage instructions. In this post I'm going to go over some of my Rust code and what it does.
 
 ## Reading a KeePassXC database
 
-With the [keepass-rs crate](https://github.com/sseemayer/keepass-rs) loaded up, unlocking and reading the entries of KeePass database was pretty easy:
+With the [keepass-rs crate](https://github.com/sseemayer/keepass-rs) loaded up, unlocking and reading the entries of KeePass database was pretty easy. Below is an early version of a function that did just that: 
 
 ```rust
 fn get_entries_from_keepass_db(file_path: &str) -> Vec<Entry> {
@@ -72,35 +75,135 @@ pub struct Entry {
 }
 ```
 
-### Using the HaveIBeenPwned API to offer users an online check
+### How I read in a KeePass database in the current version of Medic
+
+As I wrote more code and added more features to the program -- including taking a keyfile or a CSV export of the user's database, I broke the "Read KeePass database entries into Vector of Structs" task into a couple of functions, all located in `src/lib.rs`
+
+```rust
+pub fn get_entries(file_path: &str, keyfile_path: Option<&str>) -> Vec<Entry> {
+    let file_extension = get_file_extension(file_path);
+
+    let db_pass: Option<String> = if file_extension != "csv" {
+        Some(
+                rpassword::read_password_from_tty(Some(
+                        "Enter the password to your KeePass database: ",
+                        ))
+                .unwrap(),
+            )
+    } else {
+        None
+    };
+
+    if file_extension != "csv" && db_pass.is_some() {
+        build_entries_from_keepass_db(file_path, db_pass.unwrap(), keyfile_path)
+    } else {
+        build_entries_from_csv(file_path)
+    }
+}
+
+fn build_entries_from_keepass_db(
+        file_path: &str,
+        db_pass: String,
+        keyfile_path: Option<&str>,
+        ) -> Vec<Entry> {
+    let mut entries: Vec<Entry> = vec![];
+
+    println!("Attempting to unlock your KeePass database...");
+    let db = unlock_keepass_database(file_path, db_pass, keyfile_path);
+    // Iterate over all Groups and Nodes
+    for node in &db.root {
+        match node {
+            Node::GroupNode(_g) => {
+                // println!("Saw group '{}'", g.name);
+            }
+            Node::EntryNode(e) => {
+                let this_entry = Entry {
+title: e.get_title().unwrap().to_string(),
+           username: e.get_username().unwrap().to_string(),
+           url: e.get("URL").unwrap().to_string(),
+           pass: e.get_password().unwrap().to_string(),
+           digest: sha1::Sha1::from(e.get_password().unwrap().to_string())
+               .digest()
+               .to_string()
+               .to_uppercase(),
+                };
+                if this_entry.pass != "" {
+                    entries.push(this_entry);
+                }
+            }
+        }
+    }
+    println!("Successfully read KeePass database!");
+    entries
+}
+
+// helper function that does the actual unlocking
+fn unlock_keepass_database(
+        file_path: &str,
+        db_pass: String,
+        keyfile_path: Option<&str>,
+        ) -> keepass::Database {
+    let path = std::path::Path::new(file_path);
+
+    if keyfile_path.is_some() {
+        match Database::open(
+                &mut File::open(path).unwrap(), // the database
+                Some(&db_pass),                 // password
+                Some(&mut File::open(std::path::Path::new(keyfile_path.unwrap())).unwrap()), // keyfile
+                ) {
+            Ok(db) => db,
+            Err(e) => panic!("Error opening database: {}", e),
+        }
+    } else {
+        match Database::open(
+                &mut File::open(path).unwrap(), // the database
+                Some(&db_pass),                 // password
+                None,                           // keyfile
+                ) {
+            Ok(db) => db,
+            Err(_e) => {
+                println!("\nError opening database. Maybe you have a keyfile? If so, enter its file path:");
+                let keyfile_path = get_file_path().unwrap();
+                unlock_keepass_database(file_path, db_pass, Some(&keyfile_path))
+            }
+        }
+    }
+}
+```
+
+When I started this project the keepass-rs crate wasn't able to unlock KeePass databases that were locked with keyfiles. Feeling lucky, I open [an issue](https://github.com/sseemayer/keepass-rs/issues/8) on the GitHub repo and just hours later the maintainer responded. The next day he wrote the feature into the crate, and I bumped it version `0.3.1`. Open source ftw! 
+
+Now I made an interesting UI choice here -- I decided to only prompt for a keyfile location if the user entering his or her password fails to decrypt the database (see the bottom part of `fn unlock_keepass_database`). This isn't _great_, since the user might have simply typed their master password incorrectly. If that happens they're going to be in for a bad time, cuz the program immediately prompts them for a keyfile, something they might not even know about. If anyone has a better way for the user to easily indicate that their database requires a keyfile, let me know in the comments!
+
+## Using the HaveIBeenPwned API to offer users an online check
 
 You're welcome to checkout the code to the API/"online" check, but again, I mostly copied it from [this very clean project](https://github.com/davidhewitt/password-check). Hope that's cool, David!
 
-## Back to the Offline check: Splitting the work into chunks
+## The offline check: Splitting the work into chunks
 
-Finally, with the 11 GB file downloaded and extracted (22.6 GB), I was able to begin work on the offline check. My first problem: figuring out how to read this massive amount of data in to my Rust program in order to work with it.
+Once I successfully downloaded the 11 GB file of passwords and extracted it to a usable `txt` file (22.6 GB), I was able to begin work on the offline check. My first problem: figuring out how to read this massive amount of data in to my Rust program in order to work with it.
 
 In my first attempt, I brazenly [tried to read all 550 million hashes into a single, massive Vector](https://github.com/sts10/medic/blob/1770df4d4f5383768c466847c669e95f3e0451fd/src/main.rs#L197). 
 
 ```rust
 fn read_by_line(file_path: &str) -> io::Result<Vec<String>> {
-  let mut vec = Vec::new();
-  let f = match File::open(file_path.trim_matches(|c| c == '\'' || c == ' ')) {
-    Ok(res) => res,
-    Err(e) => return Err(e),
-  };
-  let file = BufReader::new(&f);
-  let mut line_number = 0;
-  for line in file.lines() {
-    line_number = line_number + 1;
-    println!("Reading line #{:?}", line_number);
-    vec.push(line.unwrap());
-  }
-  Ok(vec)
+    let mut vec = Vec::new();
+    let f = match File::open(file_path.trim_matches(|c| c == '\'' || c == ' ')) {
+        Ok(res) => res,
+            Err(e) => return Err(e),
+    };
+    let file = BufReader::new(&f);
+    let mut line_number = 0;
+    for line in file.lines() {
+        line_number = line_number + 1;
+        println!("Reading line #{:?}", line_number);
+        vec.push(line.unwrap());
+    }
+    Ok(vec)
 }
 ```
 
-As you might guess, this slowly but surely endeavored to fill up 22.6 GB of my RAM. While I have 32 GB on this machine (rah!), this obviously wasn't a viable method. 
+As you might guess, this slowly but surely tried to full up 22.6 GB of my RAM. (While I have 32 GB on this machine (rah!), this obviously wasn't a viable method.)
 
 I had a few ideas of how to solve this issue, but [a Fediverse friend](https://fosstodon.org/@codesections/101463247584610406) helped me decide to split the data into chunks. After some testing I did later, I found that 10 million lines per chunk as a pretty good size.
 
@@ -136,7 +239,9 @@ fn check_database_offline(passwords_file_path: &str, entries: Vec<Entry>) -> io:
 }
 ```
 
-The `for line in files.lines()` loop loops through each line of the file. When the `len` of the chunk gets larger than the designated `chunk_size`, it dips into that `match` statement, which sends `this_chunk`, as well as a reference to the users `entries`, to another function called `check_this_chunk`. If `check_this_chunk` finds any passwords from your KeePass entries in that chunk, it returns them in a `Result`, then `append`s them to a Vector called `breached_entries`. Next, _crucially_ it `clear`s `this_chunk` before continuing through the big file. 
+The `for line in files.lines()` loop loops through each line of the file. When the `len` of the chunk gets larger than the designated `chunk_size`, it dips into that `match` statement, which sends `this_chunk`, as well as a reference to the users `entries`, to another function called `check_this_chunk`. If `check_this_chunk` finds any passwords from your KeePass entries in that chunk, it returns them in a `Result`, then `append`s them to a Vector called `breached_entries` (if no matches, does nothing). Next, _crucially_ it `clear`s `this_chunk` before continuing through the big file. 
+
+Then it moves on to building the next chunk.
 
 The result is that we never have more than 10 million password hashes stores in RAM at one time. 
 
@@ -165,37 +270,227 @@ fn check_this_chunk(entries: &[Entry], chunk: &[String]) -> io::Result<Vec<Entry
 
 I made it a little easier on myself here and used `clone()` so that I wouldn't have to worry as much about ownership. I figured this was OK resource-wise, since (hopefully) no one's going to have thousands or even hundreds of breached entries in a single KeePass database.
 
+### Adding a progress bar and learning that line counting is pretty slow?! 
 
-## Adding the first pair of tests
- - https://github.com/sts10/medic/blob/d8a65178291c5011929e4a4de7e4a1cdcc6c05c9/src/main.rs#L248
+While this offline check worked reasonably well, it still took 1 to 3 minutes to complete. While, in [my previous experience](https://sts10.github.io/2018/12/07/optimizing-rust-advent-of-code-day-5.html), if you work hard enough you can speed Rust up significantly, I thought that before banging my head on that it'd be fun to see if I could implement a progress bar. I found two crates for just this: [pb](https://github.com/a8m/pb) and [indicatif](https://github.com/mitsuhiko/indicatif). I found indicatif's API a little more sensible, and it allowed for colors, so I went with that (though pb seems more lightweight).
 
-## Progress bar(s)
+I hit a sticking point here though: both prgress bar libraries require you set some value for when the progress bar should be done. For example, if you're cranking through 550M lines, `550_000_000` could be the max, and you'd call `pb.inc(chunk_size as u64)` each time you finiushed checking a chunk. Obviously hardcoding the `550_000_000` is one option here, but it's not ideal -- what if the file HaveIBeenPwned offers gets larger over time? 
 
-### Counting lines versus counting bytes
+So I tried having Rust count the lines of the inputed file, but this turned to take a real long time-- like a minute at least. Since I was only doing this to make the progress bar function, that was unacceptable. But rather than ditch the progress bar or resort to hard-coding a value, I ended up using `f.metadata.unwrap().len()` to get the _number of bytes_ of the file. This call is much quicker, for sort-of obvious reasons I think. 
 
-You may notice I hard-coded the line count to the (approximate) value of `550_000_000`. But since I want this tool to work for other lists of 
+My next problem was estimated the size of each chunk in bytes rather than line numbers. 500 MB felt like a good RAM requirement for the user -- I felt OK hard-coding that value. But now I had to figure out how to check the byte size of Rust Vector as I added to it.
 
-## zxcvbn
-  - I had used it previously here: https://github.com/sts10/password-strength-checker The Rust port is pretty straight-forward to use
-  - Hunt recommends using zxcvbn in conjunction with a HIBP checked https://www.troyhunt.com/introducing-306-million-freely-downloadable-pwned-passwords/
+I kind of forget how I did this, but by my first measure I found that one line of the text file was 24 bytes. But when I tried using this value, the progress bar would get to 50% and the process would end, so I just doubled it to `48` and went with that. Again, if you have a more scientific way of correctly
 
-## Use hashmap to better find duplicate passwords 
- - https://github.com/sts10/medic/blob/cb49ecbc8bd89312e797d3f96f896dd7b90bd649/src/main.rs#L268
+```rust
+pub fn check_database_offline(
+        passwords_file_path: &str,
+        entries: Vec<Entry>,
+        progress_bar: bool,
+        ) -> io::Result<Vec<Entry>> {
+    let mut this_chunk = Vec::new();
+    let mut breached_entries: Vec<Entry> = Vec::new();
 
+    let f = match File::open(passwords_file_path) {
+        Ok(res) => res,
+            Err(e) => return Err(e),
+    };
+    let passwords_file_size = f.metadata().unwrap().len() as usize;
 
-## File sizing for progress bar
+    // times via `cargo test --release can_check_offline --no-run && time cargo test --release can_check_offline -- --nocapture`
+    // let chunk_size = 1_000_000_000; // real 1m6.354s
+    let chunk_size = 500_000_000; // real 1m7.686s
+
+    let pb = ProgressBar::new(passwords_file_size as u64);
+    if progress_bar {
+        pb.set_style(
+                ProgressStyle::default_bar()
+                .template("{spinner} [{elapsed_precise}] [{bar:40}] ({eta})"),
+                // .progress_chars("#>-"),
+                );
+    }
+
+    let file = BufReader::new(&f);
+    for line in file.lines() {
+        let this_line = line.unwrap()[..40].to_string();
+        this_chunk.push(this_line);
+        if this_chunk.len() * 48 > chunk_size {
+            match check_this_chunk(&entries, &this_chunk) {
+                Ok(mut vec_of_breached_entries) => {
+                    breached_entries.append(&mut vec_of_breached_entries)
+                }
+                Err(_e) => eprintln!("found no breached entries in this chunk"),
+            }
+            if progress_bar {
+                pb.inc(chunk_size as u64);
+            }
+            this_chunk.clear();
+        }
+    }
+    if progress_bar {
+        pb.finish_with_message("Done.");
+    }
+    Ok(breached_entries)
+}
+
+```
+
+## Checking for weak passwords with zxcvbn
+
+Next, since I had already done this work to read in a user's passwords, I figured I might as well built out an option to check their database for _weak_ passwords. Troy Hunt actually [suggests doing this in his original blog post about the password list](https://www.troyhunt.com/introducing-306-million-freely-downloadable-pwned-passwords/) in conjunction with a HaveIBeenPwned check -- he recommends using [zxcvbn](https://github.com/dropbox/zxcvbn), a "low-budget password strength checker" from Dropbox. 
+
+Luckily, a few months ago I used Rust to make [this little password checker](https://github.com/sts10/password-strength-checker) that uses [a Rust port of zxcvbn](https://github.com/shssoichiro/zxcvbn-rs). The Rust port is pretty straight-forward to use. Here are the two functions I needed:
+
+```rust
+pub fn check_for_and_display_weak_passwords(entries: &[Entry]) {
+    for entry in entries {
+        let estimate = zxcvbn(&entry.pass, &[&entry.title, &entry.username]).unwrap();
+        // estimate.score gives is a 0 to 4 score of the password
+        if estimate.score < 4 {
+            println!("Your password for {} is weak.", entry);
+            give_feedback(estimate.feedback);
+            println!("\n--------------------------------");
+        }
+    }
+}
+
+fn give_feedback(feedback: Option<zxcvbn::feedback::Feedback>) {
+    match feedback {
+        Some(feedback) => {
+            if let Some(warning) = feedback.warning {
+                println!("Warning: {}\n", warning);
+            }
+            println!("Suggestions:");
+            for suggestion in feedback.suggestions {
+                println!("   - {}", suggestion)
+            }
+        }
+        None => println!("No suggestions."),
+    }
+}
+```
+
+Two cool things here: First, that second argument to `zxcvbn` is a Vector of related words, like username or service title, to assist zxcvbn in estimating the password's strength. For example, `github_rocks123` might be an OK password for Tumblr, but it's a worse choice for GitHub.
+
+Second, the  function returns "feedback", which I wrote a helper function to display. Examples of feedback are like, "Don't use dates".
+
+## Using a HashMap to find and organize duplicate passwords 
+
+Next, I figured I'd offer the option of finding re-used or duplicate passwords. To do this, I used a Rust HashMap and this neat `entry`/`and_modify`/`or_insert` pattern [I've used before](https://sts10.github.io/2018/12/02/lessons-from-first-two-days-of-advent-of-code-2018.html#7-the-entry--and_modify--or_insert-pattern-for-hashmaps) that's great for counting things. 
+
+To be a _little_ safer, I decided to use the password hash digests for the keys of the HashMap. The values are a Vector of all the entries whose password digest is the same. So if none of your KeePass databases entries share passwords, all of the keys of this HashMap will only have one Entry in their attached Vectors. But if, say, three entries share a password, the digest of that password will be a key and it's value will be a Vector with 3 Entries in it.
+
+```rust
+pub fn make_digest_map(entries: &[Entry]) -> io::Result<HashMap<String, Vec<Entry>>> {
+    let mut digest_map: HashMap<String, Vec<Entry>> = HashMap::new();
+    for entry in entries {
+        digest_map
+            .entry(entry.clone().digest)
+            .and_modify(|vec| vec.push(entry.clone()))
+            .or_insert_with(|| vec![entry.clone()]);
+    }
+
+    Ok(digest_map)
+}
+
+// Clippy told me "warning: parameter of type `HashMap` should be generalized over different hashers"
+pub fn present_duplicated_entries<S: ::std::hash::BuildHasher>(
+        digest_map: HashMap<String, Vec<Entry>, S>,
+        ) {
+    let mut has_duplicated_entries = false;
+    for groups in digest_map.values() {
+        if groups.len() > 1 {
+            println!("The following entries have the same password:\n");
+            for entry in groups {
+                println!("   - {}", entry);
+            }
+            has_duplicated_entries = true;
+        }
+    }
+
+    if has_duplicated_entries {
+        println!("\nPassword re-use is bad. Change passwords until you have no duplicates.");
+    } else {
+        println!("\nGood job -- no password reuse detected!");
+    }
+}
+```
 
 ## Attempting similar passwords with zxcvbn
 
-## paranoid mode (https://github.com/sts10/medic/blob/1e06da88cd084b3fd8c7b3dc2f35cacbe67d6183/src/main.rs)
+While checking for repeated passwords is nice and potentially useful, I thought it be cool if the tool could detect passwords that are _similar_ as well, for example `Spot34` and `Spot43`. I thought I could use that feature of zxcvbn where it optionally takes related words to accomplish this: I'd just shove all the other passwords into that Vector and see if the password still got a high-enough score.
 
-## Creating lib.rs
- - https://github.com/sts10/medic/tree/91af5b975a6d0c73364c1dc1eb053f756930ed10
+This worked OK if the differences in the passwords where capitalization, for example `Spot34` gets a lower score if you submit `spot34` as a related word. But sadly it seems not to do anything with numbers: `Spot34` doesn't get a lower score if you submit `Spot43` along with it. 
 
-## Learning about `is_some()` (and a little about if let)
+So, for now, I've scrapped this feature. If you have any ideas on how to better implement it, let me know! 
 
-## Accepting CSV files
-   - avoiding keepass-rs can be slightly more secure?
+## Paranoid mode 
 
-## keyfile request and implementation 
-   - https://github.com/sseemayer/keepass-rs/issues/8
+As I spent more hours on this project, I wondered if any other users would trust it with their passwords. In an effect to make the program more trustworthy, I made what I call "paranoid mode". In paranoid mode, Medic can only accept user passwords if it can not connect to the internet. So user must disconnect their internet connection before using Medic. The idea here is to assure the user that the program isn't "phoning home" and/or sending their passwords somewhere without their knowledge. 
+
+To be honest, now that I've thought about it more it's kind of security theater, but it was a weird challenge to implement. Here's some of it:
+
+
+```rust
+pub fn is_allowed_access_to_user_passwords(paranoid_mode: bool) -> bool {
+    !(paranoid_mode && has_internet_connection())
+}
+
+pub fn has_internet_connection() -> bool {
+    let urls_to_test = [
+        "https://google.com".to_string(),
+        "https://dropbox.com".to_string(),
+        "https://github.com".to_string(),
+        "https://api.pwnedpasswords.com".to_string(),
+    ];
+
+    for url in &urls_to_test {
+        let response = match reqwest::get(url) {
+            Ok(res) => res,
+                Err(_e) => continue,
+        };
+        if response.status().to_string() == "200 OK" {
+            return true;
+        }
+    }
+    false
+}
+```
+
+<!-- ## Creating lib.rs -->
+ <!-- - https://github.com/sts10/medic/tree/91af5b975a6d0c73364c1dc1eb053f756930ed10 -->
+
+## Learning about `is_some()` 
+
+A small Rust thing I learned: When I implemented the keyfile functionality mentioned above, I was sure to make `keyfile_path` and Option, specifically `Option<&str>`, since not all KeePass databases are going to have key files. 
+
+At some point I need some control flow on whether this `keyfile_path` variable was present (a `Some`) or a `None`. My Ruby instincts told me I'd be able to just write `if keyfile_path` or `if Some(keyfile_path)` and, in that context, Rust would evaluate the varaible as a Boolean. Of course Rust is much to strict to do this. But I did learn about [the `is_some()` method](https://doc.rust-lang.org/std/option/enum.Option.html#method.is_some). 
+
+So we have this:
+
+```rust
+if keyfile_path.is_some() {
+    match Database::open(
+            &mut File::open(path).unwrap(), // the database
+            Some(&db_pass),                 // password
+            Some(&mut File::open(std::path::Path::new(keyfile_path.unwrap())).unwrap()), // keyfile
+            ) {
+        Ok(db) => db,
+        Err(e) => panic!("Error opening database: {}", e),
+    }
+} else {
+    match Database::open(
+            &mut File::open(path).unwrap(), // the database
+            Some(&db_pass),                 // password
+            None,                           // keyfile
+            ) {
+        Ok(db) => db,
+        Err(_e) => {
+            println!("\nError opening database. Maybe you have a keyfile? If so, enter its file path:");
+            let keyfile_path = get_file_path().unwrap();
+            unlock_keepass_database(file_path, db_pass, Some(&keyfile_path))
+        }
+    }
+}
+```
+
