@@ -34,7 +34,20 @@ After poking around a bit I decided to write it myself in Rust, with [this scrip
 
 [Medic](https://github.com/sts10/medic) is a Rust CLI that can perform a variety of "health" checks on a KeePass database. It works! But nevertheless I'm going to give a big ol' "buyer beware" on it -- I am a social media producer by trade, and have never written software that deals so directly with sensitive data before. (Of course, part of the promise of Rust is that it enables more people to write "safe" code, so this was a natural challenge for me.)
 
-Please refer to the [ReadMe](https://github.com/sts10/medic/blob/master/readme.markdown) for setup and usage instructions. In this post I'm going to go over some of my Rust code and what it does.
+To give you a gist of what the tool can do at the time of writing, here's the menu that users are presented with when they start the program:
+
+```text
+To check your KeePass database's passwords, do you want to:
+
+==> 1. Check for weak passwords
+==> 2. Check for duplicate passwords
+==> 3. Check OFFLINE for breached passwords: Give me a database of SHA-1 hashed passwords to check your KeePass database against
+==> 4. Check ONLINE for breached passwords: I will hash your passwords and send the first 5 characters of each hash over the internet to HaveIBeenPwned, in order to check if they've been breached.
+```
+
+For more on usage and setup, it's best to refer to the [ReadMe](https://github.com/sts10/medic/blob/master/readme.markdown). In this post I'm going to go over some of my Rust code and what it does.
+
+## But is this useful?
 
 I have run my personal KeePass database through the program (actually I exported my database to a CSV file and ran that through the program -- [I outline the steps I actually took in the README](https://github.com/sts10/medic#how-i-chose-to-use-this-tool)). It found a few old passwords (that I was still using) among the HIBP list, though I should note that I did not find any of my passwords that I used KeePassXC (or 1Password, which I sometimes use for mobile) to randomly generate on the breach list. 
 
