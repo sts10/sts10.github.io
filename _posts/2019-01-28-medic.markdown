@@ -538,7 +538,7 @@ if keyfile_path.is_some() {
 }
 ```
 
-The related, more elegant solution here is Rust's [`if let`](https://doc.rust-lang.org/book/ch06-03-if-let.html), and while I've used it before, I was happy with the above code as is. Feel free to try implementing `if let` and submit a pull request though! 
+The related, more elegant solution here is Rust's [`if let`](https://doc.rust-lang.org/book/ch06-03-if-let.html), which I use in the rather-convoluted `give_feedback` function, I was happy with the above code as is. Feel free to try implementing `if let` and submit a pull request though! 
 
 ## Epilogue: Collection #2 through #5
 
