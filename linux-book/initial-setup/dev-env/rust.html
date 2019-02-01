@@ -136,10 +136,11 @@
 
                 <div id="content" class="content">
                     <main>
-                        <a class="header" href="#rust" id="rust"><h1>Rust</h1></a>
+                        <a class="header" href="#rust--neovim" id="rust--neovim"><h1>Rust + Neovim</h1></a>
+<p>This assumes you have <a href="../neovim.html">Neovim</a> installed already.</p>
 <ol>
 <li>
-<p><a href="https://www.rust-lang.org/en-US/install.html">Install Rust</a> - Make sure to add <code>export PATH=&quot;$HOME/.cargo/bin:$PATH&quot;</code> to end of <code>~/.bashrc</code>. Note: you can uninstall at anytime with <code>rustup self uninstall</code></p>
+<p><a href="https://www.rust-lang.org/en-US/install.html">Install Rust</a>. Make sure to add <code>export PATH=&quot;$HOME/.cargo/bin:$PATH&quot;</code> to end of <code>~/.bashrc</code>. Note: you can uninstall at anytime with <code>rustup self uninstall</code>.</p>
 </li>
 <li>
 <p>Install <a href="https://github.com/rust-lang-nursery/rustfmt">rustfmt</a> and <a href="https://github.com/rust-lang/rust.vim#formatting-with-rustfmt">its Vim counterpart, rust.vim</a></p>
@@ -148,7 +149,7 @@
 <p>Install <a href="https://github.com/rust-lang-nursery/rust-clippy#usage">Rust Clippy</a></p>
 </li>
 </ol>
-<a class="header" href="#getting-autocomplete-in-vim-with-deoplete" id="getting-autocomplete-in-vim-with-deoplete"><h2>Getting Autocomplete in Vim with Deoplete</h2></a>
+<a class="header" href="#getting-autocomplete-in-neovim-with-deoplete" id="getting-autocomplete-in-neovim-with-deoplete"><h2>Getting Autocomplete in Neovim with Deoplete</h2></a>
 <ol>
 <li>Install <a href="https://github.com/Shougo/deoplete.nvim#install">Deoplete</a></li>
 </ol>
@@ -221,13 +222,16 @@ nnoremap &lt;silent&gt; gd :call LanguageClient#textDocument_definition()&lt;CR&
 &quot; got an error with this on only attempt
 nnoremap &lt;silent&gt; gr :call LanguageClient#textDocument_rename()&lt;CR&gt;
 
-&quot; Deoplete (auto-complete)
+&quot; Deoplete (general auto-complete)
 let g:deoplete#enable_at_startup = 1
 
-&quot;Racer (Rust)
+&quot; Racer (Rust auto-complete)
 let g:racer_cmd = &quot;~/.cargo/bin/racer&quot;
 let g:racer_experimental_completer = 1
 
+&quot; ...
+
+set hidden
 </code></pre>
 <p>Then, from the command line, run <code>nvim +PlugInstall +UpdateRemotePlugins +qa</code> to install all that right.</p>
 
