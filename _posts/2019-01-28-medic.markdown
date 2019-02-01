@@ -19,6 +19,8 @@ I use a password manager called KeePassXC, so all of my passwords are stored in 
 
 Please refer to the [ReadMe](https://github.com/sts10/medic/blob/master/readme.markdown) for setup and usage instructions. In this post I'm going to go over some of my Rust code and what it does.
 
+I have run my personal KeePass database through the program (actually I exported my database to a CSV and ran that through the program -- [I outline the steps I actually took in the README](https://github.com/sts10/medic#how-i-chose-to-use-this-tool)). It found a few old passwords (that I was still using) among the HIBP list, though I should note that none of the passwords I used KeePassXC or 1Password to randomly generated were on the breach list. There is an open question of the usefulness of this kind of check -- the logci of the question si something like "Wouldn't a KeePass user not have any common passwords, thus a check against a breach list like this be pointless?" My tentative answer is that even the strongest of passwords can be exposed. Sure, it may only appear on the list once, but it's still there and a tool like Medic is one of the safer yet moderately efficient ways I can think of to learn if that's true or not for any of your passwords.
+
 ## Reading a KeePassXC database
 
 With the [keepass-rs crate](https://github.com/sseemayer/keepass-rs) loaded up, unlocking and reading the entries of KeePass database was pretty easy. Below is an early version of a function that did just that: 
