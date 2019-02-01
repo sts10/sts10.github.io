@@ -500,3 +500,10 @@ if keyfile_path.is_some() {
 }
 ```
 
+## Postscript: Collection #2 through #5
+
+On January 31, 2019, Collections #2 through #5 dropped. [Wired reports](https://www.wired.co.uk/article/collection-data-breach-dump-leak):
+
+> The new Collection leak, which was first reported by Heise, contains 2.2 billion unique usernames and passwords. In total it contains 845GB of data and more than 25bn records.
+
+I'm not sure how to get my hands on this dump, but I'd be curious to see how Medic does with it. Maybe a few hours? Could be good inspiration to squeeze more efficiency out of the offline check function, and/or implement threading...
