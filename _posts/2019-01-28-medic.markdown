@@ -24,7 +24,19 @@ E38AD214943DAAD1D64C102FAEC29DE4AFE9DA3D:2401761
 8CB2237D0679CA88DB6464EAC60DA96345513964:2333232
 ```
 
+You might be asking: But you said this file had passwords in it. In actuality the file contains _hash digests_ of the passwords, followed by the number of times each password appears in all the collected breaches (the number after the colon).
+
+What's a hash and a hash digest? [Here's a good explainer video](https://www.youtube.com/watch?v=b4b8ktEV4Bg), [another video](https://www.youtube.com/watch?v=DMtFhACPnTY), and here's the [Wikipedia page](https://en.wikipedia.org/wiki/SHA-1). But basically a hash is way to represent a piece of data (in this case, a password) without actually revealing it. An example: If we run the word "password" through the SHA-1 hash, we get a "digest" of `5BAA61E4C9B93F3F0682250B6CF8331B7EE68FD8` (which was the 4th most common password in the breach with a whopping 3,645,804 appearances).
+
+To generate this "hash digest", we run a numeric representation of the word "password" through the Secure Hash Algorithm 1, aka SHA-1. SHA-1, which was designed by the NSA, is an example of a one way mathematical function, which Wikipedia [defines](https://en.wikipedia.org/wiki/One-way_function):
+
+> In computer science, a one-way function is a function that is easy to compute on every input, but hard to invert given the image of a random input. Here, "easy" and "hard" are to be understood in the sense of computational complexity theory, specifically the theory of polynomial time problems. Not being one-to-one is not considered sufficient of a function for it to be called one-way.
+
+If that went a bit over your head don't worry too much about it -- we'll press on.
+
 After the recent breach, I was curious to check my passwords against the list, but I'm a bit paranoid, so I wanted to download the big text file and check my passwords against it offline, nice and safely. 
+
+## What I wanted to do
 
 I use a password manager called KeePassXC, so all of my passwords are stored in an encrypted file -- a KeePass database -- and I use a program called [KeePassXC](https://keepassxc.org/), a free and open-source password manager, to manage them (I wrote [a beginner's user guide to KeePassXC](https://sts10.github.io/2017/06/27/keepassxc-setup-guide.html) a while back if you're interested!). So ideally, to check my passwords against the big list, I'd have a tool that checks all the passwords in a given KeePass database against the entire HaveIBeenPwned list of passwords, preferably against the downloaded file (i.e. "offline"), rather than the API. In other words something similar to [1Password's Watchtower feature](https://support.1password.com/watchtower/), but preferably offline. 
 
@@ -233,8 +245,6 @@ E38AD214943DAAD1D64C102FAEC29DE4AFE9DA3D:2401761
 ```
 
 The format is `<SHA-1 hash of the password>` and then a colon, then the number of times that particular password appeared in the various breaches (a number I didn't have much interest in). The last 10 lines are very similar to the first 10, except that all of the number-of-appearances are `1`.
-
-You might be asking: But you said this file had passwords in it. What's a SHA-1 hash? [Here's a good explainer video](https://www.youtube.com/watch?v=b4b8ktEV4Bg), [another video](https://www.youtube.com/watch?v=DMtFhACPnTY), and here's the [Wikipedia page](https://en.wikipedia.org/wiki/SHA-1). But basically a hash is way to represent a piece of data (in this case, a password) without actually revealing it. An example: The SHA-1 hash of "password" is `5BAA61E4C9B93F3F0682250B6CF8331B7EE68FD8`, which was the 4th most common password in the breach with a whopping 3,645,804 appearances.
 
 Troy Hunt [explains why he uses SHA-1 for this project](https://www.troyhunt.com/introducing-306-million-freely-downloadable-pwned-passwords/#whyhashes):
 
