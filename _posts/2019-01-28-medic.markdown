@@ -5,11 +5,24 @@ date: 2019-01-31 21:15:00 -0400
 comments: true
 ---
 
-Earlier this month news broke of a large cache of emails and passwords, dubbed ["Collection #1"](https://www.troyhunt.com/the-773-million-record-collection-1-data-reach/), surfacing on the internet. Troy Hunt writes that it includes 772,904,991 unique email addresses and 21,222,975 unique passwords. Wow! Hunt cleaned and loaded the data into his service called HaveIBeenPwned, which allows (non-technical) users to enter either their [email](https://haveibeenpwned.com/) or [password(s)](https://haveibeenpwned.com/Passwords) to see if their data was included in the breach (or earlier breaches that he's cataloged). Hunt's total list of passwords now includes more than half a billion unique passwords.
+Midway through January 2019 news broke of a large cache of emails and passwords, dubbed ["Collection #1"](https://www.troyhunt.com/the-773-million-record-collection-1-data-reach/), surfacing on the internet. Troy Hunt writes that it includes 772,904,991 unique email addresses and 21,222,975 unique passwords. Wow! Hunt cleaned and loaded the data into his service called HaveIBeenPwned, which allows (non-technical) users to enter either their [email](https://haveibeenpwned.com/) or [password(s)](https://haveibeenpwned.com/Passwords) to see if their data was included in the breach (or earlier breaches that he's cataloged). Hunt's total list of passwords now includes more than half a billion unique passwords.
 
 While I'm reasonably OK entering my email address into the HaveIBeenPwned website, I was a bit more skeptical about entering any of my passwords. Hunt employs something called [k-anonymity](https://www.troyhunt.com/ive-just-launched-pwned-passwords-version-2/#cloudflareprivacyandkanonymity) to make the password search safer. You can check your passwords this way either by manually entering it in [a webpage](https://haveibeenpwned.com/Passwords), or via [a lovely little API](https://haveibeenpwned.com/API/v2). If using the API, users only need to send the first 5 characters of the SHA-1 hash of their password over the internet. The API then returns all the hashes that have that 5-character prefix, and the user does the rest of the work. I copied most of this code from [David Hewitt's Password Check](https://github.com/davidhewitt/password-check).
 
 Additionally, Hunt makes the (very large) text file of current, half-billion password list [available to the general public for download](https://haveibeenpwned.com/Passwords), either as a torrent or hosted by Cloudflare. After the recent breach, I was curious to check my passwords against the list, but I'm a bit paranoid, so I wanted to download the big text file and check my passwords against it offline, nice and safely. 
+
+```text
+7C4A8D09CA3762AF61E59520943DC26494F8941B:23174662
+F7C3BC1D808E04732ADF679965CCC34CA7AE3441:7671364
+B1B3773A05C0ED0176787A4F1574FF0075F7521E:3810555
+5BAA61E4C9B93F3F0682250B6CF8331B7EE68FD8:3645804
+3D4F2BF07DC1BE38B20CD6E46949A1071F9D0E3D:3093220
+7C222FB2927D828AF22F592134E8932480637C0D:2889079
+6367C48DD193D56EA7B0BAAD25B19455E529F5EE:2834058
+20EABE5D64B0E216796E834F52D61FD0B70332FC:2484157
+E38AD214943DAAD1D64C102FAEC29DE4AFE9DA3D:2401761
+8CB2237D0679CA88DB6464EAC60DA96345513964:2333232
+```
 
 I use a password manager called KeePassXC, so all of my passwords are stored in an encrypted file -- a KeePass database -- and I use a program called [KeePassXC](https://keepassxc.org/), a free and open-source password manager, to manage them (I wrote [a beginner's user guide to KeePassXC](https://sts10.github.io/2017/06/27/keepassxc-setup-guide.html) a while back if you're interested!). So ideally, to check my passwords against the big list, I'd have a tool that checks all the passwords in a given KeePass database against the entire HaveIBeenPwned list of passwords, preferably against the downloaded file (i.e. "offline"), rather than the API. After poking around a bit I decided to write it myself in Rust, with [this script](https://github.com/davidhewitt/password-check/blob/master/src/main.rs) and [this crate](https://github.com/sseemayer/keepass-rs) as useful references.
 
@@ -183,7 +196,28 @@ You're welcome to checkout the code to the API/"online" check, but again, I most
 
 ## The offline check: Splitting the work into chunks
 
-Once I successfully downloaded the 11 GB file of passwords and extracted it to a usable `txt` file (22.6 GB), I was able to begin work on the offline check. My first problem: figuring out how to read this massive amount of data in to my Rust program in order to work with it.
+Once I successfully downloaded the 11 GB file of passwords and extracted it to a usable `txt` file (22.6 GB), I was able to begin work on the offline check. 
+
+Here are the first 10 lines: 
+
+```text
+7C4A8D09CA3762AF61E59520943DC26494F8941B:23174662
+F7C3BC1D808E04732ADF679965CCC34CA7AE3441:7671364
+B1B3773A05C0ED0176787A4F1574FF0075F7521E:3810555
+5BAA61E4C9B93F3F0682250B6CF8331B7EE68FD8:3645804
+3D4F2BF07DC1BE38B20CD6E46949A1071F9D0E3D:3093220
+7C222FB2927D828AF22F592134E8932480637C0D:2889079
+6367C48DD193D56EA7B0BAAD25B19455E529F5EE:2834058
+20EABE5D64B0E216796E834F52D61FD0B70332FC:2484157
+E38AD214943DAAD1D64C102FAEC29DE4AFE9DA3D:2401761
+8CB2237D0679CA88DB6464EAC60DA96345513964:2333232
+```
+
+The format is `<SHA-1 hash of the password>` and then a colon, then the number of times that particular password appeared in the various breaches (a number I didn't have much interest in). The last 10 lines are very similar, but all the number-of-appearances are `1`
+
+So, to review, our task is to open up a KeePass database, make SHA-1 hashes (digests) of all the passwords, then see if they in this 550-million-line text document. 
+
+My first problem: figuring out how to read this massive amount of data in to my Rust program in order to work with it.
 
 In my first attempt, I brazenly [tried to read all 550 million hashes into a single, massive Vector](https://github.com/sts10/medic/blob/1770df4d4f5383768c466847c669e95f3e0451fd/src/main.rs#L197). 
 
