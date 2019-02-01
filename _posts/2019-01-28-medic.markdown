@@ -239,9 +239,9 @@ fn read_by_line(file_path: &str) -> io::Result<Vec<String>> {
 }
 ```
 
-As you might guess, this slowly but surely tried to full up 22.6 GB of my RAM. (While I have 32 GB on this machine (rah!), this obviously wasn't a viable method.)
+As you might guess, this slowly but surely tried to fill up 22.6 GB of my RAM. (While I have 32 GB on this machine (rah!), this obviously wasn't a viable method.)
 
-I had a few ideas of how to solve this issue, but [a Fediverse friend](https://fosstodon.org/@codesections/101463247584610406) helped me decide to split the data into chunks. After some testing I did later, I found that 10 million lines per chunk as a pretty good size.
+I had a few ideas of how to solve this issue, but [a Fediverse friend](https://fosstodon.org/@codesections/101463247584610406) helped me decide to split the data into chunks. After some testing I did later, I found that 10 million lines per chunk was a pretty good size.
 
 ```rust
 fn check_database_offline(passwords_file_path: &str, entries: Vec<Entry>) -> io::Result<Vec<Entry>> {
@@ -536,7 +536,9 @@ if keyfile_path.is_some() {
 }
 ```
 
-## Postscript: Collection #2 through #5
+The related, more elegant solution here is Rust's [`if let`](https://doc.rust-lang.org/book/ch06-03-if-let.html), and while I've used it before, I was happy with the above code as is. Feel free to try implementing `if let` and submit a pull request though! 
+
+## Epilogue: Collection #2 through #5
 
 On January 31, 2019, Collections #2 through #5 dropped. [Wired reports](https://www.wired.co.uk/article/collection-data-breach-dump-leak):
 
