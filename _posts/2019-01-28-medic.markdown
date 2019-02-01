@@ -219,7 +219,11 @@ E38AD214943DAAD1D64C102FAEC29DE4AFE9DA3D:2401761
 8CB2237D0679CA88DB6464EAC60DA96345513964:2333232
 ```
 
-The format is `<SHA-1 hash of the password>` ([what's a SHA-1 hash?](https://en.wikipedia.org/wiki/SHA-1))and then a colon, then the number of times that particular password appeared in the various breaches (a number I didn't have much interest in). The last 10 lines are very similar, but all of the number-of-appearances are `1`.
+The format is `<SHA-1 hash of the password>` and then a colon, then the number of times that particular password appeared in the various breaches (a number I didn't have much interest in). The last 10 lines are very similar to the first 10, except that all of the number-of-appearances are `1`.
+
+What's a SHA-1 hash? [Here's a good explainer video](https://www.youtube.com/watch?v=b4b8ktEV4Bg), [another video](https://www.youtube.com/watch?v=DMtFhACPnTY), and here's the [Wikipedia page](https://en.wikipedia.org/wiki/SHA-1). Troy Hunt [explains why he uses SHA-1](https://www.troyhunt.com/introducing-306-million-freely-downloadable-pwned-passwords/#whyhashes):
+
+> Each of the... passwords is being provided as a SHA1 hash. What this means is that anyone using this data can take a plain text password from their end (for example during registration, password change or at login), hash it with SHA1 and see if it's previously been leaked. It doesn't matter that SHA1 is a fast algorithm unsuitable for storing your customers' passwords with because that's not what we're doing here, it's simply about ensuring the source passwords are not immediately visible.
 
 So, to review, our task is to open up a KeePass database (see above), make SHA-1 hashes (digests) of all the passwords (I do this when I build the `Entry` objects), then see if they appear in this 550-million-line text document. 
 
