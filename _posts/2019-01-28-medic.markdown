@@ -166,11 +166,11 @@ fn unlock_keepass_database(
         ) -> keepass::Database {
     let path = std::path::Path::new(file_path);
 
-    if keyfile_path.is_some() {
+    if let Some(keyf_path) = keyfile_path {
         match Database::open(
                 &mut File::open(path).unwrap(), // the database
                 Some(&db_pass),                 // password
-                Some(&mut File::open(std::path::Path::new(keyfile_path.unwrap())).unwrap()), // keyfile
+                Some(&mut File::open(std::path::Path::new(keyf_path)).unwrap()), // keyfile
                 ) {
             Ok(db) => db,
             Err(e) => panic!("Error opening database: {}", e),
@@ -221,11 +221,15 @@ E38AD214943DAAD1D64C102FAEC29DE4AFE9DA3D:2401761
 
 The format is `<SHA-1 hash of the password>` and then a colon, then the number of times that particular password appeared in the various breaches (a number I didn't have much interest in). The last 10 lines are very similar to the first 10, except that all of the number-of-appearances are `1`.
 
-What's a SHA-1 hash? [Here's a good explainer video](https://www.youtube.com/watch?v=b4b8ktEV4Bg), [another video](https://www.youtube.com/watch?v=DMtFhACPnTY), and here's the [Wikipedia page](https://en.wikipedia.org/wiki/SHA-1). Troy Hunt [explains why he uses SHA-1 for this project](https://www.troyhunt.com/introducing-306-million-freely-downloadable-pwned-passwords/#whyhashes):
+You might be asking: But you said this file had passwords in it. What's a SHA-1 hash? [Here's a good explainer video](https://www.youtube.com/watch?v=b4b8ktEV4Bg), [another video](https://www.youtube.com/watch?v=DMtFhACPnTY), and here's the [Wikipedia page](https://en.wikipedia.org/wiki/SHA-1). But basically a hash is way to represent a piece of data (in this case, a password) without actually revealing it. An example: The SHA-1 hash of "password" is `5BAA61E4C9B93F3F0682250B6CF8331B7EE68FD8`, which was the 4th most common password in the breach with a whopping 3,645,804 appearances.
+
+Troy Hunt [explains why he uses SHA-1 for this project](https://www.troyhunt.com/introducing-306-million-freely-downloadable-pwned-passwords/#whyhashes):
 
 > Each of the... passwords is being provided as a SHA1 hash. What this means is that anyone using this data can take a plain text password from their end (for example during registration, password change or at login), hash it with SHA1 and see if it's previously been leaked. It doesn't matter that SHA1 is a fast algorithm unsuitable for storing your customers' passwords with because that's not what we're doing here, it's simply about ensuring the source passwords are not immediately visible.
 
-So, to review, our task is to open up a KeePass database (see above), make SHA-1 hashes (digests) of all the passwords (I do this when I build the `Entry` objects), then see if they appear in this 550-million-line text document. 
+### Back to the code
+
+So, to review, our task is to open up a KeePass database (see above), make SHA-1 hashes (sometimes referred to more specifically as "digests") of all the passwords (I do this when I build the `Entry` objects), then see if they appear in this 550-million-line text document. 
 
 My first problem: figuring out how to read this massive amount of data in to my Rust program in order to work with it.
 
@@ -516,9 +520,7 @@ pub fn has_internet_connection() -> bool {
 
 A small Rust thing I learned: When I implemented the keyfile functionality mentioned above, I was sure to make `keyfile_path` and Option, specifically `Option<&str>`, since not all KeePass databases are going to have key files. 
 
-At some point I need some control flow on whether this `keyfile_path` variable was present (a `Some`) or a `None`. My Ruby instincts told me I'd be able to just write `if keyfile_path` or `if Some(keyfile_path)` and, in that context, Rust would evaluate the varaible as a Boolean. Of course Rust is much to strict to do this. But I did learn about [the `is_some()` method](https://doc.rust-lang.org/std/option/enum.Option.html#method.is_some). 
-
-So we have this:
+At some point I need some control flow on whether this `keyfile_path` variable was present (a `Some`) or a `None`. My Ruby instincts told me I'd be able to just write `if keyfile_path` or `if Some(keyfile_path)` and, in that context, Rust would evaluate the variable as a Boolean. Of course Rust is much to strict to do this. But I did learn about [the `is_some()` method](https://doc.rust-lang.org/std/option/enum.Option.html#method.is_some). Here's how that would look with `keyfile_path`:
 
 ```rust
 if keyfile_path.is_some() {
@@ -546,7 +548,41 @@ if keyfile_path.is_some() {
 }
 ```
 
-The related, more elegant solution here is Rust's [`if let`](https://doc.rust-lang.org/book/ch06-03-if-let.html), which I use in the rather-convoluted `give_feedback` function, I was happy with the above code as is. Feel free to try implementing `if let` and submit a pull request though! 
+The related, more elegant solution here is Rust's [`if let`](https://doc.rust-lang.org/book/ch06-03-if-let.html). This allows us to safely "unwrap" the key file path variable without calling `unwrap()` (yay).
+
+```rust
+fn unlock_keepass_database(
+        file_path: &str,
+        db_pass: String,
+        keyfile_path: Option<&str>,
+        ) -> keepass::Database {
+    let path = std::path::Path::new(file_path);
+
+    if let Some(keyf_path) = keyfile_path {
+        match Database::open(
+                &mut File::open(path).unwrap(), // the database
+                Some(&db_pass),                 // password
+                Some(&mut File::open(std::path::Path::new(keyf_path)).unwrap()), // keyfile
+                ) {
+            Ok(db) => db,
+            Err(e) => panic!("Error opening database: {}", e),
+        }
+    } else {
+        match Database::open(
+                &mut File::open(path).unwrap(), // the database
+                Some(&db_pass),                 // password
+                None,                           // keyfile
+                ) {
+            Ok(db) => db,
+            Err(_e) => {
+                println!("\nError opening database. Maybe you have a keyfile? If so, enter its file path:");
+                let keyfile_path = get_file_path().unwrap();
+                unlock_keepass_database(file_path, db_pass, Some(&keyfile_path))
+            }
+        }
+    }
+}
+```
 
 ## Epilogue: Collection #2 through #5
 
