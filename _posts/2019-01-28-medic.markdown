@@ -171,7 +171,7 @@ fn unlock_keepass_database(
 }
 ```
 
-When I started this project the keepass-rs crate wasn't able to unlock KeePass databases that were locked with keyfiles. Feeling lucky, I open [an issue](https://github.com/sseemayer/keepass-rs/issues/8) on the GitHub repo and just hours later the maintainer responded. The next day he wrote the feature into the crate, and I bumped it version `0.3.1`. Open source ftw! 
+When I started this project the keepass-rs crate wasn't able to unlock KeePass databases that were locked with keyfiles. Feeling lucky, I opened [an issue](https://github.com/sseemayer/keepass-rs/issues/8) on the crate's GitHub repo and just hours later the maintainer responded. The next day he wrote the feature into the crate, and I bumped it version `0.3.1`. Open source ftw! 
 
 Now I made an interesting UI choice here -- I decided to only prompt for a keyfile location if the user entering his or her password fails to decrypt the database (see the bottom part of `fn unlock_keepass_database`). This isn't _great_, since the user might have simply typed their master password incorrectly. If that happens they're going to be in for a bad time, cuz the program immediately prompts them for a keyfile, something they might not even know about. If anyone has a better way for the user to easily indicate that their database requires a keyfile, let me know in the comments!
 
@@ -249,7 +249,7 @@ This works pretty well! Running rustc in release mode, it takes about 70 seconds
 
 ## Doing the checking
 
-Here's `check_this_chunk` for reference: 
+Once I got this chunk thing figured out, doing the actual hash digest comparisons was relatively easier -- nested `for` loops.
 
 ```rust
 fn check_this_chunk(entries: &[Entry], chunk: &[String]) -> io::Result<Vec<Entry>> {
@@ -270,17 +270,19 @@ fn check_this_chunk(entries: &[Entry], chunk: &[String]) -> io::Result<Vec<Entry
 
 I made it a little easier on myself here and used `clone()` so that I wouldn't have to worry as much about ownership. I figured this was OK resource-wise, since (hopefully) no one's going to have thousands or even hundreds of breached entries in a single KeePass database.
 
+I did experiment a little with [Rust's `HashSet`](https://doc.rust-lang.org/std/collections/struct.HashSet.html) collection type, in an effort to speed up this check, but -- the way I implemented them at least -- it wasn't noticeably faster. Could be a good future project though, along with adding threading.
+
 ### Adding a progress bar and learning that line counting is pretty slow?! 
 
 While this offline check worked reasonably well, it still took 1 to 3 minutes to complete. While, in [my previous experience](https://sts10.github.io/2018/12/07/optimizing-rust-advent-of-code-day-5.html), if you work hard enough you can speed Rust up significantly, I thought that before banging my head on that it'd be fun to see if I could implement a progress bar. I found two crates for just this: [pb](https://github.com/a8m/pb) and [indicatif](https://github.com/mitsuhiko/indicatif). I found indicatif's API a little more sensible, and it allowed for colors, so I went with that (though pb seems more lightweight).
 
-I hit a sticking point here though: both prgress bar libraries require you set some value for when the progress bar should be done. For example, if you're cranking through 550M lines, `550_000_000` could be the max, and you'd call `pb.inc(chunk_size as u64)` each time you finiushed checking a chunk. Obviously hardcoding the `550_000_000` is one option here, but it's not ideal -- what if the file HaveIBeenPwned offers gets larger over time? 
+I hit a sticking point here though: both progress bar libraries require you to set some value for when the progress bar should be done. For example, if you're cranking through 550M lines, you might want to set this value to `550_000_000`, and you'd call `pb.inc(chunk_size as u64)` each time you finished checking a chunk. Obviously hardcoding the `550_000_000` is one option here, but it's not ideal -- what if the file HaveIBeenPwned offers gets larger over time? 
 
-So I tried having Rust count the lines of the inputed file, but this turned to take a real long time-- like a minute at least. Since I was only doing this to make the progress bar function, that was unacceptable. But rather than ditch the progress bar or resort to hard-coding a value, I ended up using `f.metadata.unwrap().len()` to get the _number of bytes_ of the file. This call is much quicker, for sort-of obvious reasons I think. 
+So I tried having Rust count the lines of the inputed file -- something like `f.lines().unwrap().len()` -- but this turned to take a real long time for a 550-million line text file -- like a minute at least. Since I was only doing this for the progress bar, that was unacceptable. But rather than ditch the progress bar or resort to hard-coding a value, I ended up using `f.metadata.unwrap().len()` to get the _number of bytes_ of the file. This call is much quicker, which kind of makes sense intuitively? 
 
-My next problem was estimated the size of each chunk in bytes rather than line numbers. 500 MB felt like a good RAM requirement for the user -- I felt OK hard-coding that value. But now I had to figure out how to check the byte size of Rust Vector as I added to it.
+My next problem was estimated the size of each chunk in bytes rather than line numbers. 500 MB felt like a good RAM requirement for the user -- I felt OK hard-coding that value. But now I had to figure out how to check the byte size of a Rust Vector as I added to it.
 
-I kind of forget how I did this, but by my first measure I found that one line of the text file was 24 bytes. But when I tried using this value, the progress bar would get to 50% and the process would end, so I just doubled it to `48` and went with that. Again, if you have a more scientific way of correctly
+I kind of forget how I did this -- maybe [`std::mem::size_of`](https://doc.rust-lang.org/std/mem/fn.size_of.html) -- but by my first measure I found that one line of the text file was 24 bytes. But when I tried using this value, the progress bar would get to 50% and the process would end, so I just doubled it to `48` and went with that. Again, if you have a more scientific way of correctly
 
 ```rust
 pub fn check_database_offline(
@@ -337,7 +339,9 @@ pub fn check_database_offline(
 
 ## Checking for weak passwords with zxcvbn
 
-Next, since I had already done this work to read in a user's passwords, I figured I might as well built out an option to check their database for _weak_ passwords. Troy Hunt actually [suggests doing this in his original blog post about the password list](https://www.troyhunt.com/introducing-306-million-freely-downloadable-pwned-passwords/) in conjunction with a HaveIBeenPwned check -- he recommends using [zxcvbn](https://github.com/dropbox/zxcvbn), a "low-budget password strength checker" from Dropbox. 
+Next, since I had already done all the work to read in a user's passwords, I figured I might as well build out an option to check their database for _weak_ passwords. 
+
+Troy Hunt actually [suggests doing this in his original blog post about the password list](https://www.troyhunt.com/introducing-306-million-freely-downloadable-pwned-passwords/) in conjunction with a HaveIBeenPwned check -- he recommends using [zxcvbn](https://github.com/dropbox/zxcvbn), a "low-budget password strength checker" from Dropbox. 
 
 Luckily, a few months ago I used Rust to make [this little password checker](https://github.com/sts10/password-strength-checker) that uses [a Rust port of zxcvbn](https://github.com/shssoichiro/zxcvbn-rs). The Rust port is pretty straight-forward to use. Here are the two functions I needed:
 
@@ -416,9 +420,11 @@ pub fn present_duplicated_entries<S: ::std::hash::BuildHasher>(
 }
 ```
 
-## Attempting similar passwords with zxcvbn
+Gonna be straight with you: I'm not 100% sure about that `.or_insert_with(|| vec![entry.clone()]);` line -- it was a Clippy suggestion. I had a simple `or_insert` call.
 
-While checking for repeated passwords is nice and potentially useful, I thought it be cool if the tool could detect passwords that are _similar_ as well, for example `Spot34` and `Spot43`. I thought I could use that feature of zxcvbn where it optionally takes related words to accomplish this: I'd just shove all the other passwords into that Vector and see if the password still got a high-enough score.
+## Attempting to detect similar passwords using zxcvbn
+
+While checking for repeated passwords is nice and potentially useful, I thought it'd be cool if the tool could also detect passwords that are _similar_ as well, for example `Spot34` and `Spot43`. I _hoped_ that I could use that feature of zxcvbn where it optionally takes related words to accomplish this: I'd just shove all the other passwords into that Vector and see if the password still got a high-enough score.
 
 This worked OK if the differences in the passwords where capitalization, for example `Spot34` gets a lower score if you submit `spot34` as a related word. But sadly it seems not to do anything with numbers: `Spot34` doesn't get a lower score if you submit `Spot43` along with it. 
 
