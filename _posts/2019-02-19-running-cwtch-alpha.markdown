@@ -12,6 +12,8 @@ This past Valentine's Day, [Open Privacy released an alpha build of an encrypted
 
 You can read more about Cwtch either in [this blog post](https://openprivacy.ca/blog/2019/02/14/cwtch-alpha/) or [their main Gitlab repo](https://git.openprivacy.ca/cwtch.im/cwtch). But it's basically a decentralized chat application that uses end-to-end encryption for all communication. It also uses Tor Onion services to further protect the metadata of communication.
 
+Important: The developers are keen to point out that "Cwtch is an experimental concept and prototype. We do not recommend you use Cwtch today if you require secure communication. At least, not yet." So you know, don't send sensitive information over Cwtch just yet.
+
 ## Getting this Alpha release up and running on Ubuntu 18.04
 
 Note: I'm running Ubuntu 18.04, specifically Kubuntu. I had both the Tor Browser and Go installed before attempting this.
