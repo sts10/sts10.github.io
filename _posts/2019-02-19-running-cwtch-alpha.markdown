@@ -14,7 +14,7 @@ You can read more about Cwtch either in [this blog post](https://openprivacy.ca/
 
 ## Getting this Alpha release up and running on Ubuntu 18.04
 
-Note: I'm running Kubutnu 18.04.
+Note: I'm running Ubuntu 18.04, specifically Kubuntu. I had both the Tor Browser and Go installed before attempting this.
 
 ### Prerequisites
 
@@ -40,17 +40,21 @@ sudo apt update
 sudo apt install tor deb.torproject.org-keyring
 ```
 
+After doing the above, running `tor --version` returns `Tor version 0.3.5.7.` for me, which Cwtch worked with.
+
 #### Do you need Golang installed?
 
-Cwtch is written in the Go programming language. I already had `go version go1.11.4 linux/amd64` installed on my machine, so I don't know if that's required to run the build of Cwtch. If it is required, you can (pretty easily) install Go [here](https://golang.org/doc/install).
+Cwtch is written in the Go programming language. I already had `go version go1.11.4 linux/amd64` installed on my machine (for other purposes), so I don't know if that's required to run this build of Cwtch. I kind of doubt it, but if it is required, you can (pretty easily) install Go [here](https://golang.org/doc/install).
 
 ### Installing and running Cwtch
 
-1. Download [pre-built Linux binary](https://git.openprivacy.ca/cwtch.im/ui/releases). 
+OK let's do this.
 
-2. Extract the downloaded zip file and navigate into directory.
+1. Download [pre-built Linux binary called "linux-x86-64.zip"](https://git.openprivacy.ca/cwtch.im/ui/releases). 
 
-3. Running Cwtch: navigate one directory up and run `./linux/ui.sh`. Cwtch should launch!
+2. Extract the downloaded zip file.
 
-I think my username/address/handle is `alice~xg4j2xfz2k7zl2apy4nyrye7qesnjrqebgjhu2q544wydfypgyshk3yd` (can't seem to change my handle from "alice" just yet...).
+3. Launch Cwtch by running `./linux/ui.sh` from the appropriate location. Cwtch should launch!
+
+Success! I think my username/address/handle is `alice~xg4j2xfz2k7zl2apy4nyrye7qesnjrqebgjhu2q544wydfypgyshk3yd` if you want to say hi (can't seem to change my handle from "alice" just yet...).
 
