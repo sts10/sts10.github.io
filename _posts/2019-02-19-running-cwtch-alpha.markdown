@@ -60,5 +60,5 @@ OK let's do this.
 
 3. Launch Cwtch by running `./linux/ui.sh` from the appropriate location. Cwtch should launch!
 
-Success! I think my username/address/handle is `alice~xg4j2xfz2k7zl2apy4nyrye7qesnjrqebgjhu2q544wydfypgyshk3yd` if you want to say hi (can't seem to change my handle from "alice" just yet...).
+Success! I think my username/address/handle is `alice~xek4wvclrozoecg535wndbksyid6fczi5q5kbvvtu7pyt2kb3ghdywid` if you want to say hi (can't seem to change my handle from "alice" just yet...).
 
