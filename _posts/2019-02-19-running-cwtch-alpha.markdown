@@ -20,11 +20,30 @@ Note: I'm running Ubuntu 18.04, specifically Kubuntu. I had both the Tor Browser
 
 ### Prerequisites
 
-#### Ensure you have the latest version of Tor installed. 
+#### Ensure you have the latest version of Tor installed.
 
-I believe you need Tor version 0.3.5.x or higher to make this release of Cwtch work. To check what version you have, run `tor --version`. If the version given is too low you'll need to upgrade `tor`.
+I _think_ this build of Cwtch comes with its own version of Tor, but in the interest of full disclosure, I had `Tor version 0.3.5.7` installed on my machine before downloading Cwtch (check with `tor --version`). More info in the Appendix below.
 
-If you're running Ubuntu, unfortunately simply running `sudo apt install tor` will give you a version of Tor that's too old to run Cwtch, at least at the time of this writing. To get a newer version of Tor on Ubuntu, [follow instructions found here](https://www.torproject.org/docs/debian.html.en#ubuntu), which I outline below as well. 
+#### Do you need Golang installed?
+
+Cwtch is written in the Go programming language. I already had `go version go1.11.4 linux/amd64` installed on my machine (for other purposes), so I don't know if that's required to run this build of Cwtch. I kind of doubt it, but if it is required, you can (pretty easily) install Go [here](https://golang.org/doc/install).
+
+### Installing and running Cwtch
+
+OK let's do this.
+
+1. Download [pre-built Linux binary called "linux-x86-64.zip"](https://git.openprivacy.ca/cwtch.im/ui/releases). 
+
+2. Extract the downloaded zip file.
+
+3. Launch Cwtch by running `./linux/ui.sh` from the appropriate location. Cwtch should launch!
+
+Success! I think my username/address/handle is `alice~xek4wvclrozoecg535wndbksyid6fczi5q5kbvvtu7pyt2kb3ghdywid` if you want to say hi (can't seem to change my handle from "alice" just yet...).
+
+
+## Appendix: Installing the latest version of Tor on Ubuntu 18.04
+
+If you're running Ubuntu, unfortunately simply running `sudo apt install tor` will give you a version of Tor that's too old to run Cwtch, at least at the time of this writing. To get a newer version of Tor on Ubuntu, [follow instructions found here](https://www.torproject.org/docs/debian.html.en#ubuntu), which I outline below as well.
 
 1. `sudo apt install apt-transport-https`
 2. Add the following lines to `/etc/apt/sources.list`:
@@ -45,20 +64,3 @@ sudo apt install tor deb.torproject.org-keyring
 ```
 
 After doing the above, running `tor --version` returns `Tor version 0.3.5.7.` for me, which Cwtch worked with.
-
-#### Do you need Golang installed?
-
-Cwtch is written in the Go programming language. I already had `go version go1.11.4 linux/amd64` installed on my machine (for other purposes), so I don't know if that's required to run this build of Cwtch. I kind of doubt it, but if it is required, you can (pretty easily) install Go [here](https://golang.org/doc/install).
-
-### Installing and running Cwtch
-
-OK let's do this.
-
-1. Download [pre-built Linux binary called "linux-x86-64.zip"](https://git.openprivacy.ca/cwtch.im/ui/releases). 
-
-2. Extract the downloaded zip file.
-
-3. Launch Cwtch by running `./linux/ui.sh` from the appropriate location. Cwtch should launch!
-
-Success! I think my username/address/handle is `alice~xek4wvclrozoecg535wndbksyid6fczi5q5kbvvtu7pyt2kb3ghdywid` if you want to say hi (can't seem to change my handle from "alice" just yet...).
-
