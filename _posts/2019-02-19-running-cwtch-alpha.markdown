@@ -20,7 +20,9 @@ Note: I'm running Ubuntu 18.04, specifically Kubuntu. I had both the Tor Browser
 
 ### Prerequisites
 
-#### Ensure you have the latest version of Tor installed.
+I don't _think_ you'll need to do either of these things before getting Cwtch up and running, but I had them opn my system, so I'm listing them here. 
+
+#### Ensure you have the latest version of Tor installed?
 
 I _think_ this build of Cwtch comes with its own version of Tor, but in the interest of full disclosure, I had `Tor version 0.3.5.7` installed on my machine before downloading Cwtch (check with `tor --version`). More info in the Appendix below.
 
@@ -40,6 +42,24 @@ OK let's do this.
 
 Success! I think my username/address/handle is `alice~xek4wvclrozoecg535wndbksyid6fczi5q5kbvvtu7pyt2kb3ghdywid` if you want to say hi (can't seem to change my handle from "alice" just yet...).
 
+
+## Creating an application icon by creating a `.desktop` file (Ubuntu systems)
+
+If you wish to create an application icon for Cwtch on your Ubuntu-based system, you'll likely want to create a `.desktop` file. First, let's download [a nice PNG image file of the Cwtch logo](https://cwtch.im/images/cwtch-peer.png) and save it in Cwtch's containing directory. 
+
+Next, in `~/.local/share/applications/`, create a file called `cwtch.desktop` and put this in it:
+
+```
+[Desktop Entry]
+Type=Application
+Name=Cwtch
+Exec=/home/$USER/cwtch/linux/ui.sh
+Icon=/home/$USER/cwtch/cwtch-peer.png
+Terminal=false
+Categories=Network;InstantMessaging;Internet
+```
+
+Once you save that file, you should have a Cwtch file available in your applications menu.
 
 ## Appendix: Installing the latest version of Tor on Ubuntu 18.04
 
