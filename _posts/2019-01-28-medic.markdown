@@ -619,6 +619,38 @@ fn unlock_keepass_database(
 }
 ```
 
+## Calling `map` on an `Option`
+
+Thanks to a comment on this post (thanks!), I could refactor this `unlock_keepass_database` a bit further. To be honest, I'm not super sure how this works, but clearly the two calls to [`map` on `Option`](https://doc.rust-lang.org/std/option/enum.Option.html#method.map)s do some solid work, which works on `keyfile` whether it's a `None` or `Some`. We're also introducing a call to [`dyn`](https://rust-lang-nursery.github.io/edition-guide/rust-2018/trait-system/dyn-trait-for-trait-objects.html), which is some sort of way to use a trait object.
+
+```rust
+fn unlock_keepass_database(
+        file_path: &str,
+        db_pass: String,
+        keyfile_path: Option<&str>,
+        ) -> keepass::Database {
+    let path = std::path::Path::new(file_path);
+    let mut keyfile = keyfile_path.map(|kfp| File::open(std::path::Path::new(kfp)).unwrap());
+
+    match Database::open(
+            &mut File::open(path).unwrap(),               // the database
+            Some(&db_pass),                               // password
+            keyfile.as_mut().map(|f| f as &mut dyn Read), // keyfile
+            ) {
+        Ok(db) => db,
+        Err(_e) => {
+            println!(
+                    "\nError opening database. Maybe you have a keyfile? If so, enter its file path:"
+                    );
+            let keyfile_path = get_file_path().unwrap();
+            unlock_keepass_database(file_path, db_pass, Some(&keyfile_path))
+        }
+    }
+}
+```
+
+So I don't love introducing multiple lines that I don't understand well, but this version is so much more concise I decided to implement it.
+
 ## Epilogue: Collections #2 through #5
 
 On January 31, 2019, Collections #2 through #5 dropped. [Wired reports](https://www.wired.co.uk/article/collection-data-breach-dump-leak):
