@@ -621,7 +621,7 @@ fn unlock_keepass_database(
 
 ## Calling `map` on an `Option`
 
-Thanks to a comment on this post (thanks!), I could refactor this `unlock_keepass_database` a bit further. To be honest, I'm not super sure how this works, but clearly the two calls to [`map` on `Option`](https://doc.rust-lang.org/std/option/enum.Option.html#method.map)s do some solid work, which works on `keyfile` whether it's a `None` or `Some`. We're also introducing a call to [`dyn`](https://rust-lang-nursery.github.io/edition-guide/rust-2018/trait-system/dyn-trait-for-trait-objects.html), which is some sort of way to use a trait object.
+Thanks to a [comment on this post](http://disq.us/p/1zwjgam) by Frederic Dumont (thanks!), I learned that I could refactor this `unlock_keepass_database` a bit further. To be honest, I'm not super sure how this works, but clearly the two calls to [`map` on `Option`](https://doc.rust-lang.org/std/option/enum.Option.html#method.map)s do some solid work, which works on `keyfile` whether it's a `None` or `Some`. We're also introducing a call to [`dyn`](https://rust-lang-nursery.github.io/edition-guide/rust-2018/trait-system/dyn-trait-for-trait-objects.html), which is some sort of way to use a trait object.
 
 ```rust
 fn unlock_keepass_database(
