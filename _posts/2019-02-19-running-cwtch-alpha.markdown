@@ -20,7 +20,7 @@ Note: I'm running Ubuntu 18.04, specifically Kubuntu. I had both the Tor Browser
 
 ### Prerequisites
 
-I don't _think_ you'll need to do either of these things before getting Cwtch up and running, but I had them opn my system, so I'm listing them here. 
+I don't _think_ you'll need to do either of these things before getting Cwtch up and running, but I had them open my system, so I'm listing them here. 
 
 #### Ensure you have the latest version of Tor installed?
 
@@ -40,7 +40,7 @@ OK let's do this.
 
 3. Launch Cwtch by running `./linux/ui.sh` from the appropriate location. Cwtch should launch!
 
-Success! I think my username/address/handle is `alice~xek4wvclrozoecg535wndbksyid6fczi5q5kbvvtu7pyt2kb3ghdywid` if you want to say hi (can't seem to change my handle from "alice" just yet...).
+Success! I think my username/address/handle is `schlink~xek4wvclrozoecg535wndbksyid6fczi5q5kbvvtu7pyt2kb3ghdywid` if you want to say hi! (I changed that first part from the default "alice" to "schlink" by clicking on the word "alice" and typing "schlink" -- that I could do that wasn't intuitive to me for a few days.)
 
 
 ## Creating an application icon by creating a `.desktop` file (Ubuntu systems)
