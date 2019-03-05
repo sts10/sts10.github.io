@@ -34,32 +34,46 @@ Cwtch is written in the Go programming language. I already had `go version go1.1
 
 OK let's do this.
 
-1. Download [pre-built Linux binary called "linux-x86-64.zip"](https://git.openprivacy.ca/cwtch.im/ui/releases). 
+1. Download the latest [pre-built Linux binary, labeled "linux-x86-64.zip"](https://git.openprivacy.ca/cwtch.im/ui/releases). (This guide was written for release version 0.1.2.)
 
 2. Extract the downloaded zip file.
 
-3. Launch Cwtch by running `./linux/ui.sh` from the appropriate location. Cwtch should launch!
+3. Launch Cwtch by running `./cwtch/ui` from the appropriate location. Cwtch should launch!
 
-Success! I think my username/address/handle is `schlink~xek4wvclrozoecg535wndbksyid6fczi5q5kbvvtu7pyt2kb3ghdywid` if you want to say hi! (I changed that first part from the default "alice" to "schlink" by clicking on the word "alice" and typing "schlink" -- that I could do that wasn't intuitive to me for a few days.)
+Success! Hopefully!
 
+I think my username/address/handle is `schlink~xek4wvclrozoecg535wndbksyid6fczi5q5kbvvtu7pyt2kb3ghdywid` if you want to say hi! (I changed that first part from the default "alice" to "schlink" by clicking on the word "alice" and typing "schlink" -- that I could do that wasn't intuitive to me for a few days.)
+
+## Cwtch Alpha testing group 
+
+There's also a "Cwtch Alpha" group where -- as explained in [this friendly blog post](https://openprivacy.ca/blog/2019/03/04/cwtch-alpha-0.1.2/) -- users are welcome to test out Cwtch and chat in. To request an invite to the group, just paste the following code (called an address) into the address text box in Cwtch that says "paste an address here to add a contact":
+
+```
+torv3frgCHN7wBNpDdOVvSixgbsIwIjYKD/kl768gRG4hiaQ=EsABCiA2NmI0NmM4OGMxNDc1ZGUxODE5YWYyYTk1ZDM5NTQ4ZBIgDSFY2mxYJiSJs0b442hFChzaHB5B8EERcFqLAkpb5kAaODJjM2ttb29ibnlnaGoyenc2cHd2N2Q1N3l6bGQ3NTNhdW8zdWdhdWV6enB2ZmFrM2FoYzRiZHlkIkBgg+E0T4YKtxnw57sHQbuG3C6myjU2aS496O4n3jpzQu8iT25NReJnuwqv9ER93wE1N9g1f7WY8JCtx0bnvyQK
+```
+
+## Getting the very latest builds
+
+If you wish to download and installed the very latest builds of Cwtch, you can find compiled binaries [here](https://build.openprivacy.ca/files/). Personally I think I'm going to stick to the Alpha releases for now, though. 
 
 ## Creating an application icon by creating a `.desktop` file (Ubuntu systems)
 
-If you wish to create an application icon for Cwtch on your Ubuntu-based system, you'll likely want to create a `.desktop` file. First, let's download [a nice PNG image file of the Cwtch logo](https://cwtch.im/images/cwtch-peer.png) and save it in Cwtch's containing directory. 
+If you wish to create an application icon for Cwtch on your Ubuntu-based system, you'll likely want to create a `.desktop` file. First, let's download [a nice PNG image file of the Cwtch logo](https://cwtch.im/images/cwtch-peer.png) and save it inside the `cwtch` directory. 
 
-Next, in `~/.local/share/applications/`, create a file called `cwtch.desktop` and put this in it:
+Next, in `~/.local/share/applications/`, create a file called `cwtch.desktop`. Assuming you've got version 0.1.2 of Cwtch -- put this in that file:
 
-```
+```text
 [Desktop Entry]
 Type=Application
 Name=Cwtch
-Exec=/home/$USER/cwtch/linux/ui.sh
-Icon=/home/$USER/cwtch/cwtch-peer.png
+Exec=/home/$USER/other_apps/cwtch/ui
+Icon=/home/$USER/other_apps/cwtch/cwtch-peer.png
 Terminal=false
 Categories=Network;InstantMessaging;Internet
 ```
 
 Once you save that file, you should have a Cwtch file available in your applications menu.
+
 
 ## Appendix: Installing the latest version of Tor on Ubuntu 18.04
 
