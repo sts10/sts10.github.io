@@ -24,7 +24,9 @@ I _think_, for this build of Cwtch, you need to have Tor installed separately, a
 
 #### Installing the latest version of Tor on Ubuntu 18.04
 
-If you're running Ubuntu, unfortunately simply running `sudo apt install tor` may give you a version of Tor that's too old to run Cwtch, at least at the time of this writing. To get a newer version of Tor on Ubuntu, [follow instructions found here](https://www.torproject.org/docs/debian.html.en#ubuntu), which I outline below as well.
+If you're running Ubuntu, unfortunately simply running `sudo apt install tor` may give you a version of Tor that's too old to run Cwtch, at least at the time of this writing. If you run that command and get version `0.3.5.7`, you're all good to skip this section. If it's lower, you'll need a newer version.
+
+To get a newer version of Tor on Ubuntu, [follow instructions found here](https://www.torproject.org/docs/debian.html.en#ubuntu), which I outline below as well.
 
 1. `sudo apt install apt-transport-https`
 2. Add the following lines to `/etc/apt/sources.list`:
