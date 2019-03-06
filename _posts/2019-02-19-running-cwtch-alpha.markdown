@@ -18,17 +18,33 @@ Important: The developers are keen to point out that "Cwtch is an experimental c
 
 Note: I'm running Ubuntu 18.04, specifically Kubuntu. I had both the Tor Browser and Go installed before attempting this.
 
-### Prerequisites
+### Prerequisites: An up-to-date version of Tor (not included)
 
-I don't _think_ you'll need to do either of these things before getting Cwtch up and running, but I had them open my system, so I'm listing them here. 
+I _think_, for this build of Cwtch, you need to have Tor installed separately, and it needs to be a pretty recent version. I needed to get up to `Tor version 0.3.5.7` for Cwtch to work (you can check which version you have with `tor --version`). 
 
-#### Ensure you have the latest version of Tor installed?
+#### Installing the latest version of Tor on Ubuntu 18.04
 
-I _think_ this build of Cwtch comes with its own version of Tor, but in the interest of full disclosure, I had `Tor version 0.3.5.7` installed on my machine before downloading Cwtch (check with `tor --version`). More info in the Appendix below.
+If you're running Ubuntu, unfortunately simply running `sudo apt install tor` may give you a version of Tor that's too old to run Cwtch, at least at the time of this writing. To get a newer version of Tor on Ubuntu, [follow instructions found here](https://www.torproject.org/docs/debian.html.en#ubuntu), which I outline below as well.
 
-#### Do you need Golang installed?
+1. `sudo apt install apt-transport-https`
+2. Add the following lines to `/etc/apt/sources.list`:
+```bash
+deb https://deb.torproject.org/torproject.org bionic main
+deb-src https://deb.torproject.org/torproject.org bionic main
+```
+3. Import GPG key
+```bash
+sudo curl https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --import
+sudo gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | sudo apt-key add -
+```
 
-Cwtch is written in the Go programming language. I already had `go version go1.11.4 linux/amd64` installed on my machine (for other purposes), so I don't know if that's required to run this build of Cwtch. I kind of doubt it, but if it is required, you can (pretty easily) install Go [here](https://golang.org/doc/install).
+4. Install tor and keyring
+```bash
+sudo apt update
+sudo apt install tor deb.torproject.org-keyring
+```
+
+After doing the above, running `tor --version` returns `Tor version 0.3.5.7.` for me, which Cwtch worked with.
 
 ### Installing and running Cwtch
 
@@ -74,27 +90,3 @@ Categories=Network;InstantMessaging;Internet
 
 Once you save that file, you should have a Cwtch file available in your applications menu.
 
-
-## Appendix: Installing the latest version of Tor on Ubuntu 18.04
-
-If you're running Ubuntu, unfortunately simply running `sudo apt install tor` will give you a version of Tor that's too old to run Cwtch, at least at the time of this writing. To get a newer version of Tor on Ubuntu, [follow instructions found here](https://www.torproject.org/docs/debian.html.en#ubuntu), which I outline below as well.
-
-1. `sudo apt install apt-transport-https`
-2. Add the following lines to `/etc/apt/sources.list`:
-```bash
-deb https://deb.torproject.org/torproject.org bionic main
-deb-src https://deb.torproject.org/torproject.org bionic main
-```
-3. Import GPG key
-```bash
-sudo curl https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --import
-sudo gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | sudo apt-key add -
-```
-
-4. Install tor and keyring
-```bash
-sudo apt update
-sudo apt install tor deb.torproject.org-keyring
-```
-
-After doing the above, running `tor --version` returns `Tor version 0.3.5.7.` for me, which Cwtch worked with.
