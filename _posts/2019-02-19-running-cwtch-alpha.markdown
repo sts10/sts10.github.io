@@ -10,7 +10,7 @@ This past Valentine's Day, [Open Privacy released an alpha build of an encrypted
 <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Happy Valentine&#39;s Day! 💜💜💜<br><br>What better day to launch the alpha of a project designed to bring people together safely and securely than on Valentine’s day?<br><br>Cwtch is our metadata resistant, group messaging tool  Time for truly consensual applications!<a href="https://t.co/Dcru1WxAft">https://t.co/Dcru1WxAft</a> <a href="https://t.co/5mk03Q0duH">pic.twitter.com/5mk03Q0duH</a></p>&mdash; Open Privacy (@OpenPriv) <a href="https://twitter.com/OpenPriv/status/1096077069920788480?ref_src=twsrc%5Etfw">February 14, 2019</a></blockquote>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-You can read more about Cwtch either in [this blog post](https://openprivacy.ca/blog/2019/02/14/cwtch-alpha/) or [their main Gitlab repo](https://git.openprivacy.ca/cwtch.im/cwtch). But it's basically a decentralized chat application that uses end-to-end encryption for all communication. It also uses Tor Onion services to further protect the metadata of communication.
+You can read more about Cwtch either in [this blog post](https://openprivacy.ca/blog/2019/02/14/cwtch-alpha/) or [their main Gitlab repo](https://git.openprivacy.ca/cwtch.im/cwtch). But it's basically a decentralized chat application that uses end-to-end encryption for all communication. It also uses Tor Onion services to further protect the metadata of communication, similar to how [Ricochet](https://ricochet.im/) works.
 
 Important: The developers are keen to point out that "Cwtch is an experimental concept and prototype. We do not recommend you use Cwtch today if you require secure communication. At least, not yet." So you know, don't send sensitive information over Cwtch just yet.
 
@@ -18,13 +18,15 @@ Important: The developers are keen to point out that "Cwtch is an experimental c
 
 Note: I'm running Ubuntu 18.04, specifically Kubuntu. I had both the Tor Browser and Go installed before attempting this.
 
-### Prerequisites: An up-to-date version of Tor (not included)
+### Dependency: An up-to-date version of Tor (not included)
 
-I _think_, for this build of Cwtch, you need to have Tor installed separately, and it needs to be a pretty recent version. I needed to get up to `Tor version 0.3.5.7` for Cwtch to work (you can check which version you have with `tor --version`). 
+In order to run this build of Cwtch, you need to have Tor installed separately, and it needs to be a pretty recent version. I needed to get up to `Tor version 0.3.5.7` for Cwtch to work (you can check which version you have with `tor --version`). 
 
 #### Installing the latest version of Tor on Ubuntu 18.04
 
-If you're running Ubuntu, unfortunately simply running `sudo apt install tor` may give you a version of Tor that's too old to run Cwtch, at least at the time of this writing. If you run that command and get version `0.3.5.7`, you're all good to skip this section. If it's lower, you'll need a newer version.
+If you run `tor --version` and get version `0.3.5.7`, you're all good to skip this section. If it's a lower version number, you may need a newer version of tor. 
+
+If you're running Ubuntu, unfortunately simply running `sudo apt install tor` may give you [a version of Tor that's too old to run Cwtch](https://packages.ubuntu.com/bionic/tor), at least at the time of this writing.
 
 To get a newer version of Tor on Ubuntu, [follow instructions found here](https://www.torproject.org/docs/debian.html.en#ubuntu), which I outline below as well.
 
