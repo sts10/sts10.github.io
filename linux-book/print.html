@@ -224,6 +224,29 @@ curl -o ~/.config/nvim/init.vim https://raw.githubusercontent.com/sts10/linux-co
 <a class="header" href="#syncthing" id="syncthing"><h1>Syncthing</h1></a>
 <p>I installed Syncthing via the instructions at the top of <a href="https://apt.syncthing.net/">this page</a></p>
 <p>I then setup Syncthing, including my KeePass database.</p>
+<a class="header" href="#useful-bash-functions" id="useful-bash-functions"><h2>Useful bash functions</h2></a>
+<pre><code class="language-bash"># Via: https://sts10.github.io/2018/11/27/syncthing-and-tmux.html
+function ss {
+  if tmux has-session -t synct 2&gt;/dev/null; then
+    echo &quot;Syncthing session already started at http://127.0.0.1:8384/&quot; &gt;&amp;2
+    return 1
+  fi
+  
+  echo &quot;Starting up Syncthing at http://127.0.0.1:8384/&quot;
+  tmux new-session -d -s synct &quot;syncthing -no-browser&quot;
+}
+
+function se {
+  if ! tmux has-session -t synct 2&gt;/dev/null; then
+    echo &quot;No Syncthing session to end.&quot; &gt;&amp;2
+    return 1
+  fi
+  
+  echo &quot;Stopping Syncthing and killing the tmux session&quot;
+  tmux send-keys -t synct C-c
+}
+
+</code></pre>
 <a class="header" href="#setting-up-standard-notes-on-linux" id="setting-up-standard-notes-on-linux"><h1>Setting up Standard Notes on Linux</h1></a>
 <p>First, let's <a href="https://standardnotes.org/">download Standard Notes for Linux</a>.</p>
 <a class="header" href="#where-to-put-the-appimage-file" id="where-to-put-the-appimage-file"><h2>Where to put the AppImage file?</h2></a>
