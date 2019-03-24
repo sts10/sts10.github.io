@@ -171,18 +171,29 @@
 <a class="header" href="#initial-setup" id="initial-setup"><h1>Initial Setup</h1></a>
 <a class="header" href="#some-app-installation-and-hard-drive-mounting-basics" id="some-app-installation-and-hard-drive-mounting-basics"><h1>Some App Installation and Hard Drive Mounting Basics</h1></a>
 <a class="header" href="#installing-snap" id="installing-snap"><h2>Installing Snap</h2></a>
-<p>Think it's just <code>sudo apt install snapd</code></p>
+<p>Think it's just <code>sudo apt install snapd</code>.</p>
+<p>Know that, sometimes in order to <em>update</em> applications that you install via Snap need to be updated with a command like <code>snap refresh</code> or <code>snap refresh &lt;app_name&gt;</code>. Run <code>snap refresh --help</code> for more information.</p>
 <a class="header" href="#generic-upgrade-line" id="generic-upgrade-line"><h2>Generic upgrade line</h2></a>
 <p><code>sudo apt-get update &amp;&amp; sudo apt-get dist-upgrade</code> is a good way to upgrade everything.</p>
 <a class="header" href="#how-to-install-from-an-appimage-if-its-not-going-easily" id="how-to-install-from-an-appimage-if-its-not-going-easily"><h2>How to install from an AppImage if it's not going easily</h2></a>
 <p><a href="https://itsfoss.com/use-appimage-linux/">This tutorial</a> instructs to right-click the download appimage file, go to &quot;Properties&quot; &gt; &quot;Permissions&quot; and then check &quot;Allow executing file as program&quot;. Alternatively <code>chmod u+x &lt;AppImage File&gt;</code> to make it executable.</p>
 <a class="header" href="#how-to-mount-an-external-hard-drive-thats-formatted-as-exfat" id="how-to-mount-an-external-hard-drive-thats-formatted-as-exfat"><h2>How to mount an external hard drive that's formatted as exFAT</h2></a>
 <p>Simply install these programs by running this line: <code>sudo apt-get install exfat-fuse exfat-utils</code> (<a href="https://www.reddit.com/r/Ubuntu/comments/6r954q/mount_exfat_drive_in_ubuntu_1704/">via</a>).</p>
-<a class="header" href="#desktop-files" id="desktop-files"><h2>Desktop Files</h2></a>
+<a class="header" href="#desktop-files" id="desktop-files"><h2>Desktop files</h2></a>
 <p>The Arch Wiki has <a href="https://wiki.archlinux.org/index.php/desktop_entries">an entry on desktop entries</a>, which notes</p>
 <blockquote>
 <p>Desktop entries for applications, or .desktop files, are generally a combination of meta information resources and a shortcut of an application. These files usually reside in <code>/usr/share/applications/</code> or <code>/usr/local/share/applications/</code> for applications installed system-wide, or <code>~/.local/share/applications/</code> for user-specific applications. User entries take precedence over system entries.</p>
 </blockquote>
+<a class="header" href="#desktop-file-example" id="desktop-file-example"><h3>Desktop file example</h3></a>
+<p>At <code>~/.local/share/applications/standard-notes.desktop</code> paste the following:</p>
+<pre><code>[Desktop Entry]
+Type=Application
+Name=StandardNotes
+Exec=/home/$USER/standard-notes/standard-notes-*-x86_64.AppImage 
+Icon=/home/$USER/standard-notes/standard-notes.png
+Terminal=false
+Categories=Office;Notes;
+</code></pre>
 <p>See the page on Standard Notes for more.</p>
 <a class="header" href="#bashrc-and-terminal" id="bashrc-and-terminal"><h1>bashrc and Terminal</h1></a>
 <p>Here are some tips on setting up your bash environment and your terminal. Most of the config files live in <a href="https://github.com/sts10/linux-config">this GitHub repo</a>, for now. Below are some instruction on how to load them correctly and easily.</p>
