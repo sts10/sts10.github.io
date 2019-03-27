@@ -89,7 +89,7 @@ When we launch KeePassXC for the first time, we're greeted with the screen above
 
 First, we're asked to choose a name and, optionally, a description for our passwords database. I just called mine "My Passwords".
 
-Next, we're asked about some encryption settings. I highly recommend leaving the defaults settings as they are. Do **not** choose a decryption time under 1.0 seconds.
+Next, we're asked about some encryption settings. I highly recommend leaving the defaults settings as they are. Do **not** choose a decryption time under 1.0 seconds. I don't recommend even going into "Advanced Settings" (at this point).
 
 ![Encryption settings](/img/keepassxc/encryption-settings.png)
 
@@ -97,7 +97,7 @@ Next, we're asked to set up a master key. In our case, for now, this will just b
 
 ![Setting master key](/img/keepassxc/master-password-blank.png)
 
-Since this is the key that opens the door to all of our passwords, we want to make this very hard to guess. For this reason I recommend using as _passphrase_ of about six random words, like "pushiness earthly snowsuit overcast agile unlinked" or "stadium bazooka pastime battery survey scorpion".
+Since this password is the key that opens the metaphorical door to all of our passwords, we want to make this password very hard to guess. For this reason I recommend using as _passphrase_ of about six random words. Some examples "pushiness earthly snowsuit overcast agile unlinked" or "stadium bazooka pastime battery survey scorpion" (do not choose these exact ones because, lol, they're on the internet now).
 
 Thankfully, KeePassXC has a built-in tool to randomly generate passphrases for us. Just click the die icon on the right side of this screen, and the password generator will appear. Since we want to generate a passphrase, click the "Passphrase" tab.
 
@@ -127,17 +127,17 @@ We'll be presented with an interface to create our new entry. Let's fill in a ti
 
 If you want to view your password, you can click the button with the eye icon on the right. 
 
-Note that KeePassXC has the ability to generate random passwords for us, which we can do by clicking the black die icon. We'll go over that below, but for now let's pretend we're simply storing your existing password that you hopefully know by heart (but won't have to for much longer!).
+As mentioned, KeePassXC has the ability to generate random passwords for us, which we can do by clicking the black die icon. We'll go over that below, but for now let's pretend we're simply storing your existing password that you hopefully know by heart (but won't have to for much longer!).
 
-Once we've filled in this basic information, we'll click the OK button to save these changes to our database. We'll now see our new entry in our database. 
+Once we've filled in this basic information, we'll click the OK button to create this new entry in our password database. We'll now see our new entry in our database. 
 
 ![one little entry](/img/keepassxc/one-entry.png)
 
 ### Save your Database, and give it a file name
 
-Now is a great time to save your database for the first time. To do this, either click the button with floppy disk icon or go to Database > Save database. Choose a name for your database, being sure to keep the <code>.kdbx</code> file extension. So "my_passwords.kdbx" is a fine example. Then choose where you want to save your database. 
+Now would be a great time to save our database for the first time. To do this, either click the button with floppy disk icon or go to Database > Save database. Choose a file name for your database, being sure to keep the <code>.kdbx</code> file extension. "my_passwords.kdbx" is a fine example. Then choose where you want to save your database. 
 
-Remember, your database file will be encrypted, so you don't have to obfuscate the databases name or location. That said, there are obviously some security advantages to, say, keeping your database off cloud services like Dropbox or on USB sticks you keep safe.
+Remember, your database file will be encrypted, so you don't have to obfuscate the databases name or location. That said, there are obviously some security advantages to, say, keeping your database off of cloud services like Dropbox or on USB sticks you keep safe.
 
 ### Logging in to Reddit
 
