@@ -81,7 +81,7 @@ Now that KeePassXC is installed on our machine, let's create a password database
 
 ### Creating a Password Database
 
-![KeePassXC 2.2.0 start screen](https://keepassxc.org/images/screenshots/macos/screen_001.png)
+![KeePassXC 2.4.0 welcome screen](/img/keepassxc/welcome-screen.png)
 
 When we launch KeePassXC for the first time, we're greeted with the screen above. Since we don't have any databases yet, let's click the "Create new database" button. 
 
@@ -333,6 +333,8 @@ Once the favicon downloads (it might take a second), be sure to select it and th
 KeePassXC, as you may have already observed by this point, has search functionality via a text field in the top right of the program. As of KeePassXC v 2.2.0 it searches all of your folders, regardless of which folder you're currently in, which is nice.
 
 On a Mac it can be invoked by the familiar `Command + f` keyboard shortcut.
+
+As of version 2.4.0, KeePassXC has an advanced search feature. You can learn more about it by clicking the question mark in the search bar. 
 
 ## Level 4: Securing our database with multiple factors
 
