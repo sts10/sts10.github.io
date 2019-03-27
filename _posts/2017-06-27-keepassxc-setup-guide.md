@@ -137,7 +137,7 @@ Once we've filled in this basic information, we'll click the OK button to create
 
 Now would be a great time to save our database for the first time. To do this, either click the button with floppy disk icon or go to Database > Save database. Choose a file name for your database, being sure to keep the <code>.kdbx</code> file extension. "my_passwords.kdbx" is a fine example. Then choose where you want to save your database. 
 
-Remember, your database file will be encrypted, so you don't have to obfuscate the databases name or location. That said, there are obviously some security advantages to, say, keeping your database off of cloud services like Dropbox or on USB sticks you keep safe.
+Remember, your database file will be encrypted, so you don't have to obfuscate the databases name or location. That said, there are obviously some security-vs.-convenience trade-offs to, say, keeping your database off of cloud services like Dropbox, or on USB sticks you keep safe.
 
 ### Logging in to Reddit
 
