@@ -211,13 +211,11 @@ In addition to Auto-Type, KeePassXC offers another way to quickly and easily ent
 
 To access the KeePassXC settings menu on macOS, click the "KeePassXC" menu in the top-left of your screen and click Preferences. 
 
-I think the default settings are fine for most users, but it's good practice to read through them and make sure you understand most of them and they're set to what you need and prefer.
+While the default settings are pretty good, I'd strongly recommend you confirm that two settings in particular are turned on. I'd recommend enabling "Safely save database files" (because of [this bug](https://twitter.com/KeePassXC/status/1110700606283571202) -- [more info](https://github.com/keepassxreboot/keepassxc/issues/2888)) and "Backup database file before saving", which creates a copy of your database in the same directory as your database, but named `<your-database-name>.old.kdbx`. (While this feature may save you in a pinch, see the section below for more of my tips on backing up your database.)
 
 Below are the settings I generally use (with KeePassXC version 2.4.0):
 
 ![KeePassXC Settings](/img/keepassxc/settings.png)
-
-For example, you may want to enable "Backup database file before saving" -- this creates a copy of your database in the same directory as your database, but named `<your-database-name>.old.kdbx`. While this feature may save you in a pinch, see the section below for more of my tips on backing up your database.
 
 ### Locking your database
 
