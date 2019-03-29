@@ -1,0 +1,243 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Other DEs - Linux Notes</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">var path_to_root = "../";</script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { } 
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <ol class="chapter"><li><a href="../welcome.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../installing-on-oryx.html"><strong aria-hidden="true">2.</strong> Installing a Fresh Distro on Oryx Pro</a></li><li><a href="../initial-setup/index.html"><strong aria-hidden="true">3.</strong> Initial Setup</a></li><li><ol class="section"><li><a href="../initial-setup/basics.html"><strong aria-hidden="true">3.1.</strong> Basics</a></li><li><a href="../initial-setup/bashrc-and-konsole.html"><strong aria-hidden="true">3.2.</strong> bashrc and terminal</a></li><li><a href="../initial-setup/git.html"><strong aria-hidden="true">3.3.</strong> Git</a></li><li><a href="../initial-setup/neovim.html"><strong aria-hidden="true">3.4.</strong> Neovim</a></li><li><a href="../initial-setup/keepassxc.html"><strong aria-hidden="true">3.5.</strong> KeePassXC</a></li><li><a href="../initial-setup/syncthing.html"><strong aria-hidden="true">3.6.</strong> Syncthing</a></li><li><a href="../initial-setup/standard-notes.html"><strong aria-hidden="true">3.7.</strong> Standard Notes</a></li><li><a href="../initial-setup/pgp.html"><strong aria-hidden="true">3.8.</strong> PGP</a></li><li><a href="../initial-setup/other-apps.html"><strong aria-hidden="true">3.9.</strong> Other Apps to Install</a></li><li><a href="../initial-setup/chrome-and-flash.html"><strong aria-hidden="true">3.10.</strong> Chrome and Flash</a></li><li><a href="../initial-setup/dev-env/index.html"><strong aria-hidden="true">3.11.</strong> Development Environment</a></li><li><ol class="section"><li><a href="../initial-setup/dev-env/python-pyenv.html"><strong aria-hidden="true">3.11.1.</strong> Python and pyenv</a></li><li><a href="../initial-setup/dev-env/ruby-and-rbenv.html"><strong aria-hidden="true">3.11.2.</strong> Ruby and rbenv</a></li><li><a href="../initial-setup/dev-env/rust.html"><strong aria-hidden="true">3.11.3.</strong> Rust</a></li><li><a href="../initial-setup/dev-env/github-and-ssh.html"><strong aria-hidden="true">3.11.4.</strong> GitHub and ssh keys</a></li><li><a href="../initial-setup/dev-env/jekyll.html"><strong aria-hidden="true">3.11.5.</strong> GitHub blog with Jekyll</a></li></ol></li><li><a href="../initial-setup/gnome-setup.html"><strong aria-hidden="true">3.12.</strong> GNOME Setup</a></li><li><a href="../initial-setup/kde-setup.html"><strong aria-hidden="true">3.13.</strong> KDE Setup and Troubleshooting</a></li><li><a href="../initial-setup/redshift.html"><strong aria-hidden="true">3.14.</strong> Redshift</a></li><li><a href="../initial-setup/battery-management.html"><strong aria-hidden="true">3.15.</strong> Battery and TLP</a></li><li><a href="../initial-setup/images-and-video.html"><strong aria-hidden="true">3.16.</strong> Images and Video</a></li></ol></li><li><a href="../installing-ubuntu-on-an-old-macbook-pro.html"><strong aria-hidden="true">4.</strong> Installing Ubuntu on my 2009 MacBook Pro</a></li><li><a href="../lubuntu/index.html"><strong aria-hidden="true">5.</strong> Lubuntu</a></li><li><ol class="section"><li><a href="../lubuntu/switching-to-lubuntu.html"><strong aria-hidden="true">5.1.</strong> Switching to Lubuntu</a></li><li><a href="../lubuntu/improving-lubuntu.html"><strong aria-hidden="true">5.2.</strong> Improving Lubuntu</a></li><li><a href="../lubuntu/remapping-control-and-caps-lock-lubuntu.html"><strong aria-hidden="true">5.3.</strong> Remapping Caps Lock to Control</a></li><li><a href="../lubuntu/using-neovim-in-lubuntu.html"><strong aria-hidden="true">5.4.</strong> Using Neovim</a></li><li><a href="../lubuntu/rbenv-on-lubuntu.html"><strong aria-hidden="true">5.5.</strong> Using Rbenv</a></li><li><a href="../lubuntu/configuring-openbox-on-lubuntu.html"><strong aria-hidden="true">5.6.</strong> Configuring OpenBox</a></li></ol></li><li><a href="../security/index.html"><strong aria-hidden="true">6.</strong> Security Apps and Tools</a></li><li><ol class="section"><li><a href="../security/installing-gnu-privacy-guard-on-ubuntu.html"><strong aria-hidden="true">6.1.</strong> Installing GNU Privacy Guard</a></li><li><a href="../security/keepassxc-from-snap.html"><strong aria-hidden="true">6.2.</strong> KeePassXC as a Snap</a></li><li><a href="../security/ricochet-114-lubuntu-1604.html"><strong aria-hidden="true">6.3.</strong> Ricochet</a></li><li><a href="../security/python-pip-and-magic-wormhole-on-lubuntu.html"><strong aria-hidden="true">6.4.</strong> Magic Wormhole</a></li><li><a href="../security/using-a-yubikey-from-a-smartcard-on-ubuntu.html"><strong aria-hidden="true">6.5.</strong> YubiKey</a></li><li><a href="../security/pidgin-google-and-otr.html"><strong aria-hidden="true">6.6.</strong> Pidgin, Gchat, and OTR</a></li></ol></li><li><a href="../other-des/index.html"><strong aria-hidden="true">7.</strong> Other DEs</a></li><li><ol class="section"><li><a href="../other-des/customizing-appearance-of-xfce-ubuntu.html"><strong aria-hidden="true">7.1.</strong> Customizing XFCE (Ubuntu base)</a></li><li><a href="../other-des/notes-on-i3.html"><strong aria-hidden="true">7.2.</strong> Notes on i3</a></li><li><a href="../other-des/other-desktop-environments.html" class="active"><strong aria-hidden="true">7.3.</strong> Other DEs</a></li></ol></li></ol>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light <span class="default">(default)</span></button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">Linux Notes</h1> 
+
+                        <div class="right-buttons">
+                            <a href="../print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <a class="header" href="#trying-other-desktop-environments-with-ubuntu-besides-unity" id="trying-other-desktop-environments-with-ubuntu-besides-unity"><h1>Trying Other Desktop Environments with Ubuntu (Besides Unity)</h1></a>
+<a class="header" href="#xfce" id="xfce"><h2>XFCE</h2></a>
+<a class="header" href="#to-install" id="to-install"><h3>To install</h3></a>
+<ol>
+<li><code>sudo apt-get install xfce4 xfce4-goodies</code></li>
+<li>Restart</li>
+<li>Login as &quot;xfce session&quot;</li>
+</ol>
+<a class="header" href="#what-you-get-straight-out-of-the-box" id="what-you-get-straight-out-of-the-box"><h3>What You Get Straight out of the Box</h3></a>
+<ul>
+<li>&quot;Whisker menu&quot; is the Start-menu-like menu in the top left. Same as Lubuntu</li>
+<li>A nice, MacOS-like dock on the bottom with GNOME Terminal, File Manager, Web Browser (default), and a search</li>
+</ul>
+<a class="header" href="#settings" id="settings"><h3>Settings</h3></a>
+<p>There's a nice Settings menu in Whisker menu &gt; Settings &gt; Settings Manager</p>
+<ul>
+<li>In Window Manager &gt; Keyboard, I set up a bucnh of window resizing keyboard shorts!</li>
+<li>In Session and Startup &gt; Application Autostart, I entered a custom command to remap caps lock to control.
+Name: remap caps
+Description: remap caps lock to control
+Command: <code>/usr/bin/setxkbmap -option &quot;ctrl:nocaps&quot;</code></li>
+<li>In Mouse and Touchpad &gt; Devices &gt; Touchpad, I enabled &quot;Disable touchpag while typing&quot; and I disabled &quot;Tap touchpad to click&quot;</li>
+</ul>
+<a class="header" href="#memory-usage" id="memory-usage"><h3>Memory Usage</h3></a>
+<p>With Firefox, Terminal, and Settings open, I've got about 980 MB out of 2GB RAM &quot;available&quot;. (This is compared to abut 1180 MB available when using Lubuntu-- it makes sense that Xubuntu slightly heavier than Lubuntu.)</p>
+<a class="header" href="#pros" id="pros"><h3>Pros</h3></a>
+<ul>
+<li>Nice desktop
+<ul>
+<li>has a dock by default (edit settings by right-clicking between icons)</li>
+<li>Window Switcher is nice.</li>
+<li>Toolbar on top is nice out of the box.</li>
+</ul>
+</li>
+<li>Available on many distros! Only have to learn the tweaks and settings once!</li>
+</ul>
+<a class="header" href="#cons" id="cons"><h3>Cons</h3></a>
+<ul>
+<li>Cursor is solid white (not smart) in Neovim 0.2, and then when I quit Neovim it's solid white (not smart) in the terminal as well. Not sure how to get at it... I tried creating <code>~/.config/xfce4/terminal/terminalrc</code> and setting a hard-coded cursor color there but I couldn't get it to make any effect (even after a computer restart).</li>
+<li>A helpful Mastodon user pointed me to his XFCE terminal config: https://github.com/zacanger/z/blob/master/.config/xfce4/terminal/terminalrc</li>
+</ul>
+<a class="header" href="#kde" id="kde"><h2>KDE</h2></a>
+<a class="header" href="#to-install-from-ubuntu" id="to-install-from-ubuntu"><h3>To install from Ubuntu</h3></a>
+<ol>
+<li><code>sudo apt-get install kubuntu-desktop</code>?</li>
+<li>When you get the chance to choose between &quot;lightdm&quot; and &quot;sddm&quot;, I think you want &quot;sddm&quot;.</li>
+</ol>
+<p>More: https://www.linuxbabe.com/ubuntu/install-kde-plasma-5-7-ubuntu-16-04-ubuntu-16-10</p>
+<a class="header" href="#gnome" id="gnome"><h2>GNOME</h2></a>
+<p>seems more difficult:  http://sourcedigit.com/20948-how-to-ubuntu-install-gnome-3-22-desktop-environment-on-ubuntu-16-04/</p>
+<a class="header" href="#what-if-this-all-goes-to-shit" id="what-if-this-all-goes-to-shit"><h2>What if this all goes to shit</h2></a>
+<p>Here's a very old &quot;How to get back to pure Ubuntu post&quot;? http://www.psychocats.net/ubuntu/pureubuntu</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../other-des/notes-on-i3.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="../other-des/notes-on-i3.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>
