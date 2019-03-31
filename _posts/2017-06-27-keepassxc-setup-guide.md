@@ -261,25 +261,19 @@ Once you've got a password or phrase you like and that meets the service's requi
 
 Now go to [GitHub's sign-up page](https://github.com/join?source=header-home) and create a new account with the username and password we just saved in your database.
 
-### More about generating long, random passphrases with KeePassXC
+### Changing your master password (hopefully to a long, random passphrase)
 
 As we saw when we were creating our first KeePass database, we can also use KeePassXC’s built-in password generator to generate a random passphrase to be used as our master password. Since you actually have to type in this password, it makes more sense to use a passphrase than a password. 
 
-If, for whatever reason, you didn't make your master password (or master key) a randomly generated passphrase, below I walk through the steps of changing your master key.
+If, for whatever reason, you didn't make your master password (or master key) a randomly generated passphrase, or you just want to change your master password, let's go over how to do that.
 
-To change the master password of an existing KeePass database, go to the "Database" menu and select "Change master key". Next click the black die icon to generate a new random passphrase.
+To change the master password of an existing KeePass database, go to the "Database" menu and hit the button that says "Change Password". 
 
-Switch the random generator mode from "Password" to "Passphrase", then set the Word Count to six words or more. You then may want to change the "Word Separator" from the default of a space to a hyphen, or even to no character (nothing).
+![Menu option for changing your database's master key](/img/keepassxc/change-master-key2.png)
 
-![randomly generating a master passphrase](/img/keepassxc/random-master-passphrase.gif)
-
-Once you've got a 6-or-more word passphrase with your desired word separator, write your new passphrase on a piece of paper and keep it somewhere safe. 
+Next click the black die icon to generate a new random passphrase. Once you've got a 6-or-more word passphrase with your desired word separator, write your new passphrase on a piece of paper and keep it somewhere safe. 
 
 NOTE: It's very important to know that you're going to need to remember this passphrase (as it's not going to be stored in your KeePass database). Basically, **don't actually change your master password to the generated passphrase unless you have it written down somewhere or memorized.**
-
-Now click the Copy button to copy your new passphrase to the clipboard. Then click the Close button to close the password generator. 
-
-At this point we're ready to change your master password to your new passphrase by pasting it into the "Enter password" field and the "Repeat password" field. Clicking the OK button will change your database's master password to your new passphrase. Again, don't do this unless you've written the new passphrase down somewhere safe and/or memorized it.
 
 One trick for remembering your new passphrase is to [create a little story about them](https://www.xkcd.com/936/) in your head about them.
 
@@ -302,7 +296,7 @@ If you want keep you KeePass database synchronized across multiple devices, you'
 
 If you're wary of your password database being stored on servers you don't own, you can explore other options like [Syncthing](https://syncthing.net/), a program that keeps a folder or multiple folders "in-sync" across multiple computers that you own (think Dropbox but without the Dropbox server involved.) However note that Syncthing involves a bit more set up (I wrote [a getting started guide to Syncthing a few weeks ago](https://sts10.github.io/2017/05/24/getting-started-with-syncthing.html) if you want a quick preview of what you'd be getting into).
 
-To access your passwords from a smartphone, you'll need to use an app that can open KeePass databases. There are a handful of such apps for both iOS and Android, but I haven't used any of them so I won't comment further. However I will note that one of KeePassXC's lead developers, Jonathan White, aka [droidmonkey](https://github.com/droidmonkey), says he uses [Keepass2Android](https://play.google.com/store/apps/details?id=keepass2android.keepass2android&hl=en) with his Android phone in [this interview at about 18:37](https://soundcloud.com/user-98066669/042-a-conversation-with-keepassxc#t=18:37).
+To access your passwords from a smartphone, you'll need to use an app that can open KeePass databases. There are a handful of such apps for both iOS and Android, but I haven't used any of them so I won't comment further. However I will note that, when I asked the KeePassXC developers who run their Twitter account what the recommended, [they said](https://twitter.com/KeePassXC/status/1110913358616817664) [Keepass2Android](https://play.google.com/store/apps/details?id=keepass2android.keepass2android&hl=en) for Android and [Strongbox](https://strongboxsafe.com/) for iOS. Others recommend [KeePassDX](https://www.keepassdx.com/) for Android users.
 
 #### Troubleshooting Syncing 
 
@@ -333,6 +327,28 @@ KeePassXC, as you may have already observed by this point, has search functional
 On a Mac it can be invoked by the familiar `Command + f` keyboard shortcut.
 
 As of version 2.4.0, KeePassXC has an advanced search feature. You can learn more about it by clicking the question mark in the search bar. 
+
+### Storing TOTP codes in your KeePass database
+
+If you have two-factor authentication enabled on some of your accounts (which I whole heartedly recommend!), you may be using an app like Google Authenticator on your phone to display 6-digit codes that act as your second-factor. These are [time-based one-time passcodes (TOTP)](https://en.wikipedia.org/wiki/Time-based_One-time_Password_algorithm). 
+
+KeePassXC can store and handle these TOTP codes for you. Note that this is a security trade-off: if you store your regular password _and_ your TOTP code in the same KeePass database, anyone who gets into that database will have both of your authentication factors... so it's kind of like it's down to one-factor authentication. As 1Password [noted in a blog post when they introduced a similar feature](https://blog.1password.com/totp-for-1password-users/): 
+
+> If you would like to turn a site’s offering of TOTP into true two-factor security, you should not store your TOTP secret in 1Password (or in anything that will synchronize across systems). Furthermore, you should not use the regular password for the site on the same device that holds your TOTP secret... Put simply: the device that holds your TOTP secret should never hold your password if your aim is genuine two factor security.
+
+So all that said here's how to do this in KeePassXC. Let's say I want to store my TOTP code for my Slack account in my KeePass database. First, if you haven't yet, make a new entry for Slack in your database, just like we did with our Reddit account above. Enter the password if you like. 
+
+When you turn on two-factor authentication in a service like Slack, you'd select TOTP as your desired second factor (as opposed to SMS). Usually you're then presented with a QR code to point your phone at. Unfortunately, as far as I know, KeePassXC **requires an alphanumeric "key" instead of a QR code**. (There are ways of getting this key from a QR code, but the only sure way I know involves using the command line and a tool called `zbar` -- I [wrote about that here](https://sts10.github.io/2018/11/26/totp-uris-qr-codes-2-factor.html).) 
+
+Once you have the key, go back to KeePassXC and right-click your Slack entry, hover over the "TOTP..." option, and click "Set up TOTP..." 
+
+![TOPT menu](/img/keepassxc/totp-menu.png)
+
+Enter your key into the presented form, and specify custom settings if needed (I have found the default settings are usually right).
+
+![TOPT set up](/img/keepassxc/totp-setup.png)
+
+Once your TOTP code is set up, KeePassXC allows you to do a number of useful things: copy the TOTP code, show the code, and even show the TOTP QR code. Since KeePassXC can show the QR code, it makes KeePassXC a good choice for a place to back-up these TOTP codes. Then, if you lose your phone, you can quickly and easily generate QR Codes to enter into a new phone's authenticator app.
 
 ## Level 4: Securing our database with multiple factors
 
