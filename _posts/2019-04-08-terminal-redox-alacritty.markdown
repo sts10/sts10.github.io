@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Terminal Redox: Rust Terminal Tools"
-date: 2019-04-19 18:11:00 -0400
+date: 2019-04-08 18:11:00 -0400
 comments: true
 ---
 
@@ -52,7 +52,7 @@ I'll also note here that there are a ton of ways to re-configure **keybindings**
 
 There are a number of command line tools written in Rust (here's one [casual list from a Fediverse user](https://mastodon.social/@wezm/101824862524557850)). Below I outline a few that I actually use.
 
-### `exa`
+### exa: "A modern version of ls"
 
 [`exa`](https://github.com/ogham/exa) is "a modern version of `ls`" (here's [the official website](https://the.exa.website/)). 
 
@@ -62,6 +62,8 @@ The developers summarize:
 
 > exa is a modern replacement for the command-line program ls that ships with Unix and Linux operating systems, with more features and better defaults. It uses colours to distinguish file types and metadata. It knows about symlinks, extended attributes, and Git. And it's small, fast, and just one single binary.
 
+I'm not sure if it's _faster_ than `ls`, but it seems to handle colors well right out of the box, and I list the options it gives (see below).
+
 #### Installing `exa`
 
 Again we can either build from source or, on MacOS, use Homebrew. There's [an installation section in the ReadMe](https://github.com/ogham/exa#installation).
@@ -70,9 +72,9 @@ With Homebrew, you can run `brew install exa`. If you don't have the dependency 
 
 To build from source, install Rust and then run `cargo install exa` or, if you don't have `libgit2`, try `cargo install --no-default-features exa`.
 
-#### Usage: 
+#### Usage
 
-You can just use `exa` where you would use `ls`. See [tons of options in the ReadMe](https://github.com/ogham/exa#options). I particularly like the `--long`, `--tree` and `--all` options.
+You can just use `exa` where you would use `ls`. Then there are [tons of options explained in the ReadMe](https://github.com/ogham/exa#options). I particularly like the `--long`, `--tree` and `--all` options.
 
 #### Helpful bash aliases to use with `exa`
 
@@ -101,9 +103,17 @@ fi
 
 (`du --help` explains it's aim is to "Summarize disk usage of the set of FILEs, recursively for directories.")
 
-So basically Dust is helpful when you want to see what directories and files are taking up a lot of space on a hard drive.
+So basically Dust is helpful when you want to see what directories and files are taking up a lot of space on a hard drive. I've never used `du` before, but trying it now by just running `du`, it spits out a list of every file in a directory, recursively, with its size. I'm sure there are a series of flags I could run with it to get the output similar to `dust`'s default output... or I could just use `dust`.
 
-**Usage**: Run `dust` in a directory that you want to map out. Here's an example from the ReadMe: 
+`du` does seem to be faster than `dust` though, so.
+
+#### Installation
+
+`cargo install du-dust` or [download the appropriate binary from the Releases page](https://github.com/bootandy/dust#download-install).
+
+#### Usage
+
+Run `dust` in a directory that you want to map out. Here's an example from the ReadMe: 
 
 ```text
 djin:git/dust> dust
@@ -137,12 +147,10 @@ I'm the first to admit that my regex skills are lacking, but if you're a regualr
 
 [As the ReadMe explains](https://github.com/BurntSushi/ripgrep#installation), there are precompiled binaries for all platforms. Or you can use Homebrew: `brew install ripgrep`.
 
-## Other Ideas I'm Hoping to Try Soon
+## Other Rust Programs I'm Hoping to Try Soon
 
-Zola is a static site generator written in Rust. 
+[Zola](https://www.getzola.org/) is a static site generator written in Rust. Currently I'm using Jekyll, which is written in Ruby and is generally kind of a pain to set up and maintain. I'm hoping Zola is faster and, assuming it uses Cargo, will be easier to install/upgrade/maintain.
 
-## More Command Line Tools Written in Rust
-
-As mentioned above, there are a number of command line tools written in Rust (here's one [casual list from a Fediverse user](https://mastodon.social/@wezm/101824862524557850)). 
+And, as mentioned above, there are a number of command line tools written in Rust (here's one [casual list from a Fediverse user](https://mastodon.social/@wezm/101824862524557850)). 
 
 If you know of other cool tools written in Rust, let me know in the comments, on [Mastodon](https://octodon.social/@schlink), or on [Twitter](https://twitter.com/sts10).
