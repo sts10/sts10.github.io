@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Terminal Redox: Rust Terminal Tools"
+title: "Terminal Redox: Some Developer Tools Written in Rust"
 date: 2019-04-08 18:11:00 -0400
 comments: true
 ---
