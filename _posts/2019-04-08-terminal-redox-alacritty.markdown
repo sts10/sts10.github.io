@@ -151,7 +151,9 @@ I'm the first to admit that my regex skills are lacking, but if you're a frequen
 
 ## Other Rust Programs I'm Hoping to Try at Some Point
 
-[Zola](https://www.getzola.org/) is a static site generator written in Rust. Currently I'm using Jekyll, which is written in Ruby and is generally kind of a pain to set up and maintain. I'm hoping Zola is faster and, assuming it uses Cargo, will be easier to install/upgrade/maintain.
+- [Zola](https://www.getzola.org/) is a static site generator written in Rust. Currently I'm using Jekyll, which is written in Ruby and is generally kind of a pain to set up and maintain. I'm hoping Zola is faster and, assuming it uses Cargo, will be easier to install/upgrade/maintain.
+
+- [Amp](https://github.com/jmacdonald/amp) and [iota](https://github.com/gchp/iota) are two terminal text editors written in Rust. (Though I am _really_ locked into Vim at this point...)
 
 And, as mentioned above, there are a number of command line tools written in Rust not mentioned here. In fact there's [a Rust working group just for CLIs](https://github.com/rust-lang-nursery/cli-wg) (they're [on Twitter](https://twitter.com/CliRust) and [Mastodon](https://fosstodon.org/@clirust)). Separately, here's a [casual list of tools from a Mastodon user](https://mastodon.social/@wezm/101824862524557850)). 
 
