@@ -50,7 +50,9 @@ I'll also note here that there are a ton of ways to re-configure **keybindings**
 
 ## Command Line Tools Written in Rust
 
-There are a number of command line tools written in Rust (here's one [casual list from a Fediverse user](https://mastodon.social/@wezm/101824862524557850)). Below I outline a few that I actually use.
+For a number of reasons that I'm not quite smart enough to outline here, Rust seems pretty well suited for building command line tools. There are many I don't mention in this post! In fact there's [a Rust working group just for CLIs](https://github.com/rust-lang-nursery/cli-wg) (they're [on Twitter](https://twitter.com/CliRust) and [Mastodon](https://fosstodon.org/@clirust)). Separately, here's a [casual list of tools from a Mastodon user](https://mastodon.social/@wezm/101824862524557850)). 
+ 
+Below I outline a few that I actually use.
 
 ### exa: "A modern version of ls"
 
@@ -141,16 +143,18 @@ djin:git/dust> dust
 
 > ripgrep is a line-oriented search tool that recursively searches your current directory for a regex pattern. By default, ripgrep will respect your .gitignore and automatically skip hidden files/directories and binary files. ripgrep has first class support on Windows, macOS and Linux, with binary downloads available for every release. ripgrep is similar to other popular search tools like The Silver Searcher, ack and grep.
 
-I'm the first to admit that my regex skills are lacking, but if you're a regualr grep user, ripgrep might be a speedier substitute. 
+I'm the first to admit that my regex skills are lacking, but if you're a frequent grep user, ripgrep might be a speedier substitute. You can also [use ripgrep with fzf and Vim](https://medium.com/@crashybang/supercharge-vim-with-fzf-and-ripgrep-d4661fc853d2) apparently.
 
 #### Installation 
 
 [As the ReadMe explains](https://github.com/BurntSushi/ripgrep#installation), there are precompiled binaries for all platforms. Or you can use Homebrew: `brew install ripgrep`.
 
-## Other Rust Programs I'm Hoping to Try Soon
+## Other Rust Programs I'm Hoping to Try at Some Point
 
 [Zola](https://www.getzola.org/) is a static site generator written in Rust. Currently I'm using Jekyll, which is written in Ruby and is generally kind of a pain to set up and maintain. I'm hoping Zola is faster and, assuming it uses Cargo, will be easier to install/upgrade/maintain.
 
-And, as mentioned above, there are a number of command line tools written in Rust (here's one [casual list from a Fediverse user](https://mastodon.social/@wezm/101824862524557850)). 
+And, as mentioned above, there are a number of command line tools written in Rust not mentioned here. In fact there's [a Rust working group just for CLIs](https://github.com/rust-lang-nursery/cli-wg) (they're [on Twitter](https://twitter.com/CliRust) and [Mastodon](https://fosstodon.org/@clirust)). Separately, here's a [casual list of tools from a Mastodon user](https://mastodon.social/@wezm/101824862524557850)). 
+
+And as for the ultimate commitment to using software written in Rust, there's an operating system written in Rust called [Redox](https://www.redox-os.org/), which has recently been [resurrected](https://www.redox-os.org/news/release-0.5.0/) after a year of stagnation.
 
 If you know of other cool tools written in Rust, let me know in the comments, on [Mastodon](https://octodon.social/@schlink), or on [Twitter](https://twitter.com/sts10).
