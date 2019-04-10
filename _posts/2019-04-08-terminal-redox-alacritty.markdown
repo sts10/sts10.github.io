@@ -7,7 +7,7 @@ comments: true
 
 In my very slow and not very steady quest to learn the Rust programming language, I've come across a few projects written in the language that I use everyday. I thought I'd write a quick post about them, with some configuration tricks that I've made to make them suit my needs. 
 
-**Why prefer tools built with Rust?** [Rust](https://www.rust-lang.org/) is a very fast language that also works to ensure safety from a group of bugs and pitfalls. Also, since Rust is only a few years old, any program written in Rust is by definition new. Of course newer doesn't always mean better, but as a non-professional developer I can afford to be on the edge a bit.
+**Why prefer tools built with Rust?** [Rust](https://www.rust-lang.org/) is a very fast language that also works to ensure safety from a group of bugs and pitfalls. It's also the four-time-running most loved programming language, according to [a yearly Stack Overflow survey](https://insights.stackoverflow.com/survey/2019 ). Also, since Rust is only a few years old, any program written in Rust is by definition new. Of course newer doesn't always mean better, but as a non-professional developer I can afford to be on the edge a bit.
 
 Do you know of other tools written in Rust that you've found useful? Leave a comment! 
 
@@ -23,6 +23,8 @@ Note that Alacritty is in a self-described "beta" stage, and may not be as featu
 
 > Alacritty has many great features, but not every feature from every other terminal. This could be for a number of reasons, but sometimes it's just not a good fit for Alacritty. This means you won't find things like tabs or splits (which are best left to a window manager or terminal multiplexer) nor niceties like a GUI config editor.
 
+I was able to replace iTerm2 with Alacritty fully on my work Mac, so if you don't love [having to update your terminal emulator all the time](https://twitter.com/schwanksta/status/1115679910826262528), _and_ can do without tabs or splits, give it a shot! 
+
 ### Alacritty installation options
 
 On MacOS, I build Alacritty from source. You can find their [official instructions on how to build from source on GitHub](https://github.com/jwilm/alacritty/blob/master/INSTALL.md). But if you're on a Mac and have Rust already installed, I'm pretty sure [all you have to do](https://github.com/jwilm/alacritty/blob/master/INSTALL.md#macos) is clone down the repo, run `make app`, then move the binary to your Applications directory: `cp -r target/release/osx/Alacritty.app /Applications/`.
@@ -33,7 +35,13 @@ Alternatively, you can [install via Homebrew](https://github.com/jwilm/alacritty
 
 Alacritty looks for a YAML config file in a number of locations. On Mac, I made mine at `~/.config/alacritty/alacritty.yml`. There's a copy of [the default config file in the root of the GitHub repo](https://github.com/jwilm/alacritty/blob/master/alacritty.yml) which you can copy down and tweak as needed. Here's [a copy of my config file](https://gist.github.com/sts10/df620672662fe4c6f03ac296a02b8e72), which, among other tweaks, has some colors specified to match [my Vim colorscheme of choice](https://github.com/sts10/vim-pink-moon) and is set to use the fontface [Hack](https://sourcefoundry.org/hack/).
 
-Also, I wanted Alacritty to open to a specific directory when launched, in this case `~/Documents/code`. After [asking some questions on a semi-related GitHub issue](https://github.com/jwilm/alacritty/issues/1672#issuecomment-452883768), I figured out how to do this. I added the following snippet to the config file:
+I'd also recommend adding a key binding to open a new instance of Alacritty, and map it to Command + n. To do this, paste the following in the `key_bindings` section of the config file:
+
+```yaml
+- { key: N,        mods: Command, action: SpawnNewInstance             }
+```
+
+Lastly, I wanted Alacritty to open to a specific directory when launched, in this case `~/Documents/code`. After [asking some questions on a semi-related GitHub issue](https://github.com/jwilm/alacritty/issues/1672#issuecomment-452883768), I figured out how to do this. I added the following snippet to the config file:
 
 ```yaml
 shell:
@@ -107,7 +115,7 @@ fi
 
 So basically Dust is helpful when you want to see what directories and files are taking up a lot of space on a hard drive. I've never used `du` before, but trying it now by just running `du`, it spits out a list of every file in a directory, recursively, with its size. I'm sure there are a series of flags I could run with it to get the output similar to `dust`'s default output... or I could just use `dust`.
 
-`du` does seem to be faster than `dust` though, so.
+`du` does seem to be faster than `dust` though, so we're not gaining speed here. (As a third alternative, a Mastodon friend [pointed](https://mastodon.social/@OliverUv/101895246765815653) to [ncdu](https://dev.yorhel.nl/ncdu)).
 
 #### Installation
 
@@ -153,7 +161,9 @@ I'm the first to admit that my regex skills are lacking, but if you're a frequen
 
 - [Zola](https://www.getzola.org/) is a static site generator written in Rust. Currently I'm using Jekyll, which is written in Ruby and is generally kind of a pain to set up and maintain. I'm hoping Zola is faster and, assuming it uses Cargo, will be easier to install/upgrade/maintain.
 
-- [Amp](https://github.com/jmacdonald/amp) and [iota](https://github.com/gchp/iota) are two terminal text editors written in Rust. (Though I am _really_ locked into Vim at this point...)
+- [miniserve](https://github.com/svenstaro/miniserve) is "a CLI tool to serve files and dirs over HTTP". To do this, I usually go for `python -m SimpleHTTPServer 8000`, but I'm betting miniserve has a bunch more capabilities out of the box.
+
+- [Amp](https://github.com/jmacdonald/amp), [remacs](https://github.com/remacs/remacs), and [iota](https://github.com/gchp/iota) are all terminal text editors written in Rust. (Though I am _really_ locked into Vim at this point...)
 
 And, as mentioned above, there are a number of command line tools written in Rust not mentioned here. In fact there's [a Rust working group just for CLIs](https://github.com/rust-lang-nursery/cli-wg) (they're [on Twitter](https://twitter.com/CliRust) and [Mastodon](https://fosstodon.org/@clirust)). Separately, here's a [casual list of tools from a Mastodon user](https://mastodon.social/@wezm/101824862524557850)). 
 
