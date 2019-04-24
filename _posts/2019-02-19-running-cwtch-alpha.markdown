@@ -54,13 +54,15 @@ After doing the above, running `tor --version` returns `Tor version 0.3.5.7.` fo
 
 OK let's do this.
 
-1. Download the latest [pre-built Linux binary, labeled "linux-x86-64.zip"](https://git.openprivacy.ca/cwtch.im/ui/releases). (This guide was written for release version 0.1.2.)
+1. Download the latest [pre-built Linux binary, labeled "cwtch-linux-YYYY-MM-DD.tar.gz"](https://git.openprivacy.ca/cwtch.im/ui/releases) and the matching `.sha256` file. (This guide was written for release version 0.1.4.)
 
-2. Extract the downloaded zip file.
+2. Optionally, check the `gz` file's integrity by opening a terminal, navigating to where you downloaded the pair of files, and running `sha256sum -c cwtch-linux-YYYY-MM-DD.tar.gz.sha256`, filling in the proper date. You get an "OK" message.
 
-3. Launch Cwtch by running `./cwtch/ui` from the appropriate location. Cwtch should launch!
+3. Extract the downloaded `gz` file (usually this can be done by just double clicking the compressed file).
 
-Success! Hopefully!
+4. Launch Cwtch by running `./cwtch/ui` from the appropriate location. Cwtch should launch!
+
+Success! Hopefully! See below for how to run Cwtch more easily, i.e. from your GUI desktop.
 
 I think my username/address/handle is `schlink~xek4wvclrozoecg535wndbksyid6fczi5q5kbvvtu7pyt2kb3ghdywid` if you want to say hi! (I changed that first part from the default "alice" to "schlink" by clicking on the word "alice" and typing "schlink" -- that I could do that wasn't intuitive to me for a few days.)
 
@@ -80,7 +82,9 @@ If you wish to download and installed the very latest builds of Cwtch, you can f
 
 If you wish to create an application icon for Cwtch on your Ubuntu-based system, you'll likely want to create a `.desktop` file. First, let's download [a nice PNG image file of the Cwtch logo](https://cwtch.im/images/cwtch-peer.png) and save it inside the `cwtch` directory. 
 
-Next, in `~/.local/share/applications/`, create a file called `cwtch.desktop`. Assuming you've got version 0.1.2 of Cwtch -- put this in that file:
+Then, I put the entire `cwtch` directory in a new directory called `other_apps`, located at `~/other_apps`.
+
+Next, in `~/.local/share/applications/`, I created a file called `cwtch.desktop`. Assuming you've got version 0.1.4 of Cwtch -- put this in that file:
 
 ```text
 [Desktop Entry]
