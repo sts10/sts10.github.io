@@ -161,7 +161,7 @@ I'm the first to admit that my regex skills are lacking, but if you're a frequen
 
 - [Zola](https://www.getzola.org/) is a static site generator written in Rust. Currently I'm using Jekyll, which is written in Ruby and is generally kind of a pain to set up and maintain. I'm hoping Zola is faster and, assuming it uses Cargo, will be easier to install/upgrade/maintain.
 
-- [miniserve](https://github.com/svenstaro/miniserve) is "a CLI tool to serve files and dirs over HTTP". To do this, I usually go for `python -m SimpleHTTPServer 8000`, but I'm betting miniserve has a bunch more capabilities out of the box.
+- [miniserve](https://github.com/svenstaro/miniserve) is "a CLI tool to serve files and dirs over HTTP". To do this, I usually go for `python -m SimpleHTTPServer 8000`, but I'm betting miniserve has a bunch more capabilities out of the box. [A commenter](http://disq.us/p/21hevy7) pointed me to another option for this, also written in Rust, called [simple-http-server](https://github.com/TheWaWaR/simple-http-server). I haven't tried either of them yet.
 
 - [Amp](https://github.com/jmacdonald/amp), [remacs](https://github.com/remacs/remacs), and [iota](https://github.com/gchp/iota) are all terminal text editors written in Rust. (Though I am _really_ locked into Vim at this point...)
 
