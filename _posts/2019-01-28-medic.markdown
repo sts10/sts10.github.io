@@ -19,7 +19,7 @@ But what if we're too paranoid for this type of check?
 
 ## An offline checking option
 
-In addition to this Passwords API, Hunt makes the (very large) text file of the updated, half-billion password list [available to the general public for download](https://haveibeenpwned.com/Passwords), either as a torrent or hosted by Cloudflare. Here are the first 10 lines of the 550-million-line text file (the number after the colon is the number of times that password has appeared in the various breach lists):
+In addition to this Passwords API, Hunt makes the (very large) text file of the half-billion password list [available to the general public for download](https://haveibeenpwned.com/Passwords), either as a torrent or hosted by Cloudflare. Here are the first 10 lines of the 550-million-line text file (the number after the colon is the number of times that password has appeared in the various breach lists):
 
 ```text
 7C4A8D09CA3762AF61E59520943DC26494F8941B:23174662
@@ -58,16 +58,12 @@ After poking around a bit I decided to write it myself in Rust, with [this scrip
 
 [Medic](https://github.com/sts10/medic) is a Rust CLI that can perform a variety of "health" checks on a KeePass database. It works! But nevertheless I'm going to give a big ol' "buyer beware" on it -- I am a social media producer by trade, and have never written software that deals so directly with sensitive data before. (Of course, part of the promise of Rust is that it enables more people to write "safe" code, so this was a natural challenge for me.)
 
-To give you a gist of what the tool can do at the time of writing, here's the menu that users are presented with when they start the program:
+Medic can check the passwords of a given KeePass database in four ways:
 
-```text
-To check your KeePass database's passwords, do you want to:
-
-==> 1. Check for weak passwords
-==> 2. Check for duplicate passwords
-==> 3. Check OFFLINE for breached passwords: Give me a database of SHA-1 hashed passwords to check your KeePass database against
-==> 4. Check ONLINE for breached passwords: I will hash your passwords and send the first 5 characters of each hash over the internet to HaveIBeenPwned, in order to check if they've been breached.
-```
+1. Check passwords against the HaveIBeenPwned password database, via the HaveIBeenPwned API
+2. Check passwords against a file of password hashes. This requires users to download a large list of SHA-1 hashes of breached or compromised passwords. I tailored it to work with the Pwned Passwords lists from HaveIBeenPwned, which anyone can download here. Medic will then display a list of any passwords from the given KeePass database that also appear in the list of breached passwords.
+3. Check for weak passwords, using zxcvbn
+4. Check for duplicate passwords
 
 For more on usage and setup, it's best to refer to the [ReadMe](https://github.com/sts10/medic/blob/master/readme.markdown). In this post I'm going to go over some of my Rust code and what it does.
 
@@ -142,16 +138,16 @@ Believe it or not, the above code represents an early, partially simplified vers
 As I wrote more code and added more features to the program -- including the ability to take a keyfile or a CSV export of the user's database, I broke this "Read KeePass database entries into Vector of Structs" task into a couple of functions, all located in `src/lib.rs`
 
 ```rust
-pub fn get_entries(file_path: &str, keyfile_path: Option<&str>) -> Vec<Entry> {
-    let file_extension = get_file_extension(file_path);
+pub fn get_entries(file_path: PathBuf, keyfile_path: Option<PathBuf>) -> Vec<Entry> {
+    let file_extension = file_path.extension().unwrap().to_str().unwrap();
 
     let db_pass: Option<String> = if file_extension != "csv" {
         Some(
-                rpassword::read_password_from_tty(Some(
-                        "Enter the password to your KeePass database: ",
-                        ))
-                .unwrap(),
-            )
+            rpassword::read_password_from_tty(Some(
+                "Enter the password to your KeePass database: ",
+            ))
+            .unwrap(),
+        )
     } else {
         None
     };
@@ -160,13 +156,12 @@ pub fn get_entries(file_path: &str, keyfile_path: Option<&str>) -> Vec<Entry> {
         build_entries_from_keepass_db(file_path, db_pass.unwrap(), keyfile_path)
     } else {
         build_entries_from_csv(file_path)
-    }
 }
 
 fn build_entries_from_keepass_db(
-        file_path: &str,
+        file_path: PathBuf,
         db_pass: String,
-        keyfile_path: Option<&str>,
+        keyfile_path: Option<PathBuf>,
         ) -> Vec<Entry> {
     let mut entries: Vec<Entry> = vec![];
 
@@ -201,41 +196,26 @@ title: e.get_title().unwrap().to_string(),
 
 // helper function that does the actual unlocking
 fn unlock_keepass_database(
-        file_path: &str,
+        path: PathBuf,
         db_pass: String,
-        keyfile_path: Option<&str>,
+        keyfile_path: Option<PathBuf>,
         ) -> keepass::Database {
-    let path = std::path::Path::new(file_path);
+    let mut keyfile = keyfile_path.map(|kfp| File::open(kfp).unwrap());
 
-    if let Some(keyf_path) = keyfile_path {
-        match Database::open(
-                &mut File::open(path).unwrap(), // the database
-                Some(&db_pass),                 // password
-                Some(&mut File::open(std::path::Path::new(keyf_path)).unwrap()), // keyfile
-                ) {
-            Ok(db) => db,
-            Err(e) => panic!("Error opening database: {}", e),
-        }
-    } else {
-        match Database::open(
-                &mut File::open(path).unwrap(), // the database
-                Some(&db_pass),                 // password
-                None,                           // keyfile
-                ) {
-            Ok(db) => db,
-            Err(_e) => {
-                println!("\nError opening database. Maybe you have a keyfile? If so, enter its file path:");
-                let keyfile_path = get_file_path().unwrap();
-                unlock_keepass_database(file_path, db_pass, Some(&keyfile_path))
-            }
+    match Database::open(
+            &mut File::open(path).unwrap(),               // the database
+            Some(&db_pass),                               // password
+            keyfile.as_mut().map(|f| f as &mut dyn Read), // keyfile
+            ) {
+        Ok(db) => db,
+        Err(e) => {
+            panic!("\nError opening database: {}", e);
         }
     }
 }
 ```
 
 When I started this project the keepass-rs crate wasn't able to unlock KeePass databases that were locked with keyfiles. Feeling lucky, I opened [an issue](https://github.com/sseemayer/keepass-rs/issues/8) on the crate's GitHub repo and just hours later the maintainer responded. The next day he wrote the feature into the crate -- basically `Database::open` takes an optionally third argument -- , and I bumped the version in my `Cargo.toml` to `0.3.1`. Open source ftw! 
-
-Now, I made an "interesting" (probably bad) UI choice here -- I decided to only prompt for a keyfile location if the user entering his or her password fails to decrypt the database (see the bottom part of `fn unlock_keepass_database`). This isn't _great_, since the user might have simply typed their master password incorrectly. If that happens they're going to be in for a bad time, because the program immediately prompts them for a keyfile, something they might not even know about. If anyone has a better way for the user to easily indicate that their database requires a keyfile, let me know in the comments!
 
 At this point I could read the entries of a KeePass database into a Vector of custom-made `Entry` objects (even if the KeePass database was locked with a keyfile). Sweet! Onward!
 
@@ -518,6 +498,144 @@ pub fn present_duplicated_entries<S: ::std::hash::BuildHasher>(
 
 Gonna be straight with you: I'm not 100% sure about that `.or_insert_with(|| vec![entry.clone()]);` line -- it was a Clippy suggestion. I had a simple `or_insert` call.
 
+## Making it a grown-up Rust CLI with `structopt`
+
+In earlier versions, medic presented users with a menu and asked for a numerical choice input.
+
+```text
+To check your KeePass database's passwords, do you want to:
+
+==> 1. Check for weak passwords
+==> 2. Check for duplicate passwords
+==> 3. Check OFFLINE for breached passwords: Give me a database of SHA-1 hashed passwords to check your KeePass database against
+==> 4. Check ONLINE for breached passwords: I will hash your passwords and send the first 5 characters of each hash over the internet to HaveIBeenPwned, in order to check if they've been breached.
+```
+
+But as I learned more about Rust command line interfaces, I saw there are a handful of command line argument parsers that people use to create their CLIs, which gives the ecosystem of Rust CLIs a nice uniformity. These parsers include [clap](https://github.com/clap-rs/clap) and [structopt](https://github.com/TeXitoi/structopt), among others. I decided to go with structopt. 
+
+`structopt` requires you to define a `struct` called `Opt` in `src/main.rs`, in which we outline the options, flags, and arguments that our CLI will take. We can also provide documentation notes (denoted by the triple `///`) that will populate the `--help` output.
+
+
+```rust
+// excerpt from src/main.rs
+extern crate structopt;
+// ...
+use std::path::PathBuf;
+use structopt::StructOpt;
+
+/// Medic
+#[derive(StructOpt, Debug)]
+#[structopt(name = "medic")]
+struct Opt {
+    /// Give verbose output
+    #[structopt(short = "v", long = "verbose")]
+    verbose: bool,
+
+    /// Provide key file, if unlocking the KeePass databases requires one
+    #[structopt(short = "k", long = "keyfile", parse(from_os_str))]
+    keyfile: Option<PathBuf>,
+
+    /// Check passwords against breached passwords online via the HaveIBeenPwned API. More info
+    /// here:
+    /// https://www.troyhunt.com/ive-just-launched-pwned-passwords-version-2/#cloudflareprivacyandkanonymity
+    #[structopt(long = "online")]
+    online: bool,
+
+    /// Provide password hash file to check database against. To download a copy of very large list of
+    /// password hashes from HaveIBeenPwned, go to: https://haveibeenpwned.com/Passwords
+    #[structopt(short = "h", long = "hashfile", parse(from_os_str))]
+    hash_file: Option<PathBuf>,
+
+    /// Check database for duplicate passwords
+    #[structopt(short = "d", long = "duplicate")]
+    check_duplicate: bool,
+
+    /// Check database for weak passwords
+    #[structopt(short = "w", long = "weak")]
+    check_weak: bool,
+
+    /// KeePass database to check. Can either be a kdbx file or an exported CSV version of a
+    /// KeePass database.
+    #[structopt(name = "KEEPASS DATABASE FILE", parse(from_os_str))]
+    keepass_db: PathBuf,
+}
+```
+
+We can access these parameters using `Opt::from_args()` like so:
+
+```rust
+// still in src/main.rs
+fn main() {
+    let opt = Opt::from_args();
+    println!("Detected option:\n{:?}", opt);
+
+    // and if we like, we can stash some of them in a fresh set of variables
+    let keepass_db_file_path = opt.keepass_db;
+    let hash_file: Option<PathBuf> = opt.hash_file;
+    let keyfile: Option<PathBuf> = opt.keyfile;
+    let check_online = opt.online;
+    // ...
+}
+```
+
+This solved two other problems for me: (1) It gave me a way to give the user an _optional_ method of providing a keyfile. (Not every KeePass database requires a keyfile to open it.)
+
+And (2), the file paths we ask the user for are already of type `PathBuf` rather than `String`s or string slices.
+
+## Replacing a `bool` with baby's first `enum`
+
+In previous versions of `medic`, the function `check_database_offline` had a `bool` value for whether to display a progress bar or not. The primary reason for this was so I could turn it off for testing. 
+
+This worked fine, but it didn't look great. For example, the actual, non-test call for the function looked like this 
+
+```rust
+println!("Checking KeePass database against provided hash file");
+let breached_entries = check_database_offline(file_path, &entries, true).unwrap();
+```
+
+What's that `true` doing hanging out there!? What's set to `true`? 
+
+Luckily, I happened to stumble upon [this wonderfully short blog post called "Rust Patterns: Enums Instead of Booleans"](http://blakesmith.me/2019/05/07/rust-patterns-enums-instead-of-booleans.html). As the title implies, the author advises that we can often be more descriptive  if we use `enum`s rather than `bool`eans.
+
+With this lesson fresh in mind, I set about to refactor the "progress bar" bool into an enum (and rename it to `progress_bar_visibility`
+
+```rust
+#[derive(Debug, PartialEq)]
+pub enum VisibilityPreference {
+    Show,
+    Hide,
+}
+
+pub fn check_database_offline(
+    passwords_file_path: PathBuf,
+    entries: &[Entry],
+    progress_bar_visibility: VisibilityPreference,
+    ) -> io::Result<Vec<Entry>> {
+
+        //...
+
+        let pb = ProgressBar::new(passwords_file_size as u64);
+        if progress_bar_visibility == VisibilityPreference::Show {
+            pb.set_style(
+                    ProgressStyle::default_bar()
+                    .template("{spinner} [{elapsed_precise}] [{bar:40}] ({eta})"),
+                    );
+        }
+
+        // ...
+    }
+```
+
+Now, calling the function looks much more descriptive:
+
+```rust
+// show progress bar in production
+let breached_entries = check_database_offline(file_path, &entries, VisibilityPreference::Show).unwrap();
+
+// hide progress bar for test functions
+let breached_entries = check_database_offline(passwords_file_path, &entries, VisibilityPreference::Hide).unwrap();
+```
+
 ## Attempting to detect similar passwords using zxcvbn
 
 While checking for repeated passwords is nice and potentially useful, I thought it'd be cool if the tool could also detect passwords that are _similar_ as well, for example `Spot34` and `Spot43`. I _hoped_ that I could use that feature of zxcvbn where it optionally takes related words to accomplish this: I'd just shove all the other passwords into that Vector and see if the password still got a high-enough score.
@@ -525,41 +643,6 @@ While checking for repeated passwords is nice and potentially useful, I thought 
 This worked OK if the differences in the passwords where capitalization, for example `Spot34` gets a lower score if you submit `spot34` as a related word. But sadly it seems not to do anything with numbers: `Spot34` doesn't get a lower score if you submit `Spot43` along with it. 
 
 So, for now, I've scrapped this feature. If you have any ideas on how to better implement it, let me know! 
-
-## Paranoid mode 
-
-As I spent more hours on this project, I wondered if any other users would trust it with their passwords. In an effect to make the program more trustworthy, I made what I call "paranoid mode". In paranoid mode, Medic can only accept user passwords if it can not connect to the internet. So user must disconnect their internet connection before using Medic. The idea here is to assure the user that the program isn't "phoning home" and/or sending their passwords somewhere without their knowledge. 
-
-To be honest, now that I've thought about it more, this could be seen as a kind of security theater, but it was a weird challenge to implement and I'm glad I did it. Here's some of it:
-
-```rust
-pub fn is_allowed_access_to_user_passwords(paranoid_mode: bool) -> bool {
-    !(paranoid_mode && has_internet_connection())
-}
-
-pub fn has_internet_connection() -> bool {
-    let urls_to_test = [
-        "https://google.com".to_string(),
-        "https://dropbox.com".to_string(),
-        "https://github.com".to_string(),
-        "https://api.pwnedpasswords.com".to_string(),
-    ];
-
-    for url in &urls_to_test {
-        let response = match reqwest::get(url) {
-            Ok(res) => res,
-                Err(_e) => continue,
-        };
-        if response.status().to_string() == "200 OK" {
-            return true;
-        }
-    }
-    false
-}
-```
-
-<!-- ## Creating lib.rs -->
- <!-- - https://github.com/sts10/medic/tree/91af5b975a6d0c73364c1dc1eb053f756930ed10 -->
 
 ## Learning about `is_some()` 
 
@@ -635,12 +718,11 @@ Thanks to a [comment on this post](http://disq.us/p/1zwjgam) by Frederic Dumont 
 
 ```rust
 fn unlock_keepass_database(
-        file_path: &str,
+        path: PathBuf,
         db_pass: String,
-        keyfile_path: Option<&str>,
+        keyfile_path: Option<PathBuf>,
         ) -> keepass::Database {
-    let path = std::path::Path::new(file_path);
-    let mut keyfile = keyfile_path.map(|kfp| File::open(std::path::Path::new(kfp)).unwrap());
+    let mut keyfile = keyfile_path.map(|kfp| File::open(kfp).unwrap());
 
     match Database::open(
             &mut File::open(path).unwrap(),               // the database
@@ -648,12 +730,8 @@ fn unlock_keepass_database(
             keyfile.as_mut().map(|f| f as &mut dyn Read), // keyfile
             ) {
         Ok(db) => db,
-        Err(_e) => {
-            println!(
-                    "\nError opening database. Maybe you have a keyfile? If so, enter its file path:"
-                    );
-            let keyfile_path = get_file_path().unwrap();
-            unlock_keepass_database(file_path, db_pass, Some(&keyfile_path))
+        Err(e) => {
+            panic!("\nError opening database: {}", e);
         }
     }
 }
