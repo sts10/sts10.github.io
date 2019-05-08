@@ -73,6 +73,12 @@ I have run my personal KeePass database through the program (actually I exported
 
 There is an open question of the usefulness of this kind of check -- the logic of the question is something like "Wouldn't a KeePass user not have any common passwords, thus a check against a breach list like this be pointless?" My tentative answer is that even the strongest of passwords can be exposed. Sure, it may only appear on the list once, but it's still there, and a tool like Medic is one of the safer yet moderately efficient ways I can think of to learn if that's true or not for any of your passwords. Plus, as mentioned, 1Password has a similar tool called Watchtower. 
 
+### What about KDBX version 4.0?
+
+Relatively recently, [a new version of KeePass database files (extension `kdbx`) was released](https://keepass.info/help/kb/kdbx_4.html). This new version -- version 4 -- is a bit different than version 3.X. Unfortunately, Medic currently cannot open databases that are saved using version 4.
+
+My CLI can only unlock KDBX files that are version 3.X. This is because the otherwise-fantastic Rust crate I use, [keepass-rs](https://github.com/sseemayer/keepass-rs), doesn't know how to open 4.0 databases. I [filed an issue](https://github.com/sseemayer/keepass-rs/issues/11) if you want to take a look! But for Medic users, this means you'll have to either (a) switch your database's Key Derivation Function (KDF) to "AES-KDF (KDBX 3.1)" or (b) export your database to a CSV file ([see readme for more](https://github.com/sts10/medic#known-issueslimitations)).
+
 ## Reading a KeePassXC database
 
 With the [keepass-rs crate](https://github.com/sseemayer/keepass-rs) loaded up, unlocking and reading the entries of KeePass database was pretty easy. Below is an early version of a function that did just that: 
