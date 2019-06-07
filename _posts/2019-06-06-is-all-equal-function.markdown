@@ -41,7 +41,7 @@ fn is_all_same(arr: &[usize]) -> bool {
 
 Anyway, the Fediverse is wonderful and full of helpful Rust friends -- I ended up getting about a dozen solutions (none exactly the same I don't think?)
 
-If you want to run them with appropriate tests, I also put them all in [a fresh Rust Playground, with tests](https://play.rust-lang.org/?version=nightly&mode=debug&edition=2018&gist=013aea5507471f07120c3bbefea038c5).
+If you want to run them with appropriate tests, I also put them all in [a fresh Rust Playground, with tests](https://play.rust-lang.org/?version=nightly&mode=debug&edition=2018&gist=57c76200984607a01f4de5e06557759d).
 
 ## Answers
 
@@ -85,12 +85,12 @@ This one requires Rust Nightly!
 ```rust
 // https://weirder.earth/@Eden/102226720432099086
 // requires nightly (run with: `cargo +nightly run`)
-fn is_all_same5(vec: Vec<usize>) -> bool {
-    match vec.as_slice() {
+fn is_all_same5(vec: &[usize]) -> bool {
+    match vec {
         [] => true,
         [_elem] => true,
-        [head, second] if (head != second) => false,
-        [_, rest..] => is_all_same5(rest.to_vec()),
+        [head, second, ..] if (head != second) => false,
+        [_head, rest..] => is_all_same5(rest),
     }
 }
 ```
@@ -193,4 +193,4 @@ fn is_all_same12<T: Eq>(slice: &[T]) -> bool {
 }
 ```
 
-Again, if you want to run these answers with appropriate tests, I also put them all in [a fresh Rust Playground](https://play.rust-lang.org/?version=nightly&mode=debug&edition=2018&gist=013aea5507471f07120c3bbefea038c5).
+Again, if you want to run these answers with appropriate tests, I also put them all in [a fresh Rust Playground](https://play.rust-lang.org/?version=nightly&mode=debug&edition=2018&gist=57c76200984607a01f4de5e06557759d).
