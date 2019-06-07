@@ -5,7 +5,7 @@ date: 2019-06-06 18:11:00 -0400
 comments: true
 ---
 
-Earlier today, I tooted out a Rust question: How would you write a function to determine if a Vector of integers are all the same, or not. 
+Earlier today, I [tooted out a Rust question](https://octodon.social/@schlink/102226540877408178): How would you write a function to determine if a Vector of integers are all the same, or not. 
 
 ```rust
 fn main() {
@@ -21,7 +21,7 @@ fn is_all_same(vec: Vec<usize>) -> bool {
 }
 ```
 
-Now,I should note that I already screwed up a bit in how I laid out the sample code. I should have had the `is_all_same` function accept a slice, rather than a Vector. That way, we could pass a slice of the Vector to multiple functions.
+Now, I should note that right off the bat I screwed up a bit in how I laid out the sample code. I should have had the `is_all_same` function accept a slice, rather than a Vector. That way, we could pass a slice of the Vector to multiple functions.
 
 So the challenge should have looked like this:
 
@@ -109,6 +109,8 @@ fn is_all_same6(vec: &Vec<usize>) -> bool {
 }
 ```
 
+7 is the same as 6, but works for multiple types:
+
 ```rust
 // https://asonix.dog/@asonix/102226729246023587
 fn is_all_same7<T>(vec: &[T]) -> bool
@@ -172,7 +174,7 @@ fn is_all_same10(vec: Vec<usize>) -> bool {
 }
 ```
 
-Maybe the most concise one here:
+Maybe the most concise option, which uses [windows](https://doc.rust-lang.org/std/slice/struct.Windows.html):
 
 ```rust
 // https://mastodon.technology/@bugaevc/102226891784062955
