@@ -39,7 +39,9 @@ fn is_all_same(arr: &[usize]) -> bool {
 }
 ```
 
-Anyway, here are some of the answers I got! I also put them all in [a fresh Rust Playground, with appropriate tests](https://play.rust-lang.org/?version=nightly&mode=debug&edition=2018&gist=013aea5507471f07120c3bbefea038c5).
+Anyway, the Fediverse is wonderful and full of helpful Rust friends -- I ended up getting about a dozen solutions (none exactly the same I don't think?)
+
+If you want to run them with appropriate tests, I also put them all in [a fresh Rust Playground, with tests](https://play.rust-lang.org/?version=nightly&mode=debug&edition=2018&gist=013aea5507471f07120c3bbefea038c5).
 
 ## Answers
 
@@ -189,3 +191,4 @@ fn is_all_same12<T: Eq>(slice: &[T]) -> bool {
 }
 ```
 
+Again, if you want to run these answers with appropriate tests, I also put them all in [a fresh Rust Playground](https://play.rust-lang.org/?version=nightly&mode=debug&edition=2018&gist=013aea5507471f07120c3bbefea038c5).
