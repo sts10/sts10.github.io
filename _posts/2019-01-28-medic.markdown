@@ -42,7 +42,7 @@ To generate this "hash digest", we run a numeric representation of the word "pas
 
 > In computer science, a one-way function is a function that is easy to compute on every input, but hard to invert given the image of a random input. Here, "easy" and "hard" are to be understood in the sense of computational complexity theory, specifically the theory of polynomial time problems. Not being one-to-one is not considered sufficient of a function for it to be called one-way.
 
-You can generate your own SHA-1 hash digests [here](https://passwordsgenerator.net/sha1-hash-generator/). 
+You can generate your own SHA-1 hash digests [here](https://passwordsgenerator.net/sha1-hash-generator/), though I would not recommend typing your real passwords into that website. 
 
 If that went a bit over your head don't worry too much about it for now -- we'll press on.
 
@@ -61,8 +61,8 @@ After poking around a bit I decided to write it myself in Rust, with [this scrip
 Medic can check the passwords of a given KeePass database in four ways:
 
 1. Check passwords against the HaveIBeenPwned password database, via the HaveIBeenPwned API
-2. Check passwords against a file of password hashes. This requires users to download a large list of SHA-1 hashes of breached or compromised passwords. I tailored it to work with the Pwned Passwords lists from HaveIBeenPwned, which anyone can download here. Medic will then display a list of any passwords from the given KeePass database that also appear in the list of breached passwords.
-3. Check for weak passwords, using zxcvbn
+2. Check passwords against a file of password hashes. This requires users to download a large list of SHA-1 hashes of breached or compromised passwords. I tailored it to work with the Pwned Passwords lists from HaveIBeenPwned, which anyone can download [here](https://haveibeenpwned.com/Passwords). Medic will then display a list of any passwords from the given KeePass database that also appear in the list of breached passwords.
+3. Check for weak passwords, using [zxcvbn](https://github.com/dropbox/zxcvbn)
 4. Check for duplicate passwords
 
 For more on usage and setup, it's best to refer to the [ReadMe](https://github.com/sts10/medic/blob/master/readme.markdown). In this post I'm going to go over some of my Rust code and what it does.
@@ -72,12 +72,6 @@ For more on usage and setup, it's best to refer to the [ReadMe](https://github.c
 I have run my personal KeePass database through the program (actually I exported my database to a CSV file and ran that through the program -- [I outline the steps I actually took in the README](https://github.com/sts10/medic#how-i-chose-to-use-this-tool)). It found a few old passwords (that I was still using) among the HIBP list, though I should note that I did not find any of my passwords that I used KeePassXC (or 1Password, which I sometimes use for mobile) to randomly generate on the breach list. 
 
 There is an open question of the usefulness of this kind of check -- the logic of the question is something like "Wouldn't a KeePass user not have any common passwords, thus a check against a breach list like this be pointless?" My tentative answer is that even the strongest of passwords can be exposed. Sure, it may only appear on the list once, but it's still there, and a tool like Medic is one of the safer yet moderately efficient ways I can think of to learn if that's true or not for any of your passwords. Plus, as mentioned, 1Password has a similar tool called Watchtower. 
-
-### What about KDBX version 4.0?
-
-Relatively recently, [a new version of KeePass database files (extension `kdbx`) was released](https://keepass.info/help/kb/kdbx_4.html). This new version -- version 4 -- is a bit different than version 3.X. Unfortunately, Medic currently cannot open databases that are saved using version 4.
-
-My CLI can only unlock KDBX files that are version 3.X. This is because the otherwise-fantastic Rust crate I use, [keepass-rs](https://github.com/sseemayer/keepass-rs), doesn't know how to open 4.0 databases. I [filed an issue](https://github.com/sseemayer/keepass-rs/issues/11) if you want to take a look! But for Medic users, this means you'll have to either (a) switch your database's Key Derivation Function (KDF) to "AES-KDF (KDBX 3.1)" or (b) export your database to a CSV file ([see readme for more](https://github.com/sts10/medic#known-issueslimitations)).
 
 ## Reading a KeePassXC database
 
@@ -506,7 +500,7 @@ Gonna be straight with you: I'm not 100% sure about that `.or_insert_with(|| vec
 
 ## Making it a grown-up Rust CLI with `structopt`
 
-In earlier versions, medic presented users with a menu and asked for a numerical choice input.
+In earlier versions, Medic presented users with a menu and asked for a numerical choice input.
 
 ```text
 To check your KeePass database's passwords, do you want to:
@@ -567,13 +561,13 @@ struct Opt {
 }
 ```
 
-We can access these parameters using `Opt::from_args()` like so:
+We can access the values of these arguments by using `Opt::from_args()` like so:
 
 ```rust
 // still in src/main.rs
 fn main() {
     let opt = Opt::from_args();
-    println!("Detected option:\n{:?}", opt);
+    println!("Detected option(s):\n{:?}", opt);
 
     // and if we like, we can stash some of them in a fresh set of variables
     let keepass_db_file_path = opt.keepass_db;
@@ -590,7 +584,7 @@ And (2), the file paths we ask the user for are already of type `PathBuf` rather
 
 ## Replacing a `bool` with baby's first `enum`
 
-In previous versions of `medic`, the function `check_database_offline` had a `bool` value for whether to display a progress bar or not. The primary reason for this was so I could turn it off for testing. 
+In previous versions of Medic, the function `check_database_offline` had a `bool` value for whether to display a progress bar or not. The primary reason for this was so I could turn it off for testing. 
 
 This worked fine, but it didn't look great. For example, the actual, non-test call for the function looked like this 
 
@@ -652,9 +646,9 @@ So, for now, I've scrapped this feature. If you have any ideas on how to better 
 
 ## Learning about `is_some()` 
 
-A small Rust thing I learned: When I implemented the keyfile functionality mentioned above, I was sure to make `keyfile_path` and Option, specifically `Option<&str>`, since not all KeePass databases are going to have key files. 
+A small Rust thing I learned: When I implemented the keyfile functionality mentioned above, I was sure to make `keyfile_path` an `Option`, specifically `Option<&str>`, since not all KeePass databases are going to require key files to be unlocked.
 
-At some point I need some control flow on whether this `keyfile_path` variable was present (a `Some`) or a `None`. My Ruby instincts told me I'd be able to just write `if keyfile_path` or `if Some(keyfile_path)` and, in that context, Rust would evaluate the variable as a Boolean. Of course Rust is much to strict to do this. But I did learn about [the `is_some()` method](https://doc.rust-lang.org/std/option/enum.Option.html#method.is_some). Here's how that would look with `keyfile_path`:
+At some point I need some control flow on whether this `keyfile_path` variable was present (a `Some`) or a `None`. My Ruby instincts told me I'd be able to just write `if keyfile_path` or `if Some(keyfile_path)` and, in that context, Rust would evaluate the variable as a Boolean. Of course Rust is too strict to allow this. But I did learn about [the `is_some()` method](https://doc.rust-lang.org/std/option/enum.Option.html#method.is_some). Here's how that would look with `keyfile_path`:
 
 ```rust
 if keyfile_path.is_some() {
@@ -751,4 +745,4 @@ On January 31, 2019, Collections #2 through #5 dropped. [Wired reports](https://
 
 > The new Collection leak, which was first reported by Heise, contains 2.2 billion unique usernames and passwords. In total it contains 845GB of data and more than 25bn records.
 
-I'm not sure how to get my hands on this dump, but I'd be curious to see how Medic does with it. Maybe a few hours? Could be good inspiration to squeeze more efficiency out of the offline check function, and/or implement threading...
+I'm not sure how to get my hands on this dump, but I'd be curious to see how Medic performs with such a long list. Maybe a few hours? Could be good inspiration to squeeze more efficiency out of the offline check function, and/or implement threading...
