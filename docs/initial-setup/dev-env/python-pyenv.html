@@ -143,8 +143,8 @@
 <li>Add the necessary stuff to your <code>.bashrc</code> (not <code>.bash_profile</code>)</li>
 <li>Restart terminal</li>
 <li>Maybe <a href="https://github.com/pyenv/pyenv/wiki#suggested-build-environment">install dependencies</a>? (You may be good to go already.)</li>
-<li><code>pyenv install --list</code> and pick new-ish-but-stable versions of  python2 and python3 to install. For example: <code>pyenv install 3.70 2.7.15</code></li>
-<li>You can set version 3 as the global, with 2 as fall-back: <code>pyenv global 3.7.0 2.7.15</code>. You could also set the <code>system</code> version as a fallback, with <code>pyenv global 3.7.0 2.7.15 system</code>.</li>
+<li>Run <code>pyenv install --list</code> and pick new-ish-but-stable versions of  python2 and python3 to install. For example: <code>pyenv install 3.7.4 &amp;&amp; pyenv install 2.7.16</code></li>
+<li>You can set version 3 as the global, with 2 as fall-back: <code>pyenv global 3.7.4 2.7.16</code>. You could also set the <code>system</code> version as a fallback, with <code>pyenv global 3.7.0 2.7.15 system</code>.</li>
 <li>Check that <code>pip</code> is installed (I think it's included?). You should be able to upgrade <code>pip3</code> with <code>pip3 install --upgrade pip</code> and <code>pip2</code> with <code>pip2 install --upgrade pip</code></li>
 </ol>
 <p><strong>Let's see how we did</strong>: If successful, <code>python2</code> gets you Python 2, <code>python3</code> or <code>python</code> gets you Python 3. Similar with <code>pip2</code>/<code>pip3</code>/<code>pip</code>.</p>
@@ -152,7 +152,8 @@
 <a class="header" href="#deoplete--neovim" id="deoplete--neovim"><h2>Deoplete / Neovim</h2></a>
 <p>Now that we've got a nice little Python and Pip environment set up, let's make sure Deoplete is using it.</p>
 <p>If you use Neovim + Deoplete, you probably want to run <code>pip3 install neovim</code> to ensure Deoplete works smoothly (see <a href="https://github.com/Shougo/deoplete.nvim#requirements">Deoplete's requirements</a>).</p>
-<p>I also ran <code>pip2 install neovim</code> because Neovim's <code>:CheckHealth</code> told me too. At this point, you may need to update Deoplete by running <code>:UpdateRemotePlugins</code> in Neovim. (Neovim's <code>:CheckHealth</code> is your friend here.)</p>
+<p>I also ran <code>pip2 install neovim</code> because Neovim's <code>:CheckHealth</code> told me too.</p>
+<p>At this point, you may need to update Deoplete by running <code>:UpdateRemotePlugins</code> in Neovim. (Neovim's <code>:CheckHealth</code> is your friend here.)</p>
 
                     </main>
 
