@@ -1,9 +1,11 @@
 <!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js">
+<html lang="en" class="sidebar-visible no-js light">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>KDE Setup and Troubleshooting - Docs</title>
+        
+
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,9 +32,12 @@
 
         
     </head>
-    <body class="light">
+    <body>
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">var path_to_root = "../";</script>
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+        </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script type="text/javascript">
@@ -53,10 +58,13 @@
         <!-- Set the theme before any content is loaded, prevents flash -->
         <script type="text/javascript">
             var theme;
-            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { } 
-            if (theme === null || theme === undefined) { theme = 'light'; }
-            document.body.className = theme;
-            document.querySelector('html').className = theme + ' js';
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
@@ -72,7 +80,10 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="../welcome.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../installing-on-oryx.html"><strong aria-hidden="true">2.</strong> Installing a Fresh Distro on Oryx Pro</a></li><li><a href="../initial-setup/index.html"><strong aria-hidden="true">3.</strong> Initial Setup</a></li><li><ol class="section"><li><a href="../initial-setup/basics.html"><strong aria-hidden="true">3.1.</strong> Basics</a></li><li><a href="../initial-setup/bashrc-and-konsole.html"><strong aria-hidden="true">3.2.</strong> bashrc and terminal</a></li><li><a href="../initial-setup/git.html"><strong aria-hidden="true">3.3.</strong> Git</a></li><li><a href="../initial-setup/neovim.html"><strong aria-hidden="true">3.4.</strong> Neovim</a></li><li><a href="../initial-setup/keepassxc.html"><strong aria-hidden="true">3.5.</strong> KeePassXC</a></li><li><a href="../initial-setup/syncthing.html"><strong aria-hidden="true">3.6.</strong> Syncthing</a></li><li><a href="../initial-setup/standard-notes.html"><strong aria-hidden="true">3.7.</strong> Standard Notes</a></li><li><a href="../initial-setup/pgp.html"><strong aria-hidden="true">3.8.</strong> PGP</a></li><li><a href="../initial-setup/other-apps.html"><strong aria-hidden="true">3.9.</strong> Other Apps to Install</a></li><li><a href="../initial-setup/chrome-and-flash.html"><strong aria-hidden="true">3.10.</strong> Chrome and Flash</a></li><li><a href="../initial-setup/dev-env/index.html"><strong aria-hidden="true">3.11.</strong> Development Environment</a></li><li><ol class="section"><li><a href="../initial-setup/dev-env/python-pyenv.html"><strong aria-hidden="true">3.11.1.</strong> Python and pyenv</a></li><li><a href="../initial-setup/dev-env/ruby-and-rbenv.html"><strong aria-hidden="true">3.11.2.</strong> Ruby and rbenv</a></li><li><a href="../initial-setup/dev-env/rust.html"><strong aria-hidden="true">3.11.3.</strong> Rust</a></li><li><a href="../initial-setup/dev-env/github-and-ssh.html"><strong aria-hidden="true">3.11.4.</strong> GitHub and ssh keys</a></li><li><a href="../initial-setup/dev-env/jekyll.html"><strong aria-hidden="true">3.11.5.</strong> GitHub blog with Jekyll</a></li></ol></li><li><a href="../initial-setup/gnome-setup.html"><strong aria-hidden="true">3.12.</strong> GNOME Setup</a></li><li><a href="../initial-setup/kde-setup.html" class="active"><strong aria-hidden="true">3.13.</strong> KDE Setup and Troubleshooting</a></li><li><a href="../initial-setup/redshift.html"><strong aria-hidden="true">3.14.</strong> Redshift</a></li><li><a href="../initial-setup/battery-management.html"><strong aria-hidden="true">3.15.</strong> Battery and TLP</a></li><li><a href="../initial-setup/images-and-video.html"><strong aria-hidden="true">3.16.</strong> Images and Video</a></li></ol></li><li><a href="../installing-ubuntu-on-an-old-macbook-pro.html"><strong aria-hidden="true">4.</strong> Installing Ubuntu on my 2009 MacBook Pro</a></li><li><a href="../lubuntu/index.html"><strong aria-hidden="true">5.</strong> Lubuntu</a></li><li><ol class="section"><li><a href="../lubuntu/switching-to-lubuntu.html"><strong aria-hidden="true">5.1.</strong> Switching to Lubuntu</a></li><li><a href="../lubuntu/improving-lubuntu.html"><strong aria-hidden="true">5.2.</strong> Improving Lubuntu</a></li><li><a href="../lubuntu/remapping-control-and-caps-lock-lubuntu.html"><strong aria-hidden="true">5.3.</strong> Remapping Caps Lock to Control</a></li><li><a href="../lubuntu/using-neovim-in-lubuntu.html"><strong aria-hidden="true">5.4.</strong> Using Neovim</a></li><li><a href="../lubuntu/rbenv-on-lubuntu.html"><strong aria-hidden="true">5.5.</strong> Using Rbenv</a></li><li><a href="../lubuntu/configuring-openbox-on-lubuntu.html"><strong aria-hidden="true">5.6.</strong> Configuring OpenBox</a></li></ol></li><li><a href="../security/index.html"><strong aria-hidden="true">6.</strong> Security Apps and Tools</a></li><li><ol class="section"><li><a href="../security/installing-gnu-privacy-guard-on-ubuntu.html"><strong aria-hidden="true">6.1.</strong> Installing GNU Privacy Guard</a></li><li><a href="../security/keepassxc-from-snap.html"><strong aria-hidden="true">6.2.</strong> KeePassXC as a Snap</a></li><li><a href="../security/ricochet-114-lubuntu-1604.html"><strong aria-hidden="true">6.3.</strong> Ricochet</a></li><li><a href="../security/python-pip-and-magic-wormhole-on-lubuntu.html"><strong aria-hidden="true">6.4.</strong> Magic Wormhole</a></li><li><a href="../security/using-a-yubikey-from-a-smartcard-on-ubuntu.html"><strong aria-hidden="true">6.5.</strong> YubiKey</a></li><li><a href="../security/pidgin-google-and-otr.html"><strong aria-hidden="true">6.6.</strong> Pidgin, Gchat, and OTR</a></li></ol></li><li><a href="../other-des/index.html"><strong aria-hidden="true">7.</strong> Other DEs</a></li><li><ol class="section"><li><a href="../other-des/customizing-appearance-of-xfce-ubuntu.html"><strong aria-hidden="true">7.1.</strong> Customizing XFCE (Ubuntu base)</a></li><li><a href="../other-des/notes-on-i3.html"><strong aria-hidden="true">7.2.</strong> Notes on i3</a></li><li><a href="../other-des/other-desktop-environments.html"><strong aria-hidden="true">7.3.</strong> Other DEs</a></li></ol></li></ol>
+            <div id="sidebar-scrollbox" class="sidebar-scrollbox">
+                <ol class="chapter"><li class="expanded "><a href="../welcome.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="expanded "><a href="../installing-on-oryx.html"><strong aria-hidden="true">2.</strong> Installing a Fresh Distro on Oryx Pro</a></li><li class="expanded "><a href="../initial-setup/index.html"><strong aria-hidden="true">3.</strong> Initial Setup</a></li><li><ol class="section"><li class="expanded "><a href="../initial-setup/basics.html"><strong aria-hidden="true">3.1.</strong> Basics</a></li><li class="expanded "><a href="../initial-setup/bashrc-and-konsole.html"><strong aria-hidden="true">3.2.</strong> bashrc and terminal</a></li><li class="expanded "><a href="../initial-setup/git.html"><strong aria-hidden="true">3.3.</strong> Git</a></li><li class="expanded "><a href="../initial-setup/neovim.html"><strong aria-hidden="true">3.4.</strong> Neovim</a></li><li class="expanded "><a href="../initial-setup/keepassxc.html"><strong aria-hidden="true">3.5.</strong> KeePassXC</a></li><li class="expanded "><a href="../initial-setup/syncthing.html"><strong aria-hidden="true">3.6.</strong> Syncthing</a></li><li class="expanded "><a href="../initial-setup/standard-notes.html"><strong aria-hidden="true">3.7.</strong> Standard Notes</a></li><li class="expanded "><a href="../initial-setup/pgp.html"><strong aria-hidden="true">3.8.</strong> PGP</a></li><li class="expanded "><a href="../initial-setup/other-apps.html"><strong aria-hidden="true">3.9.</strong> Other Apps to Install</a></li><li class="expanded "><a href="../initial-setup/chrome-and-flash.html"><strong aria-hidden="true">3.10.</strong> Chrome and Flash</a></li><li class="expanded "><a href="../initial-setup/dev-env/index.html"><strong aria-hidden="true">3.11.</strong> Development Environment</a></li><li><ol class="section"><li class="expanded "><a href="../initial-setup/dev-env/python-pyenv.html"><strong aria-hidden="true">3.11.1.</strong> Python and pyenv</a></li><li class="expanded "><a href="../initial-setup/dev-env/ruby-and-rbenv.html"><strong aria-hidden="true">3.11.2.</strong> Ruby and rbenv</a></li><li class="expanded "><a href="../initial-setup/dev-env/rust.html"><strong aria-hidden="true">3.11.3.</strong> Rust</a></li><li class="expanded "><a href="../initial-setup/dev-env/github-and-ssh.html"><strong aria-hidden="true">3.11.4.</strong> GitHub and ssh keys</a></li><li class="expanded "><a href="../initial-setup/dev-env/jekyll.html"><strong aria-hidden="true">3.11.5.</strong> GitHub blog with Jekyll</a></li></ol></li><li class="expanded "><a href="../initial-setup/gnome-setup.html"><strong aria-hidden="true">3.12.</strong> GNOME Setup</a></li><li class="expanded "><a href="../initial-setup/kde-setup.html" class="active"><strong aria-hidden="true">3.13.</strong> KDE Setup and Troubleshooting</a></li><li class="expanded "><a href="../initial-setup/redshift.html"><strong aria-hidden="true">3.14.</strong> Redshift</a></li><li class="expanded "><a href="../initial-setup/battery-management.html"><strong aria-hidden="true">3.15.</strong> Battery and TLP</a></li><li class="expanded "><a href="../initial-setup/images-and-video.html"><strong aria-hidden="true">3.16.</strong> Images and Video</a></li></ol></li><li class="expanded "><a href="../installing-ubuntu-on-an-old-macbook-pro.html"><strong aria-hidden="true">4.</strong> Installing Ubuntu on my 2009 MacBook Pro</a></li><li class="expanded "><a href="../lubuntu/index.html"><strong aria-hidden="true">5.</strong> Lubuntu</a></li><li><ol class="section"><li class="expanded "><a href="../lubuntu/switching-to-lubuntu.html"><strong aria-hidden="true">5.1.</strong> Switching to Lubuntu</a></li><li class="expanded "><a href="../lubuntu/improving-lubuntu.html"><strong aria-hidden="true">5.2.</strong> Improving Lubuntu</a></li><li class="expanded "><a href="../lubuntu/remapping-control-and-caps-lock-lubuntu.html"><strong aria-hidden="true">5.3.</strong> Remapping Caps Lock to Control</a></li><li class="expanded "><a href="../lubuntu/using-neovim-in-lubuntu.html"><strong aria-hidden="true">5.4.</strong> Using Neovim</a></li><li class="expanded "><a href="../lubuntu/rbenv-on-lubuntu.html"><strong aria-hidden="true">5.5.</strong> Using Rbenv</a></li><li class="expanded "><a href="../lubuntu/configuring-openbox-on-lubuntu.html"><strong aria-hidden="true">5.6.</strong> Configuring OpenBox</a></li></ol></li><li class="expanded "><a href="../security/index.html"><strong aria-hidden="true">6.</strong> Security Apps and Tools</a></li><li><ol class="section"><li class="expanded "><a href="../security/installing-gnu-privacy-guard-on-ubuntu.html"><strong aria-hidden="true">6.1.</strong> Installing GNU Privacy Guard</a></li><li class="expanded "><a href="../security/keepassxc-from-snap.html"><strong aria-hidden="true">6.2.</strong> KeePassXC as a Snap</a></li><li class="expanded "><a href="../security/ricochet-114-lubuntu-1604.html"><strong aria-hidden="true">6.3.</strong> Ricochet</a></li><li class="expanded "><a href="../security/python-pip-and-magic-wormhole-on-lubuntu.html"><strong aria-hidden="true">6.4.</strong> Magic Wormhole</a></li><li class="expanded "><a href="../security/using-a-yubikey-from-a-smartcard-on-ubuntu.html"><strong aria-hidden="true">6.5.</strong> YubiKey</a></li><li class="expanded "><a href="../security/pidgin-google-and-otr.html"><strong aria-hidden="true">6.6.</strong> Pidgin, Gchat, and OTR</a></li></ol></li><li class="expanded "><a href="../other-des/index.html"><strong aria-hidden="true">7.</strong> Other DEs</a></li><li><ol class="section"><li class="expanded "><a href="../other-des/customizing-appearance-of-xfce-ubuntu.html"><strong aria-hidden="true">7.1.</strong> Customizing XFCE (Ubuntu base)</a></li><li class="expanded "><a href="../other-des/notes-on-i3.html"><strong aria-hidden="true">7.2.</strong> Notes on i3</a></li><li class="expanded "><a href="../other-des/other-desktop-environments.html"><strong aria-hidden="true">7.3.</strong> Other DEs</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -89,7 +100,7 @@
                                 <i class="fa fa-paint-brush"></i>
                             </button>
                             <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                                <li role="none"><button role="menuitem" class="theme" id="light">Light <span class="default">(default)</span></button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
                                 <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                                 <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                                 <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
@@ -102,12 +113,13 @@
                             
                         </div>
 
-                        <h1 class="menu-title">Docs</h1> 
+                        <h1 class="menu-title">Docs</h1>
 
                         <div class="right-buttons">
                             <a href="../print.html" title="Print this book" aria-label="Print this book">
                                 <i id="print-button" class="fa fa-print"></i>
                             </a>
+                            
                         </div>
                     </div>
                 </div>
@@ -136,19 +148,19 @@
 
                 <div id="content" class="content">
                     <main>
-                        <a class="header" href="#kde-setup-and-troubleshooting" id="kde-setup-and-troubleshooting"><h1>KDE Setup and Troubleshooting</h1></a>
+                        <h1><a class="header" href="#kde-setup-and-troubleshooting" id="kde-setup-and-troubleshooting">KDE Setup and Troubleshooting</a></h1>
 <p>Basically, if you go with the Kubuntu &quot;Minimal Install&quot;, configure KDE with your heart.</p>
-<a class="header" href="#keyboard-stuff" id="keyboard-stuff"><h2>Keyboard Stuff</h2></a>
+<h2><a class="header" href="#keyboard-stuff" id="keyboard-stuff">Keyboard Stuff</a></h2>
 <p>In &quot;Systems Settings&quot;, under Hardware, click &quot;Input Devices&quot;. Make sure you're on the &quot;Keyboard&quot; section (you should see a menu titled &quot;Keyboard Hardware and Layout&quot;). Go to the &quot;Advanced&quot; tab. In this tab...</p>
 <ol>
 <li>Under &quot;Caps Lock behavior&quot;, check &quot;Caps Lock is also a Ctrl&quot;</li>
 <li>Under &quot;Position of Compose key&quot;, I like &quot;Right Win&quot; (aka Right Meta or Right Apple Command). This means you can insert special characters like an em dash (hold right meta/mac/win key and press the hyphen key three times). More info about the Compose Key <a href="https://wiki.ubuntu.com/ComposeKey#KDE_4.x_configuration">here</a> and <a href="https://cyberborean.wordpress.com/2008/01/06/compose-key-magic/">here</a> and <a href="https://userbase.kde.org/Tutorials/ComposeKey">here</a>. (An alternative method: Under &quot;Key to choose the 3rd level&quot; check &quot;Right Alt; Shift+Right Alt as Compose&quot;. This allows you to insert an em dash by holding Right Alt + Shift and then inserting three hyphens in a row.)</li>
 </ol>
-<a class="header" href="#kde-troubleshooting" id="kde-troubleshooting"><h2>KDE Troubleshooting</h2></a>
-<a class="header" href="#everything-looks-big" id="everything-looks-big"><h3>Everything looks big!</h3></a>
+<h2><a class="header" href="#kde-troubleshooting" id="kde-troubleshooting">KDE Troubleshooting</a></h2>
+<h3><a class="header" href="#everything-looks-big" id="everything-looks-big">Everything looks big!</a></h3>
 <p>If, after installing the proper NVIDIA drivers and restarting the machine, everything looks big, go to Fonts settings menu and &quot;Force&quot; the DPI to 96.</p>
-<a class="header" href="#if-external-monitors-arent-being-recognized-by-your-laptop" id="if-external-monitors-arent-being-recognized-by-your-laptop"><h3>If external monitors aren't being recognized by your laptop</h3></a>
-<p>If external monitors aren't being recognized by your laptop, try opening &quot;NVIDIA X Server Settings&quot;, then select &quot;X Server Display Configuration&quot; from the menu you on the left. Try clicking &quot;Detect Displays&quot;.</p>
+<h3><a class="header" href="#if-external-monitors-arent-being-recognized-by-your-laptop" id="if-external-monitors-arent-being-recognized-by-your-laptop">If external monitors aren't being recognized by your laptop</a></h3>
+<p>If external monitors aren't being recognized by your laptop, try opening &quot;NVIDIA X Server Settings&quot;, then select &quot;X Server Display Configuration&quot; from the menu you on the left. Try clicking &quot;Detect Displays&quot;. </p>
 <p>If the external monitor appears in the layout, it may just be &quot;disabled&quot;. If that's the case, go to the drop-down menu on the right side of the window labeled &quot;Configuration&quot; and try choosing &quot;X screen 0&quot;.</p>
 <p><a href="https://askubuntu.com/questions/1083733/kubuntu-18-04-laptop-wont-recognize-external-monitor">An AskUbuntu question about this issue</a></p>
 
@@ -191,6 +203,14 @@
 
         
 
+        
+
+        
+        
+        
+        <script type="text/javascript">
+            window.playpen_copyable = true;
+        </script>
         
 
         

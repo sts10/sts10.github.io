@@ -1,9 +1,13 @@
 <!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js">
+<html lang="en" class="sidebar-visible no-js light">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Docs</title>
+        
+        <meta name="robots" content="noindex" />
+        
+
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,9 +34,12 @@
 
         
     </head>
-    <body class="light">
+    <body>
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">var path_to_root = "";</script>
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+        </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script type="text/javascript">
@@ -53,10 +60,13 @@
         <!-- Set the theme before any content is loaded, prevents flash -->
         <script type="text/javascript">
             var theme;
-            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { } 
-            if (theme === null || theme === undefined) { theme = 'light'; }
-            document.body.className = theme;
-            document.querySelector('html').className = theme + ' js';
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
@@ -72,7 +82,10 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="welcome.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="installing-on-oryx.html"><strong aria-hidden="true">2.</strong> Installing a Fresh Distro on Oryx Pro</a></li><li><a href="initial-setup/index.html"><strong aria-hidden="true">3.</strong> Initial Setup</a></li><li><ol class="section"><li><a href="initial-setup/basics.html"><strong aria-hidden="true">3.1.</strong> Basics</a></li><li><a href="initial-setup/bashrc-and-konsole.html"><strong aria-hidden="true">3.2.</strong> bashrc and terminal</a></li><li><a href="initial-setup/git.html"><strong aria-hidden="true">3.3.</strong> Git</a></li><li><a href="initial-setup/neovim.html"><strong aria-hidden="true">3.4.</strong> Neovim</a></li><li><a href="initial-setup/keepassxc.html"><strong aria-hidden="true">3.5.</strong> KeePassXC</a></li><li><a href="initial-setup/syncthing.html"><strong aria-hidden="true">3.6.</strong> Syncthing</a></li><li><a href="initial-setup/standard-notes.html"><strong aria-hidden="true">3.7.</strong> Standard Notes</a></li><li><a href="initial-setup/pgp.html"><strong aria-hidden="true">3.8.</strong> PGP</a></li><li><a href="initial-setup/other-apps.html"><strong aria-hidden="true">3.9.</strong> Other Apps to Install</a></li><li><a href="initial-setup/chrome-and-flash.html"><strong aria-hidden="true">3.10.</strong> Chrome and Flash</a></li><li><a href="initial-setup/dev-env/index.html"><strong aria-hidden="true">3.11.</strong> Development Environment</a></li><li><ol class="section"><li><a href="initial-setup/dev-env/python-pyenv.html"><strong aria-hidden="true">3.11.1.</strong> Python and pyenv</a></li><li><a href="initial-setup/dev-env/ruby-and-rbenv.html"><strong aria-hidden="true">3.11.2.</strong> Ruby and rbenv</a></li><li><a href="initial-setup/dev-env/rust.html"><strong aria-hidden="true">3.11.3.</strong> Rust</a></li><li><a href="initial-setup/dev-env/github-and-ssh.html"><strong aria-hidden="true">3.11.4.</strong> GitHub and ssh keys</a></li><li><a href="initial-setup/dev-env/jekyll.html"><strong aria-hidden="true">3.11.5.</strong> GitHub blog with Jekyll</a></li></ol></li><li><a href="initial-setup/gnome-setup.html"><strong aria-hidden="true">3.12.</strong> GNOME Setup</a></li><li><a href="initial-setup/kde-setup.html"><strong aria-hidden="true">3.13.</strong> KDE Setup and Troubleshooting</a></li><li><a href="initial-setup/redshift.html"><strong aria-hidden="true">3.14.</strong> Redshift</a></li><li><a href="initial-setup/battery-management.html"><strong aria-hidden="true">3.15.</strong> Battery and TLP</a></li><li><a href="initial-setup/images-and-video.html"><strong aria-hidden="true">3.16.</strong> Images and Video</a></li></ol></li><li><a href="installing-ubuntu-on-an-old-macbook-pro.html"><strong aria-hidden="true">4.</strong> Installing Ubuntu on my 2009 MacBook Pro</a></li><li><a href="lubuntu/index.html"><strong aria-hidden="true">5.</strong> Lubuntu</a></li><li><ol class="section"><li><a href="lubuntu/switching-to-lubuntu.html"><strong aria-hidden="true">5.1.</strong> Switching to Lubuntu</a></li><li><a href="lubuntu/improving-lubuntu.html"><strong aria-hidden="true">5.2.</strong> Improving Lubuntu</a></li><li><a href="lubuntu/remapping-control-and-caps-lock-lubuntu.html"><strong aria-hidden="true">5.3.</strong> Remapping Caps Lock to Control</a></li><li><a href="lubuntu/using-neovim-in-lubuntu.html"><strong aria-hidden="true">5.4.</strong> Using Neovim</a></li><li><a href="lubuntu/rbenv-on-lubuntu.html"><strong aria-hidden="true">5.5.</strong> Using Rbenv</a></li><li><a href="lubuntu/configuring-openbox-on-lubuntu.html"><strong aria-hidden="true">5.6.</strong> Configuring OpenBox</a></li></ol></li><li><a href="security/index.html"><strong aria-hidden="true">6.</strong> Security Apps and Tools</a></li><li><ol class="section"><li><a href="security/installing-gnu-privacy-guard-on-ubuntu.html"><strong aria-hidden="true">6.1.</strong> Installing GNU Privacy Guard</a></li><li><a href="security/keepassxc-from-snap.html"><strong aria-hidden="true">6.2.</strong> KeePassXC as a Snap</a></li><li><a href="security/ricochet-114-lubuntu-1604.html"><strong aria-hidden="true">6.3.</strong> Ricochet</a></li><li><a href="security/python-pip-and-magic-wormhole-on-lubuntu.html"><strong aria-hidden="true">6.4.</strong> Magic Wormhole</a></li><li><a href="security/using-a-yubikey-from-a-smartcard-on-ubuntu.html"><strong aria-hidden="true">6.5.</strong> YubiKey</a></li><li><a href="security/pidgin-google-and-otr.html"><strong aria-hidden="true">6.6.</strong> Pidgin, Gchat, and OTR</a></li></ol></li><li><a href="other-des/index.html"><strong aria-hidden="true">7.</strong> Other DEs</a></li><li><ol class="section"><li><a href="other-des/customizing-appearance-of-xfce-ubuntu.html"><strong aria-hidden="true">7.1.</strong> Customizing XFCE (Ubuntu base)</a></li><li><a href="other-des/notes-on-i3.html"><strong aria-hidden="true">7.2.</strong> Notes on i3</a></li><li><a href="other-des/other-desktop-environments.html"><strong aria-hidden="true">7.3.</strong> Other DEs</a></li></ol></li></ol>
+            <div id="sidebar-scrollbox" class="sidebar-scrollbox">
+                <ol class="chapter"><li class="expanded "><a href="welcome.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="expanded "><a href="installing-on-oryx.html"><strong aria-hidden="true">2.</strong> Installing a Fresh Distro on Oryx Pro</a></li><li class="expanded "><a href="initial-setup/index.html"><strong aria-hidden="true">3.</strong> Initial Setup</a></li><li><ol class="section"><li class="expanded "><a href="initial-setup/basics.html"><strong aria-hidden="true">3.1.</strong> Basics</a></li><li class="expanded "><a href="initial-setup/bashrc-and-konsole.html"><strong aria-hidden="true">3.2.</strong> bashrc and terminal</a></li><li class="expanded "><a href="initial-setup/git.html"><strong aria-hidden="true">3.3.</strong> Git</a></li><li class="expanded "><a href="initial-setup/neovim.html"><strong aria-hidden="true">3.4.</strong> Neovim</a></li><li class="expanded "><a href="initial-setup/keepassxc.html"><strong aria-hidden="true">3.5.</strong> KeePassXC</a></li><li class="expanded "><a href="initial-setup/syncthing.html"><strong aria-hidden="true">3.6.</strong> Syncthing</a></li><li class="expanded "><a href="initial-setup/standard-notes.html"><strong aria-hidden="true">3.7.</strong> Standard Notes</a></li><li class="expanded "><a href="initial-setup/pgp.html"><strong aria-hidden="true">3.8.</strong> PGP</a></li><li class="expanded "><a href="initial-setup/other-apps.html"><strong aria-hidden="true">3.9.</strong> Other Apps to Install</a></li><li class="expanded "><a href="initial-setup/chrome-and-flash.html"><strong aria-hidden="true">3.10.</strong> Chrome and Flash</a></li><li class="expanded "><a href="initial-setup/dev-env/index.html"><strong aria-hidden="true">3.11.</strong> Development Environment</a></li><li><ol class="section"><li class="expanded "><a href="initial-setup/dev-env/python-pyenv.html"><strong aria-hidden="true">3.11.1.</strong> Python and pyenv</a></li><li class="expanded "><a href="initial-setup/dev-env/ruby-and-rbenv.html"><strong aria-hidden="true">3.11.2.</strong> Ruby and rbenv</a></li><li class="expanded "><a href="initial-setup/dev-env/rust.html"><strong aria-hidden="true">3.11.3.</strong> Rust</a></li><li class="expanded "><a href="initial-setup/dev-env/github-and-ssh.html"><strong aria-hidden="true">3.11.4.</strong> GitHub and ssh keys</a></li><li class="expanded "><a href="initial-setup/dev-env/jekyll.html"><strong aria-hidden="true">3.11.5.</strong> GitHub blog with Jekyll</a></li></ol></li><li class="expanded "><a href="initial-setup/gnome-setup.html"><strong aria-hidden="true">3.12.</strong> GNOME Setup</a></li><li class="expanded "><a href="initial-setup/kde-setup.html"><strong aria-hidden="true">3.13.</strong> KDE Setup and Troubleshooting</a></li><li class="expanded "><a href="initial-setup/redshift.html"><strong aria-hidden="true">3.14.</strong> Redshift</a></li><li class="expanded "><a href="initial-setup/battery-management.html"><strong aria-hidden="true">3.15.</strong> Battery and TLP</a></li><li class="expanded "><a href="initial-setup/images-and-video.html"><strong aria-hidden="true">3.16.</strong> Images and Video</a></li></ol></li><li class="expanded "><a href="installing-ubuntu-on-an-old-macbook-pro.html"><strong aria-hidden="true">4.</strong> Installing Ubuntu on my 2009 MacBook Pro</a></li><li class="expanded "><a href="lubuntu/index.html"><strong aria-hidden="true">5.</strong> Lubuntu</a></li><li><ol class="section"><li class="expanded "><a href="lubuntu/switching-to-lubuntu.html"><strong aria-hidden="true">5.1.</strong> Switching to Lubuntu</a></li><li class="expanded "><a href="lubuntu/improving-lubuntu.html"><strong aria-hidden="true">5.2.</strong> Improving Lubuntu</a></li><li class="expanded "><a href="lubuntu/remapping-control-and-caps-lock-lubuntu.html"><strong aria-hidden="true">5.3.</strong> Remapping Caps Lock to Control</a></li><li class="expanded "><a href="lubuntu/using-neovim-in-lubuntu.html"><strong aria-hidden="true">5.4.</strong> Using Neovim</a></li><li class="expanded "><a href="lubuntu/rbenv-on-lubuntu.html"><strong aria-hidden="true">5.5.</strong> Using Rbenv</a></li><li class="expanded "><a href="lubuntu/configuring-openbox-on-lubuntu.html"><strong aria-hidden="true">5.6.</strong> Configuring OpenBox</a></li></ol></li><li class="expanded "><a href="security/index.html"><strong aria-hidden="true">6.</strong> Security Apps and Tools</a></li><li><ol class="section"><li class="expanded "><a href="security/installing-gnu-privacy-guard-on-ubuntu.html"><strong aria-hidden="true">6.1.</strong> Installing GNU Privacy Guard</a></li><li class="expanded "><a href="security/keepassxc-from-snap.html"><strong aria-hidden="true">6.2.</strong> KeePassXC as a Snap</a></li><li class="expanded "><a href="security/ricochet-114-lubuntu-1604.html"><strong aria-hidden="true">6.3.</strong> Ricochet</a></li><li class="expanded "><a href="security/python-pip-and-magic-wormhole-on-lubuntu.html"><strong aria-hidden="true">6.4.</strong> Magic Wormhole</a></li><li class="expanded "><a href="security/using-a-yubikey-from-a-smartcard-on-ubuntu.html"><strong aria-hidden="true">6.5.</strong> YubiKey</a></li><li class="expanded "><a href="security/pidgin-google-and-otr.html"><strong aria-hidden="true">6.6.</strong> Pidgin, Gchat, and OTR</a></li></ol></li><li class="expanded "><a href="other-des/index.html"><strong aria-hidden="true">7.</strong> Other DEs</a></li><li><ol class="section"><li class="expanded "><a href="other-des/customizing-appearance-of-xfce-ubuntu.html"><strong aria-hidden="true">7.1.</strong> Customizing XFCE (Ubuntu base)</a></li><li class="expanded "><a href="other-des/notes-on-i3.html"><strong aria-hidden="true">7.2.</strong> Notes on i3</a></li><li class="expanded "><a href="other-des/other-desktop-environments.html"><strong aria-hidden="true">7.3.</strong> Other DEs</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -89,7 +102,7 @@
                                 <i class="fa fa-paint-brush"></i>
                             </button>
                             <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                                <li role="none"><button role="menuitem" class="theme" id="light">Light <span class="default">(default)</span></button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
                                 <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                                 <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                                 <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
@@ -102,12 +115,13 @@
                             
                         </div>
 
-                        <h1 class="menu-title">Docs</h1> 
+                        <h1 class="menu-title">Docs</h1>
 
                         <div class="right-buttons">
                             <a href="print.html" title="Print this book" aria-label="Print this book">
                                 <i id="print-button" class="fa fa-print"></i>
                             </a>
+                            
                         </div>
                     </div>
                 </div>
@@ -136,46 +150,46 @@
 
                 <div id="content" class="content">
                     <main>
-                        <a class="header" href="#schlinks-docs" id="schlinks-docs"><h1>Schlink's Docs</h1></a>
-<p>Welcome! This is an <a href="https://github.com/rust-lang-nursery/mdBook">mdbook</a> full on notes that Sam Schlinkert has written about installing and running a Linux desktop. It's mostly for personal reference, but you may find it useful. It mostly pertains to Ubuntu-based systems.</p>
-<a class="header" href="#my-config-files" id="my-config-files"><h2>My Config Files</h2></a>
+                        <h1><a class="header" href="#schlinks-docs" id="schlinks-docs">Schlink's Docs</a></h1>
+<p>Welcome! This is an <a href="https://github.com/rust-lang-nursery/mdBook">mdbook</a> full on notes that Sam Schlinkert has written about installing and running a Linux desktop. It's mostly for personal reference, but you may find it useful. It mostly pertains to Ubuntu-based systems. </p>
+<h2><a class="header" href="#my-config-files" id="my-config-files">My Config Files</a></h2>
 <p>Most of my Linux config files (as opposed to guides, which is what this site is mostly made up of) live in <a href="https://github.com/sts10/linux-config">this GitHub repo</a>. (Separately, I keep <a href="https://gist.github.com/sts10/df620672662fe4c6f03ac296a02b8e72">an Alacritty config file as a Gist</a>.)</p>
-<a class="header" href="#how-this-book-is-set-up" id="how-this-book-is-set-up"><h2>How this book is set up</h2></a>
+<h2><a class="header" href="#how-this-book-is-set-up" id="how-this-book-is-set-up">How this book is set up</a></h2>
 <p>This is an <a href="https://github.com/rust-lang-nursery/mdBook">mdbook</a>. The book's source files live in <a href="https://github.com/sts10/linux-notes-mdbook">this GitHub repo</a> -- if you wish to <strong>contribute</strong> to this book, please create an issue or pull request there!</p>
 <p>The GitHub repo of my Jekyll website/blog, which is one place where this book is published, is <a href="https://github.com/sts10/sts10.github.io">here</a>.</p>
-<a class="header" href="#publishing-the-mdbook-to-the-github-page" id="publishing-the-mdbook-to-the-github-page"><h3>Publishing the mdbook to the GitHub Page:</h3></a>
+<h3><a class="header" href="#publishing-the-mdbook-to-the-github-page" id="publishing-the-mdbook-to-the-github-page">Publishing the mdbook to the GitHub Page:</a></h3>
 <p>The <code>book.toml</code> file in <a href="https://github.com/sts10/linux-notes-mdbook">the mdbook source repo</a> specifies that the mdbook builds to <code>../sts10.github.io/docs</code> (via the <code>mbdook build</code> command). So when you set this up you need those two directories in the same parent directory.</p>
-<p>Once set up, you can run a publish:</p>
+<p>Once set up, you can run a publish: </p>
 <ol>
 <li>In the mdbook source repo, run <code>mdbook build</code></li>
 <li>In the <code>sts10.github.io</code> Jekyll site repo, add and commit the Git changes and run <code>git push origin master</code></li>
 </ol>
-<a class="header" href="#contact-the-author" id="contact-the-author"><h2>Contact the Author</h2></a>
+<h2><a class="header" href="#contact-the-author" id="contact-the-author">Contact the Author</a></h2>
 <p>You can find Sam on <a href="https://twitter.com/sts10">Twitter</a> or <a href="https://octodon.social/@schlink">Mastodon</a> or <a href="https://gist.github.com/sts10/4a4e01021b3a5ad42e9b73e0abd7b7e3">contact him via more secure channels</a>.</p>
-<a class="header" href="#installing-a-fresh-distro-on-oryx-pro" id="installing-a-fresh-distro-on-oryx-pro"><h1>Installing a Fresh Distro on Oryx Pro</h1></a>
-<p>Once you've got the USB stick in the computer, reboot your system. You’ll need to tell the computer to boot from the live disk by holding F7 or F1 <a href="http://support.system76.com/articles/live-disk/">source</a>.</p>
+<h1><a class="header" href="#installing-a-fresh-distro-on-oryx-pro" id="installing-a-fresh-distro-on-oryx-pro">Installing a Fresh Distro on Oryx Pro</a></h1>
+<p>Once you've got the USB stick in the computer, reboot your system. You’ll need to tell the computer to boot from the live disk by holding F7 or F1 <a href="http://support.system76.com/articles/live-disk/">source</a>. </p>
 <p>If you're NOT going with Pop_OS, you'll likely need to install System76 drivers and the appropriate NVIDIA drivers. <a href="https://support.system76.com/articles/system76-driver/">More info on this here</a>.</p>
-<a class="header" href="#some-system76pop_os-links" id="some-system76pop_os-links"><h2>Some System76/Pop!_OS Links</h2></a>
+<h2><a class="header" href="#some-system76pop_os-links" id="some-system76pop_os-links">Some System76/Pop!_OS Links</a></h2>
 <p><a href="http://support.system76.com/articles/">Support articles</a></p>
 <p><a href="https://support.system76.com/articles/system76-driver/">Installing System76 and appropriate NVIDIA drivers for System76 machine</a></p>
 <p><a href="http://pop.system76.com/docs/">Pop Docs</a></p>
-<a class="header" href="#initial-setup" id="initial-setup"><h1>Initial Setup</h1></a>
-<a class="header" href="#some-app-installation-and-hard-drive-mounting-basics" id="some-app-installation-and-hard-drive-mounting-basics"><h1>Some App Installation and Hard Drive Mounting Basics</h1></a>
-<a class="header" href="#installing-snap" id="installing-snap"><h2>Installing Snap</h2></a>
-<p>Think it's just <code>sudo apt install snapd</code>.</p>
+<h1><a class="header" href="#initial-setup" id="initial-setup">Initial Setup</a></h1>
+<h1><a class="header" href="#some-app-installation-and-hard-drive-mounting-basics" id="some-app-installation-and-hard-drive-mounting-basics">Some App Installation and Hard Drive Mounting Basics</a></h1>
+<h2><a class="header" href="#installing-snap" id="installing-snap">Installing Snap</a></h2>
+<p>Think it's just <code>sudo apt install snapd</code>. </p>
 <p>Know that, sometimes in order to <em>update</em> applications that you install via Snap need to be updated with a command like <code>snap refresh</code> or <code>snap refresh &lt;app_name&gt;</code>. Run <code>snap refresh --help</code> for more information.</p>
-<a class="header" href="#generic-upgrade-line" id="generic-upgrade-line"><h2>Generic upgrade line</h2></a>
+<h2><a class="header" href="#generic-upgrade-line" id="generic-upgrade-line">Generic upgrade line</a></h2>
 <p><code>sudo apt-get update &amp;&amp; sudo apt-get dist-upgrade</code> is a good way to upgrade everything.</p>
-<a class="header" href="#how-to-install-from-an-appimage-if-its-not-going-easily" id="how-to-install-from-an-appimage-if-its-not-going-easily"><h2>How to install from an AppImage if it's not going easily</h2></a>
+<h2><a class="header" href="#how-to-install-from-an-appimage-if-its-not-going-easily" id="how-to-install-from-an-appimage-if-its-not-going-easily">How to install from an AppImage if it's not going easily</a></h2>
 <p><a href="https://itsfoss.com/use-appimage-linux/">This tutorial</a> instructs to right-click the download appimage file, go to &quot;Properties&quot; &gt; &quot;Permissions&quot; and then check &quot;Allow executing file as program&quot;. Alternatively <code>chmod u+x &lt;AppImage File&gt;</code> to make it executable.</p>
-<a class="header" href="#how-to-mount-an-external-hard-drive-thats-formatted-as-exfat" id="how-to-mount-an-external-hard-drive-thats-formatted-as-exfat"><h2>How to mount an external hard drive that's formatted as exFAT</h2></a>
-<p>Simply install these programs by running this line: <code>sudo apt-get install exfat-fuse exfat-utils</code> (<a href="https://www.reddit.com/r/Ubuntu/comments/6r954q/mount_exfat_drive_in_ubuntu_1704/">via</a>).</p>
-<a class="header" href="#desktop-files" id="desktop-files"><h2>Desktop files</h2></a>
+<h2><a class="header" href="#how-to-mount-an-external-hard-drive-thats-formatted-as-exfat" id="how-to-mount-an-external-hard-drive-thats-formatted-as-exfat">How to mount an external hard drive that's formatted as exFAT</a></h2>
+<p>Simply install these programs by running this line: <code>sudo apt-get install exfat-fuse exfat-utils</code> (<a href="https://www.reddit.com/r/Ubuntu/comments/6r954q/mount_exfat_drive_in_ubuntu_1704/">via</a>). </p>
+<h2><a class="header" href="#desktop-files" id="desktop-files">Desktop files</a></h2>
 <p>The Arch Wiki has <a href="https://wiki.archlinux.org/index.php/desktop_entries">an entry on desktop entries</a>, which notes</p>
 <blockquote>
 <p>Desktop entries for applications, or .desktop files, are generally a combination of meta information resources and a shortcut of an application. These files usually reside in <code>/usr/share/applications/</code> or <code>/usr/local/share/applications/</code> for applications installed system-wide, or <code>~/.local/share/applications/</code> for user-specific applications. User entries take precedence over system entries.</p>
 </blockquote>
-<a class="header" href="#desktop-file-example" id="desktop-file-example"><h3>Desktop file example</h3></a>
+<h3><a class="header" href="#desktop-file-example" id="desktop-file-example">Desktop file example</a></h3>
 <p>At <code>~/.local/share/applications/standard-notes.desktop</code> paste the following:</p>
 <pre><code>[Desktop Entry]
 Type=Application
@@ -186,47 +200,47 @@ Terminal=false
 Categories=Office;Notes;
 </code></pre>
 <p>See the page on Standard Notes for more.</p>
-<a class="header" href="#bashrc-and-terminal" id="bashrc-and-terminal"><h1>bashrc and Terminal</h1></a>
+<h1><a class="header" href="#bashrc-and-terminal" id="bashrc-and-terminal">bashrc and Terminal</a></h1>
 <p>Here are some tips on setting up your bash environment and your terminal. Most of the config files live in <a href="https://github.com/sts10/linux-config">this GitHub repo</a>, for now. Below are some instruction on how to load them correctly and easily.</p>
-<a class="header" href="#bashrc" id="bashrc"><h2>bashrc</h2></a>
+<h2><a class="header" href="#bashrc" id="bashrc">bashrc</a></h2>
 <p>Here's a one-line bash command to copy down my Linux <code>.bashrc</code> from GitHub:</p>
 <pre><code class="language-bash">curl -o ~/.bashrc https://raw.githubusercontent.com/sts10/linux-config/master/bash/bashrc
 </code></pre>
-<a class="header" href="#konsole-color-profile" id="konsole-color-profile"><h2>Konsole color profile</h2></a>
+<h2><a class="header" href="#konsole-color-profile" id="konsole-color-profile">Konsole color profile</a></h2>
 <p>If you're using KDE, the default terminal emulator, <a href="https://konsole.kde.org/">Konsole</a>, is pretty good. To get my colors -- based on my <a href="https://github.com/sts10/vim-pink-moon">Pink Moon Vim colorscheme</a> -- and profile, run the following two lines:</p>
 <pre><code class="language-bash">curl --create-dirs -o ~/.local/share/konsole/Pink\ Moon.colorscheme https://raw.githubusercontent.com/sts10/linux-config/master/plasma/konsole/Pink\ Moon.colorscheme
 </code></pre>
 <pre><code class="language-bash">curl --create-dirs -o ~/.local/share/konsole/pink-moon.profile https://raw.githubusercontent.com/sts10/linux-config/master/plasma/konsole/pink-moon.profile
 </code></pre>
-<a class="header" href="#alacritty-terminal-emulator-config-file" id="alacritty-terminal-emulator-config-file"><h2>Alacritty terminal emulator config file</h2></a>
+<h2><a class="header" href="#alacritty-terminal-emulator-config-file" id="alacritty-terminal-emulator-config-file">Alacritty terminal emulator config file</a></h2>
 <p><a href="https://github.com/jwilm/alacritty/">Alacritty</a> is a cross-platform terminal emulator written in Rust, so it's really fast.</p>
 <p>My Alacritty config file -- complete with colors -- is tested on MacOS, not Ubuntu, but if you want to try it: Place the following yaml file at <code>~/.config/alacritty/alacritty.yml</code>: <a href="https://gist.github.com/sts10/df620672662fe4c6f03ac296a02b8e72">Alacritty config</a>. To do this, try running:</p>
 <pre><code class="language-bash">curl --create-dirs -o ~/.config/alacritty/alacritty.yml https://gist.githubusercontent.com/sts10/df620672662fe4c6f03ac296a02b8e72/raw/e219e9433b108bb8345f1aaa114b3f716b6df1e3/alacritty.yml
 </code></pre>
-<a class="header" href="#git" id="git"><h1>Git</h1></a>
+<h1><a class="header" href="#git" id="git">Git</a></h1>
 <p>Before you do anything else, especially with Neovim or Vim, install git! <code>sudo apt install git</code></p>
 <p>Given the holistic setup in this document, you're going to want to use the ssh URL when cloning down repos from GitHub (as opposed to HTTPS).</p>
-<a class="header" href="#neovim" id="neovim"><h1>Neovim</h1></a>
+<h1><a class="header" href="#neovim" id="neovim">Neovim</a></h1>
 <p>I think I used the stable ppa and followed <a href="https://github.com/neovim/neovim/wiki/Installing-Neovim#ubuntu">these instructions</a>, though given <a href="https://github.com/neovim/neovim#install-from-package">this page</a>, we might be able to just do <code>sudo apt install neovim</code> at this point?</p>
-<p>Before proceeding, make sure git is installed.</p>
-<p>A decent init.vim file is contained in <a href="https://github.com/sts10/linux-config">my linux-config repo</a>.</p>
+<p>Before proceeding, make sure git is installed. </p>
+<p>A decent init.vim file is contained in <a href="https://github.com/sts10/linux-config">my linux-config repo</a>. </p>
 <pre><code class="language-bash">mkdir ~/.config/nvim
 curl -o ~/.config/nvim/init.vim https://raw.githubusercontent.com/sts10/linux-config/master/neovim/init.vim
 </code></pre>
 <p>Next, we can install our plugins by running <code>nvim +PlugInstall +qa</code>.</p>
-<a class="header" href="#deoplete--neovim" id="deoplete--neovim"><h2>Deoplete / Neovim</h2></a>
-<p>For Deoplete to work well, first I'd recommend setting up <a href="dev-env/python-pyenv.html">pyenv</a>.</p>
+<h2><a class="header" href="#deoplete--neovim" id="deoplete--neovim">Deoplete / Neovim</a></h2>
+<p>For Deoplete to work well, first I'd recommend setting up <a href="initial-setup/dev-env/python-pyenv.html">pyenv</a>.</p>
 <p>To update Deoplete, you may need to run <code>:UpdateRemotePlugins</code> in Neovim. Neovim's <code>:CheckHealth</code> is your friend here.</p>
-<a class="header" href="#keepassxc" id="keepassxc"><h1>KeePassXC</h1></a>
-<a class="header" href="#installing-the-snap" id="installing-the-snap"><h2>Installing the Snap</h2></a>
+<h1><a class="header" href="#keepassxc" id="keepassxc">KeePassXC</a></h1>
+<h2><a class="header" href="#installing-the-snap" id="installing-the-snap">Installing the Snap</a></h2>
 <p><code>sudo apt install snapd</code></p>
-<p>I then installed KeePassXC with <code>snap install keepassxc</code>,</p>
-<a class="header" href="#installing-from-the-app-image" id="installing-from-the-app-image"><h2>Installing from the app image</h2></a>
-<p>Here's <a href="https://keepassxc.org/download/">the download page</a>. See the <a href="basics.html">Basics</a> section for AppImage installation instructions.</p>
-<a class="header" href="#syncthing" id="syncthing"><h1>Syncthing</h1></a>
+<p>I then installed KeePassXC with <code>snap install keepassxc</code>, </p>
+<h2><a class="header" href="#installing-from-the-app-image" id="installing-from-the-app-image">Installing from the app image</a></h2>
+<p>Here's <a href="https://keepassxc.org/download/">the download page</a>. See the <a href="initial-setup/basics.html">Basics</a> section for AppImage installation instructions.</p>
+<h1><a class="header" href="#syncthing" id="syncthing">Syncthing</a></h1>
 <p>I installed Syncthing via the instructions at the top of <a href="https://apt.syncthing.net/">this page</a></p>
-<p>I then setup Syncthing, including my KeePass database.</p>
-<a class="header" href="#useful-bash-functions" id="useful-bash-functions"><h2>Useful bash functions</h2></a>
+<p>I then setup Syncthing, including my KeePass database. </p>
+<h2><a class="header" href="#useful-bash-functions" id="useful-bash-functions">Useful bash functions</a></h2>
 <pre><code class="language-bash"># Via: https://sts10.github.io/2018/11/27/syncthing-and-tmux.html
 function ss {
   if tmux has-session -t synct 2&gt;/dev/null; then
@@ -249,11 +263,11 @@ function se {
 }
 
 </code></pre>
-<a class="header" href="#setting-up-standard-notes-on-linux" id="setting-up-standard-notes-on-linux"><h1>Setting up Standard Notes on Linux</h1></a>
+<h1><a class="header" href="#setting-up-standard-notes-on-linux" id="setting-up-standard-notes-on-linux">Setting up Standard Notes on Linux</a></h1>
 <p>First, let's <a href="https://standardnotes.org/">download Standard Notes for Linux</a>.</p>
-<a class="header" href="#where-to-put-the-appimage-file" id="where-to-put-the-appimage-file"><h2>Where to put the AppImage file?</h2></a>
-<p>Here's one way that works: Create a directory at <code>~/standard-notes/</code> and move the AppImage file there. Also, go download a PNG of the Standard Notes logo and place it in this directory.</p>
-<a class="header" href="#creating-the-desktop-file" id="creating-the-desktop-file"><h2>Creating the <code>.desktop</code> file</h2></a>
+<h2><a class="header" href="#where-to-put-the-appimage-file" id="where-to-put-the-appimage-file">Where to put the AppImage file?</a></h2>
+<p>Here's one way that works: Create a directory at <code>~/standard-notes/</code> and move the AppImage file there. Also, go download a PNG of the Standard Notes logo and place it in this directory. </p>
+<h2><a class="header" href="#creating-the-desktop-file" id="creating-the-desktop-file">Creating the <code>.desktop</code> file</a></h2>
 <p>If you don't yet have a <code>.desktop</code> file for Standard Notes, we'll create one. At <code>~/.local/share/applications/standard-notes.desktop</code> paste the following:</p>
 <pre><code>[Desktop Entry]
 Type=Application
@@ -265,14 +279,14 @@ Categories=Office;Notes;
 </code></pre>
 <p>Now, after a computer restart, Standard Notes should come up when you search your applications.</p>
 <p><a href="https://wiki.archlinux.org/index.php/desktop_entries">More on desktop files in the Arch Wiki</a>.</p>
-<a class="header" href="#pgp" id="pgp"><h1>PGP</h1></a>
-<a class="header" href="#gnu-privacy-assistant" id="gnu-privacy-assistant"><h2>GNU Privacy Assistant</h2></a>
+<h1><a class="header" href="#pgp" id="pgp">PGP</a></h1>
+<h2><a class="header" href="#gnu-privacy-assistant" id="gnu-privacy-assistant">GNU Privacy Assistant</a></h2>
 <p>For a GPG GUI application, try <code>sudo apt install gpa</code> which installs a program called <a href="https://help.ubuntu.com/community/GnuPrivacyGuardHowto#Graphical_Interfaces">&quot;GNU Privacy Assistant&quot;</a></p>
-<a class="header" href="#using-a-pgp-private-key-from-a-smartcard-on-ubuntu" id="using-a-pgp-private-key-from-a-smartcard-on-ubuntu"><h2>Using a PGP private key from a Smartcard on Ubuntu</h2></a>
+<h2><a class="header" href="#using-a-pgp-private-key-from-a-smartcard-on-ubuntu" id="using-a-pgp-private-key-from-a-smartcard-on-ubuntu">Using a PGP private key from a Smartcard on Ubuntu</a></h2>
 <ol>
 <li>Add the public key to your system: Get the .asc file onto your system, then run <code>gpg2 --import &lt;file-name&gt;.asc</code></li>
 <li>Plug the smartcard into your computer.</li>
-<li>Try running <code>gpg2 --card-status</code>.</li>
+<li>Try running <code>gpg2 --card-status</code>. </li>
 </ol>
 <p><strong>Troubleshooting</strong></p>
 <ul>
@@ -283,17 +297,17 @@ Categories=Office;Notes;
 pgrep scdaemon
 </code></pre>
 <p>You can now encrypt and decrypt files with the pgp keys on your smartkey using the gpg2 command line tool. To decrypt a file run something like this: <code>gpg --output test --decrypt '/home/schlinkert/keepass-databases/key-files/fly1.key.gpg'</code>. Check that you can decrypt a Keepass database AND that you can alter settings.</p>
-<a class="header" href="#other-apps-to-install" id="other-apps-to-install"><h1>Other Apps to Install</h1></a>
+<h1><a class="header" href="#other-apps-to-install" id="other-apps-to-install">Other Apps to Install</a></h1>
 <ol>
 <li>Installed Wire desktop via <a href="https://medium.com/@wireapp/a-step-forward-for-wire-for-linux-52f0538cac15">these instructions</a></li>
 <li><a href="https://signal.org/download/">Download and install Signal</a></li>
 <li>Install Ricochet from <a href="https://ricochet.im/">its website</a> -- not sure the procude here. You can also look in your distro's GUI app store, though check version.</li>
 <li>Install Tor Browser (forget how exactly I did this-- maybe Tor Browser Launcher? From POP store?)</li>
-<li>To install OnionShare, I followed the &quot;Ubuntu&quot; instructions on their <a href="https://onionshare.org/#downloads">download page</a> and added their PPA. (The version in the POP store was 0.9 -- too old for me.)</li>
+<li>To install OnionShare, I followed the &quot;Ubuntu&quot; instructions on their <a href="https://onionshare.org/#downloads">download page</a> and added their PPA. (The version in the POP store was 0.9 -- too old for me.) </li>
 <li>Install Chromium via the POP app store if you like.</li>
 <li>Install Standard Notes app from <a href="https://standardnotes.org/getting-started?downloaded=linux">their site</a></li>
 </ol>
-<a class="header" href="#standard-notes-desktop-file" id="standard-notes-desktop-file"><h2>Standard Notes .desktop file</h2></a>
+<h2><a class="header" href="#standard-notes-desktop-file" id="standard-notes-desktop-file">Standard Notes .desktop file</a></h2>
 <p>Put this in <code>~/.local/share/applications</code></p>
 <pre><code class="language-desktop">[Desktop Entry]
 Type=Application
@@ -304,8 +318,8 @@ Icon=/home/$USER/standard-notes/standard-notes.png
 Terminal=false
 Categories=Office;Notes;
 </code></pre>
-<a class="header" href="#ricochet-desktop-file" id="ricochet-desktop-file"><h2>Ricochet .desktop file</h2></a>
-<p>Download a Ricochet icon as a png if necessary.</p>
+<h2><a class="header" href="#ricochet-desktop-file" id="ricochet-desktop-file">Ricochet .desktop file</a></h2>
+<p>Download a Ricochet icon as a png if necessary. </p>
 <p>Then put this in <code>~/.local/share/applications</code></p>
 <pre><code class="language-desktop">[Desktop Entry]
 Type=Application
@@ -315,13 +329,13 @@ Icon=/home/sschlinkert/other_apps/ricochet/ricochet.png
 Terminal=false
 Categories=Network;InstantMessaging;Internet
 </code></pre>
-<a class="header" href="#chrome-and-flash" id="chrome-and-flash"><h1>Chrome and Flash</h1></a>
-<p>The best way to watch things that <em>might</em> require Flash(?) like Hulu is to do it through the Chrome browser (not Chromium)</p>
+<h1><a class="header" href="#chrome-and-flash" id="chrome-and-flash">Chrome and Flash</a></h1>
+<p>The best way to watch things that <em>might</em> require Flash(?) like Hulu is to do it through the Chrome browser (not Chromium) </p>
 <p><a href="https://www.google.com/chrome/browser/desktop/index.html">Download Chrome</a> and then install it (I forget the steps).</p>
 <p>You <em>may</em> need to also install some sort of flash plugin. In the past I've tried running: <code>sudo apt-get install flashplugin-installer</code> and then restarting Chrome.</p>
-<p>I've Googled and found blog posts like <a href="https://websiteforstudents.com/installing-the-latest-flash-player-on-ubuntu-17-10/">this one</a> with other things to try.</p>
-<a class="header" href="#development-environment" id="development-environment"><h1>Development Environment</h1></a>
-<a class="header" href="#installing-pyenv" id="installing-pyenv"><h1>Installing Pyenv</h1></a>
+<p>I've Googled and found blog posts like <a href="https://websiteforstudents.com/installing-the-latest-flash-player-on-ubuntu-17-10/">this one</a> with other things to try. </p>
+<h1><a class="header" href="#development-environment" id="development-environment">Development Environment</a></h1>
+<h1><a class="header" href="#installing-pyenv" id="installing-pyenv">Installing Pyenv</a></h1>
 <p>I'm not sure if you have to <em>uninstall</em> any versions of Python before you do this, but I doubt it. You might want to checkout your bashrc to make sure there isn't any weird Python PATH stuff in there before we start.</p>
 <ol>
 <li>Install <a href="https://github.com/pyenv/pyenv#installation">Pyenv</a>, probably via the <a href="https://github.com/pyenv/pyenv#basic-github-checkout">&quot;Basic GitHub Checkout&quot; method</a></li>
@@ -332,19 +346,19 @@ Categories=Network;InstantMessaging;Internet
 <li>You can set version 3 as the global, with 2 as fall-back: <code>pyenv global 3.7.4 2.7.16</code>. You could also set the <code>system</code> version as a fallback, with <code>pyenv global 3.7.0 2.7.15 system</code>.</li>
 <li>Check that <code>pip</code> is installed (I think it's included?). You should be able to upgrade <code>pip3</code> with <code>pip3 install --upgrade pip</code> and <code>pip2</code> with <code>pip2 install --upgrade pip</code></li>
 </ol>
-<p><strong>Let's see how we did</strong>: If successful, <code>python2</code> gets you Python 2, <code>python3</code> or <code>python</code> gets you Python 3. Similar with <code>pip2</code>/<code>pip3</code>/<code>pip</code>.</p>
+<p><strong>Let's see how we did</strong>: If successful, <code>python2</code> gets you Python 2, <code>python3</code> or <code>python</code> gets you Python 3. Similar with <code>pip2</code>/<code>pip3</code>/<code>pip</code>. </p>
 <p>To install <a href="https://github.com/agermanidis/autosub">autosub</a> (which I think necessitates Python2) run <code>pip2 install autosub</code></p>
-<a class="header" href="#deoplete--neovim-1" id="deoplete--neovim-1"><h2>Deoplete / Neovim</h2></a>
+<h2><a class="header" href="#deoplete--neovim-1" id="deoplete--neovim-1">Deoplete / Neovim</a></h2>
 <p>Now that we've got a nice little Python and Pip environment set up, let's make sure Deoplete is using it.</p>
 <p>If you use Neovim + Deoplete, you probably want to run <code>pip3 install neovim</code> to ensure Deoplete works smoothly (see <a href="https://github.com/Shougo/deoplete.nvim#requirements">Deoplete's requirements</a>).</p>
-<p>I also ran <code>pip2 install neovim</code> because Neovim's <code>:CheckHealth</code> told me too.</p>
+<p>I also ran <code>pip2 install neovim</code> because Neovim's <code>:CheckHealth</code> told me too. </p>
 <p>At this point, you may need to update Deoplete by running <code>:UpdateRemotePlugins</code> in Neovim. (Neovim's <code>:CheckHealth</code> is your friend here.)</p>
-<a class="header" href="#ruby-and-rbenv" id="ruby-and-rbenv"><h1>Ruby and rbenv</h1></a>
+<h1><a class="header" href="#ruby-and-rbenv" id="ruby-and-rbenv">Ruby and rbenv</a></h1>
 <ol>
-<li>Install <a href="https://github.com/rbenv/rbenv#basic-github-checkout">rbenv (via &quot;basic github checkout&quot;)</a></li>
-<li>Install <a href="https://github.com/rbenv/ruby-build#installation">ruby-build</a> as an rbenv plugin.</li>
+<li>Install <a href="https://github.com/rbenv/rbenv#basic-github-checkout">rbenv (via &quot;basic github checkout&quot;)</a> </li>
+<li>Install <a href="https://github.com/rbenv/ruby-build#installation">ruby-build</a> as an rbenv plugin. </li>
 <li>At this point you made need to run <code>sudo apt-get install -y libssl-dev libreadline-dev zlib1g-dev</code> before proceeding</li>
-<li><code>rbenv install -l</code> lists available versions of Ruby. Pick one to install.</li>
+<li><code>rbenv install -l</code> lists available versions of Ruby. Pick one to install. </li>
 <li>Set that version to global.</li>
 </ol>
 <p>You can update the Ruby versions available to rbenv by running <code>rbenv_upgrade</code> (found in <code>bashrc</code>).</p>
@@ -354,8 +368,8 @@ Categories=Network;InstantMessaging;Internet
   cd ~
 }
 </code></pre>
-<a class="header" href="#rust--neovim" id="rust--neovim"><h1>Rust + Neovim</h1></a>
-<p>This assumes you have <a href="../neovim.html">Neovim</a> installed already.</p>
+<h1><a class="header" href="#rust--neovim" id="rust--neovim">Rust + Neovim</a></h1>
+<p>This assumes you have <a href="initial-setup/dev-env/../neovim.html">Neovim</a> installed already.</p>
 <ol>
 <li>
 <p><a href="https://www.rust-lang.org/en-US/install.html">Install Rust</a>. Make sure to add <code>export PATH=&quot;$HOME/.cargo/bin:$PATH&quot;</code> to end of <code>~/.bashrc</code>. Note: you can uninstall at anytime with <code>rustup self uninstall</code>.</p>
@@ -367,15 +381,14 @@ Categories=Network;InstantMessaging;Internet
 <p>Install <a href="https://github.com/rust-lang-nursery/rust-clippy#usage">Rust Clippy</a></p>
 </li>
 </ol>
-<a class="header" href="#getting-autocomplete-in-neovim-with-deoplete" id="getting-autocomplete-in-neovim-with-deoplete"><h2>Getting Autocomplete in Neovim with Deoplete</h2></a>
+<h2><a class="header" href="#getting-autocomplete-in-neovim-with-deoplete" id="getting-autocomplete-in-neovim-with-deoplete">Getting Autocomplete in Neovim with Deoplete</a></h2>
 <ol>
 <li>Install <a href="https://github.com/Shougo/deoplete.nvim#install">Deoplete</a></li>
 </ol>
 <ul>
-<li>
-<p>You may first be required to install some Python stuff. You may want to get your <a href="python-pyenv.html">pyenv setup</a> working first. However, in a pinch, these commands have worked for me in the past:</p>
+<li>You may first be required to install some Python stuff. You may want to get your <a href="initial-setup/dev-env/python-pyenv.html">pyenv setup</a> working first. However, in a pinch, these commands have worked for me in the past: 
 <ul>
-<li>Install pip3 with <code>sudo apt-get install python3-pip</code></li>
+<li>Install pip3 with <code>sudo apt-get install python3-pip</code> </li>
 <li>and then <code>pip3 install neovim</code></li>
 </ul>
 </li>
@@ -399,10 +412,10 @@ let g:racer_experimental_completer = 1
 <ol start="5">
 <li>Make sure you you've got the rust.vim Vim plugin installed: <code>Plug 'rust-lang/rust.vim'</code></li>
 </ol>
-<a class="header" href="#language-server" id="language-server"><h2>Language Server</h2></a>
+<h2><a class="header" href="#language-server" id="language-server">Language Server</a></h2>
 <ol>
-<li>Install <a href="https://github.com/rust-lang/rls#setup">Rust Language Server</a></li>
-<li>Get <a href="https://github.com/autozimu/LanguageClient-neovim">LanguageClient-Neovim</a> setup.</li>
+<li>Install <a href="https://github.com/rust-lang/rls#setup">Rust Language Server</a> </li>
+<li>Get <a href="https://github.com/autozimu/LanguageClient-neovim">LanguageClient-Neovim</a> setup. </li>
 </ol>
 <p>Altogether your Neovim <code>init.vim</code> is going to look something like this:</p>
 <pre><code class="language-vim">&quot; Rust Language Server
@@ -451,9 +464,9 @@ let g:racer_experimental_completer = 1
 
 set hidden
 </code></pre>
-<p>Then, from the command line, run <code>nvim +PlugInstall +UpdateRemotePlugins +qa</code> to install all that right.</p>
-<a class="header" href="#github-and-ssh-keys" id="github-and-ssh-keys"><h1>GitHub and ssh keys</h1></a>
-<p>Make sure Git is installed</p>
+<p>Then, from the command line, run <code>nvim +PlugInstall +UpdateRemotePlugins +qa</code> to install all that right. </p>
+<h1><a class="header" href="#github-and-ssh-keys" id="github-and-ssh-keys">GitHub and ssh keys</a></h1>
+<p>Make sure Git is installed </p>
 <ol>
 <li>
 <p>Set git username (email) and email locally</p>
@@ -477,29 +490,19 @@ fi
 </ol>
 <p>Alternatively, you could try <a href="https://keepassxc.org/docs/#faq-ssh-agent-how">storing ssh key in KeePassXC database</a>, but I haven't had luck with that in the past.</p>
 <p>Given this setup, you're going to want to use the ssh URL (<code>git@github.com:sts10/terminal_and_vim_settings.git</code>) when cloning down repos from GitHub (as opposed to HTTPS).</p>
-<a class="header" href="#github-blog-with-jekyll" id="github-blog-with-jekyll"><h1>GitHub blog with Jekyll</h1></a>
+<h1><a class="header" href="#github-blog-with-jekyll" id="github-blog-with-jekyll">GitHub blog with Jekyll</a></h1>
 <ol>
-<li>
-<p>Be sure rbenv is set up and a modern version of Ruby is set to global.</p>
-</li>
-<li>
-<p><code>gem install jekyll bundler</code></p>
-</li>
-<li>
-<p><code>git clone git@github.com:sts10/sts10.github.io.git</code></p>
-</li>
-<li>
-<p>cd into the repo</p>
-</li>
-<li>
-<p><code>bundle exec install</code></p>
-</li>
+<li>Be sure rbenv is set up and a modern version of Ruby is set to global.</li>
+<li><code>gem install jekyll bundler</code></li>
+<li><code>git clone git@github.com:sts10/sts10.github.io.git</code></li>
+<li>cd into the repo</li>
+<li><code>bundle exec install</code></li>
 </ol>
 <ul>
 <li>To publish changes: commit changes, then run <code>bundle exec jekyll build</code>, then <code>git push origin master</code></li>
 </ul>
-<a class="header" href="#gnome-setup" id="gnome-setup"><h1>GNOME Setup</h1></a>
-<a class="header" href="#some-system-level-basics-gnome" id="some-system-level-basics-gnome"><h2>Some System-Level Basics (Gnome)</h2></a>
+<h1><a class="header" href="#gnome-setup" id="gnome-setup">GNOME Setup</a></h1>
+<h2><a class="header" href="#some-system-level-basics-gnome" id="some-system-level-basics-gnome">Some System-Level Basics (Gnome)</a></h2>
 <ol>
 <li>In settings &gt; &quot;Mouse and Track Pad&quot;, put &quot;Mouse Speed&quot; about in the dead center and turn off &quot;Natural Scrolling&quot;</li>
 <li>In Gnome Keyboard settings, change &quot;Switch windows of an application&quot; OR &quot;Switch windows of an app directly&quot; to &quot;Super + Escape&quot;</li>
@@ -511,7 +514,7 @@ fi
 <li>Download the Gnome Tweaks Tool via the Pop app store. In Tweaks:</li>
 </ol>
 <ul>
-<li>Remap Caps Lock to Control in &quot;Keyboard &amp; Mouse&quot; &gt; &quot;Additional Layout Options&quot;.</li>
+<li>Remap Caps Lock to Control in &quot;Keyboard &amp; Mouse&quot; &gt; &quot;Additional Layout Options&quot;. </li>
 <li>Suggested: Change &quot;Mouse&quot; &quot;Acceleration Profile&quot; to &quot;Flat&quot;</li>
 </ul>
 <ol start="4">
@@ -522,10 +525,10 @@ fi
 <p><a href="https://askubuntu.com/a/947573">Disable blinking cursor in gnome-terminal</a>: In terminal: <code>gsettings set org.gnome.desktop.interface cursor-blink false</code></p>
 </li>
 </ol>
-<a class="header" href="#gnome-terminal-profile" id="gnome-terminal-profile"><h2>Gnome-terminal profile</h2></a>
+<h2><a class="header" href="#gnome-terminal-profile" id="gnome-terminal-profile">Gnome-terminal profile</a></h2>
 <p>Head over to <a href="https://github.com/sts10/linux-config">my linux-config repo</a> to load my Gnome terminal profile.</p>
 <p>If there's a problem, <code>dconf dump /org/gnome/terminal/legacy/profiles:/</code> might be helpful, as it lists the profiles loaded on your system.</p>
-<a class="header" href="#changing-default-fonts" id="changing-default-fonts"><h2>Changing Default Fonts</h2></a>
+<h2><a class="header" href="#changing-default-fonts" id="changing-default-fonts">Changing Default Fonts</a></h2>
 <p>Weirdly the only place I could find this is in Gnome Tweak Tool (which I think I installed via the GUI Pop software store). Here are the defaults and what I changed them to:</p>
 <pre><code>  - Window title: Fira Sans SemiBold 10 --&gt; Noto Sans CJK KR Bold 10
   - Interface: Fira Sans Book 10        --&gt; Noto Sans CJK KR Regular 10
@@ -533,23 +536,23 @@ fi
   - Monospace: Fira Mono Regular 11     --&gt; Deja Vu Sans Mono Book 11
 </code></pre>
 <p>You can <a href="https://github.com/IBM/plex">download IBM Plex here</a>.</p>
-<a class="header" href="#kde-setup-and-troubleshooting" id="kde-setup-and-troubleshooting"><h1>KDE Setup and Troubleshooting</h1></a>
+<h1><a class="header" href="#kde-setup-and-troubleshooting" id="kde-setup-and-troubleshooting">KDE Setup and Troubleshooting</a></h1>
 <p>Basically, if you go with the Kubuntu &quot;Minimal Install&quot;, configure KDE with your heart.</p>
-<a class="header" href="#keyboard-stuff" id="keyboard-stuff"><h2>Keyboard Stuff</h2></a>
+<h2><a class="header" href="#keyboard-stuff" id="keyboard-stuff">Keyboard Stuff</a></h2>
 <p>In &quot;Systems Settings&quot;, under Hardware, click &quot;Input Devices&quot;. Make sure you're on the &quot;Keyboard&quot; section (you should see a menu titled &quot;Keyboard Hardware and Layout&quot;). Go to the &quot;Advanced&quot; tab. In this tab...</p>
 <ol>
 <li>Under &quot;Caps Lock behavior&quot;, check &quot;Caps Lock is also a Ctrl&quot;</li>
 <li>Under &quot;Position of Compose key&quot;, I like &quot;Right Win&quot; (aka Right Meta or Right Apple Command). This means you can insert special characters like an em dash (hold right meta/mac/win key and press the hyphen key three times). More info about the Compose Key <a href="https://wiki.ubuntu.com/ComposeKey#KDE_4.x_configuration">here</a> and <a href="https://cyberborean.wordpress.com/2008/01/06/compose-key-magic/">here</a> and <a href="https://userbase.kde.org/Tutorials/ComposeKey">here</a>. (An alternative method: Under &quot;Key to choose the 3rd level&quot; check &quot;Right Alt; Shift+Right Alt as Compose&quot;. This allows you to insert an em dash by holding Right Alt + Shift and then inserting three hyphens in a row.)</li>
 </ol>
-<a class="header" href="#kde-troubleshooting" id="kde-troubleshooting"><h2>KDE Troubleshooting</h2></a>
-<a class="header" href="#everything-looks-big" id="everything-looks-big"><h3>Everything looks big!</h3></a>
+<h2><a class="header" href="#kde-troubleshooting" id="kde-troubleshooting">KDE Troubleshooting</a></h2>
+<h3><a class="header" href="#everything-looks-big" id="everything-looks-big">Everything looks big!</a></h3>
 <p>If, after installing the proper NVIDIA drivers and restarting the machine, everything looks big, go to Fonts settings menu and &quot;Force&quot; the DPI to 96.</p>
-<a class="header" href="#if-external-monitors-arent-being-recognized-by-your-laptop" id="if-external-monitors-arent-being-recognized-by-your-laptop"><h3>If external monitors aren't being recognized by your laptop</h3></a>
-<p>If external monitors aren't being recognized by your laptop, try opening &quot;NVIDIA X Server Settings&quot;, then select &quot;X Server Display Configuration&quot; from the menu you on the left. Try clicking &quot;Detect Displays&quot;.</p>
+<h3><a class="header" href="#if-external-monitors-arent-being-recognized-by-your-laptop" id="if-external-monitors-arent-being-recognized-by-your-laptop">If external monitors aren't being recognized by your laptop</a></h3>
+<p>If external monitors aren't being recognized by your laptop, try opening &quot;NVIDIA X Server Settings&quot;, then select &quot;X Server Display Configuration&quot; from the menu you on the left. Try clicking &quot;Detect Displays&quot;. </p>
 <p>If the external monitor appears in the layout, it may just be &quot;disabled&quot;. If that's the case, go to the drop-down menu on the right side of the window labeled &quot;Configuration&quot; and try choosing &quot;X screen 0&quot;.</p>
 <p><a href="https://askubuntu.com/questions/1083733/kubuntu-18-04-laptop-wont-recognize-external-monitor">An AskUbuntu question about this issue</a></p>
-<a class="header" href="#redshift" id="redshift"><h1>Redshift</h1></a>
-<a class="header" href="#redshift--xorg--kde" id="redshift--xorg--kde"><h2>Redshift + Xorg + KDE</h2></a>
+<h1><a class="header" href="#redshift" id="redshift">Redshift</a></h1>
+<h2><a class="header" href="#redshift--xorg--kde" id="redshift--xorg--kde">Redshift + Xorg + KDE</a></h2>
 <p>If you're running KDE and Xorg, you'll likely need to use Redshift to tint your screen at night. &quot;Redshift Control&quot; is a KDE widget that gives you a nice GUI to configure Redshift (found by searching the &quot;Get new widgets&quot; interface).</p>
 <p>I also found (in <a href="https://youtu.be/O0K9TzKZ9x4?t=1016">this video</a>) what might be the command line way to install both redshift and the plasma widget:</p>
 <pre><code class="language-bash">sudo apt install redshift plasma-applet-redshift-control
@@ -557,25 +560,25 @@ fi
 <p>Although <a href="https://linoxide.com/tools/install-use-redshift-ubuntu-16-04/">elsewhere</a> I've seen an additional program recommended:</p>
 <pre><code class="language-bash">sudo apt-get install plasma-widget-redshift plasma-applet-redshift-control
 </code></pre>
-<a class="header" href="#configuring-redshift-in-plasma" id="configuring-redshift-in-plasma"><h2>Configuring Redshift in Plasma</h2></a>
+<h2><a class="header" href="#configuring-redshift-in-plasma" id="configuring-redshift-in-plasma">Configuring Redshift in Plasma</a></h2>
 <p>First, I'd recommend moving the widget to the task bar. Then, to configure it, simply right-click the widget and click configure. Hit &quot;Locate&quot; to automatically locate your position. Then for temperature 6500 for Day and 3250 for Night seems to work well.</p>
-<a class="header" href="#gtk-gnome" id="gtk-gnome"><h2>GTK (GNOME)</h2></a>
+<h2><a class="header" href="#gtk-gnome" id="gtk-gnome">GTK (GNOME)</a></h2>
 <p>For gtk-based desktop environments like GNOME, you're probably going to want to run <code>sudo apt-get install redshift redshift-gtk</code></p>
-<a class="header" href="#installing-tlp-for-battery-management" id="installing-tlp-for-battery-management"><h1>Installing TLP for Battery Management</h1></a>
+<h1><a class="header" href="#installing-tlp-for-battery-management" id="installing-tlp-for-battery-management">Installing TLP for Battery Management</a></h1>
 <p>If you're using a laptop and want to conserve battery smarter, you can install a power manager called <a href="https://linrunner.de/en/tlp/tlp.html">TLP</a>.</p>
-<a class="header" href="#ubuntu" id="ubuntu"><h2>Ubuntu</h2></a>
+<h2><a class="header" href="#ubuntu" id="ubuntu">Ubuntu</a></h2>
 <ul>
 <li><a href="https://linrunner.de/en/tlp/docs/tlp-linux-advanced-power-management.html#installation">Installation</a></li>
 <li><a href="https://linrunner.de/en/tlp/docs/tlp-linux-advanced-power-management.html#configuration">Configuration</a></li>
 </ul>
-<a class="header" href="#images-and-video" id="images-and-video"><h1>Images and Video</h1></a>
-<p>For editing RAW photos, try Darktable of DigiKam(?). Here are some <a href="https://github.com/t3mujin/t3mujinpack">free film emulators</a> for DarkTable.</p>
+<h1><a class="header" href="#images-and-video" id="images-and-video">Images and Video</a></h1>
+<p>For editing RAW photos, try Darktable of DigiKam(?). Here are some <a href="https://github.com/t3mujin/t3mujinpack">free film emulators</a> for DarkTable. </p>
 <p>There's also GIMP and Kdenlive (for video)!</p>
-<a class="header" href="#installing-ubuntu-on-my-2009-macbook-pro" id="installing-ubuntu-on-my-2009-macbook-pro"><h1>Installing Ubuntu on my 2009 MacBook Pro</h1></a>
-<p>I had an old 17-inch MacBook Pro from 2009 (college) lying around and I figured it'd be a fun challenge to install Linux on it. I had never installed or even used Linux before (to my knowledge). I also, confusingly, hadn't found a clean, step-by-step guide for doing this, so I promised I'd write my process out as thoroughly but simply as I could once I got it done.</p>
+<h1><a class="header" href="#installing-ubuntu-on-my-2009-macbook-pro" id="installing-ubuntu-on-my-2009-macbook-pro">Installing Ubuntu on my 2009 MacBook Pro</a></h1>
+<p>I had an old 17-inch MacBook Pro from 2009 (college) lying around and I figured it'd be a fun challenge to install Linux on it. I had never installed or even used Linux before (to my knowledge). I also, confusingly, hadn't found a clean, step-by-step guide for doing this, so I promised I'd write my process out as thoroughly but simply as I could once I got it done. </p>
 <p>I now realize, I think, that the reason the process of installing even a popular Linux distribution on a common (if old) model computer isn't written out or easily findable is that the process is a bit different for everyone, depending on the distro, the version, and the hardware you're starting with. Note that I didn't want to partition my hard drive to allow myself to dual-boot either in OS X or Ubuntu-- I was going for a full replacement, and thus would and did lose all the files on applications I had on the old Mac.</p>
-<p>But regardless, here is the process I took.</p>
-<a class="header" href="#about-this-mac" id="about-this-mac"><h2>About This Mac</h2></a>
+<p>But regardless, here is the process I took. </p>
+<h2><a class="header" href="#about-this-mac" id="about-this-mac">About This Mac</a></h2>
 <pre><code>Model name: MacBook Pro
 Model Identifier: MacBookPro3,1
 Processor Name: Intel Core 2 Duo
@@ -591,19 +594,19 @@ It's a 17 inch screen. I believe I bought it in the summer of 2009.
 was running:
 OS X 10.9.2 (13C64)
 </code></pre>
-<a class="header" href="#how-i-got-ubuntu-16-installed" id="how-i-got-ubuntu-16-installed"><h2>How I Got Ubuntu 16 Installed</h2></a>
-<p>Again, note, this worked for me and my machine but may not for you. For example I believe I had to do steps 4, 5, 8, 9, 10, and 11 only because I have a MBP with an Intel chip.</p>
+<h2><a class="header" href="#how-i-got-ubuntu-16-installed" id="how-i-got-ubuntu-16-installed">How I Got Ubuntu 16 Installed</a></h2>
+<p>Again, note, this worked for me and my machine but may not for you. For example I believe I had to do steps 4, 5, 8, 9, 10, and 11 only because I have a MBP with an Intel chip. </p>
 <p>Also, <strong>WARNING</strong>, this procedure completely wiped my OS X and all the files and applications on that installation, as I intended. There are ways to dual-boot both, but I wasn't interested in that as Mavericks was running super slow on this computer. Furthermore I think all the data I had on my USB stick is lost due to it being formatted in a certain way at some point in the procedure.</p>
-<p><strong>UPDATE (February 2017)</strong>: Before moving ahead, you may want to consider the following. A helpful commenter, Brian Moran, writes that, when installing Ubuntu on an older Mac with a NVIDIA graphics card, it may be better to &quot;boot in 'Legacy BIOS mode', not in 'EFI' mode&quot;:</p>
+<p><strong>UPDATE (February 2017)</strong>: Before moving ahead, you may want to consider the following. A helpful commenter, Brian Moran, writes that, when installing Ubuntu on an older Mac with a NVIDIA graphics card, it may be better to &quot;boot in 'Legacy BIOS mode', not in 'EFI' mode&quot;: </p>
 <blockquote>
-<p>Apparently what is happening is that both the open source and Nvidia drivers are buggy when doing an &quot;EFI Install&quot; on Mac machines. If full graphics performance is desired, a &quot;Legacy BIOS Install&quot; is needed.</p>
+<p>Apparently what is happening is that both the open source and Nvidia drivers are buggy when doing an &quot;EFI Install&quot; on Mac machines. If full graphics performance is desired, a &quot;Legacy BIOS Install&quot; is needed. </p>
 </blockquote>
 <p>From <a href="https://ubuntuforums.org/showthread.php?t=2209602">the forum post that the commenter cites</a>, which is concerned with a MacBook Air 3,2:</p>
 <blockquote>
-<p>The core problem with the [generic] installation is this. The graphic driver that Ubuntu installs by default (Nouveau) has bugs with the MacBook Air 3 graphic processor, the nvidia GeForce 320M (G320M). You can do a default install, it will boot normally, but you'll soon see little glitches here and there and the computer will normally crash after a few minutes of use (especially when transparency or shadow effects are used, it seems). The problem exists with Raring and I expect it arises with Precise (though see ''alternative solutions&quot; below).</p>
+<p>The core problem with the [generic] installation is this. The graphic driver that Ubuntu installs by default (Nouveau) has bugs with the MacBook Air 3 graphic processor, the nvidia GeForce 320M (G320M). You can do a default install, it will boot normally, but you'll soon see little glitches here and there and the computer will normally crash after a few minutes of use (especially when transparency or shadow effects are used, it seems). The problem exists with Raring and I expect it arises with Precise (though see ''alternative solutions&quot; below). </p>
 </blockquote>
 <blockquote>
-<p>To avoid that, you need to install the proprietary nvidia driver. But here is the catch: the driver requires the computer to boot in &quot;Legacy BIOS mode&quot;, not in &quot;EFI&quot; mode (see here or here). If you install the nvidia drivers while Ubuntu is in EFI mode, you'll get a blank/black screen at the beginning of the boot. (If you got to that stage, see the ''recovery for nvidia drivers EFI crash'' below). On a PC you can force Ubuntu to install in BIOS Legacy mode by selecting that mode in the computer BIOS. But on a Mac you can't (easily) do that, and if you install from a USB key by default you will be in EFI mode.</p>
+<p>To avoid that, you need to install the proprietary nvidia driver. But here is the catch: the driver requires the computer to boot in &quot;Legacy BIOS mode&quot;, not in &quot;EFI&quot; mode (see here or here). If you install the nvidia drivers while Ubuntu is in EFI mode, you'll get a blank/black screen at the beginning of the boot. (If you got to that stage, see the ''recovery for nvidia drivers EFI crash'' below). On a PC you can force Ubuntu to install in BIOS Legacy mode by selecting that mode in the computer BIOS. But on a Mac you can't (easily) do that, and if you install from a USB key by default you will be in EFI mode. </p>
 </blockquote>
 <blockquote>
 <p>So summing up, if you do a default installation of Ubuntu from a USB on a MacBook Air 3,1 or 3,2, you'll either have buggy graphics and random crashes, or you'll install the nvdida drivers and have a blank/black screen at startup.</p>
@@ -611,15 +614,15 @@ OS X 10.9.2 (13C64)
 <p>For the record, I followed the procedure detailed below with my MackBook Pro 3,1 and while I now believe that my nvidia card is NOT being used, basic computing (web browser, document editing coding, simple games) are working just fine. Not being a gamer I don't know much about graphics cards, but for what it's worth I believe my MacBook Pro has a G84M [GeForce 8600M GT] card, which is <em>not</em> the same model listed in the forum post the commenter cites.</p>
 <p>But if I were starting over I might instead consider the procedure outlined in <a href="https://ubuntuforums.org/showthread.php?t=2209602">the forum post</a> the commenter links to in hopes of even better performance. End of February 2017 update.</p>
 <p>Alright, with all that said here's what I think I would do if I were starting fresh, knowing what I know now:</p>
-<a class="header" href="#what-i-did-to-install-ubuntu" id="what-i-did-to-install-ubuntu"><h3>What I Did to Install Ubuntu</h3></a>
+<h3><a class="header" href="#what-i-did-to-install-ubuntu" id="what-i-did-to-install-ubuntu">What I Did to Install Ubuntu</a></h3>
 <ol>
 <li>Get a USB drive with at least 2 GB of storage. Know that it's going to get wiped, so move important files off it first. Then use the MacOS Disk Utility to format the USB stick as DOS FAT32.</li>
-<li>I'd follow <a href="https://www.ubuntu.com/download/desktop/create-a-usb-stick-on-mac-osx">this guide</a> to download Ubuntu 16.04 LTS and get it onto the USB stick, using UNetbootin.</li>
+<li>I'd follow <a href="https://www.ubuntu.com/download/desktop/create-a-usb-stick-on-mac-osx">this guide</a> to download Ubuntu 16.04 LTS and get it onto the USB stick, using UNetbootin. </li>
 <li>As described in the final step in that guide, when you restart, hold down the option key on your Mac. In the resulting menu, select the &quot;EFI&quot; device as the device to boot from.</li>
-<li>You'll be confronted with a text-only menu that's from a piece of software called GNU GRUB. Key down so your cursor is on &quot;Install Ubuntu&quot;, but instead of pressing enter, press <code>e</code> to edit the commands before booting.</li>
+<li>You'll be confronted with a text-only menu that's from a piece of software called GNU GRUB. Key down so your cursor is on &quot;Install Ubuntu&quot;, but instead of pressing enter, press <code>e</code> to edit the commands before booting. </li>
 <li>This opens an options file in a basic text editor. Find the line that has <code>ro quiet splash</code> in it and make that bit of the line read <code>ro nomodeset quiet splash</code>. Then press either F10 or Ctrl-X to boot (read the text at the bottom of the screen to be sure of the key(s) to press).</li>
-<li>If presented with a choice in GRUB (a text menu) with an option to <code>install Ubuntu</code>, choose that option.</li>
-<li>You should be then presented with a nice GUI (not text only) Ubuntu installer, or maybe an icon that says <code>Install Ubuntu</code>. Double click the icon if you see it. Go through everything, decide whether or not to connect your Wifi to download updates, decide whether or not to encrypt your home folder, and then choose restart.</li>
+<li>If presented with a choice in GRUB (a text menu) with an option to <code>install Ubuntu</code>, choose that option. </li>
+<li>You should be then presented with a nice GUI (not text only) Ubuntu installer, or maybe an icon that says <code>Install Ubuntu</code>. Double click the icon if you see it. Go through everything, decide whether or not to connect your Wifi to download updates, decide whether or not to encrypt your home folder, and then choose restart. </li>
 <li>We now need to boot Ubuntu in <a href="https://wiki.ubuntu.com/RecoveryMode">recovery mode</a>. To do this, as the computer is starting up again after restart, right after you hear the Apple/Mac start-up sound, hold the SHIFT key. Repeat step #3 above if you're presented with the EFI option. Once you're at a text-only menu, press <code>e</code> and add <code>nomodeset</code> to the line of code discussed above. Then press the key(s) to boot. Ubuntu should boot up-- though the display may be screwy. In either case, we're not done yet.</li>
 <li>Now we need to make that <code>nomodeset</code> setting permanent. Open terminal (ctrl+option+t) and run <code>sudo nano /etc/default/grub</code>. (<a href="https://askubuntu.com/questions/38780/how-do-i-set-nomodeset-after-ive-already-installed-ubuntu#38782">Reference</a>)</li>
 <li>In that file, add <code>nomodeset</code> to <code>GRUB_CMDLINE_LINUX_DEFAULT</code> as seen below:</li>
@@ -638,41 +641,41 @@ GRUB_CMDLINE_LINUX=&quot;&quot;
 </ol>
 <p>I think that would do it. I don't think I needed rEFInd. And apparently the warning on UNetbootin that I could run the device on Macs was not accurate.</p>
 <p><strong>For completeness sake, here is the actual process I went through over three days.</strong></p>
-<a class="header" href="#attempt-1-ubuntu-1604" id="attempt-1-ubuntu-1604"><h2>Attempt #1: Ubuntu 16.04</h2></a>
+<h2><a class="header" href="#attempt-1-ubuntu-1604" id="attempt-1-ubuntu-1604">Attempt #1: Ubuntu 16.04</a></h2>
 <p>I found <a href="https://www.ubuntu.com/download/desktop/create-a-usb-stick-on-mac-osx">this guide</a> which involved downloading and using the <a href="https://unetbootin.github.io/">UNetbootin USB installer</a>.</p>
 <p>I believe I successfully downloaded the Ubuntu 16.04 ISO and UNetbootin. I then installed UNetbootin (by dragging it into Application) and then I used UNetbootin as described in the tutorial. However at step 7 when I restarted my Mac and held the option key I was presented with a menu to try or install Ubuntu. Every time I selected &quot;install&quot; it just went to a black screen. I waited minutes but no installation screen appeared. I then held down the power button and the computer rebooted in OS X, back to square one.</p>
 <p>I will say that after using UNetbootin to load the USB stick the program warned the device could only boot the new OS on PCs, not on Macs. I chose to ignore that warning and try anyway, but as I reported above, it didn't work.</p>
-<p>Upon further research I believe the Ubuntu 16.04 may not work on Intel-based MBPs made circa 2009. One page, https://help.ubuntu.com/community/MacBookPro, seemed to encourage those with MBPs this old should instead opt for Ubuntu 14.04.</p>
+<p>Upon further research I believe the Ubuntu 16.04 may not work on Intel-based MBPs made circa 2009. One page, https://help.ubuntu.com/community/MacBookPro, seemed to encourage those with MBPs this old should instead opt for Ubuntu 14.04. </p>
 <p>I didn't want to run an old version of a distro I wasn't particualrly excited about if I could find a distro that I could run the lastest version of. Plus I couldn't quite figure out how to download an (official) copy of version 14.04.</p>
-<a class="header" href="#attempt-2-mint-18-sarah-cinnamon-64-bit" id="attempt-2-mint-18-sarah-cinnamon-64-bit"><h2>Attempt #2: Mint 18 (&quot;Sarah&quot;) Cinnamon 64-bit</h2></a>
+<h2><a class="header" href="#attempt-2-mint-18-sarah-cinnamon-64-bit" id="attempt-2-mint-18-sarah-cinnamon-64-bit">Attempt #2: Mint 18 (&quot;Sarah&quot;) Cinnamon 64-bit</a></h2>
 <p>I understand that <a href="https://lifehacker.com/5993297/ubuntu-vs-mint-which-linux-distro-is-better-for-beginners">the other distro well-reviewed for beginners</a> is <a href="https://www.linuxmint.com">Mint</a>. And I saw that Mint 18 was itself <a href="http://arstechnica.com/information-technology/2016/08/mint-18-review-just-works-linux-doesnt-get-any-better-than-this/">got good reviews</a>.</p>
-<p>So I headed over to <a href="https://www.linuxmint.com/download.php">their download page</a> and chose <a href="https://www.linuxmint.com/edition.php?id=217">&quot;Cinnamon 64-bit&quot;</a> and downloaded it via a torrent.</p>
-<p>The <a href="https://community.linuxmint.com/tutorial/view/744">only tutorial that I found for installing Linux Mint via USB</a> seemed strange and brief. Thus my current plan is to try to use UNetbootin again, following <a href="https://www.ubuntu.com/download/desktop/create-a-usb-stick-on-mac-osx">the Ubuntu guide</a> but with Mint this time rather than Ubuntu 16.04.</p>
-<p>However, as before, after using UNetbootin it told me the device could only boot the new OS on PCs, not on Macs.</p>
+<p>So I headed over to <a href="https://www.linuxmint.com/download.php">their download page</a> and chose <a href="https://www.linuxmint.com/edition.php?id=217">&quot;Cinnamon 64-bit&quot;</a> and downloaded it via a torrent. </p>
+<p>The <a href="https://community.linuxmint.com/tutorial/view/744">only tutorial that I found for installing Linux Mint via USB</a> seemed strange and brief. Thus my current plan is to try to use UNetbootin again, following <a href="https://www.ubuntu.com/download/desktop/create-a-usb-stick-on-mac-osx">the Ubuntu guide</a> but with Mint this time rather than Ubuntu 16.04. </p>
+<p>However, as before, after using UNetbootin it told me the device could only boot the new OS on PCs, not on Macs. </p>
 <p>When I restarted my Mac and held down the option key, I got a similar menu as when I tried Ubuntu, but eventually came to a dark black screen. I waited a few minutes, and then forced the computer to shut down by holding down the power button.</p>
-<a class="header" href="#attempt-3-back-to-ubuntu-1604-by-a-different-method" id="attempt-3-back-to-ubuntu-1604-by-a-different-method"><h2>Attempt #3: Back to Ubuntu 16.04 by a different method</h2></a>
+<h2><a class="header" href="#attempt-3-back-to-ubuntu-1604-by-a-different-method" id="attempt-3-back-to-ubuntu-1604-by-a-different-method">Attempt #3: Back to Ubuntu 16.04 by a different method</a></h2>
 <p>I followed <a href="https://help.ubuntu.com/community/How%20to%20install%20Ubuntu%20on%20MacBook%20using%20USB%20Stick">the instructions presented here</a>, which I was optimistic about it because it avoided using UNetbootin, along with the potentially helpful warning:</p>
 <blockquote>
 <p>UNetbootin for Mac OS X can be used to automate the process of extracting the Ubuntu ISO file to USB, and making the USB drive bootable. The resulting USB drive, however, can be booted on PCs only.</p>
 </blockquote>
-<p>Which mirrors the warning UNetbootin gave me.</p>
+<p>Which mirrors the warning UNetbootin gave me. </p>
 <p>However the method described in the link above failed in the same way the others did-- I restarted, held down the option key, chose the EFI boot, chose to install Ubuntu, and then was met with a black screen. For the first time I thought to check the light on my USB stick to see if it was at least thinking but it was off.</p>
-<a class="header" href="#attempt-4-using-refind-boot-manager" id="attempt-4-using-refind-boot-manager"><h2>Attempt #4: Using rEFInd Boot Manager</h2></a>
+<h2><a class="header" href="#attempt-4-using-refind-boot-manager" id="attempt-4-using-refind-boot-manager">Attempt #4: Using rEFInd Boot Manager</a></h2>
 <p>From <a href="http://www.linux-on-laptops.com/apple.html">here</a> I found <a href="http://research.naumachiarius.com/articles/macbook-debian.html">an article about installing Debian</a> (a more advanced distro of Linux).</p>
-<p>That let me to believe <a href="http://www.rodsbooks.com/refind/">rEFInd</a> was something I needed to <a href="http://www.rodsbooks.com/refind/installing.html">install</a> first.</p>
+<p>That let me to believe <a href="http://www.rodsbooks.com/refind/">rEFInd</a> was something I needed to <a href="http://www.rodsbooks.com/refind/installing.html">install</a> first. </p>
 <p>However this program (I admittedly didn't take the time to figure out what it actually does) did not seem to help. Afterward, and before my next attempt, I <a href="http://www.rodsbooks.com/refind/installing.html#uinst_osx">bypassed rEFInd</a> by going to System Preferences &gt; Start Up Disk, selecting my hard drive and hitting the restart button. Thus I do not think I actually needed to install rEFInd to successfully get Ubuntu installed, however I'm not 100% of this, since <a href="http://www.rodsbooks.com/refind/installing.html#uinst_osx">the rEFInd uninstall instructions for OS X</a> recommend bypassing rEFInd rather than actually uninstalling it.</p>
-<a class="header" href="#attempt-5-having-bypassed-refind-i-replace-quiet-splash-with-nomodeset" id="attempt-5-having-bypassed-refind-i-replace-quiet-splash-with-nomodeset"><h2>Attempt #5: Having bypassed rEFInd, I replace <code>quiet splash</code> with <code>nomodeset</code></h2></a>
-<p>Big success!</p>
-<p>Somewhere else I remember seeing someone recommend turning on an option called <code>nomodeset</code> in GNU GRUB, but for some reason didn't think I had that option in the menu that I kept getting. Turns out, as described <a href="http://askubuntu.com/a/38834">here</a>, when you get to the GRUB menu you hit the <code>e</code> key. Then you add <code>nomodeset</code> as a parameter in one of the lines of code in the text file that opens. Removing <code>quiet splash</code> seems to just present more text as output-- the <code>nomodeset</code> solved the problem.</p>
-<p>After maybe 40 seconds I was presented with an Ubuntu desktop and a shortcut icon to an Ubuntu installer. I double-clicked the installer and followed the wizard.</p>
+<h2><a class="header" href="#attempt-5-having-bypassed-refind-i-replace-quiet-splash-with-nomodeset" id="attempt-5-having-bypassed-refind-i-replace-quiet-splash-with-nomodeset">Attempt #5: Having bypassed rEFInd, I replace <code>quiet splash</code> with <code>nomodeset</code></a></h2>
+<p>Big success! </p>
+<p>Somewhere else I remember seeing someone recommend turning on an option called <code>nomodeset</code> in GNU GRUB, but for some reason didn't think I had that option in the menu that I kept getting. Turns out, as described <a href="http://askubuntu.com/a/38834">here</a>, when you get to the GRUB menu you hit the <code>e</code> key. Then you add <code>nomodeset</code> as a parameter in one of the lines of code in the text file that opens. Removing <code>quiet splash</code> seems to just present more text as output-- the <code>nomodeset</code> solved the problem. </p>
+<p>After maybe 40 seconds I was presented with an Ubuntu desktop and a shortcut icon to an Ubuntu installer. I double-clicked the installer and followed the wizard. </p>
 <p>I connected to my wifi network and told it to download updates as it installed to make things quicker. The only hard choice was whether to encrypt my home folder (which I believe you can't do later). I decided not to based on <a href="https://askubuntu.com/questions/37/when-installing-im-given-the-option-of-encrypting-my-home-folder-what-does-t#62">this answer</a> as I was worried about the performance hit on decrypting on a machine with 2GB memory. Then I just waited for Ubuntu 16.04.1 LTS to install.</p>
-<p>After installation it asked me to restart. I clicked yes. I then got an ugly error message that said something like &quot;remove the installation device and hit enter&quot;. I still had the USB stick in, unsure when I was to remove it. I pulled it out and hit enter. The computer then restarted, making the familiar Mac start-up sound and presenting the familiar Mac gray, but then it switched to a purple Ubuntu-like color and stayed there for a minute.</p>
-<a class="header" href="#setting-nomodeset-permanently" id="setting-nomodeset-permanently"><h2>Setting <code>nomodeset</code> permanently</h2></a>
+<p>After installation it asked me to restart. I clicked yes. I then got an ugly error message that said something like &quot;remove the installation device and hit enter&quot;. I still had the USB stick in, unsure when I was to remove it. I pulled it out and hit enter. The computer then restarted, making the familiar Mac start-up sound and presenting the familiar Mac gray, but then it switched to a purple Ubuntu-like color and stayed there for a minute. </p>
+<h2><a class="header" href="#setting-nomodeset-permanently" id="setting-nomodeset-permanently">Setting <code>nomodeset</code> permanently</a></h2>
 <p>When I came back from that restart it was stuck on a purple screen. I figured I needed to set <code>nomodeset</code> permanently on. I needed to get back to the GRUB screen, which I figured out from somewhere:</p>
 <ol>
 <li>Switch on your computer.</li>
 <li>Wait until the BIOS has finished loading, or has almost finished. (During this time you will probably see a logo of your computer manufacturer.)</li>
-<li>Quickly press and hold the Shift key, which will bring up the GNU GRUB menu. (If you see the Ubuntu logo, you've missed the point where you can enter the GRUB menu.)</li>
+<li>Quickly press and hold the Shift key, which will bring up the GNU GRUB menu. (If you see the Ubuntu logo, you've missed the point where you can enter the GRUB menu.) </li>
 </ol>
 <p>Then, to set <code>nomodeset</code> to be on permanently, I followed <a href="https://askubuntu.com/questions/38780/how-do-i-set-nomodeset-after-ive-already-installed-ubuntu#38782">this Ask Ubuntu answer</a> that reads:</p>
 <pre><code>You should add this option to /etc/default/grub, firstly:
@@ -696,33 +699,33 @@ sudo update-grub
 </code></pre>
 <p>I saved that file and ran <code>sudo update-grub</code> as instructed. I then restarted my computer once again and I think that's when things went smoothly for the first time.</p>
 <p>(FYI a similar process to the one described above seems to be given <a href="https://ubuntuforums.org/showthread.php?t=1613132">here</a> but with some other stuff as well, if you need more help at this stage.)</p>
-<a class="header" href="#initial-thoughts" id="initial-thoughts"><h2>Initial Thoughts</h2></a>
-<p>Woohoo! It seems snappier that OS X 10.9, but it's not a speed demon like my 2012 MacBook Air with 8 GB of memory.</p>
+<h2><a class="header" href="#initial-thoughts" id="initial-thoughts">Initial Thoughts</a></h2>
+<p>Woohoo! It seems snappier that OS X 10.9, but it's not a speed demon like my 2012 MacBook Air with 8 GB of memory. </p>
 <p>But the desktop and dock are familiar enough to me. It comes with Firefox, <a href="https://www.libreoffice.org/">Libre Office</a>, a basic text editor, and a link to Amazon.com(?) in the dock that's on the left by default. I got terminal Vim and <a href="https://rvm.io/">RVM</a> running with a few Google-able tweaks from the OS X installation process. Remapping caps lock to control was <a href="http://askubuntu.com/a/614664">one line in Terminal</a> (<code>setxkbmap -option caps:ctrl_modifer</code>), however that did not persist when restarted. I followed <a href="https://askubuntu.com/questions/53038/how-do-i-remap-the-caps-lock-key#comment460778_336988">this AskUbuntu answer</a> and went to Startup Applications &gt; Add &gt; and entered <code>setxkbmap -option caps:ctrl_modifer</code>. It seems to persist on restart now.</p>
-<p>I was able to install git by running <code>sudo apt install git</code>. Similarly I was able to install KeePassX by running <code>sudo apt-get install keepassx</code> (I'm not 100% in the difference between <code>apt</code> and <code>apt-get</code> here but that's what I saw on the internet help sites I found). I also installed a fresh version of vim but I forget what line I ran in terminal.</p>
+<p>I was able to install git by running <code>sudo apt install git</code>. Similarly I was able to install KeePassX by running <code>sudo apt-get install keepassx</code> (I'm not 100% in the difference between <code>apt</code> and <code>apt-get</code> here but that's what I saw on the internet help sites I found). I also installed a fresh version of vim but I forget what line I ran in terminal. </p>
 <p>To run a general update and upgrade, I run <code>sudo apt update &amp;&amp; sudo apt upgrade</code>, which seems to work.</p>
-<p>We'll see how much I use this old computer going forward, and what for.</p>
+<p>We'll see how much I use this old computer going forward, and what for. </p>
 <p>Update: Just found <a href="https://linuxjourney.com/">this website that aims to teach Linux for beginners</a>, which I might checkout. There's also this series of YouTube videos: <a href="https://www.youtube.com/watch?v=1dQTEw8n9yc">Ubuntu Beginners Guide</a> that looks nice, is Ubuntu-specific, and is, as of this writing, only one month old.</p>
-<a class="header" href="#lubuntu" id="lubuntu"><h1>Lubuntu</h1></a>
-<a class="header" href="#switching-from-ubuntu-to-lubuntu" id="switching-from-ubuntu-to-lubuntu"><h2>Switching from Ubuntu to Lubuntu</h2></a>
+<h1><a class="header" href="#lubuntu" id="lubuntu">Lubuntu</a></h1>
+<h2><a class="header" href="#switching-from-ubuntu-to-lubuntu" id="switching-from-ubuntu-to-lubuntu">Switching from Ubuntu to Lubuntu</a></h2>
 <p>To avoid the high memory usage of Ubuntu's Unity desktop environment, I installed Ubuntu's LXDE desktop environment (called Lubuntu). I had a gist that Unity was a bit of a memory hog compared to other desktop environments. I also spotted <a href="https://www.reddit.com/r/linux/comments/5l39tz/linux_distros_ram_consumption_comparison_updated/?st=ixpgu5wy&amp;sh=67b8f57f">this Reddit post</a> that compares some lightweight distros in terms of RAM consumption and Lubuntu did well.</p>
-<p>To install Lubuntu, I ran <code>sudo apt-get install lubuntu-desktop</code> (I learned this from a helpful user in the <a href="https://riot.im/app/#/room/ubuntu:matrix.org">Ubuntu Riot.im channel</a>). The size of the installation was about 340 mb.</p>
-<p>After installing the Lubuntu desktop environment, you want to run the software updater (you can also update software in the Terminal by running <code>sudo apt update &amp;&amp; sudo apt upgrade</code>). Then restart the computer (that seems to have been pretty important), and at the login screen choose Lubuntu (or LXDE... that's another option and I'm not sure what the difference is).</p>
+<p>To install Lubuntu, I ran <code>sudo apt-get install lubuntu-desktop</code> (I learned this from a helpful user in the <a href="https://riot.im/app/#/room/ubuntu:matrix.org">Ubuntu Riot.im channel</a>). The size of the installation was about 340 mb. </p>
+<p>After installing the Lubuntu desktop environment, you want to run the software updater (you can also update software in the Terminal by running <code>sudo apt update &amp;&amp; sudo apt upgrade</code>). Then restart the computer (that seems to have been pretty important), and at the login screen choose Lubuntu (or LXDE... that's another option and I'm not sure what the difference is). </p>
 <p>You can check how much RAM you have available by running <code>free -m</code> in the terminal. Thanks to <a href="http://www.linuxatemyram.com/">this site</a>, I knew to look for the value under &quot;available&quot; to get an accurate estimate of how many megabytes of my memory were &quot;free&quot;. With my terminal and Firefox running on Lubuntu, I have about 1187 MB RAM of my 2 GB available, as opposed to Ubuntu, which generally only left about 700 or 800 MB available when I was running a couple of programs (not a very scientific test, I know).</p>
 <p>Plus I can always switch back to regular Ubuntu via the login screen.</p>
-<p>Lubuntu is pretty snappy! I did want to make a few simple changes right off the bat. Here's how I went about some of them.</p>
-<a class="header" href="#how-to-disable-tap-to-click-persistently-in-lubuntu" id="how-to-disable-tap-to-click-persistently-in-lubuntu"><h3>How to disable tap to click persistently in Lubuntu</h3></a>
+<p>Lubuntu is pretty snappy! I did want to make a few simple changes right off the bat. Here's how I went about some of them. </p>
+<h3><a class="header" href="#how-to-disable-tap-to-click-persistently-in-lubuntu" id="how-to-disable-tap-to-click-persistently-in-lubuntu">How to disable tap to click persistently in Lubuntu</a></h3>
 <p>I wanted to disable my touchpad from clicking, which I did by doing this:</p>
 <ol>
 <li>Open <code>~/.config/lxsession/lubuntu/autostart</code> or possibly <code>~/.config/lxsession/LXDE/autostart</code> (not sure which)</li>
 <li>To disable tap touchpad to click, add <code>synclient MaxTapTime=0</code></li>
 </ol>
 <p>You can find other settings to set <a href="https://help.ubuntu.com/community/Lubuntu/Mouse">here</a>, like enabling two-finger horizontal scroll (<code>synclient HorizTwoFingerScroll=1</code>).</p>
-<a class="header" href="#installing-an-application-launcher-for-lubuntu" id="installing-an-application-launcher-for-lubuntu"><h3>Installing an application launcher for Lubuntu</h3></a>
-<p>On macOS I make frequent use of <a href="https://www.alfredapp.com/">Alfred</a> as an application launcher. Ubuntu's Unity desktop environment sort of had something like that, which you can initiate by pressing the command key on its own at any time. But I couldn't find something similar in LXDE-- the application menu (similar to the Start menu in Windows) was just not fast enough for me coming from macOS + Alfred).</p>
-<p>So I found <a href="https://askubuntu.com/questions/203851/any-search-tool-for-lxde-menu/203852#203852">this askubuntu answer</a> that recommends installing an application called Synapse by running <code>sudo apt-get install synapse</code>. By default the launcher is invoked by hitting <code>ctrl + space</code>, but I changed it to <code>alt+Enter</code> by launching Synapse and clicking on the not-super-obvious round button on the right side of the pop-up display and clicking &quot;Preferences&quot;. Works great!</p>
-<a class="header" href="#my-attempt-to-make-the-gnome-terminal-the-default" id="my-attempt-to-make-the-gnome-terminal-the-default"><h3>My attempt to make the Gnome terminal the default</h3></a>
-<p>The default Terminal in Lubuntu (think it's called LXTerminal) didn't support true color in Vim, so I looked for other options. I had gotten used to the terminal in regular Ubuntu (which I'm pretty sure is the Gnome Terminal), so I figured I could switch that in on Lubuntu. Oddly it's not in the main menu of applications though.</p>
+<h3><a class="header" href="#installing-an-application-launcher-for-lubuntu" id="installing-an-application-launcher-for-lubuntu">Installing an application launcher for Lubuntu</a></h3>
+<p>On macOS I make frequent use of <a href="https://www.alfredapp.com/">Alfred</a> as an application launcher. Ubuntu's Unity desktop environment sort of had something like that, which you can initiate by pressing the command key on its own at any time. But I couldn't find something similar in LXDE-- the application menu (similar to the Start menu in Windows) was just not fast enough for me coming from macOS + Alfred). </p>
+<p>So I found <a href="https://askubuntu.com/questions/203851/any-search-tool-for-lxde-menu/203852#203852">this askubuntu answer</a> that recommends installing an application called Synapse by running <code>sudo apt-get install synapse</code>. By default the launcher is invoked by hitting <code>ctrl + space</code>, but I changed it to <code>alt+Enter</code> by launching Synapse and clicking on the not-super-obvious round button on the right side of the pop-up display and clicking &quot;Preferences&quot;. Works great! </p>
+<h3><a class="header" href="#my-attempt-to-make-the-gnome-terminal-the-default" id="my-attempt-to-make-the-gnome-terminal-the-default">My attempt to make the Gnome terminal the default</a></h3>
+<p>The default Terminal in Lubuntu (think it's called LXTerminal) didn't support true color in Vim, so I looked for other options. I had gotten used to the terminal in regular Ubuntu (which I'm pretty sure is the Gnome Terminal), so I figured I could switch that in on Lubuntu. Oddly it's not in the main menu of applications though. </p>
 <p>First, I figured out a way to set it as the &quot;default&quot; terminal:</p>
 <ol>
 <li>menu &gt; Preferences &gt; Default applications LXSession</li>
@@ -742,39 +745,39 @@ Keywords=console;command line;execute;
 </code></pre>
 <p>Upon saving that file, I got a new icon in menu &gt; System Tools called &quot;GNOME Terminal&quot; that launches my now-beloved Gnome Terminal. Woohoo! (If <code>Icon=gnome-terminal</code> hadn't worked I would have used <code>Icon=lxterminal</code>)</p>
 <p><em>See separate entry for more on using Vim in Lubuntu.</em></p>
-<a class="header" href="#more-lubuntu-configuration-ideas" id="more-lubuntu-configuration-ideas"><h3>More Lubuntu configuration ideas</h3></a>
+<h3><a class="header" href="#more-lubuntu-configuration-ideas" id="more-lubuntu-configuration-ideas">More Lubuntu configuration ideas</a></h3>
 <p>Just found <a href="https://ubuntuforums.org/showthread.php?t=1905408">this long forum post</a> with more ideas of recommended features for Lubuntu.  There's also the <a href="https://help.ubuntu.com/community/Lubuntu">Community Help Page</a> here.</p>
-<a class="header" href="#some-lingering-problems-on-lubuntu" id="some-lingering-problems-on-lubuntu"><h3>Some lingering problems on Lubuntu</h3></a>
+<h3><a class="header" href="#some-lingering-problems-on-lubuntu" id="some-lingering-problems-on-lubuntu">Some lingering problems on Lubuntu</a></h3>
 <ul>
 <li>can't figure out how to set custom openbox keybindings</li>
 <li>Want to disable scrolling in Gnome terminal</li>
 </ul>
-<a class="header" href="#improving-lubuntu" id="improving-lubuntu"><h2>Improving Lubuntu</h2></a>
+<h2><a class="header" href="#improving-lubuntu" id="improving-lubuntu">Improving Lubuntu</a></h2>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/X-ppIMezIgM" frameborder="0" allowfullscreen></iframe>
 <p><br><br></p>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/1a_Zy43CZBk" frameborder="0" allowfullscreen></iframe>
 <p><br><br></p>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/TvEhMKvTH4w" frameborder="0" allowfullscreen></iframe>
-<a class="header" href="#swapping-control-and-caps-lock-on-lubuntu-1604" id="swapping-control-and-caps-lock-on-lubuntu-1604"><h2>Swapping control and caps lock on Lubuntu 16.04</h2></a>
-<p>First I ran <code>setxkbmap -option ctrl:swapcaps</code> in gnome-terminal, and observed that the keys were switched on my Macbook keyboard.</p>
+<h2><a class="header" href="#swapping-control-and-caps-lock-on-lubuntu-1604" id="swapping-control-and-caps-lock-on-lubuntu-1604">Swapping control and caps lock on Lubuntu 16.04</a></h2>
+<p>First I ran <code>setxkbmap -option ctrl:swapcaps</code> in gnome-terminal, and observed that the keys were switched on my Macbook keyboard. </p>
 <p>Now, following an answer on the web whose URL I've lost, I added that line of text to <code>~/.config/lxsession/Lubuntu/autostart</code>.</p>
 <p>Note that the <code>setxkbmap</code> line the worked in Ubuntu 16.04, <code>setxkbmap -option caps:ctrl_modifier</code>, did not work immediately when run in terminal in Lubuntu.</p>
-<a class="header" href="#how-to-install-neovim-on-lubuntu-1604" id="how-to-install-neovim-on-lubuntu-1604"><h2>How to Install Neovim on Lubuntu 16.04</h2></a>
-<p>I'm using Lubuntu 16.04 and we're assuming that we're going to be using gnome-terminal. I couldn't figure out how to get HEX colors in Vim when using Lubuntu's default Terminal application, LXTerminal.</p>
+<h2><a class="header" href="#how-to-install-neovim-on-lubuntu-1604" id="how-to-install-neovim-on-lubuntu-1604">How to Install Neovim on Lubuntu 16.04</a></h2>
+<p>I'm using Lubuntu 16.04 and we're assuming that we're going to be using gnome-terminal. I couldn't figure out how to get HEX colors in Vim when using Lubuntu's default Terminal application, LXTerminal. </p>
 <p>Thus I took some steps to make Gnome terminal the default Terminal application, and added an icon for it in my menu. These steps are described in another section of this document.</p>
 <p><strong>Note:</strong> If you're looking for info on installing plain Vim, see the end of this post.</p>
-<a class="header" href="#installation" id="installation"><h3>Installation</h3></a>
+<h3><a class="header" href="#installation" id="installation">Installation</a></h3>
 <p>First, we're going to want to install git in order to use vim-plug later: <code>sudo apt install git</code></p>
 <p>Next, I went over to <a href="https://github.com/neovim/neovim/wiki/Installing-Neovim#ubuntu">the Ubuntu section of the Neovim installation page</a></p>
 <p>Assuming I needed this dependency, I probably ran: <code>sudo apt-get install software-properties-common</code></p>
-<p>I then chose the unstable version: https://launchpad.net/%7Eneovim-ppa/+archive/ubuntu/unstable</p>
-<p>To add the PPA to my system, I ran</p>
+<p>I then chose the unstable version: https://launchpad.net/%7Eneovim-ppa/+archive/ubuntu/unstable </p>
+<p>To add the PPA to my system, I ran </p>
 <pre><code>sudo add-apt-repository ppa:neovim-ppa/unstable
 sudo apt-get update
 </code></pre>
 <p>I then installed Neovim from this PPA by running <code>sudo apt-get install neovim</code>. I think the <code>nvim</code> command worked after that.</p>
-<a class="header" href="#critical-changes-to-vim-config-file" id="critical-changes-to-vim-config-file"><h3>Critical changes to Vim config file</h3></a>
-<p>First, since on Lubuntu I'm likely only going to use Neovim and not Vim, I renamed my vimrc to <code>init.vim</code> and put it in <code>~/.config/nvim/</code> (which I may have had to create myself).</p>
+<h3><a class="header" href="#critical-changes-to-vim-config-file" id="critical-changes-to-vim-config-file">Critical changes to Vim config file</a></h3>
+<p>First, since on Lubuntu I'm likely only going to use Neovim and not Vim, I renamed my vimrc to <code>init.vim</code> and put it in <code>~/.config/nvim/</code> (which I may have had to create myself). </p>
 <p>I then changed my <a href="https://github.com/junegunn/vim-plug">vim-plug</a> call to download my plugins to <code>~/.config/nvim/plugged</code>: <code>call plug#begin('~/.config/nvim/plugged')</code></p>
 <p>I could have chosen to set vim-plug to download plugins to another directory somewhere in <code>~/.local/</code>, which may have kept the <code>~/.config</code> directory closer to what I assume is its intended purpose of just being configuration files, and not actual software.</p>
 <p>Also, I had to redo this mappings that open my vim config file:</p>
@@ -782,10 +785,10 @@ sudo apt-get update
 nnoremap &lt;silent&gt; &lt;leader&gt;ev :vs $MYVIMRC&lt;CR&gt;
 nnoremap &lt;silent&gt; &lt;leader&gt;sv :so $MYVIMRC&lt;CR&gt;
 </code></pre>
-<a class="header" href="#syntax-highlighting-colors" id="syntax-highlighting-colors"><h4>Syntax Highlighting Colors</h4></a>
+<h4><a class="header" href="#syntax-highlighting-colors" id="syntax-highlighting-colors">Syntax Highlighting Colors</a></h4>
 <p>I also made sure that <code>set termguicolors</code> was definitely being run in my <code>init.vim</code> file-- on my Mac I ran it only conditionally based on the terminal Vim detected. For now, let's just run it, as gnome-terminal is capable of running hex color vim themes.</p>
-<a class="header" href="#system-clipboard" id="system-clipboard"><h3>System Clipboard</h3></a>
-<p>Within Neovim I ran <code>:CheckHealth</code> which kindly informed me that to get system clipboard support, I'd need to install a program called <a href="https://apps.ubuntu.com/cat/applications/xsel/">XSel</a>. So back on the terminal I ran <code>sudo apt install xsel</code> and then restarted my terminal.</p>
+<h3><a class="header" href="#system-clipboard" id="system-clipboard">System Clipboard</a></h3>
+<p>Within Neovim I ran <code>:CheckHealth</code> which kindly informed me that to get system clipboard support, I'd need to install a program called <a href="https://apps.ubuntu.com/cat/applications/xsel/">XSel</a>. So back on the terminal I ran <code>sudo apt install xsel</code> and then restarted my terminal. </p>
 <p>Then in my <code>init.vim</code> I figured out through trial and error that I needed to use the <code>+</code> register to access the system clipboard, rather than <code>*</code> that I used on MacOS:</p>
 <pre><code class="language-vim">&quot; use leader to interact with the system clipboard
 nnoremap &lt;Leader&gt;p &quot;+]p
@@ -807,18 +810,18 @@ nnoremap &lt;Leader&gt;a :%y*&lt;cr&gt;
 &quot; brackets, then dumps system clipboard contents into parenthesis
 autocmd FileType markdown vnoremap &lt;c-a&gt; &lt;Esc&gt;`&lt;i[&lt;Esc&gt;`&gt;la](&lt;Esc&gt;&quot;*]pa)&lt;Esc&gt;
 </code></pre>
-<a class="header" href="#other-things-to-consider" id="other-things-to-consider"><h3>Other Things To Consider</h3></a>
+<h3><a class="header" href="#other-things-to-consider" id="other-things-to-consider">Other Things To Consider</a></h3>
 <p>I have Lubuntu installed on an old MacBook, whose track pad sometimes gets triggered when I'm typing. Thus in this Vim configuration I chose to disable my mouse</p>
 <pre><code class="language-vim">&quot; disable mouse
 autocmd BufEnter * set mouse=
 </code></pre>
-<a class="header" href="#appendix-some-notes-on-vim-not-neovim" id="appendix-some-notes-on-vim-not-neovim"><h3>Appendix: Some Notes on Vim (not Neovim)</h3></a>
-<p>As of this writing, you can install Vim 7.4.X with something like <code>sudo apt-get vim</code>. To install, Vim 8 currently you need to use <a href="http://tipsonubuntu.com/2016/09/13/vim-8-0-released-install-ubuntu-16-04/">a PPA</a>.</p>
+<h3><a class="header" href="#appendix-some-notes-on-vim-not-neovim" id="appendix-some-notes-on-vim-not-neovim">Appendix: Some Notes on Vim (not Neovim)</a></h3>
+<p>As of this writing, you can install Vim 7.4.X with something like <code>sudo apt-get vim</code>. To install, Vim 8 currently you need to use <a href="http://tipsonubuntu.com/2016/09/13/vim-8-0-released-install-ubuntu-16-04/">a PPA</a>. </p>
 <p>But with both versions of Vim I was having trouble getting access to the system clipboard, so I went with Neovim. Though you can have both installed, with their own configurations, pretty easily.</p>
-<a class="header" href="#installing-rbenv-on-lubuntu-1604" id="installing-rbenv-on-lubuntu-1604"><h2>Installing rbenv on Lubuntu 16.04</h2></a>
+<h2><a class="header" href="#installing-rbenv-on-lubuntu-1604" id="installing-rbenv-on-lubuntu-1604">Installing rbenv on Lubuntu 16.04</a></h2>
 <p>We're attempting to install <a href="https://github.com/rbenv/rbenv">rbenv</a> via the <a href="https://github.com/rbenv/rbenv#basic-github-checkout">&quot;Basic GitHub Checkout&quot; method</a>.</p>
 <p>I think we're also going to want <a href="https://github.com/rbenv/ruby-build#readme">ruby-build</a> plugin. I DON'T think I'm going to want <a href="https://github.com/jf/rbenv-gemset">rbenv-gemset</a>?</p>
-<a class="header" href="#installing-rbenv" id="installing-rbenv"><h3>Installing rbenv</h3></a>
+<h3><a class="header" href="#installing-rbenv" id="installing-rbenv">Installing rbenv</a></h3>
 <p>As mentioned above, we're going to install rbenv via the <a href="https://github.com/rbenv/rbenv#basic-github-checkout">&quot;Basic GitHub Checkout&quot; method</a>. I reproduce them below, but you should consult the latest instructions for Ubuntu on that GitHub page.</p>
 <p>Clone down rbenv:</p>
 <pre><code>git clone https://github.com/rbenv/rbenv.git ~/.rbenv
@@ -834,24 +837,24 @@ autocmd BufEnter * set mouse=
 </code></pre>
 <p>Following instructions from the init script run, I added <code>eval &quot;$(rbenv init -)&quot;</code> to my <code>~/.bashrc</code>, just <em>below</em> the <code>export PATH=&quot;$HOME/.rbenv/bin:$PATH&quot;</code> line that we added with the echo command above.</p>
 <p>Now restart your terminal and/or run <code>source ~/.bashrc</code>.</p>
-<p>Check your rbenv installation by running <code>type rbenv</code>. It should say it's a function.</p>
-<a class="header" href="#installing-the-ruby-build-plugin" id="installing-the-ruby-build-plugin"><h3>Installing the ruby-build plugin</h3></a>
+<p>Check your rbenv installation by running <code>type rbenv</code>. It should say it's a function. </p>
+<h3><a class="header" href="#installing-the-ruby-build-plugin" id="installing-the-ruby-build-plugin">Installing the ruby-build plugin</a></h3>
 <p>Wanting to build the latest version of Ruby a nice and clean way, I installed <a href="https://github.com/rbenv/ruby-build#readme">ruby-build</a> by running <code>git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build</code></p>
-<a class="header" href="#installing-a-version-of-ruby-using-rbenv-some-problems" id="installing-a-version-of-ruby-using-rbenv-some-problems"><h3>Installing a version of Ruby using rbenv (some problems)</h3></a>
+<h3><a class="header" href="#installing-a-version-of-ruby-using-rbenv-some-problems" id="installing-a-version-of-ruby-using-rbenv-some-problems">Installing a version of Ruby using rbenv (some problems)</a></h3>
 <p>Now we can install some versions of Ruby using rbenv.</p>
-<p><code>rbenv install --list</code> gives us all available versions to install.</p>
-<p>I'm going with 2.3.3, so I ran <code>rbenv install 2.3.3</code>. It took a long time to install and then told my the build failed. It suggested running <code>apt-get install -y libreadline-dev</code> so I did that (prefaced with <code>sudo</code>) and that software seemed to install successfully.</p>
+<p><code>rbenv install --list</code> gives us all available versions to install. </p>
+<p>I'm going with 2.3.3, so I ran <code>rbenv install 2.3.3</code>. It took a long time to install and then told my the build failed. It suggested running <code>apt-get install -y libreadline-dev</code> so I did that (prefaced with <code>sudo</code>) and that software seemed to install successfully. </p>
 <p>On second attempt I ran <code>rbenv install --verbose 2.3.3</code> so that I could better see what's going on (turns out, it's a lot!). Success this time!</p>
-<p>Once that's all installed, I opened a new gnome-terminal window. I was greeted by this shitty message at the top of the terminal window:</p>
+<p>Once that's all installed, I opened a new gnome-terminal window. I was greeted by this shitty message at the top of the terminal window: </p>
 <blockquote>
 <p>The program 'rbenv' is currently not installed. You can install it by typing: <code>sudo apt install rbenv</code></p>
 </blockquote>
 <p>but I learned that this can be temporarily solved be running <code>source ~/.profile</code>. And that it will be solved permanently once you restart Ubuntu/Lubuntu (source: <a href="https://github.com/rbenv/rbenv/issues/424">this GitHub issue</a>).</p>
 <p>Then I had to set Ruby v. 2.3.3 as my global version of Ruby, which I did with <code>rbenv global 2.3.3</code>. After that, <code>ruby --version</code> gave me the familiar: <code>ruby 2.3.3p222 (2016-11-21 revision 56859) [x86_64-linux]</code></p>
-<a class="header" href="#installing-gems-with-rbenv" id="installing-gems-with-rbenv"><h3>Installing gems with rbenv</h3></a>
-<p>I definitely want to install the &quot;bundler&quot; gem. To do this, I ran: <code>gem install bundler</code>, just like with RVM.</p>
-<p>From there things seem to be just fine. Installed gems just work so far.</p>
-<a class="header" href="#configuring-openbox-on-lubuntu" id="configuring-openbox-on-lubuntu"><h2>Configuring Openbox on Lubuntu</h2></a>
+<h3><a class="header" href="#installing-gems-with-rbenv" id="installing-gems-with-rbenv">Installing gems with rbenv</a></h3>
+<p>I definitely want to install the &quot;bundler&quot; gem. To do this, I ran: <code>gem install bundler</code>, just like with RVM. </p>
+<p>From there things seem to be just fine. Installed gems just work so far. </p>
+<h2><a class="header" href="#configuring-openbox-on-lubuntu" id="configuring-openbox-on-lubuntu">Configuring Openbox on Lubuntu</a></h2>
 <p>Openbox is a window manager that comes installed with Lubuntu/LXDE.</p>
 <p>To configure it, open <code>~/.config/openbox/lubuntu-rc.xml</code> in a text editor.</p>
 <p>Change the relevant section to this:</p>
@@ -981,21 +984,21 @@ autocmd BufEnter * set mouse=
   &lt;/action&gt;
 &lt;/keybind&gt;
 </code></pre>
-<a class="header" href="#security-apps-and-tools" id="security-apps-and-tools"><h1>Security Apps and Tools</h1></a>
-<a class="header" href="#installing-gnu-privacy-assistant" id="installing-gnu-privacy-assistant"><h2>Installing GNU Privacy Assistant</h2></a>
-<p><code>sudo apt install gpa</code> installs a GUI called &quot;GNU Privacy Assistant&quot;</p>
+<h1><a class="header" href="#security-apps-and-tools" id="security-apps-and-tools">Security Apps and Tools</a></h1>
+<h2><a class="header" href="#installing-gnu-privacy-assistant" id="installing-gnu-privacy-assistant">Installing GNU Privacy Assistant</a></h2>
+<p><code>sudo apt install gpa</code> installs a GUI called &quot;GNU Privacy Assistant&quot; </p>
 <p><a href="https://help.ubuntu.com/community/GnuPrivacyGuardHowto#Graphical_Interfaces">Read more about it here</a></p>
-<a class="header" href="#installing-keepassxc-via-ubuntus-new-snap" id="installing-keepassxc-via-ubuntus-new-snap"><h2>Installing KeePassXC Via Ubuntu's new Snap</h2></a>
+<h2><a class="header" href="#installing-keepassxc-via-ubuntus-new-snap" id="installing-keepassxc-via-ubuntus-new-snap">Installing KeePassXC Via Ubuntu's new Snap</a></h2>
 <p>Pretty sure it's just:</p>
 <p><code>sudo snap install keepassxc</code></p>
 <p><a href="https://keepassxc.org/download">source</a></p>
-<a class="header" href="#installing-ricochet-114-on-lubuntu-1604" id="installing-ricochet-114-on-lubuntu-1604"><h2>Installing Ricochet 1.1.4 on Lubuntu 16.04</h2></a>
-<p>When I first installed <a href="https://ricochet.im/">Ricochet IM</a> on my machine running Lubuntu, I either ran <code>sudo apt install ricochet-im</code>, or downloaded it through Ubuntu's GUI &quot;Software&quot; application. Regardless of which I chose, I think both methods install Ricochet version 1.1.2, as opposed the to latest release: <a href="https://github.com/ricochet-im/ricochet/releases/tag/v1.1.4">1.1.4</a>. Considering this is a secure instant messaging app and new versions may contain important security fixes, I wanted to be using the latest version available (which I'm actually thanked in, due to <a href="https://github.com/ricochet-im/ricochet/commit/fe40045cec8bed9a735c3cecbcca6ae2276d9902">some extremely minor documentation fixes</a>).</p>
+<h2><a class="header" href="#installing-ricochet-114-on-lubuntu-1604" id="installing-ricochet-114-on-lubuntu-1604">Installing Ricochet 1.1.4 on Lubuntu 16.04</a></h2>
+<p>When I first installed <a href="https://ricochet.im/">Ricochet IM</a> on my machine running Lubuntu, I either ran <code>sudo apt install ricochet-im</code>, or downloaded it through Ubuntu's GUI &quot;Software&quot; application. Regardless of which I chose, I think both methods install Ricochet version 1.1.2, as opposed the to latest release: <a href="https://github.com/ricochet-im/ricochet/releases/tag/v1.1.4">1.1.4</a>. Considering this is a secure instant messaging app and new versions may contain important security fixes, I wanted to be using the latest version available (which I'm actually thanked in, due to <a href="https://github.com/ricochet-im/ricochet/commit/fe40045cec8bed9a735c3cecbcca6ae2276d9902">some extremely minor documentation fixes</a>). </p>
 <!-- more --> 
 <p>So I went over to <a href="https://ricochet.im/">ricochet.im</a>, found the <a href="https://ricochet.im/releases/1.1.4/">releases page</a> and downloaded the latest release for Linux, which is currently 1.1.4. I'm running Linux on a 64-bit machine (<a href="https://sts10.github.io/blog/2016/11/07/installing-ubuntu-on-my-old-macbook-pro/">an old Macbook Pro</a>), so I went with <code>ricochet-1.1.4-linux-x86_64.tar.bz2</code>. I downloaded this compressed file to my <code>Downloads/</code> directory.</p>
-<a class="header" href="#verifying-the-downloaded-tar-file" id="verifying-the-downloaded-tar-file"><h3>Verifying the downloaded tar file</h3></a>
-<p>To verify the contents of the downloaded tar file, I also downloaded the <code>.asc</code> signature file associated with the release I downloaded from to the <a href="https://ricochet.im/releases/1.1.4/">releases page</a>. I then went to the <a href="https://ricochet.im/">ricochet.im website</a> and downloaded <a href="https://ricochet.im/john-brooks.asc">John Brooks' public gpg key</a>.</p>
-<p>Then in terminal I navigated to my <code>~/Downloads</code> directory (<code>cd ~/Downloads</code>) and ran <code>gpg2 --import john-brooks.asc</code>. gpg2 informed me that 1 key was successfully imported-- woohoo. To double check that this was actually John Brooks' public key that he signs Ricochet releases with, I ran <code>gpg2 --fingerprint</code> to list the fingerprints of the ekys on my key ring. I saw the fingerprint for the Brooks key was <code>9032 CAE4 CBFA 933A 5A21 45D5 FF97 C53F 183C 045D</code>, which is exactly the same fingerprint listed in <a href="https://github.com/ricochet-im/ricochet#downloads">the Ricochet Github README</a>.</p>
+<h3><a class="header" href="#verifying-the-downloaded-tar-file" id="verifying-the-downloaded-tar-file">Verifying the downloaded tar file</a></h3>
+<p>To verify the contents of the downloaded tar file, I also downloaded the <code>.asc</code> signature file associated with the release I downloaded from to the <a href="https://ricochet.im/releases/1.1.4/">releases page</a>. I then went to the <a href="https://ricochet.im/">ricochet.im website</a> and downloaded <a href="https://ricochet.im/john-brooks.asc">John Brooks' public gpg key</a>. </p>
+<p>Then in terminal I navigated to my <code>~/Downloads</code> directory (<code>cd ~/Downloads</code>) and ran <code>gpg2 --import john-brooks.asc</code>. gpg2 informed me that 1 key was successfully imported-- woohoo. To double check that this was actually John Brooks' public key that he signs Ricochet releases with, I ran <code>gpg2 --fingerprint</code> to list the fingerprints of the ekys on my key ring. I saw the fingerprint for the Brooks key was <code>9032 CAE4 CBFA 933A 5A21 45D5 FF97 C53F 183C 045D</code>, which is exactly the same fingerprint listed in <a href="https://github.com/ricochet-im/ricochet#downloads">the Ricochet Github README</a>. </p>
 <p>Next I needed to actually verify the tar file, so I ran <code>gpg2 --verify ricochet-1.1.4-linux-x86_64.tar.bz2.asc</code>. gpg2 correctly assumed that the signed data was in <code>ricochet-1.1.4-linux-x86_64.tar.bz2</code> and gave me the message:</p>
 <pre><code>gpg: Good signature from &quot;John Brooks &lt;john.brooks@dereferenced.net&gt;&quot; [unknown]
 gpg: WARNING: This key is not certified with a trusted signature!
@@ -1003,19 +1006,19 @@ gpg:          There is no indication that the signature belongs to the owner.
 Primary key fingerprint: 9032 CAE4 CBFA 933A 5A21  45D5 FF97 C53F 183C 045D
 </code></pre>
 <p>Again, the fingerprint listed on the last line of the output above matches the one listed on <a href="https://github.com/ricochet-im/ricochet#downloads">the Ricochet Github README</a>.</p>
-<p>My understanding is that this &quot;Good signature&quot; message means I got a good tar file from the website. The &quot;WARNING&quot; that it's not a trusted signature just means that I didn't manually mark John Brooks' public key as &quot;ultimately trusted&quot; before running the verify command.</p>
+<p>My understanding is that this &quot;Good signature&quot; message means I got a good tar file from the website. The &quot;WARNING&quot; that it's not a trusted signature just means that I didn't manually mark John Brooks' public key as &quot;ultimately trusted&quot; before running the verify command. </p>
 <p>For more about this and the process of verifying signatures generally, checkout <a href="https://www.qubes-os.org/doc/verifying-signatures/">this page in the Qubes OS documentation</a> and/or <a href="https://keepassxc.org/verifying-signatures">KeePassXC's page on the subject</a>.</p>
-<a class="header" href="#extraction-and-installing" id="extraction-and-installing"><h3>Extraction... and Installing?</h3></a>
-<p>After I found a good signature, I double-clicked the <code>.tar.bz2</code> file to uncompress/extract it (though I understand that I could have been a badass and also <a href="https://linuxjourney.com/lesson/compressed-archives-tar">done this in the terminal</a>).</p>
+<h3><a class="header" href="#extraction-and-installing" id="extraction-and-installing">Extraction... and Installing?</a></h3>
+<p>After I found a good signature, I double-clicked the <code>.tar.bz2</code> file to uncompress/extract it (though I understand that I could have been a badass and also <a href="https://linuxjourney.com/lesson/compressed-archives-tar">done this in the terminal</a>). </p>
 <p>I then got a new directory called <code>ricochet</code> that had subdirectories like <code>config</code> and <code>QtQuick</code>, a README file, a file called <code>tor</code> I was scared to click, and a file called <code>ricochet</code> that when I clicked I got asked what application I wanted to use to open it. I couldn't figure out how to run the actual Ricochet application-- <a href="https://github.com/ricochet-im/ricochet/blob/master/packaging/linux-static/content/README">the README</a> didn't help me much.</p>
-<p>So first I Googled (actually Duck Duck Go) something like &quot;ubuntu how to install from tar file&quot; and landed on <a href="https://askubuntu.com/questions/25961/how-do-i-install-a-tar-gz-or-tar-bz2-file#1030">this askubuntu answer</a>, which talks about opening a file called <code>INSTALL</code> that I didn't have, and/or running <code>./configure</code>, which was returning an error for me.</p>
+<p>So first I Googled (actually Duck Duck Go) something like &quot;ubuntu how to install from tar file&quot; and landed on <a href="https://askubuntu.com/questions/25961/how-do-i-install-a-tar-gz-or-tar-bz2-file#1030">this askubuntu answer</a>, which talks about opening a file called <code>INSTALL</code> that I didn't have, and/or running <code>./configure</code>, which was returning an error for me. </p>
 <p>Eventually, I figured out that I could just run <code>./ricochet</code> from my <code>ricochet</code> directory and the real application-- version 1.1.4-- opened right up. Cool. But it would be kind of shitty if I had to first open Terminal, then run a command to launch Ricochet. Ideally I'd have a Ricochet icon in my Lubuntu start menu.</p>
-<a class="header" href="#creating-an-icon-in-the-lubuntu-start-menu" id="creating-an-icon-in-the-lubuntu-start-menu"><h3>Creating an icon in the Lubuntu start menu</h3></a>
-<p>After some more searching I found a subheading on an Ubuntu/Lubuntu help page called <a href="https://help.ubuntu.com/community/Lubuntu/Windows#How_to_make.2Fadd_an_application_to_the_.22start.22_menu.">&quot;How to make/add an application to the &quot;start&quot; menu.&quot;</a> that described how to make a <code>.desktop</code> file.</p>
+<h3><a class="header" href="#creating-an-icon-in-the-lubuntu-start-menu" id="creating-an-icon-in-the-lubuntu-start-menu">Creating an icon in the Lubuntu start menu</a></h3>
+<p>After some more searching I found a subheading on an Ubuntu/Lubuntu help page called <a href="https://help.ubuntu.com/community/Lubuntu/Windows#How_to_make.2Fadd_an_application_to_the_.22start.22_menu.">&quot;How to make/add an application to the &quot;start&quot; menu.&quot;</a> that described how to make a <code>.desktop</code> file. </p>
 <p>The help page states: &quot;Making a .desktop file in <code>~/.local/share/applications</code> will show the item in the LXDE start menu.&quot;</p>
-<p>First I moved my <code>ricochet</code> directory into <code>~/Desktop/my_programs</code>, a directory I made for programs I've downloaded through the browser and am not sure where else to put (I know isn't ideal but I figure it's better than <code>~/Downloads</code>-- <a href="https://twitter.com/sts10">hit me on Twitter</a> if you know a better way). Next I confirmed that the new absolute command for launching Ricochet the application was <code>~/Desktop/my_programs/ricochet/ricochet</code>, which indeed worked.</p>
+<p>First I moved my <code>ricochet</code> directory into <code>~/Desktop/my_programs</code>, a directory I made for programs I've downloaded through the browser and am not sure where else to put (I know isn't ideal but I figure it's better than <code>~/Downloads</code>-- <a href="https://twitter.com/sts10">hit me on Twitter</a> if you know a better way). Next I confirmed that the new absolute command for launching Ricochet the application was <code>~/Desktop/my_programs/ricochet/ricochet</code>, which indeed worked. </p>
 <p>Next, as described in the <a href="https://help.ubuntu.com/community/Lubuntu/Windows#How_to_make.2Fadd_an_application_to_the_.22start.22_menu.">help page</a>, I created a <code>Ricochet.desktop</code> text file from scratch in <code>~/.local/share/applications</code> using a desktop file for another program that was also in that directory as a loose template (the other program is <a href="https://crypto.cat/">Cryptocat</a>, just another program I had previously downloaded that had its .desktop file in <code>~/.local/share/applications</code>).</p>
-<p>Here's the <code>Ricochet.desktop</code> file I typed out in its entirety:</p>
+<p>Here's the <code>Ricochet.desktop</code> file I typed out in its entirety: </p>
 <pre><code>[Desktop Entry]
 Type=Application
 Name=Ricochet
@@ -1026,87 +1029,87 @@ Categories=Network;InstantMessaging;Internet;
 </code></pre>
 <p>And be sure to substitute where it says &quot;$USER&quot; with your username. If you're not sure what your username, navigate to the ricochet directory in your terminal and run <code>pwd</code>.</p>
 <p>As you can see, the <code>.desktop</code> format also allows you to specify an icon image, so I went over to <a href="https://github.com/ricochet-im/ricochet">the Ricochet IM Github repo</a> and downloaded <a href="https://github.com/ricochet-im/ricochet/blob/master/icons/ricochet.png">a PNG logo</a> and put it in my ricochet directory.</p>
-<p>I think I had to restart the machine in order to see the icon appear in the start menu. After restart it was there in &quot;Internet&quot; next to Cryptocat and some other applications.</p>
-<a class="header" href="#things-i-havent-figure-out" id="things-i-havent-figure-out"><h3>Things I haven't figure out</h3></a>
-<p>So running <code>ricochet</code> from anywhere other than my ricochet directory does not launch the application. I could likely solve this pretty easily with an <code>ln</code> command or a line in my <code>bashrc</code>, but I've never need to launch a non-text editor from the command line before.</p>
-<p>I'm also not 100% how I'll go about upgrading to a new version of Ricochet, but the README says &quot;To upgrade, extract the new version to the same location.&quot; I assume I'll be able to download a new tar file, extract it, and switch it out from old directory. I'll likely keep the <code>config</code> directory, as that has my username, contact list, and (I think) my private key (the README notes: &quot;Once you run Ricochet, configuration will be stored in a 'config' directory inside this folder&quot;.).</p>
-<p>I also might not even have to edit the .desktop file (assuming I put the executable and the PNG icon in the same place).</p>
-<a class="header" href="#is-it-supposed-to-be-this-difficult-im-not-even-building-from-source" id="is-it-supposed-to-be-this-difficult-im-not-even-building-from-source"><h3>Is it supposed to be this difficult? I'm not even building from source</h3></a>
+<p>I think I had to restart the machine in order to see the icon appear in the start menu. After restart it was there in &quot;Internet&quot; next to Cryptocat and some other applications. </p>
+<h3><a class="header" href="#things-i-havent-figure-out" id="things-i-havent-figure-out">Things I haven't figure out</a></h3>
+<p>So running <code>ricochet</code> from anywhere other than my ricochet directory does not launch the application. I could likely solve this pretty easily with an <code>ln</code> command or a line in my <code>bashrc</code>, but I've never need to launch a non-text editor from the command line before. </p>
+<p>I'm also not 100% how I'll go about upgrading to a new version of Ricochet, but the README says &quot;To upgrade, extract the new version to the same location.&quot; I assume I'll be able to download a new tar file, extract it, and switch it out from old directory. I'll likely keep the <code>config</code> directory, as that has my username, contact list, and (I think) my private key (the README notes: &quot;Once you run Ricochet, configuration will be stored in a 'config' directory inside this folder&quot;.). </p>
+<p>I also might not even have to edit the .desktop file (assuming I put the executable and the PNG icon in the same place). </p>
+<h3><a class="header" href="#is-it-supposed-to-be-this-difficult-im-not-even-building-from-source" id="is-it-supposed-to-be-this-difficult-im-not-even-building-from-source">Is it supposed to be this difficult? I'm not even building from source</a></h3>
 <p>To be honest, I'm too new to Linux/Ubuntu/Lubuntu to know. It does seem strange that there isn't at least a copy of the Ricochet icon included in the tar that I downloaded. And I could also imagine there being a script that creates and places the <code>Ricochet.desktop</code> file for you. In fact there is a <a href="https://github.com/ricochet-im/ricochet/blob/master/src/ricochet.desktop">ricochet.desktop file</a> in the source of the project, but I couldn't find it in the 1.1.4 tar.</p>
-<p>Of course I could have missed some step in the installation that does exactly these things and maybe more. And I should say that this tar I downloaded is meant to serve the needs of many Linux distributions, whose configurations processes may be very different than the ones I took.</p>
+<p>Of course I could have missed some step in the installation that does exactly these things and maybe more. And I should say that this tar I downloaded is meant to serve the needs of many Linux distributions, whose configurations processes may be very different than the ones I took. </p>
 <p>Of course this pre-built distribution does take care of a lot of things that could be big headaches, most notable the Tor configuration, which just works. As the README notes: &quot;You do not need to manually run or configure tor. An unmodified tor binary is included with this package, and Ricochet will run it automatically, similiar [sic] to Tor Browser.&quot; which is obviously awesome.</p>
-<p>At the end of the day I've got version 1.1.4 working and an icon for it in my start menu. I'm not sure how similar the process is on Ubuntu 16.04.</p>
+<p>At the end of the day I've got version 1.1.4 working and an icon for it in my start menu. I'm not sure how similar the process is on Ubuntu 16.04. </p>
 <p>Plus I learned a bit about Linux and Lubuntu. And yes, I did submitted <a href="https://github.com/ricochet-im/ricochet/pull/521">a fresh pull request</a> to fix that pesky little typo in the README which has since been merged.</p>
-<a class="header" href="#installing-pip-and-magic-wormhole-on-lubuntu-1604" id="installing-pip-and-magic-wormhole-on-lubuntu-1604"><h2>Installing Pip and Magic Wormhole on Lubuntu 16.04</h2></a>
-<a class="header" href="#python" id="python"><h3>Python</h3></a>
-<p>Python 2 and Python 3 come with Ubuntu/Lubuntu. <code>python</code> calls v 2.7.12 and <code>python3</code> calls 3.5.2.</p>
-<a class="header" href="#installing-pip" id="installing-pip"><h3>Installing pip</h3></a>
+<h2><a class="header" href="#installing-pip-and-magic-wormhole-on-lubuntu-1604" id="installing-pip-and-magic-wormhole-on-lubuntu-1604">Installing Pip and Magic Wormhole on Lubuntu 16.04</a></h2>
+<h3><a class="header" href="#python" id="python">Python</a></h3>
+<p>Python 2 and Python 3 come with Ubuntu/Lubuntu. <code>python</code> calls v 2.7.12 and <code>python3</code> calls 3.5.2. </p>
+<h3><a class="header" href="#installing-pip" id="installing-pip">Installing pip</a></h3>
 <p>I think you can install regular pip by running: <code>sudo apt install python-pip</code> and then upgrading it with <code>pip install --upgrade pip</code>. I'm not sure whether, after doing this, pip is tied to python 2 or 3. My guess is v 2, which is fine.</p>
-<a class="header" href="#installing-magic-wormhole" id="installing-magic-wormhole"><h3>Installing Magic Wormhole</h3></a>
+<h3><a class="header" href="#installing-magic-wormhole" id="installing-magic-wormhole">Installing Magic Wormhole</a></h3>
 <p>To install <a href="https://github.com/warner/magic-wormhole#installation">magic-wormhole</a>, a CLI to &quot;get things from one computer to another, safely&quot;, I needed to install some other stuff. They suggest installing all at once with <code>apt-get install python-pip build-essential python-dev libffi-dev libssl-dev</code>. I likely could have run that command without <code>python-pip</code>.</p>
 <p>I was then able to install magic-wormhole with <code>sudo pip install magic-wormhole</code>.</p>
-<a class="header" href="#using-a-pgp-private-key-from-a-smartcard-on-ubuntu-1" id="using-a-pgp-private-key-from-a-smartcard-on-ubuntu-1"><h1>Using a PGP private key from a Smartcard on Ubuntu</h1></a>
+<h1><a class="header" href="#using-a-pgp-private-key-from-a-smartcard-on-ubuntu-1" id="using-a-pgp-private-key-from-a-smartcard-on-ubuntu-1">Using a PGP private key from a Smartcard on Ubuntu</a></h1>
 <p>I think I need to :</p>
 <ol>
-<li>add the key's public half
-a. get the .asc file onto your system.
+<li>add the key's public half 
+a. get the .asc file onto your system. 
 b. run <code>gpg2 --import &lt;file-name&gt;.asc</code></li>
 <li>Plug in the card</li>
 <li>try <code>gpg2 --card-status</code> If that doesn't work try installing scdaemon and pcscd with <code>sudo apt install scdaemon</code> and then <code>sudo apt install pcscd</code>. You may also need to <code>sudo apt install gpgsm</code></li>
 </ol>
 <ul>
-<li>you may also need to kill and restart scdaemon with:</li>
+<li>you may also need to kill and restart scdaemon with: </li>
 </ul>
 <pre><code>killall scdaemon
 pgrep scdaemon
 </code></pre>
-<p>You can now encrypt and decrypt files with the pgp keys on your martkey using the <code>gpg2</code> command line tool.</p>
-<a class="header" href="#gui" id="gui"><h2>GUI</h2></a>
+<p>You can now encrypt and decrypt files with the pgp keys on your martkey using the <code>gpg2</code> command line tool. </p>
+<h2><a class="header" href="#gui" id="gui">GUI</a></h2>
 <p>To add GUI support on Xfce, while using Thunar file manager, it looks like I'm going to need to build some <a href="https://help.ubuntu.com/community/ThunarCustomActions">Thunar custom actions</a>, which doesn't seem ideal. Xcfe doesn't use Nautilus by default, so I doubt installing <code>seahorse-nautilus</code> is going to do me any good.</p>
-<a class="header" href="#using-pidgin-with-a-google-account-and-setting-up-otr" id="using-pidgin-with-a-google-account-and-setting-up-otr"><h2>Using Pidgin with a Google Account, and Setting Up OTR</h2></a>
+<h2><a class="header" href="#using-pidgin-with-a-google-account-and-setting-up-otr" id="using-pidgin-with-a-google-account-and-setting-up-otr">Using Pidgin with a Google Account, and Setting Up OTR</a></h2>
 <p>Pidgin comes installed with Ubuntu 16.04. To add my existing Google Account, I followed the steps outlined in <a href="https://stackoverflow.com/questions/28681341/how-to-add-google-talk-hangouts-to-pidgin-chat-client/33898893#33898893">this Stack Overflow answer</a>.</p>
-<p>To summarize:</p>
-<p>In Pidgin, add a new account. Set the Protocol to &quot;Google Talk&quot;, username to your Google username, and the Domain to &quot;gmail.com&quot;.</p>
+<p>To summarize: </p>
+<p>In Pidgin, add a new account. Set the Protocol to &quot;Google Talk&quot;, username to your Google username, and the Domain to &quot;gmail.com&quot;. </p>
 <p>For the password you'll need to create a dedicated app password. You can do that <a href="https://security.google.com/settings/security/apppasswords">in your Google accounts Security &gt; App Passwords section</a>. When creating the new app password, set &quot;app&quot; to &quot;other&quot; and call it something like &quot;linux pidgin&quot;-- it doesn't matter what you call it. Optionally, if on a secure computer, tick the &quot;Remember password&quot; checkmark. (Warning: This will mean your new app password will be stored in plain text in <code>~/.purple/accounts.xml</code>.) Leave &quot;Resource&quot; and &quot;Local Alias&quot; blank.</p>
-<a class="header" href="#installing-and-enabling-otr" id="installing-and-enabling-otr"><h3>Installing and Enabling OTR</h3></a>
+<h3><a class="header" href="#installing-and-enabling-otr" id="installing-and-enabling-otr">Installing and Enabling OTR</a></h3>
 <p>Once my Google account was successfully added, I installed the Pidgin-otr plugin by running <code>sudo apt-get install pidgin-otr</code> in terminal. To enable and setup OTR, I followed <a href="https://ssd.eff.org/en/module/how-use-otr-linux">this EFF guide</a>. That guide also describes how to install the otr plugin through the Ubuntu Software manager if you're more into GUIs (see the early steps of that EFF guide).</p>
-<a class="header" href="#further-pidgin-customizations" id="further-pidgin-customizations"><h3>Further Pidgin Customizations</h3></a>
+<h3><a class="header" href="#further-pidgin-customizations" id="further-pidgin-customizations">Further Pidgin Customizations</a></h3>
 <p>To display offline buddies, go to Buddies &gt; Show &gt; Offline Buddies. There are more preferences, like muting sounds, in Tools &gt; Preferences.</p>
 <p>Not sure how to disable the pop up notifications yet though.</p>
-<a class="header" href="#other-des" id="other-des"><h1>Other DEs</h1></a>
-<a class="header" href="#customizing-appearance-of-xfce-ubuntu" id="customizing-appearance-of-xfce-ubuntu"><h1>Customizing Appearance of XFCE (Ubuntu)</h1></a>
-<a class="header" href="#desktop-background" id="desktop-background"><h2>Desktop Background</h2></a>
+<h1><a class="header" href="#other-des" id="other-des">Other DEs</a></h1>
+<h1><a class="header" href="#customizing-appearance-of-xfce-ubuntu" id="customizing-appearance-of-xfce-ubuntu">Customizing Appearance of XFCE (Ubuntu)</a></h1>
+<h2><a class="header" href="#desktop-background" id="desktop-background">Desktop Background</a></h2>
 <ol>
-<li>Pick one (I found one I liked <a href="https://www.buzzfeed.com/jessicaprobus/26-remarkably-soothing-desktop-backgrounds?utm_term=.uhwBX0qylL#.vxgE1Z8Yar">here</a>).</li>
-<li>Download the image file to your Pictures folder.</li>
+<li>Pick one (I found one I liked <a href="https://www.buzzfeed.com/jessicaprobus/26-remarkably-soothing-desktop-backgrounds?utm_term=.uhwBX0qylL#.vxgE1Z8Yar">here</a>). </li>
+<li>Download the image file to your Pictures folder. </li>
 <li>Go to Settings Manager &gt; Desktop &gt; Background. In bottom-right change Folder to Pictures and find your desired background.</li>
 </ol>
-<a class="header" href="#theme" id="theme"><h2>&quot;Theme&quot;</h2></a>
-<p>I went with axiom, which I got <a href="https://www.xfce-look.org/p/1016679/">here</a>. To install it:</p>
+<h2><a class="header" href="#theme" id="theme">&quot;Theme&quot;</a></h2>
+<p>I went with axiom, which I got <a href="https://www.xfce-look.org/p/1016679/">here</a>. To install it: </p>
 <ol>
-<li>I downloaded <a href="https://www.xfce-look.org/p/1016679/">the tar file</a>,</li>
+<li>I downloaded <a href="https://www.xfce-look.org/p/1016679/">the tar file</a>, </li>
 <li>In terminal I ran <code>mkdir ~/.themes</code></li>
-<li>I then extracted two directories from the tar file called &quot;axiom&quot; and &quot;axiomd&quot;, and then moved them both into the new <code>~/.themes</code> directory.</li>
+<li>I then extracted two directories from the tar file called &quot;axiom&quot; and &quot;axiomd&quot;, and then moved them both into the new <code>~/.themes</code> directory. </li>
 <li>Go to Settings Manager &gt; Appearance and choose either axiom or axiomd</li>
 <li>Then is Settings Manager &gt; Window Manager &gt; Style and select either axiom or axiomd</li>
 </ol>
-<a class="header" href="#icons" id="icons"><h2>Icons</h2></a>
-<p>I went with &quot;Papers&quot; icons for now, which you can find download instructions for on <a href="https://snwh.org/paper/download">the offical website</a>. After running those updates, I went to Settings Manager &gt; Appearance &gt; Icons and selected Paper.</p>
-<a class="header" href="#login-window" id="login-window"><h2>Login Window</h2></a>
-<p>Go to Settings Manager &gt; LightDM GTK + Greeter Settings and select the theme and icon set you like. You can also change your user image or remove it all together. Unfortunately, for me, axiom was not available here, so I went with Adwaita for now.</p>
+<h2><a class="header" href="#icons" id="icons">Icons</a></h2>
+<p>I went with &quot;Papers&quot; icons for now, which you can find download instructions for on <a href="https://snwh.org/paper/download">the offical website</a>. After running those updates, I went to Settings Manager &gt; Appearance &gt; Icons and selected Paper. </p>
+<h2><a class="header" href="#login-window" id="login-window">Login Window</a></h2>
+<p>Go to Settings Manager &gt; LightDM GTK + Greeter Settings and select the theme and icon set you like. You can also change your user image or remove it all together. Unfortunately, for me, axiom was not available here, so I went with Adwaita for now. </p>
 <p>Note: <a href="https://www.youtube.com/watch?v=GR2y0xOIIdI">This video</a> helped me quite a bit:</p>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/GR2y0xOIIdI" frameborder="0" allowfullscreen></iframe>
-<a class="header" href="#font" id="font"><h2>Font</h2></a>
-<p>I'm going with Noto Sans for now (the actual choice says &quot;Noto Sans CJK JP&quot;). I selected this font in Settings Manager &gt; Appearance &gt; Fonts. I also selected basically every where else I encountered a choice of font in Settings.</p>
-<a class="header" href="#panels" id="panels"><h2>Panels</h2></a>
-<p>Odds are you Panel 1 is on top of your screen, and panel 2 is the dock-like panel that I think starts at the bottom of your screen.</p>
+<h2><a class="header" href="#font" id="font">Font</a></h2>
+<p>I'm going with Noto Sans for now (the actual choice says &quot;Noto Sans CJK JP&quot;). I selected this font in Settings Manager &gt; Appearance &gt; Fonts. I also selected basically every where else I encountered a choice of font in Settings. </p>
+<h2><a class="header" href="#panels" id="panels">Panels</a></h2>
+<p>Odds are you Panel 1 is on top of your screen, and panel 2 is the dock-like panel that I think starts at the bottom of your screen. </p>
 <p>For customizing Panel 1, I followed some of the instructions in the first minute of <a href="https://www.youtube.com/watch?v=tJQ0y2XMoMw">this video</a>. I set the mode to Vertical, which puts in on the left, increased transparency, and made it 48 pixels wide, and had it never hide. Then, in Items &gt; Applications Menu I deselected &quot;show button title&quot; and changed the image. In Items &gt; Window Buttons I deselected &quot;Show button labels&quot;, selected &quot;Show flat buttons&quot;, deselected &quot;Show handle&quot;, and set Window grouping to always.</p>
-<p>I'm not sure what I want out of panel 2 (the dock) yet, so I set it to be pretty small and have it hide intelligently.</p>
-<a class="header" href="#notes-on-i3" id="notes-on-i3"><h2>Notes on i3</h2></a>
+<p>I'm not sure what I want out of panel 2 (the dock) yet, so I set it to be pretty small and have it hide intelligently. </p>
+<h2><a class="header" href="#notes-on-i3" id="notes-on-i3">Notes on i3</a></h2>
 <p>Good 3-video <a href="https://www.youtube.com/watch?v=j1I63wGcvU4&amp;index=1&amp;list=PL5ze0DjYv5DbCv9vNEzFmP6sU7ZmkGzcf">playlist</a> that shows i3 window manager from the start: https://www.youtube.com/watch?v=j1I63wGcvU4&amp;index=1&amp;list=PL5ze0DjYv5DbCv9vNEzFmP6sU7ZmkGzcf</p>
-<a class="header" href="#install-i3-on-ubuntu" id="install-i3-on-ubuntu"><h3>Install i3 on Ubuntu</h3></a>
+<h3><a class="header" href="#install-i3-on-ubuntu" id="install-i3-on-ubuntu">Install i3 on Ubuntu</a></h3>
 <ol>
-<li>Log in</li>
+<li>Log in </li>
 <li>Open Terminal</li>
 <li><code>sudo apt-get install i3</code>; enter passowrd</li>
 <li>log out</li>
@@ -1114,7 +1117,7 @@ pgrep scdaemon
 <li>Press enter to generate a config file</li>
 <li>Select mod key (think we want the &quot;windows&quot; key)</li>
 </ol>
-<a class="header" href="#basic-default-keybindings" id="basic-default-keybindings"><h3>Basic, Default Keybindings</h3></a>
+<h3><a class="header" href="#basic-default-keybindings" id="basic-default-keybindings">Basic, Default Keybindings</a></h3>
 <ul>
 <li>
 <p>open a new instance of terminal (hope it's GNOME...): mod + Enter</p>
@@ -1144,7 +1147,7 @@ pgrep scdaemon
 <p>move or swap a window within the current workspace: mod + shift + arrow keys</p>
 </li>
 <li>
-<p>log out with mod + shift + e</p>
+<p>log out with mod + shift + e </p>
 </li>
 <li>
 <p>lock out: enter in terminal <code>i3lock</code></p>
@@ -1153,23 +1156,23 @@ pgrep scdaemon
 <p>refresh your i3 config: mod + shift + r</p>
 </li>
 </ul>
-<a class="header" href="#workspaces" id="workspaces"><h4>Workspaces</h4></a>
+<h4><a class="header" href="#workspaces" id="workspaces">Workspaces</a></h4>
 <p>&quot;There is no maximize key in i3. What you want to do is move it to a different workspace.&quot;</p>
 <ul>
 <li>move current window to a different workspace: mod + shift + number</li>
 </ul>
-<a class="header" href="#resizing-windows" id="resizing-windows"><h4>Resizing Windows</h4></a>
-<p>First, enter resize mode with mod + r. Red box appears. Escape to exit resize mode.</p>
-<p>Now can use the arrow keys to resize the current window.</p>
-<a class="header" href="#stacking-and-tab-mode-as-opposed-to-tiling-mode" id="stacking-and-tab-mode-as-opposed-to-tiling-mode"><h4>Stacking and Tab mode (as opposed to tiling mode)</h4></a>
+<h4><a class="header" href="#resizing-windows" id="resizing-windows">Resizing Windows</a></h4>
+<p>First, enter resize mode with mod + r. Red box appears. Escape to exit resize mode. </p>
+<p>Now can use the arrow keys to resize the current window. </p>
+<h4><a class="header" href="#stacking-and-tab-mode-as-opposed-to-tiling-mode" id="stacking-and-tab-mode-as-opposed-to-tiling-mode">Stacking and Tab mode (as opposed to tiling mode)</a></h4>
 <ul>
 <li>enter stacking mode with mod + s</li>
 <li>navigate the stack with mod + arrows</li>
-<li>return to tiling mode with mod + e</li>
+<li>return to tiling mode with mod + e </li>
 </ul>
 <p>mod + w enters &quot;tab&quot; mode</p>
-<a class="header" href="#customization-basics" id="customization-basics"><h3>Customization Basics</h3></a>
-<a class="header" href="#questions" id="questions"><h3>Questions</h3></a>
+<h3><a class="header" href="#customization-basics" id="customization-basics">Customization Basics</a></h3>
+<h3><a class="header" href="#questions" id="questions">Questions</a></h3>
 <ol>
 <li>How do I open a file manager window?</li>
 </ol>
@@ -1180,57 +1183,57 @@ pgrep scdaemon
 <li>How do I set it so KeePassXC as a floating window by default (at least initially?)</li>
 <li></li>
 </ol>
-<a class="header" href="#trying-other-desktop-environments-with-ubuntu-besides-unity" id="trying-other-desktop-environments-with-ubuntu-besides-unity"><h1>Trying Other Desktop Environments with Ubuntu (Besides Unity)</h1></a>
-<a class="header" href="#xfce" id="xfce"><h2>XFCE</h2></a>
-<a class="header" href="#to-install" id="to-install"><h3>To install</h3></a>
+<h1><a class="header" href="#trying-other-desktop-environments-with-ubuntu-besides-unity" id="trying-other-desktop-environments-with-ubuntu-besides-unity">Trying Other Desktop Environments with Ubuntu (Besides Unity)</a></h1>
+<h2><a class="header" href="#xfce" id="xfce">XFCE</a></h2>
+<h3><a class="header" href="#to-install" id="to-install">To install</a></h3>
 <ol>
 <li><code>sudo apt-get install xfce4 xfce4-goodies</code></li>
 <li>Restart</li>
 <li>Login as &quot;xfce session&quot;</li>
 </ol>
-<a class="header" href="#what-you-get-straight-out-of-the-box" id="what-you-get-straight-out-of-the-box"><h3>What You Get Straight out of the Box</h3></a>
+<h3><a class="header" href="#what-you-get-straight-out-of-the-box" id="what-you-get-straight-out-of-the-box">What You Get Straight out of the Box</a></h3>
 <ul>
-<li>&quot;Whisker menu&quot; is the Start-menu-like menu in the top left. Same as Lubuntu</li>
+<li>&quot;Whisker menu&quot; is the Start-menu-like menu in the top left. Same as Lubuntu </li>
 <li>A nice, MacOS-like dock on the bottom with GNOME Terminal, File Manager, Web Browser (default), and a search</li>
 </ul>
-<a class="header" href="#settings" id="settings"><h3>Settings</h3></a>
+<h3><a class="header" href="#settings" id="settings">Settings</a></h3>
 <p>There's a nice Settings menu in Whisker menu &gt; Settings &gt; Settings Manager</p>
 <ul>
 <li>In Window Manager &gt; Keyboard, I set up a bucnh of window resizing keyboard shorts!</li>
-<li>In Session and Startup &gt; Application Autostart, I entered a custom command to remap caps lock to control.
+<li>In Session and Startup &gt; Application Autostart, I entered a custom command to remap caps lock to control. 
 Name: remap caps
 Description: remap caps lock to control
 Command: <code>/usr/bin/setxkbmap -option &quot;ctrl:nocaps&quot;</code></li>
 <li>In Mouse and Touchpad &gt; Devices &gt; Touchpad, I enabled &quot;Disable touchpag while typing&quot; and I disabled &quot;Tap touchpad to click&quot;</li>
 </ul>
-<a class="header" href="#memory-usage" id="memory-usage"><h3>Memory Usage</h3></a>
+<h3><a class="header" href="#memory-usage" id="memory-usage">Memory Usage</a></h3>
 <p>With Firefox, Terminal, and Settings open, I've got about 980 MB out of 2GB RAM &quot;available&quot;. (This is compared to abut 1180 MB available when using Lubuntu-- it makes sense that Xubuntu slightly heavier than Lubuntu.)</p>
-<a class="header" href="#pros" id="pros"><h3>Pros</h3></a>
+<h3><a class="header" href="#pros" id="pros">Pros</a></h3>
 <ul>
 <li>Nice desktop
 <ul>
 <li>has a dock by default (edit settings by right-clicking between icons)</li>
-<li>Window Switcher is nice.</li>
-<li>Toolbar on top is nice out of the box.</li>
+<li>Window Switcher is nice. </li>
+<li>Toolbar on top is nice out of the box. </li>
 </ul>
 </li>
 <li>Available on many distros! Only have to learn the tweaks and settings once!</li>
 </ul>
-<a class="header" href="#cons" id="cons"><h3>Cons</h3></a>
+<h3><a class="header" href="#cons" id="cons">Cons</a></h3>
 <ul>
-<li>Cursor is solid white (not smart) in Neovim 0.2, and then when I quit Neovim it's solid white (not smart) in the terminal as well. Not sure how to get at it... I tried creating <code>~/.config/xfce4/terminal/terminalrc</code> and setting a hard-coded cursor color there but I couldn't get it to make any effect (even after a computer restart).</li>
+<li>Cursor is solid white (not smart) in Neovim 0.2, and then when I quit Neovim it's solid white (not smart) in the terminal as well. Not sure how to get at it... I tried creating <code>~/.config/xfce4/terminal/terminalrc</code> and setting a hard-coded cursor color there but I couldn't get it to make any effect (even after a computer restart). </li>
 <li>A helpful Mastodon user pointed me to his XFCE terminal config: https://github.com/zacanger/z/blob/master/.config/xfce4/terminal/terminalrc</li>
 </ul>
-<a class="header" href="#kde" id="kde"><h2>KDE</h2></a>
-<a class="header" href="#to-install-from-ubuntu" id="to-install-from-ubuntu"><h3>To install from Ubuntu</h3></a>
+<h2><a class="header" href="#kde" id="kde">KDE</a></h2>
+<h3><a class="header" href="#to-install-from-ubuntu" id="to-install-from-ubuntu">To install from Ubuntu</a></h3>
 <ol>
 <li><code>sudo apt-get install kubuntu-desktop</code>?</li>
 <li>When you get the chance to choose between &quot;lightdm&quot; and &quot;sddm&quot;, I think you want &quot;sddm&quot;.</li>
 </ol>
 <p>More: https://www.linuxbabe.com/ubuntu/install-kde-plasma-5-7-ubuntu-16-04-ubuntu-16-10</p>
-<a class="header" href="#gnome" id="gnome"><h2>GNOME</h2></a>
+<h2><a class="header" href="#gnome" id="gnome">GNOME</a></h2>
 <p>seems more difficult:  http://sourcedigit.com/20948-how-to-ubuntu-install-gnome-3-22-desktop-environment-on-ubuntu-16-04/</p>
-<a class="header" href="#what-if-this-all-goes-to-shit" id="what-if-this-all-goes-to-shit"><h2>What if this all goes to shit</h2></a>
+<h2><a class="header" href="#what-if-this-all-goes-to-shit" id="what-if-this-all-goes-to-shit">What if this all goes to shit</a></h2>
 <p>Here's a very old &quot;How to get back to pure Ubuntu post&quot;? http://www.psychocats.net/ubuntu/pureubuntu</p>
 
                     </main>
@@ -1256,6 +1259,14 @@ Command: <code>/usr/bin/setxkbmap -option &quot;ctrl:nocaps&quot;</code></li>
 
         
 
+        
+
+        
+        
+        
+        <script type="text/javascript">
+            window.playpen_copyable = true;
+        </script>
         
 
         

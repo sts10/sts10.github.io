@@ -1,9 +1,11 @@
 <!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js">
+<html lang="en" class="sidebar-visible no-js light">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Switching to Lubuntu - Docs</title>
+        
+
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,9 +32,12 @@
 
         
     </head>
-    <body class="light">
+    <body>
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">var path_to_root = "../";</script>
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "light" : "light";
+        </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script type="text/javascript">
@@ -53,10 +58,13 @@
         <!-- Set the theme before any content is loaded, prevents flash -->
         <script type="text/javascript">
             var theme;
-            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { } 
-            if (theme === null || theme === undefined) { theme = 'light'; }
-            document.body.className = theme;
-            document.querySelector('html').className = theme + ' js';
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
@@ -72,7 +80,10 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li><a href="../welcome.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><a href="../installing-on-oryx.html"><strong aria-hidden="true">2.</strong> Installing a Fresh Distro on Oryx Pro</a></li><li><a href="../initial-setup/index.html"><strong aria-hidden="true">3.</strong> Initial Setup</a></li><li><ol class="section"><li><a href="../initial-setup/basics.html"><strong aria-hidden="true">3.1.</strong> Basics</a></li><li><a href="../initial-setup/bashrc-and-konsole.html"><strong aria-hidden="true">3.2.</strong> bashrc and terminal</a></li><li><a href="../initial-setup/git.html"><strong aria-hidden="true">3.3.</strong> Git</a></li><li><a href="../initial-setup/neovim.html"><strong aria-hidden="true">3.4.</strong> Neovim</a></li><li><a href="../initial-setup/keepassxc.html"><strong aria-hidden="true">3.5.</strong> KeePassXC</a></li><li><a href="../initial-setup/syncthing.html"><strong aria-hidden="true">3.6.</strong> Syncthing</a></li><li><a href="../initial-setup/standard-notes.html"><strong aria-hidden="true">3.7.</strong> Standard Notes</a></li><li><a href="../initial-setup/pgp.html"><strong aria-hidden="true">3.8.</strong> PGP</a></li><li><a href="../initial-setup/other-apps.html"><strong aria-hidden="true">3.9.</strong> Other Apps to Install</a></li><li><a href="../initial-setup/chrome-and-flash.html"><strong aria-hidden="true">3.10.</strong> Chrome and Flash</a></li><li><a href="../initial-setup/dev-env/index.html"><strong aria-hidden="true">3.11.</strong> Development Environment</a></li><li><ol class="section"><li><a href="../initial-setup/dev-env/python-pyenv.html"><strong aria-hidden="true">3.11.1.</strong> Python and pyenv</a></li><li><a href="../initial-setup/dev-env/ruby-and-rbenv.html"><strong aria-hidden="true">3.11.2.</strong> Ruby and rbenv</a></li><li><a href="../initial-setup/dev-env/rust.html"><strong aria-hidden="true">3.11.3.</strong> Rust</a></li><li><a href="../initial-setup/dev-env/github-and-ssh.html"><strong aria-hidden="true">3.11.4.</strong> GitHub and ssh keys</a></li><li><a href="../initial-setup/dev-env/jekyll.html"><strong aria-hidden="true">3.11.5.</strong> GitHub blog with Jekyll</a></li></ol></li><li><a href="../initial-setup/gnome-setup.html"><strong aria-hidden="true">3.12.</strong> GNOME Setup</a></li><li><a href="../initial-setup/kde-setup.html"><strong aria-hidden="true">3.13.</strong> KDE Setup and Troubleshooting</a></li><li><a href="../initial-setup/redshift.html"><strong aria-hidden="true">3.14.</strong> Redshift</a></li><li><a href="../initial-setup/battery-management.html"><strong aria-hidden="true">3.15.</strong> Battery and TLP</a></li><li><a href="../initial-setup/images-and-video.html"><strong aria-hidden="true">3.16.</strong> Images and Video</a></li></ol></li><li><a href="../installing-ubuntu-on-an-old-macbook-pro.html"><strong aria-hidden="true">4.</strong> Installing Ubuntu on my 2009 MacBook Pro</a></li><li><a href="../lubuntu/index.html"><strong aria-hidden="true">5.</strong> Lubuntu</a></li><li><ol class="section"><li><a href="../lubuntu/switching-to-lubuntu.html" class="active"><strong aria-hidden="true">5.1.</strong> Switching to Lubuntu</a></li><li><a href="../lubuntu/improving-lubuntu.html"><strong aria-hidden="true">5.2.</strong> Improving Lubuntu</a></li><li><a href="../lubuntu/remapping-control-and-caps-lock-lubuntu.html"><strong aria-hidden="true">5.3.</strong> Remapping Caps Lock to Control</a></li><li><a href="../lubuntu/using-neovim-in-lubuntu.html"><strong aria-hidden="true">5.4.</strong> Using Neovim</a></li><li><a href="../lubuntu/rbenv-on-lubuntu.html"><strong aria-hidden="true">5.5.</strong> Using Rbenv</a></li><li><a href="../lubuntu/configuring-openbox-on-lubuntu.html"><strong aria-hidden="true">5.6.</strong> Configuring OpenBox</a></li></ol></li><li><a href="../security/index.html"><strong aria-hidden="true">6.</strong> Security Apps and Tools</a></li><li><ol class="section"><li><a href="../security/installing-gnu-privacy-guard-on-ubuntu.html"><strong aria-hidden="true">6.1.</strong> Installing GNU Privacy Guard</a></li><li><a href="../security/keepassxc-from-snap.html"><strong aria-hidden="true">6.2.</strong> KeePassXC as a Snap</a></li><li><a href="../security/ricochet-114-lubuntu-1604.html"><strong aria-hidden="true">6.3.</strong> Ricochet</a></li><li><a href="../security/python-pip-and-magic-wormhole-on-lubuntu.html"><strong aria-hidden="true">6.4.</strong> Magic Wormhole</a></li><li><a href="../security/using-a-yubikey-from-a-smartcard-on-ubuntu.html"><strong aria-hidden="true">6.5.</strong> YubiKey</a></li><li><a href="../security/pidgin-google-and-otr.html"><strong aria-hidden="true">6.6.</strong> Pidgin, Gchat, and OTR</a></li></ol></li><li><a href="../other-des/index.html"><strong aria-hidden="true">7.</strong> Other DEs</a></li><li><ol class="section"><li><a href="../other-des/customizing-appearance-of-xfce-ubuntu.html"><strong aria-hidden="true">7.1.</strong> Customizing XFCE (Ubuntu base)</a></li><li><a href="../other-des/notes-on-i3.html"><strong aria-hidden="true">7.2.</strong> Notes on i3</a></li><li><a href="../other-des/other-desktop-environments.html"><strong aria-hidden="true">7.3.</strong> Other DEs</a></li></ol></li></ol>
+            <div id="sidebar-scrollbox" class="sidebar-scrollbox">
+                <ol class="chapter"><li class="expanded "><a href="../welcome.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="expanded "><a href="../installing-on-oryx.html"><strong aria-hidden="true">2.</strong> Installing a Fresh Distro on Oryx Pro</a></li><li class="expanded "><a href="../initial-setup/index.html"><strong aria-hidden="true">3.</strong> Initial Setup</a></li><li><ol class="section"><li class="expanded "><a href="../initial-setup/basics.html"><strong aria-hidden="true">3.1.</strong> Basics</a></li><li class="expanded "><a href="../initial-setup/bashrc-and-konsole.html"><strong aria-hidden="true">3.2.</strong> bashrc and terminal</a></li><li class="expanded "><a href="../initial-setup/git.html"><strong aria-hidden="true">3.3.</strong> Git</a></li><li class="expanded "><a href="../initial-setup/neovim.html"><strong aria-hidden="true">3.4.</strong> Neovim</a></li><li class="expanded "><a href="../initial-setup/keepassxc.html"><strong aria-hidden="true">3.5.</strong> KeePassXC</a></li><li class="expanded "><a href="../initial-setup/syncthing.html"><strong aria-hidden="true">3.6.</strong> Syncthing</a></li><li class="expanded "><a href="../initial-setup/standard-notes.html"><strong aria-hidden="true">3.7.</strong> Standard Notes</a></li><li class="expanded "><a href="../initial-setup/pgp.html"><strong aria-hidden="true">3.8.</strong> PGP</a></li><li class="expanded "><a href="../initial-setup/other-apps.html"><strong aria-hidden="true">3.9.</strong> Other Apps to Install</a></li><li class="expanded "><a href="../initial-setup/chrome-and-flash.html"><strong aria-hidden="true">3.10.</strong> Chrome and Flash</a></li><li class="expanded "><a href="../initial-setup/dev-env/index.html"><strong aria-hidden="true">3.11.</strong> Development Environment</a></li><li><ol class="section"><li class="expanded "><a href="../initial-setup/dev-env/python-pyenv.html"><strong aria-hidden="true">3.11.1.</strong> Python and pyenv</a></li><li class="expanded "><a href="../initial-setup/dev-env/ruby-and-rbenv.html"><strong aria-hidden="true">3.11.2.</strong> Ruby and rbenv</a></li><li class="expanded "><a href="../initial-setup/dev-env/rust.html"><strong aria-hidden="true">3.11.3.</strong> Rust</a></li><li class="expanded "><a href="../initial-setup/dev-env/github-and-ssh.html"><strong aria-hidden="true">3.11.4.</strong> GitHub and ssh keys</a></li><li class="expanded "><a href="../initial-setup/dev-env/jekyll.html"><strong aria-hidden="true">3.11.5.</strong> GitHub blog with Jekyll</a></li></ol></li><li class="expanded "><a href="../initial-setup/gnome-setup.html"><strong aria-hidden="true">3.12.</strong> GNOME Setup</a></li><li class="expanded "><a href="../initial-setup/kde-setup.html"><strong aria-hidden="true">3.13.</strong> KDE Setup and Troubleshooting</a></li><li class="expanded "><a href="../initial-setup/redshift.html"><strong aria-hidden="true">3.14.</strong> Redshift</a></li><li class="expanded "><a href="../initial-setup/battery-management.html"><strong aria-hidden="true">3.15.</strong> Battery and TLP</a></li><li class="expanded "><a href="../initial-setup/images-and-video.html"><strong aria-hidden="true">3.16.</strong> Images and Video</a></li></ol></li><li class="expanded "><a href="../installing-ubuntu-on-an-old-macbook-pro.html"><strong aria-hidden="true">4.</strong> Installing Ubuntu on my 2009 MacBook Pro</a></li><li class="expanded "><a href="../lubuntu/index.html"><strong aria-hidden="true">5.</strong> Lubuntu</a></li><li><ol class="section"><li class="expanded "><a href="../lubuntu/switching-to-lubuntu.html" class="active"><strong aria-hidden="true">5.1.</strong> Switching to Lubuntu</a></li><li class="expanded "><a href="../lubuntu/improving-lubuntu.html"><strong aria-hidden="true">5.2.</strong> Improving Lubuntu</a></li><li class="expanded "><a href="../lubuntu/remapping-control-and-caps-lock-lubuntu.html"><strong aria-hidden="true">5.3.</strong> Remapping Caps Lock to Control</a></li><li class="expanded "><a href="../lubuntu/using-neovim-in-lubuntu.html"><strong aria-hidden="true">5.4.</strong> Using Neovim</a></li><li class="expanded "><a href="../lubuntu/rbenv-on-lubuntu.html"><strong aria-hidden="true">5.5.</strong> Using Rbenv</a></li><li class="expanded "><a href="../lubuntu/configuring-openbox-on-lubuntu.html"><strong aria-hidden="true">5.6.</strong> Configuring OpenBox</a></li></ol></li><li class="expanded "><a href="../security/index.html"><strong aria-hidden="true">6.</strong> Security Apps and Tools</a></li><li><ol class="section"><li class="expanded "><a href="../security/installing-gnu-privacy-guard-on-ubuntu.html"><strong aria-hidden="true">6.1.</strong> Installing GNU Privacy Guard</a></li><li class="expanded "><a href="../security/keepassxc-from-snap.html"><strong aria-hidden="true">6.2.</strong> KeePassXC as a Snap</a></li><li class="expanded "><a href="../security/ricochet-114-lubuntu-1604.html"><strong aria-hidden="true">6.3.</strong> Ricochet</a></li><li class="expanded "><a href="../security/python-pip-and-magic-wormhole-on-lubuntu.html"><strong aria-hidden="true">6.4.</strong> Magic Wormhole</a></li><li class="expanded "><a href="../security/using-a-yubikey-from-a-smartcard-on-ubuntu.html"><strong aria-hidden="true">6.5.</strong> YubiKey</a></li><li class="expanded "><a href="../security/pidgin-google-and-otr.html"><strong aria-hidden="true">6.6.</strong> Pidgin, Gchat, and OTR</a></li></ol></li><li class="expanded "><a href="../other-des/index.html"><strong aria-hidden="true">7.</strong> Other DEs</a></li><li><ol class="section"><li class="expanded "><a href="../other-des/customizing-appearance-of-xfce-ubuntu.html"><strong aria-hidden="true">7.1.</strong> Customizing XFCE (Ubuntu base)</a></li><li class="expanded "><a href="../other-des/notes-on-i3.html"><strong aria-hidden="true">7.2.</strong> Notes on i3</a></li><li class="expanded "><a href="../other-des/other-desktop-environments.html"><strong aria-hidden="true">7.3.</strong> Other DEs</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -89,7 +100,7 @@
                                 <i class="fa fa-paint-brush"></i>
                             </button>
                             <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                                <li role="none"><button role="menuitem" class="theme" id="light">Light <span class="default">(default)</span></button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
                                 <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                                 <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                                 <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
@@ -102,12 +113,13 @@
                             
                         </div>
 
-                        <h1 class="menu-title">Docs</h1> 
+                        <h1 class="menu-title">Docs</h1>
 
                         <div class="right-buttons">
                             <a href="../print.html" title="Print this book" aria-label="Print this book">
                                 <i id="print-button" class="fa fa-print"></i>
                             </a>
+                            
                         </div>
                     </div>
                 </div>
@@ -136,25 +148,25 @@
 
                 <div id="content" class="content">
                     <main>
-                        <a class="header" href="#switching-from-ubuntu-to-lubuntu" id="switching-from-ubuntu-to-lubuntu"><h2>Switching from Ubuntu to Lubuntu</h2></a>
+                        <h2><a class="header" href="#switching-from-ubuntu-to-lubuntu" id="switching-from-ubuntu-to-lubuntu">Switching from Ubuntu to Lubuntu</a></h2>
 <p>To avoid the high memory usage of Ubuntu's Unity desktop environment, I installed Ubuntu's LXDE desktop environment (called Lubuntu). I had a gist that Unity was a bit of a memory hog compared to other desktop environments. I also spotted <a href="https://www.reddit.com/r/linux/comments/5l39tz/linux_distros_ram_consumption_comparison_updated/?st=ixpgu5wy&amp;sh=67b8f57f">this Reddit post</a> that compares some lightweight distros in terms of RAM consumption and Lubuntu did well.</p>
-<p>To install Lubuntu, I ran <code>sudo apt-get install lubuntu-desktop</code> (I learned this from a helpful user in the <a href="https://riot.im/app/#/room/ubuntu:matrix.org">Ubuntu Riot.im channel</a>). The size of the installation was about 340 mb.</p>
-<p>After installing the Lubuntu desktop environment, you want to run the software updater (you can also update software in the Terminal by running <code>sudo apt update &amp;&amp; sudo apt upgrade</code>). Then restart the computer (that seems to have been pretty important), and at the login screen choose Lubuntu (or LXDE... that's another option and I'm not sure what the difference is).</p>
+<p>To install Lubuntu, I ran <code>sudo apt-get install lubuntu-desktop</code> (I learned this from a helpful user in the <a href="https://riot.im/app/#/room/ubuntu:matrix.org">Ubuntu Riot.im channel</a>). The size of the installation was about 340 mb. </p>
+<p>After installing the Lubuntu desktop environment, you want to run the software updater (you can also update software in the Terminal by running <code>sudo apt update &amp;&amp; sudo apt upgrade</code>). Then restart the computer (that seems to have been pretty important), and at the login screen choose Lubuntu (or LXDE... that's another option and I'm not sure what the difference is). </p>
 <p>You can check how much RAM you have available by running <code>free -m</code> in the terminal. Thanks to <a href="http://www.linuxatemyram.com/">this site</a>, I knew to look for the value under &quot;available&quot; to get an accurate estimate of how many megabytes of my memory were &quot;free&quot;. With my terminal and Firefox running on Lubuntu, I have about 1187 MB RAM of my 2 GB available, as opposed to Ubuntu, which generally only left about 700 or 800 MB available when I was running a couple of programs (not a very scientific test, I know).</p>
 <p>Plus I can always switch back to regular Ubuntu via the login screen.</p>
-<p>Lubuntu is pretty snappy! I did want to make a few simple changes right off the bat. Here's how I went about some of them.</p>
-<a class="header" href="#how-to-disable-tap-to-click-persistently-in-lubuntu" id="how-to-disable-tap-to-click-persistently-in-lubuntu"><h3>How to disable tap to click persistently in Lubuntu</h3></a>
+<p>Lubuntu is pretty snappy! I did want to make a few simple changes right off the bat. Here's how I went about some of them. </p>
+<h3><a class="header" href="#how-to-disable-tap-to-click-persistently-in-lubuntu" id="how-to-disable-tap-to-click-persistently-in-lubuntu">How to disable tap to click persistently in Lubuntu</a></h3>
 <p>I wanted to disable my touchpad from clicking, which I did by doing this:</p>
 <ol>
 <li>Open <code>~/.config/lxsession/lubuntu/autostart</code> or possibly <code>~/.config/lxsession/LXDE/autostart</code> (not sure which)</li>
 <li>To disable tap touchpad to click, add <code>synclient MaxTapTime=0</code></li>
 </ol>
 <p>You can find other settings to set <a href="https://help.ubuntu.com/community/Lubuntu/Mouse">here</a>, like enabling two-finger horizontal scroll (<code>synclient HorizTwoFingerScroll=1</code>).</p>
-<a class="header" href="#installing-an-application-launcher-for-lubuntu" id="installing-an-application-launcher-for-lubuntu"><h3>Installing an application launcher for Lubuntu</h3></a>
-<p>On macOS I make frequent use of <a href="https://www.alfredapp.com/">Alfred</a> as an application launcher. Ubuntu's Unity desktop environment sort of had something like that, which you can initiate by pressing the command key on its own at any time. But I couldn't find something similar in LXDE-- the application menu (similar to the Start menu in Windows) was just not fast enough for me coming from macOS + Alfred).</p>
-<p>So I found <a href="https://askubuntu.com/questions/203851/any-search-tool-for-lxde-menu/203852#203852">this askubuntu answer</a> that recommends installing an application called Synapse by running <code>sudo apt-get install synapse</code>. By default the launcher is invoked by hitting <code>ctrl + space</code>, but I changed it to <code>alt+Enter</code> by launching Synapse and clicking on the not-super-obvious round button on the right side of the pop-up display and clicking &quot;Preferences&quot;. Works great!</p>
-<a class="header" href="#my-attempt-to-make-the-gnome-terminal-the-default" id="my-attempt-to-make-the-gnome-terminal-the-default"><h3>My attempt to make the Gnome terminal the default</h3></a>
-<p>The default Terminal in Lubuntu (think it's called LXTerminal) didn't support true color in Vim, so I looked for other options. I had gotten used to the terminal in regular Ubuntu (which I'm pretty sure is the Gnome Terminal), so I figured I could switch that in on Lubuntu. Oddly it's not in the main menu of applications though.</p>
+<h3><a class="header" href="#installing-an-application-launcher-for-lubuntu" id="installing-an-application-launcher-for-lubuntu">Installing an application launcher for Lubuntu</a></h3>
+<p>On macOS I make frequent use of <a href="https://www.alfredapp.com/">Alfred</a> as an application launcher. Ubuntu's Unity desktop environment sort of had something like that, which you can initiate by pressing the command key on its own at any time. But I couldn't find something similar in LXDE-- the application menu (similar to the Start menu in Windows) was just not fast enough for me coming from macOS + Alfred). </p>
+<p>So I found <a href="https://askubuntu.com/questions/203851/any-search-tool-for-lxde-menu/203852#203852">this askubuntu answer</a> that recommends installing an application called Synapse by running <code>sudo apt-get install synapse</code>. By default the launcher is invoked by hitting <code>ctrl + space</code>, but I changed it to <code>alt+Enter</code> by launching Synapse and clicking on the not-super-obvious round button on the right side of the pop-up display and clicking &quot;Preferences&quot;. Works great! </p>
+<h3><a class="header" href="#my-attempt-to-make-the-gnome-terminal-the-default" id="my-attempt-to-make-the-gnome-terminal-the-default">My attempt to make the Gnome terminal the default</a></h3>
+<p>The default Terminal in Lubuntu (think it's called LXTerminal) didn't support true color in Vim, so I looked for other options. I had gotten used to the terminal in regular Ubuntu (which I'm pretty sure is the Gnome Terminal), so I figured I could switch that in on Lubuntu. Oddly it's not in the main menu of applications though. </p>
 <p>First, I figured out a way to set it as the &quot;default&quot; terminal:</p>
 <ol>
 <li>menu &gt; Preferences &gt; Default applications LXSession</li>
@@ -174,9 +186,9 @@ Keywords=console;command line;execute;
 </code></pre>
 <p>Upon saving that file, I got a new icon in menu &gt; System Tools called &quot;GNOME Terminal&quot; that launches my now-beloved Gnome Terminal. Woohoo! (If <code>Icon=gnome-terminal</code> hadn't worked I would have used <code>Icon=lxterminal</code>)</p>
 <p><em>See separate entry for more on using Vim in Lubuntu.</em></p>
-<a class="header" href="#more-lubuntu-configuration-ideas" id="more-lubuntu-configuration-ideas"><h3>More Lubuntu configuration ideas</h3></a>
+<h3><a class="header" href="#more-lubuntu-configuration-ideas" id="more-lubuntu-configuration-ideas">More Lubuntu configuration ideas</a></h3>
 <p>Just found <a href="https://ubuntuforums.org/showthread.php?t=1905408">this long forum post</a> with more ideas of recommended features for Lubuntu.  There's also the <a href="https://help.ubuntu.com/community/Lubuntu">Community Help Page</a> here.</p>
-<a class="header" href="#some-lingering-problems-on-lubuntu" id="some-lingering-problems-on-lubuntu"><h3>Some lingering problems on Lubuntu</h3></a>
+<h3><a class="header" href="#some-lingering-problems-on-lubuntu" id="some-lingering-problems-on-lubuntu">Some lingering problems on Lubuntu</a></h3>
 <ul>
 <li>can't figure out how to set custom openbox keybindings</li>
 <li>Want to disable scrolling in Gnome terminal</li>
@@ -221,6 +233,14 @@ Keywords=console;command line;execute;
 
         
 
+        
+
+        
+        
+        
+        <script type="text/javascript">
+            window.playpen_copyable = true;
+        </script>
         
 
         
