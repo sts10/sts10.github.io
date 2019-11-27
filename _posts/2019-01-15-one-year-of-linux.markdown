@@ -91,3 +91,12 @@ I still use Twitter and other social networks of course, but in 2018 I came to r
 
 Thanks to Linux I've shaved my Apple use down to my iPhone, and cut my last ties to Microsoft by no longer needing Office. Mastodon is a cool social network, but it doesn't _replace_ other networks of friends you've made. And while I use Firefox and [DuckDuckGo](https://duckduckgo.com/) more, I still use Google for email, mostly for the security and anti-spam features, and simple inertia, and I use Chrome on Linux to watch Hulu and Netflix. This is all to say that I didn't make _all_ of my tech usage as ethical as possible in 2018. But I think I made some good steps.
 
+## Update as of November 2019
+
+Still using Linux (specifically, Kubuntu 18.04) on my Oryx Pro! I've collected a lot of my notes on how I set up and use Linux over in this ["Docs" site](https://sts10.github.io/docs/). 
+
+Also, I now use Firefox (v 70.0.1) for everything, including watching videos on Hulu and Netflix. Still using Google for email and my calendar though. 
+
+I'm also looking for decentralized options for things like real-time, encrypted messaging. There's no clear front-runner for that right now as far as I can tell, but three promising options are [Matrix/Riot](https://matrix.org/), [Cwtch](https://cwtch.im/), and XMPP with OMEMO. In reality I still use Wire and Signal, which are still both centralized and slightly problematic for different reasons.
+
+For email, I'm curious about [Helm](https://www.thehelm.com/) (here's [a review](https://theintercept.com/2019/04/30/helm-email-server/)).
