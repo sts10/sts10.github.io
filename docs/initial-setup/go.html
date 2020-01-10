@@ -150,6 +150,37 @@
                     <main>
                         <h1><a class="header" href="#go" id="go">Go</a></h1>
 <p>A good desktop app: <a href="https://sabaki.yichuanshen.de/">Sabaki</a> (<a href="https://github.com/SabakiHQ/Sabaki">GitHub repo</a>). To install it, I went with the x64 AppImage, probably from <a href="https://github.com/SabakiHQ/Sabaki/releases">the GitHub Releases tab</a>).</p>
+<p>You can also &quot;attach&quot; <a href="https://github.com/SabakiHQ/Sabaki/blob/master/docs/guides/engines.md">a number of &quot;game engines&quot;</a> to Sabaki to either play against or have analyze your games. You can manage the engines available to Sabaki by going to &quot;Engines&quot; &gt; &quot;Manage Engines&quot;. </p>
+<h2><a class="header" href="#setting-up-the-gnugo-engine" id="setting-up-the-gnugo-engine">Setting up the GNUGo Engine</a></h2>
+<p><a href="https://www.gnu.org/software/gnugo/gnugo.html">GNU Go</a> is an engine that's nice in that it can (a) play on multiple board sizes out of the box, and (b) has multiple levels to choose from (1 through 10 or 1 through 9, I'm not sure).</p>
+<h3><a class="header" href="#installing-gnu-go-on-ubuntu" id="installing-gnu-go-on-ubuntu">Installing GNU Go on Ubuntu</a></h3>
+<p>Go to the <a href="https://www.gnu.org/software/gnugo/download.html">Download page</a> and download the source code to the latest version of GNU Go. It's likely to be a <code>tar.gz</code> file. Once downloaded, expand it. </p>
+<p>Inside that directory, there should be a README and an INSTALL documentation text file for you. But basically, to make the executable, I think you run </p>
+<pre><code>./configure --enable-level=4; make
+</code></pre>
+<p>To build a level 4 binary. (There are plenty of other options in one of the documentation text files.) This binary will be created and placed at <code>./interface/gnugo</code>. Cool. </p>
+<p>Now in Sabaki, go to Engines &gt; Manage Engines and click the &quot;Add&quot; button. For path, enter <code>path/to/interface/gnugo</code>, and then for &quot;arguments&quot; I'm pretty sure you want to put <code>--mode gtp</code>. Leave &quot;Initial commands&quot; blank. Note that after Adding an engine, you may need to restart Sabaki to use it.</p>
+<p>To attach <strong>multiple levels</strong> of GNU Go, I just duplicate the folder and rebuilt with the level I want. So in <code>go-engines</code> I've got:</p>
+<pre><code class="language-txt">go-engines/gnugo-3.8-lvl1
+go-engines/gnugo-3.8-lvl2
+go-engines/gnugo-3.8-lvl3
+go-engines/gnugo-3.8-lvl5
+go-engines/gnugo-3.8-lvl7
+go-engines/gnugo-3.8-lvl9
+</code></pre>
+<p>each of which have their own executables at <code>interface/gnugo</code> to attach in Sabaki. For example, my engine named &quot;GNUGo_lvl_3&quot; has a path of <code>go-engines/gnugo-3.8-lvl3/interface/gnugo</code> (&quot;arguments&quot; for all of them are (still) <code>--mode gtp</code>).</p>
+<h2><a class="header" href="#pachi" id="pachi">Pachi</a></h2>
+<p><a href="https://github.com/pasky/pachi">Pachi</a> is a pretty strong engine, but that, unlike LeelaZero, can play smaller board sizes out-of-the-box, so to speak. The developers note:</p>
+<blockquote>
+<p>The default engine plays by Chinese rules and should be about 7d KGS strength on 9x9. On 19x19 it can hold a solid KGS 2d rank on modest hardware (Raspberry Pi, dcnn) or faster machine (e.g. six-way Intel i7) without dcnn.</p>
+</blockquote>
+<h3><a class="header" href="#install-pachi-via-pre-compiled-binary" id="install-pachi-via-pre-compiled-binary">Install Pachi via pre-compiled binary</a></h3>
+<p>To install Pachi via pre-compiled binary, head over to <a href="https://github.com/pasky/pachi/releases">GitHub Releases page</a> and download the latest <code>-linux-static.zip</code>. Extract this. </p>
+<h3><a class="header" href="#connecting-pachi-to-sabaki" id="connecting-pachi-to-sabaki">Connecting Pachi to Sabaki</a></h3>
+<p>I didn't change any configurations. </p>
+<p>Then in Sabaki, I just entered the path to the <code>pachi-12.40-amd64</code> file in the unzipped directory, with no arguments or initial commands, and it seems to work. However, as I installed it, it can only do analysis on 19x19 boards I think?</p>
+<h3><a class="header" href="#compiling-pachi-from-source" id="compiling-pachi-from-source">Compiling Pachi from Source</a></h3>
+<p>I haven't tried this, but they say it might improve performance. <a href="https://launchpad.net/%7Elemonsqueeze/+archive/ubuntu/pachi">Instructions here</a>.</p>
 <h2><a class="header" href="#setting-up-leelazero-ubuntu" id="setting-up-leelazero-ubuntu">Setting up LeelaZero (Ubuntu)</a></h2>
 <ol>
 <li>Download and install <a href="https://github.com/SabakiHQ/Sabaki/">Sabaki</a>. Make sure it runs before proceeding.</li>
@@ -159,7 +190,13 @@
 <li>Restart Sabaki </li>
 <li>Find the Game Info menu item. For White, in the drop-down menu, select Leela Zero. Make sure you choose a 19 by 19 board. And you're probably going to want a large handicap.</li>
 </ol>
-<h2><a class="header" href="#cool-things-you-can-do-now-that-you-have-an-engine-attached" id="cool-things-you-can-do-now-that-you-have-an-engine-attached">Cool things you can do now that you have an engine attached</a></h2>
+<h2><a class="header" href="#how-to-play-against-a-game-engine" id="how-to-play-against-a-game-engine">How to play against a game engine</a></h2>
+<p>To play against one of these engines, open Sabaki. Be sure you're on a blank, new game. Then go to &quot;File&quot; &gt; &quot;Game Info&quot;. If you want Balck, make the engine take Whtie by clicking the down arrow next to &quot;White&quot; and selecting the engine you want to play. Fill out the other fields as desired, then hit the OK button. If you're Black, place a stone to start the game, and the engine should respond. To see what the engine is doing, go to &quot;Engines&quot; &gt; &quot;Toggle GTP console&quot;.</p>
+<p>Alternatively you can manually attach an engine by going to Engines &gt; &quot;Attach&quot;. </p>
+<h2><a class="header" href="#recommended-sabaki-preferences" id="recommended-sabaki-preferences">Recommended Sabaki preferences</a></h2>
+<p>To prevent engines from making moves <em>right</em> when you initially attach them (which can be annoying if you just want to use the engine to analyze possible moves [see below]), I would go to File &gt; Preferences and uncheck &quot;Start game right after attaching engines&quot;. The con to this is that to start playing a game against an engine, you have to first attach it (&quot;Engines&quot; &gt; &quot;Attach&quot;), then (sometimes) tell it to start playing (&quot;Engines&quot; &gt; &quot;Start Playing&quot;).</p>
+<h2><a class="header" href="#analysis" id="analysis">Analysis</a></h2>
+<p>Some of these engines allow you to analyze next moves.</p>
 <ol>
 <li>&quot;Engines&quot; &gt; &quot;Toggle Analysis&quot; gives you a heat map of what Leela likes for the next move. Leela will do both show the analysis of its moves <em>as well as</em> provide analysis for your move (you can accept by clicking on the green blob, or move somewhere else)</li>
 <li>With &quot;Analysis&quot; toggled on, you can also hover a piece over a space and Leela will play out the game from there, if you were to move there.</li>
