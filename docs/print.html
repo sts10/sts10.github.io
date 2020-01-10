@@ -713,10 +713,12 @@ fi
 <p>For editing RAW photos, try Darktable of DigiKam(?). Here are some <a href="https://github.com/t3mujin/t3mujinpack">free film emulators</a> for DarkTable. </p>
 <p>There's also GIMP and Kdenlive (for video)!</p>
 <h1><a class="header" href="#go" id="go">Go</a></h1>
-<p>Go is a board game!</p>
+<p>[Go](https://en.wikipedia.org/wiki/Go_(game)) is a ~2,500-year-old abstract strategy board game! </p>
+<p>If you just want to play Go on your desktop, an easy way to do it is in your browser through an online server like <a href="https://online-go.com/">OGS</a>. On iOS I like <a href="https://apps.apple.com/us/app/smartgo-player/id314506629">SmartGo</a>. See more Go resources at the bottom of this page.</p>
+<h2><a class="header" href="#sabaki-a-desktop-go-app-for-linux" id="sabaki-a-desktop-go-app-for-linux">Sabaki, a desktop Go app for Linux</a></h2>
 <p>A good desktop app that works for Linux is <a href="https://sabaki.yichuanshen.de/">Sabaki</a> (<a href="https://github.com/SabakiHQ/Sabaki">GitHub repo</a>). To install it, I went with the x64 AppImage, probably from <a href="https://github.com/SabakiHQ/Sabaki/releases">the GitHub Releases tab</a>).</p>
 <p>In Sabaki you can play against yourself or load and go through SGF files. But you can also &quot;attach&quot; <a href="https://github.com/SabakiHQ/Sabaki/blob/master/docs/guides/engines.md">a number of &quot;game engines&quot;</a> to Sabaki to either play against or have analyze games. You can manage the engines available to Sabaki by going to &quot;Engines&quot; &gt; &quot;Manage Engines&quot;. </p>
-<h2><a class="header" href="#setting-up-the-gnu-go-engine" id="setting-up-the-gnu-go-engine">Setting up the GNU Go Engine</a></h2>
+<h2><a class="header" href="#setting-up-the-gnu-go-engine" id="setting-up-the-gnu-go-engine">Setting up the GNU Go engine</a></h2>
 <p><a href="https://www.gnu.org/software/gnugo/gnugo.html">GNU Go</a> is an engine that's nice in that it can (a) play on multiple board sizes out of the box, and (b) has multiple levels to choose from (1 through 10 or 1 through 9, I'm not sure).</p>
 <h3><a class="header" href="#installing-gnu-go-on-ubuntu" id="installing-gnu-go-on-ubuntu">Installing GNU Go on Ubuntu</a></h3>
 <p>Go to the <a href="https://www.gnu.org/software/gnugo/download.html">Download page</a> and download the source code to the latest version of GNU Go. It's likely to be a <code>tar.gz</code> file. Once downloaded, expand it. </p>
@@ -767,6 +769,48 @@ go-engines/gnugo-3.8-lvl9
 <li>With &quot;Analysis&quot; toggled on, you can also hover a piece over a space and the engine will play out the game from there, if you were to move there.</li>
 </ol>
 <p>If the GPU load gets to be too much, you can always make the engine suspend by going to &quot;Engines&quot; &gt; &quot;Suspend&quot;. Toggling Analysis off will help too, as the engine won't think during your move.</p>
+<h2><a class="header" href="#appendix-go-resources" id="appendix-go-resources">Appendix: Go resources</a></h2>
+<p>If you're here and want to learn more about Go, I've pasted some of my notes on general Go resources below.</p>
+<h3><a class="header" href="#learning-the-rules" id="learning-the-rules">Learning the rules</a></h3>
+<p>To learn how to play Go, I'd recommend watching YouTube videos (links below), but obviously there are other ways.</p>
+<ul>
+<li>YouTube videos I liked: <a href="https://www.youtube.com/watch?v=Vov_keBQOJ8&amp;list=PL5mVjO5OFYSzIlp0aTDsE_1Xsx16AaUej">&quot;How to Play Go&quot; YouTube series</a>. Here's <a href="https://www.youtube.com/watch?v=xMshtO8h7RU">another one I watched</a>, and <a href="https://www.youtube.com/watch?v=eNpJF0BzUig">one from the New York Institute of Go</a>. </li>
+<li>The <a href="https://www.reddit.com/r/baduk">r/baduk subreddit</a> (&quot;Baduk&quot; is what they call the game in Korean, and has much better search-ability online) has <a href="https://www.reddit.com/r/baduk/comments/4c8xs5/learning_links_for_newcomers_after_alphago/">a pinned post full of links for newcomers</a>, including to YouTube resources.</li>
+<li>There's also <a href="http://playgo.to/iwtg/en/">this interactive tutorial</a>, though I had to fiddle with my browser settings a bit to make it work. </li>
+<li>Here's <a href="http://www.learngo.co.uk/GoTutor/Tutor.php">a non-interactive slideshow of sorts</a> that looks good.</li>
+</ul>
+<h3><a class="header" href="#actually-playing-games" id="actually-playing-games">Actually playing games</a></h3>
+<ul>
+<li>On desktop web: I like <a href="https://online-go.com/">online-go.com</a> for actually playing Go games online. You can play both other humans and a variety of bots with different skill levels. 
+<ul>
+<li>If you don't want to be bothered to create an account, there's <a href="https://www.cosumi.net/en/">this site</a>, though it doesn't offer handicaps on smaller boards like 9 by 9, so you're probably going to lose way more than half the time.</li>
+</ul>
+</li>
+<li>On iOS: As mentioned, I've found <a href="https://apps.apple.com/us/app/smartgo-player/id314506629">this $2.99 app called SmartGo</a> nice for beginners like me. If you ask, it'll estimate the score for you and even suggest a move for you. If that's not challenging enough, <a href="https://new3rs.github.io/a_master_of_go/index.html">A Master of Go</a> is an expensive iOS app that features high-end AI software.</li>
+<li>On your desktop, you can install Sabaki and a number of Go engines to play against.</li>
+<li>There are more software options listed <a href="https://www.reddit.com/r/cbaduk/comments/c0o8f1/go_software/">here</a>.</li>
+</ul>
+<h3><a class="header" href="#exercises" id="exercises">Exercises</a></h3>
+<p>If you're don't want to play full games, you can find apps and websites that provide small exercises or puzzles to play through. </p>
+<ul>
+<li>The iOS app SmartGo that I've mentioned above has a tutorial of live exercises somewhere in the menus.</li>
+<li>online-go.com has <a href="https://online-go.com/puzzle/2625">a &quot;playlist&quot; of puzzles for beginners</a>, though I found them a bit too difficult?</li>
+</ul>
+<h3><a class="header" href="#more-english-language-youtube-channels" id="more-english-language-youtube-channels">More English-language YouTube channels</a></h3>
+<ul>
+<li><a href="https://www.youtube.com/channel/UCCYMY6j5mUvPMPzvN5bxuKA">dwyrin</a></li>
+<li><a href="https://www.youtube.com/channel/UC_msctwlIh2cwM8yAtaju1A">Nick Sibicky</a></li>
+<li><a href="https://www.youtube.com/user/goingceo/videos">Go Pro Yeonwoo</a></li>
+<li><a href="https://www.youtube.com/user/USGOWeb/videos">American Go Association</a></li>
+<li><a href="https://www.youtube.com/user/goingceo/videos">New York Institute of Go</a></li>
+</ul>
+<h3><a class="header" href="#books" id="books">Books</a></h3>
+<p>I'm not sure if you <em>need</em> a book or books to learn, but obviously there are plenty out there. In my cursory search of posts on r/baduk, I found and bought three popular options for beginners. I've read at least half of them, and I'd recommend reading them in this order:</p>
+<ol>
+<li><a href="https://www.amazon.com/gp/product/1453632891/ref=ox_sc_act_title_3?smid=ATVPDKIKX0DER&amp;psc=1"><em>Learn to Play Go</em> by Janice Kim</a> would probably work for brand new players.</li>
+<li><a href="https://www.amazon.com/gp/product/0394733312/ref=ox_sc_act_title_2?smid=ATVPDKIKX0DER&amp;psc=1"><em>Go for Beginners</em> by Kaoru Iwamoto</a> seems like a classic intro text.</li>
+<li><a href="https://www.amazon.com/gp/product/4906574289/ref=ppx_yo_dt_b_asin_title_o03_s00?ie=UTF8&amp;psc=1"><em>Lessons in the Fundamentals of Go</em> by Toshiro Kageyama</a> is still a bit advanced for me.</li>
+</ol>
 <h1><a class="header" href="#installing-ubuntu-on-my-2009-macbook-pro" id="installing-ubuntu-on-my-2009-macbook-pro">Installing Ubuntu on my 2009 MacBook Pro</a></h1>
 <p>I had an old 17-inch MacBook Pro from 2009 (college) lying around and I figured it'd be a fun challenge to install Linux on it. I had never installed or even used Linux before (to my knowledge). I also, confusingly, hadn't found a clean, step-by-step guide for doing this, so I promised I'd write my process out as thoroughly but simply as I could once I got it done. </p>
 <p>I now realize, I think, that the reason the process of installing even a popular Linux distribution on a common (if old) model computer isn't written out or easily findable is that the process is a bit different for everyone, depending on the distro, the version, and the hardware you're starting with. Note that I didn't want to partition my hard drive to allow myself to dual-boot either in OS X or Ubuntu-- I was going for a full replacement, and thus would and did lose all the files on applications I had on the old Mac.</p>
