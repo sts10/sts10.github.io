@@ -379,7 +379,11 @@ function se {
 
 </code></pre>
 <h1><a class="header" href="#setting-up-standard-notes-on-linux" id="setting-up-standard-notes-on-linux">Setting up Standard Notes on Linux</a></h1>
-<p>First, let's <a href="https://standardnotes.org/">download Standard Notes for Linux</a>.</p>
+<p><a href="https://www.omgubuntu.co.uk/2020/01/standard-notes-snap-app">As of January 2020, Standard Notes is available as a snap</a>. </p>
+<pre><code class="language-bash">sudo snap install standard-notes
+</code></pre>
+<p>But I originally installed Standard Notes via the AppImage, so I'll leave those instructions here. </p>
+<p>First, let's <a href="https://standardnotes.org/">download Standard Notes for Linux from the Standard Notes site</a>, which gives us an AppImage file.</p>
 <h2><a class="header" href="#where-to-put-the-appimage-file" id="where-to-put-the-appimage-file">Where to put the AppImage file?</a></h2>
 <p>Here's one way that works: Create a directory at <code>~/standard-notes/</code> and move the AppImage file there. Also, go download a PNG of the Standard Notes logo and place it in this directory. </p>
 <h2><a class="header" href="#creating-the-desktop-file" id="creating-the-desktop-file">Creating the <code>.desktop</code> file</a></h2>
@@ -711,7 +715,8 @@ fi
 </code></pre>
 <h1><a class="header" href="#images-and-video" id="images-and-video">Images and Video</a></h1>
 <p>For editing RAW photos, try Darktable of DigiKam(?). Here are some <a href="https://github.com/t3mujin/t3mujinpack">free film emulators</a> for DarkTable. </p>
-<p>There's also GIMP and Kdenlive (for video)!</p>
+<p>For viewing video files, there's always trusty <a href="https://www.videolan.org/vlc/download-ubuntu.html">VLC</a>, which is available as a snap: <code>sudo snap install vlc</code></p>
+<p>There's also GIMP and, for editing video, Kdenlive.</p>
 <h1><a class="header" href="#go" id="go">Go</a></h1>
 <p><a href="https://en.wikipedia.org/wiki/Go_(game)">Go</a> is a ~2,500-year-old abstract strategy board game that you might play or want to play. I got into it after watching the AlphaGo documentary (<a href="https://www.netflix.com/title/80190844">currently on Netflix</a>).</p>
 <p>If you just want to play Go on your desktop, an easy way to do it is in your browser through an online server like <a href="https://online-go.com/">OGS</a>. On iOS I like <a href="https://apps.apple.com/us/app/smartgo-player/id314506629">SmartGo</a>. See more Go resources at the bottom of this page. But the bulk of this page is dedicated to playing Go through a desktop app called Sabaki.</p>
@@ -757,6 +762,19 @@ go-engines/gnugo-3.8-lvl9
 <li>Restart Sabaki </li>
 <li>Find the Game Info menu item. For White, in the drop-down menu, select Leela Zero. Make sure you choose a 19 by 19 board. And you're probably going to want a large handicap.</li>
 </ol>
+<h2><a class="header" href="#katago" id="katago">KataGo</a></h2>
+<p><a href="https://github.com/lightvector/KataGo">KataGo</a> is another new engine. I think I like it best of these options since it works on smaller board sizes and, apparently, it works well with handicaps.</p>
+<p>To run it on Linux (or Windows), I think you want to download the appropriate binary from <a href="https://github.com/lightvector/KataGo/releases">the GitHub release page</a>. On my System76 Oryx Pro, I apparently prefer the <code>katago-v1.X.X-opencl-linux-x64.zip</code> version. And you also need one of the &quot;block network&quot; files, which I think are called &quot;models&quot;. These files end in <code>bin.gz</code> or <code>txt.gz</code>. I think I've chosen the &quot;40 block network&quot; before, though I don't fully understand what that number means. </p>
+<p>Next, you may want to have the binary create a config file tuned to your computer. From <a href="https://github.com/lightvector/KataGo#how-to-use">the README's &quot;How to Use&quot; section</a>:</p>
+<p>&quot;To automatically tune threads and other settings for you based on asking simple questions, and generate a GTP config for you: <code>./katago genconfig -model &lt;NEURALNET&gt;.gz -output &lt;PATH_TO_SAVE_GTP_CONFIG&gt;.cfg</code>&quot;</p>
+<p>Answer the questions as you like. It'll create a fresh text config file that we'll point Sabaki to (see below).</p>
+<p>At some point, you'll want to run something like <code>chmod a+x ./katago</code>.</p>
+<h3><a class="header" href="#settings-for-katago-for-sabaki" id="settings-for-katago-for-sabaki">Settings for KataGo for Sabaki</a></h3>
+<pre><code>/home/sschlinkert/code/go-engines/katago-v1.3.5-opencl-linux-x64/katago
+gtp -model '/home/sschlinkert/code/go-engines/katago-v1.3.5-opencl-linux-x64/g170-b30c320x2-s2846858752-d829865719.bin.gz' -config '/home/sschlinkert/code/go-engines/katago-v1.3.5-opencl-linux-x64/my_oryx_pro_config.cfg'
+</code></pre>
+<p>and no &quot;initial commands&quot; </p>
+<p>Note that you may need to run <code>chmod a+x</code> on the executable before it'll work.</p>
 <h2><a class="header" href="#how-to-play-against-a-game-engine-in-sabaki" id="how-to-play-against-a-game-engine-in-sabaki">How to play against a game engine in Sabaki</a></h2>
 <p>To play against one of these engines, open Sabaki. Be sure you're on a blank, new game. Then go to &quot;File&quot; &gt; &quot;Game Info&quot;. If you want Balck, make the engine take Whtie by clicking the down arrow next to &quot;White&quot; and selecting the engine you want to play. Fill out the other fields as desired, then hit the OK button. If you're Black, place a stone to start the game, and the engine should respond. To see what the engine is doing, go to &quot;Engines&quot; &gt; &quot;Toggle GTP console&quot;.</p>
 <p>Alternatively you can manually attach an engine by going to Engines &gt; &quot;Attach&quot;. </p>
