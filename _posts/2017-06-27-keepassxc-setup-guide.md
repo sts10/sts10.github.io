@@ -5,6 +5,8 @@ date: 2017-06-27 20:18:05 0400
 comments: true
 ---
 
+*2020 UPDATE*: The guide below was written in 2017. While it still may be helpful to some, KeePassXC has changed quite a bit in the last three years, both in functionality and aesthetics (almost universally for the better!). Since this guide may be out-of-date, I'd recommend their new, *official ["Getting Started Guide"](https://keepassxc.org/docs/KeePassXC_GettingStarted.html)*.
+
 ## Table of Contents
 
 [What is KeePassXC?](#what-is-keepassxc)
