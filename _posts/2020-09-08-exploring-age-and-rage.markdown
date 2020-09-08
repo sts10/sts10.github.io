@@ -13,9 +13,11 @@ For no reason in particular, I'd thought I'd try out rage today. I am not an exp
 
 ## Installation
 
-Since I have an up-to-date version of the Rust language installed (1.46), I installed rage by running `cargo install rage`. There are other options listed in the [README on Github](https://github.com/str4d/rage#installation).
+To install rage, there are a couple options listed in the [README on Github](https://github.com/str4d/rage#installation).
 
-## Encrypting a file with a passphrase 
+Since I have an up-to-date version of the Rust language [installed](https://www.rust-lang.org/tools/install) (1.46), I installed rage by running `cargo install rage`. 
+
+## Using rage to encrypt a file with a passphrase 
 
 Let's say we have a file called secrets.txt that we want to encrypt, such that only someone who knows a certain passphrase can decrypt it. We could just run:
 
