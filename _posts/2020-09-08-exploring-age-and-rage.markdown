@@ -69,7 +69,7 @@ It also places both this public key and our private or _secret_ key in a file ca
 AGE-SECRET-KEY-1URL6WQVKQ0ULFDH7S0UL3ZFL2FU0WAKD778CLK5E9ASH40S8R90QE8E20V
 ```
 
-As you can see, the file contains both our public key and our secret key. 
+As you can see, the file contains both our public key and our secret key (don't share it with anyone!).
 
 ### Encrypting a file for a public key 
 
@@ -105,6 +105,47 @@ $ rage-keygen >> ~/.config/age/keys.txt
 This is also handy because rage will look to that location first for key-pairs when decrypting. This means you can just run `rage -d encrypted_file.txt` (without specifying a key-pair file with `-i` like we did above), and rage will use the key-pair located at `~/.config/age/keys.txt` as a default.
 
 As before, you can share this public key broadly and publicly, so that others could encrypt files for you. For example, I now have a public age/rage key in [a Github Gist](https://gist.github.com/sts10/4a4e01021b3a5ad42e9b73e0abd7b7e3) that I link to from some of my social media accounts. Just remember: **Don't share your secret key!**
+
+## Can you encrypt/decrypt _text_ rather than a file?
+
+What if you just want to encrypt a line or two of text, rather than a file? You can "pipe" in an echo command (note that rage requires that you encrypt using a public key, rather than a passphrase):
+
+```
+$ echo "secret message from echo" | rage -a -r age180d9ut0ff3zzkq6umq588p7zlqqetuf8nhxxfhsysmg4hjyt55lsjraysp 
+```
+
+which prints the encrypted text to the terminal:
+
+```txt
+-----BEGIN AGE ENCRYPTED FILE-----
+YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBvUWtNRmhYbURWQTRYL2ZF
+Z2h2ZWhLdVc1S1RWZWRIV293UkZ1RWMxb2tjCkxxcStGMzhWODdzN0RBNDlTMmlM
+ZXczeTNydzAyMkVleTF4MUd0QnpheEkKLT4gam9pbnQtb2lsLWMwIksuICgKWjQ5
+OEgxU2hiNE9CTjhCdjlkeURuRFU1RWl5TEMwREh0VzRKUm1JT2ZBU1hKUVZOeXVM
+emFyNHZSbGp1eTdYUgp4N29xbUtYdnZSREQyL2NtdXMzcTVBbEN5VGVUT0lrVERt
+SGR3UjVCMmZZT1VZOAotLS0gREVxbjZ3Q0s4cnBSL0ZPZ3g3RVpWTUtLMk0zWU5C
+NVgrNmRsbG9ybDJoawqvEbV6F/m6uYjcD7mBmfFiUMaRX/y/nzNlal+zaO9yBVPV
+xvRY+zVyXtYPtvAz42vGrMdGeeGD0+8=
+-----END AGE ENCRYPTED FILE-----
+```
+
+The `-a` flag stands for "armor" and it tells rage to encrypt to a [PEM](https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail) encoded format, which is easier to copy and paste and move around in general. 
+
+Having this block of text printed to the terminal screen isn't super helpful. We already know how to print it to a file, using the `-o` flag. But this time, how about we pipe it directly to the clipboard? If you're using Linux and have `xsel` installed, you'd do this:
+
+```bash
+echo "secret message from echo" | rage -a -r age180d9ut0ff3zzkq6umq588p7zlqqetuf8nhxxfhsysmg4hjyt55lsjraysp | xsel --clipboard
+```
+
+(On Mac, try `| pbcopy` at the end, though I haven't tested this. Other systems may have yet another tools called xclip installed.)
+
+To decrypt an encrypted message currently in your clipboard, you'd run:
+
+```bash
+xsel --clipboard | rage -d
+```
+
+which will print the decrypted message to the terminal screen.
 
 ## More features
 
