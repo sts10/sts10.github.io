@@ -7,15 +7,17 @@ comments: true
 
 A while back I learned about [age](https://github.com/FiloSottile/age), which describes itself as "A simple, modern and secure encryption tool (and Go library) with small explicit keys, no config options, and UNIX-style composability." As someone who's struggled to learn and use PGP, I was intrigued! There's more info in [this public Google Doc](https://docs.google.com/document/d/11yHom20CrsuX8KQJXBBw04s80Unjv8zCg_A7sPAX_9Y/preview). 
 
-There's also a port for Rust called [rage](https://github.com/str4d/rage), which is apparently inoperable with the original golang version. 
+## Should I use age or rage?
 
-For no reason in particular, I'd thought I'd try out rage today. I am not an expert in encryption, Golang, or Rust, so don't take this guide as gospel. It's mostly a note to my future self!
+There's a port of age written in Rust called [rage](https://github.com/str4d/rage), which is inter-operable with age (the original golang version). Since I write some Rust, I chose to learn using rage, so all the commands below use `rage`. But given how rage and age are inter-operable, and I think the commands are the same, you could install age and still follow this post -- just be sure to use `age` wherever you see `rage`.
+
+Note that, as of this writing, [age encrypts large files about twice as fast as rage](https://github.com/str4d/rage/issues/57). 
 
 ## Installation
 
-To install rage, there are a couple options listed in the [README on Github](https://github.com/str4d/rage#installation).
+To install rage, there are a couple options listed in the [README on Github](https://github.com/str4d/rage#installation) ([likewise with age](https://github.com/FiloSottile/age#installation), if you're going that route).
 
-Since I have an up-to-date version of the Rust language [installed](https://www.rust-lang.org/tools/install) (1.46), I installed rage by running `cargo install rage`. 
+Since I have an up-to-date version of the Rust language [installed](https://www.rust-lang.org/tools/install) (1.46) already set up, I installed rage by running `cargo install rage`. 
 
 ## Using rage to encrypt a file with a passphrase 
 
