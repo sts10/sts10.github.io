@@ -104,7 +104,7 @@ $ rage-keygen >> ~/.config/age/keys.txt
 
 This is also handy because rage will look to that location first for key-pairs when decrypting. This means you can just run `rage -d encrypted_file.txt` (without specifying a key-pair file with `-i` like we did above), and rage will use the key-pair located at `~/.config/age/keys.txt` as a default.
 
-As before, you can share this public key broadly and publicly, so that others could encrypt files for you. But don't share the secret key!
+As before, you can share this public key broadly and publicly, so that others could encrypt files for you. For example, I now have a public age/rage key in [a Github Gist](https://gist.github.com/sts10/4a4e01021b3a5ad42e9b73e0abd7b7e3) that I link to from some of my social media accounts. Just remember: **Don't share your secret key!**
 
 ## More features
 
