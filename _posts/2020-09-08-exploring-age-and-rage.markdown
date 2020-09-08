@@ -19,7 +19,7 @@ Since I have an up-to-date version of the Rust language installed (1.46), I inst
 
 Let's say we have a file called secrets.txt that we want to encrypt, such that only someone who knows a certain passphrase can decrypt it. We could just run:
 
-```
+```bash
 $ rage -p -o secrets_encrypted.txt secrets.txt
 ```
 
@@ -37,7 +37,7 @@ Rage created a new file called "secrets_encrypted.txt" that is encrypted and thu
 
 Decrypting this file is simple. Just run 
 
-```
+```bash
 $ rage -d -o secrets_decrypted.txt secrets_encrypted.txt 
 ```
 
@@ -49,13 +49,13 @@ Encrypting and decrypting files with secret passphrases can be useful, but one d
 
 When we installed rage, we got two executables: `rage`, which we've been using, and `rage-keygen`, which we haven't used yet. rage-kleygen generate key-pairs for us. Let's make a key-pair now.
 
-```
+```bash
 $ rage-keygen > test_key.txt
 ```
 
 Running this command will print our new _public_ key. 
 
-```
+```txt
 Public key: age1s366ey709nfd29jpaapvq2s2w29wjv9y68v9vvz5rc5v3tgge4xq7afnej
 ```
 
@@ -73,7 +73,7 @@ As you can see, the file contains both our public key and our secret key.
 
 Let's say someone else wants to encrypt a file for us, the holder of the key above. Let's say the file they want to encrypt for us is file_for_keyholder_only.txt. They'd run 
 
-```
+```bash
 $ rage -o file_for_keyholder_only_encrypted.txt -r age1s366ey709nfd29jpaapvq2s2w29wjv9y68v9vvz5rc5v3tgge4xq7afnej file_for_keyholder_only.txt
 ```
 
@@ -85,7 +85,7 @@ Once we hit enter, rage creates a new, encrypted file called file_for_keyholder_
 
 Now let's say we receive a file that's been encrypted for us using our public key. We want to decrypt it. We'll run:
 
-```
+```bash
 $ rage -o decrypted.txt -i test_key.txt -d file_for_keyholder_only_encrypted.txt
 ```
 
@@ -95,7 +95,7 @@ Which will decrypt the file to "decrypted.txt". Note the `-i` flag pointing to t
 
 If you want to create a key-pair that you'll use more permanently, the [age documentation](https://docs.google.com/document/d/11yHom20CrsuX8KQJXBBw04s80Unjv8zCg_A7sPAX_9Y/preview) recommends storing the key file in `~/.config/age/keys.txt`. You'd do this by running 
 
-```
+```bash
 $ mkdir -p ~/.config/age
 $ rage-keygen >> ~/.config/age/keys.txt
 ```
