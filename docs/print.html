@@ -500,7 +500,7 @@ Categories=Network;InstantMessaging;Internet
 <h1><a class="header" href="#installing-pyenv" id="installing-pyenv">Installing Pyenv</a></h1>
 <p>I'm not sure if you have to <em>uninstall</em> any versions of Python before you do this, but I doubt it. You might want to checkout your bashrc to make sure there isn't any weird Python PATH stuff in there before we start.</p>
 <ol>
-<li>Install <a href="https://github.com/pyenv/pyenv#installation">Pyenv</a>, probably via the <a href="https://github.com/pyenv/pyenv#basic-github-checkout">&quot;Basic GitHub Checkout&quot; method</a></li>
+<li>Install <a href="https://github.com/pyenv/pyenv#installation">Pyenv</a>, probably via the <a href="https://github.com/pyenv/pyenv#basic-github-checkout">&quot;Basic GitHub Checkout&quot; method</a>. Could also try <a href="https://github.com/pyenv/pyenv-installer">new auto-installer</a>, which seems to make updating easier.</li>
 <li>Add the necessary stuff to your <code>.bashrc</code> (not <code>.bash_profile</code>)</li>
 <li>Restart terminal</li>
 <li>Maybe <a href="https://github.com/pyenv/pyenv/wiki#suggested-build-environment">install dependencies</a>? (You may be good to go already.)</li>
@@ -515,6 +515,14 @@ Categories=Network;InstantMessaging;Internet
 <p>If you use Neovim + Deoplete, you probably want to run <code>pip3 install neovim</code> to ensure Deoplete works smoothly (see <a href="https://github.com/Shougo/deoplete.nvim#requirements">Deoplete's requirements</a>).</p>
 <p>I also ran <code>pip2 install neovim</code> because Neovim's <code>:CheckHealth</code> told me too. </p>
 <p>At this point, you may need to update Deoplete by running <code>:UpdateRemotePlugins</code> in Neovim. (Neovim's <code>:CheckHealth</code> is your friend here.)</p>
+<h2><a class="header" href="#2020-updates--notes" id="2020-updates--notes">2020 updates / notes</a></h2>
+<p>These two blog posts may offer better, newer solutions:</p>
+<ul>
+<li>https://read.acloud.guru/my-python-setup-77c57a2fc4b6</li>
+<li>https://jacobian.org/2019/nov/11/python-environment-2020/</li>
+</ul>
+<h3><a class="header" href="#pipx" id="pipx">pipx</a></h3>
+<p>Specifically, if you've been using pip to install packages solely for use on the command-line (as opposed to active development using Python), like the <code>neovim</code> package, I'm hoping that <a href="https://pypi.org/project/pipx/">pipx</a> may be a better, more self-contained solution. Though given that you need either Homebrew or pip to install pipx, it might not be as strong of a solution on Ubuntu as it is on MacOS.</p>
 <h1><a class="header" href="#ruby-and-rbenv" id="ruby-and-rbenv">Ruby and rbenv</a></h1>
 <ol>
 <li>Install <a href="https://github.com/rbenv/rbenv#basic-github-checkout">rbenv (via &quot;basic github checkout&quot;)</a> </li>
