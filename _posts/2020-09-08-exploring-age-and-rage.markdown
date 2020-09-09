@@ -9,7 +9,7 @@ A while back I learned about [age](https://github.com/FiloSottile/age), which de
 
 ## Should I use age or rage?
 
-There's a port of age written in Rust called [rage](https://github.com/str4d/rage), which is inter-operable with age (the original golang version). Since I write some Rust, I chose to learn using rage, so all the commands below use `rage`. But given how rage and age are inter-operable, and I think the commands are the same, you could install age and still follow this post -- just be sure to use `age` wherever you see `rage`.
+There's a implementation of age written in Rust called [rage](https://github.com/str4d/rage), which is inter-operable with age (the original golang version). Since I write some Rust, I chose to learn using rage, so all the commands below use `rage`. But given how rage and age are inter-operable, and I think the commands are the same, you could install age and still follow this post -- just be sure to use `age` wherever you see `rage`.
 
 Note that, as of this writing, [age encrypts large files about twice as fast as rage](https://github.com/str4d/rage/issues/57). 
 
