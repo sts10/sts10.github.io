@@ -107,6 +107,14 @@ else
 fi
 ```
 
+### Bat
+
+[Bat](https://github.com/sharkdp/bat) is a replacement to cat that provides syntax highlighting and other features. It's a quick way to print the contents of text files to the terminal.
+
+![Screenshot of bat being used to display the contents of a file to a terminal, with syntax highlighting](https://camo.githubusercontent.com/9d3d89364f2cc83ace8f29646a6236bc15ea1da0/68747470733a2f2f696d6775722e636f6d2f724773646e44652e706e67)
+
+There are a number of installation methods listed in [the project's README](https://github.com/sharkdp/bat#installation).
+
 ### Dust
 
 [Dust](https://github.com/bootandy/dust) is "a more intuitive version of `du` in Rust". If you're unfamiliar with `du`, Dust devs explain: "Dust is meant to give you an instant overview of which directories are using disk space without requiring sort or head." 
@@ -126,7 +134,7 @@ So basically Dust is helpful when you want to see what directories and files are
 Run `dust` in a directory that you want to map out. Here's an example from the ReadMe: 
 
 ```text
-djin:git/dust> dust
+$ dust
 1.2G  target
 622M ├─┬ debug
 445M │ ├── deps
