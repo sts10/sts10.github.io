@@ -155,4 +155,4 @@ This guide is by no means exhaustive of what you can already do with these tools
 
 ## To look forward to 
 
-It looks like the developer(s) of rage seem to be working on some sort of [Yubikey plugin](https://github.com/str4d/age-plugin-yubikey), though I'm not sure of its current status. That'd be pretty cool though!
+It looks like the developer(s) of rage seem to be working on (and [discussing](https://groups.google.com/forum/#!topic/age-dev/lKyzz61iphM)) some sort of [Yubikey plugin](https://github.com/str4d/age-plugin-yubikey/pull/1), though I'm not sure of its current status. That'd be pretty cool though!
