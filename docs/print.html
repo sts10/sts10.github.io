@@ -358,24 +358,18 @@ curl -o ~/.config/nvim/init.vim https://raw.githubusercontent.com/sts10/linux-co
 <p>For Deoplete to work well, first I'd recommend setting up <a href="initial-setup/dev-env/python-pyenv.html">pyenv</a>.</p>
 <p>To update Deoplete, you may need to run <code>:UpdateRemotePlugins</code> in Neovim. Neovim's <code>:CheckHealth</code> is your friend here.</p>
 <h2><a class="header" href="#rust-analyzer-and-languageserver" id="rust-analyzer-and-languageserver">rust-analyzer and LanguageServer</a></h2>
-<p>To get some nice Rust features in Neovim, we're going to install <a href="https://rust-analyzer.github.io/manual.html">rust-analysis</a>. Below, I outline the <a href="https://rust-analyzer.github.io/manual.html#languageclient-neovim">relatively simple install option that uses LanguageClient-neovim</a>, though do check documentation for latest instructions.</p>
-<ol>
-<li><a href="https://rust-analyzer.github.io/manual.html#rust-analyzer-language-server-binary">Install rust-analyzer Language Server Binary</a> by running the following.</li>
-</ol>
+<p>To get some nice Rust-specific, IDE-esque goodies in Neovim, we're going to install <a href="https://rust-analyzer.github.io/manual.html">rust-analysis</a>. Below, I outline the <a href="https://rust-analyzer.github.io/manual.html#languageclient-neovim">relatively simple install option that uses LanguageClient-neovim</a>, though do check documentation for latest instructions.</p>
+<h3><a class="header" href="#1-a-hrefhttpsrust-analyzergithubiomanualhtmlrust-analyzer-language-server-binaryinstall-rust-analyzer-language-server-binarya-by-running-the-following" id="1-a-hrefhttpsrust-analyzergithubiomanualhtmlrust-analyzer-language-server-binaryinstall-rust-analyzer-language-server-binarya-by-running-the-following">1. <a href="https://rust-analyzer.github.io/manual.html#rust-analyzer-language-server-binary">Install rust-analyzer Language Server Binary</a> by running the following.</a></h3>
 <pre><code class="language-bash">git clone https://github.com/rust-analyzer/rust-analyzer.git &amp;&amp; cd rust-analyzer
 cargo xtask install --server
 </code></pre>
 <p>Think this installs the project's code to <code>~/.config/nvim/rust-analyzer/</code>. Executable is <code>rust-analyzer</code>, so can check that it's in your PATH by running <code>rust-analyzer --version</code>. Assume you'd upgrade by running <code>git pull &amp;&amp; cargo xtask install --force --server</code>?</p>
-<ol start="2">
-<li>Configure by adding this to your vim/neovim config file (replacing the existing Rust-specific line if it exists):</li>
-</ol>
+<h3><a class="header" href="#2-configure-by-adding-this-to-your-vimneovim-config-file-replacing-the-existing-rust-specific-line-if-it-exists" id="2-configure-by-adding-this-to-your-vimneovim-config-file-replacing-the-existing-rust-specific-line-if-it-exists">2. Configure by adding this to your vim/neovim config file (replacing the existing Rust-specific line if it exists):</a></h3>
 <pre><code class="language-vim">let g:LanguageClient_serverCommands = {
 \ 'rust': ['rust-analyzer'],
 \ }
 </code></pre>
-<ol start="3">
-<li>Get the neovim LanguageClient installed</li>
-</ol>
+<h3><a class="header" href="#3-get-the-neovim-languageclient-installed" id="3-get-the-neovim-languageclient-installed">3. Get the neovim LanguageClient installed</a></h3>
 <pre><code class="language-vim">Plug 'autozimu/LanguageClient-neovim', {
 \ 'branch': 'next',
 \ 'do': 'bash install.sh',
@@ -387,10 +381,8 @@ Plug 'junegunn/fzf'
 <p>Then down below the <code>g:LanguageClient_serverCommands</code> bit:</p>
 <pre><code class="language-vim">nmap &lt;F5&gt; &lt;Plug&gt;(lcn-menu)
 </code></pre>
-<ol start="4">
-<li>Back in the terminal, run <code>nvim +PlugInstall +UpdateRemotePlugins +qa</code></li>
-</ol>
-<p>Think you should ne good-to go? F5 will give you some options for analysis. </p>
+<h3><a class="header" href="#4-back-in-the-terminal-run-nvim-pluginstall-updateremoteplugins-qa" id="4-back-in-the-terminal-run-nvim-pluginstall-updateremoteplugins-qa">4. Back in the terminal, run <code>nvim +PlugInstall +UpdateRemotePlugins +qa</code></a></h3>
+<p>Think you should be good-to go? F5 will give you some options for analysis. </p>
 <h3><a class="header" href="#notes-on-alternative-approaches-to-making-neovim-more-of-a-rust-ide" id="notes-on-alternative-approaches-to-making-neovim-more-of-a-rust-ide">Notes on alternative approaches to making Neovim more of a Rust IDE</a></h3>
 <p>For rust-analyzer, there is <a href="https://rust-analyzer.github.io/manual.html#coc-rust-analyzer">an alternative installation process described</a> where it's integrated with <a href="https://github.com/neoclide/coc.nvim">coc.nvim</a>, which you might be using anyway, or like for its other features. To me, right now, it seems a bit intense, and requires Node to be installed.</p>
 <p>There also seems to be another way to &quot;teach&quot; Neopvim about the Rust language using <a href="https://github.com/racer-rust/racer"><strong>Racer</strong> (&quot;code completion for Rust&quot;)</a>, but I think I tried it before and it through halting errors as I was typing code.</p>
