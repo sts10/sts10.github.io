@@ -173,9 +173,7 @@
 </li>
 </ol>
 <h2><a class="header" href="#getting-autocomplete-in-neovim-with-deoplete" id="getting-autocomplete-in-neovim-with-deoplete">Getting Autocomplete in Neovim with Deoplete</a></h2>
-<ol>
-<li>Install <a href="https://github.com/Shougo/deoplete.nvim#install">Deoplete</a></li>
-</ol>
+<p>Install <a href="https://github.com/Shougo/deoplete.nvim#install">Deoplete</a></p>
 <ul>
 <li>You may first be required to install some Python stuff. You may want to get your <a href="python-pyenv.html">pyenv setup</a> working first. However, in a pinch, these commands have worked for me in the past: 
 <ul>
@@ -184,40 +182,8 @@
 </ul>
 </li>
 </ul>
-<ol start="2">
-<li>
-<p>Check that <code>let g:deoplete#enable_at_startup = 1</code> is set in your Vim config file.</p>
-</li>
-<li>
-<p>Install <a href="https://github.com/racer-rust/racer">Racer</a></p>
-</li>
-<li>
-<p>Make sure <a href="https://github.com/racer-rust/vim-racer">Vim Racer</a> is installed. My vim-racer config is:</p>
-</li>
-</ol>
-<pre><code class="language-vim">Plug 'racer-rust/vim-racer'
-set hidden
-let g:racer_cmd = &quot;~/.cargo/bin/racer&quot;
-let g:racer_experimental_completer = 1
-</code></pre>
-<ol start="5">
-<li>Make sure you you've got the rust.vim Vim plugin installed: <code>Plug 'rust-lang/rust.vim'</code></li>
-</ol>
-<h2><a class="header" href="#language-server" id="language-server">Language Server</a></h2>
-<ol>
-<li>Install <a href="https://github.com/rust-lang/rls#setup">Rust Language Server</a> </li>
-<li>Get <a href="https://github.com/autozimu/LanguageClient-neovim">LanguageClient-Neovim</a> setup. </li>
-</ol>
-<p>Altogether your Neovim <code>init.vim</code> is going to look something like this:</p>
-<pre><code class="language-vim">&quot; Rust Language Server
-Plug 'autozimu/LanguageClient-neovim', {
-\ 'branch': 'next',
-\ 'do': 'bash install.sh',
-\ }
-
-Plug 'junegunn/fzf'
-
-&quot; Auto-complete
+<p>Then make sure you've got all this (or something similar) in your init.vim file:</p>
+<pre><code class="language-vim">&quot; Auto-complete
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
@@ -226,36 +192,43 @@ else
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
 
-&quot; Language or filetype specific
-Plug 'rust-lang/rust.vim'
-Plug 'racer-rust/vim-racer'
-
-
-&quot; ...
-
-
-&quot; Language Server Config
-let g:LanguageClient_serverCommands = {
-\ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+&quot; then further down
+let g:deoplete#enable_at_startup = 1
+</code></pre>
+<h2><a class="header" href="#rust-analyzer-and-languageserver" id="rust-analyzer-and-languageserver">rust-analyzer and LanguageServer</a></h2>
+<p>To get some nice Rust-specific, IDE-esque goodies in Neovim, we're going to install <a href="https://rust-analyzer.github.io/manual.html">rust-analyzer</a>. Below, I outline the <a href="https://rust-analyzer.github.io/manual.html#languageclient-neovim">relatively simple installation option that uses LanguageClient-neovim</a>, though do check documentation for latest instructions.</p>
+<h3><a class="header" href="#1-install-rust-analyzer-language-server-binary" id="1-install-rust-analyzer-language-server-binary">1. Install rust-analyzer Language Server Binary</a></h3>
+<p><a href="https://rust-analyzer.github.io/manual.html#rust-analyzer-language-server-binary">Install rust-analyzer Language Server Binary</a> by running the following:</p>
+<pre><code class="language-bash">git clone https://github.com/rust-analyzer/rust-analyzer.git &amp;&amp; cd rust-analyzer
+cargo xtask install --server
+</code></pre>
+<p>Think this installs the project's code to <code>~/.config/nvim/rust-analyzer/</code>. Executable is <code>rust-analyzer</code>, so can check that it's in your PATH by running <code>rust-analyzer --version</code>. Assume you'd upgrade by running <code>git pull &amp;&amp; cargo xtask install --force --server</code>?</p>
+<h3><a class="header" href="#2-configure-by-adding-this-to-your-vimneovim-config-file" id="2-configure-by-adding-this-to-your-vimneovim-config-file">2. Configure by adding this to your vim/neovim config file...</a></h3>
+<p>...replacing the existing Rust-specific line if it exists:</p>
+<pre><code class="language-vim">let g:LanguageClient_serverCommands = {
+\ 'rust': ['rust-analyzer'],
+\ }
+</code></pre>
+<h3><a class="header" href="#3-get-the-neovim-languageclient-installed" id="3-get-the-neovim-languageclient-installed">3. Get the neovim LanguageClient installed</a></h3>
+<pre><code class="language-vim">Plug 'autozimu/LanguageClient-neovim', {
+\ 'branch': 'next',
+\ 'do': 'bash install.sh',
 \ }
 
-nnoremap &lt;silent&gt; K :call LanguageClient#textDocument_hover()&lt;CR&gt;
-nnoremap &lt;silent&gt; gd :call LanguageClient#textDocument_definition()&lt;CR&gt;
-&quot; got an error with this on only attempt
-nnoremap &lt;silent&gt; gr :call LanguageClient#textDocument_rename()&lt;CR&gt;
-
-&quot; Deoplete (general auto-complete)
-let g:deoplete#enable_at_startup = 1
-
-&quot; Racer (Rust auto-complete)
-let g:racer_cmd = &quot;~/.cargo/bin/racer&quot;
-let g:racer_experimental_completer = 1
-
-&quot; ...
-
-set hidden
+&quot; (Optional) Multi-entry selection UI.
+Plug 'junegunn/fzf'
 </code></pre>
-<p>Then, from the command line, run <code>nvim +PlugInstall +UpdateRemotePlugins +qa</code> to install all that right. </p>
+<p>Then down below the <code>g:LanguageClient_serverCommands</code> bit, let's add some mappings. The <a href="https://github.com/autozimu/LanguageClient-neovim#quick-start">plugin's readme provides some ideas</a>, but as a minimum:</p>
+<pre><code class="language-vim">nmap &lt;F5&gt; &lt;Plug&gt;(lcn-menu)
+</code></pre>
+<h3><a class="header" href="#4-install-plugins" id="4-install-plugins">4. Install plugins</a></h3>
+<p>Back in the terminal, run <code>nvim +PlugInstall +UpdateRemotePlugins +qa</code></p>
+<p>Think you should now be good-to go? F5 will give you some options for analysis. </p>
+<h2><a class="header" href="#notes-on-alternative-approaches-to-making-neovim-more-of-a-rust-ide" id="notes-on-alternative-approaches-to-making-neovim-more-of-a-rust-ide">Notes on alternative approaches to making Neovim more of a Rust IDE</a></h2>
+<h3><a class="header" href="#alternative-methods-of-installing-rust-analyzer" id="alternative-methods-of-installing-rust-analyzer">Alternative methods of installing rust-analyzer</a></h3>
+<p>For rust-analyzer, there is <a href="https://rust-analyzer.github.io/manual.html#coc-rust-analyzer">an alternative installation process described</a> where it's integrated with <a href="https://github.com/neoclide/coc.nvim">coc.nvim</a>, which you might be using anyway, or like for its other features. To me, right now, it seems a bit intense, and requires Node to be installed.</p>
+<h3><a class="header" href="#racer" id="racer">Racer</a></h3>
+<p>There also seems to be another way to &quot;teach&quot; Neovim about the Rust language using <a href="https://github.com/racer-rust/racer"><strong>Racer</strong> (&quot;code completion for Rust&quot;)</a> and its <a href="https://github.com/racer-rust/vim-racer">associated Vim plugin</a>, but I think I tried it before and it through halting errors as I was typing code.</p>
 
                     </main>
 
