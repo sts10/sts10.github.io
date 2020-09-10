@@ -105,3 +105,11 @@ It'd be super handy if users of KeePassXC could simply _drag_ a screenshot (or i
 ## Appendix 
 
 Here's [a shell script that takes an otpauth URI and presents the current 6-digit code](https://github.com/shello/2fa_scripts), among other things ([h/t @shello@octodon.social](https://octodon.social/@shello/101099361987648303)).
+
+## Epilogue (2020)
+
+As of summer 2020, KeePassXC v 2.6.0+ can create QR codes from TOTP secret keys, all while storing everything in an encrypted database. This is almost certainly a safer choice than using qrencode.
+
+To read a TOTP secret key(s) from a given QR code image file, zbar still seems like a fine solution. 
+
+I'll also note here that, since writing this post, I created a command-line tool called [QRForge](https://github.com/sts10/qr-forge) that can transfer between both formats relatively safely.
