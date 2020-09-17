@@ -412,7 +412,10 @@ Categories=Office;Notes;
 <p><a href="https://wiki.archlinux.org/index.php/desktop_entries">More on desktop files in the Arch Wiki</a>.</p>
 <h1><a class="header" href="#pgp" id="pgp">PGP</a></h1>
 <h2><a class="header" href="#gnu-privacy-assistant" id="gnu-privacy-assistant">GNU Privacy Assistant</a></h2>
-<p>For a GPG GUI application, try <code>sudo apt install gpa</code> which installs a program called <a href="https://help.ubuntu.com/community/GnuPrivacyGuardHowto#Graphical_Interfaces">&quot;GNU Privacy Assistant&quot;</a></p>
+<p>For a GPG GUI application for Linux/Ubuntu for key management etc., try <code>sudo apt install gpa</code> which installs a program called <a href="https://help.ubuntu.com/community/GnuPrivacyGuardHowto#Graphical_Interfaces">&quot;GNU Privacy Assistant&quot;</a></p>
+<h2><a class="header" href="#gpg-conf" id="gpg-conf">GPG conf</a></h2>
+<p>Let's make sure we've got good GPG settings. To do this, create a new file at <code>~/.gnupg/gpg.conf</code>. </p>
+<p>I'd either copy <a href="https://github.com/drduh/YubiKey-Guide#harden-configuration">this guide's &quot;hardened&quot; config</a> (<a href="https://github.com/drduh/config/blob/master/gpg.conf">actual gpg.conf file</a>) or read through <a href="https://riseup.net/en/security/message-security/openpgp/best-practices#putting-it-all-together">this guide</a>, which points to <a href="https://github.com/ioerror/duraconf/tree/master/configs/gnupg">this Github repo</a>.</p>
 <h2><a class="header" href="#using-a-pgp-private-key-from-a-smartcard-on-ubuntu" id="using-a-pgp-private-key-from-a-smartcard-on-ubuntu">Using a PGP private key from a Smartcard on Ubuntu</a></h2>
 <ol>
 <li>Add the public key to your system: Get the .asc file onto your system, then run <code>gpg2 --import &lt;file-name&gt;.asc</code></li>
