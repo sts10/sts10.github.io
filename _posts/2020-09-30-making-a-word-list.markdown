@@ -47,9 +47,9 @@ For their part, a 1Password employee did respond, saying they would bring the is
 
 At some point I decided to start from scratch. I figured I wanted a list about as long as 1Password's, but if possible, have it be free of prefix words. For the words themselves, I wanted them to be the most commonly used, since users would need to weave them into little narratives like correct horses, or at least remember them for a few seconds as they typed them into a mobile device. 
 
-To get a list of common words, I explored [Google Books Ngram public data](https://storage.googleapis.com/books/ngrams/books/datasetsv3.html). 
+To get a list of common words, I explored [Google Books Ngram public data](https://storage.googleapis.com/books/ngrams/books/datasetsv3.html), which you may be familiar with due to their entertaining [Viewer web product](https://books.google.com/ngrams#).
 
-Satisfied that this data was available and looked OK, I started building [a scraper and parsing tool using BASH and Rust](https://github.com/sts10/common_word_list_maker). I figured the "1-grams" data compiled in 2012 would do fine. That data is broken up into separate word lists, based on starting letter of the word. For example, here's the file [f](http://storage.googleapis.com/books/ngrams/books/googlebooks-eng-all-1gram-20120701-f.gz). Each file is a compressed tab-separated text file, with a line for each word-year. The f file alone has more than 47 million lines. For example, here's a sample on the word "finches": 
+Satisfied that this data was available and looked useful to me, I started building [a scraper and parsing tool using BASH and Rust](https://github.com/sts10/common_word_list_maker). I figured the "1-grams" (single words) data compiled in 2012 would do fine. That data is broken up into separate word lists, based on starting letter of the word. For example, here's the file [f](http://storage.googleapis.com/books/ngrams/books/googlebooks-eng-all-1gram-20120701-f.gz). Each file is a compressed tab-separated text file, with a line for each word-year. The f file alone has more than 47 million lines. For example, here's a sample on the word "finches": 
 
 ```tsv
 finches_NOUN	1584	2	1
