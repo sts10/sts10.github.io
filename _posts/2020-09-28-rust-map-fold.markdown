@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Summing over a Rust struct with map and fold"
-date: 2020-09-08 15:46:00 -0400
+date: 2020-09-28 12:46:00 -0400
 comments: true
 ---
 
