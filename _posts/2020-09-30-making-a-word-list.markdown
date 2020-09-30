@@ -97,13 +97,21 @@ As a simple cleaning example, we could just take the top X number of words. Sinc
 
 ### Tidying up further
 
-To cut down the list further and with a bit more nuance, I built a separate tool called [Tidy](https://github.com/sts10/tidy/), a command line tool specifically for combining and cleaning word lists. (It's all Rust and is a bit more polished than my word-list making code.) Some options that are interesting to our problem include removing words below a minimum character count and removing prefix words. We can also remove a list of rejected words, like words that are a little too common, or profane words (lists of which are a search query away).
+To cut down the list further and with a bit more nuance, I built a separate tool called [Tidy](https://github.com/sts10/tidy/), a command line tool specifically for combining and cleaning word lists. (It's all Rust and is a bit more polished than my word-list making code.) Some options that are interesting to our problem include removing words below a minimum character count and removing prefix words. 
+
+We can also remove a list of rejected words, like words that are a little too common, or profane words (lists of which are a search query away). Tidy can also take a list of approved words and reject all others, like your Mac/Linux word dictionary, which, I learned from [that 1Password forum thread](https://1password.community/discussion/comment/568180/#Comment_568180), is located at `/usr/share/dict/words` and contains 102,305 words!
+
+So as an example, you could run something like this:
+
+```bash
+tidy -o cleaned_word_list.txt -lpe -m 4 -a /usr/share/dict/words -r reject_words.txt word_list_raw.txt.
+```
 
 ## An example of a usable word list
 
 Using `head` and Tidy, I created [an example word list](https://github.com/sts10/common_word_list_maker/blob/master/example_word_list.txt), containing 16,607 words (and no prefix words). Each word from this list provides an additional 14.02 bits of entropy, close to a nice round number. And passphrases can be safely created without punctuation between the words.
 
-Note that I haven't manually scrolled through this example list, so there may be some offensive words remaining. (You can use Tidy's reject words options to remove words.) Nor am I currently using this example word list, or any product of this project, for creating passphrases or anything else. But it was a fun project!?
+Note that I haven't manually scrolled through this example list, so there may be some offensive words remaining. (You can use Tidy's reject words options to remove words.) **Nor am I currently using this example word list, or any product of this project, for creating passphrases or anything else.** But it was a fun project!?
 
 ## Tender wrap-up
 
