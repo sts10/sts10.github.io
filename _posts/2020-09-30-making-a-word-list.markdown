@@ -103,6 +103,8 @@ To cut down the list further and with a bit more nuance, I built a separate tool
 
 Using `head` and Tidy, I created [an example word list](https://github.com/sts10/common_word_list_maker/blob/master/example_word_list.txt), containing 16,607 words (and no prefix words). Each word from this list provides an additional 14.02 bits of entropy, close to a nice round number. And passphrases can be safely created without punctuation between the words.
 
-Note that I haven't manually scrolled through this example list, so there may be some offensive words remaining. (You can use Tidy's reject words options to remove words.) 
+Note that I haven't manually scrolled through this example list, so there may be some offensive words remaining. (You can use Tidy's reject words options to remove words.) Nor am I currently using this example word list, or any product of this project, for creating passphrases or anything else. But it was a fun project!?
+
+## Tender wrap-up
 
 I'm aware of the irony of starting a post about this project with phrases like "particularly human" and ending up explaining how I blindly scraped Google data to create this list, doing almost no manual editing of the list myself. But I think you could do worse when you consider that the underlying data, a sample of books -- our stories! --, is pretty human.
