@@ -83,15 +83,21 @@ This procedure gave "finches" a score of 291,922, placing it just below "florins
 
 I went through each letter of the alphabet, calculating a score for each word and then appending the top 100,000 words starting with the letter into a CSV file, which weighed in at 2.2 millions lines. I then took the top 100,001 words from that CSV file to create a "raw" word list. Crucially, I left this list sorted by the appearance score (even though the score itself is not in the file). You can view that file [here](https://github.com/sts10/common_word_list_maker/blob/master/word_list_raw.txt), though note that has many profane and offensive words.
 
+### A note on the code: BASH?
+
+Again here's a link to my Github repo for this project, gracefully named [common_word_list_maker](https://github.com/sts10/common_word_list_maker).
+
+I used BASH to download and uncompress the files from Google. Thus, the code itself is _not_ kicked off by the user running the familiar Rust command of `cargo run`, but rather executing a script I creatively called run.sh. No, I don't love this aspect of this project; yes, I'd prefer if it was all in Rust. But I also wanted this project to be more about the end product than another Rust-learning expedition. 
+
 ## Cleaning the raw word list
 
-As you might imagine, this list wouldn't make a good word list for generating passphrases. To begin with, the lowest-scoring words on this list are pretty strange: "todor", "rew", "biddulph". Plus, given the way entropy is calculated, the benefits of a huge list like this has diminishing returns for per-word entropy: each word adds 16.61 bits of entropy. Compare that to a 33,000 word list, which adds 15 bits. 
+As you might imagine, this 100k-word-long list wouldn't make a good word list for generating passphrases. To begin with, the lowest-scoring words on this list are pretty strange: "todor", "rew", "biddulph". Plus, given the way entropy is calculated, the benefits of a huge list like this has diminishing returns for per-word entropy: each word adds 16.61 bits of entropy. Compare that to a 33,000 word list, which adds roughly 15 bits and allows you to remove the 77,000 worst (however you want to define that) words. 
 
-As a simple cleaning example, we could just take the top X number of words. Since the list is sorted by score, this means we'd get the most common X words. On \*nix systems, we can use the `head` command: for example, to write the top 33,000 words to a new file, you could run `head -33000 word_list_raw.txt > cleaned_word_list.txt`.
+As a simple cleaning example, we could just take the top X number of words. Since the raw list is sorted by score, this means we'd get the most common X words. On \*nix systems, we can use the `head` command: for example, to write the top 33,000 words to a new file, you could run `head -33000 word_list_raw.txt > cleaned_word_list.txt`.
 
 ### Tidying up further
 
-To cut down the list further, I built a separate tool called [Tidy](https://github.com/sts10/tidy/), a command line tool specifically for combining and cleaning word lists. Some options that are interesting to our problem include removing words below a minimum character count and removing prefix words. We can also remove a list of rejected words, like words that are a little too common, or profane words (lists of which are a search query away).
+To cut down the list further and with a bit more nuance, I built a separate tool called [Tidy](https://github.com/sts10/tidy/), a command line tool specifically for combining and cleaning word lists. (It's all Rust and is a bit more polished than my word-list making code.) Some options that are interesting to our problem include removing words below a minimum character count and removing prefix words. We can also remove a list of rejected words, like words that are a little too common, or profane words (lists of which are a search query away).
 
 ## An example of a usable word list
 
