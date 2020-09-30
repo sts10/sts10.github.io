@@ -91,7 +91,7 @@ I used BASH to download and uncompress the files from Google. Thus, the code its
 
 ## Cleaning the raw word list
 
-As you might imagine, this 100k-word-long list wouldn't make a good word list for generating passphrases. To begin with, the lowest-scoring words on this list are pretty strange: "todor", "rew", "biddulph". Plus, given the way entropy is calculated, the benefits of a huge list like this has diminishing returns for per-word entropy: each word adds 16.61 bits of entropy. Compare that to a 33,000 word list, which adds roughly 15 bits and allows you to remove the 77,000 worst (however you want to define that) words. 
+As you might imagine, this 100k-word-long list wouldn't make a good word list for generating passphrases. To begin with, the lowest-scoring words on this list are pretty strange: "todor", "rew", "biddulph". Plus, given the way entropy is calculated, the benefits of a huge list like this has diminishing returns for per-word entropy: each word adds 16.61 bits of entropy. Compare that to a 33,000 word list, which adds roughly 15 bits and allows you to remove the 77,000 worst (however you want to define that) words. (Note: I'm a little confused about how important each additional bit is in terms of practical password strength.)
 
 As a simple cleaning example, we could just take the top X number of words. Since the raw list is sorted by score, this means we'd get the most common X words. On \*nix systems, we can use the `head` command: for example, to write the top 33,000 words to a new file, you could run `head -33000 word_list_raw.txt > cleaned_word_list.txt`.
 
@@ -109,9 +109,15 @@ tidy -o cleaned_word_list.txt -lpe -m 4 -a /usr/share/dict/words -r reject_words
 
 ## An example of a usable word list
 
-Using `head` and Tidy, I created [an example word list](https://github.com/sts10/common_word_list_maker/blob/master/example_word_list.txt), containing 16,607 words (and no prefix words). Each word from this list provides an additional 14.02 bits of entropy, close to a nice round number. And passphrases can be safely created without punctuation between the words.
+Using `head` and Tidy, I created [an example word list](https://github.com/sts10/common_word_list_maker/blob/master/example_word_list.txt), containing 16,607 words (and no prefix words). Each word from this list provides an additional 14.02 bits of entropy, close to a nice round number. Plus a 7-word passphrase is only 1.5 bits off from 100 bits, which is what KeePassXC labels "excellent". And passphrases can be safely created without punctuation between the words.
 
 Note that I haven't manually scrolled through this example list, so there may be some offensive words remaining. (You can use Tidy's reject words options to remove words.) **Nor am I currently using this example word list, or any product of this project, for creating passphrases or anything else.** But it was a fun project!?
+
+## Further questions
+
+Would a raw list that used the number of _distinct_ word appearances be better for our purposes? 
+
+A bigger question: What if we looked at the Google 2-gram data -- words that frequently appear together. According to my casual calculations, things get nutty quickly. If we had a list of the most common 1 billion 2-grams, each pair of words would add 29.9 bits of entropy, meaning three of them (6 words) would make a decent passphrase. Galaxy brain: 1,000,000,000,000,000 3-grams, 49.8 bits a pop. 
 
 ## Tender wrap-up
 
