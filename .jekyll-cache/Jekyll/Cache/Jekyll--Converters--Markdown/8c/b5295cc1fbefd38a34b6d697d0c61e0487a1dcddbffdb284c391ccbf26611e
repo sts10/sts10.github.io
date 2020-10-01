@@ -1,0 +1,2 @@
+I"’<p>In my <a href="http://sts10.github.io/2014/04/21/squawkbot-connecting-to-twitter.html">first post</a> about <a href="http://squawkbot.herokuapp.com/">SquawkBot</a> (<a href="https://github.com/sts10/squawk">public GitHub repo</a>), I went over how the app connects to the Twitter REST API. In this post, Iâ€™ll be discussing the second main part of the app: extracting the URLs from the tweets.</p>
+:ET

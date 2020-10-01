@@ -1,0 +1,74 @@
+I"'<p>I run <a href="https://syncthing.net/">Syncthing</a> to keep one of my KeePass databases in sync between multiple computers. (Here’s <a href="https://sts10.github.io/2017/05/24/getting-started-with-syncthing.html">my “getting started” guide to using Syncthing</a>.)</p>
+
+<p>Before using tmux, I used to run Syncthing by opening a terminal and running <code class="language-plaintext highlighter-rouge">syncthing -no-browser</code>, then minimizing that terminal window for the day (the <code class="language-plaintext highlighter-rouge">-no-browser</code> flag tells Sycnthing not to launch the GUI dashboard in a browser tab). However, using tmux makes this flow a little smoother.</p>
+
+<p>Our goal here is to run Syncthing “in the background”, so that we don’t have to keep a terminal window open with it running all the time. We also want to preserve the ability to easily stop Syncthing if we need to.</p>
+
+<p>First, let’s install <a href="https://github.com/tmux/tmux">tmux</a>. On macOS, I used Homebrew and ran <code class="language-plaintext highlighter-rouge">brew install tmux</code>. On Linux, <code class="language-plaintext highlighter-rouge">sudo apt-get install tmux</code>. Here’s <a href="https://hackernoon.com/a-gentle-introduction-to-tmux-8d784c404340">“A Gentle Introduction to tmux”</a> that I found helpful, but for this tutorial you’ll mostly be copying and pasting tmux commands into shell/bash functions.</p>
+
+<p>Next, in your <code class="language-plaintext highlighter-rouge">~/.bash_profile</code> or <code class="language-plaintext highlighter-rouge">~/.bashrc</code>, add these two functions:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function </span>ss <span class="o">{</span>
+  <span class="k">if </span>tmux has-session <span class="nt">-t</span> synct 2&gt;/dev/null<span class="p">;</span> <span class="k">then
+    </span><span class="nb">echo</span> <span class="s2">"Syncthing session already started at http://127.0.0.1:8384/"</span> <span class="o">&gt;</span>&amp;2
+    <span class="k">return </span>1
+  <span class="k">fi
+  
+  </span><span class="nb">echo</span> <span class="s2">"Starting up Syncthing at http://127.0.0.1:8384/"</span>
+  tmux new-session <span class="nt">-d</span> <span class="nt">-s</span> synct <span class="s2">"syncthing -no-browser"</span>
+<span class="o">}</span>
+
+<span class="k">function </span>se <span class="o">{</span>
+  <span class="k">if</span> <span class="o">!</span> tmux has-session <span class="nt">-t</span> synct 2&gt;/dev/null<span class="p">;</span> <span class="k">then
+    </span><span class="nb">echo</span> <span class="s2">"No Syncthing session to end."</span> <span class="o">&gt;</span>&amp;2
+    <span class="k">return </span>1
+  <span class="k">fi
+  
+  </span><span class="nb">echo</span> <span class="s2">"Stopping Syncthing and killing the tmux session"</span>
+  tmux send-keys <span class="nt">-t</span> synct C-c
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>To load these changes, run <code class="language-plaintext highlighter-rouge">tmux source-file ~/.tmux.conf</code> and then <code class="language-plaintext highlighter-rouge">source ~/.bash_profile</code> or <code class="language-plaintext highlighter-rouge">source ~/.bashrc</code></p>
+
+<p>Now you should be able to run <code class="language-plaintext highlighter-rouge">ss</code> in your terminal to Start Syncthing, and <code class="language-plaintext highlighter-rouge">se</code> to end Syncthing (“Syncthing End”).</p>
+
+<p>(Thanks to <a href="https://octodon.social/@shello/101146148206158754">@shello</a>) who <a href="https://gist.github.com/shello/dea96c183f9e8e7fe181ef12335b44cf">helped me add the conditionals and some unnecessary commands</a> to the shell functions)</p>
+
+<h2 id="how-i-use-these-functions">How I use these functions</h2>
+
+<p>So for me, when I boot up any of my computers, I just run <code class="language-plaintext highlighter-rouge">ss</code> in a terminal window. Syncthing runs in a tmux session, so I can either use that terminal window for something else or safely close it. If I need to stop Syncthing for any reason (which is rare) I can run <code class="language-plaintext highlighter-rouge">se</code>.</p>
+
+<h2 id="appendix-a-some-nice-tmux-settings-if-youll-be-using-vim-andor-neovim-within-tmux-sessions">Appendix A: Some nice tmux settings if you’ll be using Vim and/or Neovim within tmux sessions</h2>
+
+<p>While we’re here, if you want to start doing any text editing with Vim or Neovim within tmux sessions, you may find these settings helpful. First, let’s create a tmux config file: <code class="language-plaintext highlighter-rouge">touch ~/.tmux.conf</code>. Enter this code into that file:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># in ~/.tmux.conf
+
+# Neovim color help (https://github.com/neovim/neovim/issues/7764#issuecomment-411995268)
+set -g terminal-overrides ',xterm-256color:Tc'
+set -g default-terminal "tmux-256color"
+set -as terminal-overrides ',xterm*:sitm=\E[3m'
+
+# Set Neovim escape delay to 0 milliseconds (https://github.com/neovim/neovim/wiki/FAQ#esc-in-tmux-or-gnu-screen-is-delayed) 
+set -sg escape-time 0
+</code></pre></div></div>
+
+<h2 id="appendix-b-simpler-versions-of-the-syncthing-shell-functions">Appendix B: Simpler versions of the Syncthing shell functions</h2>
+
+<p>If the functions above are giving you problems, you can try these simpler versions I used at first:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># in ~/.bash_profile or ~/.bashrc</span>
+<span class="k">function </span>ss <span class="o">{</span>
+  <span class="nb">echo</span> <span class="s2">"Starting up Syncthing at http://127.0.0.1:8384/"</span>
+  tmux new-session <span class="nt">-d</span> <span class="nt">-s</span> synct
+  tmux send-keys <span class="nt">-t</span> synct <span class="s2">"syncthing -no-browser"</span> Enter
+<span class="o">}</span>
+
+<span class="k">function </span>se <span class="o">{</span>
+  <span class="nb">echo</span> <span class="s2">"Stopping Syncthing and killing the tmux session"</span>
+  tmux send-keys <span class="nt">-t</span> synct C-c
+  tmux kill-session <span class="nt">-t</span> synct
+<span class="o">}</span>
+</code></pre></div></div>
+:ET

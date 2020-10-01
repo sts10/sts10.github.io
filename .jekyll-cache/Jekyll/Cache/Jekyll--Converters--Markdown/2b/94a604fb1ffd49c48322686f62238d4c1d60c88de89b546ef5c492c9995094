@@ -1,0 +1,15 @@
+I"�<p>Sometimes I get an error on a seemingly-random iteration of a loop that occurs many times. Normally I would drop in in a <code class="language-plaintext highlighter-rouge">binding.pry</code> from the <a href="https://github.com/pry/pry">Pry Ruby gem</a>, but this is not always a sufficient solution, since I’d have to <code class="language-plaintext highlighter-rouge">exit</code> through all the successful iterations until I found the error.</p>
+
+<!-- more -->
+
+<p>The smarter way to do this is to use <code class="language-plaintext highlighter-rouge">begin</code>/<code class="language-plaintext highlighter-rouge">rescue</code> blocks to ensure <code class="language-plaintext highlighter-rouge">binding.pry</code> is only called when (any) error is thrown. Here’s a generic example:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">begin</span> 
+  <span class="c1"># troublesome code where the error is occurring </span>
+<span class="k">rescue</span>
+  <span class="nb">binding</span><span class="p">.</span><span class="nf">pry</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>With this code in place, the <code class="language-plaintext highlighter-rouge">binding.pry</code> will only be called when the trouble code line or block generates an error of any kind, thus taking you straight to the first problematic iteration.</p>
+:ET

@@ -1,0 +1,40 @@
+I"q<p>Last fall I was delighted to figure out <a href="http://sts10.github.io/2015/10/24/true-hex-colors-with-neovim-and-iterm2.html">how to get true HEX colors with Neovim and iTerm2</a>. However I have recently learned that you can have these same colors available in regular old terminal Vim (aka command line Vim) and iTerm2.</p>
+
+<!-- more -->
+
+<p>In April Vim merged <a href="https://groups.google.com/forum/#!topic/vim_dev/mAhjlVqpKts">patch 7.4.1799, which appears to simplify settings for using true colors in the terminal</a>. After upgrading to this patch, users simply had to include <code class="language-plaintext highlighter-rouge">set termguicolors</code> in their vimrc to get true colors in the terminal– the one caveat being that it has to be a terminal like iTerm2 that also supports “true colors”. <a href="https://gist.github.com/XVilka/8346728#now-supporting-truecolour">Here’s a list of other terminal emulators that support “truecolor”</a>.</p>
+
+<p>To be honest it’s unclear to me if users could get true colors in the terminal before this Vim patch was applied. But I do know that in Vim 7.4.1799 and above, the setting (when used with recent versions of iTerm2) gave me true colors running regular Vim (as opposed to Neovim) in iTerm2, something that I had previously thought only possible using either MacVim or Neovim+iTerm2.</p>
+
+<h2 id="how-to-get-true-colors-with-regular-terminal-vim-and-iterm2">How To Get True Colors with Regular Terminal Vim and iTerm2</h2>
+
+<p>Anyway, if you only ever use iTerm2 and never OS X’s Terminal app and want true colors in regular Vim:</p>
+
+<ol>
+  <li><a href="https://iterm2.com/downloads.html">Upgrade to the confusingly-named iTerm2 3.0.4</a>.</li>
+  <li>If necessary, upgrade your terminal Vim to 7.4.1799 or higher (<a href="https://github.com/sts10/terminal_and_vim_settings#flavors-of-vim">I recommend using Homebrew to do this</a>, though I’m not totally confident that this method is without downsides)</li>
+  <li>Put <code class="language-plaintext highlighter-rouge">set termguicolors</code> in your vimrc.</li>
+</ol>
+
+<p>If you only want to run this setting when using iTerm, wrap it in this nifty if statement that <a href="https://twitter.com/chrislesage">Chris Lesage</a> was nice enough to <a href="http://sts10.github.io/2015/10/24/true-hex-colors-with-neovim-and-iterm2.html/#comment-2632598645">leave in a comment</a> on my previous blog post:</p>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">" gui colors if running iTerm</span>
+<span class="k">if</span> $TERM_PROGRAM <span class="p">=~</span> <span class="s2">"iTerm"</span>
+  <span class="k">set</span> <span class="nb">termguicolors</span>
+<span class="k">endif</span>
+</code></pre></div></div>
+
+<p>The above 3 lines are what I now use in my vimrc. The advantage of using the if statement is that if you do use your vimrc in OS X’s Terminal app, your colors are at least readable, rather than totally messed up if you do execute <code class="language-plaintext highlighter-rouge">set termguicolors</code> without your terminal supporting guicolors.</p>
+
+<h2 id="macvim-vs-terminal-vim">MacVim vs. terminal Vim</h2>
+
+<p>Now that I can get true colors on a fresh machine by simply installing iTerm2 and a fresh version of terminal Vim, I’m tempted to revisit an old question of whether to prefer a GUI version of Vim like <a href="https://github.com/macvim-dev/macvim/releases/">MacVim</a> or terminal Vim. To me there seem to be real advantages and disadvantages to both approaches, as seen by the <a href="https://www.google.com/webhp?sourceid=chrome-instant&amp;ion=1&amp;espv=2&amp;ie=UTF-8#q=vim%20gui%20or%20terminal">healthy amount discussion of this question on the internet</a>. My approach these days is to stay comfortable in both, though I will say that as I use either version more, I am (a) using the mouse less and (b) growing more comfortable with my Vim mappings that deal with the system clipboard in relatively predictable ways.</p>
+
+<h2 id="what-about-neovim">What about Neovim</h2>
+
+<p>A month after the Vim patch, <a href="https://github.com/neovim/neovim/pull/4690">Neovim merged patch 7.4.1799</a>, following the new <code class="language-plaintext highlighter-rouge">set termguicolors</code> name for the setting. In other words, the same setting will work if you’re running Neovim and iTerm2. No need to use an <code class="language-plaintext highlighter-rouge">if has("nvim")</code> statement for different settings to get true colors.</p>
+
+<h2 id="the-last-frontier">The Last Frontier</h2>
+
+<p>As you may have gathered, I have yet to figure out how to get true colors in terminal Vim <em>when using OS X’s default Terminal app</em> (as opposed to iTerm2). Hopefully that makes sense. If you know how to do this, leave a comment! Perhaps it’s a matter of me updating my Terminal application, which is 2.5.3 (343.7).</p>
+:ET

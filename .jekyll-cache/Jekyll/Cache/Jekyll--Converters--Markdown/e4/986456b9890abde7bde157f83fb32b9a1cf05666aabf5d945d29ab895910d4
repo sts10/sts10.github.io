@@ -1,0 +1,100 @@
+I"I$<p>This past Valentine’s Day, <a href="https://openprivacy.ca/blog/2019/02/14/cwtch-alpha/">Open Privacy released an alpha build of an encrypted messaging app called Cwtch</a>.</p>
+
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Happy Valentine&#39;s Day! 💜💜💜<br /><br />What better day to launch the alpha of a project designed to bring people together safely and securely than on Valentine’s day?<br /><br />Cwtch is our metadata resistant, group messaging tool  Time for truly consensual applications!<a href="https://t.co/Dcru1WxAft">https://t.co/Dcru1WxAft</a> <a href="https://t.co/5mk03Q0duH">pic.twitter.com/5mk03Q0duH</a></p>&mdash; Open Privacy (@OpenPriv) <a href="https://twitter.com/OpenPriv/status/1096077069920788480?ref_src=twsrc%5Etfw">February 14, 2019</a></blockquote>
+<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>You can read more about Cwtch either in <a href="https://openprivacy.ca/blog/2019/02/14/cwtch-alpha/">this blog post</a> or <a href="https://git.openprivacy.ca/cwtch.im/cwtch">their main Gitlab repo</a>. But it’s basically a decentralized chat application that uses end-to-end encryption for all communication. It also uses Tor Onion services to further protect the metadata of communication, similar to how <a href="https://ricochet.im/">Ricochet</a> works.</p>
+
+<p>Important: The developers are keen to point out that “Cwtch is an experimental concept and prototype. We do not recommend you use Cwtch today if you require secure communication. At least, not yet.” So you know, don’t send sensitive information over Cwtch just yet.</p>
+
+<h2 id="getting-this-alpha-release-up-and-running-on-ubuntu-1804">Getting this Alpha release up and running on Ubuntu 18.04</h2>
+
+<p>Note: I’m running Ubuntu 18.04, specifically Kubuntu. I had both the Tor Browser and Go installed before attempting this.</p>
+
+<h3 id="dependency-an-up-to-date-version-of-tor-not-included">Dependency: An up-to-date version of Tor (not included)</h3>
+
+<p>In order to run this build of Cwtch, you need to have Tor installed separately, and it needs to be a pretty recent version. I needed to get up to <code class="language-plaintext highlighter-rouge">Tor version 0.3.5.7</code> for Cwtch to work (you can check which version you have with <code class="language-plaintext highlighter-rouge">tor --version</code>).</p>
+
+<h4 id="installing-the-latest-version-of-tor-on-ubuntu-1804">Installing the latest version of Tor on Ubuntu 18.04</h4>
+
+<p>If you run <code class="language-plaintext highlighter-rouge">tor --version</code> and get version <code class="language-plaintext highlighter-rouge">0.3.5.7</code>, you’re all good to skip this section. If it’s a lower version number, you may need a newer version of tor.</p>
+
+<p>If you’re running Ubuntu, unfortunately simply running <code class="language-plaintext highlighter-rouge">sudo apt install tor</code> may give you <a href="https://packages.ubuntu.com/bionic/tor">a version of Tor that’s too old to run Cwtch</a>, at least at the time of this writing.</p>
+
+<p>To get a newer version of Tor on Ubuntu, <a href="https://www.torproject.org/docs/debian.html.en#ubuntu">follow instructions found here</a>, which I outline below as well.</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">sudo apt install apt-transport-https</code></li>
+  <li>Add the following lines to <code class="language-plaintext highlighter-rouge">/etc/apt/sources.list</code>:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>deb https://deb.torproject.org/torproject.org bionic main
+deb-src https://deb.torproject.org/torproject.org bionic main
+</code></pre></div>    </div>
+  </li>
+  <li>Import GPG key
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>curl https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg <span class="nt">--import</span>
+<span class="nb">sudo </span>gpg <span class="nt">--export</span> A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | <span class="nb">sudo </span>apt-key add -
+</code></pre></div>    </div>
+  </li>
+  <li>Install tor and keyring
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt update
+<span class="nb">sudo </span>apt <span class="nb">install </span>tor deb.torproject.org-keyring
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>After doing the above, running <code class="language-plaintext highlighter-rouge">tor --version</code> returns <code class="language-plaintext highlighter-rouge">Tor version 0.3.5.7.</code> for me, which Cwtch worked with.</p>
+
+<h3 id="installing-and-running-cwtch">Installing and running Cwtch</h3>
+
+<p>OK let’s do this.</p>
+
+<ol>
+  <li>
+    <p>Download the latest <a href="https://git.openprivacy.ca/cwtch.im/ui/releases">pre-built Linux binary, labeled “cwtch-linux-YYYY-MM-DD.tar.gz”</a> and the matching <code class="language-plaintext highlighter-rouge">.sha256</code> file. (This guide was written for release version 0.1.4.)</p>
+  </li>
+  <li>
+    <p>Optionally, check the <code class="language-plaintext highlighter-rouge">gz</code> file’s integrity by opening a terminal, navigating to where you downloaded the pair of files, and running <code class="language-plaintext highlighter-rouge">sha256sum -c cwtch-linux-YYYY-MM-DD.tar.gz.sha256</code>, filling in the proper date. You get an “OK” message.</p>
+  </li>
+  <li>
+    <p>Extract the downloaded <code class="language-plaintext highlighter-rouge">gz</code> file (usually this can be done by just double clicking the compressed file).</p>
+  </li>
+  <li>
+    <p>Launch Cwtch by running <code class="language-plaintext highlighter-rouge">./cwtch/ui</code> from the appropriate location. Cwtch should launch!</p>
+  </li>
+</ol>
+
+<p>Success! Hopefully! See below for how to run Cwtch more easily, i.e. from your GUI desktop.</p>
+
+<p>I think my username/address/handle is <code class="language-plaintext highlighter-rouge">schlink~xek4wvclrozoecg535wndbksyid6fczi5q5kbvvtu7pyt2kb3ghdywid</code> if you want to say hi! (I changed that first part from the default “alice” to “schlink” by clicking on the word “alice” and typing “schlink” – that I could do that wasn’t intuitive to me for a few days.)</p>
+
+<h2 id="cwtch-alpha-testing-group">Cwtch Alpha testing group</h2>
+
+<p>There’s also a “Cwtch Alpha” group where – as explained in <a href="https://openprivacy.ca/blog/2019/03/04/cwtch-alpha-0.1.2/">this friendly blog post</a> – users are welcome to test out Cwtch and chat in. To request an invite to the group, just paste the following code (called an address) into the address text box in Cwtch that says “paste an address here to add a contact”:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>torv3frgCHN7wBNpDdOVvSixgbsIwIjYKD/kl768gRG4hiaQ=EsABCiA2NmI0NmM4OGMxNDc1ZGUxODE5YWYyYTk1ZDM5NTQ4ZBIgDSFY2mxYJiSJs0b442hFChzaHB5B8EERcFqLAkpb5kAaODJjM2ttb29ibnlnaGoyenc2cHd2N2Q1N3l6bGQ3NTNhdW8zdWdhdWV6enB2ZmFrM2FoYzRiZHlkIkBgg+E0T4YKtxnw57sHQbuG3C6myjU2aS496O4n3jpzQu8iT25NReJnuwqv9ER93wE1N9g1f7WY8JCtx0bnvyQK
+</code></pre></div></div>
+
+<h2 id="getting-the-very-latest-builds">Getting the very latest builds</h2>
+
+<p>If you wish to download and installed the very latest builds of Cwtch, you can find compiled binaries <a href="https://build.openprivacy.ca/files/">here</a>. Personally I think I’m going to stick to the Alpha releases for now, though.</p>
+
+<h2 id="creating-an-application-icon-by-creating-a-desktop-file-ubuntu-systems">Creating an application icon by creating a <code class="language-plaintext highlighter-rouge">.desktop</code> file (Ubuntu systems)</h2>
+
+<p>If you wish to create an application icon for Cwtch on your Ubuntu-based system, you’ll likely want to create a <code class="language-plaintext highlighter-rouge">.desktop</code> file. First, let’s download <a href="https://cwtch.im/images/cwtch-peer.png">a nice PNG image file of the Cwtch logo</a> and save it inside the <code class="language-plaintext highlighter-rouge">cwtch</code> directory.</p>
+
+<p>Then, I put the entire <code class="language-plaintext highlighter-rouge">cwtch</code> directory in a new directory called <code class="language-plaintext highlighter-rouge">other_apps</code>, located at <code class="language-plaintext highlighter-rouge">~/other_apps</code>.</p>
+
+<p>Next, in <code class="language-plaintext highlighter-rouge">~/.local/share/applications/</code>, I created a file called <code class="language-plaintext highlighter-rouge">cwtch.desktop</code>. Assuming you’ve got version 0.1.4 of Cwtch – put this in that file:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[Desktop Entry]
+Type=Application
+Name=Cwtch
+Exec=/home/$USER/other_apps/cwtch/ui
+Icon=/home/$USER/other_apps/cwtch/cwtch-peer.png
+Terminal=false
+Categories=Network;InstantMessaging;Internet
+</code></pre></div></div>
+
+<p>Once you save that file, you should have a Cwtch file available in your applications menu.</p>
+
+:ET

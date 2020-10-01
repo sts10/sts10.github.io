@@ -1,0 +1,186 @@
+I"mI<blockquote class="twitter-tweet" lang="en"><p>Suspect fires on bounty hunters, twirling in their <a href="https://twitter.com/hashtag/Burberry?src=hash">#Burberry</a></p>&mdash; Schlink Bot (@schlinkbot) <a href="https://twitter.com/schlinkbot/status/546412459830288384">December 20, 2014</a></blockquote>
+<script async="" src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>Over the past few weeks I’ve been playing around with different ways of making Twitter bots (automated Twitter accounts). I don’t have much to show for it yet– most of my experimentation has been with <a href="http://twitter.com/schlinkbot">@schlinkbot</a>, which probably doesn’t look too impressive at this point. But I’ve learned some foundational stuff.</p>
+
+<!-- more -->
+
+<p>Anyway, in this post I’m going to be going over how to use a Ruby gem called <a href="https://github.com/mispy/twitter_ebooks">Twitter Ebooks</a> by GitHub user mispy to make a Twitter bot. There are of course other ways of doing this, but Twitter Ebooks has some nice features. <strong>Note:</strong> I’m still new to this gem/framework, so excuse any problems. But I did get the bot up and tweeting and replying.</p>
+
+<p>You can read more about Twitter Ebooks at <a href="http://www.rubydoc.info/github/mispy/twitter_ebooks">the project’s wiki</a>.</p>
+
+<h3 id="wait-what-is-this">Wait, What is This?</h3>
+
+<p>Right, so Twitter Ebooks is basically a framework written in Ruby that allows users to create their own Twitter bots. You can think of it like a Twitter bot factory. We want to use it to make one Twitter bot.</p>
+
+<p>Our bot, using Twitter Ebooks, will connect to Twitter using the <a href="https://dev.twitter.com/overview/documentation">Twitter API</a>. This will allow us to send tweets and listen for mentions of our bot. Actually running the bot involves us: (1) creating a twitter account for the bot, (2) registering a Twitter app for the bot, (3) creating a bot with Twitter Ebooks, then (4) running the Ruby code that runs the bot.</p>
+
+<p>Twitter Ebooks, and the bots created with it, are written in a programming language called Ruby. It’s what’s called a Ruby gem, which we’ll need to download in a special way in order to use.</p>
+
+<h3 id="where-will-my-bot-get-its-content-from">Where Will My Bot Get Its Content From?</h3>
+
+<p>Twitter Ebooks uses a pseudo-Markov generator to generate text for the bot to tweet. Basically it’s going to mash-up text from a “real” Twitter account (like your personal account perhaps), and spit it back out all mashed up. Hopefully that sounds cool to you. It can be pretty poetic!</p>
+
+<h3 id="what-youll-need-to-set-up-a-twitter-bot-this-way">What You’ll Need to Set Up a Twitter Bot This Way</h3>
+
+<p>You’ll need a basic Ruby coding environment. I think the bare minimum would be a fresh install of XCode or Command Line Tools, which you can <a href="https://developer.apple.com/downloads/index.action">download from Apple</a>, and <a href="https://rvm.io/rvm/install">RVM</a>. You’ll also need a code editor like <a href="http://www.sublimetext.com/2">Sublime Text 2</a> or 3. If you can install Ruby gems you’re ready to roll.</p>
+
+<h3 id="setup-step-1-configuration">Setup Step 1: Configuration</h3>
+
+<p>First step is to install the Twitter Ebooks Ruby gem. To do this open your Terminal and enter <code class="language-plaintext highlighter-rouge">gem install twitter_ebooks</code>. Hopefully it installs successfully. If it doesn’t you probably don’t have XCode or Command Line Tools set up correctly, or you don’t have RVM (or an equivalent Ruby version manager) installed correctly (see above).</p>
+
+<p>Now you’ll want to use the Unix commands <code class="language-plaintext highlighter-rouge">cd</code> and <code class="language-plaintext highlighter-rouge">mkdir</code> to make a folder for your bot project. When you’re in the proper directory, run <code class="language-plaintext highlighter-rouge">ebooks new my_test_bot</code> (or whatever you want to call your bot). Now open the <code class="language-plaintext highlighter-rouge">bots.rb</code> file in your code editor. This is where you tell your bot how to act and thus will be where we’ll do most of our coding.</p>
+
+<p>This would be a good time to go create the Twitter account that will be your bot. For example, I went and made @schlinkbot. Write down the password somewhere.</p>
+
+<p>Now we need to create a “Twitter app.” While logged in as your bot account, head over to <a href="https://apps.twitter.com/">https://apps.twitter.com/</a>. Hit the create new app button in the top right and fill out the form. It doesn’t really matter what you put here, just be sure to leave Callback URL blank and agree to terms. If it asks, choose the highest level of permissions (read, write, direct messages). (Note: Since writing this blog post, I think Twitter has changed their API rules such that for an account to create a new account, it needs to have a phone number attached to it. If, like me, your one real phone number is attached to your real, non-bot account, <a href="https://www.google.com/voice?pli=1">Google Voice</a> may be useful here.)</p>
+
+<p>Let’s head over to the “Permissions” tab and make sure our app asks for “Read, Write and Access direct messages”. With the checked, hit “Update Settings.” Now go to the “Keys and Access Tokens” tab. Scroll down and click the “Generate My Access Token and Token Secret” button.</p>
+
+<p>Cool. We now have 4 long token/secrets on this page. These 4 codes will allow our app to read and post to the bot’s Twitter account. The 4 codes are: consumer key (API key), consumer secret (API secret), access token, and access token secret.</p>
+
+<p>Now, while keeping your browser open to that page, open <code class="language-plaintext highlighter-rouge">bots.rb</code> in your text editor.</p>
+
+<p>By default you’re given a bare-bones example, but I’d suggest replacing that with my slightly more built-up example below, which I based off of the bot example in <a href="https://github.com/mispy/ebooks_example">this repo</a>:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">require</span> <span class="s1">'twitter_ebooks'</span>
+
+<span class="c1"># This is an example bot definition with event handlers commented out</span>
+<span class="c1"># You can define and instantiate as many bots as you like</span>
+
+<span class="k">class</span> <span class="nc">MyBot</span> <span class="o">&lt;</span> <span class="no">Ebooks</span><span class="o">::</span><span class="no">Bot</span>
+  <span class="c1"># Configuration here applies to all MyBots</span>
+  <span class="nb">attr_accessor</span> <span class="ss">:original</span><span class="p">,</span> <span class="ss">:model</span><span class="p">,</span> <span class="ss">:model_path</span>
+
+  <span class="k">def</span> <span class="nf">configure</span>
+    <span class="c1"># Consumer details come from registering an app at https://dev.twitter.com/</span>
+    <span class="c1"># Once you have consumer details, use "ebooks auth" for new access tokens</span>
+    <span class="nb">self</span><span class="p">.</span><span class="nf">consumer_key</span> <span class="o">=</span> <span class="s1">''</span> <span class="c1"># Your app consumer key</span>
+    <span class="nb">self</span><span class="p">.</span><span class="nf">consumer_secret</span> <span class="o">=</span> <span class="s1">''</span> <span class="c1"># Your app consumer secret</span>
+
+    <span class="c1"># Users to block instead of interacting with</span>
+    <span class="nb">self</span><span class="p">.</span><span class="nf">blacklist</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'tnietzschequote'</span><span class="p">]</span>
+
+    <span class="c1"># Range in seconds to randomize delay when bot.delay is called</span>
+    <span class="nb">self</span><span class="p">.</span><span class="nf">delay_range</span> <span class="o">=</span> <span class="mi">1</span><span class="o">..</span><span class="mi">6</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">on_startup</span>
+    <span class="n">load_model!</span> 
+
+    <span class="n">scheduler</span><span class="p">.</span><span class="nf">every</span> <span class="s1">'24h'</span> <span class="k">do</span>
+      <span class="c1"># Tweet something every 24 hours</span>
+      <span class="c1"># See https://github.com/jmettraux/rufus-scheduler</span>
+      <span class="c1"># tweet("hi")</span>
+      <span class="c1"># pictweet("hi", "cuteselfie.jpg")</span>
+    <span class="k">end</span>
+
+    <span class="n">scheduler</span><span class="p">.</span><span class="nf">every</span> <span class="s1">'57m'</span> <span class="k">do</span> 
+      <span class="n">statement</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="nf">make_statement</span><span class="p">(</span><span class="mi">140</span><span class="p">)</span>
+      <span class="n">tweet</span><span class="p">(</span><span class="n">statement</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">on_message</span><span class="p">(</span><span class="n">dm</span><span class="p">)</span>
+    <span class="c1"># Reply to a DM</span>
+    <span class="c1"># reply(dm, "secret secrets")</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">on_follow</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+    <span class="c1"># Follow a user back</span>
+    <span class="c1"># follow(user.screen_name)</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">on_mention</span><span class="p">(</span><span class="n">tweet</span><span class="p">)</span>
+    <span class="c1"># Reply to a mention</span>
+    <span class="c1"># reply(tweet, "oh hullo")</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">on_timeline</span><span class="p">(</span><span class="n">tweet</span><span class="p">)</span>
+    <span class="c1"># Reply to a tweet in the bot's timeline</span>
+    <span class="c1"># reply(tweet, "nice tweet")</span>
+  <span class="k">end</span>
+
+  <span class="kp">private</span>
+  <span class="k">def</span> <span class="nf">load_model!</span>
+    <span class="k">return</span> <span class="k">if</span> <span class="vi">@model</span>
+
+    <span class="vi">@model_path</span> <span class="o">||=</span> <span class="s2">"model/</span><span class="si">#{</span><span class="n">original</span><span class="si">}</span><span class="s2">.model"</span>
+
+    <span class="n">log</span> <span class="s2">"Loading model </span><span class="si">#{</span><span class="n">model_path</span><span class="si">}</span><span class="s2">"</span>
+    <span class="vi">@model</span> <span class="o">=</span> <span class="no">Ebooks</span><span class="o">::</span><span class="no">Model</span><span class="p">.</span><span class="nf">load</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="c1"># Make a MyBot and attach it to an account</span>
+<span class="no">MyBot</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s2">"schlinkbot"</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">bot</span><span class="o">|</span>
+  <span class="n">bot</span><span class="p">.</span><span class="nf">access_token</span> <span class="o">=</span> <span class="s2">""</span> <span class="c1"># Token connecting the app to this account</span>
+  <span class="n">bot</span><span class="p">.</span><span class="nf">access_token_secret</span> <span class="o">=</span> <span class="s2">""</span> <span class="c1"># Secret connecting the app to this account</span>
+
+  <span class="n">bot</span><span class="p">.</span><span class="nf">original</span> <span class="o">=</span> <span class="s2">"sts10"</span>
+<span class="k">end</span>
+
+</code></pre></div></div>
+
+<p>NOTE: Here is a <a href="http://gist.github.com/sts10/9f253ea19bbf49b622ed">gist</a> of the above code if that’s easier for you to read/copy-and-paste.</p>
+
+<p>First off, let’s fill in those 4 codes. The first two go up top where it says <code class="language-plaintext highlighter-rouge">self.consumer_key</code> and <code class="language-plaintext highlighter-rouge">self.consumer_secret</code>. The second two go down at the bottom at <code class="language-plaintext highlighter-rouge">bot.access_token</code> and <code class="language-plaintext highlighter-rouge">bot.access_token_secret</code>. In all 4 cases, put the codes between the quotation marks.</p>
+
+<p>Next, change out <code class="language-plaintext highlighter-rouge">"schlinkbot"</code> to the handle of your Twitterbot. And change <code class="language-plaintext highlighter-rouge">"sts10"</code> to whatever “real” Twitter account you want your bot to imitate. This “real” account with populate something that Twitter Ebooks calls the “model”.</p>
+
+<p>OK, let’s save that <code class="language-plaintext highlighter-rouge">bots.rb</code> file and go back to the command line. Now run the following lines from within your bots directory:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bundle install
+ebooks archive sts10 corpus/sts10.json
+ebooks consume corpus/sts10.json
+</code></pre></div></div>
+
+<p>This went and grabbed your real Twitter account’s tweets so that your bot can mimic it. If you have trouble, this is <a href="https://github.com/mispy/ebooks_example">the repo containing an example bot</a> where I found this series of commands.</p>
+
+<p>Now, to actually run the bot, enter <code class="language-plaintext highlighter-rouge">ebooks start</code>. Since we only entered the bare minimum into the <code class="language-plaintext highlighter-rouge">bots.rb</code> file, your bot literally does nothing at this point, but if you saw something like:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@schlinkbot: Loading model model/sts10.model
+@schlinkbot: starting tweet stream
+@schlinkbot: Online!
+</code></pre></div></div>
+
+<p>We’re in good shape. To stop your bot, hit Control + c in the terminal.</p>
+
+<h3 id="step-2-give-your-bot-instructions-on-how-to-act">Step 2: Give Your Bot Instructions on How to Act</h3>
+
+<p>In my example above, I give you two important lines of code:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">scheduler</span><span class="p">.</span><span class="nf">every</span> <span class="s1">'57m'</span> <span class="k">do</span> 
+    <span class="n">statement</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="nf">make_statement</span><span class="p">(</span><span class="mi">140</span><span class="p">)</span>
+    <span class="n">tweet</span><span class="p">(</span><span class="n">statement</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>Using a <a href="https://github.com/jmettraux/rufus-scheduler">scheduler</a>, this code tweets a Markov-generated “statement” that is 140 characters long every 57 minutes. Obviously you can make it tweet more or less often by changing that <code class="language-plaintext highlighter-rouge">57m</code>.</p>
+
+<p>Now knowing how the model generates Markov text, let’s look at how we’d instruct the bot to reply to users with a Markov statement in addition to sending statements out every 57 minutes.</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">on_mention</span><span class="p">(</span><span class="n">tweet</span><span class="p">)</span>
+    <span class="c1"># Reply to a mention</span>
+    <span class="n">statement</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="nf">make_statment</span><span class="p">(</span><span class="mi">120</span><span class="p">)</span>
+    <span class="n">reply</span><span class="p">(</span><span class="n">tweet</span><span class="p">,</span> <span class="n">statement</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>So now instead of just tweeting out the 140 characters, we are replying to whatever tweet mentioned our bot.</p>
+
+<blockquote class="twitter-tweet" lang="en"><p><a href="https://twitter.com/ryanvailbrown">@ryanvailbrown</a> The last-ditch missile plan failed, sig up their Nobel Peace Prizes.</p>&mdash; Schlink Bot (@schlinkbot) <a href="https://twitter.com/schlinkbot/status/546446144445116417">December 20, 2014</a></blockquote>
+<script async="" src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<h3 id="restarting-your-bot">Restarting Your Bot</h3>
+
+<p>As I said above, to stop your bot hit Control + c in Terminal. To start it again, navigate to the correct directory and run <code class="language-plaintext highlighter-rouge">ebooks start</code>.</p>
+
+<h3 id="running-your-bot-not-on-your-local-machine-ie-semi-permanently">Running Your Bot NOT On Your Local Machine (i.e. Semi-Permanently)</h3>
+
+<p>As you’ve probably surmised, following this guide means you’ll only be able to run your bot on your local machine. As in, your bot will only tweet/reply to tweets while you’re running the Ruby program. To have your bot run forever, you’ll need to push your finished code to a cloud hosting service like <a href="https://www.heroku.com/">Heroku</a>, as the <a href="https://github.com/mispy/twitter_ebooks/blob/master/README.md">Twitter Ebooks README</a> suggests. I haven’t done this yet, mostly because I forget how Heroku works and I’m still frequently playing with my <code class="language-plaintext highlighter-rouge">bots.rb</code> settings.</p>
+
+<h3 id="going-forward">Going Forward</h3>
+
+<p>There are plenty more “event handlers” in the <code class="language-plaintext highlighter-rouge">bots.rb</code> file to play with– <code class="language-plaintext highlighter-rouge">on_message</code>, <code class="language-plaintext highlighter-rouge">on_follow</code>, <code class="language-plaintext highlighter-rouge">on_timeline</code> for example. For more ideas, check out <a href="https://github.com/mispy/ebooks_example/blob/master/bots.rb">the bots.rb file of the example bot</a>.</p>
+:ET

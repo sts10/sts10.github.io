@@ -1,0 +1,185 @@
+I"M<p>In my very slow and not very steady quest to learn the Rust programming language, I’ve come across a few projects written in the language that I use everyday. I thought I’d write a quick post about them, with some configuration tricks that I’ve made to make them suit my needs.</p>
+
+<p><strong>Why prefer tools built with Rust?</strong> <a href="https://www.rust-lang.org/">Rust</a> is a very fast language that also works to ensure safety from a group of bugs and pitfalls. It’s also the four-time-running most loved programming language, according to <a href="https://insights.stackoverflow.com/survey/2019">a yearly Stack Overflow survey</a>. Also, since Rust is only a few years old, any program written in Rust is by definition new. Of course newer doesn’t always mean better, but as a non-professional developer I can afford to be on the edge a bit.</p>
+
+<p>Do you know of other tools written in Rust that you’ve found useful? Leave a comment!</p>
+
+<h2 id="terminal-emulator">Terminal Emulator</h2>
+
+<p>First up, <a href="https://github.com/jwilm/alacritty">Alacritty</a>: a cross-platform, GPU-accelerated terminal emulator written in Rust.</p>
+
+<p><img src="https://cloud.githubusercontent.com/assets/4285147/21585004/2ebd0288-d06c-11e6-95d3-4a2889dbbd6f.png" alt="Alacritty screenshot" /></p>
+
+<p>Alacritty’s developers claim it’s “the fastest terminal emulator in existence,” and that they’ve performed benchmarks to prove it. It’s certainly snappy enough for me – I remember the first times I ran the <code class="language-plaintext highlighter-rouge">ls</code> command and being impressed by how the output seemed to rush to the screen, like it was overexcited to be there. It seems faster than iTerm2, for example.</p>
+
+<p>Note that Alacritty is in a self-described “beta” stage, and may not be as feature-rich as other terminal emulators – for example it does not currently have tabs or split windows (you have to run multiple instances of Alacritty, or run a multiplexer like <a href="https://github.com/tmux/tmux">tmux</a>), though it does now support scrollback. In the <a href="https://github.com/jwilm/alacritty#faq">ReadMe FAQ section</a>, the developers explain:</p>
+
+<blockquote>
+  <p>Alacritty has many great features, but not every feature from every other terminal. This could be for a number of reasons, but sometimes it’s just not a good fit for Alacritty. This means you won’t find things like tabs or splits (which are best left to a window manager or terminal multiplexer) nor niceties like a GUI config editor.</p>
+</blockquote>
+
+<p>I was able to replace iTerm2 with Alacritty fully on my work Mac, so if you don’t love <a href="https://twitter.com/schwanksta/status/1115679910826262528">having to update your terminal emulator all the time</a>, <em>and</em> can do without tabs or splits, give it a shot!</p>
+
+<h3 id="alacritty-installation-options">Alacritty installation options</h3>
+
+<p>On MacOS, I build Alacritty from source. You can find their <a href="https://github.com/jwilm/alacritty/blob/master/INSTALL.md">official instructions on how to build from source on GitHub</a>. But if you’re on a Mac and have Rust already installed, I’m pretty sure <a href="https://github.com/jwilm/alacritty/blob/master/INSTALL.md#macos">all you have to do</a> is clone down the repo, run <code class="language-plaintext highlighter-rouge">make app</code>, then move the binary to your Applications directory: <code class="language-plaintext highlighter-rouge">cp -r target/release/osx/Alacritty.app /Applications/</code>.</p>
+
+<p>Alternatively, you can <a href="https://github.com/jwilm/alacritty#macos">install via Homebrew</a> with <code class="language-plaintext highlighter-rouge">brew cask install alacritty</code>.</p>
+
+<h3 id="configuring-alacritty">Configuring Alacritty</h3>
+
+<p>Alacritty looks for a YAML config file in a number of locations. On Mac, I made mine at <code class="language-plaintext highlighter-rouge">~/.config/alacritty/alacritty.yml</code>. There’s a copy of <a href="https://github.com/jwilm/alacritty/blob/master/alacritty.yml">the default config file in the root of the GitHub repo</a> which you can copy down and tweak as needed. Here’s <a href="https://gist.github.com/sts10/df620672662fe4c6f03ac296a02b8e72">a copy of my config file</a>, which, among other tweaks, has some colors specified to match <a href="https://github.com/sts10/vim-pink-moon">my Vim colorscheme of choice</a> and is set to use the fontface <a href="https://sourcefoundry.org/hack/">Hack</a>.</p>
+
+<p>I’d also recommend adding a key binding to open a new instance of Alacritty, and map it to Command + n. To do this, paste the following in the <code class="language-plaintext highlighter-rouge">key_bindings</code> section of the config file:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="pi">{</span> <span class="nv">key</span><span class="pi">:</span> <span class="nv">N</span><span class="pi">,</span>        <span class="nv">mods</span><span class="pi">:</span> <span class="nv">Command</span><span class="pi">,</span> <span class="nv">action</span><span class="pi">:</span> <span class="nv">SpawnNewInstance</span>             <span class="pi">}</span>
+</code></pre></div></div>
+
+<p>Lastly, I wanted Alacritty to open to a specific directory when launched, in this case <code class="language-plaintext highlighter-rouge">~/Documents/code</code>. After <a href="https://github.com/jwilm/alacritty/issues/1672#issuecomment-452883768">asking some questions on a semi-related GitHub issue</a>, I figured out how to do this. I added the following snippet to the config file:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">shell</span><span class="pi">:</span>
+<span class="na">program</span><span class="pi">:</span> <span class="s">/bin/bash</span>
+<span class="na">args</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">-c</span>
+<span class="pi">-</span> <span class="s">cd ~/Documents/code &amp;&amp; exec bash</span>
+</code></pre></div></div>
+
+<p>I can’t say I fully understand it, but it works consistently.</p>
+
+<p>I’ll also note here that there are a ton of ways to re-configure <strong>keybindings</strong>. See the explanation and defaults <a href="https://github.com/jwilm/alacritty/blob/master/alacritty.yml#L377">at the bottom of the sample config file in teh root of the GitHub repo</a>.</p>
+
+<h2 id="command-line-tools-written-in-rust">Command Line Tools Written in Rust</h2>
+
+<p>For a number of reasons that I’m not quite smart enough to outline here, Rust seems pretty well suited for building command line tools. There are many I don’t mention in this post! In fact there’s <a href="https://github.com/rust-lang-nursery/cli-wg">a Rust working group just for CLIs</a> (they’re <a href="https://twitter.com/CliRust">on Twitter</a> and <a href="https://fosstodon.org/@clirust">Mastodon</a>). Separately, here’s a <a href="https://mastodon.social/@wezm/101824862524557850">casual list of tools from a Mastodon user</a>).</p>
+
+<p>Below I outline a few that I actually use.</p>
+
+<h3 id="exa-a-modern-version-of-ls">exa: “A modern version of ls”</h3>
+
+<p><a href="https://github.com/ogham/exa"><code class="language-plaintext highlighter-rouge">exa</code></a> is “a modern version of <code class="language-plaintext highlighter-rouge">ls</code>” (here’s <a href="https://the.exa.website/">the official website</a>).</p>
+
+<p><img src="https://raw.githubusercontent.com/ogham/exa/master/screenshots.png" alt="exa screenshot" /></p>
+
+<p>The developers summarize:</p>
+
+<blockquote>
+  <p>exa is a modern replacement for the command-line program ls that ships with Unix and Linux operating systems, with more features and better defaults. It uses colours to distinguish file types and metadata. It knows about symlinks, extended attributes, and Git. And it’s small, fast, and just one single binary.</p>
+</blockquote>
+
+<p>I’m not sure if it’s <em>faster</em> than <code class="language-plaintext highlighter-rouge">ls</code>, but it seems to handle colors well right out of the box, and I list the options it gives (see below).</p>
+
+<h4 id="installing-exa">Installing <code class="language-plaintext highlighter-rouge">exa</code></h4>
+
+<p>Again we can either build from source or, on MacOS, use Homebrew. There’s <a href="https://github.com/ogham/exa#installation">an installation section in the ReadMe</a>.</p>
+
+<p>With Homebrew, you can run <code class="language-plaintext highlighter-rouge">brew install exa</code>. If you don’t have the dependency <code class="language-plaintext highlighter-rouge">libgit2</code>, try <code class="language-plaintext highlighter-rouge">brew install exa --without-git</code>. Without this feature, <code class="language-plaintext highlighter-rouge">exa</code> won’t be able to the git status of individual files (not a huge deal, imo).</p>
+
+<p>To build from source, install Rust and then run <code class="language-plaintext highlighter-rouge">cargo install exa</code> or, if you don’t have <code class="language-plaintext highlighter-rouge">libgit2</code>, try <code class="language-plaintext highlighter-rouge">cargo install --no-default-features exa</code>.</p>
+
+<h4 id="usage">Usage</h4>
+
+<p>You can just use <code class="language-plaintext highlighter-rouge">exa</code> where you would use <code class="language-plaintext highlighter-rouge">ls</code>. Then there are <a href="https://github.com/ogham/exa#options">tons of options explained in the ReadMe</a>. I particularly like the <code class="language-plaintext highlighter-rouge">--long</code>, <code class="language-plaintext highlighter-rouge">--tree</code> and <code class="language-plaintext highlighter-rouge">--all</code> options.</p>
+
+<h4 id="helpful-bash-aliases-to-use-with-exa">Helpful bash aliases to use with <code class="language-plaintext highlighter-rouge">exa</code></h4>
+
+<p>I decided to map <code class="language-plaintext highlighter-rouge">ls</code> to <code class="language-plaintext highlighter-rouge">exa</code>. In other words, when I call <code class="language-plaintext highlighter-rouge">ls</code>, <code class="language-plaintext highlighter-rouge">exa</code> actually runs. I accomplish this through a number of <code class="language-plaintext highlighter-rouge">alias</code>es listed below.</p>
+
+<p>Below are a few <code class="language-plaintext highlighter-rouge">alias</code>es I put in my <code class="language-plaintext highlighter-rouge">~/.bash_profile</code> (or <code class="language-plaintext highlighter-rouge">~/.bashrc</code>) that, if the <code class="language-plaintext highlighter-rouge">exa</code> command is installed, calls <code class="language-plaintext highlighter-rouge">exa</code> when I run <code class="language-plaintext highlighter-rouge">ls</code>, plus adds some other handy options:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if </span><span class="nb">type </span>exa 2&gt;/dev/null<span class="p">;</span> <span class="k">then
+  </span><span class="nb">alias ls</span><span class="o">=</span><span class="s1">'exa'</span>
+  <span class="nb">alias </span><span class="nv">l</span><span class="o">=</span><span class="s1">'exa -l --all --group-directories-first --git'</span>
+  <span class="nb">alias </span><span class="nv">ll</span><span class="o">=</span><span class="s1">'exa -l --all --all --group-directories-first --git'</span>
+  <span class="nb">alias </span><span class="nv">lt</span><span class="o">=</span><span class="s1">'exa -T --git-ignore --level=2 --group-directories-first'</span>
+  <span class="nb">alias </span><span class="nv">llt</span><span class="o">=</span><span class="s1">'exa -lT --git-ignore --level=2 --group-directories-first'</span>
+  <span class="nb">alias </span><span class="nv">lT</span><span class="o">=</span><span class="s1">'exa -T --git-ignore --level=4 --group-directories-first'</span>
+<span class="k">else
+  </span><span class="nb">alias </span><span class="nv">l</span><span class="o">=</span><span class="s1">'ls -lah'</span>
+  <span class="nb">alias </span><span class="nv">ll</span><span class="o">=</span><span class="s1">'ls -alF'</span>
+  <span class="nb">alias </span><span class="nv">la</span><span class="o">=</span><span class="s1">'ls -A'</span>
+<span class="k">fi</span>
+</code></pre></div></div>
+
+<h3 id="bat">Bat</h3>
+
+<p><a href="https://github.com/sharkdp/bat">Bat</a> is a replacement to cat that provides syntax highlighting and other features. It’s a quick way to print the contents of text files to the terminal.</p>
+
+<p><img src="https://camo.githubusercontent.com/9d3d89364f2cc83ace8f29646a6236bc15ea1da0/68747470733a2f2f696d6775722e636f6d2f724773646e44652e706e67" alt="Screenshot of bat being used to display the contents of a file to a terminal, with syntax highlighting" /></p>
+
+<p>There are a number of installation methods listed in <a href="https://github.com/sharkdp/bat#installation">the project’s README</a>.</p>
+
+<h3 id="dust">Dust</h3>
+
+<p><a href="https://github.com/bootandy/dust">Dust</a> is “a more intuitive version of <code class="language-plaintext highlighter-rouge">du</code> in Rust”. If you’re unfamiliar with <code class="language-plaintext highlighter-rouge">du</code>, Dust devs explain: “Dust is meant to give you an instant overview of which directories are using disk space without requiring sort or head.”</p>
+
+<p>(<code class="language-plaintext highlighter-rouge">du --help</code> explains it’s aim is to “Summarize disk usage of the set of FILEs, recursively for directories.”)</p>
+
+<p>So basically Dust is helpful when you want to see what directories and files are taking up a lot of space on a hard drive. I’ve never used <code class="language-plaintext highlighter-rouge">du</code> before, but trying it now by just running <code class="language-plaintext highlighter-rouge">du</code>, it spits out a list of every file in a directory, recursively, with its size. I’m sure there are a series of flags I could run with it to get the output similar to <code class="language-plaintext highlighter-rouge">dust</code>’s default output… or I could just use <code class="language-plaintext highlighter-rouge">dust</code>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">du</code> does seem to be faster than <code class="language-plaintext highlighter-rouge">dust</code> though, so we’re not gaining speed here. (As a third alternative, a Mastodon friend <a href="https://mastodon.social/@OliverUv/101895246765815653">pointed</a> to <a href="https://dev.yorhel.nl/ncdu">ncdu</a>).</p>
+
+<h4 id="installation">Installation</h4>
+
+<p><code class="language-plaintext highlighter-rouge">cargo install du-dust</code> or <a href="https://github.com/bootandy/dust#download-install">download the appropriate binary from the Releases page</a>.</p>
+
+<h4 id="usage-1">Usage</h4>
+
+<p>Run <code class="language-plaintext highlighter-rouge">dust</code> in a directory that you want to map out. Here’s an example from the ReadMe:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ dust
+1.2G  target
+622M ├─┬ debug
+445M │ ├── deps
+ 70M │ ├── incremental
+ 56M │ └── build
+262M ├─┬ rls
+262M │ └─┬ debug
+203M │   ├── deps
+ 56M │   └── build
+165M ├─┬ package
+165M │ └─┬ du-dust-0.2.4
+165M │   └─┬ target
+165M │     └─┬ debug
+131M │       └── deps
+165M └─┬ release
+124M   └── deps
+</code></pre></div></div>
+
+<h3 id="ripgrep">ripgrep</h3>
+
+<p><a href="https://github.com/BurntSushi/ripgrep">ripgrep</a> is, as you may have guessed, a faster replacement for GNU’s <code class="language-plaintext highlighter-rouge">grep</code> command.</p>
+
+<blockquote>
+  <p>ripgrep is a line-oriented search tool that recursively searches your current directory for a regex pattern. By default, ripgrep will respect your .gitignore and automatically skip hidden files/directories and binary files. ripgrep has first class support on Windows, macOS and Linux, with binary downloads available for every release. ripgrep is similar to other popular search tools like The Silver Searcher, ack and grep.</p>
+</blockquote>
+
+<p>I’m the first to admit that my regex skills are lacking, but if you’re a frequent grep user, ripgrep might be a speedier substitute. You can also <a href="https://medium.com/@crashybang/supercharge-vim-with-fzf-and-ripgrep-d4661fc853d2">use ripgrep with fzf and Vim</a> apparently.</p>
+
+<h4 id="installation-1">Installation</h4>
+
+<p><a href="https://github.com/BurntSushi/ripgrep#installation">As the ReadMe explains</a>, there are precompiled binaries for all platforms. Or you can use Homebrew: <code class="language-plaintext highlighter-rouge">brew install ripgrep</code>.</p>
+
+<h2 id="ion-a-shell-written-in-rust">Ion: A shell written in Rust</h2>
+
+<p><a href="https://github.com/redox-os/ion">Ion</a> “is a modern system shell that features a simple, yet powerful, syntax. It is written entirely in Rust, which greatly increases the overall quality and security of the shell.” It is “developed alongside, and primarily for, <a href="https://www.redox-os.org/">RedoxOS</a>,” an operating system written in Rust. But Ion promises to be fully capable on other *nix platforms.</p>
+
+<p>I haven’t tried Ion myself, but readers of this post might be interested!</p>
+
+<h2 id="other-rust-programs-im-hoping-to-try-at-some-point">Other Rust Programs I’m Hoping to Try at Some Point</h2>
+
+<ul>
+  <li>
+    <p><a href="https://www.getzola.org/">Zola</a> is a static site generator written in Rust. Currently I’m using Jekyll, which is written in Ruby and is generally kind of a pain to set up and maintain. I’m hoping Zola is faster and, assuming it uses Cargo, will be easier to install/upgrade/maintain.</p>
+  </li>
+  <li>
+    <p><a href="https://github.com/svenstaro/miniserve">miniserve</a> is “a CLI tool to serve files and dirs over HTTP”. To do this, I usually go for <code class="language-plaintext highlighter-rouge">python -m SimpleHTTPServer 8000</code>, but I’m betting miniserve has a bunch more capabilities out of the box. <a href="http://disq.us/p/21hevy7">A commenter</a> pointed me to another option for this, also written in Rust, called <a href="https://github.com/TheWaWaR/simple-http-server">simple-http-server</a>. I haven’t tried either of them yet.</p>
+  </li>
+  <li>
+    <p><a href="https://github.com/jmacdonald/amp">Amp</a>, <a href="https://github.com/remacs/remacs">remacs</a>, and <a href="https://github.com/gchp/iota">iota</a> are all terminal text editors written in Rust. (Though I am <em>really</em> locked into Vim at this point…)</p>
+  </li>
+</ul>
+
+<p>And, as mentioned above, there are a number of command line tools written in Rust not mentioned here. In fact there’s <a href="https://github.com/rust-lang-nursery/cli-wg">a Rust working group just for CLIs</a> (they’re <a href="https://twitter.com/CliRust">on Twitter</a> and <a href="https://fosstodon.org/@clirust">Mastodon</a>). Separately, here’s a <a href="https://mastodon.social/@wezm/101824862524557850">casual list of tools from a Mastodon user</a>).</p>
+
+<p>If you know of other cool tools written in Rust, let me know in the comments, on <a href="https://octodon.social/@schlink">Mastodon</a>, or on <a href="https://twitter.com/sts10">Twitter</a>.</p>
+:ET

@@ -1,0 +1,39 @@
+I"J<p>I was lurking in the <a href="https://gitter.im/neovim/neovim">Neovim Gitter room</a> this morning and saw someone drop in a link to <a href="https://github.com/neovim/neovim/wiki/Related-projects">this page on projects related to Neovim</a>.</p>
+
+<p>Among the related projects was a Mac OS X GUI called <a href="https://github.com/rogual/neovim-dot-app">Neovim dot app</a>. Every since <a href="http://sts10.github.io/blog/2015/08/07/from-terminal-vim-to-mac-vim/">my adoption of MacVim</a> I’ve learned to enjoy the practical advantages of using a GUI of vim for everyday use (though I’ve been careful to try not to learn or rely to heavily upon practices that will not work in Terminal vim). Thus I was willing to give this GUI (seemingly the most-developed Mac OS X GUI listed on the related-projects page) a try, even though it’s pretty clear there are a good number of outstanding <a href="https://github.com/rogual/neovim-dot-app/issues">bugs and issues</a>.</p>
+
+<!-- more -->
+
+<h2 id="installation">Installation</h2>
+
+<p>As described in <a href="https://github.com/rogual/neovim-dot-app">the project’s GitHub readme</a>, I ran the following commands to install the app:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew tap neovim/neovim
+brew tap rogual/neovim-dot-app
+brew install --HEAD neovim-dot-app
+</code></pre></div></div>
+
+<p>This installs the program into the following directory: <code class="language-plaintext highlighter-rouge">/usr/local/Cellar/neovim-dot-app</code> (which I found by running the helpful Homebrew command: <code class="language-plaintext highlighter-rouge">brew info neovim-dot-app</code>).</p>
+
+<p>To use Homebrew to create a link (like a shortcut) to Neovim dot app in you <code class="language-plaintext highlighter-rouge">Applications/</code> directory, run: <code class="language-plaintext highlighter-rouge">brew linkapps neovim-dot-app</code>.</p>
+
+<h2 id="not-working">Not Working</h2>
+
+<p>While I’m pretty sure I installed the app correctly, I’m having some trouble opening files. The most common way that I open files with my text editors is by the command line… more on this below.</p>
+
+<p>I CAN open files with this Neovim app by using Command-o when the app is open.</p>
+
+<p>However, for example, when I drag a .html file onto the Neovim app icon in the Homebrew folder, I get the following error message:</p>
+
+<p><code class="language-plaintext highlighter-rouge">The document "test.html" could not be opened. Neovim cannot open files in the "HTML text" format.</code></p>
+
+<p>This is an almost identical error to the one <a href="https://github.com/rogual/neovim-dot-app/issues/146">described in this issue</a>, and it appears that there’s <a href="https://github.com/rogual/neovim-dot-app/pull/127">an open pull request that attempts to address the problem</a>.</p>
+
+<p>As for a command line tool similar to MacVim’s: per <a href="https://github.com/rogual/neovim-dot-app/issues/146">issue #146</a> and <a href="https://github.com/rogual/neovim-dot-app/pull/127">PR #127</a> it looks like the contributors want to use a bash command something like <code class="language-plaintext highlighter-rouge">open -a Neovim --args &lt;filename&gt;</code> to open a given file from the command line. This command was flaky for me, though they seem to be working on it. There’s also what looks like <a href="https://github.com/rogual/neovim-dot-app/issues/162">a first attempt at a command line tool</a>.</p>
+
+<p>I’ll try to keep an eye on the project and keep my version up-to-date (which I assume I do by running <code class="language-plaintext highlighter-rouge">brew reinstall --HEAD neovim-dot-app</code>, similar to <a href="https://github.com/neovim/homebrew-neovim/blob/master/README.md">how NeoVim itself is upgraded via Homebrew</a>.</p>
+
+<h3 id="update-11132015">Update (11/13/2015)</h3>
+
+<p>I just reinstalled neovim dot app by running <code class="language-plaintext highlighter-rouge">brew reinstall --HEAD neovim-dot-app</code>. (Note that I did not to run the <code class="language-plaintext highlighter-rouge">brew linkapps neovim-dot-app</code> line again.) I’m not sure exactly what version I got upgraded to, it seems much more stable than the version I first installed. Also, I found that it does now come with a command line launcher, invoked by using <code class="language-plaintext highlighter-rouge">gnvim</code> from the command line, so for example <code class="language-plaintext highlighter-rouge">gnvim .</code> or <code class="language-plaintext highlighter-rouge">gnvim &lt;filename&gt;</code>. Seems to work OK!</p>
+:ET

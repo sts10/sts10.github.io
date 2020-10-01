@@ -1,0 +1,221 @@
+I"Yu<p>Earlier this week Alex Balk, a co-founder of <a href="http://www.theawl.com/">The Awl</a>, tweeted:</p>
+
+<blockquote class="twitter-tweet" data-cards="hidden" data-lang="en"><p lang="en" dir="ltr">Of all the alt-texts that are about to disappear this may be my favorite: <a href="https://t.co/8HqTCyuXsC">https://t.co/8HqTCyuXsC</a></p>&mdash; Alex Balk (@AlexBalk) <a href="https://twitter.com/AlexBalk/status/727898415082909696">May 4, 2016</a></blockquote>
+<script async="" src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>For those who don’t know, The Awl is <a href="http://www.theawl.com/about">“the last weblog”</a> on the internet. It was started in 2009 by Balk and Choire Sicha. I started reading it in college– I remember specifically <a href="http://www.theawl.com/2009/11/flicked-off-2012-is-awesome-and-haters-can-suck-it">this review of the movie <em>2012</em>, titled “Flicked Off: ‘2012’ is Awesome and Haters Can Suck It”</a> gave me a refreshing example of how much fun you could have writing.</p>
+
+<p>One of the little fun secret things about The Awl is that the writers would often hide text in the alt text of images or links. It didn’t take long for <a href="http://katiebakes.tumblr.com/post/420123402/maybe-this-is-the-internet-equivalent-of-listening">this “secret” to be appreciated</a>, and when I remember to, I place my mouse on images on the site and patiently wait the required number of seconds before the alt text pops up.</p>
+
+<!-- more -->
+
+<h2 id="what-is-alt-text">What is alt text?</h2>
+
+<p>On images, this text is stored in the <code class="language-plaintext highlighter-rouge">alt</code> attribute of the HTML <code class="language-plaintext highlighter-rouge">&lt;img&gt;</code> tag. Here’s <a href="http://www.w3schools.com/tags/att_img_alt.asp">how w3schools defines the attribute</a>:</p>
+
+<blockquote>
+  <p>The required alt attribute specifies an alternate text for an image, if the image cannot be displayed.</p>
+</blockquote>
+
+<blockquote>
+  <p>The alt attribute provides alternative information for an image if a user for some reason cannot view it (because of slow connection, an error in the src attribute, or if the user uses a screen reader).</p>
+</blockquote>
+
+<p>A Penn State website on accessibly <a href="http://accessibility.psu.edu/images/imageshtml/">adds that</a> “The term “ALT tag” is a common shorthand term used to refer to the ALT attribute within in the IMG tag.” Alt text is important enough that <a href="https://daringfireball.net/projects/markdown/syntax#img">Markdown allows for it</a>.</p>
+
+<p>The w3schools site adds that “To create a tooltip for an image, use the <a href="http://www.w3schools.com/tags/att_global_title.asp">title attribute</a>!” which “specifies extra information about an element.”</p>
+
+<p>I was vaguely aware of the distinction between the <code class="language-plaintext highlighter-rouge">&lt;img&gt;</code> tags’ <code class="language-plaintext highlighter-rouge">alt</code> attribute and the more global <code class="language-plaintext highlighter-rouge">title</code> attribute, but given that both <a href="https://twitter.com/AlexBalk/status/727898415082909696">Balk’s mournful tweet</a> and <a href="http://katiebakes.tumblr.com/post/420123402/maybe-this-is-the-internet-equivalent-of-listening">Bakes’ 2010 Tumblr post</a> refer to text stored in the <code class="language-plaintext highlighter-rouge">alt</code> attribute, I proceeded with the assumption that, at least as far as images go, the fun stuff on The Awl was stored there.</p>
+
+<h2 id="what-i-tried">What I tried</h2>
+
+<p>When I saw Balk’s tweet I assumed that, due to some change on the backend of the site, the alt text for images would be somehow removed or deleted. As of this writing the <code class="language-plaintext highlighter-rouge">alt</code> attributes are still there, and I don’t know if they’ll be deleted or just if a new CMS won’t let the authors add them going forward (which seems strange given the progressive nature of the attribute…). Either way, my assignment was clear: scrape all of the <code class="language-plaintext highlighter-rouge">alt</code> text and store it in some useful way.</p>
+
+<p>So that night I started looking into ways pull down the data before it was too late(!) At first I tried parsing the RSS/XML feed that the <a href="https://twitter.com/AwlTags">AwlTags Twitter bot</a> <a href="https://github.com/negatendo/AwlTags/blob/master/bots.rb#L13">uses</a> (<a href="https://github.com/negatendo/AwlTags">full Github repo</a>).</p>
+
+<p>I’m apparently not great at accessing or parsing XML with Ruby, and I couldn’t figure out how to go back more than about 70 posts, but I had some fun:</p>
+
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">&quot;your organic masculinity&quot; <a href="https://t.co/DfuHe4BHqR">pic.twitter.com/DfuHe4BHqR</a></p>&mdash; Sam Schlinkert (@sts10) <a href="https://twitter.com/sts10/status/728012398792151040">May 5, 2016</a></blockquote>
+<script async="" src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>Then I figured I’d pull down every tweet from <a href="https://twitter.com/awl">The Awl’s Twitter account</a> and extract the post URLs that way, but turns out you can only go back roughly 3,600 Tweets in a given user’s account. Cue the big, red “Denied” message on the hacker montage that was my Wednesday night.</p>
+
+<h2 id="what-i-ended-up-doing">What I ended up doing</h2>
+
+<p>So finally I confronted the most-straight forward, but also dirtier solution of scraping the site directly using <a href="https://github.com/sparklemotion/nokogiri">Nokogiri</a>. This ended up working great– <a href="https://github.com/sts10/awl_alt_scraper">here’s my Github repo</a>. The Awl’s pagination is nice and simple (perhaps a Wordpress standard?): the URL for 3 pages back is simply <code class="language-plaintext highlighter-rouge">http://theawl.com/page/3</code>. With some guessing and checking I found that the blog, as of when I ran the scraper, went back to <a href="http://www.theawl.com/page/2707">page 2707</a>.</p>
+
+<p>Basically the code visits each page, pulls the desired code for each of posts it finds on that page, and pushes the <code class="language-plaintext highlighter-rouge">post_url</code>, <code class="language-plaintext highlighter-rouge">image_src</code>, and <code class="language-plaintext highlighter-rouge">image_alt</code> to an array.</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">base_url</span> <span class="o">=</span> <span class="s2">"http://www.theawl.com/page/"</span>
+
+<span class="n">all_posts</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># 2707 is last page as of today</span>
+<span class="n">total_number_of_pages_to_scrape</span> <span class="o">=</span> <span class="mi">2705</span>
+<span class="n">time_to_sleep_between_page_scrapes</span> <span class="o">=</span> <span class="mi">4</span>
+
+<span class="n">total_number_of_pages_to_scrape</span><span class="p">.</span><span class="nf">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
+  <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+  <span class="n">this_page_url</span> <span class="o">=</span> <span class="n">base_url</span> <span class="o">+</span> <span class="n">i</span><span class="p">.</span><span class="nf">to_s</span>
+  
+  <span class="n">this_page</span> <span class="o">=</span> <span class="no">Page</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">this_page_url</span><span class="p">)</span>
+  <span class="n">all_posts</span> <span class="o">=</span> <span class="n">all_posts</span> <span class="o">+</span> <span class="n">this_page</span><span class="p">.</span><span class="nf">posts</span>
+
+  <span class="nb">puts</span> <span class="s2">"Have scraped </span><span class="si">#{</span><span class="n">i</span><span class="si">}</span><span class="s2"> pages so far."</span>
+  <span class="nb">sleep</span> <span class="n">time_to_sleep_between_page_scrapes</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>The Post object:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Post</span>
+  <span class="nb">attr_reader</span> <span class="ss">:image_src</span><span class="p">,</span> <span class="ss">:image_alt</span><span class="p">,</span> <span class="ss">:post_url</span>
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">post</span><span class="p">)</span>
+    <span class="n">post_image</span> <span class="o">=</span> <span class="n">post</span><span class="p">.</span><span class="nf">css</span><span class="p">(</span><span class="s2">"div.post__body div p:first img:first"</span><span class="p">)</span>
+    <span class="vi">@image_src</span> <span class="o">=</span> <span class="n">post_image</span><span class="p">.</span><span class="nf">attr</span><span class="p">(</span><span class="s2">"src"</span><span class="p">)</span><span class="o">&amp;</span><span class="p">.</span><span class="nf">value</span>
+    <span class="vi">@image_alt</span> <span class="o">=</span> <span class="n">post_image</span><span class="p">.</span><span class="nf">attr</span><span class="p">(</span><span class="s2">"alt"</span><span class="p">)</span><span class="o">&amp;</span><span class="p">.</span><span class="nf">value</span>
+    <span class="vi">@post_url</span> <span class="o">=</span> <span class="n">post</span><span class="p">.</span><span class="nf">css</span><span class="p">(</span><span class="s1">'h2 a'</span><span class="p">).</span><span class="nf">attr</span><span class="p">(</span><span class="s1">'href'</span><span class="p">)</span><span class="o">&amp;</span><span class="p">.</span><span class="nf">value</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>Note that the scraper ignores posts that do not have images in the first <code class="language-plaintext highlighter-rouge">p</code> tag OR if there’s no <code class="language-plaintext highlighter-rouge">a</code> tag in the <code class="language-plaintext highlighter-rouge">h2</code>.</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">def</span> <span class="nf">make_posts</span>
+   <span class="vi">@doc</span><span class="p">.</span><span class="nf">search</span><span class="p">(</span><span class="s2">"div.reverse-chron__post"</span><span class="p">).</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">post</span><span class="o">|</span>
+     <span class="k">if</span> <span class="o">!</span><span class="n">post</span><span class="p">.</span><span class="nf">css</span><span class="p">(</span><span class="s2">"div.post__body div p:first img:first"</span><span class="p">).</span><span class="nf">empty?</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">post</span><span class="p">.</span><span class="nf">css</span><span class="p">(</span><span class="s1">'h2 a'</span><span class="p">).</span><span class="nf">empty?</span>
+       <span class="n">this_post</span> <span class="o">=</span> <span class="no">Post</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">post</span><span class="p">)</span>
+       <span class="vi">@posts</span> <span class="o">&lt;&lt;</span> <span class="n">this_post</span>
+     <span class="k">end</span>
+   <span class="k">end</span>
+ <span class="k">end</span>
+</code></pre></div></div>
+
+<p>The above snippets are slight simplifications of code from the <a href="https://github.com/sts10/awl_alt_scraper/blob/master/runner.rb">runner.rb file</a> if you want to read more.</p>
+
+<h2 id="storing-the-scraped-text-and-urls">Storing the scraped text and URLs</h2>
+
+<p>I wanted to store the scraped data in a nice, easy, and universal format, so I chose a comma separated value file (aka CSV), which is basically a minimalistic spreadsheet (you can open them with Excel). To be more thorough, I made the scraper make two CSV files: <a href="https://raw.githubusercontent.com/sts10/awl_alt_scraper/master/csv/archive1.csv">one with every post with an image</a>, and <a href="https://raw.githubusercontent.com/sts10/awl_alt_scraper/master/csv/just_with_alt.csv">one only with images with alt text</a>.</p>
+
+<p>That’s <a href="https://twitter.com/sts10/status/728077020865777664">where I was</a> Wednesday night. I set the <code class="language-plaintext highlighter-rouge">time_to_sleep_between_page_scrapes</code> to 2 seconds, started it, dimmed the monitor, and went to sleep a little after midnight.</p>
+
+<p>When I woke up there was an error and my internet was out. In my groggy state I spent a second worried I had been penalized some how for accessing too many pages too quickly, but now I think what happened was I forgot to change the setting to tell my MacBook never to go to sleep.</p>
+
+<p><img src="http://i.imgur.com/Cb3M0FM.png" alt="Energy Saver yeah OK sure" /></p>
+
+<p>And when it did go to sleep maybe the open internet request freaked the router out some how?</p>
+
+<p>Anyway I unplugged and plugged in my router and after a shower it was working again– phew. I set “Computer sleep” to never and started up the scraper again, then left for work. When I got home Thursday evening I had two nice CSVs waiting for me. I gleefully <a href="https://twitter.com/sts10/status/728367840374444032">tweeted a link to the data</a>, but nobody seemed to care. That was fine, because next came the fun part.</p>
+
+<h2 id="front-end-ugh">Front end (ugh)</h2>
+
+<p>On the subway ride home from work Thursday night, assuming the scraping had gone well, I started to imagine ways that I would use this data stored in the CSV files. <a href="http://samschlinkert.com/awl-alt-tags">Here’s what I came up with</a> (<a href="https://github.com/sts10/awl_alt_scraper/tree/master/site">Github</a>) after an hour or two.</p>
+
+<p><em>Update: Unfortunately, since I create this site, The Awl has taken down or moved its hosted images, and thus breaking this particular front end implementation. Bummer!</em></p>
+
+<p>The site pulls in the CSV data from Github. Each row of the CSV contains an image URL, the image’s alt text, and the URL of the Awl post that the image came from. The JavaScript in the site then chooses a random CSV row. Then it displays the alt text as a large, caption in the bottom-left corner of the image on a yellow background, kind of like a comic book.</p>
+
+<p>I was tired enough to tweet something mildly sincere.</p>
+
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">I made something silly because I really love The <a href="https://twitter.com/Awl">@Awl</a> <a href="https://t.co/sH08wfLFEJ">https://t.co/sH08wfLFEJ</a> <a href="https://t.co/gU3vXrdqaN">pic.twitter.com/gU3vXrdqaN</a></p>&mdash; Sam Schlinkert (@sts10) <a href="https://twitter.com/sts10/status/728397846647603200">May 6, 2016</a></blockquote>
+<script async="" src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>I mentioned @Awl hoping to catch Balk monitoring the account and just before I fell asleep got this reply:</p>
+
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/sts10">@sts10</a> You poor thing.</p>&mdash; The Awl (@Awl) <a href="https://twitter.com/Awl/status/728412638145851392">May 6, 2016</a></blockquote>
+<script async="" src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>“Fuck him,” I thought. <a href="https://twitter.com/silviakillings">Silvia Killingsworth</a>, their new editor from The New Yorker, will like it.</p>
+
+<p>Sure enough, the next morning Siliva tweeted this high praise</p>
+
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Just...wow. <a href="https://twitter.com/sts10">@sts10</a> made an alt-tag site <a href="https://t.co/akDqt2VGM1">https://t.co/akDqt2VGM1</a></p>&mdash; Silvia Killingsworth (@silviakillings) <a href="https://twitter.com/silviakillings/status/728570354554294273">May 6, 2016</a></blockquote>
+<script async="" src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>along with a <a href="https://twitter.com/silviakillings/status/728570624017346560">series</a> <a href="https://twitter.com/silviakillings/status/728571236192751616">of</a> <a href="https://twitter.com/silviakillings/status/728571557283532800">screenshots</a> from the site. Woohoo!</p>
+
+<h2 id="fun-with-url-parameters">Fun with URL Parameters</h2>
+
+<p>Today I added some more JavaScript to the site so that there’s effectively a URL parameter with the URL of the Awl post of the image. So as you’re clicking through the images, the URL on my site actually changes. That way if you find <a href="http://samschlinkert.com/awl-alt-tags/?http://www.theawl.com/2010/05/the-awl-in-your-internet-mailbox">one you like</a>, you can share the URL (something like <code class="language-plaintext highlighter-rouge">http://samschlinkert.com/awl-alt-tags/?http://www.theawl.com/2010/05/the-awl-in-your-internet-mailbox</code>) on social media or email or whatever, and others going to that URL will get the image and alt text that you intended to send them (rather than a random one).</p>
+
+<p>Code-wise there’s two parts to this: (1) give the site the ability to read a URL from the URL’s parameters and display it, and (2) change the site’s URL whenever a new image is served.</p>
+
+<p>From <a href="https://github.com/sts10/awl_alt_scraper/blob/master/site/index.html">index.html</a>, here’s the start of part 1:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">baseURL</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">baseURL</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="dl">"</span><span class="s2">?</span><span class="dl">"</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!==</span> <span class="kc">undefined</span> <span class="o">&amp;&amp;</span> <span class="nx">baseURL</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="dl">"</span><span class="s2">?</span><span class="dl">"</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!==</span> <span class="dl">""</span><span class="p">){</span>
+  <span class="kd">var</span> <span class="nx">givenURL</span> <span class="o">=</span> <span class="nx">baseURL</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="dl">"</span><span class="s2">?</span><span class="dl">"</span><span class="p">)[</span><span class="mi">1</span><span class="p">];</span>
+<span class="p">}</span> 
+</code></pre></div></div>
+
+<p>And the end of part 2:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 4. write the post_url into the address bar</span>
+<span class="kd">var</span> <span class="nx">baseURL</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">toString</span><span class="p">().</span><span class="nx">split</span><span class="p">(</span><span class="dl">"</span><span class="s2">?</span><span class="dl">"</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+<span class="nx">history</span><span class="p">.</span><span class="nx">replaceState</span><span class="p">({},</span> <span class="nb">document</span><span class="p">.</span><span class="nx">title</span><span class="p">,</span> <span class="nx">baseURL</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">?</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">post_url</span><span class="p">);</span> 
+</code></pre></div></div>
+
+<p>This is a technique I first used on <a href="http://samschlinkert.com/gif_rank/">my GIF rank</a> project, and I think it’s pretty sweet. I’ve also <a href="http://sts10.github.io/2015/05/20/url-parameters-as-user-settings.html">written about the idea of storing non-sensitive, user-specific data in URL parameters before</a>.</p>
+
+<h2 id="epilogue-headlines-with-nodejs">Epilogue: Headlines with Node.js</h2>
+
+<p>Separately I’d been playing around with a JavaScript framework (I think that’s what it is) called <a href="https://nodejs.org/en/">Node.js</a> this week. So on Friday, for a challenge (yolo), I figured I’d build a new scraper with Node to grab all the headlines from The Awl that contained exactly two words.</p>
+
+<p>Why exactly two words? Because, similar to the alt text thing, The Awl sometimes uses a humorous device of writing headlines that follow a noun + adjective or noun + verb construction (ugh it feels like explaining a joke but OK). Also similar to the alt text thing, others had noticed and <a href="https://docs.google.com/document/d/1VygBa92XKMouxHXmb5nHiMiiBMI2qmdZ98krP3p_gsE/edit">chronicled it a bit</a>. A sampling: <a href="http://www.theawl.com/2011/12/earth-pretty">“Earth Pretty”</a>, <a href="http://www.theawl.com/2011/09/man-sweaty">“Man Sweaty”</a>, <a href="http://www.theawl.com/2011/10/accomplishments-transitory">“Accomplishments Transitory”</a>, <a href="http://www.theawl.com/2013/08/goat-vexed">“Goat Vexed”</a>, <a href="https://github.com/sts10/awl_two_word_headline_scraper/blob/master/two_word_awl_headlines.csv">etc</a>.</p>
+
+<p>Since I already knew the best way to scrape the data and what HTML to target, this task was more about the coding and learning how to use Node (I’m very new to it). Just getting Node installed was a bit of a trick for me, since I had haphazardly installed <a href="https://iojs.org/en/">io.js</a> on my machine a few months ago and struggled to un-install it.</p>
+
+<p>For future reference, or anyone else facing this problem, I first consulted <a href="http://stackoverflow.com/a/11178106/3160994">this Stack Overflow answer</a> and ran all of the code therein to get rid of my previous io.js installation. Then I <a href="https://github.com/creationix/nvm#install-script">installed NVM (Node Version Manager)</a> (which seems to work very much like <a href="https://rvm.io/">RVM</a>) and ran <code class="language-plaintext highlighter-rouge">nvm install node</code>. Now <code class="language-plaintext highlighter-rouge">node -v</code> gives me <code class="language-plaintext highlighter-rouge">v6.0.0</code>.</p>
+
+<p>To scrape the HTML I used the Node’s http endpoint (is it called an endpoint?) and <a href="https://nodejs.org/api/http.html#http_http_get_options_callback">its get method</a>. To parse the HTML I used a package called <a href="https://github.com/cheeriojs/cheerio">Cheerio</a>. To write to a CSV file, I used a package called <a href="https://github.com/koles/ya-csv">ya-csv</a>, thanks to <a href="http://blog-richter.rhcloud.com/writing-a-simple-csv-with-node-js/">this helpful blog post</a>, which notes, “While there seemed to be good Node packages available [for writing to CSVs] they lacked very good documentation.”</p>
+
+<p>I’m more comfortable in Ruby than in JavaScript at this point, so some simple things took me a while. The stickiest part was how to make the scraper wait a second or two between calls to avoid a timeout. I had run into problems with asynchronous code before– the asynchronous capabilities of Node are both a reason I’m interested by it and apparently a conceptual headache for me. Anyway, after a good amount of trial and error I got it working with <code class="language-plaintext highlighter-rouge">setInterval</code>. Here’s that bit from <a href="https://github.com/sts10/awl_two_word_headline_scraper/blob/master/app.js">app.js</a>:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">totalPagesToScrape</span> <span class="o">=</span> <span class="mi">2705</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">interval</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">pageToScrape</span><span class="p">){</span>
+  <span class="nx">getPage</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">ran the interval for the </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">i</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> time.</span><span class="dl">"</span><span class="p">);</span>
+  <span class="nx">i</span> <span class="o">=</span> <span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">i</span> <span class="o">==</span> <span class="nx">totalPagesToScrape</span><span class="p">){</span>
+    <span class="nx">clearInterval</span><span class="p">(</span><span class="nx">interval</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">},</span> <span class="mi">1000</span><span class="p">,</span> <span class="nx">i</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>I still don’t know why I never needed to refer to <code class="language-plaintext highlighter-rouge">pageToScrape</code> in the anonymous function… maybe because I made <code class="language-plaintext highlighter-rouge">i</code> global and just used that? In fact there’s a good amount of that code block I’d live to go over with someone who knows their stuff, but it worked!</p>
+
+<p>I also don’t love how much code I have in the <code class="language-plaintext highlighter-rouge">response.on('end', function(){</code> function. But that’s the only place where I know I’ve got a new page scraped and ready so I guess that’s how it goes with asynchronous.</p>
+
+<p><a href="http://samschlinkert.com/awl-two-headlines/">The front end for the two-word headlines project</a> (<a href="https://github.com/sts10/awl_two_word_headline_scraper/tree/master/site">Github</a>) is similar to the alt text one– if anything it’s simpler. I decided to allow the user to randomly swap out either the first word or the second word of the headline (or both).</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#both-button</span><span class="dl">'</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">click</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">newHeadline</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#first-button</span><span class="dl">'</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">click</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">newWord</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#second-button</span><span class="dl">'</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">click</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">newWord</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+  <span class="p">});</span>
+</code></pre></div></div>
+
+<h2 id="just-the-links">Just the Links</h2>
+
+<p>Alt text scraper:</p>
+
+<ul>
+  <li><a href="http://samschlinkert.com/awl-alt-tags/">Front end demo</a></li>
+  <li><a href="https://github.com/sts10/awl_alt_scraper">GitHub</a></li>
+  <li><a href="https://raw.githubusercontent.com/sts10/awl_alt_scraper/master/csv/just_with_alt.csv">Raw CSV data</a></li>
+</ul>
+
+<p>Two-word headline scraper:</p>
+
+<ul>
+  <li><a href="http://samschlinkert.com/awl-two-headlines/">Front end demo</a></li>
+  <li><a href="https://github.com/sts10/awl_two_word_headline_scraper">Github</a></li>
+  <li><a href="https://raw.githubusercontent.com/sts10/awl_two_word_headline_scraper/master/two_word_awl_headlines.csv">Raw CSV data</a></li>
+</ul>
+:ET

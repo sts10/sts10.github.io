@@ -1,0 +1,171 @@
+I"�a<p>Today Brian and I launched <a href="http://squawkbot.herokuapp.com/">SquawkBot</a>, a Rails web app that reads users’ Twitter timeline, searching for URLs that appear more than once. Here’s the <a href="https://github.com/sts10/squawk">public GitHub repo</a>.</p>
+
+<p>You can find part 2 of this explainer <a href="http://sts10.github.io/2014/04/24/squawkbot-part-2-extracting-urls.html">here</a>.</p>
+
+<h3 id="general-overview-of-squawkbot">General Overview of SquawkBot</h3>
+
+<p>I really dig SquawkBot’s code, as it’s both simple and complex. It’s simple in that it does not interact with a database (and thus has no schema or migrations) and only has one real controller. But it’s complex in the work done in the 3 models is pretty interesting (at least I think so).</p>
+
+<p>There’s a lot to the app, but in this post I’ll just be talking about how we connect to Twitter’s REST API and get the user’s recent timeline tweets.</p>
+
+<!-- more -->
+
+<h3 id="connecting-to-twitter">Connecting to Twitter</h3>
+
+<p>The very first step is figuring out how we’ll be connecting to Twitter. We quickly decided we’d use the simpler <a href="https://dev.twitter.com/docs/api/1.1">REST API</a> rather than the more-complex <a href="https://dev.twitter.com/docs/api/streaming">streaming API</a>, as it better met the needs of our app.</p>
+
+<p>We headed on over to <a href="https://apps.twitter.com/">apps.twitter.com</a> and registered a new Twitter app. The first one we made was specifically for the development stage of our project, so we set the app’s “website” to http://flatironschool.com/ and the callback URL to http://127.0.0.1:3000/auth/twitter. The callback URL is what’s actually important here.</p>
+
+<p>Once created, we went on over to the “API Keys” tab to get the API key and API secret for our new app. I also generated an access token and access token secret. These four keys are what you need to connect to Twitter. We’ll be switching out the access token and access token secret in a minute, but for now generate them using your personal Twitter account and have them ready to be copy and pasted.</p>
+
+<p>Note: Under settings, we also checked the box that reads “Allow this application to be used to Sign in with Twitter”.</p>
+
+<p>We then added 3 gems: <a href="https://github.com/sferik/twitter">sferik’s Twitter gem</a>, the <a href="https://github.com/arunagw/omniauth-twitter">‘omniauth-twitter’ gem</a>, and the <a href="https://github.com/laserlemon/figaro">figaro gem</a>.</p>
+
+<p>We needed sferik’s Twitter gem in order to setup Twitter client(s) to ping for tweets. We include the omniauth-twitter gem so our users can OAuth with Twitter, which we’ll need them to do so the app can scrape their home timeline. Since we knew we wanted users to go to the <code class="language-plaintext highlighter-rouge">show</code> action in the timelines controller after OAuthing into Twitter, we then added a new route: <code class="language-plaintext highlighter-rouge">get '/auth/twitter/callback' =&gt; 'timelines#show'</code>.</p>
+
+<p>Finally, we bundled the <a href="https://github.com/laserlemon/figaro">Figaro gem</a> by adding <code class="language-plaintext highlighter-rouge">gem 'figaro', github: 'laserlemon/figaro'</code> to our Gemfile (as of the writing of this post, the github pointer is necessary when using Rails 4.1, as it’s the latest version of the gem) to safely hide our API keys from GitHub. Once we had bundled Figaro, we ran <code class="language-plaintext highlighter-rouge">rails generate figaro:install</code>, which, I believe, just generated a file called <code class="language-plaintext highlighter-rouge">application.yml</code> in the Rails config directory and (importantly!) added this file to gitignore.</p>
+
+<p>This <code class="language-plaintext highlighter-rouge">application.yml</code> file is where we’re going to put all of our super-secret keys. Figaro will assign them to environmental variables that we can use in other files, namely secrets.yml, and safely push up to public GitHub repos.</p>
+
+<p>Here’s what my application.yml file for SquawkBot looks like (obviously I’m not going to post our app or my secret keys here on the blog– you put them right where I put the comments “your key goes here”):</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">TWITTER_API_KEY</span><span class="pi">:</span> <span class="c1"># your key goes here</span>
+<span class="na">TWITTER_API_SECRET</span><span class="pi">:</span> <span class="c1"># your key goes here</span>
+
+<span class="na">TWITTER_ACCESS_TOKEN</span><span class="pi">:</span> <span class="c1"># your key goes here</span>
+<span class="na">TWITTER_ACCESS_TOKEN_SECRET</span><span class="pi">:</span> <span class="c1"># your key goes here</span>
+</code></pre></div></div>
+
+<p>Later on, I removed the TWITTER_ACCESS_TOKEN and TWITTER_ACCESS_TOKEN_SECRET for reasons I will explain later. I also added a TWITTER_PRODUCTION_API_KEY and a TWITTER_PRODUCTION_API_SECRET because we later made a new Twitter app to be used in production, as opposed to development.</p>
+
+<p>OK cool. Now we’re going to refer to these variables in secrets.yml, which is the file in Rails 4.1 where we’re supposed to store keys (but is, by default, not git ignored).</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">development</span><span class="pi">:</span>
+  <span class="na">twitter_api_key</span><span class="pi">:</span> <span class="s">&lt;%= ENV["TWITTER_API_KEY"] %&gt;</span>
+  <span class="na">twitter_api_secret</span><span class="pi">:</span> <span class="s">&lt;%= ENV["TWITTER_API_SECRET"] %&gt;</span>
+  <span class="na">twitter_access_token</span><span class="pi">:</span> <span class="s">&lt;%= ENV["TWITTER_ACCESS_TOKEN"] %&gt;</span>
+  <span class="na">twitter_access_token_secret</span><span class="pi">:</span> <span class="s">&lt;%= ENV["TWITTER_ACCESS_TOKEN_SECRET"] %&gt;</span>
+  <span class="na">secret_key_base</span><span class="pi">:</span> <span class="c1"># secret key base</span>
+
+<span class="na">test</span><span class="pi">:</span>
+  <span class="na">secret_key_base</span><span class="pi">:</span> <span class="c1"># secret key base</span>
+
+<span class="na">production</span><span class="pi">:</span>
+  <span class="na">twitter_api_key</span><span class="pi">:</span> <span class="s">&lt;%= ENV["TWITTER_PRODUCTION_API_KEY"] %&gt;</span>
+  <span class="na">twitter_api_secret</span><span class="pi">:</span> <span class="s">&lt;%= ENV["TWITTER_PRODUCTION_API_SECRET"] %&gt;</span>
+  <span class="na">twitter_access_token</span><span class="pi">:</span> <span class="s">&lt;%= ENV["TWITTER_PRODUCTION_ACCESS_TOKEN"] %&gt;</span>
+  <span class="na">twitter_access_token_secret</span><span class="pi">:</span> <span class="s">&lt;%= ENV["TWITTER_PRODUCTION_ACCESS_TOKEN_SECRET"] %&gt;</span>
+  <span class="na">secret_key_base</span><span class="pi">:</span> <span class="c1"># secret key base</span>
+
+</code></pre></div></div>
+
+<p>See all those lovely, opaque ENV variables? Totes safe to push up to GitHub. Now, finally, here is how we actually access these variables anywhere in our Rails 4.1 app. Here is how we set up our Twitter client, with all 4 values hard-coded:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">Twitter</span><span class="o">::</span><span class="no">REST</span><span class="o">::</span><span class="no">Client</span><span class="p">.</span><span class="nf">new</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+    <span class="n">config</span><span class="p">.</span><span class="nf">consumer_key</span> <span class="o">=</span> <span class="no">Rails</span><span class="p">.</span><span class="nf">application</span><span class="p">.</span><span class="nf">secrets</span><span class="p">.</span><span class="nf">twitter_api_key</span>  <span class="c1"># "YOUR_CONSUMER_KEY"</span>
+    <span class="n">config</span><span class="p">.</span><span class="nf">consumer_secret</span> <span class="o">=</span> <span class="no">Rails</span><span class="p">.</span><span class="nf">application</span><span class="p">.</span><span class="nf">secrets</span><span class="p">.</span><span class="nf">twitter_api_secret</span>   <span class="c1"># "YOUR_CONSUMER_SECRET"</span>
+    <span class="n">config</span><span class="p">.</span><span class="nf">access_token</span> <span class="o">=</span> <span class="no">Rails</span><span class="p">.</span><span class="nf">application</span><span class="p">.</span><span class="nf">secrets</span><span class="p">.</span><span class="nf">twitter_access_token</span> <span class="c1"># "YOUR_ACCESS_TOKEN"</span>
+    <span class="n">config</span><span class="p">.</span><span class="nf">access_token_secret</span> <span class="o">=</span> <span class="no">Rails</span><span class="p">.</span><span class="nf">application</span><span class="p">.</span><span class="nf">secrets</span><span class="p">.</span><span class="nf">twitter_access_token_secret</span>   <span class="c1"># "YOUR_ACCESS_SECRET"</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>If this <code class="language-plaintext highlighter-rouge">application.yml</code> &gt; <code class="language-plaintext highlighter-rouge">secrets.yml</code> &gt; configuration path seems a bit round-about to you, that’s because in a way it is. It would seem to make more sense if Rails 4.1, by default, git ignored secrets.yml and allowed you to dump all your keys in that file, then allow you to refer to those variables with something like <code class="language-plaintext highlighter-rouge">Rails.application.secrets.twitter_api_secret</code>. This would make the <code class="language-plaintext highlighter-rouge">application.yml</code> file, and thus the Figaro gem, unnecessary. (We actually <a href="https://twitter.com/loganhasson/status/454272877236617216">@replied David Heinermeier Hanson on Twitter</a> with this question during another project to little help.) But alas, that seems to be the best way to do this kind of thing at this point.</p>
+
+<h3 id="how-to-not-hard-code-your-access-token-and-access-token-secret">How to Not Hard-Code Your Access Token and Access Token Secret</h3>
+
+<p>This bit took us a day or two to figure out, so I’m granting the concept its own section in this post. Basically the access token and the access token secret are associated with your personal Twitter account, rather than your app. With these values hard-coded into your app, you’re going to hit Twitter’s API limit much faster, since all of your user’s will be using your personal account’s tokens. What you want is for each user who logs in to your app to use their own access token and access token secret.</p>
+
+<p>Remember the callback route we setup earlier: <code class="language-plaintext highlighter-rouge">get '/auth/twitter/callback' =&gt; 'timelines#show'</code>. Basically Twitter is going to send a bunch of information in the params back to us here. So in the <code class="language-plaintext highlighter-rouge">show</code> action of the timelines controller, we want to assign all the info we want to use later into instance variables:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">show</span> 
+    <span class="vi">@twitter_username</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="nf">env</span><span class="p">[</span><span class="s2">"omniauth.auth"</span><span class="p">][</span><span class="s2">"info"</span><span class="p">][</span><span class="s2">"nickname"</span><span class="p">]</span>
+    <span class="vi">@user_name</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="nf">env</span><span class="p">[</span><span class="s2">"omniauth.auth"</span><span class="p">][</span><span class="s2">"info"</span><span class="p">][</span><span class="s2">"name"</span><span class="p">]</span>
+    <span class="vi">@twitter_avatar_url</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="nf">env</span><span class="p">[</span><span class="s2">"omniauth.auth"</span><span class="p">][</span><span class="s2">"info"</span><span class="p">][</span><span class="s2">"image"</span><span class="p">]</span>
+    
+    <span class="vi">@oauth_token</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="nf">env</span><span class="p">[</span><span class="s2">"omniauth.auth"</span><span class="p">][</span><span class="s2">"extra"</span><span class="p">][</span><span class="s2">"access_token"</span><span class="p">].</span><span class="nf">params</span><span class="p">[</span><span class="ss">:oauth_token</span><span class="p">]</span>
+    <span class="vi">@oauth_token_secret</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="nf">env</span><span class="p">[</span><span class="s2">"omniauth.auth"</span><span class="p">][</span><span class="s2">"extra"</span><span class="p">][</span><span class="s2">"access_token"</span><span class="p">].</span><span class="nf">params</span><span class="p">[</span><span class="ss">:oauth_token_secret</span><span class="p">]</span>
+
+    <span class="vi">@timeline</span> <span class="o">=</span> <span class="no">Timeline</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="vi">@oauth_token</span><span class="p">,</span> <span class="vi">@oauth_token_secret</span><span class="p">)</span>
+
+    <span class="vi">@url_objs</span> <span class="o">=</span> <span class="vi">@timeline</span><span class="p">.</span><span class="nf">make_url_objs</span>
+    <span class="vi">@max_appearances</span> <span class="o">=</span> <span class="vi">@timeline</span><span class="p">.</span><span class="nf">get_max_appearances</span><span class="p">(</span><span class="vi">@url_objs</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>First we grab 5 variables from Twitter’s OAuth response: <code class="language-plaintext highlighter-rouge">@twitter_username</code>, <code class="language-plaintext highlighter-rouge">@user_name</code>, <code class="language-plaintext highlighter-rouge">@twitter_avatar_url</code>, <code class="language-plaintext highlighter-rouge">@oauth_token</code>, and <code class="language-plaintext highlighter-rouge">@oauth_token_secret</code>. Let’s stay focused on the last two– the access tokens.</p>
+
+<p>After assigning the instance variables we instantiate a new Timeline object simply called <code class="language-plaintext highlighter-rouge">@timeline</code>, passing in <code class="language-plaintext highlighter-rouge">@oauth_token</code> and the <code class="language-plaintext highlighter-rouge">@oauth_token_secret</code>. On initialization, Timeline calls a method called <code class="language-plaintext highlighter-rouge">make_twitter_client</code> using these access tokens. We’ll look at this in the next section.</p>
+
+<p>The last important line of the show action is the call to the <code class="language-plaintext highlighter-rouge">make_url_objs</code> method, which is outside of the scope of this blog post.</p>
+
+<h3 id="generating-the-actual-twitter-client">Generating the Actual Twitter Client</h3>
+
+<p>Now let’s go to the Timeline model. As I said, the model accepts the access token and access secret on intializtion. Let’s look at that intialization method:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">secret</span><span class="p">)</span>
+  <span class="vi">@twitter_client</span> <span class="o">=</span> <span class="nb">self</span><span class="p">.</span><span class="nf">make_twitter_client</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">secret</span><span class="p">)</span>
+  <span class="vi">@tweets</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="vi">@url_objs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">end</span> 
+</code></pre></div></div>
+
+<p>We immediately pass the token and secret parameters to a method called <code class="language-plaintext highlighter-rouge">make_twitter_client</code>, and save the result of the call to a new instance variable called <code class="language-plaintext highlighter-rouge">@twitter_client</code>.</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">make_twitter_client</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">secret</span><span class="p">)</span>
+  <span class="no">Twitter</span><span class="o">::</span><span class="no">REST</span><span class="o">::</span><span class="no">Client</span><span class="p">.</span><span class="nf">new</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+    <span class="n">config</span><span class="p">.</span><span class="nf">consumer_key</span>        <span class="o">=</span> <span class="no">Rails</span><span class="p">.</span><span class="nf">application</span><span class="p">.</span><span class="nf">secrets</span><span class="p">.</span><span class="nf">twitter_api_key</span>
+    <span class="n">config</span><span class="p">.</span><span class="nf">consumer_secret</span>     <span class="o">=</span> <span class="no">Rails</span><span class="p">.</span><span class="nf">application</span><span class="p">.</span><span class="nf">secrets</span><span class="p">.</span><span class="nf">twitter_api_secret</span> 
+    <span class="n">config</span><span class="p">.</span><span class="nf">access_token</span>        <span class="o">=</span> <span class="n">token</span> 
+    <span class="n">config</span><span class="p">.</span><span class="nf">access_token_secret</span> <span class="o">=</span> <span class="n">secret</span> 
+  <span class="k">end</span>
+<span class="k">end</span> 
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">consumer_key</code> and <code class="language-plaintext highlighter-rouge">consumer_secret</code> refer to the keys of the Twitter app, which we (still) call from secrets.yml. But as you can see, we’re now giving the user’s access token and access token secret instead of the hard-coded values like we did earlier.</p>
+
+<p>We found that this technique– the not-hard-coding– significantly decreased the number of times we ran afoul of Twitter’s API rate limits. The idea is that the rate limit for an application is far looser than it is for an individual user.</p>
+
+<h3 id="actually-asking-the-twitter-client-for-what-we-want">Actually Asking the Twitter Client for What We Want</h3>
+
+<p>Our main goal here is to get as many recent tweets from the user’s home timeline as possible. We’re going to do that by calling methods on the instance variable <code class="language-plaintext highlighter-rouge">@twitter_client</code> that we just defined.</p>
+
+<p>The methods that this ‘client’ object responds to are listed in <a href="https://dev.twitter.com/docs/api/1.1">Twitter’s REST API documentation</a>. We’re interested in a method called <a href="https://dev.twitter.com/docs/api/1.1/get/statuses/home_timeline">home_timeline</a>, which accepts a <code class="language-plaintext highlighter-rouge">count</code> option (among others) that we want to max-out at 199.</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">make_tweets</span>
+  <span class="n">timeline</span> <span class="o">=</span> <span class="p">[]</span>
+
+  <span class="n">timeline</span> <span class="o">=</span> <span class="vi">@twitter_client</span><span class="p">.</span><span class="nf">home_timeline</span><span class="p">(</span><span class="ss">:count</span> <span class="o">=&gt;</span> <span class="mi">199</span><span class="p">)</span>
+  <span class="n">last_id</span> <span class="o">=</span> <span class="n">timeline</span><span class="p">.</span><span class="nf">last</span><span class="p">.</span><span class="nf">id</span> <span class="o">-</span> <span class="mi">1</span> 
+
+  <span class="mi">4</span><span class="p">.</span><span class="nf">times</span> <span class="k">do</span> 
+    <span class="nb">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">timeline</span> <span class="o">=</span> <span class="n">timeline</span> <span class="o">+</span> <span class="vi">@twitter_client</span><span class="p">.</span><span class="nf">home_timeline</span><span class="p">(</span><span class="ss">:count</span> <span class="o">=&gt;</span> <span class="mi">199</span><span class="p">,</span> <span class="ss">:max_id</span> <span class="o">=&gt;</span> <span class="n">last_id</span><span class="p">)</span>
+    <span class="n">last_id</span> <span class="o">=</span> <span class="n">timeline</span><span class="p">.</span><span class="nf">last</span><span class="p">.</span><span class="nf">id</span> <span class="o">-</span> <span class="mi">1</span>
+  <span class="k">end</span> 
+
+  <span class="n">timeline</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">tweet_obj</span><span class="o">|</span>
+    <span class="vi">@tweets</span> <span class="o">&lt;&lt;</span> <span class="no">Tweet</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">tweet_obj</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+</code></pre></div></div>
+
+<p>We then do that 4 more times, using the <code class="language-plaintext highlighter-rouge">id</code> of the last tweet we got as as the first tweet we pull, going back in time. We do this using the <code class="language-plaintext highlighter-rouge">max_id</code> option, which is defined in the <a href="https://dev.twitter.com/docs/api/1.1/get/statuses/home_timeline">home_timeline method documentation</a>. (We subtract one from the last_id so that we don’t count that last tweet twice as both the last tweet and the first tweet of the next request. The <code class="language-plaintext highlighter-rouge">sleep</code> is an attempt to stay below Twitter’s API rate limit, which we ran in to quite a few times in testing the app.)</p>
+
+<p>But what exactly do we get from Twitter?</p>
+
+<h3 id="what-exactly-do-we-get-from-twitter">What Exactly Do We Get From Twitter?</h3>
+
+<p>Twitter returns to us Tweet objects, which have a bunch of data and methods we can call on them. Each Tweet object represents one Tweet, in our case on Tweet from the user’s home timeline. The best way we found to learn about this Tweet object was by using <code class="language-plaintext highlighter-rouge">binding.pry</code> and playing with them, hunting for the data we wanted.</p>
+
+<p>For now just know that we now have a local array variable, <code class="language-plaintext highlighter-rouge">timeline</code> (not to be confused with the controller instance variable <code class="language-plaintext highlighter-rouge">@timeline</code>), loaded with all the Tweet objects we managed to get from Twitter.</p>
+
+<p>The twist here is that we defined <em>our own Tweet object</em> to better suit our own needs, which explains the last step of the method– the <code class="language-plaintext highlighter-rouge">each</code> loop in which we call <code class="language-plaintext highlighter-rouge">Tweet.new</code> and shovel the result into an instance variable called <code class="language-plaintext highlighter-rouge">@tweets</code>. We define our own Tweet object in the Tweet model, which I may cover in another post.</p>
+
+<h3 id="wrap-up">Wrap-Up</h3>
+
+<p>Going back to the Timelines controller, you can probably guess that the <code class="language-plaintext highlighter-rouge">make_url_objs</code> calls <code class="language-plaintext highlighter-rouge">self.make_tweets</code> and then, using more instance methods, extracts the links contained in the tweets and creates Url objects, eventually letting us display the results users see on the <code class="language-plaintext highlighter-rouge">show</code> page.</p>
+
+<p><a href="http://sts10.github.io/2014/04/24/squawkbot-part-2-extracting-urls.html">Read Part 2 of my SquawkBot explainer</a></p>
+:ET

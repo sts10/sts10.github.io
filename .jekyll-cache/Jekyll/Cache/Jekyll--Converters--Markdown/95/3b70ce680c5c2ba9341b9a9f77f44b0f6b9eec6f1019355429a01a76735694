@@ -1,0 +1,164 @@
+I"�]<p>At work I was working with <a href="http://www.highcharts.com/">Highcharts</a>, a JavaScript charting library. The specific file I was working in had a number of these charts defined in it, each of which had a good amount of settings and functions within them. As a result, in spite of other vim awesomeness, I found that I was having some trouble navigating around the long file.</p>
+
+<!-- more -->
+
+<p>To give you a sense of what I was dealing with, here’s the JS for <a href="http://www.highcharts.com/demo/line-basic">a demo from the Highcharts website</a>:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">#container</span><span class="dl">'</span><span class="p">).</span><span class="nx">highcharts</span><span class="p">({</span>
+        <span class="na">title</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">text</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Monthly Average Temperature</span><span class="dl">'</span><span class="p">,</span>
+            <span class="na">x</span><span class="p">:</span> <span class="o">-</span><span class="mi">20</span> <span class="c1">//center</span>
+        <span class="p">},</span>
+        <span class="na">subtitle</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">text</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Source: WorldClimate.com</span><span class="dl">'</span><span class="p">,</span>
+            <span class="na">x</span><span class="p">:</span> <span class="o">-</span><span class="mi">20</span>
+        <span class="p">},</span>
+        <span class="na">xAxis</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">categories</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Jan</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Feb</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Mar</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Apr</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">May</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Jun</span><span class="dl">'</span><span class="p">,</span>
+                <span class="dl">'</span><span class="s1">Jul</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Aug</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Sep</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Oct</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Nov</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Dec</span><span class="dl">'</span><span class="p">]</span>
+        <span class="p">},</span>
+        <span class="na">yAxis</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">title</span><span class="p">:</span> <span class="p">{</span>
+                <span class="na">text</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Temperature (°C)</span><span class="dl">'</span>
+            <span class="p">},</span>
+            <span class="na">plotLines</span><span class="p">:</span> <span class="p">[{</span>
+                <span class="na">value</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="na">width</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#808080</span><span class="dl">'</span>
+            <span class="p">}]</span>
+        <span class="p">},</span>
+        <span class="na">tooltip</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">valueSuffix</span><span class="p">:</span> <span class="dl">'</span><span class="s1">°C</span><span class="dl">'</span>
+        <span class="p">},</span>
+        <span class="na">legend</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">layout</span><span class="p">:</span> <span class="dl">'</span><span class="s1">vertical</span><span class="dl">'</span><span class="p">,</span>
+            <span class="na">align</span><span class="p">:</span> <span class="dl">'</span><span class="s1">right</span><span class="dl">'</span><span class="p">,</span>
+            <span class="na">verticalAlign</span><span class="p">:</span> <span class="dl">'</span><span class="s1">middle</span><span class="dl">'</span><span class="p">,</span>
+            <span class="na">borderWidth</span><span class="p">:</span> <span class="mi">0</span>
+        <span class="p">},</span>
+        <span class="na">series</span><span class="p">:</span> <span class="p">[{</span>
+            <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Tokyo</span><span class="dl">'</span><span class="p">,</span>
+            <span class="na">data</span><span class="p">:</span> <span class="p">[</span><span class="mf">7.0</span><span class="p">,</span> <span class="mf">6.9</span><span class="p">,</span> <span class="mf">9.5</span><span class="p">,</span> <span class="mf">14.5</span><span class="p">,</span> <span class="mf">18.2</span><span class="p">,</span> <span class="mf">21.5</span><span class="p">,</span> <span class="mf">25.2</span><span class="p">,</span> <span class="mf">26.5</span><span class="p">,</span> <span class="mf">23.3</span><span class="p">,</span> <span class="mf">18.3</span><span class="p">,</span> <span class="mf">13.9</span><span class="p">,</span> <span class="mf">9.6</span><span class="p">]</span>
+        <span class="p">},</span> <span class="p">{</span>
+            <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">New York</span><span class="dl">'</span><span class="p">,</span>
+            <span class="na">data</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">5.7</span><span class="p">,</span> <span class="mf">11.3</span><span class="p">,</span> <span class="mf">17.0</span><span class="p">,</span> <span class="mf">22.0</span><span class="p">,</span> <span class="mf">24.8</span><span class="p">,</span> <span class="mf">24.1</span><span class="p">,</span> <span class="mf">20.1</span><span class="p">,</span> <span class="mf">14.1</span><span class="p">,</span> <span class="mf">8.6</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">]</span>
+        <span class="p">},</span> <span class="p">{</span>
+            <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Berlin</span><span class="dl">'</span><span class="p">,</span>
+            <span class="na">data</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span> <span class="mf">8.4</span><span class="p">,</span> <span class="mf">13.5</span><span class="p">,</span> <span class="mf">17.0</span><span class="p">,</span> <span class="mf">18.6</span><span class="p">,</span> <span class="mf">17.9</span><span class="p">,</span> <span class="mf">14.3</span><span class="p">,</span> <span class="mf">9.0</span><span class="p">,</span> <span class="mf">3.9</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
+        <span class="p">},</span> <span class="p">{</span>
+            <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">London</span><span class="dl">'</span><span class="p">,</span>
+            <span class="na">data</span><span class="p">:</span> <span class="p">[</span><span class="mf">3.9</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">,</span> <span class="mf">5.7</span><span class="p">,</span> <span class="mf">8.5</span><span class="p">,</span> <span class="mf">11.9</span><span class="p">,</span> <span class="mf">15.2</span><span class="p">,</span> <span class="mf">17.0</span><span class="p">,</span> <span class="mf">16.6</span><span class="p">,</span> <span class="mf">14.2</span><span class="p">,</span> <span class="mf">10.3</span><span class="p">,</span> <span class="mf">6.6</span><span class="p">,</span> <span class="mf">4.8</span><span class="p">]</span>
+        <span class="p">}]</span>
+    <span class="p">});</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>I figured the best Vim way to better deal with these large code blocks, most of which I didn’t need to see most of the time, was to learn more about folds.</p>
+
+<p>Initially, when first learning Vim, I just set <code class="language-plaintext highlighter-rouge">foldmethod</code> to <code class="language-plaintext highlighter-rouge">syntax</code>, figuring that would be the smartest option. However I’ve found that with this setting Vim rarely finds folds to close. Also, I believe that this setting slowed Vim down when I edited large Ruby files in particular. Perhaps I need some other setting in my vimrc, but <code class="language-plaintext highlighter-rouge">foldmethod=syntax</code> just hasn’t worked for me.</p>
+
+<p>So I switched to <code class="language-plaintext highlighter-rouge">foldmethod=indent</code>, figuring that I maintain pretty cleanly-indented code. With <code class="language-plaintext highlighter-rouge">foldmethod</code> set to <code class="language-plaintext highlighter-rouge">indent</code>, <code class="language-plaintext highlighter-rouge">zc</code> (close fold) worked well for me. However when trying to open a fold, I found it a bit cumbersome to have to navigate to the exact line of the fold I wanted to open. I was thinking I wanted a command that “found next fold and open it”.</p>
+
+<p>After some Googling I found <a href="http://stackoverflow.com/a/9407015/3160994">this Stack Overflow answer</a> that gives the Vimscript to do what I wanted. By trial and error, fumbling in the unforgiving darkness that is Vimscript, I modified it to the following and pasted it into my vimrc:</p>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span><span class="p">!</span> NextClosedFold<span class="p">(</span><span class="k">dir</span><span class="p">)</span>
+  <span class="k">if</span> <span class="p">!(</span><span class="nb">foldclosed</span><span class="p">(</span><span class="nb">line</span><span class="p">(</span><span class="s1">'.'</span><span class="p">))</span> <span class="p">&gt;</span> <span class="m">0</span><span class="p">)</span>
+    <span class="k">let</span> cmd <span class="p">=</span> <span class="s1">'norm!z'</span> <span class="p">.</span> <span class="nv">a:dir</span>
+    <span class="k">let</span> <span class="k">view</span> <span class="p">=</span> <span class="nb">winsaveview</span><span class="p">()</span>
+    <span class="k">let</span> <span class="p">[</span>l0<span class="p">,</span> <span class="k">l</span><span class="p">,</span> openf<span class="p">]</span> <span class="p">=</span> <span class="p">[</span><span class="m">0</span><span class="p">,</span> <span class="k">view</span><span class="p">.</span>lnum<span class="p">,</span> <span class="m">1</span><span class="p">]</span>
+    <span class="k">while</span> <span class="k">l</span> <span class="p">!=</span> l0 &amp;&amp; openf
+        exe cmd
+        <span class="k">let</span> <span class="p">[</span>l0<span class="p">,</span> <span class="k">l</span><span class="p">]</span> <span class="p">=</span> <span class="p">[</span><span class="k">l</span><span class="p">,</span> <span class="nb">line</span><span class="p">(</span><span class="s1">'.'</span><span class="p">)]</span>
+        <span class="k">let</span> openf <span class="p">=</span> <span class="nb">foldclosed</span><span class="p">(</span><span class="k">l</span><span class="p">)</span> <span class="p">&lt;</span> <span class="m">0</span>
+    <span class="k">endwhile</span>
+    <span class="k">if</span> openf
+        <span class="k">call</span> <span class="nb">winrestview</span><span class="p">(</span><span class="k">view</span><span class="p">)</span>
+    <span class="k">endif</span>
+  <span class="k">endif</span>
+<span class="k">endfunction</span>
+
+nnoremap <span class="p">&lt;</span>bar<span class="p">&gt;</span> zc
+nnoremap <span class="p">&lt;</span>Bslash<span class="p">&gt;</span> <span class="p">:&lt;</span>C<span class="p">-</span>U<span class="p">&gt;</span><span class="k">call</span> NextClosedFold<span class="p">(</span><span class="s1">'j'</span><span class="p">)&lt;</span><span class="k">cr</span><span class="p">&gt;</span>zo
+</code></pre></div></div>
+
+<p>I’m pretty sure it was something like that… the point is I just had it in my vimrc kind of like that and it worked. (<code class="language-plaintext highlighter-rouge">&lt;C-U&gt;</code> in insert mode deletes all characters before the cursor in current line. I believe it’s best practice to insert it before function calls as above. I was reminded of this from tpope’s <a href="https://github.com/tpope/vim-commentary">commentary plugin</a>. See <code class="language-plaintext highlighter-rouge">:help i_CTRL-U</code> for more.)</p>
+
+<p>This worked well enough. But I had been waiting for an opportunity to make my first Vim plugin, and at some point I figured this would be a good candidate.</p>
+
+<h2 id="making-it-a-plugin">Making It a Plugin</h2>
+
+<p>First I put the function and remappings into a separate <code class="language-plaintext highlighter-rouge">.vim</code> file and then sourced that file from my vimrc. I think I first created <code class="language-plaintext highlighter-rouge">~/.vim/zipper.vim</code>, pasted the function and the remappings into it and replaced the function and remappings in my vimrc with <code class="language-plaintext highlighter-rouge">source ~/.vim/zipper.vim</code>. It worked! One step closer to a plugin.</p>
+
+<p>I then consulted this 4-year-old <a href="http://stevelosh.com/blog/2011/09/writing-vim-plugins/">blog post</a> by Steve Losh on the topic of creating a Vim plugin, so I knew I had to structure my <code class="language-plaintext highlighter-rouge">.vim</code> file into a Vim plugin’s structure. From <a href="http://stevelosh.com/blog/2011/09/writing-vim-plugins/#be-pathogen-compatible">Losh</a>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yourplugin/
+    doc/
+        yourplugin.txt
+    plugin/
+        yourplugin.vim
+    ...
+    README
+    LICENSE
+</code></pre></div></div>
+
+<p>I then headed over to <a href="https://github.com/junegunn/vim-plug/blob/master/README.md">vim-plug’s README</a> to find out how to load a local vim plugin. Easy enough:</p>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">" Unmanaged plugin (manually installed and updated)</span>
+Plug <span class="s1">'~/my-prototype-plugin'</span>
+</code></pre></div></div>
+
+<p>I moved my vim file to my usual code directory and put it in a <code class="language-plaintext highlighter-rouge">plugin</code> directory, then added this following to list of plugins in my vimrc for vim-plug to find:</p>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Plug <span class="s1">'~/Documents/code/vim-zipper'</span>
+</code></pre></div></div>
+
+<p>I then ran <code class="language-plaintext highlighter-rouge">:PlugInstall</code> and was again in business (though I did note that I did not see “vim-zipper” in vim-plug’s output of installed plugins, I’m hoping just because it doesn’t display locally-sourced plugins since they aren’t actually downloaded?).</p>
+
+<p>After some fiddling with how to set what mappings and options (see below), I pushed my local version of the plugin <a href="https://github.com/sts10/vim-zipper">up to GitHub</a> and, in my vimrc, replaced <code class="language-plaintext highlighter-rouge">Plug '~/Documents/code/vim-zipper'</code> with:</p>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Plug <span class="s1">'sts10/vim-zipper'</span>
+</code></pre></div></div>
+
+<p>I then ran <code class="language-plaintext highlighter-rouge">:Plug Clean!</code> to make sure I removed the local version of the plugin (though not sure if that did anything), followed by <code class="language-plaintext highlighter-rouge">:PlugUpdate</code> (or <code class="language-plaintext highlighter-rouge">:PlugInstall</code>) and the plugin still worked!</p>
+
+<h2 id="controlled-remappings">Controlled Remappings</h2>
+
+<p>Rather then just keep the two remapping lines I originally wrote for my own vimrc in the public version of the plugin, I used two <code class="language-plaintext highlighter-rouge">if</code> statements to only map <code class="language-plaintext highlighter-rouge">&lt;bar&gt;</code> and <code class="language-plaintext highlighter-rouge">&lt;Bslash&gt;</code> if users hadn’t mapped those two keys yet:</p>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nnoremap <span class="p">&lt;</span><span class="k">silent</span><span class="p">&gt;</span> <span class="p">&lt;</span>Plug<span class="p">&gt;</span>ZipClosed <span class="p">:&lt;</span>C<span class="p">-</span>U<span class="p">&gt;</span><span class="k">call</span> CloseFold<span class="p">()&lt;</span><span class="k">cr</span><span class="p">&gt;</span>
+nnoremap <span class="p">&lt;</span><span class="k">silent</span><span class="p">&gt;</span> <span class="p">&lt;</span>Plug<span class="p">&gt;</span>ZipOpenNext <span class="p">:&lt;</span>C<span class="p">-</span>U<span class="p">&gt;</span><span class="k">call</span> NextClosedFold<span class="p">(</span><span class="s1">'j'</span><span class="p">)&lt;</span><span class="k">cr</span><span class="p">&gt;</span>zo
+nnoremap <span class="p">&lt;</span><span class="k">silent</span><span class="p">&gt;</span> <span class="p">&lt;</span>Plug<span class="p">&gt;</span>ZipOpenPrev <span class="p">:&lt;</span>C<span class="p">-</span>U<span class="p">&gt;</span><span class="k">call</span> NextClosedFold<span class="p">(</span><span class="s1">'k'</span><span class="p">)&lt;</span><span class="k">cr</span><span class="p">&gt;</span>zo
+
+vnoremap <span class="p">&lt;</span><span class="k">silent</span><span class="p">&gt;</span> <span class="p">&lt;</span>Plug<span class="p">&gt;</span>ZipOpenVisual <span class="p">:</span><span class="s1">'&lt;,'</span><span class="p">&gt;</span>normal zo<span class="p">&lt;</span><span class="k">cr</span><span class="p">&gt;</span>
+vnoremap <span class="p">&lt;</span><span class="k">silent</span><span class="p">&gt;</span> <span class="p">&lt;</span>Plug<span class="p">&gt;</span>ZipClosedVisual <span class="p">:</span><span class="s1">'&lt;,'</span><span class="p">&gt;</span>normal zc<span class="p">&lt;</span><span class="k">cr</span><span class="p">&gt;</span>
+
+<span class="k">if</span> <span class="p">!</span><span class="nb">hasmapto</span><span class="p">(</span><span class="s1">'&lt;Plug&gt;ZipClosed'</span><span class="p">)</span> <span class="p">||</span> <span class="nb">maparg</span><span class="p">(</span><span class="s1">'&lt;bar&gt;'</span><span class="p">,</span> <span class="s1">'n'</span><span class="p">)</span> <span class="p">==</span># <span class="s1">''</span>
+  nmap <span class="p">&lt;</span>bar<span class="p">&gt;</span> <span class="p">&lt;</span>Plug<span class="p">&gt;</span>ZipClosed
+  vmap <span class="p">&lt;</span>bar<span class="p">&gt;</span> <span class="p">&lt;</span>Plug<span class="p">&gt;</span>ZipClosedVisual
+<span class="k">endif</span>
+
+<span class="k">if</span> <span class="p">!</span><span class="nb">hasmapto</span><span class="p">(</span><span class="s1">'&lt;Plug&gt;ZipOpenNext'</span><span class="p">)</span> <span class="p">||</span> <span class="nb">maparg</span><span class="p">(</span><span class="s1">'&lt;Bslash&gt;'</span><span class="p">,</span> <span class="s1">'n'</span><span class="p">)</span> <span class="p">==</span># <span class="s1">''</span>
+  nmap <span class="p">&lt;</span>Bslash<span class="p">&gt;</span> <span class="p">&lt;</span>Plug<span class="p">&gt;</span>ZipOpenNext
+  nmap <span class="p">&lt;</span>C<span class="p">-</span>Bslash<span class="p">&gt;</span> <span class="p">&lt;</span>Plug<span class="p">&gt;</span>ZipOpenPrev
+  vmap <span class="p">&lt;</span>Bslash<span class="p">&gt;</span> <span class="p">&lt;</span>Plug<span class="p">&gt;</span>ZipOpenVisual
+<span class="k">endif</span>
+
+</code></pre></div></div>
+
+<p>I picked this scheme up from tpope’s <a href="https://github.com/tpope/vim-commentary/blob/master/plugin/commentary.vim">commentary</a> and it seems to work as intended. If, say, you haven’t mapped your <code class="language-plaintext highlighter-rouge">&lt;Leader&gt;</code>, if defaults to <code class="language-plaintext highlighter-rouge">&lt;Bslash&gt;</code>. Then users would have to map something else to <code class="language-plaintext highlighter-rouge">&lt;Plug&gt;ZipOpenNext</code>– they wouldn’t have to deal with the function calls themselves, which is nice.</p>
+
+<p>I’m almost positive there’s a way to do these mappings such that I don’t have to specify the visual mode mappings separately, but considering the “open” mechanism is basically just <code class="language-plaintext highlighter-rouge">zo</code> in visual mode, it’s probably good to define it separately.</p>
+
+<h2 id="help-text-file">Help Text File</h2>
+
+<p>To be formal about it, I copied <a href="https://github.com/tpope/vim-commentary/blob/master/doc/commentary.txt">Commentary’s help file</a> and replaced the text with <a href="https://github.com/sts10/vim-zipper/blob/master/doc/zipper.txt">what I figured was a good help file for zipper</a>. I then tested it out by running <code class="language-plaintext highlighter-rouge">:help zipper</code> and <code class="language-plaintext highlighter-rouge">:help bar</code> and it takes me right to the right place. Intriguingly, the <a href="https://github.com/sts10/vim-zipper/blob/master/doc/tags">tags</a> file just automatically created itself and then populated itself… Not sure how that happened to be honest!! Vim must have recognized the directory layout and just done its thing. No complaints here.</p>
+
+<h2 id="extras-readme-and-gif">Extras (README and GIF)</h2>
+
+<p>I then fleshed out the <a href="https://github.com/sts10/vim-zipper/blob/master/README.mdown">README</a>, including making this big silly GIF (using Quicktime screen record and <a href="http://gifbrewery.com/">GIFBrewery</a>):</p>
+
+<p><img src="https://raw.githubusercontent.com/sts10/vim-zipper/master/vim-zipper-gif.gif" alt="vim-zipper GIF" /></p>
+
+<p>That’s about it! Give <a href="https://github.com/sts10/vim-zipper">vim-zipper</a> a shot and <a href="https://twitter.com/sts10">let me know</a> what you think!</p>
+:ET

@@ -1,0 +1,206 @@
+I"p<p><a href="https://adventofcode.com/2018/day/5">Day 5 of this year’s Advent of Code</a> involves scanning “the chemical composition of [Santa’s new suit] material. We “discover that it is formed by extremely long polymers (one of which is available as your puzzle input).” We have to take these “polymers” (strings of upper and lowercase characters) and work through their reaction.</p>
+
+<p>I’ll just paste from the challenge for us:</p>
+
+<p>For example:</p>
+
+<ul>
+  <li>In <code class="language-plaintext highlighter-rouge">aA</code>, <code class="language-plaintext highlighter-rouge">a</code> and <code class="language-plaintext highlighter-rouge">A</code> react, leaving nothing behind.</li>
+  <li>In <code class="language-plaintext highlighter-rouge">abBA</code>, <code class="language-plaintext highlighter-rouge">bB</code> destroys itself, leaving <code class="language-plaintext highlighter-rouge">aA</code>. As above, this then destroys itself, leaving nothing.</li>
+  <li>In <code class="language-plaintext highlighter-rouge">abAB</code>, no two adjacent units are of the same type, and so nothing happens.</li>
+  <li>In <code class="language-plaintext highlighter-rouge">aabAAB</code>, even though <code class="language-plaintext highlighter-rouge">aa</code> and <code class="language-plaintext highlighter-rouge">AA</code> are of the same type, their polarities match, and so nothing happens.</li>
+</ul>
+
+<p>Now, consider a larger example, <code class="language-plaintext highlighter-rouge">dabAcCaCBAcCcaDA</code>:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">dabAcCaCBAcCcaDA</code>  The first ‘cC’ is removed.</li>
+  <li><code class="language-plaintext highlighter-rouge">dabAaCBAcCcaDA</code>    This creates ‘Aa’, which is removed.</li>
+  <li><code class="language-plaintext highlighter-rouge">dabCBAcCcaDA</code>      Either ‘cC’ or ‘Cc’ are removed (the result is the same).</li>
+  <li><code class="language-plaintext highlighter-rouge">dabCBAcaDA</code>        No further actions can be taken.</li>
+</ul>
+
+<p>After all possible reactions, the resulting polymer contains 10 units. How many units remain after fully reacting the polymer you scanned?</p>
+
+<p>In solving it, I wrote a <code class="language-plaintext highlighter-rouge">react</code> function that takes one of these polymer strings as a Vector of characters (<code class="language-plaintext highlighter-rouge">Vec&lt;char&gt;</code> is the Rust function signature). The first version of this <code class="language-plaintext highlighter-rouge">react</code> function contained two nested loops: the inner loop iterated through the polymer characters one character at a time, looking for characters that “cancel” or react. To test if any two given characters react, I wrote a separate function called <code class="language-plaintext highlighter-rouge">do_these_two_chars_cancel</code>.</p>
+
+<p>If we indeed find a canceling pair, we remove them from the vector and <code class="language-plaintext highlighter-rouge">break</code> out of the inner <code class="language-plaintext highlighter-rouge">for</code> loop to an outer loop, where we begin all over, starting at the first two characters.</p>
+
+<p>You can find my current solution <a href="https://github.com/sts10/advent-of-code-2018/blob/master/src/bin/day05.rs">here</a>, but I wanted to walk us through some of the refactoring and optimizations two of the key functions went through.</p>
+
+<p>Let’s start by looking at my original versions of these two functions. This code both compiles successfully and solves the puzzle, but running <code class="language-plaintext highlighter-rouge">cargo build --bin day05 --release &amp; time cargo run --bin day05 --release</code> shows that solving part 2 of the challenge (which basically involves running through 26 long polymers) takes my Oryx Pro a whopping 2 minutes and 20 seconds.</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">react</span><span class="p">(</span><span class="k">mut</span> <span class="n">p_vec</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">char</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">char</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">p_vec_len</span> <span class="o">=</span> <span class="n">p_vec</span><span class="nf">.len</span><span class="p">();</span>
+    <span class="k">loop</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="k">mut</span> <span class="n">previous_c</span><span class="p">:</span> <span class="nb">char</span> <span class="o">=</span> <span class="n">p_vec</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+        <span class="k">let</span> <span class="k">mut</span> <span class="n">indexes_to_remove</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">usize</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nd">vec!</span><span class="p">[];</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="n">in</span> <span class="mi">1</span><span class="o">..</span><span class="n">p_vec_len</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="nf">do_these_two_chars_cancel</span><span class="p">(</span><span class="n">p_vec</span><span class="p">[</span><span class="n">c</span><span class="p">],</span> <span class="n">previous_c</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c">// "found a pair: {} and {}", previous_c, p_vec[c]</span>
+                <span class="n">p_vec</span><span class="nf">.remove</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
+                <span class="n">p_vec</span><span class="nf">.remove</span><span class="p">(</span><span class="n">c</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="n">previous_c</span> <span class="o">=</span> <span class="n">p_vec</span><span class="p">[</span><span class="n">c</span><span class="p">];</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="n">p_vec</span><span class="nf">.len</span><span class="p">()</span> <span class="o">==</span> <span class="n">p_vec_len</span> <span class="p">{</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">p_vec_len</span> <span class="o">=</span> <span class="n">p_vec</span><span class="nf">.len</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="c">// let s: String = p_vec.into_iter().collect();</span>
+    <span class="c">// println!("polymer is now {:?}", s);// }</span>
+    <span class="n">p_vec</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">do_these_two_chars_cancel</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">char</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">char</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">bool</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="n">a</span><span class="nf">.is_uppercase</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">b</span><span class="nf">.is_lowercase</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">a</span><span class="nf">.to_lowercase</span><span class="p">()</span><span class="nf">.to_string</span><span class="p">()</span> <span class="o">==</span> <span class="n">b</span><span class="nf">.to_string</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">true</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="n">a</span><span class="nf">.is_lowercase</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">b</span><span class="nf">.is_uppercase</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">a</span><span class="nf">.to_uppercase</span><span class="p">()</span><span class="nf">.to_string</span><span class="p">()</span> <span class="o">==</span> <span class="n">b</span><span class="nf">.to_string</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">true</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">false</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Can you spot ways to make this code more efficient? Turns out there are quite a few. The first one I implemented was actually submitted as <a href="https://github.com/sts10/advent-of-code-2018/pull/1">a pull request</a> by a Fediverse friend named Daniel.</p>
+
+<h2 id="dont-break-so-often">Don’t break so often</h2>
+
+<p>He changed the inner loop from a <code class="language-plaintext highlighter-rouge">for</code> loop to a <code class="language-plaintext highlighter-rouge">while</code> loop. The key change here is that the inner loop does NOT break when it finds a canceling pair – rather, it simply removes them, keeps its iterator <code class="language-plaintext highlighter-rouge">index</code> at its same value, so that on the next loop it’ll look at the very next pair.</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">react</span><span class="p">(</span><span class="k">mut</span> <span class="n">p_vec</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">char</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">char</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">let</span> <span class="k">mut</span> <span class="n">p_vec_len</span> <span class="o">=</span> <span class="n">p_vec</span><span class="nf">.len</span><span class="p">();</span>
+  <span class="k">loop</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">previous_c</span><span class="p">:</span> <span class="nb">char</span> <span class="o">=</span> <span class="n">p_vec</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">indexes_to_remove</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">usize</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nd">vec!</span><span class="p">[];</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">made_a_change</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span>
+    <span class="k">while</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">p_vec_len</span> <span class="p">{</span>
+      <span class="n">previous_c</span> <span class="o">=</span> <span class="n">p_vec</span><span class="p">[</span><span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+      <span class="k">if</span> <span class="nf">do_these_two_chars_cancel</span><span class="p">(</span><span class="n">p_vec</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">previous_c</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">p_vec</span><span class="nf">.remove</span><span class="p">(</span><span class="n">index</span><span class="p">);</span>
+        <span class="n">p_vec</span><span class="nf">.remove</span><span class="p">(</span><span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="n">index</span> <span class="o">-=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="n">p_vec_len</span> <span class="o">-=</span> <span class="mi">2</span><span class="p">;</span>
+        <span class="n">made_a_change</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="o">!</span><span class="n">made_a_change</span> <span class="p">{</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="n">p_vec</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This led to a huge boost in efficiency… when doing part 2 of the challenge (which effectively requires you react/solve 26 long polymers), Daniel says his run time went from ~30 minutes to ~7 seconds! I didn’t do a speed test myself, but I saw a tremendous improvement.</p>
+
+<p>Of course, this change would likely increase the overall program’s efficiency no matter what programming language I used. But the next two are (relatively) particular to Rust.</p>
+
+<h2 id="dont-make-a-string-when-sticking-with-strs-will-do">Don’t make a String when sticking with <code class="language-plaintext highlighter-rouge">&amp;str</code>s will do</h2>
+
+<p>Not wanting to be outdone, I took a look at optimizing the helper function <code class="language-plaintext highlighter-rouge">do_these_two_chars_cancel</code> further. The original version of the function has two calls to <code class="language-plaintext highlighter-rouge">.to_string()</code>, which I remembered are particularly costly, as Strings in Rust live on the heap. If I could use slices of strings (<code class="language-plaintext highlighter-rouge">&amp;str</code>), I figured it’d lead to an increase in efficiency and thus a speed improvement.</p>
+
+<p>When I was first trying to solve the challenge, I had written the seemingly logical <code class="language-plaintext highlighter-rouge">if a.to_lowercase == b</code>, however this results in an error:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>error[E0369]: binary operation `==` cannot be applied to type `std::char::ToLowercase`  
+= note: an implementation of `std::cmp::PartialEq` might be missing for `std::char::ToLowercase`
+</code></pre></div></div>
+
+<p>I dropped the <code class="language-plaintext highlighter-rouge">.to_string()</code> calls in there out of necessity: <code class="language-plaintext highlighter-rouge">if a.is_uppercase() &amp;&amp; b.is_lowercase() &amp;&amp; a.to_lowercase().to_string() == b.to_string()</code></p>
+
+<p>But with time to go back, I found a similar method that did work on <code class="language-plaintext highlighter-rouge">char</code>s: <a href="https://doc.rust-lang.org/std/primitive.char.html#method.to_ascii_lowercase"><code class="language-plaintext highlighter-rouge">to_ascii_lowercase()</code></a>. I also took the time to clean up the conditional logic and got:</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">do_these_two_chars_cancel</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">char</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">char</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">bool</span> <span class="p">{</span>
+  <span class="n">a</span><span class="nf">.to_ascii_lowercase</span><span class="p">()</span> <span class="o">==</span> <span class="n">b</span><span class="nf">.to_ascii_lowercase</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">a</span><span class="nf">.is_uppercase</span><span class="p">()</span> <span class="o">==</span> <span class="n">b</span><span class="nf">.is_lowercase</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>As I wrote in a comment, while two <code class="language-plaintext highlighter-rouge">&lt;char&gt;.to_lowercase()</code> can’t be compared for equality, two <code class="language-plaintext highlighter-rouge">&lt;char&gt;.to_ascii_lowercase()</code>s can be.  Informally, I found that this version of the function was about 9x faster than my original.</p>
+
+<p>In order to be a little less verbose, I ended up using <a href="https://doc.rust-lang.org/std/primitive.char.html#method.eq_ignore_ascii_case"><code class="language-plaintext highlighter-rouge">eq_ignore_ascii_case()</code></a>, so it became just:</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">do_these_two_chars_cancel</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">char</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">char</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">bool</span> <span class="p">{</span>
+  <span class="n">a</span><span class="nf">.eq_ignore_ascii_case</span><span class="p">(</span><span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">a</span><span class="nf">.is_uppercase</span><span class="p">()</span> <span class="o">==</span> <span class="n">b</span><span class="nf">.is_lowercase</span><span class="p">()</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<h2 id="one-drain-is-faster-than-two-removes">One <code class="language-plaintext highlighter-rouge">drain</code> is faster than two <code class="language-plaintext highlighter-rouge">remove</code>s</h2>
+
+<p>Then, Daniel submitted <a href="https://github.com/sts10/advent-of-code-2018/pull/2">another pull request</a>, this time with an even simpler change: substituting the two <a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.remove"><code class="language-plaintext highlighter-rouge">remove()</code></a> calls with a <a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.splice"><code class="language-plaintext highlighter-rouge">splice()</code></a>. (The reason I couldn’t do it in one <code class="language-plaintext highlighter-rouge">remove()</code> call is that you can only remove one leemnt at a time with <code class="language-plaintext highlighter-rouge">remove</code>.</p>
+
+<p>I ended up using <a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.drain"><code class="language-plaintext highlighter-rouge">drain()</code></a>, at <a href="https://github.com/sts10/advent-of-code-2018/pull/2#issuecomment-445203424">the suggestion of another helper</a>, as it fits a bit better semantically.</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">react</span><span class="p">(</span><span class="k">mut</span> <span class="n">p_vec</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">char</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">char</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">let</span> <span class="k">mut</span> <span class="n">p_vec_len</span> <span class="o">=</span> <span class="n">p_vec</span><span class="nf">.len</span><span class="p">();</span>
+  <span class="k">loop</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">previous_c</span><span class="p">:</span> <span class="nb">char</span> <span class="o">=</span> <span class="n">p_vec</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">indexes_to_remove</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">usize</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nd">vec!</span><span class="p">[];</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">made_a_change</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span>
+    <span class="k">while</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">p_vec_len</span> <span class="p">{</span>
+      <span class="n">previous_c</span> <span class="o">=</span> <span class="n">p_vec</span><span class="p">[</span><span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+      <span class="k">if</span> <span class="nf">do_these_two_chars_cancel</span><span class="p">(</span><span class="n">p_vec</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">previous_c</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">p_vec</span><span class="nf">.drain</span><span class="p">((</span><span class="n">index</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">..=</span><span class="n">index</span><span class="p">);</span>
+        <span class="n">index</span> <span class="o">-=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="n">p_vec_len</span> <span class="o">-=</span> <span class="mi">2</span><span class="p">;</span>
+        <span class="n">made_a_change</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="o">!</span><span class="n">made_a_change</span> <span class="p">{</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="n">p_vec</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="removing-the-outer-loop">Removing the outer <code class="language-plaintext highlighter-rouge">loop</code></h2>
+
+<p>Ever since I saw Daniel’s first pull request showing that we didn’t need to break out of the inner loop, I had a sneaking suspicion that we could do away with the outer loop all together. The trick would be managing the <code class="language-plaintext highlighter-rouge">index</code> such that no canceling pairs were missed, paying particular attention to those iterations where a pair was removed.</p>
+
+<p>Below is how it worked out. I needed the clunky <code class="language-plaintext highlighter-rouge">index = if index &gt; 1 { index - 1 } else { index };</code> line to avoid a negative index on the very first pair. Otherwise it’s not terrible.</p>
+
+<p>So here is, finally, the current version of those two functions:</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">react</span><span class="p">(</span><span class="k">mut</span> <span class="n">p_vec</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">char</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">char</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">let</span> <span class="k">mut</span> <span class="n">p_vec_len</span> <span class="o">=</span> <span class="n">p_vec</span><span class="nf">.len</span><span class="p">();</span>
+  <span class="k">let</span> <span class="k">mut</span> <span class="n">previous_c</span><span class="p">:</span> <span class="nb">char</span><span class="p">;</span>
+  <span class="k">let</span> <span class="k">mut</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">while</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">p_vec_len</span> <span class="p">{</span>
+    <span class="n">previous_c</span> <span class="o">=</span> <span class="n">p_vec</span><span class="p">[</span><span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+    <span class="k">if</span> <span class="nf">do_these_two_chars_cancel</span><span class="p">(</span><span class="n">p_vec</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">previous_c</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c">// Found a pair that react. Let's remove them!</span>
+      <span class="c">// Use drain rather than remove. Drain is also a little semantically preferable</span>
+      <span class="c">// to `splice`</span>
+      <span class="n">p_vec</span><span class="nf">.drain</span><span class="p">((</span><span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">..=</span><span class="n">index</span><span class="p">);</span>
+      <span class="n">p_vec_len</span> <span class="o">-=</span> <span class="mi">2</span><span class="p">;</span>
+      <span class="c">// and, if we can, shift c back one</span>
+      <span class="n">index</span> <span class="o">=</span> <span class="k">if</span> <span class="n">index</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="p">{</span> <span class="n">index</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="n">index</span> <span class="p">};</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="c">// these two weren't a pair. Move on to the next pair</span>
+      <span class="c">// by shifting the iterator forward one character</span>
+      <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="n">p_vec</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">do_these_two_chars_cancel</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">char</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">char</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">bool</span> <span class="p">{</span>
+  <span class="n">a</span><span class="nf">.eq_ignore_ascii_case</span><span class="p">(</span><span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">a</span><span class="nf">.is_uppercase</span><span class="p">()</span> <span class="o">==</span> <span class="n">b</span><span class="nf">.is_lowercase</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="how-much-faster">How much faster?</h2>
+
+<p>With this version of the two functions, solving part 2 (again running <code class="language-plaintext highlighter-rouge">cargo build --bin day-05 --release &amp;&amp; time cargo run --bin day05 --release</code>), on my Oryx Pro takes only about 1.1 <em>seconds</em>, about 127x faster than the original version.</p>
+:ET

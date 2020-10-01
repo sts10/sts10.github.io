@@ -1,0 +1,37 @@
+I"8<p>On my work computer I’ve been having some trouble getting the 2015 MacBook Pro’s Terminal Vim to access the system clipboard. There is a chance that the version of Vim that shipped with the computer does not support the feature in which the <code class="language-plaintext highlighter-rouge">*</code> register is connected to the system clipboard. (I’ll note the version number next time I’m in the office.)</p>
+
+<!-- more -->
+
+<p>For the record, at home, where the <code class="language-plaintext highlighter-rouge">*</code> register works great, I’m running <code class="language-plaintext highlighter-rouge">Vim 7.4.488</code> in the Terminal. If the problem with the work machine is that the shipped version of Vim is 7.2 or 7.3, I could do what I did on my home machine to upgrade Vim– <a href="http://www.prioritized.net/blog/upgrading-vim-on-os-x/">using homebrew to install Vim</a> (not MacVim) and then add <code class="language-plaintext highlighter-rouge">alias vim="/usr/local/Cellar/vim/7.4.488/bin/vim"</code> to my <code class="language-plaintext highlighter-rouge">.bash_profile</code>, although that sucks because the version number is hard-coded…</p>
+
+<p>If that doesn’t fix the system clipboard problem, or we just object to hard-coding the Vim version number into our <code class="language-plaintext highlighter-rouge">.bash_profile</code>, another fall back for the work computer is to just use MacVim.</p>
+
+<p>Obviously, besides the actual MacVim editor, I also need to be able to launch it from the command line as easily as Terminal Vim or Sublime Text. For that, I found <a href="http://michaellee.co/launch-macvim-from-terminal/">this simple but excellent blog post</a>.</p>
+
+<p>The blog post links to <a href="https://github.com/b4winckler/macvim/releases">this snapshot of MacVim</a> on GitHub, HOWEVER <a href="https://github.com/macvim-dev/macvim/releases/">this seems to be a newer, more active fork</a> of the project. I’ve since switched to this fork, and am now running VIM 7.4.769. Also the icon is nicer and more modern: a better fit for OS X Yosemite.</p>
+
+<p>(P.S. There’s also <a href="http://www.macupdate.com/app/mac/25988/macvim">a link on macupdate.com</a>, but that active fork on GitHub is probably way better.)</p>
+
+<p>In that release, besides the actual text editor application which (I think) you install like any other OS X application, there’s a shell script called <code class="language-plaintext highlighter-rouge">mvim</code>. To set up the ability to open files from the command line with the command <code class="language-plaintext highlighter-rouge">mvim</code>, simply move that <code class="language-plaintext highlighter-rouge">mvim</code> script to <code class="language-plaintext highlighter-rouge">/usr/local/bin</code>. If you’re in the downloaded directory, you can run:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mv mvim /usr/local/bin/
+</code></pre></div></div>
+
+<p>After restarting Terminal (probably), you should be able to run <code class="language-plaintext highlighter-rouge">mvim filename.rb</code> to open files in MacVim. Best of all, no changes needed to your <code class="language-plaintext highlighter-rouge">.bash_profile</code>.</p>
+
+<h2 id="thoughts-on-actually-using-macvim-as-compared-to-vim-in-terminal">Thoughts on Actually Using MacVim, As Compared to Vim in Terminal</h2>
+
+<p>Today I started work on a new Ruby CLI allowing the user to play <a href="https://github.com/sts10/connect_four">Connect Four</a> and used MacVim as an experiment. I really liked it– having the mouse, normal OS X commands, and easy access to the system clipboard was definitely nice.</p>
+
+<p>When I <a href="http://sts10.github.io/2014/09/10/getting-started-with-vim.html">first started experimenting with Vim</a> I decided to be “hardcore” and only use it in the Terminal. And I suppose using Vim for the first 11 months (on and off) in the Terminal did two things: (1) Program me not rely on either the mouse (in any way), or on very common OS X commands like Cmd + v or Cmd + a, and (2) made me comfortable in times when I’ll <em>need</em> to use Vim in a console, like on a remote box (which I have had to do for work and <a href="http://sts10.github.io/2014/10/15/totally-nuclear-and-radiation.html">Totally Nuclear Club stuff</a>).</p>
+
+<p>But at this point I’m decently comfortable using Vim commands and working with files in Vim rather than Sublime Text. This comfort has led me to see and understand the advantages to the commands better. The reasons that I will occasionally choose to open a project in Sublime over Vim have now shrunk, though sometimes I do run Sublime, mostly when I know I’ll be dealing with a lot of files and a good amount of complex clipboard work.</p>
+
+<p>I certainly <em>could</em> get “good enough” with Terminal Vim to be able to manage tons of files and move big blocks of preciously sweated-over-and-not-well-backed-up code around flawlessly. But MacVim’s advantages in terms of system clipboard integration AND some nice mouse highlighting, easy window resizing with the mouse, and scrolling compatibility make these problems more manageable. In fact MacVim feels closer to Sublime-in-Vintage-Mode (or at least closer than Terminal Vim), but of course you still get full-featured Vim, with all of your <code class="language-plaintext highlighter-rouge">vimrc</code> settings and keymapping, and plug-ins coming with you.</p>
+
+<p>As a side note, I actually, for the first time, used <a href="http://www.watchpeoplecode.com/">WatchPeopleCode</a> to livestream my work on the Connect Four game using MacVim and Terminal side-by-side (<a href="http://www.watchpeoplecode.com/streamer/sts10">here’s my WPC page</a>). To do this I only needed one new piece of software: <a href="https://obsproject.com/">Open Broadcast Software</a>. It took up more CPU processing power than I thought I would, and the lag when sending the video to WPC was sometimes more than a minute or two. But it’s good to know how to do it, and be set up.</p>
+
+<h2 id="lingering-questions-about-macvim">Lingering Questions about MacVim</h2>
+
+<p>What is the process for upgrading MacVim if you use this method? MacVim does have a checkbox preference that asks whether we want to check for updates when the application launches, so my hope is that that would catch new versions. We’d also have to hope that that <code class="language-plaintext highlighter-rouge">mvim</code> shell script will work for subsequent versions, but that could be the case! I’m running some version of 7.4.X so that’s probably good for a while.</p>
+:ET

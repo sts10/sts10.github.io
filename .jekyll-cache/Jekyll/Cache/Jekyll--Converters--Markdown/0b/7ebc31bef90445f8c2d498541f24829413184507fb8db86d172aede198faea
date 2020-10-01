@@ -1,0 +1,31 @@
+I"<p>In my most-recent post I wrote about <a href="http://sts10.github.io/2014/03/01/some-sublime-text-tips-and-tricks.html">some Sublime Text tips and tricks</a> I had picked up from an instructional video. I’ve since been using these new techniques almost constantly, especially the window management keyboard shortcuts (set via Sublime’s key-bindings). I’ve found them to be super-helpful, especially as we moved into Sinatra and now Ruby on Rails, which involves projects with many files. Naturally, I began to explore ways in which I could set keyboard shortcuts to manage the windows of all my programs, not just Sublime Text.</p>
+
+<!-- more -->
+
+<p>I knew that Avi uses an app called <a href="http://manytricks.com/moom/">Moom</a>. It looks great– I like how it enhances OS X’s green expand button. But it also costs $10, and I figured I’d explore some free alternatives first.</p>
+
+<p>On the advice of fellow Flatiron student Daniel Spector, I tried <a href="http://www.boastr.net/">Better Touch Tool</a>. Better Touch Tool seems to be made for setting custom mouse-touch shortcuts (like 3 finger left-right swiping), but it also supports global keyboard shortcuts.</p>
+
+<h3 id="setup-and-usage">Setup and Usage</h3>
+
+<p>If I remember correctly, Better Touch doesn’t come with any default shortcuts enabled. Setting your custom shortcuts is pretty simple, although a little janky. For instance, I think it’s the case that if you want to set a shortcut (say command + arrow-up), that trigger cannot also be currently set to another command. But in general it offers tons of customization options and it’s free, so I can’t really complain.</p>
+
+<h3 id="my-current-settings">My Current Settings</h3>
+
+<p>Below are my current settings:</p>
+
+<p><img src="http://i.imgur.com/3k3bkeM.png" alt="My Better Touch Tool keyboard shortcuts" /></p>
+
+<p>Basically, I have control + command + arrows set to move the current, or active, window. ‘Left’ moves it to the left half of the monitor, ‘right’ to the right half, ‘up’ maximizes it, and ‘down’ returns it to its original size (“Restore Old Window Size”). Since I have an external monitor at home, I set control + command + = to maximize on the other monitor, and control + command + - to simply have it switch monitors (which would basically undo the “maximize on the other monitor” command).</p>
+
+<p>The control + command combo works well with <a href="http://sts10.github.io/2014/03/01/some-sublime-text-tips-and-tricks.html">the Sublime key-bindings I already had in place</a>– namely using alt + command + arrows to manage my Sublime displays. To switch between these two sets of functions all I have to do is move a finger from alt to control or visa versa.</p>
+
+<h3 id="notes">Notes</h3>
+
+<p>Setting these up was a little tricky, but once set (and once I set Better Touch Tool to open on start-up) the shortcuts have worked very well.</p>
+
+<p>Before I installed BBT and used command+tab to navigate open applications, I rarely maximized windows. It was just too hard to switch applications unless I left a little bit of another window visible so I could click on it. But now that I’ve become practiced with command+tab and Alfred, I don’t need to use the mouse to open apps from my dock or switch between open applications. Thus, I was able to set my Mac dock to only appear on hover. With BBT I really get to take advantage of the extra screen real-estate this gives me.</p>
+
+<p>I don’t have any touchpad shortcuts set up at this point, but BTT offers plenty of options. Checkout their <a href="http://blog.boastr.net/documentation-faq/new-bettertouchtool-documentation/">documentation</a> for ideas.</p>
+
+:ET

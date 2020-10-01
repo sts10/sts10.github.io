@@ -1,0 +1,41 @@
+I"�<p>I’ve been writing these blog posts in Vim for a few months now. It’s been a great way to practice and hone my Vim skills in a slower, less intense environment (as compared to deployed code).</p>
+
+<p>This blog is run using <a href="http://octopress.org/">Octopress</a> and a shell script I wrote more than a year ago called <a href="https://github.com/sts10/ink">ink</a> (which has been really awesome!). Thus, the posts are actually written in Markdown. This has worked out great– it remains my preferred syntax for writing on the internet. But one pesky problem was the headache of making text a link in Markdown using Vim.</p>
+
+<!-- more -->
+
+<p>As you can read in the <a href="http://daringfireball.net/projects/markdown/syntax#link">Markdown Syntax</a>, link text is surrounded by square brackets, followed immediately with the URL in parenthesis.</p>
+
+<p>While writing these blog posts, I’d often write a full sentence or paragraph, then go to my browser and find any URLs I’d want to insert links to. To do this, I would copy the URL to the system clipboard, then use Vim commands to navigate to the beginning of the text to link, insert a “[”, navigate to the end of the text to link to insert a “]” then a “(“, then use one of my remapping to paste from the system clipboard:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>" use leader to interact with the system clipboard 
+nnoremap &lt;Leader&gt;p "*]p
+nnoremap &lt;Leader&gt;P "*]P
+nnoremap &lt;Leader&gt;v "*]p
+nnoremap &lt;Leader&gt;V "*]P
+</code></pre></div></div>
+
+<p>Note 1: I’m using Terminal Vim.</p>
+
+<p>Note 2: It’s not clear to me whether it is better/more correct to use the <code class="language-plaintext highlighter-rouge">*</code> register or the <code class="language-plaintext highlighter-rouge">+</code> register to interact with the system clipboard. If you want to use the <code class="language-plaintext highlighter-rouge">+</code> register, just substitute <code class="language-plaintext highlighter-rouge">+</code> for all the <code class="language-plaintext highlighter-rouge">*</code>s in the code examples in this post.</p>
+
+<p>Note 3: The above block of Vimscript does NOT specifically allow Vim access to the system clipboard. I’m actually not 100% how I connect my version of Terminal Vim with my system clipboard.</p>
+
+<p>One route to take, one described in <a href="http://vimcasts.org/episodes/accessing-the-system-clipboard-from-vim/">this Vimcast</a>, is to <a href="http://vim.wikia.com/wiki/Accessing_the_system_clipboard">set the clipboard to unnamed</a>. I believe this puts all yank, delete and put (paste) commands to the system clipboard, which is pretty different from having one specific register connected to the system clipboard. There’s <em>also</em> a solution using <a href="https://github.com/tpope/vim-unimpaired">Tim Pope
+‘s Unimpaired plug-in</a>, which I believe is described in this <a href="http://vimcasts.org/episodes/using-vims-paste-mode-with-the-system-paste-command/">Vimcast</a>.</p>
+
+<p>Though this was good practice for my Vim cursor navigation skills, it was a bit of a pain in the ass, especially compared to Sublime Text. In Sublime, if you hit “[” with a portion of your text highlighted, Sublime will place square brackets around the selected text.</p>
+
+<p>Note: There is a Tim Pope plug-in for Vim called <a href="https://github.com/tpope/vim-surround">Surround</a> (<a href="https://www.youtube.com/watch?v=5HF4jSyPpvs">here’s a Tuts+ video on YouTube about it</a>), which I may still implement because it looks awesome yet simple, but I figured if I just wanted this one functionality <em>and</em> I want my single command to paste from system clipboard.</p>
+
+<p>With this functionality in mind, I went about writing a new custom Vim remapping just for inserting links in Markdown, with the assumption that I already have the URL to link to in my system clipboard (in the <code class="language-plaintext highlighter-rouge">*</code> register).</p>
+
+<p>Here’s what I came up with:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>autocmd FileType markdown vnoremap &lt;c-a&gt; &lt;Esc&gt;`&lt;i[&lt;Esc&gt;`&gt;la](&lt;Esc&gt;"*]pa)&lt;Esc&gt;
+</code></pre></div></div>
+
+<p>The first bit, <code class="language-plaintext highlighter-rouge">autocmd FileType markdown</code>, says this remapping should only work in markdown files. `&lt; and `&gt; take you to the beginning and end of the previously highlighted text (in visual mode), respectively. So I got to the beginning of the highlight text, insert a square bracket, then go to the end of the highlighted text, move one character left, and insert the closing square bracket, an opening parentheses, then paste from the system clipboard register (<code class="language-plaintext highlighter-rouge">*</code>). (Note: the square bracket after the <code class="language-plaintext highlighter-rouge">*</code> just formats the pasted text… I don’t think it’s actually necessary…) Then we use <code class="language-plaintext highlighter-rouge">a</code> to insert the closing parentheses, then hit escape to return to normal mode. Phew!</p>
+
+<p>I haven’t pushed the new line of up to <a href="https://github.com/sts10/terminal_and_vim_settings/blob/master/vimrc">the publicly-hosted copy of my .vimrc</a> yet… still testing and debating whether mapping it to Ctrl + a is a good choice.</p>
+:ET

@@ -1,0 +1,122 @@
+I"�7<p>Over the weekend I’ve been working a new side project in order to get more practice generating dynamic webpages using ERB. I’m calling it Recall and it’s supposed to take a Ruby method as a user input from the command line and then dynamically generate a new webpage that displays every time you’ve used that method, complete with the code line, the line number, and a link to the .rb file you used it in.</p>
+
+<p>I’ve also been reading <a href="http://www.amazon.com/Practical-Object-Oriented-Design-Ruby-Addison-Wesley/dp/0321721330/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1393199505&amp;sr=1-1&amp;keywords=practical+object-oriented+design+in+ruby"><em>Practical Object Oriented Design in Ruby</em></a>, aka “POODR”. I’m loving it so far: it’s very well-written, and I think I’m in a good place in my Ruby education to understand it well enough. It turns out I’d be able to apply some of her refactoring recommendations sooner than I would have guessed…</p>
+
+<!-- more -->
+
+<p>Here’s a bit of the recall code. This first snippet is a method called <code class="language-plaintext highlighter-rouge">parse_results</code> from a class called Results that lives in lib/models. <code class="language-plaintext highlighter-rouge">parse_results</code> performs a grep search with an instance variable called <code class="language-plaintext highlighter-rouge">query</code> (yes, I’ve hard-coded my flatiron directory in for now).</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  <span class="k">def</span> <span class="nf">parse_results</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="sb">`grep -r -n --include=*.rb '</span><span class="si">#{</span><span class="vi">@query</span><span class="si">}</span><span class="sb">' /Users/samschlinkert/Documents/code/flatiron`</span>
+		<span class="n">results</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+   	<span class="n">array_of_arrays</span> <span class="o">=</span> <span class="n">results</span><span class="p">.</span><span class="nf">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">result</span><span class="o">|</span>
+     	<span class="n">line_array</span> <span class="o">=</span> <span class="p">[]</span>
+      <span class="n">line_array</span> <span class="o">=</span> <span class="n">result</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="s2">":"</span><span class="p">)</span>
+    <span class="k">end</span> 
+  <span class="k">end</span>
+
+</code></pre></div></div>
+
+<p>Grep returns a long string of search results, with each result separated by a line-break, or <code class="language-plaintext highlighter-rouge">/n</code>. Now <code class="language-plaintext highlighter-rouge">results</code> is an array of strings, with each string being one result. Each one of these results contains the file path, the line of code where the query was found, and (thanks to the <code class="language-plaintext highlighter-rouge">-n</code> flag in the grep call) the line number where grep found the query. These 3 pieces of information are separated by colons, like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/Users/samschlinkert/Documents/code/flatiron/labs/week3/playlister-cli-ruby-004/lib/models/playlistercli.rb:42:    APPROVED_COMMANDS.include?(input.downcase.to_sym)
+</code></pre></div></div>
+
+<p>So we have to iterate over each of these results and perform another split, which will produce an array of arrays. To help myself remember what’s going on, I called the array of each line a <code class="language-plaintext highlighter-rouge">line_array</code>. We know that <code class="language-plaintext highlighter-rouge">line_array[0]</code> is the file path, <code class="language-plaintext highlighter-rouge">line_array[1]</code> is the line number, and <code class="language-plaintext highlighter-rouge">line_array[2]</code> is the actual code snippet.</p>
+
+<p>Thus the corresponding ERB template looks like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>		&lt;ul&gt;
+      &lt;% @results.each do |line_array| %&gt;
+        &lt;li&gt;   
+          &lt;p&gt;In file: &lt;a href="file://&lt;%= line_array[0] %&gt;"&gt;&lt;%= line_array[0] %&gt;&lt;/a&gt;&lt;/p&gt;
+          &lt;p&gt;&lt;code&gt;&lt;%= line_array[1] %&gt; : &lt;%= line_array[2] %&gt;&lt;/code&gt;&lt;/p&gt;
+          
+        &lt;/li&gt;
+      &lt;% end %&gt;
+    &lt;/ul&gt; 
+</code></pre></div></div>
+
+<p>This is ugly. Super ugly. Sandi is covering her face with horror and disappointment. “Sam,” she says, not without a touch of sternness. “Let’s… let’s start with your parse_results method.”  (Note: I obviously have never met or spoken to Sandi Metz. Just having some fun here.)</p>
+
+<h3 id="single-responsibility-principle">Single Responsibility Principle</h3>
+
+<p>In POODR, Metz’s first, basic point is that each “thing” in your code, be it an object, method, whatever, should only be responsible for one thing. This is called the <a href="http://en.wikipedia.org/wiki/Single_responsibility_principle">Single Responsibility Principle</a> and it’s part of the awesome acronym <a href="http://en.wikipedia.org/wiki/SOLID_(object-oriented_design)">“SOLID”</a>. So when describing what, say, a method does, we should only use a single statement, probably without any “ands” in it.</p>
+
+<p>Looking at the above parse_results method, we’d say something like “This method runs a grep search and parses out the single results from the whole string and then iterates over the resulting array to return an array of arrays.” Phew!</p>
+
+<p>Let’s at least break the grep search out into a new, clearly-name method:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">def</span> <span class="nf">get_grep_results</span>
+    <span class="k">return</span> <span class="sb">`grep -r -n --include=*.rb '</span><span class="si">#{</span><span class="vi">@query</span><span class="si">}</span><span class="sb">' /Users/samschlinkert/Documents/code/flatiron`</span>
+ <span class="k">end</span>
+
+ <span class="k">def</span> <span class="nf">parse_results</span>
+   <span class="n">results</span> <span class="o">=</span> <span class="n">get_grep_results</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+   <span class="n">array_of_arrays</span> <span class="o">=</span> <span class="n">results</span><span class="p">.</span><span class="nf">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">result</span><span class="o">|</span>
+      <span class="n">line_array</span> <span class="o">=</span> <span class="p">[]</span>
+      <span class="n">line_array</span> <span class="o">=</span> <span class="n">result</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="s2">":"</span><span class="p">)</span>
+ 
+   <span class="k">end</span> 
+ <span class="k">end</span>
+
+</code></pre></div></div>
+
+<p>Cool.</p>
+
+<p>So I totally could have gone one further and created an intermediary <code class="language-plaintext highlighter-rouge">split_results</code> method to run the <code class="language-plaintext highlighter-rouge">.split(“\n”)</code> line, but I didn’t. I figure that is still part of “parsing” the results.</p>
+
+<h3 id="reducing-dependencies">Reducing Dependencies</h3>
+
+<p>Now let’s think about what the new parse_results method is returning. I’m using Ruby’s implicit return to return the variably <code class="language-plaintext highlighter-rouge">array_of_arrays</code>, where each item in the big array of all results is a line_array for each result. This kind of sucks though because whenever we use this array (in this case, in an ERB template) we have to know that <code class="language-plaintext highlighter-rouge">line_array[0]</code> is the file path, <code class="language-plaintext highlighter-rouge">line_array[1]</code> is the line number, and <code class="language-plaintext highlighter-rouge">line_array[2]</code> is the actual code snippet. That doesn’t seem right…</p>
+
+<p>Now, I definitely could use a hash here. Something like:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="p">{</span> 
+	<span class="ss">:file_path</span> <span class="o">=&gt;</span> <span class="n">line_array</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+	<span class="ss">:line_number</span> <span class="o">=&gt;</span> <span class="n">line_array</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> 
+	<span class="ss">:code_snippet</span> <span class="o">=&gt;</span> <span class="n">line_array</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>and then use <code class="language-plaintext highlighter-rouge">result[:file_path]</code> to call the file path (I think that’s right?). But on page 27 of POODR I found Sandi having the same problem with her gear and wheel example. Rather than use a hash, Sandi opts (at least temporarily, before telling us we should make a separate class) for creating a <a href="http://www.ruby-doc.org/core-2.1.0/Struct.html">Struct</a>.</p>
+
+<p>From the Ruby docs: “A Struct is a convenient way to bundle a number of attributes together, using accessor methods, without having to write an explicit class.” Sounds good. Let’s jump to my refactored code:</p>
+
+<h3 id="defining-the-struct">Defining the Struct</h3>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">def</span> <span class="nf">get_grep_results</span>
+    <span class="k">return</span> <span class="sb">`grep -r -n -i --include=*.rb '</span><span class="si">#{</span><span class="vi">@query</span><span class="si">}</span><span class="sb">' /Users/samschlinkert/Documents/code/flatiron`</span>
+  <span class="k">end</span>
+
+  <span class="no">Result</span> <span class="o">=</span> <span class="no">Struct</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">:file_path</span><span class="p">,</span> <span class="ss">:line_number</span><span class="p">,</span> <span class="ss">:code_snippet</span><span class="p">)</span> 
+
+  <span class="k">def</span> <span class="nf">parse_results</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">get_grep_results</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+  
+    <span class="n">results</span><span class="p">.</span><span class="nf">map</span> <span class="k">do</span> <span class="o">|</span><span class="n">result</span><span class="o">|</span>
+      <span class="n">line_array</span> <span class="o">=</span> <span class="p">[]</span>
+      <span class="n">line_array</span> <span class="o">=</span> <span class="n">result</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="s2">":"</span><span class="p">)</span>
+      <span class="no">Result</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">line_array</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">line_array</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line_array</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="k">end</span> 
+
+  <span class="k">end</span>
+
+</code></pre></div></div>
+
+<p>Now the parse_results method returns an array of Result structs, rather than an array of arrays. Each Result struct has three attr_accessors in it: <code class="language-plaintext highlighter-rouge">:file_path, :line_number, :code_snippet</code>. Since we can all the readers methods of these variables, the corresponding ERB is much cleaner and more intuitive:</p>
+
+<div class="language-erb highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">&lt;ul&gt;</span>
+      <span class="cp">&lt;%</span> <span class="vi">@results</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">result</span><span class="o">|</span> <span class="cp">%&gt;</span>
+        <span class="nt">&lt;li&gt;</span>   
+          <span class="nt">&lt;p&gt;</span>In file: <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"file://</span><span class="cp">&lt;%=</span> <span class="n">result</span><span class="p">.</span><span class="nf">file_path</span> <span class="cp">%&gt;</span><span class="s">"</span><span class="nt">&gt;</span><span class="cp">&lt;%=</span> <span class="n">result</span><span class="p">.</span><span class="nf">file_path</span> <span class="cp">%&gt;</span><span class="nt">&lt;/a&gt;&lt;/p&gt;</span>
+          <span class="nt">&lt;p&gt;&lt;code&gt;</span><span class="cp">&lt;%=</span> <span class="n">result</span><span class="p">.</span><span class="nf">line_number</span> <span class="cp">%&gt;</span> : <span class="cp">&lt;%=</span> <span class="n">result</span><span class="p">.</span><span class="nf">code_snippet</span> <span class="cp">%&gt;</span><span class="nt">&lt;/code&gt;&lt;/p&gt;</span>
+        <span class="nt">&lt;/li&gt;</span>
+      <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+    <span class="nt">&lt;/ul&gt;</span> 
+</code></pre></div></div>
+
+<p>I’m still working on Recall, so no GitHub repo link just yet.</p>
+
+:ET

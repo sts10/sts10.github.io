@@ -1,0 +1,89 @@
+I"�3<p>Every June my family has a big reunion down south. One of our traditions is playing a card game called Contract Rummy. If you don’t know the game here is <a href="http://www.pagat.com/rummy/ctrummy.html">one version of rules</a>, but basically it’s gin rummy with 5 pre-set hands everyone plays. In the first hand, the “contract”– what every player is trying to “get”– is 2 sets of 3, or 2 3’s-of-a-kind. For example, three 6s and three Jacks would fulfill this contract. The second hand is a set of 3 and a run of 4 (6 7 8 9, for example. Must be all in the same suit).</p>
+
+<!-- more -->
+
+<p>Winning a hand means that you fulfill the contract and run out of cards before anyone else does. The winner’s score for that hand is 0. Everyone besides the winner will have cards left in there hand, and their score for that hand is determined by which and how many cards they got stuck with. So if I was left with 3 non-face cards (3 through 10), my score for that hand would be 15. Obviously you want a low score.</p>
+
+<p>Knowing who won an individual hand is easy, but the winner of the game is the player with the lowest total score after 5 hands are played. For years we’ve just been using scrap paper and pencil: the scorekeeper sketching out a rough table with a row for each “contract” or hand and columns for each player and filling in scores as the game progresses. Sometimes the scorekeeper calculates the running totals between hands to get an idea of who in the lead, but usually it’s a surprise until the end when all the scores are tallied.</p>
+
+<p>Obviously this task of scorekeeping and keeping a running total lends itself well to a simple app. Using JavaScript, jQuery, and an HTML table I got it <a href="http://samschlinkert.com/contract/">up-and-running pretty quickly</a> (here’s the <a href="https://github.com/sts10/contract_score_card">GitHub repo</a>).</p>
+
+<p>The heart of the JavaScript is a <code class="language-plaintext highlighter-rouge">keyup</code> listener trained to all the <code class="language-plaintext highlighter-rouge">input</code> tags or type <code class="language-plaintext highlighter-rouge">text</code>. Everytime there’s a <code class="language-plaintext highlighter-rouge">keyup</code> event in any of the table’s input fields (say we’re entering Bob’s score for hand number 3), we want to (a) re-calculate that player’s total score and post to the “total” cell of that player, (b) re-compute the current leader, and highlight the name and total score of the new leader.</p>
+
+<p>The actual function does a little more than this, but here’s the simplified version for now:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">input[type=text]</span><span class="dl">'</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">keyup</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+  <span class="kd">var</span> <span class="nx">player_number</span> <span class="o">=</span> <span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="dl">'</span><span class="s1">id</span><span class="dl">'</span><span class="p">)).</span><span class="nx">charAt</span><span class="p">(</span><span class="mi">6</span><span class="p">);</span> <span class="c1">// get 'this' player's number via the CSS id of the text input</span>
+  <span class="nx">low_score</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">;</span> <span class="c1">// reset the low score to an impossibly high number</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">playerHasName</span><span class="p">(</span><span class="nx">player_number</span><span class="p">))</span> <span class="p">{</span> <span class="c1">// if this is player who has a name, i.e. is actually in the game, and this isn't an erronaes data entry in an incorrect column</span>
+    <span class="nx">calculateAndPostPlayerTotal</span><span class="p">(</span><span class="nx">player_number</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nx">updateCurrentLeader</span><span class="p">();</span>  <span class="c1">// rec-calulate new leader</span>
+  <span class="nx">highlightLeader</span><span class="p">();</span>      <span class="c1">// use CSS to highlight the new leader's name and score </span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>The rest of the <code class="language-plaintext highlighter-rouge">app.js</code> file is all helper methods. I think I wrote them in the way that I’d write Ruby: each take in data, act on it– sometimes in just one line, and return the described result. Here are some fun ones:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">makeScoreArray</span><span class="p">(</span><span class="nx">player</span><span class="p">){</span>
+  <span class="kd">var</span> <span class="nx">array</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  
+  <span class="k">while</span> <span class="p">(</span><span class="nx">i</span> <span class="o">&lt;=</span> <span class="nx">number_of_hands</span><span class="p">){</span>
+    <span class="nx">array</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">getHandScore</span><span class="p">(</span><span class="nx">player</span><span class="p">,</span> <span class="nx">i</span><span class="p">));</span>  
+    <span class="nx">i</span> <span class="o">=</span> <span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="nx">array</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">sumArray</span><span class="p">(</span><span class="nx">array</span><span class="p">){</span>
+  <span class="k">return</span> <span class="nx">array</span><span class="p">.</span><span class="nx">reduce</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">pv</span><span class="p">,</span> <span class="nx">cv</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">pv</span> <span class="o">+</span> <span class="nx">cv</span><span class="p">;</span> <span class="p">},</span> <span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">calculatePlayerTotal</span><span class="p">(</span><span class="nx">player_num</span><span class="p">){</span>
+  <span class="k">return</span> <span class="nx">sumArray</span><span class="p">(</span><span class="nx">makeScoreArray</span><span class="p">(</span><span class="nx">player_num</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">calculateAndPostPlayerTotal</span><span class="p">(</span><span class="nx">player_num</span><span class="p">){</span>
+  <span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">#player</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">player_num</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">_total</span><span class="dl">"</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="nx">calculatePlayerTotal</span><span class="p">(</span><span class="nx">player_num</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="some-bells-and-whistles">Some Bells and Whistles</h3>
+
+<p>Beyond that I added some extra bells and whistles. If a player’s name is greater than 7 characters all of the player’s names rotate 55 degrees, decreases in font size, and the first row of the table gets taller to accomodate. The jQuery there is just an <code class="language-plaintext highlighter-rouge">addClass</code> and <code class="language-plaintext highlighter-rouge">removeClass</code>.</p>
+
+<p>Also, if a player missed a hand (i.e. they joined the game late, which we usually allow), the scorekeeper can input a <code class="language-plaintext highlighter-rouge">*</code> and the app will get the highest (worst) score from that hand and replace the asterick with that penalty score. This cluttered up that <code class="language-plaintext highlighter-rouge">keyup</code> listener callback function, but I think it’s a neat trick.</p>
+
+<h3 id="interesting-challenges">Interesting Challenges</h3>
+
+<p>The fact that the <em>lowest</em> score is the leader made that part of the app a interesting. Here’s that function, where <code class="language-plaintext highlighter-rouge">leader</code> and <code class="language-plaintext highlighter-rouge">low_score</code> are global variables and <code class="language-plaintext highlighter-rouge">leader</code> is the leading players number:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">updateCurrentLeader</span><span class="p">(){</span>
+  <span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+  <span class="k">while</span> <span class="p">(</span><span class="nx">i</span> <span class="o">&lt;=</span> <span class="nx">number_of_players</span><span class="p">){</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">playerHasName</span><span class="p">(</span><span class="nx">i</span><span class="p">))</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">this_player_score</span> <span class="o">=</span> <span class="nx">calculatePlayerTotal</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">this_player_score</span> <span class="o">&lt;</span> <span class="nx">low_score</span><span class="p">){</span>  
+        <span class="nx">low_score</span> <span class="o">=</span> <span class="nx">this_player_score</span><span class="p">;</span>
+        <span class="nx">leader</span> <span class="o">=</span> <span class="nx">i</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="nx">i</span> <span class="o">=</span> <span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The sticky spot here is how do you initialize the <code class="language-plaintext highlighter-rouge">low_score</code> varaible. Obviously initializing it to <code class="language-plaintext highlighter-rouge">0</code> is problematic. I’m not sure how JavaScript would handle us just declaring it as <code class="language-plaintext highlighter-rouge">var lowest_score</code>. I ended up initializing it to an ridiculously high number, 10000.</p>
+
+<p>The second part of the problem was a little trickier to see at first. So let’s say we’ve just played one hand– the leader now has a score of 0, because he or she got rid of all his or her cards, so <code class="language-plaintext highlighter-rouge">lowest_score</code> is set to 0. The next hand a different player goes out first, so the newest lowest score is, let’s say 10. Thus, we need to reset our <code class="language-plaintext highlighter-rouge">lowest_score</code> variable on every keyup.</p>
+
+<p>There’s plenty I like about this code but also some parts that I do not. For example, I’m not sure how tightly the JavAscript should depend on the CSS. In one case I’m getting the player’s number with this line <code class="language-plaintext highlighter-rouge">var player_number = ($(this).attr('id')).charAt(6);</code>, which of course relies heavily on the CSS id having the player’s number at position 6. But that may just be the nature of this stack.</p>
+
+<p>Going forward, if I can, I think it’d be a fun exercise to re-write the JavaScript for this as all <a href="http://sts10.github.io/2014/05/16/javascript-prototypes-the-basic-basics.html">object-oriented</a>. The simple approach would be to define a prototype for ‘player’ and instantiate them as names are typed in. Each player would know his or her score on any given hand plus their current total. A more elaborate OO schema could have a <code class="language-plaintext highlighter-rouge">hand</code> prototype and probably a <code class="language-plaintext highlighter-rouge">player-hand</code> prototype, but that might be drifting too far into the Rails mindset.</p>
+
+:ET

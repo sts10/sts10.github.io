@@ -1,0 +1,116 @@
+I"B)<p><strong>Note: I’ve written <a href="https://sts10.github.io/post/2016-06-14-true-hex-colors-in-vim-with-iterm2/">an updated version of this post that shows how to get true colors with terminal Vim or Neovim and iTerm2</a></strong></p>
+
+<p>For a few weeks now, I’ve been picking at the problem of getting “true” colors in Neovim, as the creators <a href="https://neovim.io/">tout on the official website</a>. I understood that I would probably need to use a terminal emulator rather than OS X’s default Terminal app, and I knew one such emulator was called <a href="https://www.iterm2.com/">iTerm2</a>. I also understood that I’d need to put some settings in my nvim config file (wherever that is these days), or a “nvim section” of my symlinked <code class="language-plaintext highlighter-rouge">.vimrc</code>.</p>
+
+<p>However this configuration didn’t “just work,” as I hoped it would at least, and it frustrated me to no end. But! Today I seem to have figured it out, and I figured I’d put it up here on the blog for next time I need to do it, or in case anyone else had the same problem as me.</p>
+
+<!-- more -->
+
+<h2 id="my-goal">My Goal</h2>
+
+<p>I made a decent colorscheme for Vim called <a href="https://github.com/sts10/vim-mustard">Mustard</a> (it’s based on my favorite theme for Sublime Text, which is also called <a href="http://colorsublime.com/theme/Mustard">Mustard</a>).</p>
+
+<p>In that Vim colorscheme file, following the pattern of another such file, I entered both a set of hex color codes and assigned variables like <code class="language-plaintext highlighter-rouge">s:cterm08</code>. My understanding, still, is that you specify the hex color codes for when they can be used (GUI), then as a fall back, you tell the colorscheme to rely on the user’s terminal to color different parts of code syntax.</p>
+
+<p>It’s my view that a setup that uses the hex color codes is infinitely preferable for 2 reasons: (1) You get a far larger variety of colors to use in your theme, and (2) the theme always appears the same, no matter the user’s terminal color preferences.</p>
+
+<p>The first way I made a setup that used the hex color codes in a Vim colorscheme was by using <a href="https://sts10.github.io/post/2015-08-07-from-terminal-vim-to-mac-vim/">MacVim</a>. But given the advantages of Neovim (some which I read about in <a href="http://geoff.greer.fm/2015/01/15/why-neovim-is-better-than-vim/">this blog post</a>), and its advertisement of true (read: hex) colors, I wanted to figure out how to get my precious hex colors in Neovim and/or the terminal somehow.</p>
+
+<p>Part of this desire was to try to get my day-to-day Vim usage back into a terminal, since that feels more authentic and may be the only way to use Vim when working on a remote box. Maybe I’ll compare the current pros and cons below.</p>
+
+<h2 id="how-i-did-it">How I Did It</h2>
+
+<p>First, assuming you’re running OS X 10.8 or higher and want to use <a href="http://iterm2.com/">iTerm2</a>, you currently need to download and install either the recommended test release, iTerm2 2.0.20160206 beta (<a href="https://iterm2.com/downloads/beta/iTerm2-2_9_20160206.zip">dmg direct download</a>), iTerm2 2.9.20160113 beta (OS 10.8+) (<a href="https://iterm2.com/downloads/beta/iTerm2-2_9_20160113.zip">dmg direct download</a>), or a <a href="http://iterm2.com/downloads/nightly/#/section/home">Nightly</a> build of iTerm2. This had been my problem for the last few weeks– I was using the standard-issue release of iTerm2, which doesn’t support what I had been trying to do at this point at least.</p>
+
+<p>Once that’s installed, it’s mostly a matter of tweaking some settings. In your shiny new iTerm2 Beta/Nightly:</p>
+
+<p>iTerm2 &gt; Preferences &gt; Profiles &gt; Terminal &gt; set Report Terminal Type “xterm-256color”</p>
+
+<p>Then in iTerm 2 &gt; Preferences &gt; Profiles &gt; Text</p>
+
+<ol>
+  <li>Uncheck “Draw Anti-alias text with thin strokes”</li>
+  <li>Have both fonts be anti-aliased</li>
+  <li>(Optional:) Set Cursor to “Box” and turn on blinking (helpful in Vim).</li>
+</ol>
+
+<p>Then in your <code class="language-plaintext highlighter-rouge">~/.vimrc</code> (or your nvim config file, without the if statement I suppose):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if has("nvim")
+  set termguicolors
+endif 
+</code></pre></div></div>
+
+<p><strong>UPDATE:</strong> In earlier versions of Neovim the setting to set here was <code class="language-plaintext highlighter-rouge">let $NVIM_TUI_ENABLE_TRUE_COLOR=1</code>, however as of <a href="https://github.com/neovim/neovim/wiki/Following-HEAD#20160511">05/11/2016</a> you need to have <code class="language-plaintext highlighter-rouge">set termguicolors</code> in your vim config file. (I’m running version <code class="language-plaintext highlighter-rouge">NVIM v0.1.5-172-gd02cfe8</code> and need to use <code class="language-plaintext highlighter-rouge">set termguicolors</code> rather than the <code class="language-plaintext highlighter-rouge">TUI</code> line.) The code block above has been updated to reflect the change.</p>
+
+<p>On fonts: Whatever you have guifont set to in your vimrc still won’t work– iTerm2 will use the font that’s set in Preferences.</p>
+
+<h2 id="neovims-terminal-emulator">Neovim’s Terminal Emulator</h2>
+
+<p>As if this isn’t confusing enough, Neovim has <a href="https://neovim.io/doc/user/nvim_terminal_emulator.html">a terminal emulator built inside of it</a>. In fact it’s another one of Neovim’s big advantages over normal Vim.</p>
+
+<p>From somewhere I saw that you can define the colors for this emulator with hex color codes in you <code class="language-plaintext highlighter-rouge">.vim</code> colorscheme file as such:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>" These are supposedly colors for Neovim's terminal emulator
+
+let g:terminal_color_0 = "#202020"
+let g:terminal_color_1 = "#333333"
+let g:terminal_color_2 = "#666666"
+let g:terminal_color_3 = "#80a78c"
+let g:terminal_color_4 = "#f7c527"
+let g:terminal_color_5 = "#ffffff"
+let g:terminal_color_6 = "#333333"
+let g:terminal_color_7 = "#ffffff"
+let g:terminal_color_8 = "#ec691e"
+let g:terminal_color_9 = "#73e4f6"
+let g:terminal_color_10 = "#ffffff"
+let g:terminal_color_11 = "#a1d7f2"
+let g:terminal_color_12 = "#73e4f6"
+let g:terminal_color_13 = "#f7c527" 
+let g:terminal_color_14 = "#ec691e"
+let g:terminal_color_15 = "#f7c527"
+let g:terminal_color_16 ="#202020"
+let g:terminal_color_background="#202020"
+let g:terminal_color_foreground="#eee"
+</code></pre></div></div>
+
+<p>I haven’t played around with this too much yet, but it seems to work with the setup described in this post!</p>
+
+<h2 id="lingering-issues">Lingering Issue(s)</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">if</code> statement in my <code class="language-plaintext highlighter-rouge">vimrc</code> is not smart enough to NOT run that <code class="language-plaintext highlighter-rouge">set termguicolors</code> line when I’m running ol’ fashioned default OS X Terminal, so now when I run Neovim there all the colors are totally fucked. Ideally my <code class="language-plaintext highlighter-rouge">vimrc</code> would be smart enough to use Terminal’s given colors when running Neovim.</p>
+
+<p>I’m betting there’s some conditional I can add to that if statement to accomplish this, but I don’t know it at this point.</p>
+
+<h2 id="lingering-disadvantages-to-iterm-betanightly--neovim-as-compared-to-macvim">Lingering Disadvantages to iTerm Beta/Nightly + Neovim as compared to MacVim</h2>
+
+<ol>
+  <li>
+    <p>iTerm cannot detect key inputs shift + space or shift + enter, <a href="http://stackoverflow.com/a/281484/3160994">as far as I can tell</a>. I recently mapped <code class="language-plaintext highlighter-rouge">&lt;Space&gt;</code> to use <a href="https://github.com/justinmk/vim-sneak">vim-sneak</a> in <a href="https://github.com/sts10/terminal_and_vim_settings/blob/master/vimrc">my vimrc</a>, which is pretty aggressive/awesome, but it is super natural to make <code class="language-plaintext highlighter-rouge">&lt;S-Space&gt;</code> set to Sneak <code class="language-plaintext highlighter-rouge">S</code>. Same goes for <code class="language-plaintext highlighter-rouge">&lt;C-Space&gt;</code> and <code class="language-plaintext highlighter-rouge">&lt;C-Enter&gt;</code> I think.</p>
+  </li>
+  <li>
+    <p>Mouse use. Though this is something I should not use at all anyway.</p>
+  </li>
+  <li>
+    <p>Interactions with system clipboard. It is not yet clear to me if the combinations of Neovim’s saner defaults and my <code class="language-plaintext highlighter-rouge">vimrc</code> are enough to make interactions with the system clipboard as fluid in iTerm Beta/Nightly + Neovim as they are in MacVim. Maybe they are– I’ll have to try it out.</p>
+  </li>
+</ol>
+
+<p><em>Note:</em> You can find instructions for <a href="https://github.com/neovim/neovim/wiki/Installing-Neovim">how to install Neovim here</a>.</p>
+
+<h2 id="update-2122016">Update (2/12/2016)</h2>
+
+<p>In terms of those three “lingering disadvantages,” I’ve overcome (2) and (3) but not really (1). However in iTerm (<code class="language-plaintext highlighter-rouge">Build 2.9.20160206</code> at least) it seems that Neovim can accept maps of Shift + Tab. I map Tab and Shift + Tab to the Sneak plugin as follows:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap &lt;Tab&gt; &lt;Plug&gt;Sneak_s
+nmap &lt;S-Tab&gt; &lt;Plug&gt;Sneak_S
+vmap &lt;Tab&gt; &lt;Plug&gt;Sneak_s
+vmap &lt;S-Tab&gt; &lt;Plug&gt;Sneak_S
+</code></pre></div></div>
+
+<p>What’s a little strange is that when I try to use <code class="language-plaintext highlighter-rouge">nnoremap</code> rather than <code class="language-plaintext highlighter-rouge">nmap</code> these mappings don’t work. Not a huge deal though.</p>
+
+<h2 id="another-nice-preference-change-to-iterm2">Another Nice Preference Change to iTerm2</h2>
+
+<p>This has nothing to do with colors or even Vim, but! To allow iTerm2 to expand correctly and smoothly in OS X, go to Preferences -&gt; Advanced, and look for “Terminal windows resize smoothly”. Change this to “Yes” (h/t <a href="https://www.reddit.com/r/vim/comments/4clr3d/bleeding_bottom_and_right_edges_of_vim_how_to_fix/d1jkpvg">this Reddit comment</a>).</p>
+:ET

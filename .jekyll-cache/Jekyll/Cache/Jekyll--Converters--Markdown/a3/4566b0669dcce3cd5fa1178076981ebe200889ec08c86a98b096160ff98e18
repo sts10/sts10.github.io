@@ -1,0 +1,229 @@
+I"��<p>At my second meet-up of this week, I ventured north to the east 20s for Building JavaScript Games. Our task was to build a seemingly simple game called Strike 9.</p>
+
+<h3 id="how-the-game-is-played">How the Game is Played</h3>
+
+<p>At the beginning of a turn, the “computer” rolls two die. The player has squares numbered 1 through 9 to make the sum of the computer’s roll. The trick is that when the player uses a number it is removed from the board. So for example, if computer rolls a 9, the player can choose to remove any of the following combinations:  [9], [1,8], [2,7], [1,2,6], [2,3,4], etc. If he or she uses, say, the 1 and the 8, on the next roll neither 1 or 8 will be available.</p>
+
+<!-- more -->
+
+<h3 id="huh--live-demo">Huh? / Live Demo</h3>
+
+<p>Yeah, it’s kind of hard to explain in words. Here’s a <a href="http://samschlinkert.com/strike9/">live demo</a> (and <a href="https://github.com/sts10/strike-9">my GitHub repo</a>).</p>
+
+<h3 id="how-i-approached-the-basic-gameplay">How I Approached the Basic Gameplay</h3>
+
+<p>The meat of this project lives in <code class="language-plaintext highlighter-rouge">strike9-board.js</code>. <code class="language-plaintext highlighter-rouge">onload</code> we initialize some arrays and variables, then call <code class="language-plaintext highlighter-rouge">resetGame()</code>, which draws our 9 HTML <code class="language-plaintext highlighter-rouge">canvas</code>’s and rolls the 2 die for the first time.</p>
+
+<p>From there we wait for the player to click one of the 9 canvases. When a canvas is clicked, we make sure it hasn’t been clicked yet in this game. Then we mark it as clicked in the <code class="language-plaintext highlighter-rouge">board_array</code> and we remove that number from the <code class="language-plaintext highlighter-rouge">player_moves_remaining</code> array. We also add the number to <code class="language-plaintext highlighter-rouge">player_total</code>.</p>
+
+<p>Eventually we have to figure out if the player won, lost, or can keep playing on that turn. Here’s a excerpt of that code:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// the player just made a sum...</span>
+
+<span class="c1">// check if player has won</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">board_array</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">){</span>   
+  <span class="nx">alert</span><span class="p">(</span><span class="dl">"</span><span class="s2">Oh hey, You won!</span><span class="dl">"</span><span class="p">);</span>
+  <span class="nx">resetGame</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="c1">//still playing</span>
+  <span class="c1">// re-roll dice. </span>
+  <span class="nx">computer_roll</span> <span class="o">=</span> <span class="nx">rollTwoDie</span><span class="p">();</span>
+
+  <span class="c1">// with new dice roll, we can already figure out if the game is over</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">isGameOver</span><span class="p">(</span><span class="nx">computer_roll</span><span class="p">,</span> <span class="nx">player_moves_remaining</span><span class="p">)){</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="dl">"</span><span class="s2">Computer's next roll is </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">computer_roll</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">...Game over :(</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nx">resetGame</span><span class="p">();</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="c1">// if there exists a way to make the roll's sum...</span>
+    <span class="nx">sendMessage</span><span class="p">(</span><span class="nx">randPraise</span><span class="p">()</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;br&gt;New roll is </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">computer_roll</span><span class="p">);</span>
+    <span class="c1">// reset for new roll, same game</span>
+    <span class="nx">possible_combinations</span> <span class="o">=</span> <span class="p">[];</span> 
+    <span class="nx">player_total</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>By far the most interesting of these outcomes to check is if the player lost– which we do with the <code class="language-plaintext highlighter-rouge">isGameOver()</code> function called above. I wanted the game to know if the player lost right away– in other words if the player had 1, 2, and 4 remaining and the computer’s new roll was 5, I wanted the game to tell the player they had lost.</p>
+
+<p>This might sounds simple, but– at least the way I went about it– turned out to be pretty non-trivial.</p>
+
+<h3 id="coolest-challenge-when-is-the-game-over">Coolest Challenge: When is the Game Over?</h3>
+
+<p>Ideally I wanted a function called <code class="language-plaintext highlighter-rouge">isGameOver</code> that returns <code class="language-plaintext highlighter-rouge">true</code> if the player can’t make the sum with the remaining numbers (like the case above), and <code class="language-plaintext highlighter-rouge">false</code> if the player can make the sum.</p>
+
+<p>My approach was to generate an array of all ways to make a sum (in the above hypothetical, all the ways to add numbers to make 5). So given, say, <code class="language-plaintext highlighter-rouge">6</code>, <code class="language-plaintext highlighter-rouge">getAllPossAddends</code> should return an array of arrays: <code class="language-plaintext highlighter-rouge">[[6], [1,5], [2,4], [1,2,3]]</code>. Note that we don’t want <code class="language-plaintext highlighter-rouge">[3,3]</code> because there’s only one 3 on the board, and we don’t want <code class="language-plaintext highlighter-rouge">[5,1]</code> because we already have <code class="language-plaintext highlighter-rouge">[1,5]</code> and order doesn’t matter here. And <code class="language-plaintext highlighter-rouge">6</code> itself should be included because, in line with the rules of the game, if the computer rolls a 6 you can just use the 6 square.</p>
+
+<p>Once we get this array of possible combinations to make a given sum, which I call <code class="language-plaintext highlighter-rouge">possible_combinations</code>, we’ll just need to compare it to what numbers the player has left (<code class="language-plaintext highlighter-rouge">player_moves_remaining</code>) to see if <code class="language-plaintext highlighter-rouge">isGameOver</code> should be <code class="language-plaintext highlighter-rouge">true</code> or <code class="language-plaintext highlighter-rouge">false</code>. Cool? Sounds easy? OMG took me a whole day.</p>
+
+<p>Let’s do this.</p>
+
+<h3 id="part-1-generating-possible_combinations">Part 1: Generating possible_combinations</h3>
+
+<p><em>Note: The section below has been edited and updated to reflect some significant refactoring I’ve performed.</em></p>
+
+<p>So the first thing I wanted to do was write the function that would take in a <code class="language-plaintext highlighter-rouge">sum</code>, say <code class="language-plaintext highlighter-rouge">6</code> and spit back <code class="language-plaintext highlighter-rouge">[[1,5], [2,4], [1,2,3], [6]]</code>. I decided to call this function <code class="language-plaintext highlighter-rouge">getAllPossAddends</code> (“addends”, <a href="http://en.wikipedia.org/wiki/Addition#Notation_and_terminology">according to Wikipedia</a>, is the technical term for what you add together to get a sum).</p>
+
+<p>After a few days of tinkering, I wrote a recursive function to accomplish this task.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">possible_combinations</span> <span class="o">=</span> <span class="p">[];</span> <span class="c1">// I made this global</span>
+
+<span class="kd">function</span> <span class="nx">getAllPossAddends</span><span class="p">(</span><span class="nx">sum</span><span class="p">,</span> <span class="nx">baggage</span><span class="p">){</span>
+  <span class="c1">// if baggage argument is undefined, this is our first run through</span>
+  <span class="c1">// so set baggage = []</span>
+  <span class="c1">// baggage is effectively an optional argument with a default value of [] if undefined in function call</span>
+  <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">baggage</span> <span class="o">==</span> <span class="dl">'</span><span class="s1">undefined</span><span class="dl">'</span><span class="p">){</span>
+    <span class="nx">baggage</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="nx">possible_combinations</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="nx">possible_combinations</span><span class="p">.</span><span class="nx">push</span><span class="p">([</span><span class="nx">sum</span><span class="p">]);</span> <span class="c1">// can just play the number itself </span>
+  <span class="p">}</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">j</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&lt;</span> <span class="nx">sum</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">){</span>
+    <span class="c1">// if j is not in baggage and sum-j is not in baggage</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">baggage</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">j</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="nx">baggage</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">sum</span><span class="o">-</span><span class="nx">j</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">){</span>
+      <span class="c1">// add j and sum-j back to baggage to make our new array we may add as a possible_combination</span>
+      <span class="kd">var</span> <span class="nx">new_array</span> <span class="o">=</span> <span class="nx">baggage</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">j</span><span class="p">,</span> <span class="nx">sum</span><span class="o">-</span><span class="nx">j</span><span class="p">);</span>
+
+      <span class="c1">// if new_array is NOT a subArray of possible_combinations yet... </span>
+      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isSubArray</span><span class="p">(</span><span class="nx">new_array</span><span class="p">,</span><span class="nx">possible_combinations</span><span class="p">)){</span>
+        <span class="nx">possible_combinations</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">new_array</span><span class="p">);</span>
+      <span class="p">}</span>
+
+      <span class="c1">// prep new_baggage and send new sum and baggage back to top of the function</span>
+      <span class="kd">var</span> <span class="nx">new_baggage</span> <span class="o">=</span> <span class="nx">baggage</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">j</span><span class="p">);</span>
+      <span class="nx">getAllPossAddends</span><span class="p">(</span><span class="nx">sum</span><span class="o">-</span><span class="nx">j</span><span class="p">,</span> <span class="nx">new_baggage</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="nx">possible_combinations</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Let’s walk through it as if we called it with <code class="language-plaintext highlighter-rouge">getAllPossAddends(10)</code>, so <code class="language-plaintext highlighter-rouge">sum = 10</code> and <code class="language-plaintext highlighter-rouge">baggage</code> is <code class="language-plaintext highlighter-rouge">undefined</code>.</p>
+
+<p>Right off the bat we use an <code class="language-plaintext highlighter-rouge">if</code> statement to check if <code class="language-plaintext highlighter-rouge">baggage</code> is undefined. If it is, we know that this is the “first time” we’re running through <code class="language-plaintext highlighter-rouge">getAllPossAddends</code>, and that we should set <code class="language-plaintext highlighter-rouge">baggage = []</code> and reset <code class="language-plaintext highlighter-rouge">possible_combinations</code>. This setting of <code class="language-plaintext highlighter-rouge">baggage</code> to <code class="language-plaintext highlighter-rouge">[]</code> will make a little more sense in a minute.</p>
+
+<p>Now to the meat of the function. First we loop from 1 to <code class="language-plaintext highlighter-rouge">sum/2</code> (5 in our case). We then do some checks against baggage, which we’ll learn about in a minute. Note: this loop doesn’t go up to 5 because we put <code class="language-plaintext highlighter-rouge">i &lt; sum/2</code> not <code class="language-plaintext highlighter-rouge">i &lt;= sum/2</code>, which is what we want– remember there aren’t 2 5s so we don’t want <code class="language-plaintext highlighter-rouge">[5,5]</code> to count as a <code class="language-plaintext highlighter-rouge">possible_combination</code>.</p>
+
+<p>Eventually we make a new_array and set it equal to <code class="language-plaintext highlighter-rouge">baggage.concat(j, sum-j)</code>. We don’t have any baggage yet, so for the first run through, <code class="language-plaintext highlighter-rouge">j==1</code> and <code class="language-plaintext highlighter-rouge">sum-j==9</code>. And that’s good, because [1,9] is a possible way of making 10.</p>
+
+<p>That’s a start, but what about <code class="language-plaintext highlighter-rouge">[1,4,5]</code> or (gulp) <code class="language-plaintext highlighter-rouge">[1,2,3,4]</code>? This is the problem that the recursion handles:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// prep new_baggage and send new sum and baggage back to top of the function</span>
+<span class="kd">var</span> <span class="nx">new_baggage</span> <span class="o">=</span> <span class="nx">baggage</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">j</span><span class="p">);</span>
+<span class="nx">getAllPossAddends</span><span class="p">(</span><span class="nx">sum</span><span class="o">-</span><span class="nx">j</span><span class="p">,</span> <span class="nx">new_baggage</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Basically, we want to take that <code class="language-plaintext highlighter-rouge">9</code> in <code class="language-plaintext highlighter-rouge">[1,9]</code> and expand it out to <code class="language-plaintext highlighter-rouge">[[1,9], [1,2,7], [1, 3, 6], [1, 4, 5]]</code>. We want to break that 9 down while keeping the 1 untouched (Notice how the <code class="language-plaintext highlighter-rouge">1</code> is the first element of every “sub-array”). I decided to call the <code class="language-plaintext highlighter-rouge">1</code> <code class="language-plaintext highlighter-rouge">baggage</code>, because it’s like, just along for the ride. With the baggage taken care of, what we want to do to the 9 is very similar to what we set out to do the 10– namely find all the ways to sum to it. Sounds like a case for recursion!</p>
+
+<p>We’re going to call <code class="language-plaintext highlighter-rouge">getAllPossAddends</code> again, but first we have to set the <code class="language-plaintext highlighter-rouge">new_baggage</code>. In our example, right after we add <code class="language-plaintext highlighter-rouge">[1,9]</code>, 9 is the <code class="language-plaintext highlighter-rouge">sum-j</code> we want to break down further, and j is <code class="language-plaintext highlighter-rouge">1</code>, the baggage we want to pass along. We have to use <code class="language-plaintext highlighter-rouge">baggage.concat(j)</code> in case we got any baggage at the beginning of the run-through of the function, which will be the case every time except the first run-through.</p>
+
+<p>On the second run-through in our example, the getAllPossAddends call is: <code class="language-plaintext highlighter-rouge">getAllPossAddends(9, [1])</code>. Now 9 is the new <code class="language-plaintext highlighter-rouge">sum</code> and <code class="language-plaintext highlighter-rouge">[1]</code> is the <code class="language-plaintext highlighter-rouge">baggage</code> (since <code class="language-plaintext highlighter-rouge">baggage</code> is defined, we do not execute that first <code class="language-plaintext highlighter-rouge">if</code> statement).</p>
+
+<p>So the array we prepare, <code class="language-plaintext highlighter-rouge">new_array</code>, WOULD BE [1,1,8], but we have a check against duplicated numbers: <code class="language-plaintext highlighter-rouge">if (baggage.indexOf(j) == -1 &amp;&amp; baggage.indexOf(sum-j) == -1)</code>. <code class="language-plaintext highlighter-rouge">j</code>, which is equal to <code class="language-plaintext highlighter-rouge">1</code>, is in fact present in <code class="language-plaintext highlighter-rouge">baggage</code>, so we’re not going to do anything in this <code class="language-plaintext highlighter-rouge">for</code> iteration. (Note: This is a bit wasteful, but refactoring further may make this thing a little too confusing.)</p>
+
+<p>So we try again. On the next iteration of the <code class="language-plaintext highlighter-rouge">for</code> loop, <code class="language-plaintext highlighter-rouge">j</code> will be equal to 2 and <code class="language-plaintext highlighter-rouge">sum-j</code> == 7. This time we will make it through the <code class="language-plaintext highlighter-rouge">if</code> checks. <code class="language-plaintext highlighter-rouge">baggage</code> is still <code class="language-plaintext highlighter-rouge">[1]</code>, so when we get to <code class="language-plaintext highlighter-rouge">baggage.concat(2, 7)</code> it’s going to evaluate to <code class="language-plaintext highlighter-rouge">[1,2,7]</code>. Then we’ll add it to <code class="language-plaintext highlighter-rouge">possible_combinations</code>.</p>
+
+<p>We’ll then call the function again which <code class="language-plaintext highlighter-rouge">sum-j</code> equal to 7 and <code class="language-plaintext highlighter-rouge">baggage</code> == <code class="language-plaintext highlighter-rouge">[1,2]</code>. So the call will be <code class="language-plaintext highlighter-rouge">getAllPossAddends(7, [1,2])</code>, and we’ll go break down that 7. And so on! Crazy, right?</p>
+
+<h3 id="part-2-building-my-own-array-tools">Part 2: Building My Own Array Tools</h3>
+
+<p>You may have noticed my use of a function called <code class="language-plaintext highlighter-rouge">isSubArray</code>. It checks whether the array we’re trying to add to <code class="language-plaintext highlighter-rouge">possible_combinations</code> has already been added (again, we don’t want duplicates).</p>
+
+<p>Of course this function is not a standard JavaScript function, but one I wrote myself. I ended up writing 3 of these “array helper” functions in total.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// believe it or not, array.sort sorts numbers alphabetically, so we have to define our own sort for numbers</span>
+<span class="kd">function</span> <span class="nx">sortArray</span><span class="p">(</span><span class="nx">array</span><span class="p">){</span> 
+  <span class="k">return</span> <span class="nx">array</span><span class="p">.</span><span class="nx">sort</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">){</span><span class="k">return</span> <span class="nx">a</span><span class="o">-</span><span class="nx">b</span><span class="p">});</span>
+<span class="p">}</span>
+
+<span class="c1">// this guy takes an array of arrays and sorts all of its sub-arrays using the above function</span>
+<span class="kd">function</span> <span class="nx">sortAllSubArrays</span><span class="p">(</span><span class="nx">array</span><span class="p">){</span>
+  <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">array</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+    <span class="nx">array</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">sortArray</span><span class="p">(</span><span class="nx">array</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">array</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// the workhorse function in the trio. It sorts both the sub-array and the array of arrays using their respective functions. </span>
+<span class="c1">// then sees if any of the arrays in `array` match the given `subArray`</span>
+<span class="kd">function</span> <span class="nx">isSubArray</span> <span class="p">(</span><span class="nx">subArray</span><span class="p">,</span> <span class="nx">array</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">subArray</span> <span class="o">=</span> <span class="nx">sortArray</span><span class="p">(</span><span class="nx">subArray</span><span class="p">);</span> <span class="c1">//  need to sort both the subArray...</span>
+  <span class="nx">array</span> <span class="o">=</span> <span class="nx">sortAllSubArrays</span><span class="p">(</span><span class="nx">array</span><span class="p">);</span> <span class="c1">// and the sub-arrays in array in order to compare them more easily</span>
+
+  <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">array</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">subArray</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="o">===</span> <span class="nx">array</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">toString</span><span class="p">()){</span>
+      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="part-3-putting-it-all-together">Part 3: Putting It All Together</h3>
+
+<p>Cool, so now we have an array, <code class="language-plaintext highlighter-rouge">possible_combinations</code>, that’s full of all the ways our player could make a given sum (a given dice roll in our case). As I mentioned above, we also have an array of numbers that the player has left, called <code class="language-plaintext highlighter-rouge">player_moves_remaining</code>. Now all we have to do is compare them to figure out if the game is over.</p>
+
+<p>Again, I broke this into 2 functions, but most of the work happens in <code class="language-plaintext highlighter-rouge">playerHasAMove</code>. <code class="language-plaintext highlighter-rouge">player_moves_left</code> is <code class="language-plaintext highlighter-rouge">player_moves_remaining</code> and <code class="language-plaintext highlighter-rouge">passing_moves</code> is our mega-awesome array of arrays, <code class="language-plaintext highlighter-rouge">possible_combinations</code>.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">playerHasAMove</span><span class="p">(</span><span class="nx">player_moves_left</span><span class="p">,</span> <span class="nx">passing_moves</span><span class="p">){</span>
+  <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">passing_moves</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">matches</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> 
+    <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&lt;</span> <span class="nx">passing_moves</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">length</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>  
+      <span class="k">if</span> <span class="p">(</span><span class="nx">player_moves_left</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">passing_moves</span><span class="p">[</span><span class="nx">i</span><span class="p">][</span><span class="nx">j</span><span class="p">])</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">){</span>
+        <span class="c1">// we foudn a match</span>
+        <span class="nx">matches</span> <span class="o">=</span> <span class="nx">matches</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">matches</span> <span class="o">==</span> <span class="nx">passing_moves</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">length</span><span class="p">){</span>
+      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="kc">false</span><span class="p">;</span> 
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">isGameOver</span><span class="p">(</span><span class="nx">roll</span><span class="p">,</span> <span class="nx">player_moves_remaining</span><span class="p">){</span>
+  <span class="kd">var</span> <span class="nx">ways_to_fulfill_roll</span> <span class="o">=</span> <span class="nx">getAllPossAddends</span><span class="p">(</span><span class="nx">roll</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">playerHasAMove</span><span class="p">(</span><span class="nx">player_moves_remaining</span><span class="p">,</span> <span class="nx">ways_to_fulfill_roll</span><span class="p">)){</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span> <span class="c1">// game is not over</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span> <span class="c1">// game is over</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">playerHasAMove</code> first loops over the <code class="language-plaintext highlighter-rouge">passing_moves</code> and yields the sub-arrays like <code class="language-plaintext highlighter-rouge">[1,9]</code> and <code class="language-plaintext highlighter-rouge">[1,3,6]</code>. It then loops through these sub-arrays and looks for <code class="language-plaintext highlighter-rouge">matches</code> in <code class="language-plaintext highlighter-rouge">player_moves_left</code> using the <code class="language-plaintext highlighter-rouge">indexOf</code> method. If, for a given sub-array, all of its element are contained in <code class="language-plaintext highlighter-rouge">player_moves_left</code>, we return true. If we get to the end of <code class="language-plaintext highlighter-rouge">passing_moves</code> and the player is out of luck, we return false. This easily plugs into <code class="language-plaintext highlighter-rouge">isGameOver</code>, where we return the final true/false verdict.</p>
+
+<p>Again, here’s where <code class="language-plaintext highlighter-rouge">isGameOver</code> is called:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// player just made a sum</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">board_array</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">){</span>  <span class="c1">// if board_array has no 0s, i.e. is all 1s </span>
+  <span class="nx">alert</span><span class="p">(</span><span class="dl">"</span><span class="s2">Oh hey, You won!</span><span class="dl">"</span><span class="p">);</span>
+  <span class="nx">resetGame</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="c1">//still playing</span>
+  <span class="c1">// re-roll dice. </span>
+  <span class="nx">computer_roll</span> <span class="o">=</span> <span class="nx">rollTwoDie</span><span class="p">();</span>
+
+  <span class="c1">// with new dice roll, we can already figure out if the game is over</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">isGameOver</span><span class="p">(</span><span class="nx">computer_roll</span><span class="p">,</span> <span class="nx">player_moves_remaining</span><span class="p">)){</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="dl">"</span><span class="s2">Computer's next roll is </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">computer_roll</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">...Game over :(</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nx">resetGame</span><span class="p">();</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="c1">// if there exists a way to make the roll's sum...</span>
+    <span class="nx">sendMessage</span><span class="p">(</span><span class="nx">randPraise</span><span class="p">()</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;br&gt;New roll is </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">computer_roll</span><span class="p">);</span>
+    <span class="c1">// reset for new roll, same game</span>
+    <span class="nx">possible_combinations</span> <span class="o">=</span> <span class="p">[];</span> 
+    <span class="nx">player_total</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Think that’s about it!</p>
+
+<p><em>Side Note</em>: I hope to write more programs that have a <code class="language-plaintext highlighter-rouge">randPraise</code> function:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">randPraise</span><span class="p">(){</span>
+  <span class="kd">var</span> <span class="nx">praise</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Awesome!</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Good job!</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Knew you could do it!</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Sweet!</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">You got this!</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Again! Again!</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Keep it up!</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Keep going!</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Easy, right?</span><span class="dl">"</span><span class="p">];</span>
+  <span class="kd">var</span> <span class="nx">rand</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="p">(</span><span class="nx">praise</span><span class="p">.</span><span class="nx">length</span><span class="p">));</span>
+  <span class="k">return</span> <span class="nx">praise</span><span class="p">[</span><span class="nx">rand</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+:ET

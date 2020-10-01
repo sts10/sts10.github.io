@@ -1,0 +1,161 @@
+I"�L<p>As 2019 approaches, I thought I’d write a new, updated version of <a href="https://sts10.github.io/2016/11/13/some-privacy-and-security-measures.html">my casual security guide from 2016</a>. Same disclaimers apply: I am still not an expert. I’m writing this mostly to have something to send to friends and family who ask me questions about this stuff. Note: I reference a lot of work by <a href="https://twitter.com/mshelton">Martin Shelton</a>, a researcher at Google. Also, this is a work in progress!</p>
+
+<h2 id="level-1-enable-2-factor-authentication-at-the-very-least-on-your-email">Level 1: Enable 2-factor authentication (at the very least, on your email)</h2>
+
+<p>Turning on two-factor authentication (2FA) for an online account means that whenever you log into the account, a code will be sent to your phone that you’ll have to enter after entering your correct password. The idea here is that even if someone gets ahold of your password, they would also need your phone to get this code.</p>
+
+<p><img src="https://cdn-images-1.medium.com/max/800/1*TMyswLat4xWqrEt8_o7N-Q.png" width="250" align="center" /></p>
+
+<p>You should set up 2-factor authentication for all of your online accounts that support it. Here’s <a href="https://medium.com/@mshelton/two-factor-authentication-for-beginners-b29b0eec07d7">a general guide</a>, and here are some how-to guides from some popular services: <a href="https://www.google.com/landing/2step/">GMail</a>, <a href="https://support.twitter.com/articles/20170388">Twitter</a>, <a href="https://www.facebook.com/help/148233965247823">Facebook</a>, <a href="https://www.dropbox.com/help/security/enable-two-step-verification">Dropbox</a>, <a href="https://help.github.com/articles/securing-your-account-with-two-factor-authentication-2fa/">GitHub</a> and <a href="https://twofactorauth.org/">a list of other services</a>. If you enable 2-factor for only one account, do it on your email.</p>
+
+<p>Note: <strong>There are different <em>ways</em> to receive/present this 2nd factor code.</strong> Not all of them are equally secure.</p>
+
+<ul>
+  <li>Worst: No 2nd-factor at all</li>
+  <li>OK: SMS (text message)</li>
+  <li>Better: Storing a <a href="https://en.wikipedia.org/wiki/Time-based_One-time_Password_Algorithm">“time-based one-time password”</a> (TOTP) in an app on your smartphone like <a href="https://support.google.com/accounts/answer/1066447?hl=en">Google Authenticator</a> or <a href="https://authy.com/">Authy</a>.</li>
+  <li>Best: Using a physical security key, like a <a href="https://www.yubico.com/product/security-key-by-yubico/#security-key">YubiKey</a>, as your 2nd factor</li>
+</ul>
+
+<h3 id="more-on-security-keys">More on Security Keys</h3>
+
+<p>As mentioned above, you can also use a physical piece of hardware called a security key as your second factor.</p>
+
+<p>Compared to SMS or TOTP (Google Authenticator), a security key is a more secure second factor, since you need the key to login to a new computer. It also helps mitigate phishing attempts better than alternative methods.</p>
+
+<p>One such example of a security key is a <a href="https://www.yubico.com/product/security-key-by-yubico/">YubiKey</a>. Facebook, Twitter, and Google all support using a YubiKey as a second factor. Once you <a href="https://www.yubico.com/product/security-key-by-yubico/">purchase a YubiKey</a>, you can follow these guides from <a href="https://support.google.com/accounts/answer/6103523?hl=en&amp;visit_id=1-636657158187444959-142829807&amp;rd=1">Google</a>, <a href="https://www.facebook.com/notes/facebook-security/security-key-for-safer-logins-with-a-touch/10154125089265766/">Facebook</a>, <a href="https://help.twitter.com/en/managing-your-account/two-factor-authentication#security-key">Twitter</a>. (Here’s an <a href="https://support.yubico.com/support/solutions/articles/15000006418-using-your-yubikey-with-google">alternate Google guide from Yubico</a> if you need.)</p>
+
+<h2 id="what-happens-if-you-lose-your-phonesecurity-key">What happens if you lose your phone/security key?</h2>
+
+<p>Most services give you <strong>back-up codes</strong> when you enable 2-factor for just this reason (<a href="https://support.google.com/accounts/answer/1187538?hl=en">here’s more info on GMail backup codes</a>). In a pinch, you can use these codes as your 2nd factor.</p>
+
+<p>Store these somewhere safe, like on a piece of paper you store somewhere secure. Once you use a backup code to login, you can choose to temporarily disable two-factor authentication until you get your phone back or get a new one.</p>
+
+<h2 id="level-2-check-which-devices-and-third-party-applications-have-access-to-your-accounts">Level 2: Check which devices and third-party applications have access to your accounts</h2>
+
+<p>It’s important to periodically check the devices you’re currently logged into an account with. Here’s how to…</p>
+
+<ul>
+  <li><a href="https://myaccount.google.com/device-activity?utm_source=google-account&amp;utm_medium=web">Check which devices are logged in to your Google account</a></li>
+  <li><a href="https://www.facebook.com/settings?tab=security">Check which devices are logged in to your Facebook account</a> (under “Where You’re Logged In”)</li>
+  <li><a href="https://twitter.com/settings/applications">Check which devices are logged in to your Twitter account</a> (under “Recently used devices to access Twitter”).</li>
+</ul>
+
+<p>This is something you’d want to do after you log in to one of these accounts on a hotel or friend’s computer, or, say, after a breakup. Change your password to these accounts as well (see below for more on passwords).</p>
+
+<p>It’s also very important to periodically review which third-party applications have access to your accounts. This is because some of these applications may well have permission to read your otherwise private information or even post on your behalf. You should <strong>only keep the access permissions that are absolutely necessary</strong>. Remove any apps you don’t recognize or look sketchy. <a href="https://www.buzzfeed.com/nicolenguyen/how-to-de-authorize-forgotten-twitter-integrations">BuzzFeed has a good article</a> on this if you want to learn more.</p>
+
+<ul>
+  <li><a href="https://myaccount.google.com/permissions">Check third-party access to your Google account</a></li>
+  <li><a href="https://twitter.com/settings/applications?lang=en">Check third-party access to your Twitter account</a></li>
+  <li><a href="https://www.facebook.com/settings?tab=applications">Check third-party access to your Facebook account</a></li>
+</ul>
+
+<p>Google/GMail users should also periodically complete Google’s <a href="https://myaccount.google.com/security-checkup">“Security Checkup”</a> and <a href="https://myaccount.google.com/privacycheckup">“Privacy Checkup”</a>.</p>
+
+<h2 id="level-3-use-better-passwords">Level 3: Use better passwords</h2>
+
+<p>You should use long, randomly generated passwords for every account, but even more important is that you should <strong>never reuse passwords</strong> (even if you give them small variations). This is because services get breached and passwords leak all the time, and someone could simply try your password from the leaked service for your other services (you can see which services you use that have been breached at <a href="https://haveibeenpwned.com/">haveibeenpwned.com</a>).</p>
+
+<p>What’s a good password look like? <code class="language-plaintext highlighter-rouge">Vy&lt;{t/W~Ee.5}k(D[Bm(N</code> and <code class="language-plaintext highlighter-rouge">uncoiled armful polymer appeasing shredder recast</code> are both examples of strong passwords. <code class="language-plaintext highlighter-rouge">StarWars13</code>… not so much.</p>
+
+<p>Since our goal is to not reuse any passwords, we’re going to have tens if not hundreds of long passwords to remember. The easiest way to handle this problem is to use a <strong>password manager</strong>, which is software that stores all of your passwords within a password “vault.”</p>
+
+<p>As long as you choose a good manager (see below) and make the password to open this vault very strong, you’ll likely be more secure overall.</p>
+
+<p>One way to create a strong, but memorable password is to generate a <em>passphrase</em> <a href="https://www.eff.org/dice">using dice</a> (<a href="https://theintercept.com/2015/03/26/passphrases-can-memorize-attackers-cant-guess/">more info on diceware passphrases</a>). This process will create a passphrase like “rubdown cytoplasm sculptor kindred unsubtle roamer”, which should be easy for you to memorize, but very hard for anyone else to guess (<a href="https://xkcd.com/936/">this invaluable xkcd comic explains the concept well</a>).</p>
+
+<h3 id="password-manager-recommendations">Password manager recommendations</h3>
+
+<p>Easiest to use: <a href="https://www.lastpass.com/">LastPass</a> is an easy-to-use online password manager that has a free option. Here’s <a href="https://medium.com/@mshelton/lastpass-for-beginners-e921f35d4114">a beginner’s guide to LastPass</a> by Shelton.</p>
+
+<p>A solid, paid option: <a href="https://1password.com/">1Password</a> is another popular option, though it costs a fee, paid either monthly or yearly ($36). Here’s <a href="https://medium.com/@mshelton/introduction-to-password-managers-5e15baa8b26e">a guide to getting started with 1Password</a> from the same author.</p>
+
+<p>More secure: <a href="https://keepassxc.org/">KeePassXC</a> is a free, “offline” password manager, meaning that your encrypted passwords only lives on your computer – think of it as Excel For Passwords. I’ve got three guides for you on KeePassXC: <a href="https://medium.com/@mshelton/keypass-for-beginners-dc8adfcdad54">Shelton’s</a>, <a href="https://ssd.eff.org/en/module/how-use-keepassxc">the Electronic Frontier Foundation’s</a>, and <a href="https://sts10.github.io/2017/06/27/keepassxc-setup-guide.html">mine</a>.</p>
+
+<p>Once you have a manager you like, and a strong vault password, go through each of your online accounts and reset your password to a unique, long, and random password.</p>
+
+<p>You can <a href="https://ssd.eff.org/en/module/creating-strong-passwords">read more about creating and storing strong passwords from the EFF</a>.</p>
+
+<h2 id="level-4-general-tips">Level 4: General tips</h2>
+
+<h3 id="dont-get-phished">Don’t get phished</h3>
+
+<p>Basically don’t click on sketchy looking links, especially in your email. One apparently common trick is to send you an email (“Fraud alert” it might say) with a link to go log into an account, like your bank account. It may <em>look</em> like your bank’s website, but it could be faked to steal your password. To avoid this, just open your browser and type in your bank’s website and log in there.</p>
+
+<p>Here are <a href="https://motherboard.vice.com/en_us/article/ezpmyw/fake-gmail-alerts-phishing">some examples of phishing emails</a>. Don’t click anywhere inside of emails like this!</p>
+
+<p><img src="https://motherboard-images.vice.com/content-images/contentimage/no-id/1476977290821129.png" width="450" /></p>
+
+<p><img src="https://motherboard-images.vice.com/content-images/contentimage/no-id/1476977310675950.png" width="450" /></p>
+
+<p>Here’s <a href="https://ssd.eff.org/en/module/how-avoid-phishing-attacks">the EFF’s guide to avoid phishing attacks</a> and <a href="https://securityinabox.org/en/guide/malware/">one from Security in a Box</a>. If you see a suspicious-looking URL and want to check if it’s safe, <a href="https://transparencyreport.google.com/safe-browsing/search">Google has a service for that</a>.</p>
+
+<h3 id="keep-your-apps-and-operating-systems-up-to-date">Keep your apps and operating systems up-to-date</h3>
+
+<p>It may be annoying to keep everything up-to-date, but it’s often important for security. Hackers are constantly looking for vulnerabilities in software, and software companies are constantly “patching,” or updating their software to prevent this. But you only get the benefit of these patches if you click that sometimes-annoying “Update” button, rather than continuously put it off till tomorrow.</p>
+
+<h3 id="your-browser">Your browser</h3>
+
+<p>For desktop, <strong><a href="https://www.mozilla.org/en-US/firefox/new/">Firefox</a></strong> is generally thought of as more privacy-respecting than Google Chrome, but they’re both good choices. Personally I use both: Chrome when I need to be logged in under my real name (email, banking, most social networking, etc.), Firefox for everything else.</p>
+
+<p>On your iPhone, you can use <a href="https://itunes.apple.com/us/app/firefox-web-browser/id989804926?mt=8">Firefox’s iOS app</a>, or add a privacy-protecting add-on like to Safari like <a href="https://better.fyi/">Better</a>. Personally I’ve been using <a href="https://brave.com/">Brave</a>, though I’m keeping an on eye <a href="https://twitter.com/tomscott/status/1076160882873380870">some concerning business practices</a>.</p>
+
+<p>For bumping up your browser security/privacy, I’d recommend the following extensions:</p>
+
+<ul>
+  <li><a href="https://www.eff.org/privacybadger">Privacy Badger</a> - Block trackers</li>
+  <li>uBlock Origin (<a href="https://addons.mozilla.org/firefox/addon/ublock-origin/">Firefox</a> / <a href="https://chrome.google.com/webstore/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm?hl=en">Chrome</a>) - Block ads</li>
+  <li><a href="https://www.eff.org/https-everywhere">HTTPS Everywhere</a> - Ensure you’re using HTTPS when you can</li>
+</ul>
+
+<p>If you want to make your Firefox installation more privacy-respecting, you can <a href="https://www.privacytools.io/#fingerprint">follow these steps</a> and, to further disrupt sites that try to track your browsing habits, <a href="https://addons.mozilla.org/en-US/firefox/addon/multi-account-containers/">install the Multi-Account Containers add-on</a> and/or the <a href="https://addons.mozilla.org/en-US/firefox/addon/cookie-autodelete/">Cookie AutoDelete add-on</a>. You can also change Firefox’s default search engine from Google to <a href="https://duckduckgo.com/">DuckDuckGo</a>.</p>
+
+<p>If you want to browse more anonymously, consider using the <a href="https://www.torproject.org/projects/torbrowser.html.en">Tor Browser</a>. However there are some important things to note about the Tor Browser, which Shelton <a href="https://medium.com/@mshelton/securing-your-digital-life-like-a-normal-person-a-hasty-and-incomplete-guide-56437f127425">summarizes nicely</a>:</p>
+
+<blockquote>
+  <p>Tor Browser encrypts your traffic and bounces your secured connection within the Tor network before connecting to the Web from a remote location… It is important to note that network eavesdroppers can still tell that you’re using Tor — they just can’t tell what you’re doing within Tor. If you’re looking for real anonymity, avoid sharing personal information in websites you access through Tor Browser.</p>
+</blockquote>
+
+<p>Another good resource, <a href="https://www.torproject.org/about/overview.html.en">Tor’s official overview</a>, adds: to stay anonymous while using the Tor Browser, “[d]on’t provide your name or other revealing information in web forms.” In other words, you probably don’t want to log in to Facebook.</p>
+
+<h3 id="more-secure-textingvoice-callsinstant-messaging">More secure texting/voice calls/instant messaging</h3>
+
+<p>Apple’s iMessage is pretty secure for everyday use, but if you want to step it up a notch (or you have any Android users in your group text), consider using <a href="https://whispersystems.org/">Signal</a> or <a href="https://wire.com/en/">Wire</a>, which both use “end-to-end” encryption.</p>
+
+<p>As mentioned above, periodically review which devices you’re logged in on. Both services also support disappearing messages. Here’s <a href="https://medium.com/@mshelton/signal-for-beginners-c6b44f76a1f0">a beginner’s guide to Signal</a> and <a href="https://medium.com/@mshelton/wire-for-beginners-8ee6caef49cb">one for Wire</a>.</p>
+
+<h3 id="private-note-taking">Private note-taking</h3>
+
+<p>I use <a href="https://standardnotes.org/">Standard Notes</a> for taking notes (rather than Evernote or other alternatives).</p>
+
+<h2 id="level-5-understanding-methods-by-which-your-passwords-can-be-reset">Level 5: Understanding methods by which your passwords can be reset</h2>
+
+<p>This section is probably only necessary for journalists/activists/political folks, but we’ll press on. If someone can easily reset your account’s password, they can also gain access and lock you out. While this is sometimes mitigated by 2-factor authentication, it’s worth thinking through some examples.</p>
+
+<p>For example, <a href="https://motherboard.vice.com/en_us/article/zm8a9y/how-to-protect-yourself-from-sim-swapping-hacks">SIM-jacking</a> or SIM-swapping is when attackers get your cellphone service provider to route your calls and text messages to their phone rather than yours. They can then (usually) do a bunch of other things at this point, like reset passwords to your online accounts. <a href="https://motherboard.vice.com/en_us/article/vbqax3/hackers-sim-swapping-steal-phone-numbers-instagram-bitcoin">Scary</a>, right?</p>
+
+<p>As Lorenzo Franceschi-Bicchierai <a href="https://motherboard.vice.com/en_us/article/zm8a9y/how-to-protect-yourself-from-sim-swapping-hacks">writes for Motherboard</a>, the general advice to avoid getting SIM-jacked is to consider removing your real phone number from your online accounts. If the online service requires a phone number, consider creating a <a href="https://voice.google.com/">Google Voice</a> phone number for that purpose. Then remove your real phone number from these accounts. Alternatively, you can call up your cell phone service provider and ask to set a PIN that will need to be given to get access to your account.</p>
+
+<h3 id="why-you-may-want-to-disable-sms-password-recovery-altogether">Why you may want to disable SMS-password recovery altogether</h3>
+
+<p>You may want to remove SMS as a password recovery method altogether. This is safer and may be good for your Google account (this is NOT the same thing as SMS as a second authentication factor).</p>
+
+<p>To do this, first go to <a href="https://myaccount.google.com/security">the “Signing in” section of Google’s security page</a>. Scroll down a bit to the section titled “Account recovery options”. Now remove the “Recovery phone” option.</p>
+
+<p><img src="https://i.imgur.com/0Ud8ksD.png" alt="Google account recovery options: none" /></p>
+
+<h2 id="guides-i-cited-or-recommend">Guides I cited or recommend</h2>
+
+<ul>
+  <li><a href="https://medium.com/@mshelton/securing-your-digital-life-like-a-normal-person-a-hasty-and-incomplete-guide-56437f127425">Securing Your Digital Life Like a Normal Person</a></li>
+  <li><a href="https://ssd.eff.org/en">EFF Surveillance Self-Defense</a></li>
+  <li><a href="https://www.privacytools.io/">privacytools.io</a></li>
+</ul>
+
+<h2 id="see-something-say-something">See Something Say Something</h2>
+
+<p>I’m low-key terrified that there is misinformation above. If you see something wrong or misleading here, or you have suggestions, feel free to ping me on <a href="https://twitter.com/sts10">Twitter</a> or <a href="https://octodon.social/@schlink">Mastodon</a>, or <a href="https://gist.github.com/sts10/4a4e01021b3a5ad42e9b73e0abd7b7e3">send me an encrypted message using one of the services listed here</a>.</p>
+
+<p>Last updated: January 2, 2019</p>
+:ET

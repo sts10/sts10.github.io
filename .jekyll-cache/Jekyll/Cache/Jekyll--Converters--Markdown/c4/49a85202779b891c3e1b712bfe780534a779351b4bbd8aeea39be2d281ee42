@@ -1,0 +1,12 @@
+I"D<h2 id="desktop">Desktop</h2>
+
+<p>I first downloaded the desktop app as <a href="https://agilebits.com/onepassword">a free trial</a>. Then enabled sync via Dropbox. Then I downloaded <a href="https://agilebits.com/onepassword/extensions">the Chrome extension</a> so it could auto-fill everything in Chrome on desktop.</p>
+
+<h2 id="iosiphone">iOS/iPhone</h2>
+
+<p>Then I downloaded <a href="https://itunes.apple.com/us/app/1password-password-manager/id568903335?mt=8&amp;ign-mpt=uo%3D4">the iOS app</a> on my iPhone, than I followed <a href="https://guides.agilebits.com/1password-ios/5/en/topic/enable-extension">these instructions</a> to add 1Password functionality to my iOS Safari.</p>
+
+<h2 id="previously">Previously</h2>
+
+<p>Previously I had been using <a href="https://www.keepassx.org/">KeePassX</a> on desktop (no iOS functionality that I’m aware of), but I was a bit too afraid to save my encrypted database to my shared Dropbox folder. Though if I was willing to sacrifice the iOS functionality and the Chrome extension, I’d probably go with the KeePassX + Dropbox solution.</p>
+:ET

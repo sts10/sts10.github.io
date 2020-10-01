@@ -1,0 +1,153 @@
+I"�P<p>For <a href="http://get-xp.herokuapp.com/">xp</a> (<a href="https://github.com/kronosapiens/xp">GitHub Repo</a>), our skillshare-like web app for the Flatiron community, Daniel and I knew that we had to make it easy for students and teachers to coordinate lesson logistics. They would need a place and a way to hash out details like what a lesson would cover, where and when it would meet, how long it would last, etc. One way I thought we could do this is to give users the ability to comment on individual lessons.</p>
+
+<p>Once I had the comments up and running without using AJAX, we decided to go one step further and use AJAX to post new comments, so that the lesson’s show page would not refresh. To do this, we used a really cool pattern that Avi showed us a few weeks ago that I’ll call “data remote true”.</p>
+
+<!-- more -->
+
+<h3 id="what-this-does">What This Does</h3>
+
+<p>This pattern allows you to easily make an HTML link or form fire an AJAX request in the background (i.e. without reloading the page) and execute some jQuery to change the layout of the page.</p>
+
+<p>The use-case I’ll be talking about here is a new comment form that (1) adds a comment to a database (connected to a Rails app) via an AJAX request and (2) adds the text of the comment to the comment section via a jQuery callback, all while not not reload the entire webpage.</p>
+
+<h3 id="a-generalized-overview-of-the-data-remote-true-pattern">A Generalized Overview of the Data Remote True Pattern</h3>
+
+<p>When I say “data remote true” what I’m directly referring to is a universal jQuery listener built into Rails. Below is a rough approximation of what the listener looks like:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">click</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">a[data-remote=true]</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+    <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">getScript</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">href</span><span class="p">())</span>
+<span class="p">});</span>
+
+<span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="dl">"</span><span class="s2">submit</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">form[data-remote=true]</span><span class="dl">"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+    <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">getScript</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="nx">action</span><span class="p">))</span>
+<span class="p">});</span>
+
+</code></pre></div></div>
+
+<p>As you can see, there are really two listeners– one for HTML links (the <code class="language-plaintext highlighter-rouge">&lt;a&gt;</code> tag) and one for HTML forms. Both of them listen to your entire document, but only fire their functions when an <code class="language-plaintext highlighter-rouge">&lt;a&gt;</code> tag is clicked or a form is submitted that has a <code class="language-plaintext highlighter-rouge">data-remote</code> attribute set to <code class="language-plaintext highlighter-rouge">true</code>. The functions they fire do two things:</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">e.preventDefault();</code> overrides the HTML tags’ default behavior– for a link that would be taking the user to the URL in the <code class="language-plaintext highlighter-rouge">href</code> attribute, for a form the default behavior is making a POST or GET request to the URL of the <code class="language-plaintext highlighter-rouge">action</code> attribute.</li>
+  <li>The second line of the functions, <code class="language-plaintext highlighter-rouge">$.getScript($(this).href())</code>, is slightly more complicated. <a href="https://api.jquery.com/jQuery.getScript/">$.getScript()</a> is a jQuery method that’s shorthand for an AJAX request for Javascript. So Rails will make an AJAX call to your controller action, but with format js. We’ll see what Rails does with this, and how we’ll use it, in a minute.</li>
+</ol>
+
+<p>To apply these listeners to a specific link or form, we simply added <code class="language-plaintext highlighter-rouge">data-remote=true</code> as an attribute (hence the phrase I’m using to describe this pattern) in the HTML tag.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;a href="/lists" data-remote="true"&gt;AJAX LINK&lt;/a&gt;
+
+&lt;form action="/tasks" data-remote="true"&gt;
+&lt;/form&gt;
+</code></pre></div></div>
+
+<h3 id="adding-comments">Adding Comments</h3>
+
+<p>Cool, so now let’s look at how we used this pattern in xp, namely for adding/posting new comments to a lesson.</p>
+
+<p>Step 1: Set the data-remote attribute on the new comment form to true. Since we’re using a form_for on a nested resource (<code class="language-plaintext highlighter-rouge">@comment</code>), that looks like this:</p>
+
+<div class="language-erb highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nt">&lt;h4&gt;</span>Leave a New Comment<span class="nt">&lt;/h4&gt;</span>
+
+  <span class="cp">&lt;%=</span> <span class="n">form_for</span> <span class="p">[</span><span class="vi">@lesson</span><span class="p">,</span> <span class="vi">@comment</span><span class="p">],</span> <span class="p">{</span><span class="ss">role: </span><span class="s2">"form"</span><span class="p">,</span> <span class="ss">remote: </span><span class="kp">true</span><span class="p">}</span> <span class="k">do</span> <span class="o">|</span><span class="n">f</span><span class="o">|</span> <span class="cp">%&gt;</span>
+    <span class="cp">&lt;%</span> <span class="k">if</span> <span class="vi">@comment</span><span class="p">.</span><span class="nf">errors</span><span class="p">.</span><span class="nf">any?</span> <span class="cp">%&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"alert alert-warning"</span><span class="nt">&gt;</span>
+        <span class="cp">&lt;%</span> <span class="vi">@comment</span><span class="p">.</span><span class="nf">errors</span><span class="p">.</span><span class="nf">full_messages</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">msg</span><span class="o">|</span> <span class="cp">%&gt;</span>
+          <span class="nt">&lt;p&gt;</span><span class="cp">&lt;%=</span> <span class="n">msg</span> <span class="cp">%&gt;</span><span class="nt">&lt;/p&gt;</span>
+        <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-group"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;textarea</span> <span class="na">class=</span><span class="s">"form-control"</span> <span class="na">name=</span><span class="s">"content"</span> <span class="na">placeholder=</span><span class="s">"Write your comment here"</span><span class="nt">&gt;&lt;/textarea&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="na">value=</span><span class="s">"Post Comment"</span> <span class="na">class=</span><span class="s">"btn"</span><span class="nt">&gt;</span>
+  <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div></div>
+
+<p>Note: <code class="language-plaintext highlighter-rouge">role: "form"</code> is simply a Bootstrap setting. We’re obviously concerned with the <code class="language-plaintext highlighter-rouge">remote: true</code> attribute setting. To review: Now this form will NOT make it’s usual POST request, but instead look for Javascript through AJAX.</p>
+
+<p>Step 2: Jump to the comments controller, specifically the <code class="language-plaintext highlighter-rouge">create</code> method, as per the <code class="language-plaintext highlighter-rouge">form_for</code>. But remember, <code class="language-plaintext highlighter-rouge">data-remote = true</code> makes Rails look for a js file, rather than an HTML response.</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">create</span>
+  <span class="vi">@comment</span> <span class="o">=</span> <span class="no">Comment</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">:user</span> <span class="o">=&gt;</span> <span class="n">current_user</span><span class="p">,</span> <span class="ss">:lesson_id</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="p">[</span><span class="ss">:lesson_id</span><span class="p">],</span> <span class="ss">:content</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="p">[</span><span class="ss">:content</span><span class="p">])</span>
+  <span class="vi">@lesson</span> <span class="o">=</span> <span class="no">Lesson</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="ss">:lesson_id</span><span class="p">])</span>
+
+  <span class="k">if</span> <span class="vi">@comment</span><span class="p">.</span><span class="nf">save</span>
+    <span class="n">respond_to</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
+      <span class="nb">format</span><span class="p">.</span><span class="nf">html</span> <span class="p">{</span> <span class="n">redirect_to</span> <span class="vi">@lesson</span> <span class="p">}</span>
+      <span class="nb">format</span><span class="p">.</span><span class="nf">js</span> <span class="p">{}</span>
+    <span class="k">end</span>
+  <span class="k">else</span>
+    <span class="n">flash</span><span class="p">[</span><span class="ss">:alert</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Comment failed to save..."</span>
+    
+    <span class="n">render</span> <span class="s2">"lessons/show"</span>
+  <span class="k">end</span>
+<span class="k">end</span> 
+</code></pre></div></div>
+
+<p>Above is the create method from the comments controller. The key lines are inside the <code class="language-plaintext highlighter-rouge">if @comment.save</code> branch. If the comment is successfully saved, if the call wants HTML, we <code class="language-plaintext highlighter-rouge">redirect_to @lesson</code>. But if the call wants Javascript (i.e. what we’ve told it to look for), we have a pair of curly braces with nothing in them: <code class="language-plaintext highlighter-rouge">{}</code>. Strange, no? But this is actually a key part of the data remote true pattern.</p>
+
+<p>When we put nothing in the curly braces we are counting on Rails’ sensible default, which is to look in this controller’s corresponding view directory for, in this case, a file called <code class="language-plaintext highlighter-rouge">create.js.erb</code>.</p>
+
+<p>(This is exactly the same Rails default we rely on when we make a controller <code class="language-plaintext highlighter-rouge">show</code> method and, once we find the instance of what we’re showing, let Rails find the proper HTML view.)</p>
+
+<p>Rails is going to run whatever Javascript is in <code class="language-plaintext highlighter-rouge">create.js.erb</code> after the new comment has been saved to the database. Because of this, it’s referred to as a callback.</p>
+
+<p>In the case of posting a new comment, we’re going to do 2 things: (1) use jQuery to add the new comment to the comment section, and (2) clear the new comment textarea.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">addCommentToLesson</span><span class="p">(</span><span class="dl">"</span><span class="s2">&lt;%= j render @comment %&gt;</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">form#new_comment textarea</span><span class="dl">"</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="dl">""</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Line 2 clears the textarea in <code class="language-plaintext highlighter-rouge">&lt;form id="new_comment"&gt;</code>. Pretty simple, but necessary in “tricking” the user into making it look like the form is being submitted as usual.</p>
+
+<p>Line 1 is a bit more tricky. Let’s start with the <code class="language-plaintext highlighter-rouge">@comment</code> instance variable. Just like with normal, good ole .html.erb views, we have access to instance variables we set in the controller action. Indeed, if you look back at the comments controller code above, we see the very first line does just this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@comment = Comment.new(:user =&gt; current_user, :lesson_id =&gt; params[:lesson_id], :content =&gt; params[:content])
+</code></pre></div></div>
+
+<p>As you can see, <code class="language-plaintext highlighter-rouge">@comment</code> is the comment we just created and saved, constructed from params.</p>
+
+<p>But, importantly, <code class="language-plaintext highlighter-rouge">@comment</code> is also referring to a partial, namely <code class="language-plaintext highlighter-rouge">_comment.html.erb</code>, which we use to render comments. It’s pretty basic HTML ERB. Here it is in part for reference:</p>
+
+<div class="language-erb highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"comment"</span> <span class="na">id=</span><span class="s">"comment_</span><span class="cp">&lt;%=</span> <span class="n">comment</span><span class="p">.</span><span class="nf">id</span> <span class="cp">%&gt;</span><span class="s">"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;p&gt;</span>
+    <span class="cp">&lt;%=</span> <span class="n">image_tag</span><span class="p">(</span><span class="n">comment</span><span class="p">.</span><span class="nf">user</span><span class="p">.</span><span class="nf">image_url</span><span class="p">,</span> <span class="ss">size: </span><span class="s2">"30"</span><span class="p">,</span> <span class="ss">alt: </span><span class="n">comment</span><span class="p">.</span><span class="nf">user</span><span class="p">.</span><span class="nf">name</span><span class="p">)</span> <span class="cp">%&gt;</span> 
+    <span class="nt">&lt;small&gt;</span>
+      <span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="n">comment</span><span class="p">.</span><span class="nf">user</span><span class="p">.</span><span class="nf">name</span><span class="p">,</span> <span class="n">user_path</span><span class="p">(</span><span class="n">comment</span><span class="p">.</span><span class="nf">user</span><span class="p">.</span><span class="nf">nickname</span><span class="p">)</span> <span class="cp">%&gt;</span> posted on <span class="cp">&lt;%=</span> <span class="n">comment</span><span class="p">.</span><span class="nf">created_at</span><span class="p">.</span><span class="nf">to_formatted_s</span><span class="p">(</span><span class="ss">:long_ordinal</span><span class="p">)</span> <span class="cp">%&gt;</span>: 
+    <span class="nt">&lt;/small&gt;</span>
+    <span class="nt">&lt;br&gt;</span>
+    <span class="nt">&lt;strong&gt;</span><span class="cp">&lt;%=</span> <span class="n">comment</span><span class="p">.</span><span class="nf">content</span> <span class="cp">%&gt;</span><span class="nt">&lt;/strong&gt;</span>
+  <span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div></div>
+
+<p>This helps illuminate what <code class="language-plaintext highlighter-rouge">&lt;%= j render @comment %&gt;</code> does. <code class="language-plaintext highlighter-rouge">render</code> just says to render the partial. The j in front escapes any quotation marks or other characters to make the rendered HTML safe for Javascript (hence the <code class="language-plaintext highlighter-rouge">j</code>). So basically we’re passing a long HTML string, with necessary characters escaped, into a Javascript function called <code class="language-plaintext highlighter-rouge">addCommentToLesson</code>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">addCommentToLesson</code> is defined in <code class="language-plaintext highlighter-rouge">app/assets/javascripts/comments.js</code>.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">addCommentToLesson</span><span class="p">(</span><span class="nx">comment_html</span><span class="p">){</span>
+  <span class="nx">$</span><span class="p">(</span><span class="dl">"</span><span class="s2">#comments-section</span><span class="dl">"</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="nx">comment_html</span><span class="p">)</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>It takes a string of HTML as an argument and, with the jQuery function <code class="language-plaintext highlighter-rouge">append</code>, dynamically appends that HTML to a CSS element with an ID of <code class="language-plaintext highlighter-rouge">comments-section</code>, which is where our comments live. This is what makes it look like the comment has been added to the page to the user.</p>
+
+<p>Here’s the div the an id of <code class="language-plaintext highlighter-rouge">comments-section</code> located in the lesson show.html.erb view:</p>
+
+<div class="language-erb highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"comments-section"</span><span class="nt">&gt;</span>
+  <span class="cp">&lt;%=</span> <span class="n">render</span> <span class="vi">@lesson</span><span class="p">.</span><span class="nf">comments</span> <span class="cp">%&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div></div>
+
+<p>That <code class="language-plaintext highlighter-rouge">render</code> call is made when the show view is loaded initially, to show comments that are already in the database. We really just care about the div. When the current user adds a new comment, we want to <code class="language-plaintext highlighter-rouge">append</code> new comments after any previously-saved comments.</p>
+
+<h3 id="a-slight-hiccup">A Slight Hiccup</h3>
+
+<p>Unfortunately, we are having a problem with this implementation. Currently, if a user has Javascript disabled in the browser for any reason, the controller should respond with HTML rather than Javascript, which should submit the form, refresh the page, and redirect_to to @lesson. However the form is currently throwing an error when we do this. We’re planning on looking into it.</p>
+
+<p>I think that’s about it. The feature is working as described live on <a href="http://get-xp.herokuapp.com/">xp</a>. Hopefully I’m not forgetting anything.</p>
+
+:ET

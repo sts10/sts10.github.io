@@ -1,0 +1,511 @@
+I"�<p>This past week I got the feeling that I hadn’t really given myself any programming challenges in a while. I had also been thinking about trying a statically typed, compiled language for a few weeks. I had C++ in mind, mostly because I actually wrote some in my high school AP Computer Science class, and <a href="https://www.keepassxc.org/">KeePassXC</a>, an application I use to store my passwords, is <a href="https://github.com/keepassxreboot/keepassxc">written in C++</a>.</p>
+
+<p>However I was also aware that there were newer, ~ shinier ~ statically typed languages out there that, if I was starting basically from scratch anyway, I might as well explore. The two I decided to try were Go (or Golang) and Rust, in that order.</p>
+
+<p>My basic process was to seek out each language’s tutorial, play around with it, then, when I felt ready make a simple command line tic-tac-toe game.</p>
+
+<p>Note that I really only learned enough of both languages to do what I wanted. Both Go and Rust have tons of features that I didn’t even try to learn about. For example, I didn’t even use structs in either version of tic-tac-toe, nor did I learn much about Go’s <a href="https://tour.golang.org/methods/10">interfaces</a> or any <a href="https://tour.golang.org/concurrency/1">goroutines</a>, or Rust’s <a href="https://doc.rust-lang.org/book/second-edition/ch06-01-defining-an-enum.html">enums</a> or <a href="https://doc.rust-lang.org/book/second-edition/ch08-01-vectors.html">vectors</a> or whatever other cool stuff Rust has. So this post is far from any sort of “Go vs. Rust”. It’s just a casual Rubyist’s initial impressions of both. (My day job is in social media.)</p>
+
+<h2 id="go">Go</h2>
+
+<p>From <a href="https://en.wikipedia.org/wiki/Go_(programming_language)">Wikipedia</a>:</p>
+
+<blockquote>
+  <p>Go (often referred to as golang) is a programming language created at Google in 2009 by Robert Griesemer, Rob Pike, and Ken Thompson. It is a compiled, statically typed language in the tradition of Algol and C, with garbage collection, limited structural typing, memory safety features and CSP-style concurrent programming features added. The compiler and other language tools originally developed by Google are all free and open source.</p>
+</blockquote>
+
+<p>Relative to Ruby, JavaScript, and– as I later learned– Rust, Go seems to be pretty close to C and C++, with a handful of useful new features like goroutines and an easy-to-use package manager (<code class="language-plaintext highlighter-rouge">go get &lt;package&gt;</code>).</p>
+
+<p>You can <a href="https://golang.org/dl/">download Go for your system here</a>. Also, here’s <a href="https://www.youtube.com/watch?v=ytEkHepK08c">a nice video explaining Go by Russ Cox</a>.</p>
+
+<p>For Go, I think the first good-looking resource I found was <a href="https://tour.golang.org/">“A Tour of Go”</a>. It’s a series of lessons and tasks, similar to what you might see with other languages. I got through the basics– variables, flow control, methods (functions)– with the tour, but once it got to pointers (a concept I wasn’t familiar with and, to be honest, am still don’t understand well) I started slowing down and feeling lost and asking myself “Why I am doing this?”</p>
+
+<p>But a day or two later I found <a href="https://www.youtube.com/watch?v=CF9S4QZuV30&amp;feature=youtu.be">this great YouTube video by Derek Banas</a>. It’s a bit fast-paced, so I would often pause it to copy code off the screen into little programs on my hard drive (though Go does have <a href="https://play.golang.org/p/1VcPUlPk_3">an online REPL</a>).</p>
+
+<p>Once I got through the video I felt ready to at least start working on the tic-tac-toe game, which I obviously had to call “Tic Tac Go”.</p>
+
+<h3 id="writing-tic-tac-go">Writing Tic Tac Go</h3>
+
+<p>Here’s my <a href="https://github.com/sts10/tic-tac-go">GitHub repo</a> of the game, but really all of the code is in <a href="https://github.com/sts10/tic-tac-go/blob/master/game.go">game.go</a>. I basically copied over ideas from my JavaScript implementation of tic-tac-toe. The command line interface goes back and forth between player 1 and player 2 (both humans as of this writing) asking for them to choose a square. Really the only interesting part of the program is the somewhat-ugly <code class="language-plaintext highlighter-rouge">checkForWin</code> function.</p>
+
+<p>To check for a winner, I’m using a second array called <code class="language-plaintext highlighter-rouge">sums</code> that adds up each of the possible wins in the game of tic-tac-toe. (Fun fact: I used this idea (and drew the sketch below) back in 2013 as part of my admission test to The Flatiron School.)</p>
+
+<p><img src="/img/go-and-rust/map.png" alt="sums explained" /></p>
+
+<p>This <code class="language-plaintext highlighter-rouge">checkForWin</code> function could likely be heavily refactored. But here’s what I got working:</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">func</span> <span class="n">checkForWin</span><span class="p">(</span><span class="n">b</span> <span class="p">[</span><span class="m">9</span><span class="p">]</span><span class="kt">int</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
+  <span class="c">// re-calculate sums Array</span>
+  <span class="n">sums</span> <span class="o">:=</span> <span class="p">[</span><span class="m">8</span><span class="p">]</span> <span class="kt">int</span> <span class="p">{</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">}</span>
+  <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">v</span> <span class="o">:=</span> <span class="k">range</span> <span class="n">b</span><span class="p">[</span><span class="m">0</span><span class="o">:</span><span class="m">2</span><span class="p">]</span> <span class="p">{</span> <span class="n">sums</span><span class="p">[</span><span class="m">7</span><span class="p">]</span> <span class="o">+=</span> <span class="n">v</span> <span class="p">}</span>
+  <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">v</span> <span class="o">:=</span> <span class="k">range</span> <span class="n">b</span><span class="p">[</span><span class="m">3</span><span class="o">:</span><span class="m">5</span><span class="p">]</span> <span class="p">{</span> <span class="n">sums</span><span class="p">[</span><span class="m">6</span><span class="p">]</span> <span class="o">+=</span> <span class="n">v</span> <span class="p">}</span>
+  <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">v</span> <span class="o">:=</span> <span class="k">range</span> <span class="n">b</span><span class="p">[</span><span class="m">6</span><span class="o">:</span><span class="m">8</span><span class="p">]</span> <span class="p">{</span> <span class="n">sums</span><span class="p">[</span><span class="m">5</span><span class="p">]</span> <span class="o">+=</span> <span class="n">v</span> <span class="p">}</span>
+
+  <span class="n">sums</span><span class="p">[</span><span class="m">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">b</span><span class="p">[</span><span class="m">2</span><span class="p">]</span><span class="o">+</span><span class="n">b</span><span class="p">[</span><span class="m">4</span><span class="p">]</span><span class="o">+</span><span class="n">b</span><span class="p">[</span><span class="m">6</span><span class="p">]</span>
+  <span class="n">sums</span><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">b</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="o">+</span><span class="n">b</span><span class="p">[</span><span class="m">3</span><span class="p">]</span><span class="o">+</span><span class="n">b</span><span class="p">[</span><span class="m">6</span><span class="p">]</span>
+  <span class="n">sums</span><span class="p">[</span><span class="m">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">b</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="o">+</span><span class="n">b</span><span class="p">[</span><span class="m">4</span><span class="p">]</span><span class="o">+</span><span class="n">b</span><span class="p">[</span><span class="m">7</span><span class="p">]</span>
+  <span class="n">sums</span><span class="p">[</span><span class="m">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">b</span><span class="p">[</span><span class="m">2</span><span class="p">]</span><span class="o">+</span><span class="n">b</span><span class="p">[</span><span class="m">5</span><span class="p">]</span><span class="o">+</span><span class="n">b</span><span class="p">[</span><span class="m">8</span><span class="p">]</span>
+  <span class="n">sums</span><span class="p">[</span><span class="m">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">b</span><span class="p">[</span><span class="m">0</span><span class="p">]</span><span class="o">+</span><span class="n">b</span><span class="p">[</span><span class="m">4</span><span class="p">]</span><span class="o">+</span><span class="n">b</span><span class="p">[</span><span class="m">8</span><span class="p">]</span>
+
+  <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">v</span> <span class="o">:=</span> <span class="k">range</span> <span class="n">sums</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="n">v</span> <span class="o">==</span> <span class="m">3</span><span class="p">{</span>
+      <span class="k">return</span> <span class="m">1</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="n">v</span> <span class="o">==</span> <span class="m">30</span><span class="p">{</span>
+      <span class="k">return</span> <span class="m">2</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="m">0</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Overall the process of writing my Go program went pretty smoothly! I never really was banging my head against a wall. But while writing the program I made some notes on sticking points I ran into.</p>
+
+<h3 id="getting-user-input">Getting User Input</h3>
+
+<p>I had some trouble figuring out how to take an input from the console and then convert it to an integer. My assumption that the input would come in as a String, and that it would somehow have to be converted to a integer, was correct.</p>
+
+<p>After a bunch of Googling and false starts, I found <code class="language-plaintext highlighter-rouge">fmt.Scan(&amp;moveInt)</code> which somehow did both things I wanted– prompt the user for input <em>while also</em> maintaining type <code class="language-plaintext highlighter-rouge">int</code> for the variable <code class="language-plaintext highlighter-rouge">moveInt</code>. Awesome– but, you know, weird how cryptic it is. Though to be fair I never fully understood Ruby’s <code class="language-plaintext highlighter-rouge">scan</code> method either.</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">func</span> <span class="n">askForPlay</span><span class="p">()</span> <span class="kt">int</span><span class="p">{</span>
+  <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"Select a move"</span><span class="p">)</span>
+    <span class="k">var</span> <span class="n">moveInt</span> <span class="kt">int</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Scan</span><span class="p">(</span><span class="o">&amp;</span><span class="n">moveInt</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">moveInt</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>As I was working on this function, I included the line <code class="language-plaintext highlighter-rouge">fmt.Printf("moveInt is type: %T\n", moveInt)</code>, which was a helpful debug step, as it printed the type of the variable <code class="language-plaintext highlighter-rouge">moveInt</code>. Thankfully, in my final code I don’t think <code class="language-plaintext highlighter-rouge">moveInt</code> is ever <em>not</em> of type “int”.</p>
+
+<h3 id="declaring-and-re-assigning-vs-just-re-assigning-the-player-variable">Declaring and Re-Assigning vs. Just Re-Assigning the <code class="language-plaintext highlighter-rouge">player</code> Variable</h3>
+
+<p>Go has the symbol <code class="language-plaintext highlighter-rouge">:=</code>, which I think is syntactic sugar for both declaring and assigning a variable. An added benefit of using the <code class="language-plaintext highlighter-rouge">:=</code> shorthand is that you don’t need to specify the variable’s type (Go’s compiler will infer it– think the technical term is “type inference”). Nice!</p>
+
+<p>However I got tripped up when I lazily forgot that using the colon not only assigns but declares, and thus should really only be used once per scope. Basically I was re-declaring a variable when I really meant to just re-assign it. Here’s the code:</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">gameOver</span> <span class="o">!=</span> <span class="no">true</span><span class="p">{</span>
+  <span class="c">// some other code here</span>
+  <span class="k">if</span> <span class="n">turnNumber</span> <span class="o">%</span> <span class="m">2</span> <span class="o">==</span> <span class="m">1</span><span class="p">{</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"Player 1's turn"</span><span class="p">)</span>
+    <span class="n">player</span> <span class="o">:=</span> <span class="m">1</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"Player 2's turn"</span><span class="p">)</span>
+    <span class="n">player</span> <span class="o">:=</span> <span class="m">2</span>
+  <span class="p">}</span>
+  <span class="n">currentMove</span> <span class="o">:=</span> <span class="n">askForPlay</span><span class="p">()</span>
+  <span class="n">board</span> <span class="o">=</span> <span class="n">executePlayerMove</span><span class="p">(</span><span class="n">currentMove</span><span class="p">,</span> <span class="n">player</span><span class="p">,</span> <span class="n">board</span><span class="p">)</span>
+  <span class="c">// more code here</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The code above gave me the following error:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code># command-line-arguments
+./game.go:22:44: undefined: player
+</code></pre></div></div>
+
+<p>Weird, right? Clearly I do define <code class="language-plaintext highlighter-rouge">player</code>, either on line 4 or line 7 depending on the conditional on line 3. The issue is that <code class="language-plaintext highlighter-rouge">player</code> is only within the scopes of those <code class="language-plaintext highlighter-rouge">if</code> statements, so when I try to pass to it the <code class="language-plaintext highlighter-rouge">executePlayerMove</code> function, it’s undefined.</p>
+
+<p>So I (sloppily) added <code class="language-plaintext highlighter-rouge">player := 0</code> above the if statement and ran it again. I then got this error:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code># command-line-arguments
+./game.go:19:17: player declared and not used
+./game.go:22:17: player declared and not used
+</code></pre></div></div>
+
+<p>Now the problem is that the lines in the conditionals that read <code class="language-plaintext highlighter-rouge">player := 1</code> and <code class="language-plaintext highlighter-rouge">player := 2</code> <em>declare</em> the variable <code class="language-plaintext highlighter-rouge">player</code>, as well as re-assign it, even though it’s already been declared.</p>
+
+<p>(As an aside, the Go compiler will throw an error and not run your program if you have unused variables. This is obviously much more strict than Ruby or Go. And as I later learned, even Rust will only throw a “warning” rather than a compiler error when it finds an unused variable.)</p>
+
+<p>What I want to do is simply re-assign the variable inside the conditional, not declare a new variable called <code class="language-plaintext highlighter-rouge">player</code>. To do that, I changed the block to:</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">gameOver</span> <span class="o">!=</span> <span class="no">true</span><span class="p">{</span>
+  <span class="c">// some code here</span>
+  <span class="n">player</span> <span class="o">:=</span> <span class="m">0</span>
+  <span class="k">if</span> <span class="n">turnNumber</span> <span class="o">%</span> <span class="m">2</span> <span class="o">==</span> <span class="m">1</span><span class="p">{</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"Player 1's turn"</span><span class="p">)</span>
+    <span class="n">player</span> <span class="o">=</span> <span class="m">1</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"Player 2's turn"</span><span class="p">)</span>
+    <span class="n">player</span> <span class="o">=</span> <span class="m">2</span>
+  <span class="p">}</span>
+
+  <span class="n">currentMove</span> <span class="o">:=</span> <span class="n">askForPlay</span><span class="p">()</span>
+  <span class="n">board</span> <span class="o">=</span> <span class="n">executePlayerMove</span><span class="p">(</span><span class="n">currentMove</span><span class="p">,</span> <span class="n">player</span><span class="p">,</span> <span class="n">board</span><span class="p">)</span>
+  <span class="c">// more code here</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>and the compiler and I were all good.</p>
+
+<h3 id="string-interpolation-symbols-were-a-little-confusing">String Interpolation Symbols Were A Little Confusing</h3>
+
+<p>Coming from Ruby, I’m used to pretty simple string interpolation. In Go it can be a bit more sophisticated. <code class="language-plaintext highlighter-rouge">fmt.Println</code> Go’s more straight forward option– you can use the <code class="language-plaintext highlighter-rouge">,</code> to switch from strings to variables.</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">var</span> <span class="n">myName</span> <span class="kt">string</span> <span class="o">=</span> <span class="s">"Sam"</span>
+<span class="k">var</span> <span class="n">age</span> <span class="kt">int</span> <span class="o">=</span> <span class="m">30</span>
+<span class="k">var</span> <span class="n">pi</span> <span class="kt">float64</span> <span class="o">=</span> <span class="m">3.1415</span>
+<span class="k">var</span> <span class="n">isOver40</span> <span class="kt">bool</span> <span class="o">=</span> <span class="no">false</span>
+
+<span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"My name is"</span><span class="p">,</span> <span class="n">myName</span><span class="p">,</span> <span class="s">", I'm "</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="s">"years old. Am I over 40?"</span><span class="p">,</span> <span class="n">isOver40</span><span class="p">)</span>
+<span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"My name is"</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">myName</span><span class="p">),</span> <span class="s">"characters long"</span><span class="p">)</span>
+<span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"Pi is "</span><span class="p">,</span> <span class="n">pi</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">fmt.Printf</code> allows more granularity– it can read given variables in multiple ways. <code class="language-plaintext highlighter-rouge">%d</code> stands for digit, so it’s appropriate for integers. <code class="language-plaintext highlighter-rouge">%f</code> is for <code class="language-plaintext highlighter-rouge">float64</code>s, and can accept a decimal point to round the <code class="language-plaintext highlighter-rouge">float64</code> to. <code class="language-plaintext highlighter-rouge">%T</code> gives the type of the variable, which proved pretty useful for debugging purposes for someone like me who is still learning types– it’s not as simple as it may seem!</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"Hello %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">myName</span><span class="p">)</span>
+<span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"I'm %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">age</span><span class="p">)</span>
+<span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"Pi is %f</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">pi</span><span class="p">)</span>
+<span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"Pi, rounded to 2 places, is %.2f</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">pi</span><span class="p">)</span>
+<span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"Am I over 40? %t</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">isOver40</span><span class="p">)</span>
+
+<span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"myName is type %T. "</span><span class="p">,</span> <span class="n">myName</span><span class="p">)</span>
+<span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"Age is type %T. "</span><span class="p">,</span> <span class="n">age</span><span class="p">)</span>
+<span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"Pi is type %T. "</span><span class="p">,</span> <span class="n">pi</span><span class="p">)</span>
+<span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"isOver40 is type %T. "</span><span class="p">,</span> <span class="n">isOver40</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><a href="https://play.golang.org/p/yf_CnG76Rw">Playground of the above</a></p>
+
+<p>Believe it or not it took me a bit to realize that these codes– <code class="language-plaintext highlighter-rouge">%d</code>, <code class="language-plaintext highlighter-rouge">%s</code>, <code class="language-plaintext highlighter-rouge">%f</code>– weren’t just placeholders and actually meant something. Then I had to figure out what each of them meant. Not a huge thing, but good to know.</p>
+
+<h3 id="strict-typing">Strict Typing</h3>
+
+<p>When declaring the <code class="language-plaintext highlighter-rouge">presentBoard</code> function, I found that you need to not only specify the type of each input and any outputs, but, if one of the inputs or outputs is an array, you also need to tell the function how big the array will be.</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">func</span> <span class="n">presentBoard</span><span class="p">(</span><span class="n">b</span> <span class="p">[</span><span class="m">9</span><span class="p">]</span><span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="o">:=</span> <span class="k">range</span> <span class="n">b</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="n">v</span> <span class="o">==</span> <span class="m">0</span><span class="p">{</span>
+      <span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+      <span class="c">// more code here</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>At first I just wrote <code class="language-plaintext highlighter-rouge">func presentBoard(b []int) { </code> figuring that’d be cool, but the Go compiler threw me an error: <code class="language-plaintext highlighter-rouge">cannot use board (type [9]int as type []int in argument...)</code>. It makes sense spelled out but it took me a bit. Risking a guess, I think <code class="language-plaintext highlighter-rouge">[]int</code> is actually a Slice rather than an Array.</p>
+
+<h3 id="function-signatures-were-a-bit-unintuitive">Function signatures were a bit unintuitive</h3>
+
+<p>When declaring a function, we have to specify quite a bit. First, the function’s name, obviously. Next, in parenthesis is all of the inputs. Then finally, and strangely for a Rubyist, the outputs. Specifying the <em>types</em> in not only the inputs, but the outputs, was different for me. A couple examples:</p>
+
+<p>This function takes two integers (type <code class="language-plaintext highlighter-rouge">int</code>) and an array of 9 integers. It outputs one array of 9 integers.</p>
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">func</span> <span class="n">executePlayerMove</span><span class="p">(</span><span class="n">moveInt</span> <span class="kt">int</span><span class="p">,</span> <span class="n">player</span> <span class="kt">int</span><span class="p">,</span> <span class="n">b</span> <span class="p">[</span><span class="m">9</span><span class="p">]</span><span class="kt">int</span><span class="p">)</span> <span class="p">[</span><span class="m">9</span><span class="p">]</span><span class="kt">int</span> <span class="p">{</span>
+  <span class="c">// body of function goes here</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Go can also, rather uncommonly, return two variables.</p>
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">func</span> <span class="n">greet</span><span class="p">(</span><span class="n">name</span> <span class="kt">string</span><span class="p">,</span> <span class="n">age</span> <span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="n">ageInFive</span> <span class="o">=</span> <span class="n">age</span> <span class="o">+</span> <span class="m">5</span>
+    <span class="k">var</span> <span class="n">ageInTen</span> <span class="o">=</span> <span class="n">age</span> <span class="o">+</span> <span class="m">10</span>
+    <span class="k">return</span> <span class="n">ageInFive</span><span class="p">,</span> <span class="n">ageInTen</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="a-note-on-looping-in-go">A Note on Looping in Go</h3>
+
+<p>I found it interesting that Go only has one type of loop: the <code class="language-plaintext highlighter-rouge">for</code> loop. I ended up using five such loops in my tic-tac-toe game, which I’ll informally place into these three categories:</p>
+
+<p>For example, when I wanted something like what is a <code class="language-plaintext highlighter-rouge">while</code> loop in other languages, I used <code class="language-plaintext highlighter-rouge">for gameOver != true{ /* code block */ }</code></p>
+
+<p>What my Ruby knowledge thinks of as as <code class="language-plaintext highlighter-rouge">each</code> loop is expressed in Go as <code class="language-plaintext highlighter-rouge">for _, value := range sums { /* code block */ }</code>. <code class="language-plaintext highlighter-rouge">range sums</code> tells Go we want to iterate over all of sums.</p>
+
+<p>That underscore raised my eyebrow– I always though it was a cryptic symbol when used in programming languages. It turns out the <code class="language-plaintext highlighter-rouge">_</code> is where your index would go. Since the Go compiler throws an error if you declare a variable but don’t use it, we need to “kill” the index variable with <code class="language-plaintext highlighter-rouge">_</code>.</p>
+
+<p>If you do want to use the index (like Ruby’s <code class="language-plaintext highlighter-rouge">each_with_index</code>), you’d want <code class="language-plaintext highlighter-rouge">for index, value := range b { /* code block */ }</code></p>
+
+<h3 id="first-impressions-of-go">First Impressions of Go</h3>
+
+<p>Given the languages I’ve played with, Go feels like JavaScript; though if I was more familiar with the C languages I assume I’d be saying Go feels most like them. Go does have structs, so you can get some Object-Oriented Programming in that way if you need, but I didn’t use any in my game. Rather, my code is organized into different functions, as I would do if writing JavaScript. Functions seem to be king in both Go and Rust.</p>
+
+<p>Syntactically it also felt more like JavaScript than Ruby. For example, functions are not usually pegged to an object, so they are usually called with the pattern: <code class="language-plaintext highlighter-rouge">funcName(parameterVariable)</code> as opposed to <code class="language-plaintext highlighter-rouge">parameterVariable.funcName</code> (like Ruby or a heavily object-oriented language). However Go apparently does sometimes use this syntax like this: <code class="language-plaintext highlighter-rouge">day := time.Now().Weekday()</code>.</p>
+
+<p>Things that were <em>unlike</em> JavaScript or Ruby did throw me a bit. For example, the shortcut syntax for declaring and assigning variables, <code class="language-plaintext highlighter-rouge">:=</code>, was strange to me. In addition to the issue I discussed above, I kept accidentally typing <code class="language-plaintext highlighter-rouge">=:</code> or also defining the variables type when I didn’t need to because of how the shortcut works.</p>
+
+<p>That said, the workflow of actually running/compiling was not as cumbersome as I feared: I didn’t have to create an executable and then run it with two or three separate commands. Instead, the workflow was very similar to Ruby and other dynamic languages: I simply ran <code class="language-plaintext highlighter-rouge">go run &lt;filename&gt;.go</code>. I don’t remember any particularly cryptic error messages (and I got a lot of them)– most of the time I could figure out what the compiler wanted.</p>
+
+<p>In general writing tic-tac-go was a pretty smooth experience, especially compared to… RUST.</p>
+
+<h2 id="rust">Rust</h2>
+
+<p>Again, from <a href="https://en.wikipedia.org/wiki/Rust_(programming_language\)">Wikipedia</a>:</p>
+
+<blockquote>
+  <p>Rust is a systems programming language[9] sponsored by Mozilla Research,[10] which describes it as a “safe, concurrent, practical language,”[11] supporting functional and imperative-procedural paradigms. Rust is syntactically similar to C++, but its designers intend it to provide better memory safety while maintaining performance.</p>
+</blockquote>
+
+<blockquote>
+  <p>Rust is an open source programming language. Its designers have refined the language through the experiences of writing the Servo[12] web browser layout engine and the Rust compiler. A large portion of current commits to the project are from community members.[13]</p>
+</blockquote>
+
+<p>Rust 1.0 <a href="https://blog.rust-lang.org/2015/05/15/Rust-1.0.html">came out in May 2015</a>, so this language is much newer than even Go and thus a bit more unpolished when it comes to things like documentation, number of Stack Overflow questions, third-party packages, etc.. As we’ll see later on, I found a very small bug in Rust 1.21 – though it appears to be fixed in the current nightly build.</p>
+
+<p>Rust is a pretty intense language/system. As opposed to Go, which I was able to glide into pretty easily with my past programming know-how, Rust felt different. I found that just writing Rust code that compiles at all felt like an accomplishment. The upside is that when Rust code <em>does</em> compile, you can be more confident that the code is memory safe and would work well in large systems. At least that’s the idea. (I have very little understanding of concepts like “memory safety” and “garbage collection” and the threats involved in not handling those things well. Admittedly if I can’t appreciate what Rust is guaranteeing me, I’m likely not an ideal Rust user. But let’s press on.)</p>
+
+<p>This <a href="https://www.youtube.com/watch?v=FMqydRampuo">“Rust 101” talk by E. Dunham</a> is a <em>great</em> video for learning about the language, its goals, and the community surrounding Rust. The community seems to be very creative and supportive, and I dig that they have a strong <a href="https://www.rust-lang.org/en-US/conduct.html">code of conduct</a> that promotes “a friendly, safe and welcoming environment for all, regardless of level of experience, gender identity and expression, sexual orientation, disability, personal appearance, body size, race, ethnicity, age, religion, nationality, or other similar characteristic.”</p>
+
+<p>Rust’s official documentation, referred to as <a href="https://doc.rust-lang.org/stable/book/">“the Book”</a>, seems well-written (the idea of a “book” reminded me a little of <a href="http://poignant.guide/book/">_why’s poignant guide to Ruby</a>, though it is [thankfully] not as irreverent). In hindsight, I really should have gone through it more slowly and thoroughly before attempting to make this tic-tac-toe game. In many ways my whining about how difficult Rust is at first blush (see below) isn’t really fair to the authors of the Book, since I didn’t read it close enough. I also thought it interesting how early Rust introduces testing– not only is it the 11th chapter in the book, but as I understand it their <code class="language-plaintext highlighter-rouge">cargo</code> tool (which comes <a href="https://doc.rust-lang.org/book/second-edition/ch01-01-installation.html">installed with Rust</a>) creates a test file by default.</p>
+
+<p>For completeness sake here is their <a href="https://www.rust-lang.org/en-US/index.html">homepage</a> and <a href="https://blog.rust-lang.org/">Official Rust blog</a>. <a href="https://play.rust-lang.org">Rust playground</a> is their REPL, allowing you to run Rust in a browser– ironically, it worked better in Chrome (v. 62.0.32…) than Firefox 57 for me.</p>
+
+<p>In addition to skimming the first few sections of the Book, I also did some exercises called <a href="https://github.com/carols10cents/rustlings">rustlings</a>, which were really helpful– they felt more helpful than the Tour of Go, especially with their links to the relevant section in the Book and hints you could scroll down to.</p>
+
+<p>I also learned a bit about Rust’s concept of ownership from this <a href="https://www.youtube.com/watch?v=agzf6ftEsLU">Intro to Rust video</a>.</p>
+
+<p>Lastly I will here give a shout-out to the <a href="https://chat.mibbit.com/?server=irc.mozilla.org&amp;channel=%23rust-beginners">#rust-beginners IRC channel</a> – At one point I was so stuck I made <a href="https://play.rust-lang.org/?gist=40257dc021809a8c8a6750ab2f133a8a&amp;version=stable">a share-able playground link</a> and hopped into the #rust-beginners IRC channel. Even though there were only a few people active on a Friday morning, I got insanely concise help I needed.</p>
+
+<p><img src="/img/go-and-rust/irc-chat.png" alt="My IRC chat" /></p>
+
+<p>Big thanks to those users! I don’t know how obvious or cryptic the sentence “arrays are indexed by usize so you just need to change the type of the function parameter from i32 to usize” is to you, but once I fixed it I now understand it as both helpful and not so far from the error message that the Rust compiler throws.</p>
+
+<!-- - [Rust by Example](https://rustbyexample.com/) -- Seems like some unofficial documentation, so I was a little reluctant. But to be frank there isn't much documentation out there, so I took what I could find. 
+- [Subreddit](https://www.reddit.com/r/rust/)
+- Derek Banas video: https://www.youtube.com/watch?v=U1EFgCNLDB8
+-->
+
+<h3 id="more-about-rust-before-we-really-get-to-it-because-wow-rust-seems-different">More About Rust Before We Really Get to It Because, Wow, Rust seems Different</h3>
+
+<p>Rust is crazy. It’s compiler is crazy strict and, I think by design, throws errors even when your code would work.</p>
+
+<p>As <a href="https://youtu.be/FMqydRampuo?t=4m35s">Dunham says</a>, “Rust has a high priority on safety and performance, so if you’ve ever managed memory before, you’ll know it’s easy to make mistakes.”</p>
+
+<p>She <a href="https://www.youtube.com/watch?v=FMqydRampuo?t=5m38s">also compares</a> Rust to C and other languages in regard to garbage collection and safety:</p>
+
+<ul>
+  <li>C: “Just follow these rules perfectly, you’re smart”</li>
+  <li>Java, JS, Ruby, etc.: “Wait a minute, I’ll take care of it”</li>
+  <li>Rust: “I’ll prove correctness at compile time.”</li>
+</ul>
+
+<p>Clearly, Rust is way “closer to the metal” than Ruby or JavaScript. But unlike C, its compiler is way more picky. It attempts to critique the <em>design</em> of your program, not just flag the syntax errors. In my very little experience, I found Rust way pickier than Golang.</p>
+
+<p>I could almost <em>feel</em> Rust’s compiler trying to guide me to write my program the way that it wanted me to. It was almost as if my program had already been written by the compiler– some platonic ideal of tic-tac-toe already existed up in Rust heaven– and it was nudging me toward that ideal. Rust’s compiler even gave me a “warning” (not an “error”) when I used camelCased variables rather than snake_case. However the much more frustrating instances of fighting with the compiler were obviously when it threw errors and wouldn’t compile– basically it was telling me “This is bad enough that I won’t even compile this for you.”</p>
+
+<p><a href="https://www.youtube.com/watch?v=FMqydRampuo?t=23m50s">Later in Dunham’s talk she said</a> something that stuck with me as I kept running into error after error:</p>
+
+<blockquote>
+  <p>The compiler wants to see your code do things right. Rust wants you to succeed. My mental image of it is that you’re apprenticing under some really knowledgeable old hacker who worked on mainframes in the ’70s. And they’re going to tell you, “Hey, I know this works right now, but it’s going to get you in trouble later.”</p>
+</blockquote>
+
+<p>Reader, I would come to resent this old hacker.</p>
+
+<h3 id="rusty-tac">Rusty Tac</h3>
+
+<p>In writing my Rust version of tic-tac-toe– which I obviously had to call <a href="https://github.com/sts10/rusty-tac">Rusty Tac</a>– I ran into tons of errors. Here are some concrete examples of when the compiler forced me to change my code, likely for the better.</p>
+
+<h4 id="types-references-and-borrowing">Types, References, and Borrowing</h4>
+
+<p>I hit a pretty big snag while writing my first Rust function– one to draw the tic-tac-toe board. As with Go, Rust mandates that we specify the type of a function’s inputs and outputs. In both Go and Rust I started with this <code class="language-plaintext highlighter-rouge">present_board</code> function, since it only has one input and no outputs. But with Rust I got tripped up.</p>
+
+<p>Here’s how I declare the <code class="language-plaintext highlighter-rouge">board</code> variable in <code class="language-plaintext highlighter-rouge">main()</code>:</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="k">mut</span> <span class="n">board</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">];</span>
+</code></pre></div></div>
+
+<p>This isn’t so bad– other than the <code class="language-plaintext highlighter-rouge">mut</code>, to make the values mutable, it looks a lot like Ruby or JavaScript. We’re relying on the compiler to interpret not only that <code class="language-plaintext highlighter-rouge">board</code> is an array, but also that its elements are integers. It turns out that Rust has a number of different types of integers, and that in this case, it assumes integers like this are <code class="language-plaintext highlighter-rouge">i32</code>s (<a href="https://doc.rust-lang.org/stable/book/second-edition/ch03-02-data-types.html#integer-types">a signed, 32-bit integer</a>). This will prove important very soon.</p>
+
+<p>My problem was that I didn’t know how to refer to this data type– an array of integers (that I didn’t know were specifically <code class="language-plaintext highlighter-rouge">i32</code>s)– when writing a function that takes it as an input.</p>
+
+<p>Additionally, I needed to pass a “<em>reference</em>” to this array, since I only wanted this function to “<em>borrow</em>” the <code class="language-plaintext highlighter-rouge">board</code> array– this explains the <code class="language-plaintext highlighter-rouge">&amp;</code> in the signature (see: <a href="https://doc.rust-lang.org/stable/book/second-edition/ch04-01-what-is-ownership.html">Ownership</a> and <a href="https://doc.rust-lang.org/stable/book/second-edition/ch04-02-references-and-borrowing.html#references-and-borrowing">References and Borrowing</a>). I’m brushing over this concept of borrowing because I still don’t feel like I have a good handle it, but it seems to be a foundational idea within Rust and how it helps ensure memory safety differently than, say, Go or C++.</p>
+
+<p>So at first I thought the parameters would be <code class="language-plaintext highlighter-rouge">fn present_board(&amp;b [int])</code>– with the amperstand on the <code class="language-plaintext highlighter-rouge">b</code>, and a type of <code class="language-plaintext highlighter-rouge">int</code>. (It turns out I was wrong in two ways here.) I also wasn’t sure how to refer to my <code class="language-plaintext highlighter-rouge">board</code> inside the function itself– <code class="language-plaintext highlighter-rouge">b</code> or <code class="language-plaintext highlighter-rouge">&amp;b</code>.</p>
+
+<p>Oddly, there doesn’t seem to be a straight-forward way to check a variable’s type. After some Googling, I ended up causing an intentional error by running <code class="language-plaintext highlighter-rouge">board[2].what_type_is_this</code>. This actually threw me off by giving this error: “error[E0610]: <code class="language-plaintext highlighter-rouge">{integer}</code> is a primitive type and therefore doesn’t have fields”. Since the error gave me <code class="language-plaintext highlighter-rouge">{integer}</code> like that, I figured that was the type (not <code class="language-plaintext highlighter-rouge">int</code> as I had tried), so I tried things like <code class="language-plaintext highlighter-rouge">fn present_board(&amp;b [integer])</code> but no dice. If the error had said <code class="language-plaintext highlighter-rouge">i32 is a primitive type...</code>, or if I had found a more official way to check a variable’s type and that had told me it was an array of <code class="language-plaintext highlighter-rouge">i32</code>s, I would have had a better chance.</p>
+
+<p>I’d say this was by far my worst snag with either Go or Rust. Maybe if I had read the Rust Book online more thoroughly I would have caught it early on, but <a href="https://doc.rust-lang.org/book/second-edition/ch03-02-data-types.html#arrays">the Array section</a> isn’t very helpful. Eventually, after much trial and not-so-helpful error, I figured it out:</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">present_board</span><span class="p">(</span><span class="n">b</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">[</span><span class="nb">i32</span><span class="p">]){</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"---------"</span><span class="p">);</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="c">// inside the function, we refer to `b` not `&amp;b`</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">b</span><span class="nf">.len</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">match</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">{</span>
+            <span class="c">// if empty, print the number that a user would enter to move</span>
+            <span class="c">// to this space</span>
+            <span class="mi">0</span> <span class="k">=&gt;</span> <span class="nd">print!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span><span class="n">i</span><span class="p">),</span>
+            <span class="mi">1</span> <span class="k">=&gt;</span> <span class="nd">print!</span><span class="p">(</span><span class="s">"X"</span><span class="p">),</span>
+            <span class="mi">2</span> <span class="k">=&gt;</span> <span class="nd">print!</span><span class="p">(</span><span class="s">"O"</span><span class="p">),</span>
+            <span class="mi">10</span> <span class="k">=&gt;</span> <span class="nd">print!</span><span class="p">(</span><span class="s">"O"</span><span class="p">),</span>
+            <span class="mi">_</span> <span class="k">=&gt;</span> <span class="k">break</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="c">// and now, some decorators</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="p">{</span>
+            <span class="nd">print!</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span><span class="p">{</span>
+            <span class="nd">print!</span><span class="p">(</span><span class="s">" | "</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"---------"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>(I also used Rust’s <a href="https://doc.rust-lang.org/1.5.0/book/match.html"><code class="language-plaintext highlighter-rouge">match</code> statement</a>, which is like a <code class="language-plaintext highlighter-rouge">switch</code> statement in other languages, but more robust– i.e. it can accept ranges, handle errors, <a href="https://mastodon.social/@seanlinsley/99028194647041640">and more</a>. Apparently the Rust devs like <code class="language-plaintext highlighter-rouge">match</code> over long <code class="language-plaintext highlighter-rouge">if</code>/<code class="language-plaintext highlighter-rouge">else if</code> chain.)</p>
+
+<p>And here’s how I called this function: <code class="language-plaintext highlighter-rouge">present_board(&amp;board);</code>, passing a <em>reference</em> to <code class="language-plaintext highlighter-rouge">board</code>, rather than ownership.</p>
+
+<p>Interestingly, unlike Go, I did not have to tell the function how long the array was going to be.</p>
+
+<h4 id="the-player-variable">The <code class="language-plaintext highlighter-rouge">player</code> variable</h4>
+
+<p>Here’s an example of the compiler nudging me a bit more softly– with warnings rather than errors. It’s actually the same code block that I had a little bit of trouble with in Go that I mention above, so you can compare how both compilers handled my bad habits.</p>
+
+<p>In my tic-tac-go game, there’s a simple part where we alternate between player 1 and player 2, getting their play selection in turn. So here’s what I initially wrote (which is similar to the pattern that worked in Go [see above]):</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// for this example, let's arbitrarily set turn_number to 6</span>
+<span class="k">let</span> <span class="n">turn_number</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span> 
+
+<span class="k">let</span> <span class="k">mut</span> <span class="n">player</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">if</span> <span class="n">turn_number</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">{</span>
+  <span class="n">player</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="n">player</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nd">println!</span><span class="p">(</span><span class="s">"Player {}'s turn"</span><span class="p">,</span> <span class="n">player</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>That line <code class="language-plaintext highlighter-rouge">let mut player = 0;</code> is problematic, the compiler told me. First, know that, by default, Rust variables are immutable(!), meaning their value can’t be changed. You have to use the keyword <code class="language-plaintext highlighter-rouge">mut</code> if you want to change the value at some point later on. At first I thought this was crazy, but I can now glimpse how it’s a really strong default for predictability– that the programmer has to assert that a value will be changed means she’ll likely keep non-mutable values as non-mutable, especially given that the Rust compiler will give her a warning.</p>
+
+<p>The Rust compiler gives me a warning here: “warning: value assigned to <code class="language-plaintext highlighter-rouge">player</code> is never read”. It’s basically saying, “why did you assign <code class="language-plaintext highlighter-rouge">player</code> to 0 when you never use that value 0?”. Pretty specific, right?</p>
+
+<p>When I edited that line to <code class="language-plaintext highlighter-rouge">let mut player;</code>, a new warning appeared: “warning: variable does not need to be mutable”. This was a little harder for me to understand, but it makes sense once I realized that, for each time <code class="language-plaintext highlighter-rouge">player</code> is declared in its scope, it’s only ever assigned one value one time (either <code class="language-plaintext highlighter-rouge">1</code> or <code class="language-plaintext highlighter-rouge">2</code>, based on this conditional). Thus it never needs to <em>mutate</em> from one value to another value, it’s just not assigned when it’s declared. Again, I can see how, when you’re throwing variables between all sorts of functions, it’s powerful to know a value will never change– thus the warning that, hey, make it immutable if you can.</p>
+
+<p>Here’s what the Rust compiler and I ended up with (no errors, no warnings):</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// for this example, let's arbitrarily set turn_number to 6</span>
+<span class="k">let</span> <span class="n">turn_number</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span> 
+
+<span class="k">let</span> <span class="n">player</span><span class="p">;</span>
+<span class="k">if</span> <span class="n">turn_number</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">{</span>
+  <span class="n">player</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="n">player</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nd">println!</span><span class="p">(</span><span class="s">"Player {}'s turn"</span><span class="p">,</span> <span class="n">player</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>In any other language I would have never made <code class="language-plaintext highlighter-rouge">player</code> immutable– likely referred to as a “constant” in other languages, usually only used for very constant values like pi. But Rust’s default immutability, combined with its warnings about unnecessary immutability that I assumed I needed, helped me write a program where <code class="language-plaintext highlighter-rouge">player</code> is only set once. No function, called after this code block, can change whose turn it is, which I can see being a powerful thing to know with pretty strong certainty.</p>
+
+<h3 id="a-bug-in-stable-rust">A Bug in Stable Rust</h3>
+
+<p>Part of Rusty Tac (my writing of tic-tac-toe in Rust) involved a function where we have to check the board to see if it’s full (meaning there had been a tie– no one had won the game). The board is basically an array, so the task here is to sum up an array of integers (and check if that sum is 45).</p>
+
+<p>My understanding is that there are a couple of approved ways to iterate through an array in Rust, including <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html">an Iterator class</a> which is probably what I should have used from the get-go (see below). One is to iterate through a reference to the array (i.e. <code class="language-plaintext highlighter-rouge">&amp;my_array</code>) with a <code class="language-plaintext highlighter-rouge">for</code> loop. The strange thing here is that the <code class="language-plaintext highlighter-rouge">value</code>s yielded to the inside of the loop are also references to the elements of the array.</p>
+
+<p>Here is a stand-alone example (not from my game).</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">let</span> <span class="n">my_array</span><span class="p">:</span> <span class="p">[</span><span class="nb">usize</span><span class="p">;</span> <span class="mi">8</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">];</span>
+  <span class="k">let</span> <span class="k">mut</span> <span class="n">sum</span><span class="p">:</span> <span class="nb">usize</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">for</span> <span class="n">v</span> <span class="n">in</span> <span class="o">&amp;</span><span class="n">my_array</span> <span class="p">{</span>
+    <span class="n">sum</span> <span class="o">=</span> <span class="n">sum</span> <span class="o">+</span> <span class="n">v</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nd">println!</span><span class="p">(</span><span class="s">"Sum is {}"</span><span class="p">,</span> <span class="n">sum</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>All good. But if you change it to the more concise: <code class="language-plaintext highlighter-rouge">sum += v;</code> you get an error: <code class="language-plaintext highlighter-rouge">expected usize, found &amp;usize</code>. Apparently <code class="language-plaintext highlighter-rouge">sum = sum + v;</code> can add a usize to a reference to a usize, but <code class="language-plaintext highlighter-rouge">sum += v;</code> cannot. You would think that <code class="language-plaintext highlighter-rouge">sum = sum + v;</code> would be the equivalent to <code class="language-plaintext highlighter-rouge">sum += v;</code>, but that did not seem to the be the case here.</p>
+
+<p>The tl;dr here is that my guess is that this is a bug in Rust 1.21.0 (<code class="language-plaintext highlighter-rouge">rustc 1.21.0 (3b72af97e 2017-10-09)</code>). However, if you <a href="http://play.integer32.com/?gist=10851a4f3ac6f986686256a5fe29bab0&amp;version=nightly">run this code with the Nightly version</a>, which the playground allows you to do, <code class="language-plaintext highlighter-rouge">sum += v;</code> does not throw that error. So my guess is that the issue has been fixed in the Nightly version.</p>
+
+<p><strong>Update</strong>: This bug was fixed in the next stable release. I have no evidence it was because of this blog post, so I assume it was just coincidence!</p>
+
+<p>For the record, in my confusion I did <a href="https://github.com/rust-lang-nursery/rust-clippy/issues/2233">file an issue with Clippy</a>, a tool that helps Rust users with hints. Clippy suggested I use <code class="language-plaintext highlighter-rouge">+=</code>.</p>
+
+<p>Later, thanks to <a href="https://mastodon.social/@seanlinsley/99028194647041640">a tip from Mastodon user seanlinsley</a>, I learned that Rust’s Iterator class <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.sum">has a handy <code class="language-plaintext highlighter-rouge">sum</code> method</a>, which makes the overall <code class="language-plaintext highlighter-rouge">check_if_board_full</code> function much cleaner:</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">check_if_board_full</span><span class="p">(</span><span class="n">b</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">[</span><span class="nb">i32</span><span class="p">])</span> <span class="k">-&gt;</span> <span class="nb">bool</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">sum</span><span class="p">:</span> <span class="nb">i32</span> <span class="o">=</span> <span class="n">b</span><span class="nf">.iter</span><span class="p">()</span><span class="nf">.sum</span><span class="p">();</span>
+    <span class="k">match</span> <span class="n">sum</span> <span class="p">{</span>
+        <span class="mi">45</span> <span class="k">=&gt;</span> <span class="k">return</span> <span class="k">true</span><span class="p">,</span>
+        <span class="mi">_</span>  <span class="k">=&gt;</span> <span class="k">return</span> <span class="k">false</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>You can also see here how Rust handles specifying the type of a function’s output– with a <code class="language-plaintext highlighter-rouge">-&gt;</code> (this function outputs a boolean of true or false– if the board is full or not. Fun!</p>
+
+<p>Think that’s what Rust is supposed to look like, if I may say so!</p>
+
+<h3 id="first-impressions-of-rust">First Impressions of Rust</h3>
+
+<p>Writing Rust was a really different– and sometimes trying– experience for me. I could see how the ’70s mainframe hacker could make me a more efficient programmer. It was interesting trying to learn what it wanted, what patterns it was trying to instill in me. I swear I wrote one of the functions parameters-to-bracket without an error! which felt pretty awesome– and hopeful. I kept wondering if, at some point relatively soon, I’d be able to write Rust without so many errors. But even Dunham, in the talk, warns that developers will hit errors, errors they won’t quite understand, for years.</p>
+
+<p>More realistically, I can also see that Rust’s enforced efficiency is overkill for anything I’d want to do. I don’t think I’ll be writing a browser from scratch any time soon. Put another way– I can’t see there being much I would want to write in Rust that I couldn’t write in Go.</p>
+
+<p>I like the idea of Rust. It comes out of Mozilla, it’s new, and the community seems smart and helpful with a respectful code of conduct. The compiler is strict, I see the advantage– if I were to submit a pull request another Rust developer would know my code didn’t have certain errors if it compiles. My understanding is that even a auditor of a cryptographic project could start with a leg up if it’s all in safe rust. But for me, of the two, I think Go is a more… comfortable, realistic language to go forward with, if I go forward with either of them.</p>
+
+<p>One thing I’ve avoided talking about here is what I’d want to do with either Go or Rust. I definitely understand that you can do more with Rust or Go than with Ruby or JavaScript, especially in creating desktop applications. I’d love to contribute to a desktop application like KeePassXC or something like that, more of which will hopefully be written in Go or Rust soon. And even if I don’t make any contributions to Go or Rust projects, at the very least learning a little Go and Rust has expanded my mind a bit.</p>
+
+<p>I can definitely see how throwing more time into improving my JavaScript is probably a more efficient use of my time, from a practical perspective. But sometimes it’s fun to try playing with some shiny, new things.</p>
+
+<h2 id="appendix-a-hello-world-in-go">Appendix A: Hello World in Go</h2>
+
+<p><code class="language-plaintext highlighter-rouge">touch hello.go</code> then…</p>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="n">main</span>
+
+<span class="k">import</span> <span class="s">"fmt"</span>
+
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"Hello, World!</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>To run this file, you can either build an executable with <code class="language-plaintext highlighter-rouge">go build hello.go</code> and then run the executable with <code class="language-plaintext highlighter-rouge">./hello.go</code>. Or you can just “run” that program, more similar to dynamic languages, with <code class="language-plaintext highlighter-rouge">go run hello.go</code>.</p>
+
+<h2 id="appendix-b-hello-world-in-rust">Appendix B: Hello World in Rust</h2>
+
+<h3 id="running-a-simple-rust-program-with-cargo-which-comes-installed-with-rust">Running a simple Rust program with Cargo (which comes installed with Rust)</h3>
+
+<p><a href="https://doc.rust-lang.org/book/second-edition/ch01-02-hello-world.html#hello-cargo">Best to consult the Book on this</a>, but here are the basics:</p>
+
+<p>Creating a new Cargo project: <code class="language-plaintext highlighter-rouge">cargo new hello_cargo --bin</code></p>
+
+<p>Your <code class="language-plaintext highlighter-rouge">main</code> function is going to be written in <code class="language-plaintext highlighter-rouge">src/main.rs</code>:</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nd">println!</span><span class="p">(</span><span class="s">"Hello, world!"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Note that the top level of your new Cargo project contains a Cargo.toml configuration file with some important stuff (again, see the Book).</p>
+
+<p>Compiling your project and running an executable:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd hello_cargo
+cargo build
+./target/debug/hello_cargo
+</code></pre></div></div>
+
+<p>“Build and execute src/main.rs”– this is probably what you’re going to be running often as you work on your code:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cargo run
+</code></pre></div></div>
+
+<h3 id="running-a-simple-rust-program-with-rustc-rather-than-cargo">Running a simple Rust program with rustc rather than Cargo</h3>
+
+<p>If you don’t want to use Cargo, here’s a more bare bones approach to running Rust:</p>
+
+<p>Create <code class="language-plaintext highlighter-rouge">hello_world/main.rs</code>:</p>
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fn</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nb">println</span><span class="o">!</span><span class="p">(</span><span class="s">"Hello, world!"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Save it, and then in the shell run:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rustc main.rs
+./main
+</code></pre></div></div>
+
+<h3 id="managing-versions-of-rust">Managing Versions of Rust</h3>
+
+<p>I used <a href="https://rustup.rs/">rustup</a> to manage my versions (or channels) of Rust.</p>
+
+<p>For my fellow Rubyists, <code class="language-plaintext highlighter-rouge">rustc</code> is like <code class="language-plaintext highlighter-rouge">ruby</code>, while <a href="https://rustup.rs/">rustup</a> is like <code class="language-plaintext highlighter-rouge">rvm</code> or <code class="language-plaintext highlighter-rouge">rbenv</code> (your version manager). <code class="language-plaintext highlighter-rouge">cargo</code> doesn’t really have a Ruby equivalent (unless you call it like <code class="language-plaintext highlighter-rouge">rails</code>, but it’s more lightweight), but I would recommend using it over <code class="language-plaintext highlighter-rouge">rustc</code>.</p>
+
+<p>The versions– called “channels”– of Rust that you can manage with <code class="language-plaintext highlighter-rouge">rustup</code> are stable, beta, and nightly. I did all my work for this project with stable, but as you can read above, I would have avoided a bug if I had used Nightly.</p>
+
+:ET

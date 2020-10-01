@@ -1,0 +1,67 @@
+I"�<p>About 18 months ago I wrote a post on my <a href="http://sts10.github.io/2014/02/14/my-current-coding-setup.html">apps, fonts, and color preferences</a> for my coding setup. Interestingly, not much has changed!</p>
+
+<p>I do now <a href="http://sts10.github.io/2015/08/07/from-terminal-vim-to-mac-vim.html">use MacVim</a> more often than Sublime Text, but I still use ST2 for some things.</p>
+
+<h3 id="colors-an-imperfect-understanding">Colors: An Imperfect Understanding</h3>
+
+<p>7 months ago, towards the beginning of my slow transition to Vim, I recreated my favorite Sublime Text theme to vim’s color format. I called it <a href="https://github.com/sts10/terminal_and_vim_settings/blob/master/mustard.vim">mustard.vim</a> and it goes in <code class="language-plaintext highlighter-rouge">~/.vim/colors/</code>, which you may have to <code class="language-plaintext highlighter-rouge">mkdir</code> yourself.</p>
+
+<!-- more -->
+
+<p>This color scheme system is not as smooth and simple as I’d like. Note that in my <code class="language-plaintext highlighter-rouge">mustard.vim</code> file we have one section called <code class="language-plaintext highlighter-rouge">GUI color definitions</code> and another called <code class="language-plaintext highlighter-rouge">Terminal color definitions</code>.</p>
+
+<p>From my understanding, only one of these sections is used by a given application. If the application supports GUI fonts/colors, that application uses the GUI colors and basically ignores the rest of the document.</p>
+
+<p>If the application does not support GUI colors (or in some cases, I think, if the user hasn’t specified for the application to use the GUI colors), it uses the terminal color definitions. Only console applications like OS X’s default Terminal and iTerm use these, from my understanding. When an application uses the terminal color settings, it relies wholly on the color choices set in the console application’s preferences.</p>
+
+<p><img src="http://i.imgur.com/FRNVXKE.png" alt="my current Terminal preferences" /></p>
+
+<p><img src="http://i.imgur.com/eHau3Dz.png" alt="my current iTerm2 color preferences" /></p>
+
+<p>Setting these colors in these GUI preference menus is far from ideal. When setting up a coding environment on a new machine, I do not want to be manually entering RGB codes into my consoles preference menu– I want to upload a text file into it (or better yet, place a text file into a certain directory) and have it all sorted.</p>
+
+<p>Applications that use the GUI section of the .vim color file solve this problem nicely, since the actual hex color codes are right there. So far the only application that I’m pretty sure uses these color codes is MacVim, which makes a lot of sense. I take comfort in the fact that at least what’s now become my main code-writing application will always use the exact colors specified in the mustard.vim file, regardless of my console application preferences.</p>
+
+<p><a href="https://www.iterm2.com/features.html">iTerm2 boasts support for 256 colors</a>, but I guess that’s not nearly enough to use real hex codes.</p>
+
+<h3 id="fonts">Fonts</h3>
+
+<p>Back in February ‘14 I had recently starting using <a href="http://dejavu-fonts.org/wiki/Download">Deja Vu Sans Mono</a> for Sublime Text. Now I use it for my console and for MacVim. Consistency!</p>
+
+<p>Just the other day, though, I got <a href="http://sublimetexttips.com/">a Sublime Text tips email</a> that featured a new coding font called <a href="https://github.com/chrissimpkins/Hack?__s=zqtsopr3dvarx5aep2ga">Hack</a>. Being naturally interested in fonts and my coding environment, I generally try out any coding font that looks decently good to me on first pass.</p>
+
+<p>From Hack’s About section:</p>
+
+<blockquote>
+  <p>No frills. No gimmicks. Hack is hand groomed and optically balanced to be a workhorse face for code.
+It has deep roots in the libre, open source typeface community and expands upon the contributions of the Bitstream Vera &amp; DejaVu projects. The face has been re-designed with a larger glyph set, modifications of the original glyph shapes (including distinct point styles and semi-bold punctuation weight in the regular set to make analphabetic characters less transparent), and meticulous attention to metrics (including numerous spacing adjustments to improve the rhythm of the face and the legibility of code at small text sizes)</p>
+</blockquote>
+
+<p>From this short description, and the samples in the GitHub readme, Hack looked pretty good to me, so I decided to try it out.</p>
+
+<p>First of all, I was happy to see that Hack is apparently based on, and looks very similar to my go-to coding font: DejaVu Sans Mono. Here’s a sample of Hack:</p>
+
+<p><img src="https://raw.githubusercontent.com/chrissimpkins/codeface/master/images/hack.png" alt="This is Hack" /></p>
+
+<p>And here’s DejaVu:</p>
+
+<p><img src="https://raw.githubusercontent.com/chrissimpkins/codeface/master/images/dejavu-sans-mono.png" alt="This is DejaVu Sans Mono" /></p>
+
+<p>For comparison, here’s <a href="http://www.fontsquirrel.com/fonts/droid-sans-mono">Droid Sans Mono</a>, which I used in Terminal for a time.</p>
+
+<p><img src="https://raw.githubusercontent.com/chrissimpkins/codeface/master/images/droid-sans-mono.png" alt="This is Droid Sans Mono" /></p>
+
+<p>In general I like Hack. But when it comes to a font that I’ll look at for hours every day, I have extremely high standards. DejaVu has survived a number of challengers in the past 18 months, and every time it does I realize a bit more how much it works for me.</p>
+
+<p>In my opinion, compared to DejaVu, Hack looks to have slightly increased line spacing, more stylized punctuation characters like asterisk, comma, exclamation point, question mark, and semi-colon, and a slightly thinner stroke.</p>
+
+<p>Also, the lowercase i in Hack is “swooped” to the right rather than DejaVu’s full feet/serif. (I’m not sure what the technical terms are here.) I now see that DejaVu has swoops rather than feet on lowercase t’s and l’s, so shouldn’t it be strange that it has feet on the lowercase i? Shouldn’t I prefer the uniformity of Hack in this case? Maybe I’m just used to the DejaVu i!</p>
+
+<p>Overall I’d say Hack is slightly more feminine than DejaVu, and I’ve always liked DejaVu for it’s straight-forwardness and heavier weight. I think I’ll continue to stick with DejaVu for now, but I’m glad I tried Hack. Again, you can download <a href="https://github.com/chrissimpkins/Hack?__s=zqtsopr3dvarx5aep2ga">Hack here</a> and <a href="http://dejavu-fonts.org/wiki/Download">DejaVu can be downloaded here</a>, both for free!</p>
+
+<p>2016 Update: Google also has nice, open source monospaced font called <a href="https://www.google.com/get/noto/#mono-mono">Noto Mono</a> that looks pretty good! Wish it had a slashed or dotted zero though…</p>
+
+<p><img src="https://noto-website.storage.googleapis.com/samples/mono-mono_en-Latn_400_normal.svg" alt="Noto Mono" /></p>
+
+<p>But yeah, I’m still going strong with Deja Vu Sans Mono.</p>
+:ET

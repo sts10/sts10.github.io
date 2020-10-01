@@ -1,0 +1,92 @@
+I"�<p>On <a href="http://reddit.com/r/vim">r/vim</a> and <a href="https://www.reddit.com/r/neovim">r/neovim</a> I’ve heard a lot about <a href="https://github.com/junegunn/fzf">fzf</a>, “A command-line fuzzy finder written in Go” by <a href="https://github.com/junegunn">junegunn</a> that plays well with Vim and Neovim.</p>
+
+<p>But I was finally inspired by <a href="http://tilvim.com/2016/01/06/fzf.html">this blog post</a>, which shows how you can use fzf to enable linewise completion in Vim, a feature I’d been looking to figure out for a bit.</p>
+
+<!-- more -->
+
+<p><img src="http://tilvim.com/img/fzflinewise.gif" alt="Vim GIFs FTW" /></p>
+
+<p>It works OK! But mostly I wanted to write this down as an installation guide.</p>
+
+<h2 id="on-vims-built-in-line-completion">On Vim’s built-in line-completion</h2>
+
+<p>So after doing all this and writing this post I found out that Vim has a built-in insertion mode line complete function, which by default is invoked by <code class="language-plaintext highlighter-rouge">&lt;C-x&gt;&lt;C-l&gt;</code>. I believe, like its word-wise companions, it only searches the current buffer. But it’s certainly far easier to get up and running than fzf, if indeed all you’re looking for is line-completion (and you can settle for only searching the current buffer as opposed to all open buffers).</p>
+
+<p>I successfully remapped this command to <code class="language-plaintext highlighter-rouge">&lt;S-Tab&gt;</code> (shift + tab), which I think works logically with <a href="https://github.com/ervandew/supertab">Super-Tab</a>.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>inoremap &lt;S-Tab&gt; &lt;C-x&gt;&lt;C-l&gt;
+</code></pre></div></div>
+
+<p>But! If you want your linewise auto-complete to search all open buffers, or if you want fzf for its many other features, here’s how I installed it.</p>
+
+<h2 id="installing-fzf">Installing fzf</h2>
+
+<p>First, from fzf repo, I <a href="https://github.com/junegunn/fzf#using-git-recommended">installed fzf using git and GitHub</a>. That apparently installs fzf on my system, the <code class="language-plaintext highlighter-rouge">fzf</code> executable, some Shell extensions, and the Vim/Neovim plugin.</p>
+
+<h2 id="fzf-install-script-targets-bashrc-but-not-bash_profile">fzf Install Script Targets .bashrc, but not .bash_profile</h2>
+
+<p>Now here’s where it went off the rails for me a bit. When I installed fzf (<code class="language-plaintext highlighter-rouge">~/.fzf/install</code>), I noticed that the <a href="https://github.com/junegunn/fzf/blob/master/install">install script</a> edited <code class="language-plaintext highlighter-rouge">~/.bashrc</code>. It added the following line:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span> <span class="nt">-f</span> ~/.fzf.bash <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">source</span> ~/.fzf.bash
+</code></pre></div></div>
+<p>On my system though, up until today, when I make changes concerning bash I edited <code class="language-plaintext highlighter-rouge">~/.bash_profile</code>. That may not be orthodox, but it’s how it worked for me. However I figured that if junegunn was targeting <code class="language-plaintext highlighter-rouge">bashrc</code> here it’s probably something I should source in my <code class="language-plaintext highlighter-rouge">bash_profile</code>. I accomplished this by adding the following lines to the end of my <code class="language-plaintext highlighter-rouge">~/.bash_profile</code> (having consulted <a href="http://www.joshstaiger.org/archives/2005/07/bash_profile_vs.html">this blog post</a>):</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="o">[</span> <span class="nt">-f</span> ~/.bashrc <span class="o">]</span><span class="p">;</span> <span class="k">then
+  </span><span class="nb">source</span> ~/.bashrc
+<span class="k">fi</span>
+</code></pre></div></div>
+
+<p>I guess the fzf install script makes the assumption that the <code class="language-plaintext highlighter-rouge">.bashrc</code> is sourced in <code class="language-plaintext highlighter-rouge">~/.bash_profile</code>, which isn’t that crazy of an assumption, but still one that wasn’t true for me when I began the installation process.</p>
+
+<h2 id="vim">Vim</h2>
+
+<p>But then I think I needed <a href="https://github.com/junegunn/vim-plug">vim-plug</a> (also written by junegunn!) to manage this thing, so I ended up adding these two lines to my .vimrc, one for <a href="https://github.com/junegunn/fzf">fzf</a> and another for <a href="https://github.com/junegunn/fzf.vim">fzf.vim</a>.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+</code></pre></div></div>
+
+<p>Then, for the line-completion, I added:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>imap &lt;C-f&gt; &lt;plug&gt;(fzf-complete-line)
+</code></pre></div></div>
+
+<p>So now, in insert mode, I can press control + f and fzf will run line-completion. I wanted to map it to <code class="language-plaintext highlighter-rouge">&lt;S-Tab&gt;</code> (shift + tab), but I coudln’t get it to work reliably in terminal Neovim.</p>
+
+<p>If it finds multiple matches in open buffers it opens a small horizontal split on the bottom for me to choose from.</p>
+
+<p>Since fzf doesn’t seem to work in MacVim (only in Neovim?), I put this remapping into my <code class="language-plaintext highlighter-rouge">if has("nvim")</code> conditional.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if has("nvim")
+  imap &lt;S-Tab&gt; &lt;plug&gt;(fzf-complete-line)
+endif
+</code></pre></div></div>
+
+<p>I guess I’d ideally make a new <code class="language-plaintext highlighter-rouge">if</code> statement for <code class="language-plaintext highlighter-rouge">if has("fzf")</code>, but I tried that and couldn’t get it to work.</p>
+
+<p>Since fzf opens in a <code class="language-plaintext highlighter-rouge">terminal</code> window in Neovim, I also freshened up my <code class="language-plaintext highlighter-rouge">tmap</code> settings in my <code class="language-plaintext highlighter-rouge">vimrc</code> to make that navigation a bit easier. (Note: Elsewhere I have <code class="language-plaintext highlighter-rouge">&lt;Space&gt;&lt;Space&gt;</code> mapped to <code class="language-plaintext highlighter-rouge">&lt;C-w&gt;&lt;C-p&gt;</code>, which goes to previous window.)</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if has("nvim")
+  tnoremap &lt;Space&gt;&lt;Space&gt; &lt;C-\&gt;&lt;C-n&gt;&lt;C-w&gt;&lt;C-p&gt;
+  tnoremap &lt;Esc&gt;&lt;Esc&gt; &lt;C-\&gt;&lt;C-n&gt;:q&lt;CR&gt;
+
+  autocmd BufWinEnter,WinEnter term://* startinsert
+  autocmd BufLeave term://* stopinsert
+ 
+  imap &lt;S-Tab&gt; &lt;plug&gt;(fzf-complete-line)
+endif
+</code></pre></div></div>
+
+<p>On r/neovim some users have <a href="https://www.reddit.com/r/neovim/comments/3oeko4/post_your_fzfvim_configurations/">shared their fzf/vim configurations</a>. Here’s <a href="https://github.com/euclio/vimrc/blob/master/plugins.vim#L207">a simple one</a> to use fzf as you would use <a href="http://github.com/ctrlpvim/ctrlp.vim">ctrlp</a>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>" Fuzzy file finder
+Plug 'junegunn/fzf', { 'dir': $XDG_DATA_HOME . '/fzf', 'do': 'yes n \| ./install' }
+let g:fzf_action = {
+      \ 'ctrl-s': 'split',
+      \ 'ctrl-v': 'vsplit'
+      \ }
+nnoremap &lt;c-p&gt; :FZF&lt;cr&gt;
+</code></pre></div></div>
+
+<p>I still have some exploring to do, but I wanted to get this down, since I didn’t find the fzf installation instructions super clear.</p>
+:ET

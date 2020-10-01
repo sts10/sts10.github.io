@@ -1,0 +1,66 @@
+I"�<p>The pace is starting to pick up! Today marked our first tepid steps into Ruby, introducing not only a new topic, but a new way of thinking required by the course: programming logic.</p>
+
+<p>This morning we got a quick intro to <a href="http://rspec.info/">RSPEC</a>, which is basically a way to test pieces of Ruby code. For the course, it works as an auto-grader of our work that we can run as many times as we like before turning in our code (we now submit our work via GitHub forking and pull-requesting).</p>
+
+<!-- more -->
+
+<p>After watching Avi go through the tedious process of merging and rebasing all of our student profiles from day 1 using Git, we broke for lunch.</p>
+
+<p>Then! Avi gave an awesome lecture called “Why Programming is Awesome” and later jumped into the basics of Ruby.</p>
+
+<p>I don’t really know how to describe Avi’s philosophical lens yet. Not that he’s unclear about his passions, just that I want to understand them better first. He’s just a really solid and enthusiastic fan of programming in general, and the Ruby language specifically. Like today in the lecture’s section on what coding is, he dropped this excerpt from Plato:</p>
+
+<blockquote>
+  <p>First perceiving and <strong>bringing together</strong> under <strong>one idea</strong> the <strong>scattered particulars</strong> so that one <strong>makes clear</strong> the particular thing which he <strong>wishes to do</strong>. Second, the <strong>separation</strong> of ideas into <strong>classes</strong>, by dividing it where the <strong>natural joints</strong> are, and not trying to break any part, after the manner of a bad carver…</p>
+</blockquote>
+
+<blockquote>
+  <p>… I love these processes of <strong>division</strong> and <strong>bringing together</strong>… and if I think any other man is able to see things that can <strong>naturally be collected into one</strong> and <strong>divided into many</strong>, him I will follow as if he were a god.</p>
+</blockquote>
+
+<blockquote>
+  <p>— Plato, <em>Phaedrus (Dialogue)</em> (Avi’s bolding)</p>
+</blockquote>
+
+<p>I majored in philosophy in college and have done some programming here and there before this course, but I never made or even considered there being such a connection between the two pursuits. In this light, both are processes of: an envisioning of something big, a breaking it down to understandable parts, and then a weaving into something new and more usable.</p>
+
+<p>Avi continued to explain that, to him, programming is “weird form of art where you don’t necessarily need to be starving.” It can be a weapon like Stuxnet, a method of curing disease through genetics and DNA coding, a valuable political asset for any politician, and a way of making millions of dollars through start-ups (if that’s what you want). But he said it in a way more inspiring way.</p>
+
+<blockquote>
+  <p>If you want to build a ship, don’t drum up the men to gather wood, divide the work, and give orders. Instead, teach them to yearn for the vast and endless sea.</p>
+</blockquote>
+
+<blockquote>
+  <p>— Antoine de Saint-Exupery, French poet and aviator</p>
+</blockquote>
+
+<p>After his talk about the vast sea (and a bit about <a href="http://en.wikipedia.org/wiki/Yukihiro_Matsumoto">the origins of Ruby</a>), Avi pivoted to the basics of Ruby, the primary language we’re here to learn.</p>
+
+<p>Later we jumped into more exercises in which we wrote Ruby code and tested it against RSPEC testing written by Avi and the TAs. The most interesting was FizzBuzz, <a href="http://c2.com/cgi/wiki?FizzBuzzTest">a common programming challenge</a>. The solution I turned in (embedded below) isn’t anything fancy, but it meets the specs we were given by the RSPEC code, and may give you a better idea of the task.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def fizzbuzz(num)
+	if num % 15 == 0 
+		return "FizzBuzz"
+	elsif num % 3 == 0 
+		return "Fizz"
+	elsif num % 5 == 0
+		return "Buzz"
+	else 
+		return nil 
+	end
+end
+</code></pre></div></div>
+
+<p>However, our small group later found a one-line function that also worked, with a few assists from the TAs:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def fizzbuzz(num)
+	"#{'Fizz' if (num % 3).zero?}#{'Buzz' if (num % 5).zero?}".scan(/\w+/)[0]
+end
+</code></pre></div></div>
+
+<p>Quick explanation: the two bits between the curly brackets { } gets evaluated as Ruby code. That first bit, 
+	‘Fizz’ if (num % 3).zero? 
+basically prints the word “Fizz” if num (the result of the number we’re testing) <a href="http://en.wikipedia.org/wiki/Modulo_operation">modulus</a> 3 = 0. Likewise it prints “Buzz” right after that if it’s divisible by 5. If the number is divisible by 3 and 5, both “Fizz” and “Buzz” get printed right next to each other (no space). (The scan method at the end is a wacky thing a TA showed us to ensure the function returns nil when the number is not divisible by 3 or 5.</p>
+
+<p><em>Programming Note</em>: This is the Octopress blog I mentioned in an earlier post on <a href="http://schlinkblog.tumblr.com/">my Tumblr</a>. I’ve decided to give it a try, mostly because it handles markdown well and I wrote <a href="https://gist.github.com/sts10/8837128">a custom bash function</a> to launch a new post in my default <a href="http://daringfireball.net/projects/markdown/">Markdown</a> editor (<a href="http://writer.pro/">Writer Pro</a>) from anywhere in the terminal. We’ll see where we are in a week or two.</p>
+:ET

@@ -1,0 +1,345 @@
+I"�<p>This post is a bit of a sequel to my post about <a href="https://sts10.github.io/2016/11/07/installing-ubuntu-on-my-old-macbook-pro.html">installing Ubuntu on my old Macbook Pro</a>. This is just a collection of notes on improvements I’ve made to my Ubuntu 16.04 Unity installation, the bulk of which has been changing my desktop environment from Unity to other options.</p>
+
+<p>Hope this helps you!</p>
+
+<h2 id="application-launcher">Application Launcher</h2>
+
+<p>On macOS I make frequent use of <a href="https://www.alfredapp.com/">Alfred</a> as an application launcher. Ubuntu’s Unity desktop environment sort of had something like that, which you can initiate by pressing the command key on its own at any time. But on other desktop environment the default “launcher” tool wasn’t similar to Alfred enough for my liking.</p>
+
+<p>So I found <a href="https://askubuntu.com/questions/203851/any-search-tool-for-lxde-menu/203852#203852">this askubuntu answer</a> that recommends installing an application called Synapse by running <code class="language-plaintext highlighter-rouge">sudo apt-get install synapse</code>. By default the launcher is invoked by hitting <code class="language-plaintext highlighter-rouge">ctrl + space</code>, but I changed it to <code class="language-plaintext highlighter-rouge">alt+Enter</code> by launching Synapse and clicking on the not-super-obvious round button on the right side of the pop-up display and clicking “Preferences”. Works great on all the desktop environments I tried (though its speed varied a little).</p>
+
+<h2 id="ditching-unity-desktop-environment">Ditching Unity Desktop Environment</h2>
+
+<h3 id="whats-a-desktop-environment">What’s a Desktop Environment?</h3>
+
+<p>In the context of an operating system, a desktop environment (sometimes abbreviated DE) is essentially the GUI part of your operating system. On OS X, the desktop Environment is called Aqua, and in Windows it’s called Aero, however in both cases users cannot change it. But with Linux, you can change your desktop environment, and pretty easily. Examples are GNOME, KDE, LXDE, Xfce, Unity, MATE, Cinnamon, etc. Note that these are different than Linux <em>distributions</em> or “distros” (examples of which are Ubuntu, Arch, Mint, Debian, Manjaro, etc.). From what I understand, some desktop environments work better with certain distributions than others, one clue of which is what desktop environment a given distribution comes with – for example Ubuntu ships with Unity, Manjaro ships with either (i.e. officially supports both) KDE or Xfce, etc.</p>
+
+<h3 id="why-i-wanted-to-change-my-desktop-environment">Why I Wanted to Change my Desktop Environment</h3>
+
+<p>To recap, I started with an old MacBook Pro with 2 GB of RAM running Ubuntu 16.04 LTS with Unity. With only 2 GB of RAM Unity ran pretty sluggishly. So to avoid the high memory usage of the Unity desktop environment, I explored installing a more lightweight desktop environment. I had a gist that Unity was a bit of a memory hog compared to other desktop environments. I also spotted <a href="https://www.reddit.com/r/linux/comments/5l39tz/linux_distros_ram_consumption_comparison_updated/?st=ixpgu5wy&amp;sh=67b8f57f">this Reddit post</a> that compares some lightweight distros in terms of RAM consumption.</p>
+
+<p>Note: When I installed new desktop environments (a) I was still running Ubuntu as my Linux distribution– Ubuntu was my operating system the whole time. Also note that (b) I didn’t lose any files or installed programs, and (c) I can easily switch between installed desktop environments by choosing from them in my computer login screen. You don’t even need to restart the computer to switch environments.</p>
+
+<p>From that <a href="https://www.reddit.com/r/linux/comments/5l39tz/linux_distros_ram_consumption_comparison_updated/?st=ixpgu5wy&amp;sh=67b8f57f">list</a>, I first installed Ubuntu’s LXDE desktop environment (called Lubuntu). The size of the installation was about 343 mb. I later installed the Xfce desktop environment, which was probably big larger and uses a little more memory, but I like it considerably more.</p>
+
+<p>Also, a seemingly big advantage Xfce has over the other two I’ve tried (LXDE and Unity) is its popularity with other distros, including well-regarded “advanced” distros like Debian and Manjaro. From what I’ve gathered this effectively means that Xfce is a desktop environment users can “grow with”, i.e. you can take your knowledge, comfort, and configuration with you to other distributions that are made to work well with it (unlike Unity, which seems to be only used with Ubuntu, and only until Ubuntu 18.04 which <a href="http://www.omgubuntu.co.uk/2017/04/ubuntu-18-04-ship-gnome-desktop-not-unity">will come with the GNOME desktop environment</a> instead). I think the same could be said of KDE and GNOME, but those seem to be a little heavier.</p>
+
+<h2 id="xfce">Xfce</h2>
+
+<p>From <a href="https://www.xfce.org/">xfce.org</a>: “Xfce is a lightweight desktop environment for UNIX-like operating systems. It aims to be fast and low on system resources, while still being visually appealing and user friendly.” There’s also <a href="https://www.reddit.com/r/xfce/">a subreddit</a>. Let’s get started!</p>
+
+<h3 id="installing-xfce-on-ubuntu">Installing Xfce on Ubuntu</h3>
+
+<ol>
+  <li>In a terminal, run <code class="language-plaintext highlighter-rouge">sudo apt-get install xfce4 xfce4-goodies</code></li>
+  <li>Restart your computer</li>
+  <li>At login screen, select “xfce session” from the dropdown menu in the top-right. Then login as usual</li>
+  <li>You then likely want to run <code class="language-plaintext highlighter-rouge">sudo apt update &amp;&amp; sudo apt upgrade</code></li>
+</ol>
+
+<h3 id="xfce-what-youre-looking-at-straight-out-of-the-box">Xfce: What You’re Looking at Straight Out of the Box</h3>
+
+<ul>
+  <li>“Whisker menu” is the Start-menu-like menu in the top left</li>
+  <li>A nice, MacOS-like dock on the bottom with GNOME Terminal, File Manager, Web Browser (default), and a search</li>
+</ul>
+
+<h3 id="xfce-settings">Xfce Settings</h3>
+
+<p>There’s a nice Settings menu in Whisker menu &gt; Settings &gt; Settings Manager. Here are some the things I did in that menu right off (personal preference of course):</p>
+
+<ul>
+  <li>In Window Manager &gt; Keyboard, I set up a bunch of window resizing keyboard shortcuts. Nice to see there’s a GUI menu of this built-in to the environment!</li>
+  <li>In Session and Startup &gt; Application Autostart, I entered a custom command to remap caps lock to control. I entered the following:</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Name: remap caps
+Description: remap caps lock to control
+Command: /usr/bin/setxkbmap -option "ctrl:nocaps"
+</code></pre></div></div>
+
+<ul>
+  <li>In Mouse and Touchpad &gt; Devices &gt; Touchpad, I enabled “Disable touchpad while typing” and I disabled “Tap touchpad to click”.</li>
+</ul>
+
+<h3 id="xfce-memory-usage">Xfce Memory Usage</h3>
+
+<p>On Ubuntu (maybe all Linux distros?) you can check how much RAM you have available by running <code class="language-plaintext highlighter-rouge">free -m</code> in the terminal. Thanks to <a href="http://www.linuxatemyram.com/">this site</a>, I knew to look for the value under “available” to get an accurate estimate of how many megabytes of my memory were “free”.</p>
+
+<p>With Firefox, Terminal, and Settings open, I’ve got about 980 MB out of 2GB RAM “available”. (This is compared to abut 1180 MB available when using Lubuntu, which makes sense as I’ve read that Xfce/Xubuntu is slightly heavier than Lubuntu.)</p>
+
+<h3 id="xfce-or-xubuntu">Xfce or Xubuntu?</h3>
+
+<p>Honestly I’m not sure whether it’s more proper to say I’m running “Xfce on Ubuntu” or “Xubuntu”, or even if there’s a real difference. I prefer saying “Xfce on Ubuntu”, as I never installed anything called <a href="https://xubuntu.org/">Xubuntu</a>, and when I run <code class="language-plaintext highlighter-rouge">screenfetch</code> my OS is listed as “Ubuntu 16.04 xenial”. But if you have a better handle of this please leave a comment!</p>
+
+<h3 id="customizing-appearance-of-xfce-ubuntu">Customizing Appearance of Xfce (Ubuntu)</h3>
+
+<p>Customizing the look of your desktop environment may seem like an afterthought to you, but I’ve come to realize it’s at least a little important in how you use and approach your computer. On Mac such things aren’t a big deal because the new OSs also update the look and feel of the environment, but I found that even my new installation of Xfce (and LXDE) looked straight out of 2000 if not earlier. Below I outline some of the tweaks that I made to my Xfce environment to bring it “up to speed” aesthetically.</p>
+
+<!-- ![my xfce desktop](https://sts10.github.io/img/xfce.png) -->
+<p><img src="../../img/axiom-screenshot.png" alt="my xfce desktop" /></p>
+
+<h4 id="desktop-background-image">Desktop Background Image</h4>
+
+<ol>
+  <li>Pick one (I found one I liked <a href="https://www.buzzfeed.com/jessicaprobus/26-remarkably-soothing-desktop-backgrounds?utm_term=.uhwBX0qylL#.vxgE1Z8Yar">here</a>).</li>
+  <li>Download the image file to your Pictures folder.</li>
+  <li>Go to Settings Manager &gt; Desktop &gt; Background. In bottom-right change Folder to Pictures and find your desired background.</li>
+</ol>
+
+<h4 id="theme">“Theme”</h4>
+
+<p>I went with axiom, which I got <a href="https://www.xfce-look.org/p/1016679/">here</a>. To install it:</p>
+
+<ol>
+  <li>I downloaded <a href="https://www.xfce-look.org/p/1016679/">the tar file</a>.</li>
+  <li>In terminal I ran <code class="language-plaintext highlighter-rouge">mkdir ~/.themes</code></li>
+  <li>I then extracted two directories from the tar file called “axiom” and “axiomd”, and then moved them both into the new <code class="language-plaintext highlighter-rouge">~/.themes</code> directory.</li>
+  <li>Go to Settings Manager &gt; Appearance and choose either axiom or axiomd</li>
+  <li>Then is Settings Manager &gt; Window Manager &gt; Style and select either axiom or axiomd</li>
+</ol>
+
+<h4 id="icons">Icons</h4>
+
+<p>I chose “Paper” icons for now, which you can find download instructions for on <a href="https://snwh.org/paper/download">the offical website</a>. After running those updates, I went to Settings Manager &gt; Appearance &gt; Icons and selected Paper.</p>
+
+<h4 id="login-window">Login Window</h4>
+
+<p>Go to Settings Manager &gt; LightDM GTK + Greeter Settings and select the theme and icon set you like. You can also change your user image or remove it all together. Unfortunately, for me, axiom was not available here, so I went with Adwaita for now.</p>
+
+<p>Note: <a href="https://www.youtube.com/watch?v=GR2y0xOIIdI">This video</a> helped me quite a bit:</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/GR2y0xOIIdI" frameborder="0" allowfullscreen=""></iframe>
+
+<h4 id="font">Font</h4>
+
+<p>I’m going with <a href="https://www.google.com/get/noto/">Noto Sans</a> for now (the actual choice says “Noto Sans CJK JP”). I selected this font in Settings Manager &gt; Appearance &gt; Fonts. I also selected basically every where else I encountered a choice of font in Settings.</p>
+
+<h4 id="panels">Panels</h4>
+
+<p>Odds are you Panel 1 is on top of your screen, and panel 2 is the dock-like panel that I think starts at the bottom of your screen.</p>
+
+<p>For customizing Panel 1, I followed some of the instructions in the first minute of <a href="https://www.youtube.com/watch?v=tJQ0y2XMoMw">this video</a>. I set the mode to Vertical, which puts in on the left, increased transparency, and made it 48 pixels wide, and had it never hide. Then, in Items &gt; Applications Menu I deselected “show button title” and changed the image. In Items &gt; Window Buttons I deselected “Show button labels”, selected “Show flat buttons”, deselected “Show handle”, and set Window grouping to always. The end result is pretty similar to the Unity bar on the left-hand side. We’ll see if I stick with it.</p>
+
+<p>I’m not sure what I want out of panel 2 (the dock) yet, so I set it to be pretty small and have it hide intelligently.</p>
+
+<h3 id="switching-to-paper-theme">Switching to Paper theme</h3>
+
+<p>I did some more fiddling today and here’s what I’ve got now:</p>
+
+<p><img src="../../img/paper-screenshot.png" alt="paper theme screenshot" /></p>
+
+<p>Basically I put panel 1 up top, switch the battery level item to the power management icon, and used the <a href="https://snwh.org/paper/download">Paper theme</a> as well as the Paper icon, though from the Neofetch display in the screenshot it looks like it’s a GTK2 theme, meaning that it won’t work with GTK3 apps(?)</p>
+
+<p><a href="https://www.reddit.com/r/wallpapers/comments/5blz1j/lowpoly_planet/?st=j1v38smk&amp;sh=bb87167d">Here’s</a> where I got the new wallpaper (seems like r/wallpapers is a good sub). I also switched the Whisker menu icon for a generic app launcher icon (top right).</p>
+
+<p>Overall it’s a bit darker than I’m used to, but I do like how the theme matches the wallpaper. I’m tempted to find a matching Vim colorscheme, but that’ll be for another day.</p>
+
+<h2 id="lxdelubuntu">LXDE/Lubuntu</h2>
+
+<h3 id="installing-lxdelubuntu">Installing LXDE/Lubuntu</h3>
+
+<p>Before installing Xfce, I gave Lubuntu/LXDE a shot. It did consume less memory, but I found the UI a bit clunky and it was a little less intuitive to get things working like I wanted. But if you need a really light weight desktop environment, it might work for you.</p>
+
+<p>To install Lubuntu, I ran <code class="language-plaintext highlighter-rouge">sudo apt-get install lubuntu-desktop</code>.</p>
+
+<p>After installing the Lubuntu desktop environment, you want to run the software updater (you can also update software in the Terminal by running <code class="language-plaintext highlighter-rouge">sudo apt update &amp;&amp; sudo apt upgrade</code>). Then restart the computer (that seems to have been pretty important), and at the login screen choose Lubuntu (or LXDE… that’s another option and I’m not sure what the difference is).</p>
+
+<h3 id="lubuntu-memory-usage">Lubuntu Memory Usage</h3>
+
+<p>With my terminal and Firefox running on Lubuntu, I have about 1187 MB RAM of my 2 GB available, as opposed to Ubuntu, which generally only left about 700 or 800 MB available when I was running a couple of programs (not a very scientific test, I know).</p>
+
+<h2 id="appendix">Appendix</h2>
+
+<p>Here’s a bunch of little tasks I took notes on. Figure I’d put them here mostly for my personal reference in case I have to do them again on another installation, but you may find them helpful.</p>
+
+<h3 id="installing-rbenv-on-ubuntu-1604">Installing rbenv on Ubuntu 16.04</h3>
+
+<p>We’re attempting to install <a href="https://github.com/rbenv/rbenv">rbenv</a> via the <a href="https://github.com/rbenv/rbenv#basic-github-checkout">“Basic GitHub Checkout” method</a>.</p>
+
+<p>I think we’re also going to want <a href="https://github.com/rbenv/ruby-build#readme">ruby-build</a> plugin. I DON’T think I’m going to want <a href="https://github.com/jf/rbenv-gemset">rbenv-gemset</a>?</p>
+
+<h4 id="installing-rbenv">Installing rbenv</h4>
+
+<p>As mentioned above, we’re going to install rbenv via the <a href="https://github.com/rbenv/rbenv#basic-github-checkout">“Basic GitHub Checkout” method</a>. I reproduce them below, but you should consult the latest instructions for Ubuntu on that GitHub page.</p>
+
+<p>Clone down rbenv:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+</code></pre></div></div>
+
+<p>Make it more efficient:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd ~/.rbenv &amp;&amp; src/configure &amp;&amp; make -C src
+</code></pre></div></div>
+
+<p>Add rbenv to your PATH:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>echo 'export PATH="$HOME/.rbenv/bin:$PATH"' &gt;&gt; ~/.bashrc
+</code></pre></div></div>
+
+<p>And finally run this init script:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~/.rbenv/bin/rbenv init
+</code></pre></div></div>
+
+<p>Following instructions from the init script run, I added <code class="language-plaintext highlighter-rouge">eval "$(rbenv init -)"</code> to my <code class="language-plaintext highlighter-rouge">~/.bashrc</code>, just <em>below</em> the <code class="language-plaintext highlighter-rouge">export PATH="$HOME/.rbenv/bin:$PATH"</code> line that we added with the echo command above.</p>
+
+<p>Now restart your terminal and/or run <code class="language-plaintext highlighter-rouge">source ~/.bashrc</code>.</p>
+
+<p>Check your rbenv installation by running <code class="language-plaintext highlighter-rouge">type rbenv</code>. It should say it’s a function.</p>
+
+<h4 id="installing-the-ruby-build-plugin">Installing the ruby-build plugin</h4>
+
+<p>Wanting to build the latest version of Ruby a nice and clean way, I installed <a href="https://github.com/rbenv/ruby-build#readme">ruby-build</a> by running <code class="language-plaintext highlighter-rouge">git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build</code></p>
+
+<h4 id="installing-a-version-of-ruby-using-rbenv-some-problems">Installing a version of Ruby using rbenv (some problems)</h4>
+
+<p>Now we can install some versions of Ruby using rbenv.</p>
+
+<p><code class="language-plaintext highlighter-rouge">rbenv install --list</code> gives us all available versions to install.</p>
+
+<p>I’m going with 2.3.3, so I ran <code class="language-plaintext highlighter-rouge">rbenv install 2.3.3</code>. It took a long time to install and then told my the build failed. It suggested running <code class="language-plaintext highlighter-rouge">apt-get install -y libreadline-dev</code> so I did that (prefaced with <code class="language-plaintext highlighter-rouge">sudo</code>) and that software seemed to install successfully.</p>
+
+<p>On second attempt I ran <code class="language-plaintext highlighter-rouge">rbenv install --verbose 2.3.3</code> so that I could better see what’s going on (turns out, it’s a lot!). Success this time!</p>
+
+<p>Once that’s all installed, I opened a new gnome-terminal window. I was greeted by this shitty message at the top of the terminal window:</p>
+
+<blockquote>
+  <p>The program ‘rbenv’ is currently not installed. You can install it by typing: <code class="language-plaintext highlighter-rouge">sudo apt install rbenv</code></p>
+</blockquote>
+
+<p>but I learned that this can be temporarily solved be running <code class="language-plaintext highlighter-rouge">source ~/.profile</code>. And that it will be solved permanently once you restart Ubuntu/Lubuntu (source: <a href="https://github.com/rbenv/rbenv/issues/424">this GitHub issue</a>).</p>
+
+<p>Then I had to set Ruby v. 2.3.3 as my global version of Ruby, which I did with <code class="language-plaintext highlighter-rouge">rbenv global 2.3.3</code>. After that, <code class="language-plaintext highlighter-rouge">ruby --version</code> gave me the familiar: <code class="language-plaintext highlighter-rouge">ruby 2.3.3p222 (2016-11-21 revision 56859) [x86_64-linux]</code></p>
+
+<h4 id="installing-gems-with-rbenv">Installing gems with rbenv</h4>
+
+<p>I definitely want to install the “bundler” gem. To do this, I ran: <code class="language-plaintext highlighter-rouge">gem install bundler</code>, just like with RVM.</p>
+
+<p>From there things seem to be just fine. Installed gems just work so far.</p>
+
+<h3 id="using-pidgin-with-a-google-account-and-setting-up-otr">Using Pidgin with a Google Account, and Setting Up OTR</h3>
+
+<p>Pidgin comes installed with Ubuntu 16.04. To add my existing Google Account, I followed the steps outlined in <a href="https://stackoverflow.com/questions/28681341/how-to-add-google-talk-hangouts-to-pidgin-chat-client/33898893#33898893">this Stack Overflow answer</a>.</p>
+
+<p>To summarize:</p>
+
+<p>In Pidgin, add a new account. Set the Protocol to “Google Talk”, username to your Google username, and the Domain to “gmail.com”.</p>
+
+<p>For the password you’ll need to create a dedicated app password. You can do that <a href="https://security.google.com/settings/security/apppasswords">in your Google accounts Security &gt; App Passwords section</a>. When creating the new app password, set “app” to “other” and call it something like “linux pidgin”– it doesn’t matter what you call it. Optionally, if on a secure computer, tick the “Remember password” checkmark. (Warning: This will mean your new app password will be stored in plain text in <code class="language-plaintext highlighter-rouge">~/.purple/accounts.xml</code>.) Leave “Resource” and “Local Alias” blank.</p>
+
+<h4 id="installing-and-enabling-otr">Installing and Enabling OTR</h4>
+
+<p>Once my Google account was successfully added, I installed the Pidgin-otr plugin by running <code class="language-plaintext highlighter-rouge">sudo apt-get install pidgin-otr</code> in terminal. To enable and setup OTR, I followed <a href="https://ssd.eff.org/en/module/how-use-otr-linux">this EFF guide</a>. That guide also describes how to install the otr plugin through the Ubuntu Software manager if you’re more into GUIs (see the early steps of that EFF guide).</p>
+
+<h4 id="further-pidgin-customizations">Further Pidgin Customizations</h4>
+
+<p>Some of my contacts/buddies set there status to “offline” nearly all the time, even when they’re actually there.</p>
+
+<p>To display offline buddies, go to Buddies &gt; Show &gt; Offline Buddies. There are more preferences, like muting sounds, in Tools &gt; Preferences.</p>
+
+<p>Not sure how to disable the pop up notifications yet though.</p>
+
+<h3 id="how-to-install-neovim-on-ubuntu-1604">How to Install Neovim on Ubuntu 16.04</h3>
+
+<p>I’m using Ubuntu 16.04 and we’re assuming that we’re going to be using gnome-terminal. I couldn’t figure out how to get HEX colors in Vim when using either Xfce’s default terminal or Lubuntu’s default Terminal application, LXTerminal. Plus, the version of Vim on my system didn’t come with system clipboard support (???).</p>
+
+<p>Thus I took some steps to make Gnome terminal the default Terminal application and installed Neovim.</p>
+
+<p><strong>Note:</strong> If you’re looking for info on installing plain Vim, see below.</p>
+
+<h4 id="installation">Installation</h4>
+
+<p>First, we’re going to want to install git in order to use vim-plug later: <code class="language-plaintext highlighter-rouge">sudo apt install git</code></p>
+
+<p>Next, I went over to <a href="https://github.com/neovim/neovim/wiki/Installing-Neovim#ubuntu">the Ubuntu section of the Neovim installation page</a></p>
+
+<p>Assuming I needed this dependency, I probably ran: <code class="language-plaintext highlighter-rouge">sudo apt-get install software-properties-common</code></p>
+
+<p>I then chose the unstable version: https://launchpad.net/%7Eneovim-ppa/+archive/ubuntu/unstable</p>
+
+<p>To add the PPA to my system, I ran</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo add-apt-repository ppa:neovim-ppa/unstable
+sudo apt-get update
+</code></pre></div></div>
+
+<p>I then installed Neovim from this PPA by running <code class="language-plaintext highlighter-rouge">sudo apt-get install neovim</code>. I think the <code class="language-plaintext highlighter-rouge">nvim</code> command worked after that.</p>
+
+<h4 id="critical-changes-to-vim-config-file">Critical changes to Vim config file</h4>
+
+<p>First, since on Lubuntu I’m likely only going to use Neovim and not Vim, I renamed my vimrc to <code class="language-plaintext highlighter-rouge">init.vim</code> and put it in <code class="language-plaintext highlighter-rouge">~/.config/nvim/</code> (which I may have had to create myself).</p>
+
+<p>I then changed my <a href="https://github.com/junegunn/vim-plug">vim-plug</a> call to download my plugins to <code class="language-plaintext highlighter-rouge">~/.config/nvim/plugged</code>: <code class="language-plaintext highlighter-rouge">call plug#begin('~/.config/nvim/plugged')</code></p>
+
+<p>I could have chosen to set vim-plug to download plugins to another directory somewhere in <code class="language-plaintext highlighter-rouge">~/.local/</code>, which may have kept the <code class="language-plaintext highlighter-rouge">~/.config</code> directory closer to what I assume is its intended purpose of just being configuration files, and not actual software.</p>
+
+<p>Also, I had to redo this mappings that open my vim config file:</p>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">" Quickly open a vertical split of my VIMRC and source my VIMRC</span>
+nnoremap <span class="p">&lt;</span><span class="k">silent</span><span class="p">&gt;</span> <span class="p">&lt;</span>leader<span class="p">&gt;</span>ev <span class="p">:</span><span class="k">vs</span> $MYVIMRC<span class="p">&lt;</span>CR<span class="p">&gt;</span>
+nnoremap <span class="p">&lt;</span><span class="k">silent</span><span class="p">&gt;</span> <span class="p">&lt;</span>leader<span class="p">&gt;</span><span class="k">sv</span> <span class="p">:</span><span class="k">so</span> $MYVIMRC<span class="p">&lt;</span>CR<span class="p">&gt;</span>
+</code></pre></div></div>
+
+<p>I also made sure that the following settings were specified in my init.vim:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>set termguicolors
+set guicursor=
+set mouse=
+</code></pre></div></div>
+
+<p>Instead of that last one you might need to use <code class="language-plaintext highlighter-rouge">autocmd BufEnter * set mouse=</code>. It’s also a good idea to consult <a href="https://github.com/neovim/neovim/wiki/Following-HEAD">Neovim’s Following Head page</a> to see if anything else might break.</p>
+
+<h4 id="system-clipboard">System Clipboard</h4>
+
+<p>Within Neovim I ran <code class="language-plaintext highlighter-rouge">:CheckHealth</code> which kindly informed me that to get system clipboard support, I’d need to install a program called <a href="https://apps.ubuntu.com/cat/applications/xsel/">XSel</a>. So back on the terminal I ran <code class="language-plaintext highlighter-rouge">sudo apt install xsel</code> and then restarted my terminal.</p>
+
+<p>Then in my <code class="language-plaintext highlighter-rouge">init.vim</code> I figured out through trial and error that I needed to use the <code class="language-plaintext highlighter-rouge">+</code> register to access the system clipboard, rather than <code class="language-plaintext highlighter-rouge">*</code> that I used on MacOS:</p>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">" use leader to interact with the system clipboard</span>
+nnoremap <span class="p">&lt;</span>Leader<span class="p">&gt;</span><span class="k">p</span> "<span class="p">+]</span><span class="k">p</span>
+nnoremap <span class="p">&lt;</span>Leader<span class="p">&gt;</span>P "<span class="p">+]</span>P
+
+nnoremap <span class="p">&lt;</span>Leader<span class="p">&gt;</span><span class="k">y</span> <span class="p">:</span><span class="k">y</span><span class="p">+&lt;</span><span class="k">cr</span><span class="p">&gt;</span>
+nnoremap <span class="p">&lt;</span>Leader<span class="p">&gt;</span><span class="k">c</span> ^"<span class="p">+</span><span class="k">c</span>$
+nnoremap <span class="p">&lt;</span>Leader<span class="p">&gt;</span><span class="k">d</span> ^"<span class="p">+</span><span class="k">d</span>$
+
+vnoremap <span class="p">&lt;</span>Leader<span class="p">&gt;</span><span class="k">y</span> "<span class="p">+</span><span class="k">y</span>
+vnoremap <span class="p">&lt;</span>Leader<span class="p">&gt;</span><span class="k">c</span> "<span class="p">+</span><span class="k">c</span>
+vnoremap <span class="p">&lt;</span>Leader<span class="p">&gt;</span><span class="k">d</span> "<span class="p">+</span><span class="k">d</span>
+</code></pre></div></div>
+
+<p>Though strangely, custom mappings that use the systemclipboard register still work with the <code class="language-plaintext highlighter-rouge">*</code> rather than the <code class="language-plaintext highlighter-rouge">+</code>:</p>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">" place enter file on system clipboard</span>
+nnoremap <span class="p">&lt;</span>Leader<span class="p">&gt;</span><span class="k">a</span> <span class="p">:</span>%<span class="k">y</span>*<span class="p">&lt;</span><span class="k">cr</span><span class="p">&gt;</span>
+
+<span class="c">" In markdown files, Control + a surrounds highlighted text with square</span>
+<span class="c">" brackets, then dumps system clipboard contents into parenthesis</span>
+autocmd <span class="nb">FileType</span> markdown vnoremap <span class="p">&lt;</span><span class="k">c</span><span class="p">-</span><span class="k">a</span><span class="p">&gt;</span> <span class="p">&lt;</span>Esc<span class="p">&gt;</span>`<span class="p">&lt;</span><span class="k">i</span><span class="p">[&lt;</span>Esc<span class="p">&gt;</span>`<span class="p">&gt;</span><span class="k">la</span><span class="p">](&lt;</span>Esc<span class="p">&gt;</span>"*<span class="p">]</span><span class="k">pa</span><span class="p">)&lt;</span>Esc<span class="p">&gt;</span>
+</code></pre></div></div>
+
+<h4 id="other-things-to-consider">Other Things To Consider</h4>
+
+<p>I have Lubuntu installed on an old MacBook, whose track pad sometimes gets triggered when I’m typing. Thus in this Vim configuration I chose to disable my mouse</p>
+
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">" disable mouse</span>
+autocmd <span class="nb">BufEnter</span> * <span class="k">set</span> <span class="nb">mouse</span><span class="p">=</span>
+</code></pre></div></div>
+
+<h4 id="some-notes-on-vim-not-neovim">Some Notes on Vim (not Neovim)</h4>
+
+<p>As of this writing, you can install Vim 7.4.X with something like <code class="language-plaintext highlighter-rouge">sudo apt-get install vim</code>. To install, Vim 8 currently you need to use <a href="http://tipsonubuntu.com/2016/09/13/vim-8-0-released-install-ubuntu-16-04/">a PPA</a>.</p>
+
+<p>The 7.4.X version I got from <code class="language-plaintext highlighter-rouge">sudo apt-get install vim</code> does not come with system clipboard support, and I had trouble getting the clipboard to work with that version of 8 from the PPA, so I went with Neovim. Though you can have both installed, with their own configurations, pretty easily.</p>
+
+<h3 id="installing-pip-and-magic-wormhole-on-lubuntu-1604">Installing Pip and Magic Wormhole on Lubuntu 16.04</h3>
+
+<h4 id="python">Python</h4>
+<p>Python 2 and Python 3 come with Ubuntu/Lubuntu. <code class="language-plaintext highlighter-rouge">python</code> calls v 2.7.12 and <code class="language-plaintext highlighter-rouge">python3</code> calls 3.5.2.</p>
+
+<h4 id="installing-pip">Installing pip</h4>
+<p>I think you can install regular pip by running: <code class="language-plaintext highlighter-rouge">sudo apt install python-pip</code> and then upgrading it with <code class="language-plaintext highlighter-rouge">pip install --upgrade pip</code>. I’m not sure whether, after doing this, pip is tied to python 2 or 3. My guess is v 2, which is fine.</p>
+
+<h4 id="installing-magic-wormhole">Installing Magic Wormhole</h4>
+<p>To install <a href="https://github.com/warner/magic-wormhole#installation">magic-wormhole</a>, a CLI to “get things from one computer to another, safely”, I needed to install some other stuff. They suggest installing all at once with <code class="language-plaintext highlighter-rouge">apt-get install python-pip build-essential python-dev libffi-dev libssl-dev</code>. I likely could have run that command without <code class="language-plaintext highlighter-rouge">python-pip</code>.</p>
+
+<p>I was then able to install magic-wormhole with <code class="language-plaintext highlighter-rouge">sudo pip install magic-wormhole</code>.</p>
+:ET

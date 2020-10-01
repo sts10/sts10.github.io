@@ -1,0 +1,242 @@
+I"�k<p>For practice with Ruby and Rspec, I’ve been working through some Project Euler problems. One of my favorites so far is <a href="http://projecteuler.net/problem=9">#9</a>, which asks us to find the one Pythagorean triplet for which <code class="language-plaintext highlighter-rouge">a + b + c == 1000</code>. Here is the <a href="https://github.com/sts10/project_euler_num_9">GitHub repo with my solution</a> for you to look at while you read long, if you’re into that.</p>
+
+<p><em>Disclaimer: I’m no math wiz. This exercise is more about using tests well and writing good Ruby code rather than discovering an efficient algorithm to figure out which numbers to check. It’s probably pretty inefficient to use nested loops from 2 to 1000 for this problem.</em></p>
+
+<!-- more -->
+
+<p>Having done 8 of these types of problems before, I’ve come to realize that you’re going to be writing two general types of methods: “checkers” and “doers” (I just made this distinction up).</p>
+
+<p>“Checkers” are methods that check to see if some requirement has been fulfilled. In Ruby, much to my JavaScript friends’ surprise, we can write method names that end in question marks, which is good practice for methods that return boolean values. I find that identifying and writing these “checker” methods first makes the whole problem easier.</p>
+
+<p>For Euler #9 an example of a reasonable “checker” would be this:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">makes_triplet?</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+  <span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">b</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span>
+  <span class="n">c</span> <span class="o">%</span> <span class="mi">1</span> <span class="o">==</span> <span class="mi">0</span> 
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>Obviously we’re going to need to know if a given triangle (defined by 2 of its sides), makes a Pythagorean triplet. This method calculates <code class="language-plaintext highlighter-rouge">c</code> and then checks to make sure it’s a whole number using the modulus operator.</p>
+
+<h3 id="ttd-isnt-so-bad">TTD Isn’t So Bad</h3>
+
+<p>Does this method work? Old Sam would have put in a <code class="language-plaintext highlighter-rouge">binding.pry</code> and played around, but I wanted to be more methodical and test-driven. But I wanted to only use tests when it made sense (as per <a href="http://david.heinemeierhansson.com/2014/tdd-is-dead-long-live-testing.html">DHH’s recent blog posts on the subject</a>). Here was, I think, a great place where a test would make my life easier.</p>
+
+<p>So I wrote:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">describe</span> <span class="s1">'can recognize triplets'</span> <span class="k">do</span> 
+  <span class="n">it</span> <span class="s1">'knows that 3 4 5 is a triplet'</span> <span class="k">do</span> 
+    <span class="n">expect</span><span class="p">(</span><span class="n">makes_triplet?</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)).</span><span class="nf">to</span> <span class="n">be</span><span class="p">(</span><span class="kp">true</span><span class="p">)</span>
+  <span class="k">end</span> 
+
+  <span class="n">it</span> <span class="s1">'knows that 2 4 5 is not a triplet'</span> <span class="k">do</span> 
+    <span class="n">expect</span><span class="p">(</span><span class="n">makes_triplet?</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">)).</span><span class="nf">to</span> <span class="n">be</span><span class="p">(</span><span class="kp">false</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>And both tests pass, so that’s cool.</p>
+
+<p>Obviously the most important test is that we actually find the triplet. I kept that nice and simple:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">describe</span> <span class="s2">"Find the triplet"</span> <span class="k">do</span>
+  <span class="n">it</span> <span class="s1">'can find the product of the three numbers that make up a pythagorean triplet and sum to 1000'</span> <span class="k">do</span>
+    <span class="n">expect</span><span class="p">(</span><span class="n">find_the_triplet</span><span class="p">).</span><span class="nf">to</span> <span class="n">eq</span><span class="p">(</span><span class="mi">31875000</span><span class="p">)</span>
+  <span class="k">end</span> 
+<span class="k">end</span> 
+</code></pre></div></div>
+
+<h3 id="this-whole-object-oriented-thing-is-pretty-handy">This Whole Object-Oriented Thing Is Pretty Handy</h3>
+
+<p>So, with my tests set up it was time to make them pass. Here is the first version of my solution:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">sum_one_thousand?</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
+  <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="n">c</span> <span class="o">==</span> <span class="mi">1000</span>
+<span class="k">end</span> 
+
+<span class="k">def</span> <span class="nf">makes_triplet?</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+  <span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">b</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span>
+  <span class="n">c</span> <span class="o">%</span> <span class="mi">1</span> <span class="o">==</span> <span class="mi">0</span> 
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">qualifies?</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+  <span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">b</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span>
+  <span class="n">makes_triplet?</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">sum_one_thousand?</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+<span class="k">end</span> 
+
+<span class="k">def</span> <span class="nf">find_the_triplet</span>
+  <span class="n">a</span> <span class="o">=</span> <span class="mi">2</span> 
+  <span class="k">while</span> <span class="p">(</span><span class="n">a</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">b</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">)</span>
+      <span class="k">if</span> <span class="n">qualifies?</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">b</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="o">*</span><span class="n">c</span><span class="p">)</span>
+      <span class="k">end</span>
+      <span class="n">b</span> <span class="o">=</span> <span class="n">b</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">end</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">1</span>
+  <span class="k">end</span> 
+<span class="k">end</span> 
+</code></pre></div></div>
+
+<p>If we were to categorize these 4 methods into “checkers” and “doers”, I’d say the first 3 are checkers and <code class="language-plaintext highlighter-rouge">find_the_triplet</code> is a doer.</p>
+
+<p>This works fine, but as you can see I need to re-calculate <code class="language-plaintext highlighter-rouge">c</code>, the third side of the triangle, three separate times. This is not DRY at all.</p>
+
+<p>Passing one variable to different methods? Sounds like I needed was a triangle object. Here’s what I did for that:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Triangle</span> 
+  <span class="nb">attr_reader</span> <span class="ss">:product</span>
+
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+    <span class="vi">@a</span> <span class="o">=</span> <span class="n">a</span>
+    <span class="vi">@b</span> <span class="o">=</span> <span class="n">b</span>
+    <span class="vi">@c</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">b</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span>
+    <span class="vi">@product</span> <span class="o">=</span> <span class="vi">@a</span> <span class="o">*</span> <span class="vi">@b</span> <span class="o">*</span> <span class="vi">@c</span>
+  <span class="k">end</span> 
+
+  <span class="k">def</span> <span class="nf">sum_one_thousand?</span>
+    <span class="vi">@a</span> <span class="o">+</span> <span class="vi">@b</span> <span class="o">+</span> <span class="vi">@c</span> <span class="o">==</span> <span class="mi">1000</span>
+  <span class="k">end</span> 
+
+  <span class="k">def</span> <span class="nf">makes_triplet?</span>
+    <span class="vi">@c</span> <span class="o">%</span> <span class="mi">1</span> <span class="o">==</span> <span class="mi">0</span> 
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">qualifies?</span>
+    <span class="n">makes_triplet?</span> <span class="o">&amp;&amp;</span> <span class="n">sum_one_thousand?</span>
+  <span class="k">end</span> 
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>That’s more like it. Now I can create instances of triangles, using just two of its sides, and use an instance variable to pass the value of <code class="language-plaintext highlighter-rouge">c</code> around. Furthermore, I can define semantic methods like <code class="language-plaintext highlighter-rouge">qualifies?</code> that clearly state the given qualifications required.</p>
+
+<p>My “doer” method remains outside of the Triangle class. Let’s revisit it:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">find_the_triplet</span>
+  <span class="n">a</span> <span class="o">=</span> <span class="mi">2</span> 
+  <span class="k">while</span> <span class="p">(</span><span class="n">a</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">b</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">)</span>
+      <span class="vi">@this_triangle</span> <span class="o">=</span> <span class="no">Triangle</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+      <span class="k">if</span> <span class="vi">@this_triangle</span><span class="p">.</span><span class="nf">qualifies?</span>
+        <span class="k">return</span> <span class="vi">@this_triangle</span><span class="p">.</span><span class="nf">product</span>
+      <span class="k">end</span>
+      <span class="n">b</span> <span class="o">=</span> <span class="n">b</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">end</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">1</span>
+  <span class="k">end</span> 
+<span class="k">end</span> 
+</code></pre></div></div>
+
+<p>Sweet. Look how semantic that is! “If this triangle qualifies, return this triangle’s product” indeed!</p>
+
+<p>But there’s still plenty to be desired of this code. It’s my natural instinct, thanks to my C++ background, to use nested <code class="language-plaintext highlighter-rouge">while</code> loops for these types of problems. How could we use something more Ruby-like?</p>
+
+<p>What about <code class="language-plaintext highlighter-rouge">upto</code> instead of <code class="language-plaintext highlighter-rouge">while</code>?</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">find_the_triplet</span>
+  <span class="mi">2</span><span class="p">.</span><span class="nf">upto</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">a</span><span class="o">|</span>
+    <span class="mi">2</span><span class="p">.</span><span class="nf">upto</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">b</span><span class="o">|</span>
+      <span class="vi">@this_triangle</span> <span class="o">=</span> <span class="no">Triangle</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+      <span class="k">if</span> <span class="vi">@this_triangle</span><span class="p">.</span><span class="nf">qualifies?</span>
+        <span class="k">return</span> <span class="vi">@this_triangle</span><span class="p">.</span><span class="nf">product</span>
+      <span class="k">end</span>
+    <span class="k">end</span>
+  <span class="k">end</span> 
+<span class="k">end</span> 
+</code></pre></div></div>
+
+<p>Better! We eliminated the <code class="language-plaintext highlighter-rouge">a</code> and <code class="language-plaintext highlighter-rouge">b</code> initializing lines and the <code class="language-plaintext highlighter-rouge">+ 1</code> lines.</p>
+
+<h3 id="short-circuited">Short Circuited</h3>
+
+<p>To make this even more Ruby-like we can’t have the method short-circuit out with the <code class="language-plaintext highlighter-rouge">return @this_triangle.product</code> line.</p>
+
+<p>The argument against this practice is that having <code class="language-plaintext highlighter-rouge">return</code>s spread out within your methods makes it difficult to understand what they do, which I more or less buy in to at this point.</p>
+
+<p>However this was an issue I ran into frequently when working on Euler problems.</p>
+
+<p>One solution would be to assign <code class="language-plaintext highlighter-rouge">product = @this_triangle.product</code> and then return <code class="language-plaintext highlighter-rouge">product</code> at the end of the method, but this isn’t ideal because we’d have to go all the way through both nested loops even if we found what we were looking for early on.</p>
+
+<p>I would naturally go to the <code class="language-plaintext highlighter-rouge">break</code> keyword here, but since we’re in nested loops, we’d need two breaks.</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">find_the_triplet</span>
+  <span class="mi">2</span><span class="p">.</span><span class="nf">upto</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">a</span><span class="o">|</span>
+    <span class="mi">2</span><span class="p">.</span><span class="nf">upto</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">b</span><span class="o">|</span>
+      <span class="vi">@this_triangle</span> <span class="o">=</span> <span class="no">Triangle</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+      <span class="k">break</span> <span class="k">if</span> <span class="vi">@this_triangle</span><span class="p">.</span><span class="nf">qualifies?</span>
+    <span class="k">end</span>
+    <span class="k">break</span> <span class="k">if</span> <span class="vi">@this_triangle</span><span class="p">.</span><span class="nf">qualifies?</span>
+  <span class="k">end</span> 
+  <span class="vi">@this_triangle</span><span class="p">.</span><span class="nf">product</span>
+<span class="k">end</span> 
+</code></pre></div></div>
+
+<p>We’re no longer short-circuiting with <code class="language-plaintext highlighter-rouge">return</code> in the middle of the method, but the two <code class="language-plaintext highlighter-rouge">break</code>s are both inefficient and repetitive. Hm. Let’s Google.</p>
+
+<h3 id="using-catch-and-throw">Using Catch and Throw</h3>
+
+<p>Googling “ruby break nested loops” led me to <a href="http://stackoverflow.com/questions/5286861/how-to-break-from-nested-loops-in-ruby">this Stack Overflow question</a>, which suggested Ruby’s catch and throw keywords. I’d never heard of <code class="language-plaintext highlighter-rouge">catch</code> or <code class="language-plaintext highlighter-rouge">throw</code> but the example was pretty close to exactly what I envisioning for a solution.</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">find_the_triplet</span>
+  <span class="kp">catch</span> <span class="ss">:found_it</span> <span class="k">do</span>
+    <span class="mi">2</span><span class="p">.</span><span class="nf">upto</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">a</span><span class="o">|</span>
+      <span class="mi">2</span><span class="p">.</span><span class="nf">upto</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">b</span><span class="o">|</span>
+        <span class="vi">@this_triangle</span> <span class="o">=</span> <span class="no">Triangle</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+        <span class="kp">throw</span> <span class="ss">:found_it</span> <span class="k">if</span> <span class="vi">@this_triangle</span><span class="p">.</span><span class="nf">qualifies?</span>
+      <span class="k">end</span>
+    <span class="k">end</span> 
+  <span class="k">end</span>
+  <span class="vi">@this_triangle</span><span class="p">.</span><span class="nf">product</span>
+<span class="k">end</span> 
+</code></pre></div></div>
+
+<p>We have a <code class="language-plaintext highlighter-rouge">catch</code> up top and a <code class="language-plaintext highlighter-rouge">throw</code> within the nested loops. When the <code class="language-plaintext highlighter-rouge">throw</code> line is executed, Ruby breaks out of the <code class="language-plaintext highlighter-rouge">catch</code> block. It’s pretty much just what we needed.</p>
+
+<p><code class="language-plaintext highlighter-rouge">catch</code> can also return a variable that is “thrown” to it, which I learned from <a href="http://rubymonk.com/learning/books/4-ruby-primer-ascent/chapters/41-exceptions/lessons/93-throw-and-catch">this Ruby Monk post on the subject</a>. So our code can be a little more efficient:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">find_the_triplet</span>
+  <span class="kp">catch</span> <span class="ss">:found_it</span> <span class="k">do</span>
+    <span class="mi">2</span><span class="p">.</span><span class="nf">upto</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">a</span><span class="o">|</span>
+      <span class="mi">2</span><span class="p">.</span><span class="nf">upto</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">b</span><span class="o">|</span>
+        <span class="vi">@this_triangle</span> <span class="o">=</span> <span class="no">Triangle</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+        <span class="kp">throw</span> <span class="ss">:found_it</span><span class="p">,</span> <span class="vi">@this_triangle</span><span class="p">.</span><span class="nf">product</span> <span class="k">if</span> <span class="vi">@this_triangle</span><span class="p">.</span><span class="nf">qualifies?</span>
+      <span class="k">end</span>
+    <span class="k">end</span> 
+  <span class="k">end</span>
+<span class="k">end</span> 
+</code></pre></div></div>
+
+<p>Our tests pass and we’re no longer short circuiting. I like this method enough that I pushed it up in a separate branch called <a href="https://github.com/sts10/project_euler_num_9/tree/throw_catch">throw_catch</a>, but it’s still not quite right.</p>
+
+<p>(For more on catch and throw there’s also <a href="http://rubylearning.com/blog/2011/07/12/throw-catch-raise-rescue-im-so-confused/">this great post from Ruby Learning</a>.)</p>
+
+<h3 id="nested-detect-loops">Nested Detect Loops</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">catch</code> and <code class="language-plaintext highlighter-rouge">throw</code> solution isn’t much better semantically than short circuiting, as it’s a little tricky to tell what’s going to be returned. Plus, I have the feeling there must be a way to use Ruby’s higher lever iterators here.</p>
+
+<p>In this case we’re going to use is <a href="http://www.ruby-doc.org/core-2.1.1/Enumerable.html#method-i-detect">detect</a> (aliased as <code class="language-plaintext highlighter-rouge">find</code>– the choice is basically semantic). The trick is we’ll need to nest them like so:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">find_the_triplet</span>
+  <span class="p">(</span><span class="mi">2</span><span class="o">..</span><span class="mi">1000</span><span class="p">).</span><span class="nf">detect</span> <span class="k">do</span> <span class="o">|</span><span class="n">a</span><span class="o">|</span>
+    <span class="p">(</span><span class="mi">2</span><span class="o">..</span><span class="mi">1000</span><span class="p">).</span><span class="nf">detect</span> <span class="k">do</span> <span class="o">|</span><span class="n">b</span><span class="o">|</span>
+      <span class="vi">@this_triangle</span> <span class="o">=</span> <span class="no">Triangle</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+      <span class="vi">@this_triangle</span><span class="p">.</span><span class="nf">qualifies?</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+  
+  <span class="vi">@this_triangle</span><span class="p">.</span><span class="nf">product</span>
+<span class="k">end</span> 
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">detect</code> (and <code class="language-plaintext highlighter-rouge">find</code>) returns the first instance where the block inside of it is <code class="language-plaintext highlighter-rouge">true</code>.</p>
+
+<p>So let’s start with the outer <code class="language-plaintext highlighter-rouge">detect</code>. It starts with <code class="language-plaintext highlighter-rouge">a = 2</code> and then runs through its block again and again until its block evalutes to <code class="language-plaintext highlighter-rouge">true</code> or it has reached the end of the range. Of course this outer <code class="language-plaintext highlighter-rouge">detect</code>’s block is another <code class="language-plaintext highlighter-rouge">detect</code> loop.</p>
+
+<p>No triangles with an <code class="language-plaintext highlighter-rouge">a</code> of 2 qualifies, so the inner <code class="language-plaintext highlighter-rouge">detect</code> returns <code class="language-plaintext highlighter-rouge">nil</code> 998 times. Thus, in the first iteration of the outer loop, its block is never evaluated to <code class="language-plaintext highlighter-rouge">true</code>. So it moves on to <code class="language-plaintext highlighter-rouge">a = 3</code> and so on.</p>
+
+<p>Finally, when we get to <code class="language-plaintext highlighter-rouge">a = 200</code>, then iterates through the inner <code class="language-plaintext highlighter-rouge">detect</code> until <code class="language-plaintext highlighter-rouge">b = 375</code>, the inner loop will return true, and thus the outer loop will evalute to true as well. At this point we will break out of the outer <code class="language-plaintext highlighter-rouge">detect</code> with <code class="language-plaintext highlighter-rouge">@this_triangle</code> set to the qualifying triangle. We then call <code class="language-plaintext highlighter-rouge">.product</code> on it to return <code class="language-plaintext highlighter-rouge">a*b*c</code>, as the problem requests.</p>
+
+:ET

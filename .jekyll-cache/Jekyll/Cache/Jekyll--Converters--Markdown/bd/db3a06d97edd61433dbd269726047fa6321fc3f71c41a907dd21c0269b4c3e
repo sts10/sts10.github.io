@@ -1,0 +1,275 @@
+I"3�<p>I was always understood JavaScript as a functional programming language, but it turns out there are in fact ways to create basic objects and even “object factories” (what Rubyists know as Classes).</p>
+
+<p>To better understand how to use objects in JavaScript, I ordered two books: <a href="http://www.amazon.com/Speaking-JavaScript-Axel-Rauschmayer/dp/1449365035/ref=sr_1_1?ie=UTF8&amp;qid=1400259368&amp;sr=8-1&amp;keywords=speaking+javascript"><em>Speaking JavaScript</em> by Dr. Axel Rauschmayer</a> and <a href="http://www.amazon.com/Pro-JavaScript-Design-Patterns-Object-Oriented/dp/159059908X/ref=sr_1_1?ie=UTF8&amp;qid=1400259393&amp;sr=8-1&amp;keywords=pro+javascript+design+patterns"><em>Pro JavaScript Design Patterns</em> by Ross Harmes and Dustin Diaz</a>. (I know the more canonical choice would have been <em>JavaScript: The Good Parts</em>, but a Flatiron T.A. pointed me to <em>Speaking</em> as a more up-to-date alternative.)</p>
+
+<!-- more -->
+
+<p>I went in to this little adventure assuming JavaScript would be much less intuitive than Ruby, and that I’d mostly be learning an entirely different system than Ruby thanks to its many quirks. But now that I’m about halfway through <em>Speaking</em> I’m realizing JavaScript isn’t so messy! In fact, given how much it can do, it’s not so bad.</p>
+
+<p>Here’s Rauschmayer on the question of whether JavaScript is elegant:</p>
+
+<blockquote>
+  <p>Yes and no. I’ve written fair amounts of code in several programming languages from different paradigms. Therefore, I’m well aware that JavaScript isn’t the pinnacle of elegance. However, it is a very flexible language has a reasonably elegant core, and enables you to use a mixture of object-oriented programming and functional programming.</p>
+</blockquote>
+
+<p>In this blog post I’ll explore the very basics of object-oriented JavaScript, since that aspect of the language is new to me. There may be some mistakes– I’m new to this pattern (if you see anything incorrect or weird please <a href="http://samschlinkert.com/#contact">shoot me a note!</a>). All 3 code examples are <a href="https://github.com/sts10/animal_prototype">up on GitHub</a>.</p>
+
+<p>I’m going to lay out a basic Animal prototype (like a Ruby class) with variables and methods, then create two instances of it. This “prototype” (lowercase ‘p’) pattern seems to be just one way or <em>pattern</em> of creating an “object factory” in JavaScript. Maybe there’s a better or more Ruby-like alternative, but this way seems to work and makes sense to me so let’s run with it at least for today.</p>
+
+<h3 id="creating-a-prototype-in-javascript">Creating a Prototype in JavaScript</h3>
+
+<p>This sample code is broken into two parts: the prototype’s definition and the instantiation of the prototype and manipulation of those instances.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">Animal</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">sound</span><span class="p">)</span> <span class="p">{</span>  
+  <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="nx">type</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">sound</span> <span class="o">=</span> <span class="nx">sound</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="nx">Animal</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">makeNoise</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">sound</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> is the sound that </span><span class="dl">"</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> makes!</span><span class="dl">"</span><span class="p">;</span>
+  <span class="p">},</span>
+  <span class="na">getWeightAtAge</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">age</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">type</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">dog</span><span class="dl">"</span><span class="p">){</span>
+      <span class="k">return</span> <span class="mi">5</span> <span class="o">*</span> <span class="nx">age</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">type</span> <span class="o">==</span> <span class="dl">"</span><span class="s2">fish</span><span class="dl">"</span><span class="p">){</span>
+      <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="nx">age</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">age</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="na">toString</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> is a </span><span class="dl">"</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">type</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>OK, let’s start at the top. I define a new <code class="language-plaintext highlighter-rouge">var</code> called <code class="language-plaintext highlighter-rouge">Animal</code> and set it equal to function that has no name and takes three parameters <code class="language-plaintext highlighter-rouge">(name, type, sound)</code>.</p>
+
+<h3 id="aside-about-creating-javascript-functions-in-general">Aside About Creating JavaScript Functions in General</h3>
+
+<p>This is just one of three ways to create a function in JavaScript– it’s called a “function expression”. (Notice the semi-colon after the closing curly-brace.)</p>
+
+<p>Alternatively, we could create this Animal function via a function declaration, which would look like:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Animal</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">sound</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="nx">type</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">sound</span> <span class="o">=</span> <span class="nx">sound</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>There are advantages to both, but Rauschmayer lists two advantages of declarations: they are “hoisted” to the top of the scope (so you can call a function before declaring it if you’re in the same scope) and they by definition are named.</p>
+
+<p>But we’re going to go with the function expression for now.</p>
+
+<h3 id="back-to-our-prototype-definition">Back to our Prototype Definition</h3>
+
+<p>This <code class="language-plaintext highlighter-rouge">Animal</code> function will serve a specific purpose for us. It’s basically the initializing method of our prototype. New instances of <code class="language-plaintext highlighter-rouge">Animal</code> will take in 3 arguments, and then we set them equal to <code class="language-plaintext highlighter-rouge">this.name</code>, <code class="language-plaintext highlighter-rouge">this.type</code>, and <code class="language-plaintext highlighter-rouge">this.sound</code> so that we can use them later.</p>
+
+<p>Here is what, in my mind, would be the Ruby equivalent:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="nb">name</span><span class="p">,</span> <span class="n">type</span><span class="p">,</span> <span class="n">sound</span><span class="p">)</span>
+  <span class="nb">self</span><span class="p">.</span><span class="nf">name</span> <span class="o">=</span> <span class="nb">name</span>
+  <span class="nb">self</span><span class="p">.</span><span class="nf">type</span> <span class="o">=</span> <span class="n">type</span>
+  <span class="nb">self</span><span class="p">.</span><span class="nf">sound</span> <span class="o">=</span> <span class="n">sound</span>
+<span class="k">end</span> 
+</code></pre></div></div>
+
+<p>The only big difference here, besides the use of <code class="language-plaintext highlighter-rouge">this</code> rather than <code class="language-plaintext highlighter-rouge">self</code>, is that in JavaScript this initializing function goes outside of the prototype definition, as opposed to Ruby where it goes within the Class definition. Kind of strange/counter-intuitive, but not so crazy.</p>
+
+<p>Next we open up the Animal prototype and define three methods (functions that belong to instances of the object).</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Animal</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">makeNoise</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">sound</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> is the sound that </span><span class="dl">"</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> makes!</span><span class="dl">"</span><span class="p">;</span>
+  <span class="p">},</span>
+  <span class="na">getWeightAtAge</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">age</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">type</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">dog</span><span class="dl">"</span><span class="p">){</span>
+      <span class="k">return</span> <span class="mi">5</span> <span class="o">*</span> <span class="nx">age</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">type</span> <span class="o">==</span> <span class="dl">"</span><span class="s2">fish</span><span class="dl">"</span><span class="p">){</span>
+      <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="nx">age</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">age</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="na">toString</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> is a </span><span class="dl">"</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">type</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The above pattern is very similar to the pattern of defining an “object literal”. An object literal is a basic object– it’s not a factory for objects, it’s just one, single object.</p>
+
+<h3 id="what-is-a-javascript-object-anyway">What is a JavaScript Object, Anyway?</h3>
+
+<p>Let’s go back to the basics here. From Rauschmayer, chapter 17:</p>
+
+<blockquote>
+  <p>Roughly, all objects in JavaScript are maps (dictionaries) from strings to values. A (key, value) entry in an object is called a <em>property</em>. The key of a property is always a text string. The value of a property can be any JavaScript value, including a function. <em>Methods</em> are properties whose values are functions.</p>
+</blockquote>
+
+<p>So basically they’re kind of like Ruby hashes that can hold functions as values. Oh and JavaScript doesn’t have the equivalent of Ruby symbols, so we roll with strings as keys.</p>
+
+<h3 id="quick-example-of-an-object-literal-in-javascript">Quick Example of an Object Literal in JavaScript</h3>
+
+<p>Again, an object literal seems to be the simplest type of JavaScript object, so let’s take a look at one. Remember, it’s not a factory for object, it’s just one, single object.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">sam</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Sam</span><span class="dl">"</span><span class="p">,</span>
+
+  <span class="na">introduce</span><span class="p">:</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="k">return</span> <span class="dl">"</span><span class="s2">Hi, my name is </span><span class="dl">"</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">introduce</code> is a method on the object <code class="language-plaintext highlighter-rouge">sam</code>. So when we call <code class="language-plaintext highlighter-rouge">print(sam.introduce());</code> we get <code class="language-plaintext highlighter-rouge">Hi, my name is Sam</code>. (Note: we can also call <code class="language-plaintext highlighter-rouge">sam.name</code> and even reset <code class="language-plaintext highlighter-rouge">sam.name</code> by running <code class="language-plaintext highlighter-rouge">sam.name = "Theodore"</code> outside of the <code class="language-plaintext highlighter-rouge">var sam</code> definition). This shows a key difference between JavaScript and Ruby– we don’t need to specify if a variable should be readable or writable via <code class="language-plaintext highlighter-rouge">attr_reader</code>, <code class="language-plaintext highlighter-rouge">attr_writer</code>, or <code class="language-plaintext highlighter-rouge">attr_accessor</code>. <code class="language-plaintext highlighter-rouge">sam.name</code> just works.</p>
+
+<p>Of course we can not instantiate new instances of <code class="language-plaintext highlighter-rouge">sam</code>– it’s just a single object. For that “factory” feature, let’s return to the prototype.</p>
+
+<p>Now that we’ve (1) taken in three variables on initialization and (2) declared 3 methods (instance methods in Ruby-speak), we’re ready to make some Animal instances and see what they can do.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">ziggy</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Animal</span><span class="p">(</span><span class="dl">"</span><span class="s2">Ziggy</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">dog</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Woof!</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">nemo</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Animal</span><span class="p">(</span><span class="dl">"</span><span class="s2">Nemo</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">fish</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">bubble!</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="nx">print</span><span class="p">(</span><span class="nx">ziggy</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> is a </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">ziggy</span><span class="p">.</span><span class="nx">type</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> and makes the sound </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">ziggy</span><span class="p">.</span><span class="nx">sound</span><span class="p">);</span>
+
+<span class="nx">print</span><span class="p">(</span><span class="nx">ziggy</span><span class="p">.</span><span class="nx">makeNoise</span><span class="p">());</span>
+<span class="nx">print</span><span class="p">(</span><span class="nx">nemo</span><span class="p">.</span><span class="nx">makeNoise</span><span class="p">());</span>
+
+<span class="nx">print</span><span class="p">(</span><span class="nx">nemo</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
+
+<span class="nx">print</span><span class="p">(</span><span class="dl">"</span><span class="s2">When </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">ziggy</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> is 7 she'll be </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">ziggy</span><span class="p">.</span><span class="nx">getWeightAtAge</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> pounds!</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="nx">print</span><span class="p">(</span><span class="dl">"</span><span class="s2">Setting Nemo's type to shark...</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">nemo</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">shark</span><span class="dl">"</span><span class="p">;</span>
+<span class="nx">print</span><span class="p">(</span><span class="dl">"</span><span class="s2">Now </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">nemo</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> is a </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">nemo</span><span class="p">.</span><span class="nx">type</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="a-quick-note-on-how-to-actually-run-this-code">A Quick Note on How to Actually Run This Code</h3>
+
+<p>As you can see I’m using the <code class="language-plaintext highlighter-rouge">print</code> function to display information to the screen. That’s because I’m using the <a href="https://github.com/v8/v8">V8 JavaScript engine</a> via my command line to run these JavaScript programs. to do that I just run <code class="language-plaintext highlighter-rouge">v8 app.js</code> from the Terminal. I wish I remembered how I installed it or if I even needed to install it on my Mac, but here is what looks like some <a href="https://code.google.com/p/v8/wiki/UsingGit">good installation instructions from Google</a>.</p>
+
+<h3 id="back-to-the-animals">Back to the Animals</h3>
+
+<p>Instantiating a new <code class="language-plaintext highlighter-rouge">Animal</code> is pretty simple: <code class="language-plaintext highlighter-rouge">var ziggy = new Animal("Ziggy", "dog", "Woof!");</code> (Ziggy is the name of our first family dog). I go on to test methods like <code class="language-plaintext highlighter-rouge">ziggy.sound</code> and <code class="language-plaintext highlighter-rouge">nemo.toString()</code> and they work just as expected.</p>
+
+<p>Methods can take arguments if they accept parameters, as we can see by the call to <code class="language-plaintext highlighter-rouge">getWeightAtAge(7)</code>. And we can even write over variables with <code class="language-plaintext highlighter-rouge">nemo.type = "shark";</code>.</p>
+
+<h3 id="all-together-with-its-ruby-equivalent">All Together, With Its Ruby Equivalent</h3>
+
+<p>Now let’s look at the full code in JavaScript:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">Animal</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">sound</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// this could also be `function Animal (name, type, sound) { ` </span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="nx">type</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">sound</span> <span class="o">=</span> <span class="nx">sound</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="nx">Animal</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">makeNoise</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">sound</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> is the sound that </span><span class="dl">"</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> makes!</span><span class="dl">"</span><span class="p">;</span>
+  <span class="p">},</span>
+  <span class="na">getWeightAtAge</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">age</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">type</span> <span class="o">===</span> <span class="dl">"</span><span class="s2">dog</span><span class="dl">"</span><span class="p">){</span>
+      <span class="k">return</span> <span class="mi">5</span> <span class="o">*</span> <span class="nx">age</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">type</span> <span class="o">==</span> <span class="dl">"</span><span class="s2">fish</span><span class="dl">"</span><span class="p">){</span>
+      <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="nx">age</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">age</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="na">toString</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> is a </span><span class="dl">"</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">type</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+<span class="p">}</span>
+
+
+<span class="kd">var</span> <span class="nx">ziggy</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Animal</span><span class="p">(</span><span class="dl">"</span><span class="s2">Ziggy</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">dog</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Woof!</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">nemo</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Animal</span><span class="p">(</span><span class="dl">"</span><span class="s2">Nemo</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">fish</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">bubble!</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="nx">print</span><span class="p">(</span><span class="nx">ziggy</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> is a </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">ziggy</span><span class="p">.</span><span class="nx">type</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> and makes the sound </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">ziggy</span><span class="p">.</span><span class="nx">sound</span><span class="p">);</span>
+
+<span class="nx">print</span><span class="p">(</span><span class="nx">ziggy</span><span class="p">.</span><span class="nx">makeNoise</span><span class="p">());</span>
+<span class="nx">print</span><span class="p">(</span><span class="nx">nemo</span><span class="p">.</span><span class="nx">makeNoise</span><span class="p">());</span>
+
+<span class="nx">print</span><span class="p">(</span><span class="nx">nemo</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
+
+<span class="nx">print</span><span class="p">(</span><span class="dl">"</span><span class="s2">When </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">ziggy</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> is 7 she'll be </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">ziggy</span><span class="p">.</span><span class="nx">getWeightAtAge</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> pounds!</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="nx">print</span><span class="p">(</span><span class="dl">"</span><span class="s2">Setting Nemo's type to shark...</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">nemo</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">shark</span><span class="dl">"</span><span class="p">;</span>
+<span class="nx">print</span><span class="p">(</span><span class="dl">"</span><span class="s2">Now </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">nemo</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> is a </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">nemo</span><span class="p">.</span><span class="nx">type</span><span class="p">);</span>
+
+</code></pre></div></div>
+
+<p>And here’s how I would do the same thing in Ruby:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Animal</span> 
+  <span class="nb">attr_accessor</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:type</span><span class="p">,</span> <span class="ss">:sound</span>
+
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="nb">name</span><span class="p">,</span> <span class="n">type</span><span class="p">,</span> <span class="n">sound</span><span class="p">)</span>
+    <span class="nb">self</span><span class="p">.</span><span class="nf">name</span> <span class="o">=</span> <span class="nb">name</span>
+    <span class="nb">self</span><span class="p">.</span><span class="nf">type</span> <span class="o">=</span> <span class="n">type</span>
+    <span class="nb">self</span><span class="p">.</span><span class="nf">sound</span> <span class="o">=</span> <span class="n">sound</span>
+  <span class="k">end</span> 
+
+  <span class="k">def</span> <span class="nf">make_noise</span>
+    <span class="s2">"</span><span class="si">#{</span><span class="nb">self</span><span class="p">.</span><span class="nf">sound</span><span class="si">}</span><span class="s2"> is the sound that </span><span class="si">#{</span><span class="nb">self</span><span class="p">.</span><span class="nf">name</span><span class="si">}</span><span class="s2"> makes."</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">get_weight_at_age</span><span class="p">(</span><span class="n">age</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">self</span><span class="p">.</span><span class="nf">type</span> <span class="o">==</span> <span class="s2">"dog"</span>
+      <span class="mi">5</span> <span class="o">*</span> <span class="n">age</span>
+    <span class="k">elsif</span> <span class="nb">self</span><span class="p">.</span><span class="nf">type</span> <span class="o">==</span> <span class="s2">"fish"</span>
+      <span class="mi">2</span> <span class="o">*</span> <span class="n">age</span>
+    <span class="k">else</span> 
+      <span class="n">age</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">to_s</span>
+    <span class="s2">"</span><span class="si">#{</span><span class="nb">self</span><span class="p">.</span><span class="nf">name</span><span class="si">}</span><span class="s2"> is a </span><span class="si">#{</span><span class="nb">self</span><span class="p">.</span><span class="nf">type</span><span class="si">}</span><span class="s2">"</span>
+  <span class="k">end</span> 
+
+<span class="k">end</span> 
+
+<span class="n">ziggy</span> <span class="o">=</span> <span class="no">Animal</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s2">"Ziggy"</span><span class="p">,</span> <span class="s2">"dog"</span><span class="p">,</span> <span class="s2">"Woof!"</span><span class="p">)</span>
+<span class="n">nemo</span> <span class="o">=</span> <span class="no">Animal</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s2">"Nemo"</span><span class="p">,</span> <span class="s2">"fish"</span><span class="p">,</span> <span class="s2">"bubble!"</span><span class="p">)</span>
+
+<span class="nb">puts</span> <span class="n">ziggy</span><span class="p">.</span><span class="nf">name</span> <span class="o">+</span> <span class="s2">" is a "</span> <span class="o">+</span> <span class="n">ziggy</span><span class="p">.</span><span class="nf">type</span> <span class="o">+</span> <span class="s2">" and makes the sound "</span> <span class="o">+</span> <span class="n">ziggy</span><span class="p">.</span><span class="nf">sound</span>
+<span class="nb">puts</span> <span class="n">ziggy</span><span class="p">.</span><span class="nf">make_noise</span>
+<span class="nb">puts</span> <span class="n">nemo</span><span class="p">.</span><span class="nf">make_noise</span>
+
+<span class="nb">puts</span> <span class="n">nemo</span><span class="p">.</span><span class="nf">to_s</span>
+
+<span class="nb">puts</span> <span class="s2">"When "</span> <span class="o">+</span> <span class="n">ziggy</span><span class="p">.</span><span class="nf">name</span> <span class="o">+</span> <span class="s2">" is 7 she'll be "</span> <span class="o">+</span> <span class="n">ziggy</span><span class="p">.</span><span class="nf">get_weight_at_age</span><span class="p">(</span><span class="mi">7</span><span class="p">).</span><span class="nf">to_s</span> <span class="o">+</span> <span class="s2">" pounds!"</span>
+
+<span class="nb">puts</span> <span class="s2">"Setting Nemo's type to shark..."</span>
+<span class="n">nemo</span><span class="p">.</span><span class="nf">type</span> <span class="o">=</span> <span class="s2">"shark"</span><span class="p">;</span>
+<span class="nb">puts</span> <span class="s2">"Now "</span> <span class="o">+</span> <span class="n">nemo</span><span class="p">.</span><span class="nf">name</span> <span class="o">+</span> <span class="s2">" is a "</span> <span class="o">+</span> <span class="n">nemo</span><span class="p">.</span><span class="nf">type</span>
+
+</code></pre></div></div>
+
+<h3 id="differences-of-note">Differences of Note</h3>
+
+<p>I was surprised how similar the programs turned out to be. Small differences: (1) More necessary punctuation (mostly parenthesis and semi-colons) in the JavaScript, (2) explicit returns in JavaScript.</p>
+
+<p>Some larger things I ran into to:</p>
+
+<p>(1) In the JavaScript version, the result of <code class="language-plaintext highlighter-rouge">ziggy.getWeightAtAge(7)</code> was coerced into a string because I was calling it within a string with a <code class="language-plaintext highlighter-rouge">print</code>. In Ruby I had to use the <code class="language-plaintext highlighter-rouge">.to_s</code> method on the result of the <code class="language-plaintext highlighter-rouge">get_weight_at_age</code> method to avoid an error.</p>
+
+<p>(2) As I mentioned above, in JavaScript the “initializing” function goes outside of the prototype definition, whereas in Ruby there’s the pretty-intuitive <code class="language-plaintext highlighter-rouge">def initialize</code>. As much as I struggle to spell “initialize” correctly almost every time I declare a new class, I’ll give a point to Ruby here for semantics.</p>
+
+<p>(3) In Ruby we have control of which variables are accessible outside of the class definition and how accessible they are (<code class="language-plaintext highlighter-rouge">attr_reader</code> vs. <code class="language-plaintext highlighter-rouge">attr_writer</code> vs. <code class="language-plaintext highlighter-rouge">attr_accessor</code>). In JavaScript, at least by default, all initialized variables are available and over-writable outside of the prototype definition, as if they had been declared <code class="language-plaintext highlighter-rouge">attr_accessor</code>s in Ruby.</p>
+
+<p>(4) In JavaScript the method definitions are separated by commas, which kind of sucks if you’re re-ordering them often. But again, nothing crazy.</p>
+
+<p>Again, here’s all of the code <a href="https://github.com/sts10/animal_prototype">on GitHub</a>.</p>
+
+:ET
