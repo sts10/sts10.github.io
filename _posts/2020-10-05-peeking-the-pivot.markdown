@@ -200,4 +200,4 @@ fn find_value_of_drop_more_elegant(arr: &[usize]) -> usize {
 }
 ```
 
-Though it's still not shorter than my very first solution, which I might say says more about Rust than me...
+Though I think it's fair to say it's still quite a bit more formidable than my very first solution (shout-out to high school comp sci!), which maybe says more about Rust and its iterators than my ability to use them? Maybe I need to work it out in Ruby and compare. 
