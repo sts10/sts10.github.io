@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Peeking the Pivot"
+title: "Peeking the pivot"
 date: 2020-10-05 22:46:00 -0400
 comments: true
 ---
