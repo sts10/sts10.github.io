@@ -157,6 +157,8 @@ fn find_value_of_drop_using_peek_written_out(vec: &[usize]) -> usize {
             Some(this_element) => match peekable_vec.peek() {
                 Some(next_element) => {
                     // Yes, there is a NEXT element, so we can do our comparison
+                    // because here we have access to both this_element and 
+                    // next_element
                     if this_element > next_element {
                         return **next_element;
                     }
