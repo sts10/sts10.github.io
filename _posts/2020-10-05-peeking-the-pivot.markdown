@@ -35,7 +35,7 @@ The trick is that we can find the pivot by finding the first element where the _
 
 I'm pretty sure that code above works -- you can [test it yourself against a few tests I wrote](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=8b718344d9c6379efe6c3d8dfa805443). 
 
-## Using `enumarate`
+## Using `enumerate`
 
 After going through this whole thing I realize now that we can use a little Rust to make this a little nicer without disturbing the underlying logic by using `enumerate`, which I think is similar to Ruby's "each with index":
 
@@ -76,7 +76,7 @@ assert_eq!(iter.next(), Some(&2));
 
 While what I almost always am in need of is a sturdy example that makes use of a loop like `for` or `while`. (An exception to this is the nice and concise examples for iterators that return a bool, like [`all`](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.all)  and `any`, and those that return something other than an iterator, like [`sum`](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.sum).) How often do I only want to `next` a couple of times? My only guess is that there's some general way to loop these specialized iterators.
 
-My instincts (most likely from Ruby) is to want to write something like `for (this_element, next_element) in arr.iter().peekable() {` and then have access to `this_element` and an Option of `next_element` in the block (since if you're at the end of the array slice you won't have a next_element). (Though I _think_ you can use Rust's [enumerate method](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.enumerate) like this?) But, of course, this isn't Ruby. 
+My instincts (most likely from Ruby, but also from how we used `enumerate` above) is to want to write something like `for (this_element, next_element) in arr.iter().peekable() {` and then have access to `this_element` and an Option of `next_element` in the block (since if you're at the end of the array slice you won't have a next_element). But, of course, this isn't Ruby. 
 
 After some haphazard Googling, I found a forum post (I've since lost track of) and adapted to this beast, which passed my tests:
 
