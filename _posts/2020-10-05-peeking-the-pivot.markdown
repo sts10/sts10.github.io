@@ -35,11 +35,28 @@ The trick is that we can find the pivot by finding the first element where the _
 
 I'm pretty sure that code above works -- you can [test it yourself against a few tests I wrote](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=8b718344d9c6379efe6c3d8dfa805443). 
 
-## Trying to use an elegant Rust iterator 
+## Using `enumarate`
 
-But, as I managed to do [last week](https://sts10.github.io/2020/09/28/rust-map-fold.html), I wanted to see if there was a more elegant/Rust-y way to look at this problem. First, I tried `cycle`, thinking it would help make the problems of (a) running out of elements in the array and (b) checking the first element a bit easier. But I don't _think_ `cycle` really helps here. 
+After going through this whole thing I realize now that we can use a little Rust to make this a little nicer without disturbing the underlying logic by using `enumerate`, which I think is similar to Ruby's "each with index":
 
-### Peeking
+```rust
+fn find_value_of_drop_more_elegant(arr: &[usize]) -> usize {
+    for (i, item) in arr.iter().enumerate() {
+        if let Some(n) = arr.get(i + 1) {
+            if item > n {
+                return *n;
+            }
+        }
+    }
+    arr[0]
+}
+```
+
+I like this solution! 
+
+But, as I managed to do [last week](https://sts10.github.io/2020/09/28/rust-map-fold.html), I wanted to see if there were other, potentially more elegant/Rust-y way to look at this problem. First, I tried `cycle`, thinking it would help make the problems of (a) running out of elements in the array and (b) checking the first element a bit easier. But I don't _think_ `cycle` really helps here. 
+
+## Peeking
 
 So I looked to [`peekable`](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.peekable) / [`peek`](https://doc.rust-lang.org/std/iter/struct.Peekable.html#method.peek), an iterator I think I had tried to use [before](https://sts10.github.io/2018/12/07/optimizing-rust-advent-of-code-day-5.html) without success.
 
@@ -60,8 +77,6 @@ assert_eq!(iter.next(), Some(&2));
 While what I almost always am in need of is a sturdy example that makes use of a loop like `for` or `while`. (An exception to this is the nice and concise examples for iterators that return a bool, like [`all`](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.all)  and `any`, and those that return something other than an iterator, like [`sum`](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.sum).) How often do I only want to `next` a couple of times? My only guess is that there's some general way to loop these specialized iterators.
 
 My instincts (most likely from Ruby) is to want to write something like `for (this_element, next_element) in arr.iter().peekable() {` and then have access to `this_element` and an Option of `next_element` in the block (since if you're at the end of the array slice you won't have a next_element). (Though I _think_ you can use Rust's [enumerate method](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.enumerate) like this?) But, of course, this isn't Ruby. 
-
-#### 
 
 After some haphazard Googling, I found a forum post (I've since lost track of) and adapted to this beast, which passed my tests:
 
@@ -180,7 +195,7 @@ fn find_value_of_drop_using_peek_written_out(vec: &[usize]) -> usize {
 
 I think I'm starting to get a handle on it!? 
 
-## Epilogue: A slightly tighter example using peek and if let
+### A slightly tighter example using peek and if let
 
 One of the great things about Mastodon is if you toot out some Rust code, [someone will refactor it further for you](https://social.libre.fi/objects/e3fb0226-8458-498d-857b-271bfe6611d6). In this case, my above solution can get significantly tighter (and arguably more readable) by replacing the `match` statement with an `if let`. Behold:
 
@@ -200,4 +215,24 @@ fn find_value_of_drop_more_elegant(arr: &[usize]) -> usize {
 }
 ```
 
-Though I think it's fair to say it's still quite a bit more formidable than my very first solution (shout-out to high school comp sci!), which maybe says more about Rust and its iterators than my ability to use them? Maybe I need to work it out in Ruby and compare. 
+Though I think it's fair to say it's still quite a bit more formidable than my very first solution (shout-out to high school comp sci!).
+
+## Windows
+
+Next to explore is the Rust method [`windows`](https://doc.rust-lang.org/std/primitive.slice.html#method.windows). Using some of what we learned above from `enumerate` and `peek`, I managed to write this out: 
+
+```rust
+fn find_value_of_drop_more_elegant(arr: &[usize]) -> usize {
+    let mut windows = arr.windows(2);
+    while let Some(&[this_element, next_element]) = windows.next() {
+        if this_element > next_element {
+            return next_element;
+        }
+    }
+    arr[0]
+}
+```
+
+Which I think I like better than using peek, right? We get rid of the inner `if let` at least. I'm guessing there's some situation where you could use `peek` but couldn't use `windows`? Maybe if you're not dealing with a slice? Something to explore.
+
+Thanks to all the Mastodon/Fediverse users who guided me on this far. I'll leave this a bit open-ended for now: How else can I solve this and learn other Rust methods/iterators? I'm wondering if there's a one- or two-line solution possible.
