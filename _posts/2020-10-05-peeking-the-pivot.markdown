@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "Peeking the pivot"
+title: "Learning about Rust's next, peek, and windows"
 date: 2020-10-05 22:46:00 -0400
 comments: true
 ---
 
-I subscribe to [a wonderful newsletter](https://cassidoo.co/newsletter/) that, among other things, presents readers with a coding challenge every week. 
+I subscribe to [a lovely newsletter](https://cassidoo.co/newsletter/) that, among other things, presents readers with a coding challenge every week. 
 
 I had some fun with [last week's](https://sts10.github.io/2020/09/28/rust-map-fold.html), so I thought I'd do this again, using Rust. So here's [this week's question](https://buttondown.email/cassidoo/archive/e203192d-4aa9-48c3-a715-78fb26fe503f):
 
@@ -233,6 +233,8 @@ fn find_value_of_drop_more_elegant(arr: &[usize]) -> usize {
 }
 ```
 
-Which I think I like better than using peek, right? We get rid of the inner `if let` at least. I'm guessing there's some situation where you could use `peek` but couldn't use `windows`? Maybe if you're not dealing with a slice? Something to explore.
+Which I think I like better than using peek, right? We get rid of the inner `if let` at least. 
+
+I'm guessing there's some situation where you could use `peek` but couldn't use `windows`? Maybe if you're not dealing with a slice? Something to explore.
 
 Thanks to all the Mastodon/Fediverse users who guided me on this far. I'll leave this a bit open-ended for now: How else can I solve this and learn other Rust methods/iterators? I'm wondering if there's a one- or two-line solution possible.
