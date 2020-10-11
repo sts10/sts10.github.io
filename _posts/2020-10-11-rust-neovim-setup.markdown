@@ -5,11 +5,13 @@ date: 2020-10-11 14:46:00 -0400
 comments: true
 ---
 
-I've been writing a fair amount of mediocre Rust in Neovim. I finally have a setup I like, so I'm going to put down some notes about it for when I want to set it up like this again in the future. 
+I've been writing a fair amount of mediocre Rust in Neovim. I finally have a setup I like, but to be honest I'm not _entriely_ sure how to reproduce it on a fresh machine. This post represents my best-effort at reproducing the procedure I'd take on a new machine, for when I need to in the future. It is ugly and confusing! If you have ideas for how to simiplify it, or see redundancies, please let me know on [Twitter](https://www.twitter.com/sts10) or [Mastodon](https://octodon.social/@schlink)!
 
-I'm using Kubuntu 18.04.
+This assumes you have [Neovim](https://github.com/neovim/neovim/wiki/Installing-Neovim) installed already.
 
-This assumes you have [Neovim](https://github.com/neovim/neovim/wiki/Installing-Neovim) installed already. I'm using version 0.4.4. And I use [vim-plug](https://github.com/junegunn/vim-plug) to manage my plugins.
+## What I'm using
+
+I'm using Kubuntu 18.04 (Linux) and Neovim 0.4.4. I use [vim-plug](https://github.com/junegunn/vim-plug) to manage my plugins.
 
 ## Installing some components for this setup
 
@@ -28,8 +30,10 @@ Install [Deoplete](https://github.com/Shougo/deoplete.nvim#install). This may be
 For example, you may first be required to install a working Python environment. If you're new to that, I'd point you to [pyenv](https://github.com/pyenv/pyenv-installer) or [pipx](https://pypi.org/project/pipx/). However, in a pinch, these commands have worked for me in the past: 
 
 ```bash
-sudo apt-get install python3-pip # Install pip3 with 
-pip3 install neovim # install the pip package for Neovim
+# Install pip3 with 
+sudo apt-get install python3-pip 
+# install the pip package for Neovim
+pip3 install neovim 
 ```
 
 Then make sure you've got all this (or something similar) in your init.vim file:
