@@ -5,7 +5,11 @@ date: 2020-10-11 14:46:00 -0400
 comments: true
 ---
 
-I've been writing a fair amount of mediocre Rust in Neovim. I finally have a setup I like, but to be honest I'm not _entriely_ sure how to reproduce it on a fresh machine. This post represents my best-effort at reproducing the procedure I'd take on a new machine, for when I need to in the future. It is ugly and confusing! If you have ideas for how to simplify it, or see redundancies, please let me know on [Twitter](https://www.twitter.com/sts10) or [Mastodon](https://octodon.social/@schlink)!
+I've been writing a fair amount of mediocre Rust in Neovim. I finally have a setup I like, but to be honest I'm not _entirely_ sure which components I've install do what, or if I've listed all of the necessary components to reproduce that setup below.  
+
+This post represents my best-effort at reproducing the procedure I'd take to get my current setup on a new machine, for when I need to in the future. I broke it into two versions: The first presents a BASH script and a section of my init.vim file (what Neovim uses in place of Vim's vimrc). The second is a more written-out version of the same procedure.
+
+If you have ideas for how to simplify it, or see redundancies, please let me know on [Twitter](https://www.twitter.com/sts10) or [Mastodon](https://octodon.social/@schlink)!
 
 ## What I'm using
 
@@ -13,7 +17,7 @@ I'm using Kubuntu 18.04 (Linux) and Neovim 0.4.4. I use [vim-plug](https://githu
 
 ## Install necessary programs
 
-Assuming you have [Rust installed](https://www.rust-lang.org/tools/install) already, via `rustup`, here's a BASH script to install all the programs we'll be using:
+Assuming you have [Rust installed](https://www.rust-lang.org/tools/install) already (the installation process seems to change over time, so I won't paste the current process here), via `rustup`, here's a BASH script to install all the programs we'll be using:
 
 ```bash
 #!/bin/bash
@@ -49,7 +53,7 @@ I'd point you to [pyenv](https://github.com/pyenv/pyenv-installer) or [pipx](htt
 
 ## Install vim-plug
 
-If you already have a plugin manager for Neovim that you use and like, use that. If you don't have one  installed you'll need one. I like [vim-plug](https://github.com/junegunn/vim-plug#installation). 
+If you already have a plugin manager for Neovim that you use and like, use that. If you don't have one installed you'll need one. I like [vim-plug](https://github.com/junegunn/vim-plug#installation).
 
 ## Now add this to your init.vim 
 
