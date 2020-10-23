@@ -163,14 +163,20 @@
 <ol>
 <li>Installed Wire desktop via <a href="https://medium.com/@wireapp/a-step-forward-for-wire-for-linux-52f0538cac15">these instructions</a></li>
 <li><a href="https://signal.org/download/">Download and install Signal</a></li>
-<li>Install Ricochet from <a href="https://ricochet.im/">its website</a> -- not sure the procude here. You can also look in your distro's GUI app store, though check version.</li>
+</ol>
+<!-- 3. Install Ricochet from [its website](https://ricochet.im/) -- not sure the procude here. You can also look in your distro's GUI app store, though check version. -->
+<ol start="4">
 <li>Install Tor Browser (forget how exactly I did this-- maybe Tor Browser Launcher? From POP store?)</li>
 <li>To install OnionShare, I followed the &quot;Ubuntu&quot; instructions on their <a href="https://onionshare.org/#downloads">download page</a> and added their PPA. (The version in the POP store was 0.9 -- too old for me.) </li>
 <li>Install Chromium via the POP app store if you like.</li>
 <li>Install Standard Notes app from <a href="https://standardnotes.org/getting-started?downloaded=linux">their site</a></li>
 </ol>
+<h2><a class="header" href="#gui-markdown-editors" id="gui-markdown-editors">GUI Markdown editors</a></h2>
+<p>While Neovim/Vim is fine for editing Markdown, if you want a different aesthetic, try <a href="https://typora.io/">Typora</a> (with <a href="https://github.com/sts10/Turing-CSS">my forked theme</a>), <a href="https://somas.pages.gitlab.gnome.org/apostrophe/">Apostrophe</a>, or <a href="https://wereturtle.github.io/ghostwriter/">Ghostwriter</a>.</p>
 <h2><a class="header" href="#standard-notes-desktop-file" id="standard-notes-desktop-file">Standard Notes .desktop file</a></h2>
-<p>Put this in <code>~/.local/share/applications</code></p>
+<p>If you install any of the programs below, you may need to create your own &quot;desktop&quot; file, so that your Desktop Environment can &quot;find&quot; these applications. These desktop files go in <code>~/.local/share/applications</code>. </p>
+<p>And sometimes you need to go download a PNG file to serve as the <code>Icon</code>.</p>
+<h3><a class="header" href="#standard-notes" id="standard-notes">Standard Notes</a></h3>
 <pre><code class="language-desktop">[Desktop Entry]
 Type=Application
 Name=StandardNotes
@@ -180,9 +186,18 @@ Icon=/home/$USER/standard-notes/standard-notes.png
 Terminal=false
 Categories=Office;Notes;
 </code></pre>
-<h2><a class="header" href="#ricochet-desktop-file" id="ricochet-desktop-file">Ricochet .desktop file</a></h2>
+<h3><a class="header" href="#cwtch" id="cwtch">Cwtch</a></h3>
+<p>(<a href="https://git.openprivacy.ca/cwtch.im/ui/releases">Releases</a>)</p>
+<pre><code>[Desktop Entry]
+Type=Application
+Name=Cwtch
+Exec=/home/$USER/other_apps/cwtch/ui
+Icon=/home/$USER/other_apps/cwtch/cwtch.png
+Terminal=false
+Categories=Network;InstantMessaging;Internet
+</code></pre>
+<h3><a class="header" href="#ricochet-no-longer-maintained" id="ricochet-no-longer-maintained">Ricochet (no longer maintained)</a></h3>
 <p>Download a Ricochet icon as a png if necessary. </p>
-<p>Then put this in <code>~/.local/share/applications</code></p>
 <pre><code class="language-desktop">[Desktop Entry]
 Type=Application
 Name=Ricochet
