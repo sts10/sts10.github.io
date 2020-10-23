@@ -17,7 +17,7 @@ Note that, as of this writing, [age encrypts large files about twice as fast as 
 
 ## Installation
 
-To install rage, there are a couple options listed in the [README on Github](https://github.com/str4d/rage#installation) ([likewise with age](https://github.com/FiloSottile/age#installation), if you're going that route).
+To install rage, there are a couple options listed in the [README on Github](https://github.com/str4d/rage#installation), including homebrew, ([likewise with age](https://github.com/FiloSottile/age#installation), if you're going that route).
 
 Since I have an up-to-date version of the Rust language [installed](https://www.rust-lang.org/tools/install) (1.46) already set up, I installed rage by running `cargo install rage`. 
 
