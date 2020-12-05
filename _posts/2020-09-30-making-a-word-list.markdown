@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Making a list"
+title: "Making a wordlist for generating passphrases"
 date: 2020-09-30 15:46:00 -0400
 comments: true
 ---
@@ -75,7 +75,7 @@ The first number is the year, the second number is overall occurrences in Google
 
 ## Cleaning the data to create a "raw" word list
 
-While there's tons of interesting information in these files, I didn't need a lot of it. Ideally I wanted to gives words like "finches" a singular, quantitative score to represent its "commonness". 
+While there's tons of interesting information in these files, I didn't need a lot of it. For example, I wanted to give words like "finches" -- regardless of its part of speech or various capitalizations -- a single, quantitative "score" to represent its "commonness". 
 
 First, I arbitrarily decided to discard any data from before 1975 (though it would be fun to a make 1920s list?). Then for any and all years after 1975 I added up the total number of appearances of the word (second number) into one numerical score. I also collapsed capitalizations and parts of speech into one "word". 
 
@@ -104,20 +104,28 @@ We can also remove a list of rejected words, like words that are a little too co
 So as an example, you could run something like this:
 
 ```bash
-tidy -o cleaned_word_list.txt -lpe -m 4 -a /usr/share/dict/words -r reject_words.txt word_list_raw.txt.
+tidy -o cleaned_word_list.txt -lpe -m 4 -a /usr/share/dict/words -r reject_words.txt word_list_raw.txt
 ```
 
-## An example of a usable word list
+## An example of a usable word list (an end-product)
 
-Using `head` and Tidy, I created [an example word list](https://github.com/sts10/common_word_list_maker/blob/master/example_word_list.txt), containing 16,607 words (and no prefix words). Each word from this list provides an additional 14.02 bits of entropy, close to a nice round number. Plus a 7-word passphrase is only 1.5 bits off from 100 bits, which is what KeePassXC labels "excellent". And passphrases can be safely created without punctuation between the words.
+Using `head` and Tidy, I created [an example word list](https://github.com/sts10/common_word_list_maker/blob/master/example_word_list.txt), containing 16,607 words (and no prefix words). Attributes of the word list include:
 
-Note that I haven't manually scrolled through this example list, so there may be some offensive words remaining. (You can use Tidy's reject words options to remove words.) **Nor am I currently using this example word list, or any product of this project, for creating passphrases or anything else.** But it was a fun project!?
+- Each word from this list provides an additional 14.02 bits of entropy, close to a nice round number. 
+- Thus, a 7-word passphrase provides 98.14 bits of entropy. This is pretty close to 100 bits, which is what KeePassXC labels "excellent". 
+- Since prefix words have been removed, passphrases created from this list aren't required to have punctuation between the words to maintain  its level of entropy. (Example: `spillsunmoveddissectionfadingminedtapered`)
 
-## Further questions
+Note that I haven't manually scrolled through this example list, so there may be some offensive words remaining. (You can use Tidy's reject words options to remove words.) 
 
-Would a raw list that used the number of _distinct_ word appearances be better for our purposes? 
+Currently, I am **not** this example word list, or any product of this project, for creating passphrases or anything else. But it was a fun project!
 
-A bigger question: What if we looked at the Google 2-gram data -- words that frequently appear together. According to my casual calculations, things get nutty quickly. If we had a list of the most common 1 billion 2-grams, each pair of words would add 29.9 bits of entropy, meaning three of them (6 words) would make a decent passphrase. Galaxy brain: 1,000,000,000,000,000 3-grams, 49.8 bits a pop. 
+## Further questions to explore
+
+Would a raw list that used the number of _distinct_ word appearances from the Google Books Ngram data be better for our purposes? 
+
+A bigger question: What if we looked at the Google 2-gram data -- words that frequently appear together. According to my casual calculations, things get nutty quickly. For example, if we had a list of the most common 1 billion 2-grams, each pair of words would add 29.9 bits of entropy, meaning three of them (6 words) would make a decent passphrase (~90 bits). Why might we want to construct a passphrase like this? Three 2-grams would likely be easier to remember than six 1-grams.
+
+Galaxy brain: A list of 1,000,000,000,000,000 3-grams would give 49.8 bits per 3-gram (according to my math). Thus, two 3-grams would give almost 100 bits. 
 
 ## Tender wrap-up
 
