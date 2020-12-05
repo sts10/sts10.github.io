@@ -545,7 +545,7 @@ MacCárthaigh original challenge was to make the algorithm more _readable_. And 
 
 In thinking about how I might make a more _readable_ implementation, I returned to the structure I used for my first fair (but slow) implementation of Lemire above, which was broken into two functions.
 
-### Splitting it up for increased readability
+### Splitting it up for increased readability (My final implementation)
 
 I like two things about splitting it into two functions, an outer and an inner. First, it shows what we might call the "seed rejection" logic clearly: The outer function (`roll_using_readable_lemire`) has the only loop, in which it passes a possible seed to an inner function (`lemire_from_seed`) for _judgment_.
 
@@ -555,7 +555,7 @@ And the second thing I like about this split version is that it's pretty easy fo
 
 So I tried to take the knowledge and tricks I learned working out `roll_using_lemire_fast` and put them back into split functions. Though I only carried over one of those three computer science tricks, since we think they can be written in the more readable way and the Rust compiler will make the optimizations for us. 
 
-Here's what I ended up with (it's in it's own module in `src/readable.rs`):
+Here's what I ended up with (it's in its own module in `src/readable.rs`):
 
 ```rust
 // This is the 'outer', public function of this module.
