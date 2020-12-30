@@ -12,7 +12,7 @@ I've written up a contrived example for us:
 ```rust 
 // Contrived example!
 fn main() {
-    println!("Result is {:?}", get_result3(0));
+    println!("Result is {:?}", get_result(0));
 }
 
 fn get_result(initial: usize) -> Option<usize> {
@@ -92,4 +92,6 @@ fn get_result4(initial: usize) -> Option<usize> {
 }
 ```
 
-Here's [a playground with the example code](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=0f46d9161e3df7c3099d41f632783f4b) if you want to tinker.
+Think that's pretty good! 
+
+If you have other ideas please let me know via [Mastodon](https://octodon.social/@schlink) or [Twitter](https://twitter.com/sts10). Here's [a playground with the example code](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=0f46d9161e3df7c3099d41f632783f4b) if you want to tinker.
