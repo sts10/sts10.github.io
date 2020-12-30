@@ -79,7 +79,6 @@ I did wonder about that use of `iter()`, though, so I poked around and reminded 
 From [the `iter` documentation](https://doc.rust-lang.org/std/iter/index.html#the-three-forms-of-iteration):
 
 > There are three common methods which can create iterators from a collection:
-
 > - `iter()`, which iterates over `&T`.
 > - `iter_mut(),` which iterates over `&mut T`.
 > - `into_iter(),` which iterates over `T`.
