@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Rust's find_map method"
-date: 2020-10-10 14:46:00 -0400
+date: 2020-12-30 18:26:00 -0400
 comments: true
 ---
 
