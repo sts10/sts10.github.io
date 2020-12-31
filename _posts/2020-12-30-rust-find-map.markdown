@@ -38,7 +38,9 @@ fn sub_five_from(y: usize) -> Option<usize> {
 
 In the contrived example above, we try sending `initial + 2` to `sub_five_from`, then try `initial + 4`, then `initial + 12`. We have `get_result` only return something if `sub_five_from` returns a `Some`. So if `sub_five_from(initial + 2)` returns `None`, we move on to `sub_five_from(initial + 4)` and see if that returns a `Some`.
 
-Now, this `get_result` function as written above works, but I couldn't [help but wonder](https://www.vulture.com/2013/03/carrie-sex-city-couldnt-help-but-wonder.html) if there was a more Rust-y way to do what I needed to do; for example, maybe using a `match` statement. The problem I was confronting seemed to me to be a pretty common one. And if it wasn't, maybe that's because Rust, in it's wisdom, was trying to push me toward setting up these two functions differently.
+Now, this `get_result` function as written above works, but I couldn't [help but wonder](https://www.vulture.com/2013/03/carrie-sex-city-couldnt-help-but-wonder.html) if there was a more Rust-y way to do what I needed to do; for example, maybe using a `match` statement. 
+
+Given that I'm not trying to do anything _too_ strange here, I kind of figure that the problem I'm confronting might be a pretty common one. Which means that, in investigating it further, either I'd learn about some cool Rust feature _or_ maybe some alternate setup for these functions.
 
 ## Toward more concise solutions
 
@@ -92,6 +94,17 @@ fn get_result4(initial: usize) -> Option<usize> {
 }
 ```
 
-Think that's pretty good! 
+Which looks good. 
+
+Alternatively, if the number of arguments we're going to try before returning a `None` is static, we can avoid creating a Vector for `values`: 
+
+```rust
+fn get_result5(initial: usize) -> Option<usize> {
+    let values = [initial + 2, initial + 4, initial + 12];
+    values.iter().find_map(|value| sub_five_from(*value))
+}
+```
+
+And obviously could tighten that down to one line if we wanted: `[initial + 2, initial + 4, initial + 12].iter().find_map(|value| sub_five_from(*value))`. But that seems a bit excessive. 
 
 If you have other ideas please let me know via [Mastodon](https://octodon.social/@schlink) or [Twitter](https://twitter.com/sts10). Here's [a playground with the example code](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=0f46d9161e3df7c3099d41f632783f4b) if you want to tinker.
