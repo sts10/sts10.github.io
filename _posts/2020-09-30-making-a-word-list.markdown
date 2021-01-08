@@ -117,7 +117,7 @@ Using `head` and Tidy, I created [an example word list](https://github.com/sts10
 
 Note that I haven't manually scrolled through this example list, so there may be some offensive words remaining. (You can use Tidy's reject words options to remove words.) 
 
-Currently, I am **not** this example word list, or any product of this project, for creating passphrases or anything else. But it was a fun project!
+Currently, I am **not** actually using this example word list, or any product of this project, for creating passphrases or anything else. But it was a fun project!
 
 ## Further questions to explore
 
