@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Schlink's Docs</title>
+        <title>Schlink&#x27;s Docs</title>
         
         <meta name="robots" content="noindex" />
         
@@ -28,7 +28,9 @@
         <link rel="stylesheet" href="css/variables.css">
         <link rel="stylesheet" href="css/general.css">
         <link rel="stylesheet" href="css/chrome.css">
+        
         <link rel="stylesheet" href="css/print.css" media="print">
+        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
@@ -127,12 +129,14 @@
                         
                     </div>
 
-                    <h1 class="menu-title">Schlink's Docs</h1>
+                    <h1 class="menu-title">Schlink&#x27;s Docs</h1>
 
                     <div class="right-buttons">
+                        
                         <a href="print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
+                        
                         
                     </div>
                 </div>
@@ -598,17 +602,26 @@ Plug 'junegunn/fzf'
 <p>There also seems to be another way to &quot;teach&quot; Neovim about the Rust language using <a href="https://github.com/racer-rust/racer"><strong>Racer</strong> (&quot;code completion for Rust&quot;)</a> and its <a href="https://github.com/racer-rust/vim-racer">associated Vim plugin</a>, but I think I tried it before and it through halting errors as I was typing code.</p>
 <h1><a class="header" href="#github-and-ssh-keys" id="github-and-ssh-keys">GitHub and ssh keys</a></h1>
 <p>Make sure Git is installed </p>
-<ol>
-<li>
-<p>Set git username (email) and email locally</p>
-</li>
-<li>
-<p>Generate a new shh key pair on your machine, then upload the public key to Github. I followed <a href="https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/">these instructions</a>, creating an ssh key locally, with a passphrase that I stored in my Keepass database.</p>
-</li>
-<li>
+<h2><a class="header" href="#1-set-git-username-email-and-email-locally" id="1-set-git-username-email-and-email-locally">1. Set git username (email) and email locally</a></h2>
+<p>Via <a href="https://linuxize.com/post/how-to-configure-git-username-and-email/">this post</a>:</p>
+<p>To set your global commit name and email address run the git config command with the --global option:</p>
+<pre><code>git config --global user.name &quot;Your Name&quot;
+git config --global user.email &quot;youremail@yourdomain.com&quot;
+</code></pre>
+<p>Once done, you can confirm that the information is set by running: <code>git config --list</code></p>
+<p>These commands save the values in the global configuration file, ~/.gitconfig:</p>
+<h2><a class="header" href="#2-generate-a-new-shh-key-pair-on-your-machine-then-upload-the-public-key-to-github" id="2-generate-a-new-shh-key-pair-on-your-machine-then-upload-the-public-key-to-github">2. Generate a new shh key pair on your machine, then upload the public key to Github</a></h2>
+<p>I followed <a href="https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/">these instructions</a>, creating an ssh key locally, with a passphrase that I stored in my Keepass database.</p>
+<h2><a class="header" href="#3-ssh-agent-stuff" id="3-ssh-agent-stuff">3. ssh-agent stuff</a></h2>
 <p>In the <code>bashrc</code> included in this repo is some code that handles your <code>ssh-agent</code>. I got it from <a href="https://wiki.archlinux.org/index.php/SSH_keys#ssh-agent">this section of the Arch Linux wiki</a>. Here's the bash code if you need:</p>
-</li>
-</ol>
+<pre><code class="language-bash">if ! pgrep -u &quot;$USER&quot; ssh-agent &gt; /dev/null; then
+    ssh-agent -t 1h &gt; &quot;$XDG_RUNTIME_DIR/ssh-agent.env&quot;
+fi
+if [[ ! &quot;$SSH_AUTH_SOCK&quot; ]]; then
+    source &quot;$XDG_RUNTIME_DIR/ssh-agent.env&quot; &gt;/dev/null
+fi
+</code></pre>
+<p>It was once this:</p>
 <pre><code class="language-bash">if ! pgrep -u &quot;$USER&quot; ssh-agent &gt; /dev/null; then
     ssh-agent &gt; ~/.ssh-agent-thing
 fi
@@ -616,11 +629,11 @@ if [[ &quot;$SSH_AGENT_PID&quot; == &quot;&quot; ]]; then
     eval &quot;$(&lt;~/.ssh-agent-thing)&quot;
 fi
 </code></pre>
-<ol start="4">
-<li><code>touch ~/.ssh/config</code> and in that file write <code>AddKeysToAgent yes</code>, as per <a href="https://wiki.archlinux.org/index.php/SSH_keys#ssh-agent">the Arch wiki entry</a>.</li>
-</ol>
-<p>Alternatively, you could try <a href="https://keepassxc.org/docs/#faq-ssh-agent-how">storing ssh key in KeePassXC database</a>, but I haven't had luck with that in the past.</p>
+<h2><a class="header" href="#4-ssh-config" id="4-ssh-config">4. ssh config</a></h2>
+<p><code>touch ~/.ssh/config</code> and in that file write <code>AddKeysToAgent yes</code>, as per <a href="https://wiki.archlinux.org/index.php/SSH_keys#ssh-agent">the Arch wiki entry</a>.</p>
 <p>Given this setup, you're going to want to use the ssh URL (<code>git@github.com:sts10/terminal_and_vim_settings.git</code>) when cloning down repos from GitHub (as opposed to HTTPS).</p>
+<h2><a class="header" href="#notesalternative-approaches" id="notesalternative-approaches">Notes/alternative approaches</a></h2>
+<p>Alternatively, you could try <a href="https://keepassxc.org/docs/#faq-ssh-agent-how">storing ssh key in KeePassXC database</a>, but I haven't had luck with that in the past.</p>
 <h1><a class="header" href="#github-blog-with-jekyll" id="github-blog-with-jekyll">GitHub blog with Jekyll</a></h1>
 <ol>
 <li>Be sure rbenv is set up and a modern version of Ruby is set to global.</li>
