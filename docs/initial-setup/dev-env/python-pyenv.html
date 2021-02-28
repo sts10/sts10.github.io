@@ -192,18 +192,14 @@
 </code></pre>
 <p>Note that I did <strong>not</strong> need to run any pip install commands to get it working.</p>
 <h3><a class="header" href="#syntax-and-style-checker" id="syntax-and-style-checker">Syntax and style checker</a></h3>
-<p>For checking Python syntax and style you could try flake8 and <a href="https://github.com/nvie/vim-flake8">its corresponding Vim plugin</a>.</p>
-<h4><a class="header" href="#flake8-installation" id="flake8-installation">Flake8 installation</a></h4>
-<ol>
-<li><code>pip install flake8</code> (<a href="https://pypi.org/project/flake8/">reference</a>)</li>
-<li>In your Vim config file: <code>Plug 'nvie/vim-flake8', { 'for': 'python' }</code></li>
-</ol>
-<p>To use in Vim, I run <code>:call flake8#Flake8()</code> though obviously could be mapped to something.</p>
+<p>For checking Python syntax and style you could try <a href="https://pypi.org/project/flake8/">flake8</a>.</p>
+<p>After installing with <code>pip install flake8</code> (<a href="https://pypi.org/project/flake8/">reference</a>), you can run it on individual python files from the command line with <code>flake8 &lt;filename&gt;.py</code>, which will print out recommendations to the terminal. </p>
+<p>It also has a <a href="https://github.com/nvie/vim-flake8">corresponding Vim plugin</a>, though after installing it the default mapping, <code>&lt;F7&gt;</code>, didn't work, so I had to run <code>:call flake8#Flake8()</code>. Obviously I could try mapping it to a key myself.</p>
 <h2><a class="header" href="#2020-updates--notes" id="2020-updates--notes">2020 updates / notes</a></h2>
-<p>These two blog posts may offer better, newer solutions:</p>
+<p>These two blog posts may offer better, newer solutions for Python environment set ups:</p>
 <ul>
-<li>https://read.acloud.guru/my-python-setup-77c57a2fc4b6</li>
-<li>https://jacobian.org/2019/nov/11/python-environment-2020/</li>
+<li><a href="https://read.acloud.guru/my-python-setup-77c57a2fc4b6">https://read.acloud.guru/my-python-setup-77c57a2fc4b6</a></li>
+<li><a href="https://jacobian.org/2019/nov/11/python-environment-2020/">https://jacobian.org/2019/nov/11/python-environment-2020/</a></li>
 </ul>
 <h3><a class="header" href="#pipx" id="pipx">pipx</a></h3>
 <p>Specifically, if you've been using pip to install packages solely for use on the command-line (as opposed to active development using Python), like the <code>neovim</code> package, I'm hoping that <a href="https://pypi.org/project/pipx/">pipx</a> may be a better, more self-contained solution. Though given that you need either Homebrew or pip to install pipx, it might not be as strong of a solution on Ubuntu as it is on MacOS.</p>
