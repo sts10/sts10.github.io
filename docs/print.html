@@ -506,7 +506,8 @@ Categories=Network;InstantMessaging;Internet
 <p>If you use Neovim + Deoplete, you probably want to run <code>pip3 install neovim</code> to ensure Deoplete works smoothly (see <a href="https://github.com/Shougo/deoplete.nvim#requirements">Deoplete's requirements</a>).</p>
 <p>I also ran <code>pip2 install neovim</code> because Neovim's <code>:CheckHealth</code> told me too. </p>
 <p>At this point, you may need to update Deoplete by running <code>:UpdateRemotePlugins</code> in Neovim. (Neovim's <code>:CheckHealth</code> is your friend here.)</p>
-<h2><a class="header" href="#tips-for-writing-python-in-vimneovim" id="tips-for-writing-python-in-vimneovim">Tips for writing Python in Vim/Neovim</a></h2>
+<h2><a class="header" href="#tips-for-writing-python-in-vimneovim" id="tips-for-writing-python-in-vimneovim">Tips for <em>writing</em> Python in Vim/Neovim</a></h2>
+<h3><a class="header" href="#formatter" id="formatter">Formatter</a></h3>
 <p>For a formatter, I like <a href="https://github.com/psf/black/blob/master/docs/editor_integration.md">Black</a> so far. All you need to integrate it into Vim is to install the Vim plugin:</p>
 <pre><code class="language-vim">Plug 'psf/black', { 'branch': 'stable' }
 </code></pre>
@@ -514,6 +515,14 @@ Categories=Network;InstantMessaging;Internet
 <pre><code class="language-vim">autocmd BufWritePre *.py execute ':Black'
 </code></pre>
 <p>Note that I did <strong>not</strong> need to run any pip install commands to get it working.</p>
+<h3><a class="header" href="#syntax-and-style-checker" id="syntax-and-style-checker">Syntax and style checker</a></h3>
+<p>For checking Python syntax and style you could try flake8 and <a href="https://github.com/nvie/vim-flake8">its corresponding Vim plugin</a>.</p>
+<h4><a class="header" href="#flake8-installation" id="flake8-installation">Flake8 installation</a></h4>
+<ol>
+<li><code>pip install flake8</code> (<a href="https://pypi.org/project/flake8/">reference</a>)</li>
+<li>In your Vim config file: <code>Plug 'nvie/vim-flake8', { 'for': 'python' }</code></li>
+</ol>
+<p>To use in Vim, I run <code>:call flake8#Flake8()</code> though obviously could be mapped to something.</p>
 <h2><a class="header" href="#2020-updates--notes" id="2020-updates--notes">2020 updates / notes</a></h2>
 <p>These two blog posts may offer better, newer solutions:</p>
 <ul>
