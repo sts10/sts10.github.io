@@ -506,6 +506,14 @@ Categories=Network;InstantMessaging;Internet
 <p>If you use Neovim + Deoplete, you probably want to run <code>pip3 install neovim</code> to ensure Deoplete works smoothly (see <a href="https://github.com/Shougo/deoplete.nvim#requirements">Deoplete's requirements</a>).</p>
 <p>I also ran <code>pip2 install neovim</code> because Neovim's <code>:CheckHealth</code> told me too. </p>
 <p>At this point, you may need to update Deoplete by running <code>:UpdateRemotePlugins</code> in Neovim. (Neovim's <code>:CheckHealth</code> is your friend here.)</p>
+<h2><a class="header" href="#tips-for-writing-python-in-vimneovim" id="tips-for-writing-python-in-vimneovim">Tips for writing Python in Vim/Neovim</a></h2>
+<p>For a formatter, I like <a href="https://github.com/psf/black/blob/master/docs/editor_integration.md">Black</a> so far. All you need to integrate it into Vim is to install the Vim plugin:</p>
+<pre><code class="language-vim">Plug 'psf/black', { 'branch': 'stable' }
+</code></pre>
+<p>And I'll probably add this to my vimrc to have it run on save: </p>
+<pre><code class="language-vim">autocmd BufWritePre *.py execute ':Black'
+</code></pre>
+<p>Note that I did <strong>not</strong> need to run any pip install commands to get it working.</p>
 <h2><a class="header" href="#2020-updates--notes" id="2020-updates--notes">2020 updates / notes</a></h2>
 <p>These two blog posts may offer better, newer solutions:</p>
 <ul>
