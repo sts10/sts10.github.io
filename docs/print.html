@@ -503,8 +503,12 @@ Categories=Network;InstantMessaging;Internet
 <p>To install <a href="https://github.com/agermanidis/autosub">autosub</a> (which I think necessitates Python2) run <code>pip2 install autosub</code></p>
 <h2><a class="header" href="#deoplete--neovim-1" id="deoplete--neovim-1">Deoplete / Neovim</a></h2>
 <p>Now that we've got a nice little Python and Pip environment set up, let's make sure Deoplete is using it.</p>
-<p>If you use Neovim + Deoplete, you probably want to run <code>pip3 install neovim</code> to ensure Deoplete works smoothly (see <a href="https://github.com/Shougo/deoplete.nvim#requirements">Deoplete's requirements</a>).</p>
-<p>I also ran <code>pip2 install neovim</code> because Neovim's <code>:CheckHealth</code> told me too. </p>
+<p>If you use Neovim + Deoplete, you probably want to run <code>pip3 install neovim</code> or <code>pip3 install pynvim</code> to ensure Deoplete works smoothly (see <a href="https://github.com/Shougo/deoplete.nvim#requirements">Deoplete's requirements</a>).</p>
+<p>Another tip to try is to explicitedly tell Neovim which Python3 to use. Do this by including this line in your Neovim config file: </p>
+<pre><code class="language-vim">let g:python3_host_prog = expand('~/.pyenv/shims/python')
+</code></pre>
+<p>I don't think you need to provide Neovim with a version of Python2 these days to make Neovim do its job well.</p>
+<!-- I also ran `pip2 install neovim` because Neovim's `:CheckHealth` told me too. --> 
 <p>At this point, you may need to update Deoplete by running <code>:UpdateRemotePlugins</code> in Neovim. (Neovim's <code>:CheckHealth</code> is your friend here.)</p>
 <h2><a class="header" href="#tips-for-writing-python-in-vimneovim" id="tips-for-writing-python-in-vimneovim">Tips for <em>writing</em> Python in Vim/Neovim</a></h2>
 <h3><a class="header" href="#formatter" id="formatter">Formatter</a></h3>
