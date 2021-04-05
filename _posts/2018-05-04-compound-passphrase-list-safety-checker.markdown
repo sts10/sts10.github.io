@@ -37,13 +37,15 @@ Apparently the traditional way of preventing these sorts of issues is to ensure 
 
 This "prefix code" idea is more broad than the task I set out for myself -- it's a possible property of all code systems, not just diceware passphrases. 
 
-I later learned that the EFF, in [making their long wird list for generating random passphrases](https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases), "ensured that no word is an exact prefix of any other word," which seems like exactly the definition of a prefix code.
+I later learned that the EFF, in [making their long word list for generating random passphrases](https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases), "ensured that no word is an exact prefix of any other word," which seems like exactly the definition of a prefix code.
 
 The process I outline below was undertaken _before_ I understood that "[ensuring] that no word is an exact prefix of any other word" also ensured compound-safety as I came to define it. For example, [this diceware tool](https://github.com/ulif/diceware) has a specific section in its README dedicated to warning users about ["the prefix code problem"](https://github.com/ulif/diceware#id3).
 
 With the benefit of hindsight, I'll say that my work below was an attempt to create a program that would make a given word list compound-safe **more efficiently** that simply making it a prefix code. By more efficient I mean that it could remove fewer words from the original, compound-unsafe list than removing words that are exact prefixes of other words, thus providing more bits of entropy per word. More on this hypothesis below.
 
-Just a note: Thanks to [phoerious](https://github.com/phoerious) for leaving an extremely illuminating [comment](https://sts10.github.io/2018/05/05/compound-passphrase-list-safety-checker.html#comment-3886800478) on the original version of this blog post.
+**Update from 2021**: If you just want to remove all prefix words from a word list, check out my newer project, [Tidy](https://github.com/sts10/tidy).
+
+Just a note: Thanks to [phoerious](https://github.com/phoerious) for leaving an extremely illuminating [comment](https://sts10.github.io/2018/05/05/compound-passphrase-list-safety-checker.html#comment-3886800478) on the original version of this blog post (reproduced below).
 
 ## First Results
 
@@ -102,7 +104,7 @@ Now the question is: If take the 1Password list and remove all words that are ex
 
 This is fewer words and fewer entropy-per-word than my "compound safety" script preserves (16,103 words, good for 13.98 bits of entropy per word). Pretty cool! 
 
-It's 100% possible that these "compound safe" lists that my script generates aren't actually safe for use in random passphrases without spaces between words. For one obvious example, there could be problematic examples I haven't thought of. So if you're actually going to clean a word list, I'd probably advice you use the [no-prefix script](https://github.com/sts10/prefix-safety-checker) rather than [the compound safety script](https://github.com/sts10/compound-passphrase-list-safety-checker), mostly because that's what the EFF did. 
+It's 100% possible that these "compound safe" lists that my script generates aren't actually safe for use in random passphrases without spaces between words. For one obvious example, there could be problematic examples I haven't thought of. So if you're actually going to clean a word list, I'd probably advice you use [Tidy](https://github.com/sts10/tidy) or the [no-prefix script](https://github.com/sts10/prefix-safety-checker) rather than [the compound safety script](https://github.com/sts10/compound-passphrase-list-safety-checker), mostly because that's what the EFF did. 
 
 ## Toward a more theoretical understanding of compound safety
 
