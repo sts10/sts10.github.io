@@ -81,7 +81,7 @@ First, I arbitrarily decided to discard any data from before 1975 (though it wou
 
 This procedure gave "finches" a score of 291,922, placing it just below "florins" (292,262) and "foibles" (291,693).
 
-I went through each letter of the alphabet, calculating a score for each word and then appending the top 100,000 words starting with the letter into a CSV file, which weighed in at 2.2 millions lines. I then took the top 100,001 words from that CSV file to create a "raw" word list. Crucially, I left this list sorted by the appearance score (even though the score itself is not in the file). You can view that file [here](https://github.com/sts10/common_word_list_maker/blob/master/word_list_raw.txt), though note that has many profane and offensive words.
+I went through each letter of the alphabet, calculating a score for each word and then appending the top 100,000 words starting with the letter into a CSV file, which weighed in at 2.2 millions lines. I then took the top 100,001 words from that CSV file to create a "raw" word list. Crucially, I left this list sorted by the appearance score (even though the score itself is not in the file). You can view that file [here](https://github.com/sts10/common_word_list_maker/blob/main/word_list_raw.txt), though note that has many profane and offensive words.
 
 ### A note on the code: BASH?
 
@@ -109,7 +109,7 @@ tidy -o cleaned_word_list.txt -lpe -m 4 -a /usr/share/dict/words -r reject_words
 
 ## An example of a usable word list (an end-product)
 
-Using `head` and Tidy, I created [an example word list](https://github.com/sts10/common_word_list_maker/blob/master/example_word_list.txt), containing 16,607 words (and no prefix words). Attributes of the word list include:
+Using `head` and Tidy, I created [an example word list](https://github.com/sts10/common_word_list_maker/blob/main/example_word_list.txt), containing 16,607 words (and no prefix words). Attributes of the word list include:
 
 - Each word from this list provides an additional 14.02 bits of entropy, close to a nice round number. 
 - Thus, a 7-word passphrase provides 98.14 bits of entropy. This is pretty close to 100 bits, which is what KeePassXC labels "excellent". 
