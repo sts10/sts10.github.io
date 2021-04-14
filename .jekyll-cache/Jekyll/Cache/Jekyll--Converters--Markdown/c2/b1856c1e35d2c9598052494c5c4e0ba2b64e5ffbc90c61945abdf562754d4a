@@ -331,7 +331,7 @@
           <span class="k">if</span> <span class="n">offset</span><span class="nf">.is_none</span><span class="p">()</span> <span class="p">{</span>
             <span class="n">offset</span> <span class="o">=</span> <span class="nf">Some</span><span class="p">(</span><span class="n">k</span><span class="p">);</span>
           <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="n">continue</span> <span class="nv">'next_line</span><span class="p">;</span>
+            <span class="k">continue</span> <span class="nv">'next_line</span><span class="p">;</span>
           <span class="p">}</span>
         <span class="p">}</span>
       <span class="p">}</span>

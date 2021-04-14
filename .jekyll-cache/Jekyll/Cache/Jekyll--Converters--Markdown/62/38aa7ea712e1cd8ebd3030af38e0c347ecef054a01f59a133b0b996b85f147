@@ -30,7 +30,7 @@
             <span class="c">// and continue the loop</span>
             <span class="nf">Err</span><span class="p">(</span><span class="mi">_</span><span class="n">e</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="p">{</span>
                 <span class="nd">eprintln!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">try_again</span><span class="p">);</span>
-                <span class="n">continue</span><span class="p">;</span>
+                <span class="k">continue</span><span class="p">;</span>
             <span class="p">}</span>
         <span class="p">};</span>
     <span class="p">}</span>
