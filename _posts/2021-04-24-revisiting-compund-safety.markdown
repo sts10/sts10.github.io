@@ -19,66 +19,14 @@ I heard of this potential issue in [this YouTube video](https://youtu.be/Pe_3cFu
 
 Another way to think about example 2: if, for every pair of words, you mash them together, there must be only ONE way to split them apart and make two words on the list. This is how I approached the issue when writing the code for csafe.
 
+Note that putting any punctuation between words in your passphrases, as 1Password requires of users, negates this issue.
+
 ## csafe: New code 
 
-Inspired by some tweets I saw, I decided to take a fresh look at this project, having 3 more years of Rust experience under my belt. The result is [csafe](https://github.com/sts10/csafe). 
+Inspired by some tweets I saw recently, I decided to take a fresh look at this project, having 3 more years of Rust experience under my belt. The result is [CSafe](https://github.com/sts10/csafe). 
 
-**Improvements over my original checker**: csafe is more considerate about which words it discards. For example, given [a version of the word list 1Password once used](https://github.com/sts10/csafe/blob/main/word_lists/agile_words.txt), it was able to [save 16,820](https://github.com/sts10/csafe/blob/main/word_lists/agile_words.txt.csafe) of the original list of 18,328 words. The original checker could only save 16,103 words. (And [removing all prefix words, the more "nuclear" option, leaves you with just 15,190 words](https://github.com/sts10/prefix-safety-checker/blob/master/word_lists/agile_words.txt.no-prefix).) The Rust code in csafe is also, in my opinion, much easier to understand than the functions of the original checker. 
+CSafe makes a number of **improvements** over [my original checker](https://github.com/sts10/compound-passphrase-list-safety-checker). First off, I think it's all more readable that my original checker code, which I wrote when I was newer to Rust. CSafe also has some basic tests and benchmarks.
 
-**Downsides to using csafe over my original checker**: For some reason I can't quite figure out, csafe is much slower than my original word checker -- like 50x slower. Maybe it's doing a lot of unnecessary checks? Feel free to create an issue or pull request if you spot any major improvements for speed that I can make.
+But more importantly for end-users, CSafe is more considerate about which words it discards when making a compound-safe version of the inputted word list. For example, given [a version of the word list 1Password once used](https://github.com/sts10/csafe/blob/main/word_lists/agile_words.txt), it was able to [save 16,773](https://github.com/sts10/csafe/blob/main/word_lists/agile_words.txt.csafe) of the original list of 18,328 words. The original checker could only save 16,103 words. (And [removing all prefix words, the more "nuclear" option, leaves you with just 15,190 words](https://github.com/sts10/prefix-safety-checker/blob/master/word_lists/agile_words.txt.no-prefix).) 
 
-### The main function
-
-It's not pretty, but it's prettier than the original.
-
-```rust
-pub fn find_unsafe_words(list: &[String]) -> Vec<Vec<String>> {
-    let mut unsafe_words: Vec<Vec<String>> = vec![];
-    let mut count = 0;
-    for root_word in list {
-        count += 1;
-        println!("Checking {} (word {} of {})", root_word, count, list.len());
-        let root_word_length = root_word.len();
-        for second_word in list {
-            if root_word == second_word {
-                continue;
-            }
-            let mashed_word = root_word.to_owned().to_owned() + second_word;
-            for i in 0..mashed_word.len() {
-                if i == root_word_length {
-                    continue;
-                }
-                if i == 0 && list.contains(&mashed_word) {
-                    println!("Found a mashed whole word ");
-                    unsafe_words.push(vec![
-                        root_word.to_string(),
-                        second_word.to_string(),
-                        mashed_word.to_string(),
-                    ]);
-                    // I don't know if I can break here or I need to keep checking
-                    // this mashed_word... Think it's safe to break
-                    break;
-                }
-                let first_part = &mashed_word[0..i];
-                let second_part = &mashed_word[i..mashed_word.len()];
-                // Honestly not sure about these &&s
-                if (first_part.trim() != "" && is_on_list(first_part, &list))
-                    && (second_part.trim() != "" && is_on_list(second_part, &list))
-                {
-                    let contenders_for_removal = vec![
-                        root_word.to_string(),
-                        second_word.to_string(),
-                        first_part.to_string(),
-                        second_part.to_string(),
-                    ];
-                    println!("Adding contenders {:?}", contenders_for_removal);
-                    unsafe_words.push(contenders_for_removal);
-                    break;
-                }
-            }
-        }
-    }
-    unsafe_words
-}
-
-```
+Lastly, I think CSafe is faster than the original checker on lists of equal length, especially on longer lists, thanks to its use of [Fx Hash](https://github.com/cbreeden/fxhash) rather than a regular old Vector -- thanks to [Wesley Moore](https://github.com/wezm). 
