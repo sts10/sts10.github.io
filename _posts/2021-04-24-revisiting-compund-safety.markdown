@@ -29,4 +29,13 @@ CSafe makes a number of **improvements** over [my original checker](https://gith
 
 But more importantly for end-users, CSafe is more considerate about which words it discards when making a compound-safe version of the inputted word list. For example, given [a version of the word list 1Password once used](https://github.com/sts10/csafe/blob/main/word_lists/agile_words.txt), it was able to [save 16,773](https://github.com/sts10/csafe/blob/main/word_lists/agile_words.txt.csafe) of the original list of 18,328 words. The original checker could only save 16,103 words. (And [removing all prefix words, the more "nuclear" option, leaves you with just 15,190 words](https://github.com/sts10/prefix-safety-checker/blob/master/word_lists/agile_words.txt.no-prefix).) 
 
-Lastly, I think CSafe is faster than the original checker on lists of equal length, especially on longer lists, thanks to its use of [Fx Hash](https://github.com/cbreeden/fxhash) rather than a regular old Vector -- thanks to [Wesley Moore](https://github.com/wezm). 
+### Speed up
+
+Lastly, I think CSafe is faster than the original checker on lists of equal length, especially on longer lists. 
+
+Here, a big thanks to [Wesley Moore](https://github.com/wezm), who provided [two key pull requests](https://github.com/sts10/csafe/pulls?q=is%3Apr+is%3Aclosed+author%3Awezm) that boosted the speed of the program by some factor. 
+
+[One of these PRs](https://github.com/sts10/csafe/pull/2) has the program make use of [Fx Hash](https://github.com/cbreeden/fxhash) rather than a regular old Vector. 
+
+[The other](https://github.com/sts10/csafe/pull/3) deals with variable allocation in the crucial `find_unsafe_words` function. I don't _quite_ understand it yet, so I'll just point you to [Moore's helpful explanation](https://github.com/sts10/csafe/pull/3#issuecomment-826252236).
+
