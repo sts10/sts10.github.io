@@ -31,15 +31,15 @@ But more importantly for end-users, CSafe is more considerate about which words 
 
 ### Speed up
 
-Lastly, I think CSafe is faster than the original checker on lists of equal length, especially on longer lists. CSafe takes about 73 seconds to get through the 1Password word list (18k words). My old compound checker takes more like 10 minutes to process the same list.
+Lastly, I think CSafe is faster than the original checker on lists of equal length, especially on longer lists. On my machine, CSafe takes about 73 seconds to get through the 1Password word list (18k words) (`time csafe agile.txt`). My old compound checker takes more like 20 minutes to process the same list.
 
-Where's the magic sauce? Here, a big thanks to [Wesley Moore](https://github.com/wezm), who provided [two key pull requests](https://github.com/sts10/csafe/pulls?q=is%3Apr+is%3Aclosed+author%3Awezm) that boosted the speed of the program by some multiples. 
+What's the magic sauce? Here, a big thanks to [Wesley Moore](https://github.com/wezm), who provided [two key pull requests](https://github.com/sts10/csafe/pulls?q=is%3Apr+is%3Aclosed+author%3Awezm) that boosted the speed of the program by some multiples. 
 
-[One of these PRs](https://github.com/sts10/csafe/pull/2) has the program make use of [Fx Hash](https://github.com/cbreeden/fxhash) rather than a regular old Vector. This sped the benchmark up by about 8x.
+[One of these PRs](https://github.com/sts10/csafe/pull/2) has the program make use of [Fx Hash](https://github.com/cbreeden/fxhash) rather than a regular old Vector. Fx Hash is even faster at look-ups that a regular Rust HashSet, though it's not cryptographically secure (we don't care about that here). This sped the benchmark up by about 8x.
 
-[The other](https://github.com/sts10/csafe/pull/3) deals with variable allocation in the crucial `find_unsafe_words` function. I don't _quite_ understand it yet, so I'll just point you to [Moore's helpful explanation](https://github.com/sts10/csafe/pull/3#issuecomment-826252236). Basically we want to be careful how we concatenate strings within nested loops. 
+[The other pull request from Moore](https://github.com/sts10/csafe/pull/3) deals with variable allocation in the crucial `find_unsafe_words` function. I don't _quite_ understand it yet, so I'll just point you to [Moore's helpful explanation](https://github.com/sts10/csafe/pull/3#issuecomment-826252236). Basically we want to be careful how we concatenate strings within nested loops. 
 
-So rather than re-allocate `mashed_word` in each inner loop (or even each outer loop), we're going to declare it before the first loop, then, when we need to use it, `clear` it and then `push_str` to it to do the actual word mashing.
+So rather than re-allocate `mashed_word` in each inner loop, as I was doing before, we're going to declare it before the first loop, then, when we need to use it, `clear` it and then `push_str` to it to do the actual word concatenation ("mashing"). This allows us to avoid creating any new Strings within the inner loop.
 
 ```rust
     let mut mashed_word = String::new();
