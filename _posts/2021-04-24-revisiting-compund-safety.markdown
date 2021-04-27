@@ -52,3 +52,69 @@ So rather than re-allocate `mashed_word` in each inner loop, as I was doing befo
             for i in 0..mashed_word.len() {
                 // more work
 ```
+
+## What's a "Contender"?
+
+CSafe's `find_unsafe_words` function returns a `Vec<Contenders>`, a Vector of structs called Contender. Basically, each contender represents a problem with compound safety. Each struct has either 3 or 4 words. I call them "Contenders" because, for each Contender struct, one of the 3 or 4 words must be removed for the list to become compound-safe. 
+
+Here's an example of a contender from the 1Password list. 
+
+```rust
+Contender { root_word: "pew", second_word: "terrain", head: "pewter", tail: "rain" }
+```
+
+How many ways can we split `pewterrain` and make two words from the word list? It should be exactly one, but here there are two ways: `pew|terrain` and `pewter|rain`. To solve this problem, we need to remove at least one of the four words. For example, if we remove "rain", this issue goes away: combining pew and terrain is the only way to make `pewterrain`.
+
+But how should we choose which of the four words to remove? 
+
+## Removing the fewest number of words to make a compound-safe list
+
+Ideally, the program would remove the fewest words from the original list to produce the new, compound-safe list. My old code made a small effort to optimize for this, but CSafe takes this a bit further. What we want to do is remove the word that is in the most _other_ contenders. So to return to our previous example, if "pew" is in 4 other Contender structs, "terrain" is in 2 other Contender structs, "pewter" is in 0 other Contender structs, and "rain" is in 6 other Contender structs, we want to remove "rain". That way, we "solve" 7 Contenders but only lose one word from the original list.
+
+This work happens in the `find_fewest_words_to_remove` function. 
+
+First, the program makes a flat Vector containing all of the words in all of the Contenders:
+
+```rust
+let mut flat_vec = vec![];
+for contenders in &unsafe_words {
+    flat_vec.push(contenders.root_word.to_string());
+    flat_vec.push(contenders.second_word.to_string());
+    flat_vec.push(contenders.head.to_string());
+    if contenders.tail != "" {
+        flat_vec.push(contenders.tail.to_string());
+    }
+}
+```
+
+Next, we're going to make a HashMap where each key is a word and each value is the number of times that word appears in the `flat_vec`. (This has been a super useful Rust pattern for me to have in my tool kit!).
+
+```rust
+let mut counts_hashmap: HashMap<String, usize> = HashMap::new();
+for word in &flat_vec {
+    counts_hashmap
+        .entry(word.to_string())
+        .and_modify(|count| *count += 1)
+        .or_insert(1);
+}
+```
+
+Next, we iterate through every Contenders struct. We check if any of its words are already in our `words_to_remove` HashSet. If not, we search for the highest scoring word in the Contender struct, and then insert that into the `words_to_remove` HashSet.
+
+Finally, we actually remove these words, sort it, and send it back
+
+```rust
+pub fn make_clean_list(
+    words_to_remove: FxHashSet<String>,
+    original_list: &FxHashSet<String>,
+) -> Vec<String> {
+    let mut clean_words = original_list
+        .difference(&words_to_remove)
+        .map(|s| s.to_owned())
+        .collect::<Vec<_>>();
+    clean_words.sort();
+    clean_words
+}
+```
+
+To be printed to a new file.
