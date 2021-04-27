@@ -29,9 +29,9 @@ CSafe makes a number of **improvements** over [my original checker](https://gith
 
 But more importantly for end-users, CSafe is more considerate about which words it discards when making a compound-safe version of the inputted word list. For example, given [a version of the word list 1Password once used](https://github.com/sts10/csafe/blob/main/word_lists/agile_words.txt), it was able to [save 16,789](https://github.com/sts10/csafe/blob/main/word_lists/agile_words.txt.csafe) of the original list of 18,328 words. The original checker only saved 16,103 words. (And [removing all prefix words, the more "nuclear" option, leaves you with just 15,190 words](https://github.com/sts10/prefix-safety-checker/blob/master/word_lists/agile_words.txt.no-prefix).) 
 
-### Speed up
+### Speeding it up
 
-Lastly, I think CSafe is faster than the original checker on lists of equal length, especially on longer lists. On my machine, CSafe takes about 73 seconds to get through the 1Password word list (18k words) (`time csafe agile.txt`). My old compound checker takes 35 minutes to process the same list.
+CSafe is faster than the original checker on lists of equal length, especially on longer lists. On my machine, CSafe takes about 73 seconds to get through the 1Password word list (18k words) (`time csafe agile.txt`). My old compound checker takes 35 minutes to process the same list.
 
 What's the magic sauce? Here, a big thanks to [Wesley Moore](https://github.com/wezm), who provided [two key pull requests](https://github.com/sts10/csafe/pulls?q=is%3Apr+is%3Aclosed+author%3Awezm) that boosted the speed of the program by some multiples. 
 
@@ -53,7 +53,11 @@ So rather than re-allocate `mashed_word` in each inner loop, as I was doing befo
                 // more work
 ```
 
-## What's a "Contender"?
+## How the actual program works
+
+While the above sections looks at some of the recent changes that helped speed up the program, below are some hints to understanding how the rest of the program works.
+
+### What's a "Contender"?
 
 CSafe's `find_unsafe_words` function returns a `Vec<Contenders>`, a Vector of structs called Contender. Basically, each contender represents a problem with compound safety. Each struct has either 3 or 4 words. I call them "Contenders" because, for each Contender struct, one of the 3 or 4 words must be removed for the list to become compound-safe. 
 
@@ -67,7 +71,7 @@ How many ways can we split `pewterrain` and make two words from the word list? I
 
 But how should we choose which of the four words to remove? 
 
-## Removing the fewest number of words to make a compound-safe list
+### Removing the fewest number of words to make a compound-safe list
 
 Ideally, the program would remove the fewest words from the original list to produce the new, compound-safe list. My old code made a small effort to optimize for this, but CSafe takes this a bit further. What we want to do is remove the word that is in the most _other_ contenders. So to return to our previous example, if "pew" is in 4 other Contender structs, "terrain" is in 2 other Contender structs, "pewter" is in 0 other Contender structs, and "rain" is in 6 other Contender structs, we want to remove "rain". That way, we "solve" 7 Contenders but only lose one word from the original list.
 
