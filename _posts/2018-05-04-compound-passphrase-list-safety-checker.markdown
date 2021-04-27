@@ -80,9 +80,12 @@ My idea was that it would be useful to know, given a word list, if it is "compou
 
 Here's the [section of the README on how to use to tool to check a word list](https://github.com/sts10/compound-passphrase-list-safety-checker#how-to-use-this-tool-to-check-a-word-list).
 
+
+**Update from 2021**: I've improved and re-written this code as [csafe](https://github.com/sts10/csafe). It does the same thing but better and faster.
+
 ## Safe Enough?
 
-I hadn't thought of the second condition ("problematic overlaps") until it was suggested to me by a [Fediverse](https://joinmastodon.org/) user. And even then it took me a sleepless night to understand it. My point being: there may well be other ways that putting random words together without punctuation to create passphrases can be problematic in terms of entropy and/or guessability. In other words, I don't know if the edited lists outputted by this tool are actually safe enough to use without punctuation between words. If you can think of any, be sure to [submit an issue](https://github.com/sts10/compound-passphrase-list-safety-checker/issues/new) or [drop me a line](https://gist.github.com/sts10/4a4e01021b3a5ad42e9b73e0abd7b7e3).
+I hadn't thought of the second condition ("problematic overlaps") until it was suggested to me by a [Fediverse](https://joinmastodon.org/) user. And even then it took me a sleepless night to understand it. My point being: there may well be other ways that putting random words together without punctuation to create passphrases can be problematic in terms of entropy and/or guessability. In other words, I don't know if the edited lists outputted by this tool are actually safe enough to use without punctuation between words. 
 
 ## The 1Password List
 
@@ -92,7 +95,7 @@ I found [2,661 compound words](https://github.com/sts10/compound-passphrase-list
 
 The tool also found 2,117 problematic overlaps in the 1Password list, and marked 2,117 words for removal.
 
-All told, the tool removed 2,225 unique words from the 1Password list to make a new, compound-safe list. Thus [my compound-safe version of the Agile list](https://github.com/sts10/compound-passphrase-list-safety-checker/blob/master/word_lists/agile_words-compound-safe.txt) has 16,103 words, down from the original 18,328 words. With 16,103, each word from this list would add about 13.98 bits of entropy to a passphrase, compared to the original 1Password list, which adds about 14.16 bits.
+All told, the tool removed 2,225 unique words from the 1Password list to make a new, compound-safe list. Thus [my compound-safe version of the Agile list](https://github.com/sts10/compound-passphrase-list-safety-checker/blob/master/word_lists/agile_words-compound-safe.txt) has 16,103 words, down from the original 18,328 words. With 16,103, each word from this list would add about 13.98 bits of entropy to a passphrase, compared to the original 1Password list, which adds about 14.16 bits. (2021 update: [CSafe](https://github.com/sts10/csafe) saves 16,789 words from this list.)
 
 Now, listen, I don't recommend you go download the 16,103 word list and start generating phrases without punctuation. I'm a social media editor, not a security researcher. 
 
@@ -108,7 +111,7 @@ It's 100% possible that these "compound safe" lists that my script generates are
 
 ## Toward a more theoretical understanding of compound safety
 
-Given that my compound-safe 1Password list is longer than the no-prefix 1Password list, we can wonder: Is the no prefix-rule _too strict_? In other words, are there word lists that don't satisfy the prefix rule but are compound-safe? My compound-safe version of the 1Password list purports to be this by a mere 913 words, but again, I don't know if there are further conditions necessary to ensuring _true_ compound-safety. 
+Given that my compound-safe 1Password list is longer than the no-prefix 1Password list, we can wonder: Is the no prefix-rule _too strict_? In other words, are there word lists that don't satisfy the prefix rule but are compound-safe? I think my compound-safe version of the 1Password list is exactly this, but again, I don't know if there are further conditions necessary to ensuring _true_ compound-safety. 
 
 Also, relatedly, is it problematic that my compound-safe lists have words that are exact prefixes of other words that remain on the list?
 
@@ -126,9 +129,11 @@ It may seem more practical to have a random passphrase generator like KeePassXC'
 
 ## Appendix C: Caveat about "Three-Word Compounding"
 
-While we've explored "two-word compounding", where two words are actually one, I accept that there is a possibility of a three-word compounding -- where three words become two. No idea how likely that is, or how to efficiently check for that, but know that this tool does NOT currently check for this, and thus I can't actually guarantee that the lists outputted by the tool are completely compound-safe.
+While we've explored "two-word compounding", where two words are actually one, I accept that there is a possibility of a three-word compounding -- where three words become two, or three words mashed together can be split in more than one way. No idea how likely that is, or how to efficiently check for that, but know that this tool does NOT currently check for this, and thus I can't actually guarantee that the lists outputted by the tool are completely compound-safe.
 
-## Appendix D: Preserving a Comment left on the original version of this post
+Here is where the more-straightforward approach of eliminating all prefix words, to be safe, may be superior. 
+
+## Appendix D: Preserving a comment left on the original version of this post
 
 In case I move blog systems and lose my Disqus comments again, here is [phoerious](https://github.com/phoerious)'s [comment](https://sts10.github.io/2018/05/05/compound-passphrase-list-safety-checker.html#comment-3886800478), referred to above, in full: 
 
