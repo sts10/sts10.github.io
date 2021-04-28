@@ -53,6 +53,8 @@ So rather than re-allocate `mashed_word` in each inner loop, as I was doing befo
                 // more work
 ```
 
+Update: With a few other tricks -- mostly removing a check for empty words in the inner loop -- I've actually now gotten the agile words time down to about 60 seconds. 
+
 ## How the actual program works
 
 While the above sections looks at some of the recent changes that helped speed up the program, below are some hints to understanding how the rest of the program works.
