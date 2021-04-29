@@ -64,7 +64,7 @@ OK, so here's a definition for us. A passphrase word list is "compound-safe" (th
 
 2. does NOT contain any pairs of words that can be combined such that they can be guessed in two distinct ways within the same word-length space (We'll call this a "problematic overlap").
 
-Number 1 is the Dr. Pound issue described above. Number 2 is new -- it was suggested to me by a social media user. Some further explanation, from [my current tool's README](https://github.com/sts10/compound-passphrase-list-safety-checker/blob/master/readme.markdown): 
+Number 1 is the Dr. Pound issue described above. Number 2 is new -- it was suggested to me by a social media user. 
 
 > An example of condition #1: If a word list included "under", "dog", and "underdog" as three separate words, it would NOT be compound-safe, since "under" and "dog" can be combined to make the word "underdog". A user not using spaces between words might get a passphrase that included the character string "underdog" as two words, but a brute-force attack would guess it as one word. Therefore this word list would NOT be compound-safe. (I refer to this as a "compounding".)
 
