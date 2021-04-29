@@ -124,3 +124,109 @@ pub fn make_clean_list(
 ```
 
 To be printed to a new file.
+
+## Dealing with characters with accents
+
+As described above, the way that CSafe finds problems is by mashing two words together, then checking if that `mashed_word` can be create in more than one way, using words on the list. 
+
+To do this, the program has to iterate through each character of `mashed_word`. Originally, I did that like this:
+
+```rust
+for i in 0..mashed_word.len() {
+    // set-up work
+    let head = &mashed_word[0..i];
+    let tail = &mashed_word[i..mashed_word.len()];
+    // Check head and tail
+}
+```
+
+This worked fine, until I tried running the program on a word list that had words with accented letters in them. In one test, I had the words "meal" and "clichés" on a list. When the program tried to iterate through that mashed_word, I got this error:
+
+```
+thread 'main' panicked at 'byte index 10 is not a char boundary; it is inside 'é' (bytes 9..11) of `mealclichés`'
+```
+
+As I understand it, the character 'é' takes up more than one byte, unlike most "normal" characters. When you blindly iterate through each byte of a word, you _usually_ get one character per iteration. But when you hit 'é', Rust gets confused -- it's trying to iterate with just half of the 'é' character.
+
+If you to play with this yourself, here's code you can paste into a playground:
+
+```rust
+fn main() {
+    let word = "clichés";
+    for i in 0..word.len() {
+        println!("{}", &word[0..i]);
+    }
+}
+```
+
+On the other hand, running
+
+```rust
+for c in word.chars() {
+    println!("{}", c);
+}
+``` 
+
+prints each character successfully and as you would expect, no errors.
+
+At this point I thought the `char()` method was what I needed to use. So I tried: 
+
+```rust
+for (i, _c) in word.chars().enumerate() {
+    println!("{}", &word[0..i]);
+}
+```
+
+But that trips the same character-boundary error that my original code hits. 
+
+Eventually, mostly through trial and error, I used [String's `get` method](https://doc.rust-lang.org/std/string/struct.String.html#method.get) to do what I wanted: 
+
+```rust
+let head = match mashed_word.get(0..i) {
+    Some(head) => head,
+    None => continue,
+};
+let tail = match mashed_word.get(i..mashed_word.len()) {
+    Some(tail) => tail,
+    None => continue,
+};
+```
+
+What's a little strange to me is that: OK, when the `get` returns a `None` we `continue` the `for` loop to the next `i` (byte). What I was worried would happen in that that skip would mean we'd never get a real 'é' in the `head` or `tail` variable. We'd only get the second byte -- which would be some _other_ character -- maybe a plain old 'e'. But that doesn't seem to the be the case. 
+
+Here's the test I wrote to convince me this approach was sound.
+
+```rust
+#[test]
+fn can_find_unsafe_words_with_accents() {
+    let word_list = [
+        "cliché", "éspirit", "spirit", "clich", "passé", "dog", "meal",
+    ]
+    .iter()
+    .map(|&s| s.to_owned())
+    .collect();
+    let mut unsafe_words_contenders = find_unsafe_words(&word_list, false);
+    unsafe_words_contenders.sort_by(|a, b| a.root_word.cmp(&b.root_word));
+    let contenders_should_find = vec![
+        Contenders {
+            root_word: "clich".to_string(),
+            second_word: "éspirit".to_string(),
+            head: "cliché".to_string(),
+            tail: "spirit".to_string(),
+        },
+        Contenders {
+            root_word: "cliché".to_string(),
+            second_word: "spirit".to_string(),
+            head: "clich".to_string(),
+            tail: "éspirit".to_string(),
+        },
+    ];
+    assert_eq!(unsafe_words_contenders, contenders_should_find);
+}
+```
+
+which passes.
+
+### A general solution for iterating through Strings in Rust? 
+
+I don't have a grand general solution for iterating through Strings like `mashed_word` at this point. But I did learn to write test for accented characters, and be wary of assuming each character is one byte.
