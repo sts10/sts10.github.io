@@ -23,7 +23,7 @@ Note that putting any punctuation between words in your passphrases, as 1Passwor
 
 ## CSafe, my new code 
 
-Inspired by some tweets I saw recently, I decided to take a fresh look at this project, having 3 more years of Rust experience under my belt. The result is [CSafe](https://github.com/sts10/csafe). 
+I recently decided to take a fresh look at this project, now having three more years of Rust experience under my belt. The result is [CSafe](https://github.com/sts10/csafe). 
 
 CSafe makes a number of **improvements** over [my original checker](https://github.com/sts10/compound-passphrase-list-safety-checker). First off, I think it's all more readable that my original checker code, which I wrote when I was newer to Rust. CSafe also has some basic tests and benchmarks.
 
