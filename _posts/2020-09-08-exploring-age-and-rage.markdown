@@ -106,7 +106,9 @@ $ mkdir -p ~/.config/age
 $ rage-keygen >> ~/.config/age/keys.txt
 ```
 
-This is also handy because rage will look to that location first for key-pairs when decrypting. This means you can just run `rage -d encrypted_file.txt` (without specifying a key-pair file with `-i` like we did above), and rage will use the key-pair located at `~/.config/age/keys.txt` as a default.
+<!-- This is also handy because rage will look to that location first for key-pairs when decrypting. This means you can just run `rage -d encrypted_file.txt` (without specifying a key-pair file with `-i` like we did above), and rage will use the key-pair located at `~/.config/age/keys.txt` as a default. -->
+
+You can then use `--identity ~/.config/age/keys.txt` to use your saved key.
 
 As before, you can share this public key broadly and publicly, so that others could encrypt files for you. For example, I now have a public age/rage key in [a Github Gist](https://gist.github.com/sts10/4a4e01021b3a5ad42e9b73e0abd7b7e3) that I link to from some of my social media accounts. Just remember: **Don't share your secret key!**
 
@@ -143,13 +145,13 @@ echo "secret message from echo" | rage -a -r age180d9ut0ff3zzkq6umq588p7zlqqetuf
 
 (On Mac, try `| pbcopy` at the end, though I haven't tested this. Other systems may have yet another tools called xclip installed.)
 
-To decrypt an encrypted message currently in your clipboard, you'd run:
+To decrypt an encrypted message currently in your clipboard with your stored key, I _think_ you'd run this (I can't test it right now):
 
 ```bash
-xsel --clipboard | rage -d
+xsel --clipboard | rage -d -i ~/.config/age/keys.txt
 ```
 
-which will print the decrypted message to the terminal screen.
+which should print the decrypted message to the terminal screen.
 
 ## More features
 
