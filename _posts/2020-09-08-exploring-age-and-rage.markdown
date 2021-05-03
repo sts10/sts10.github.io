@@ -145,7 +145,7 @@ echo "secret message from echo" | rage -a -r age180d9ut0ff3zzkq6umq588p7zlqqetuf
 
 (On Mac, try `| pbcopy` at the end, though I haven't tested this. Other systems may have yet another tools called xclip installed.)
 
-To decrypt an encrypted message currently in your clipboard with your stored key, I _think_ you'd run this (I can't test it right now):
+To decrypt an encrypted message currently in your clipboard with your stored key, you could run:
 
 ```bash
 xsel --clipboard | rage -d -i ~/.config/age/keys.txt
