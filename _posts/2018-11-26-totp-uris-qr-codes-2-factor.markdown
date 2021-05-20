@@ -2,6 +2,7 @@
 layout: post
 title: "Reading and Writing TOTP URIs into and out of QR Codes for Fun and Profit"
 date: 2018-11-26 19:42:30 -0400
+draft: true
 comments: true
 ---
 
