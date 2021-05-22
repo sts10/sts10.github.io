@@ -143,7 +143,7 @@ Having this block of text printed to the terminal screen isn't super helpful. We
 echo "secret message from echo" | rage -a -r age180d9ut0ff3zzkq6umq588p7zlqqetuf8nhxxfhsysmg4hjyt55lsjraysp | xsel --clipboard
 ```
 
-(On Mac, try `| pbcopy` at the end, though I haven't tested this. Other systems may have yet another tools called xclip installed.)
+(On Mac, try `| pbcopy` at the end, though I haven't tested this. Other systems may have yet other tools for this -- another popular one is called xclip.)
 
 To decrypt an encrypted message currently in your clipboard with your stored key, you could run:
 
