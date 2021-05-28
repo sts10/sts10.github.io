@@ -11,6 +11,8 @@ In my very slow and not very steady quest to learn the Rust programming language
 
 Do you know of other tools written in Rust that you've found useful? Leave a comment! 
 
+**Update from 2021**: [Here's a more up-to-date list of tools written in Rust](https://github.com/TaKO8Ki/awesome-alternatives-in-rust).
+
 ## Terminal Emulator
 
 First up, [Alacritty](https://github.com/jwilm/alacritty): a cross-platform, GPU-accelerated terminal emulator written in Rust. 
