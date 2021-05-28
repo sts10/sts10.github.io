@@ -31,7 +31,7 @@ But more importantly for end-users, CSafe is more considerate about which words 
 
 ### Speeding it up
 
-CSafe is faster than the original checker on lists of equal length, especially on longer lists. On my machine, CSafe takes about 73 seconds to get through the 1Password word list (18k words) (`time csafe agile.txt`). My old compound checker takes 35 minutes to process the same list.
+CSafe is faster than the original checker on lists of equal length, especially on longer lists. On my machine, CSafe takes about 73 seconds to get through the 1Password word list (18k words) (`time csafe agile.txt`) ([hyperfine](https://github.com/sharkdp/hyperfine) clocks the mean at 55 seconds). My old compound checker takes 35 minutes to process the same list.
 
 What's the magic sauce? Here, a big thanks to [Wesley Moore](https://github.com/wezm), who provided [two key pull requests](https://github.com/sts10/csafe/pulls?q=is%3Apr+is%3Aclosed+author%3Awezm) that boosted the speed of the program by some multiples. 
 
