@@ -11,7 +11,7 @@ In my very slow and not very steady quest to learn the Rust programming language
 
 Do you know of other tools written in Rust that you've found useful? Leave a comment! 
 
-**Update from 2021**: [Here's a more up-to-date list of tools written in Rust](https://github.com/TaKO8Ki/awesome-alternatives-in-rust).
+**Update from 2021**: [Here's a more up-to-date list of tools written in Rust](https://github.com/TaKO8Ki/awesome-alternatives-in-rust) and [a Reddit post with some more](https://www.reddit.com/r/rust/comments/nm96n1/awesome_rewrite_it_in_rust_a_curated_list_of/).
 
 ## Terminal Emulator
 
