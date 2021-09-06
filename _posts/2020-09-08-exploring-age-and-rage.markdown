@@ -5,6 +5,8 @@ date: 2020-09-08 15:46:00 -0400
 comments: true
 ---
 
+**Sept 2021 Update**: With the release of [age v1.0](https://github.com/FiloSottile/age/releases/tag/v1.0.0), I've written **[a brand-new how-to post](https://sts10.github.io/2021/09/06/exploring-age-1-point-0.html)**. The syntax below may be outdated now. 
+
 A while back I learned about [age](https://github.com/FiloSottile/age), which describes itself as "A simple, modern and secure encryption tool (and Go library) with small explicit keys, no config options, and UNIX-style composability." As someone who's struggled to learn and use PGP, I was intrigued! 
 
 There's more info in [this public Google Doc](https://docs.google.com/document/d/11yHom20CrsuX8KQJXBBw04s80Unjv8zCg_A7sPAX_9Y/preview). Note: age is currently in [beta](https://github.com/FiloSottile/age/releases). 

@@ -5,7 +5,9 @@ date: 2021-09-06 16:46:00 -0400
 comments: true
 ---
 
-A while back I learned about [age](https://github.com/FiloSottile/age), which describes itself as a "simple, modern and secure encryption tool (and Go library) with small explicit keys, no config options, and UNIX-style composability." As someone who's struggled to learn and use PGP, I was intrigued! 
+A while back I learned and [wrote](https://sts10.github.io/2020/09/08/exploring-age-and-rage.html) about [age](https://github.com/FiloSottile/age), a "simple, modern and secure encryption tool (and Go library) with small explicit keys, no config options, and UNIX-style composability." 
+
+As someone who's struggled to learn and use PGP, I was intrigued! 
 
 ## Installing age on Ubuntu 20.04
 
