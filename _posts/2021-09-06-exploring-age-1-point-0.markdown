@@ -5,9 +5,11 @@ date: 2021-09-06 16:46:00 -0400
 comments: true
 ---
 
-About one year ago I learned and [wrote](https://sts10.github.io/2020/09/08/exploring-age-and-rage.html) about [age](https://github.com/FiloSottile/age), a "simple, modern and secure encryption tool (and Go library) with small explicit keys, no config options, and UNIX-style composability." 
+About one year ago I learned and [wrote](https://sts10.github.io/2020/09/08/exploring-age-and-rage.html) about [age](https://github.com/FiloSottile/age), a "simple, modern and secure encryption tool (and Go library) with small explicit keys, no config options, and UNIX-style composability." Basically it's a new tool for encrypting files, and it just hit [version 1.0.0](https://github.com/FiloSottile/age/releases/tag/v1.0.0). Exciting!
 
-As someone who's struggled to learn and use PGP, I was intrigued! 
+If you're like me and have struggled to learn and use PGP to encrypt files, you might find age worth checking out. (Note that for encrypted chat, you're better off with something like [Signal](https://www.signal.org/) or [Wire](https://wire.com/en/).)
+
+Mostly for my future self, I wrote out the basic usages below. Maybe you'll find it useful as well.
 
 ## Installing age on Ubuntu 20.04
 
@@ -20,11 +22,11 @@ git clone https://filippo.io/age && cd age
 go build -o . filippo.io/age/cmd/...
 ```
 
-That `go build` command created to binaries for us, `age` and `age-keygen`. 
+That `go build` command created two binaries for us, `age` and `age-keygen`, both of which we'll use later.
 
 Since I wanted access to these binaries anywhere on my system, I needed to move them to somewhere in my PATH.
 
-After some deliberation, I chose `~/.local/bin`. To move the binaries, I ran:
+After some deliberation, I chose `~/.local/bin`. To actually move the binaries, I ran:
 
 ```bash
 mv age ~/.local/bin
