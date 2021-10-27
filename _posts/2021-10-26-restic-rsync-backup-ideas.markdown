@@ -138,6 +138,20 @@ tar -czv important_documents/ | age -p > important_documents.tar.gz.age
 age -d important_documents.tar.gz.age | tar -xzv
 ```
 
+### Symmetrical GPG encryption
+
+If you don't want to use age, you can use gpg. 
+
+Encrypting:
+```bash
+gpg -c important_documents.tar.gz
+```
+
+Decrypting:
+```bash
+gpg --output important_documents.tar.gz --decrypt important_documents.tar.gz.gpg
+```
+
 --- 
 
 ## Appendix A: Deleting target directories from Rust projects
