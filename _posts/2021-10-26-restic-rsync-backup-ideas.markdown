@@ -138,7 +138,7 @@ tar -czv important_documents/ | age -p > important_documents.tar.gz.age
 age -d important_documents.tar.gz.age | tar -xzv
 ```
 
-### Symmetrical GPG encryption
+### Using symmetrical GPG encryption
 
 If you don't want to use age, you can use gpg. 
 
