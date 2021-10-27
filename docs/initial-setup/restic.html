@@ -1,0 +1,254 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>restic - Schlink&#x27;s Docs</title>
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../welcome.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../installing-on-oryx.html"><strong aria-hidden="true">2.</strong> Installing a Fresh Distro on Oryx Pro</a></li><li class="chapter-item expanded "><a href="../initial-setup/index.html"><strong aria-hidden="true">3.</strong> Initial Setup</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../initial-setup/basics.html"><strong aria-hidden="true">3.1.</strong> Basics</a></li><li class="chapter-item expanded "><a href="../initial-setup/bashrc-and-konsole.html"><strong aria-hidden="true">3.2.</strong> bashrc and terminal</a></li><li class="chapter-item expanded "><a href="../initial-setup/git.html"><strong aria-hidden="true">3.3.</strong> Git</a></li><li class="chapter-item expanded "><a href="../initial-setup/neovim.html"><strong aria-hidden="true">3.4.</strong> Neovim</a></li><li class="chapter-item expanded "><a href="../initial-setup/keepassxc.html"><strong aria-hidden="true">3.5.</strong> KeePassXC</a></li><li class="chapter-item expanded "><a href="../initial-setup/syncthing.html"><strong aria-hidden="true">3.6.</strong> Syncthing</a></li><li class="chapter-item expanded "><a href="../initial-setup/standard-notes.html"><strong aria-hidden="true">3.7.</strong> Standard Notes</a></li><li class="chapter-item expanded "><a href="../initial-setup/pgp.html"><strong aria-hidden="true">3.8.</strong> PGP</a></li><li class="chapter-item expanded "><a href="../initial-setup/other-apps.html"><strong aria-hidden="true">3.9.</strong> Other Apps to Install</a></li><li class="chapter-item expanded "><a href="../initial-setup/chrome-and-flash.html"><strong aria-hidden="true">3.10.</strong> Chrome and Flash</a></li><li class="chapter-item expanded "><a href="../initial-setup/dev-env/index.html"><strong aria-hidden="true">3.11.</strong> Development Environment</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../initial-setup/dev-env/python-pyenv.html"><strong aria-hidden="true">3.11.1.</strong> Python and pyenv</a></li><li class="chapter-item expanded "><a href="../initial-setup/dev-env/ruby-and-rbenv.html"><strong aria-hidden="true">3.11.2.</strong> Ruby and rbenv</a></li><li class="chapter-item expanded "><a href="../initial-setup/dev-env/rust.html"><strong aria-hidden="true">3.11.3.</strong> Rust</a></li><li class="chapter-item expanded "><a href="../initial-setup/dev-env/github-and-ssh.html"><strong aria-hidden="true">3.11.4.</strong> GitHub and ssh keys</a></li><li class="chapter-item expanded "><a href="../initial-setup/dev-env/jekyll.html"><strong aria-hidden="true">3.11.5.</strong> GitHub blog with Jekyll</a></li></ol></li><li class="chapter-item expanded "><a href="../initial-setup/gnome-setup.html"><strong aria-hidden="true">3.12.</strong> GNOME Setup</a></li><li class="chapter-item expanded "><a href="../initial-setup/kde-setup.html"><strong aria-hidden="true">3.13.</strong> KDE Setup and Troubleshooting</a></li><li class="chapter-item expanded "><a href="../initial-setup/redshift.html"><strong aria-hidden="true">3.14.</strong> Redshift</a></li><li class="chapter-item expanded "><a href="../initial-setup/battery-management.html"><strong aria-hidden="true">3.15.</strong> Battery and TLP</a></li><li class="chapter-item expanded "><a href="../initial-setup/rsync.html"><strong aria-hidden="true">3.16.</strong> rsync</a></li><li class="chapter-item expanded "><a href="../initial-setup/restic.html" class="active"><strong aria-hidden="true">3.17.</strong> restic</a></li><li class="chapter-item expanded "><a href="../initial-setup/images-and-video.html"><strong aria-hidden="true">3.18.</strong> Images and Video</a></li><li class="chapter-item expanded "><a href="../initial-setup/go.html"><strong aria-hidden="true">3.19.</strong> Go and Sabaki</a></li></ol></li><li class="chapter-item expanded "><a href="../installing-ubuntu-on-an-old-macbook-pro.html"><strong aria-hidden="true">4.</strong> Installing Ubuntu on my 2009 MacBook Pro</a></li><li class="chapter-item expanded "><a href="../security/index.html"><strong aria-hidden="true">5.</strong> Security Apps and Tools</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../security/installing-gnu-privacy-guard-on-ubuntu.html"><strong aria-hidden="true">5.1.</strong> Installing GNU Privacy Guard</a></li><li class="chapter-item expanded "><a href="../security/keepassxc-from-snap.html"><strong aria-hidden="true">5.2.</strong> KeePassXC as a Snap</a></li><li class="chapter-item expanded "><a href="../security/ricochet-114-lubuntu-1604.html"><strong aria-hidden="true">5.3.</strong> Ricochet</a></li><li class="chapter-item expanded "><a href="../security/python-pip-and-magic-wormhole-on-lubuntu.html"><strong aria-hidden="true">5.4.</strong> Magic Wormhole</a></li><li class="chapter-item expanded "><a href="../security/using-a-yubikey-from-a-smartcard-on-ubuntu.html"><strong aria-hidden="true">5.5.</strong> YubiKey</a></li><li class="chapter-item expanded "><a href="../security/pidgin-google-and-otr.html"><strong aria-hidden="true">5.6.</strong> Pidgin, Gchat, and OTR</a></li></ol></li><li class="chapter-item expanded "><a href="../other-des/index.html"><strong aria-hidden="true">6.</strong> Other DEs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../other-des/customizing-appearance-of-xfce-ubuntu.html"><strong aria-hidden="true">6.1.</strong> Customizing XFCE (Ubuntu base)</a></li><li class="chapter-item expanded "><a href="../other-des/notes-on-i3.html"><strong aria-hidden="true">6.2.</strong> Notes on i3</a></li><li class="chapter-item expanded "><a href="../other-des/other-desktop-environments.html"><strong aria-hidden="true">6.3.</strong> Other DEs</a></li></ol></li><li class="chapter-item expanded "><a href="../e-reader.html"><strong aria-hidden="true">7.</strong> E-reader Tips</a></li><li class="chapter-item expanded "><a href="../lubuntu/index.html"><strong aria-hidden="true">8.</strong> Lubuntu</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../lubuntu/switching-to-lubuntu.html"><strong aria-hidden="true">8.1.</strong> Switching to Lubuntu</a></li><li class="chapter-item expanded "><a href="../lubuntu/improving-lubuntu.html"><strong aria-hidden="true">8.2.</strong> Improving Lubuntu</a></li><li class="chapter-item expanded "><a href="../lubuntu/remapping-control-and-caps-lock-lubuntu.html"><strong aria-hidden="true">8.3.</strong> Remapping Caps Lock to Control</a></li><li class="chapter-item expanded "><a href="../lubuntu/using-neovim-in-lubuntu.html"><strong aria-hidden="true">8.4.</strong> Using Neovim</a></li><li class="chapter-item expanded "><a href="../lubuntu/rbenv-on-lubuntu.html"><strong aria-hidden="true">8.5.</strong> Using Rbenv</a></li><li class="chapter-item expanded "><a href="../lubuntu/configuring-openbox-on-lubuntu.html"><strong aria-hidden="true">8.6.</strong> Configuring OpenBox</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Schlink&#x27;s Docs</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="using-restic-to-back-up-files"><a class="header" href="#using-restic-to-back-up-files">Using restic to back up files</a></h1>
+<p>Here's <a href="https://restic.readthedocs.io/en/latest/020_installation.html">the official user's guide from restic</a>, which I found pretty helpful. Since I'm just putting backups onto USB devices, I only need to follow the instructions for a &quot;local&quot; back up.</p>
+<h3 id="installing-restic-on-ubuntu"><a class="header" href="#installing-restic-on-ubuntu">Installing restic on Ubuntu</a></h3>
+<p><code>sudo apt install restic</code></p>
+<p>Let's check the version really quick:</p>
+<p><code>restic version</code> prints <code>restic 0.9.6 compiled with go1.12.12 on linux/amd64</code>. A little outdated -- 0.12.1 is <a href="https://github.com/restic/restic/releases">on Github</a> as I write this -- but it'll do.</p>
+<h3 id="getting-set-up-with-restic"><a class="header" href="#getting-set-up-with-restic">Getting set up with restic</a></h3>
+<p>Now let's do some backing up!</p>
+<p>First, let's try to gain a bare-bones conceptual understanding of how Restic works. Restic has a concept called &quot;repositories&quot;, which is where your backup(s) will live. <a href="https://restic.readthedocs.io/en/latest/030_preparing_a_new_repo.html#preparing-a-new-repository">From the docs</a>:</p>
+<blockquote>
+<p>The place where your backups will be saved is called a “repository”. This chapter explains how to create (“init”) such a repository. The repository can be stored locally, or on some remote server or service. </p>
+</blockquote>
+<p>Basically we use restic to pull data into these backup repositories. So for me, my repository (singular for now) will be on my external hard drive.</p>
+<h3 id="initializing-a-restic-repository"><a class="header" href="#initializing-a-restic-repository">Initializing a Restic repository</a></h3>
+<p>OK, let's initialize one of these repositories. On my external hard drive, I ran:</p>
+<pre><code class="language-bash">mkdir /media/sschlinkert/external_harddrive/restic-repo
+restic init --repo /media/sschlinkert/external_harddrive/restic-repo
+</code></pre>
+<p>Restic now asks us to create a password for this back-up &quot;repo&quot; (restic uses encryption). We'll be asked to enter the new password as second time to confirm.</p>
+<h3 id="doing-our-first-backup"><a class="header" href="#doing-our-first-backup">Doing our first backup</a></h3>
+<p>Finally, time to back-up some data. Following <a href="https://restic.readthedocs.io/en/latest/040_backup.html">the docs</a>, I composed this command using the <code>backup</code> subcommand to backup my entire <code>home/</code> directory:</p>
+<pre><code class="language-bash">restic -r /media/sschlinkert/external_harddrive/restic-repo --verbose backup /home/sschlinkert/
+</code></pre>
+<p>We will do subsequent snapshots by running the exact same command at later times. In other words this is the command you'd run every night or week to keep the backup up-to-date.</p>
+<h3 id="ensure-a-snapshot-was-created"><a class="header" href="#ensure-a-snapshot-was-created">Ensure a snapshot was created</a></h3>
+<p>We can do a quick check to see our first snapshot by running: </p>
+<pre><code class="language-bash">restic -r /media/sschlinkert/external_harddrive/restic-repo snapshots
+</code></pre>
+<h3 id="check-integrity-of-that-snapshot"><a class="header" href="#check-integrity-of-that-snapshot">Check integrity of that snapshot</a></h3>
+<p>One thing that's nice about restic is that you can check the state or &quot;health&quot; of the backup.</p>
+<pre><code class="language-bash">restic -r /media/sschlinkert/external_harddrive/restic-repo check
+</code></pre>
+<p>which should output a block of text that should end with: <code>no errors were found</code>. Awesome!</p>
+<h3 id="now-try-restoring-our-data"><a class="header" href="#now-try-restoring-our-data">Now try restoring our data!</a></h3>
+<p>Now let's say something bad has happened and we need to restore our files from this back-up repo. </p>
+<p>Our files aren't exactly just sitting in a directory, as they are when using a tool like rsync. (This is a bit of a downside for restic, but it's fine.) Instead, we have to use restic's <code>restore</code> subcommand.</p>
+<p>First, we copy the snapshot id of the snapshot we want to restore from from that <code>snapshot</code> command. Then we'll make a new directory to restore to, and restore to it using restic's restore subcommand:</p>
+<pre><code class="language-bash">mkdir ~/Documents_restored
+restic -r /media/sschlinkert/external_harddrive/restic-repo restore 37769142 --target ~/Documents_restored
+</code></pre>
+<p>This'll take a while, but when it's done our data should be restored to the location we specified, <code>~/Documents_restored</code>. At that point, we can do a sanity-check with:</p>
+<pre><code class="language-bash">ls ~/Documents_restored
+</code></pre>
+<h2 id="a-simpler-approach-for-a-small-directory"><a class="header" href="#a-simpler-approach-for-a-small-directory">A simpler approach for a small directory</a></h2>
+<p>I've got a small directory of very important documents. This directory is included in my restic snapshots, but I also want to put it in other locations as redundancies. One such location is Dropbox. However, I want it to encrypt it before I upload it to Dropbox.</p>
+<h3 id="step-1-compressing-with-tar"><a class="header" href="#step-1-compressing-with-tar">Step 1: Compressing with tar</a></h3>
+<p>It's a directory (rather than a single file), so the first thing I'm going to do is put it in a tar ball.</p>
+<pre><code class="language-bash">tar -czvf important_documents.tar.gz important_documents/
+</code></pre>
+<p>Running this command creates important_documents.tar.gz for us. This single, compressed file will be easier for us to encrypt. (If you need more compression, try <code>tar -cjvf</code>.)</p>
+<h3 id="step-2-encrypting-with-age"><a class="header" href="#step-2-encrypting-with-age">Step 2: Encrypting with age</a></h3>
+<p>I've chosen to use an encryption tool called <a href="https://github.com/FiloSottile/age">age</a> to encrypt and decrypt this file. <a href="https://sts10.github.io/2021/09/06/exploring-age-1-point-0.html">I wrote a short guide here</a>, but this'll work for our purposes:</p>
+<pre><code class="language-bash">age -p important_documents.tar.gz &gt; important_documents.tar.gz.age
+</code></pre>
+<p>Enter a new passphrase twice. Age will create an encrypted file called <code>important_documents.tar.gz.age</code>. </p>
+<p>We can safely upload this <code>important_documents.tar.gz.age</code> file to Dropbox or another unencrypted cloud provider (I do this through the website, but I'm sure there's a way to do it through the command line...).</p>
+<h3 id="step-3-decrypting-and-decompressing"><a class="header" href="#step-3-decrypting-and-decompressing">Step 3: Decrypting and decompressing</a></h3>
+<p>We of course need to be able to restore these files. First we decrypt:</p>
+<pre><code class="language-bash">age -d important_documents.tar.gz.age &gt; important_documents.tar.gz
+</code></pre>
+<p>Enter your passphrase to decrypt to <code>important_documents.tar.gz</code>. Then we extract the files from the tar ball:</p>
+<pre><code class="language-bash">tar -xzvf important_documents.tar.gz
+</code></pre>
+<h3 id="all-together-one-liners"><a class="header" href="#all-together-one-liners">All together (one-liners)</a></h3>
+<p>I think these work.</p>
+<pre><code class="language-bash"># compress and encrypt
+tar -czv important_documents/ | age -p &gt; important_documents.tar.gz.age
+# decrypt and extract
+age -d important_documents.tar.gz.age | tar -xzv
+</code></pre>
+<h3 id="using-symmetrical-gpg-encryption"><a class="header" href="#using-symmetrical-gpg-encryption">Using symmetrical GPG encryption</a></h3>
+<p>If you don't want to use age (it's new), you can use gpg. </p>
+<p>Encrypting:</p>
+<pre><code class="language-bash">gpg -c important_documents.tar.gz
+</code></pre>
+<p>Decrypting:</p>
+<pre><code class="language-bash">gpg --output important_documents.tar.gz --decrypt important_documents.tar.gz.gpg
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../initial-setup/rsync.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a rel="next" href="../initial-setup/images-and-video.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../initial-setup/rsync.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a rel="next" href="../initial-setup/images-and-video.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+    </body>
+</html>
