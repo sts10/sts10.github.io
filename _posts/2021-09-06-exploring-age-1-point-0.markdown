@@ -149,7 +149,72 @@ xsel --clipboard | age -d -i key.txt
 
 which should print the decrypted message to the terminal screen.
 
-## More features
+## An actual use-case: Encrypting a directory before storing on the cloud
+
+I've got a small directory of very important documents which I want to back-up somewhere, in this case on Dropbox. However, I want it to encrypt it before I upload it to Dropbox. Let's use age!
+
+### Step 1: Compressing with tar
+
+It's a directory (rather than a single file), so the first thing I'm going to do is put it in a tar ball.
+
+```bash
+tar -czvf important_documents.tar.gz important_documents/
+```
+
+Running this command creates important_documents.tar.gz for us. This single, compressed file will be easier for us to encrypt. (If you need more compression, try `tar -cjvf important_documents.tar.bz2 important_documents/`.)
+
+### Step 2: Encrypting with age
+
+Now we're ready to encrypt. As we learned above:
+
+```bash
+age -p important_documents.tar.gz > important_documents.tar.gz.age
+```
+
+Enter a new passphrase twice. Age will create an encrypted file called `important_documents.tar.gz.age`. 
+
+We can safely upload this `important_documents.tar.gz.age` file to Dropbox or another unencrypted cloud provider (I do this through the website, but I'm sure there's a way to do it through the command line...).
+
+### Step 3: Decrypting and decompressing
+
+We of course need to be able to restore these files. First we decrypt:  
+
+```bash
+age -d important_documents.tar.gz.age > important_documents.tar.gz
+```
+
+Enter your passphrase to decrypt to `important_documents.tar.gz`. Then we extract the files from the tar ball:
+
+```bash
+tar -xzvf important_documents.tar.gz
+```
+
+### All together (one-liners)
+
+I think these work.
+
+```bash
+# compress and encrypt
+tar -czv important_documents/ | age -p > important_documents.tar.gz.age
+# decrypt and extract
+age -d important_documents.tar.gz.age | tar -xzv
+```
+
+### Using symmetrical GPG encryption
+
+Just for my notes, here's how we could do something similar with GPG:
+
+Encrypting:
+```bash
+gpg -c important_documents.tar.gz
+```
+
+Decrypting:
+```bash
+gpg --output important_documents.tar.gz --decrypt important_documents.tar.gz.gpg
+```
+
+## More age features
 
 This guide is by no means exhaustive of what you can already do with age. Age definitely has more features than I've outlined here, which you can read about on [the project's README](https://github.com/FiloSottile/age#readme), including some nifty things with [SSH keys](https://github.com/FiloSottile/age#ssh-keys).
 

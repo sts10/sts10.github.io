@@ -35,7 +35,7 @@ The big downside here is that we only ever have one "snapshot" of data to recove
 
 This week, looking for a project, I decided to explore some more robust back-up options. 
 
-After asking Mastodon for recommendations and searching around just a bit, I decided to give [restic](https://restic.net/), a "modern backup program" that uses encryption, a try. (Restic's docs has a section on [its threat model](https://restic.readthedocs.io/en/latest/100_references.html?highlight=threat#threat-model), if you're interested.) It's not clear to me if restic, by default, compresses your files, so if you need that you may want to look elsewhere.
+After asking Mastodon for recommendations and searching around just a bit, I decided to give [restic](https://restic.net/), a "modern backup program" that uses encryption, a try. (I won't get into my personal threat model, for security concerns, but Restic's docs has a section on [its threat model](https://restic.readthedocs.io/en/latest/100_references.html?highlight=threat#threat-model), if you're interested.) It's not clear to me if restic, by default, compresses your files, so if you need that you may want to look elsewhere.
 
 ## Using restic
 
@@ -94,10 +94,9 @@ For me, this command prints:
 repository f96d340e opened successfully, password is correct
 ID        Time                 Host                  Tags        Paths
 ----------------------------------------------------------------------------------
-858619a2  2021-10-26 15:19:33  sschlinkert-Oryx-Pro              /home/sschlinkert
 7ea938aa  2021-10-26 19:54:53  sschlinkert-Oryx-Pro              /home/sschlinkert
 ----------------------------------------------------------------------------------
-2 snapshots
+1 snapshot
 ```
 
 ### Check integrity of a repo
@@ -135,73 +134,15 @@ This'll take a while, but when it's done our data should be restored to the loca
 ls ~/Documents_restored
 ```
 
-## A simpler approach for a small directory
+## Day-to-day backing up
 
-I've got a small directory of very important documents. This directory is included in my restic snapshots, but I also want to put it in other locations as redundancies. One such location is Dropbox. However, I want it to encrypt it before I upload it to Dropbox.
+`restic -r /media/sschlinkert/external_harddrive/restic-repo --verbose backup /home/sschlinkert/` is a bit of mouthful to straight-up remember to type. I'm sure some folks set up a chron job to run their restic backup. I might write a bash function, either next to my Restic repo or directly in my `bashrc`. 
 
-### Step 1: Compressing with tar
+There's also a tool someone mentioned called [Rustic](https://github.com/bnavetta/rustic), a Restic wrapper for easy backups, but I haven't looked into it.
 
-It's a directory (rather than a single file), so the first thing I'm going to do is put it in a tar ball.
-
-```bash
-tar -czvf important_documents.tar.gz important_documents/
-```
-
-Running this command creates important_documents.tar.gz for us. This single, compressed file will be easier for us to encrypt. (If you need more compression, try `tar -cjvf important_documents.tar.bz2 important_documents/`.)
-
-### Step 2: Encrypting with age
-
-I've chosen to use an encryption tool called [age](https://github.com/FiloSottile/age) to encrypt and decrypt this file. [I wrote a short guide here](https://sts10.github.io/2021/09/06/exploring-age-1-point-0.html), but this'll work for our purposes:
-
-```bash
-age -p important_documents.tar.gz > important_documents.tar.gz.age
-```
-
-Enter a new passphrase twice. Age will create an encrypted file called `important_documents.tar.gz.age`. 
-
-We can safely upload this `important_documents.tar.gz.age` file to Dropbox or another unencrypted cloud provider (I do this through the website, but I'm sure there's a way to do it through the command line...).
-
-### Step 3: Decrypting and decompressing
-
-We of course need to be able to restore these files. First we decrypt:  
-
-```bash
-age -d important_documents.tar.gz.age > important_documents.tar.gz
-```
-
-Enter your passphrase to decrypt to `important_documents.tar.gz`. Then we extract the files from the tar ball:
-
-```bash
-tar -xzvf important_documents.tar.gz
-```
-
-### All together (one-liners)
-
-I think these work.
-
-```bash
-# compress and encrypt
-tar -czv important_documents/ | age -p > important_documents.tar.gz.age
-# decrypt and extract
-age -d important_documents.tar.gz.age | tar -xzv
-```
-
-### Using symmetrical GPG encryption
-
-If you don't want to use age (it's new), you can use gpg. 
-
-Encrypting:
-```bash
-gpg -c important_documents.tar.gz
-```
-
-Decrypting:
-```bash
-gpg --output important_documents.tar.gz --decrypt important_documents.tar.gz.gpg
-```
 
 --- 
-## Appendix A: Other archiving tools I found
+## Appendix: Other archiving tools I found
 
 ### All-in-one command line tools for archiving files
 - [Kopika](https://kopia.io/docs/) 
@@ -214,24 +155,4 @@ gpg --output important_documents.tar.gz --decrypt important_documents.tar.gz.gpg
 
 ### File types for archives
 - [Bit Bottle](https://code.lag.net/robey/bitbottle) (very alpha so far, but an interesting idea?)
-
-## Appendix B: Deleting target directories from Rust projects
-
-As a (bad) Rust developer, I have a lot of built projects sitting in target directories. These take up quite a bit of space, and ideally I would not back them up.
-
-I believe I can use `--exclude '**/target'` on my restic commands to exclude them, but for my notes, here are some methods for (recursively) removing the target directories from Rust projects.
-
-### Using cargo wipe crate
-
-[Cargo wipe](https://github.com/mihai-dinculescu/cargo-wipe) is a Rust crate that does just what we want.
-   
-It [checks for the presence of a file that rustc puts into target](https://github.com/mihai-dinculescu/cargo-wipe/blob/ddbe3ab0c64feb15d1254c28d1b211cce17bb46d/src/dir_helpers.rs#L45), so it won't arbitrarily delete all directories named target 
-
-And by default, it does a dry run, which shows how much storage will be freed up, which is nice. Then you can run the same command with `-w` flag to do the actual removing.
-
-### More DIY approaches
-
-- `find . -name target | xargs rm -r`
-- [from Kevin Hoffman](https://twitter.com/KevinHoffman/status/1250077166982828033) `find . -type d -name target -prune -exec rm -r {} +`
-- If we want to use a Rust replacement for `find`, there's [fd](https://github.com/sharkdp/fd): `fd -I -t d target`. To do the actual removing, I think it'd be: `fd -I -t d target | xargs rm -r`
 
