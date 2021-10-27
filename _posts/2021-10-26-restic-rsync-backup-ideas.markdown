@@ -11,7 +11,7 @@ For a few years now, I've been using a command-line tool called [rsync](https://
 
 Before I learned how to use rsync, I would drag and drop my "code" folder from my main hard drive to a folder on my external hard drive called "back-ups", and date it like "2020-12-01-back-up-code". Every few months I'd make a new one, then maybe delete the oldest one.
 
-This approach is simple and easy to understand, but it hnas some real downsides. First, the external hard drive would need 2x, 3x, or 4x more space than whatever I was backing up. Second, each back-up would start from scratch, taking hours. And third, sometimes I could see where some files just wouldn't be transferred over at all!
+This approach is simple and easy to understand, but it has some real downsides. First, the external hard drive would need 2x, 3x, or 4x more space than whatever I was backing up. Second, each back-up would start from scratch, taking hours. And third, sometimes I could see where some files just wouldn't be transferred over at all!
 
 There had to be a better way! But I didn't want to jump into a do-it-all solution. Which brought me to rsync.
 
@@ -23,7 +23,7 @@ rsync -ar --delete /home/sschlinkert/Documents '/media/sschlinkert/Seagate 4TB/b
 
 This command basically sends a copy of my `Documents` directory to a back-up directory. It updates incrementally, so it's much better than removing an old backup and copying over the `Documents` directory every time I want to do a back up. Instead, rsync looks for _new_ and _modified_ files and just updates those in the back-up directory. (The optional `--delete` flag deletes files in the back-up that are not present in the data.)
 
-## Downsides to thsi rsync approach
+## Downsides to this rsync approach
 
 The big downside here is that we only ever have one "snapshot" of data to recover with at any one time. True, it's be definition the latest snapshot, but it feels a bit scary putting all our eggs in one basket. Plus, I knew Rsync wasn't _really_ meant for backing up whole home directories like I wanted to do. It also doesn't offer any encryption, which wasn't a big deal for me but might be for you!
 
@@ -180,7 +180,6 @@ gpg --output important_documents.tar.gz --decrypt important_documents.tar.gz.gpg
 ## Appendix A: Other archiving tools I found
 
 ### All-in-one command line tools for archiving files
-<!-- - [Restic](https://restic.net/) -->
 - [Kopika](https://kopia.io/docs/) 
 - [Borg](https://www.borgbackup.org/)
 
