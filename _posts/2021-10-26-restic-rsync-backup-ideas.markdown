@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Exploring restic for backing up data"
+title: "Exploring Restic for backing up data"
 date: 2021-10-26 16:46:00 -0400
 comments: true
 ---
@@ -35,15 +35,15 @@ The big downside here is that we only ever have one "snapshot" of data to recove
 
 This week, looking for a project, I decided to explore some more robust back-up options. 
 
-After asking Mastodon for recommendations and searching around just a bit, I decided to give [restic](https://restic.net/), a "modern backup program" that uses encryption, a try. It's not clear to me if restic, by default, _compresses_ your files, so if you need that you may want to look elsewhere.
+After asking Mastodon for recommendations and searching around just a bit, I decided to give [Restic](https://restic.net/), a "modern backup program" that uses encryption, a try. It's not clear to me if Restic, by default, _compresses_ your files, so if you need that you may want to look elsewhere.
 
 (Re: use of encryption: I won't get into my personal threat model here, for security reasons, but in general I believe encryption is good, and it costs me little to store yet another passphrase in [my password manager](https://sts10.github.io/2017/06/27/keepassxc-setup-guide.html). Restic's docs has a section on [its threat model](https://restic.readthedocs.io/en/latest/100_references.html?highlight=threat#threat-model), if you're interested.) 
 
-## Using restic
+## Using Restic
 
-Here's [the official user's guide from restic](https://restic.readthedocs.io/en/latest/020_installation.html), which I found pretty helpful. Since I'm just putting backups onto USB devices, I only need to follow the instructions for a "local" back up.
+Here's [the official user's guide from Restic](https://restic.readthedocs.io/en/latest/020_installation.html), which I found pretty helpful. Since I'm just putting backups onto USB devices, I only need to follow the instructions for a "local" back up.
 
-### Installing restic on Ubuntu 20.04
+### Installing Restic on Ubuntu 20.04
 
 `sudo apt install restic`
 
@@ -51,7 +51,7 @@ Let's check the version really quick: `restic version` prints:
 
 `restic 0.9.6 compiled with go1.12.12 on linux/amd64`. A little outdated -- 0.12.1 is [on Github](https://github.com/restic/restic/releases) as I write this -- but it'll do.
 
-### Getting set up with restic
+### Getting set up with Restic
 
 Now let's do some backing up!
 
@@ -59,7 +59,7 @@ First, let's try to gain a bare-bones conceptual understanding of how Restic wor
 
 > The place where your backups will be saved is called a “repository”. This chapter explains how to create (“init”) such a repository. The repository can be stored locally, or on some remote server or service. 
 
-Basically we use restic to "pull" data into these backup repositories. So for me, my repository (singular for now) will be on my external hard drive (for simplicity, let's pretend I only have one of those...).
+Basically we use Restic to "pull" data into these backup repositories. So for me, my repository (singular for now) will be on my external hard drive (for simplicity, let's pretend I only have one of those...).
 
 ### Initializing a Restic repository
 
@@ -70,7 +70,7 @@ mkdir /media/sschlinkert/external_harddrive/restic-repo
 restic init --repo /media/sschlinkert/external_harddrive/restic-repo
 ```
 
-Restic now asks us to create a password for this back-up "repo" (restic uses encryption). We'll be asked to enter the new password as second time to confirm.
+Restic now asks us to create a password for this back-up "repo" (Restic uses encryption). We'll be asked to enter the new password as second time to confirm.
 
 ### Doing our first backup
 
@@ -103,7 +103,7 @@ ID        Time                 Host                  Tags        Paths
 
 ### Check integrity of a repo
 
-One thing that's nice about restic is that you can check the state or "health" of the backup.
+One thing that's nice about Restic is that you can check the state or "health" of the backup.
 
 ```bash
 restic -r /media/sschlinkert/external_harddrive/restic-repo check
@@ -115,16 +115,16 @@ which should output a block of text that should end with: `no errors were found`
 
 Now let's say something bad has happened and we need to [restore](https://restic.readthedocs.io/en/latest/050_restore.html#restoring-from-a-snapshot) our files from this back-up repo. 
 
-Our files aren't exactly just sitting in a directory, as they are when using a tool like rsync. (This is a bit of a downside for restic, but it's fine.) Instead, we have to use restic's `restore` subcommand.
+Our files aren't exactly just sitting in a directory, as they are when using a tool like rsync. (This is a bit of a downside for Restic, but it's fine.) Instead, we have to use Restic's `restore` subcommand.
 
-First, we copy the snapshot id of the snapshot we want to restore from from that `snapshot` command. Then we'll make a new directory to restore to, and restore to it using restic's restore subcommand:
+First, we copy the snapshot id of the snapshot we want to restore from from that `snapshot` command. Then we'll make a new directory to restore to, and restore to it using Restic's restore subcommand:
 
 ```bash
 mkdir ~/Documents_restored
 restic -r /media/sschlinkert/external_harddrive/restic-repo restore 7ea938aa --target ~/Documents_restored
 ```
 
-Your can also have restic use the latest snapshot, but I'd assume you then have to provide a `--path`?
+Your can also have Restic use the latest snapshot, but I'd assume you then have to provide a `--path`?
 
 ```bash
 restic -r /media/sschlinkert/external_harddrive/restic-repo restore latest --target ~/Documents_restored --path "home/sschlinkert"
@@ -138,11 +138,11 @@ ls ~/Documents_restored
 
 ## Day-to-day backing up
 
-`restic -r /media/sschlinkert/external_harddrive/restic-repo --verbose backup /home/sschlinkert/` is a bit of mouthful to straight-up remember to type. I'm sure some folks set up a chron job to run their restic backup. I might write a bash function, either next to my Restic repo or directly in my `bashrc`. 
+`restic -r /media/sschlinkert/external_harddrive/restic-repo --verbose backup /home/sschlinkert/` is a bit of mouthful to straight-up remember to type. I'm sure some folks set up a chron job to run their Restic backup. I might write a bash function, either next to my Restic repo or directly in my `bashrc`. 
 
 There's also a tool someone mentioned called [Rustic](https://github.com/bnavetta/rustic), a Restic wrapper for easy backups, but I haven't looked into it.
 
-To make space, Restic has commands like `forget` and `prune`, which I won't go into here.
+To remove snapshots, Restic has commands like `forget` and `prune`, which [are detailed in the docs](https://restic.readthedocs.io/en/latest/060_forget.html), so I won't go into here.
 
 
 --- 
@@ -151,6 +151,7 @@ To make space, Restic has commands like `forget` and `prune`, which I won't go i
 ### All-in-one command line tools for archiving files
 - [Kopika](https://kopia.io/docs/) 
 - [Borg](https://www.borgbackup.org/)
+- [rdiff-backup](https://rdiff-backup.net/) seems like it's between Rsync and Restic in complexity.
 
 ### Online storage options
 - [Tarsnap](https://www.tarsnap.com/)
