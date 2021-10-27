@@ -140,7 +140,7 @@ ls ~/Documents_restored
 
 Phew! We're ready for day-to-day life with Restic.
 
-But `restic -r /media/sschlinkert/external_harddrive/restic-repo --verbose backup /home/sschlinkert/` is a bit of mouthful to straight-up remember to type. I'm sure some folks set up a chron job to run their Restic backup. I might write a bash function, either next to my Restic repo or directly in my `bashrc`. 
+But `restic -r /media/sschlinkert/external_harddrive/restic-repo --verbose backup /home/sschlinkert/` is a bit of mouthful to straight-up remember to type. I'm sure some folks set up a cron job to run their Restic backup. I might write a bash function, either next to my Restic repo or directly in my `bashrc`. 
 
 There's also a tool someone mentioned called [Rustic](https://github.com/bnavetta/rustic), a Restic wrapper for easy backups, but I haven't looked into it.
 
