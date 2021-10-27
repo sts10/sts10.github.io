@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Backing up data with restic and rsync"
+title: "Exploring restic and other options for backing up data"
 date: 2021-10-26 16:46:00 -0400
 comments: true
 ---
