@@ -5,20 +5,26 @@ date: 2021-10-26 16:46:00 -0400
 comments: true
 ---
 
-For a few years now, I've been using a command-line tool called [rsync](https://rsync.samba.org/) to perform periodic back-ups of my most important files to various external hard drives and even some USB thumb drives. 
+I've never been very good about backing up my data. Yes, I've had one external hard drive or another for more than a decade, but my back up plan for most of that time was to drag some folders to the drive every few months, or when I was migrating to a new computer.
 
-## In the before times...
+<!-- For a few years now, I've been using a command-line tool called [rsync](https://rsync.samba.org/) to perform periodic back-ups of my most important files to various external hard drives and even some USB thumb drives. --> 
 
-Before I learned how to use rsync, I would drag and drop my "code" folder from my main hard drive to a folder on my external hard drive called "back-ups", and date it like "2020-12-01-back-up-code". Every few months I'd make a new one, then maybe delete the oldest one.
+<!-- ## In the before times... -->
 
-This approach is simple and easy to understand, but it has some real downsides. First, the external hard drive would need 2x, 3x, or 4x more space than whatever I was backing up. Second, each back-up would start from scratch, taking hours. And third, sometimes I could see where some files just wouldn't be transferred over at all!
+For example, I would drag and drop my "code" folder from my main hard drive to a folder on my external hard drive called "back-ups", and date it like "2020-12-01-back-up-code". Every few months I'd make a new one, then maybe delete the oldest one.
 
-There had to be a better way! But I didn't want to jump into a do-it-all solution. Which brought me to rsync.
+This approach is simple and easy to perform and understand -- you move the files you want to save in one directions, and move them in the other to restore; and all GUI. But it has some real downsides. First, the external hard drive would need 2x, 3x, or 4x more space than whatever I was backing up. Second, each back-up would start from scratch, taking hours. And third, sometimes I could see where some files just wouldn't be transferred over at all!
+
+There had to be a better way! But I didn't want to jump into a do-it-all solution. Which brought me to [rsync](https://rsync.samba.org/), "an open source utility that provides fast incremental file transfer." 
+
+## A first step in the right direction: Rsync
+
+Basically, rsync is a command line tool that does my drag-and-drop method smarter. Instead of starting from scratch with each snapshot, rsync allows you to keep updating the same snapshot _incrementally_. That means that if you've only modified or added one or two files since your last backup, you'll only be transferring those changes.
 
 If you're interested, there are probably great rsync tutorials a search away. I'm not an expert, so for now let's just use one of my `rsync` commands from `~/.bashrc` as an illustrative example:
 
 ```bash
-rsync -ar --delete /home/sschlinkert/Documents '/media/sschlinkert/Seagate 4TB/back-ups-rsync/'
+rsync -ar --delete /home/sschlinkert/Documents '/media/sschlinkert/external_harddrive/back-ups-rsync/'
 ```
 
 This command basically sends a copy of my `Documents` directory to a back-up directory. It updates incrementally, so it's much better than removing an old backup and copying over the `Documents` directory every time I want to do a back up. Instead, rsync looks for _new_ and _modified_ files and just updates those in the back-up directory. (The optional `--delete` flag deletes files in the back-up that are not present in the data.)
