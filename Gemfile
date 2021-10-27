@@ -30,3 +30,8 @@ gem "wdm", "~> 0.1.1", :platforms => [:mingw, :x64_mingw, :mswin]
 
 
 gem "webrick", "~> 1.7"
+
+# Github told me to include this due to a security issue
+# https://github.com/sts10/sts10.github.io/security/dependabot/Gemfile.lock/addressable/open
+gem "addressable", ">= 2.8.0"
+
