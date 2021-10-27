@@ -35,7 +35,9 @@ The big downside here is that we only ever have one "snapshot" of data to recove
 
 This week, looking for a project, I decided to explore some more robust back-up options. 
 
-After asking Mastodon for recommendations and searching around just a bit, I decided to give [restic](https://restic.net/), a "modern backup program" that uses encryption, a try. (I won't get into my personal threat model, for security concerns, but Restic's docs has a section on [its threat model](https://restic.readthedocs.io/en/latest/100_references.html?highlight=threat#threat-model), if you're interested.) It's not clear to me if restic, by default, _compresses_ your files, so if you need that you may want to look elsewhere.
+After asking Mastodon for recommendations and searching around just a bit, I decided to give [restic](https://restic.net/), a "modern backup program" that uses encryption, a try. It's not clear to me if restic, by default, _compresses_ your files, so if you need that you may want to look elsewhere.
+
+(Re: use of encryption: I won't get into my personal threat model here, for security reasons, but in general I believe encryption is good, and it costs me little to store yet another passphrase in [my password manager](https://sts10.github.io/2017/06/27/keepassxc-setup-guide.html). Restic's docs has a section on [its threat model](https://restic.readthedocs.io/en/latest/100_references.html?highlight=threat#threat-model), if you're interested.) 
 
 ## Using restic
 
