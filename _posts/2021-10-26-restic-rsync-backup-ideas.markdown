@@ -24,7 +24,7 @@ Basically, rsync is a command line tool that does my drag-and-drop method smarte
 If you're interested, there are probably great rsync tutorials a search away. I'm not an expert, so for now let's just use one of my `rsync` commands from `~/.bashrc` as an illustrative example:
 
 ```bash
-rsync -ar --delete /home/sschlinkert/Documents '/media/sschlinkert/external_harddrive/back-ups-rsync/'
+rsync -ar --delete /home/sschlinkert/Documents /media/sschlinkert/external_harddrive/back-ups-rsync/
 ```
 
 This command basically sends a copy of my `Documents` directory to a back-up directory. It updates incrementally, so it's much better than removing an old backup and copying over the `Documents` directory every time I want to do a back up. Instead, rsync looks for _new_ and _modified_ files and just updates those in the back-up directory. (The optional `--delete` flag deletes files in the back-up that are not present in the data.)
@@ -35,7 +35,7 @@ The big downside here is that we only ever have one "snapshot" of data to recove
 
 This week, looking for a project, I decided to explore some more robust back-up options. 
 
-After asking Mastodon for recommendations and searching around just a bit, I decided to give [restic](https://restic.net/), a "modern backup program" that uses encryption, a try. 
+After asking Mastodon for recommendations and searching around just a bit, I decided to give [restic](https://restic.net/), a "modern backup program" that uses encryption, a try. (Restic's docs has a section on [its threat model](https://restic.readthedocs.io/en/latest/100_references.html?highlight=threat#threat-model), if you're interested.) It's not clear to me if restic, by default, compresses your files, so if you need that you may want to look elsewhere.
 
 ## Using restic
 
@@ -88,7 +88,19 @@ We can do a quick check to see our first snapshot by running:
 restic -r /media/sschlinkert/external_harddrive/restic-repo snapshots
 ```
 
-### Check integrity of that snapshot
+For me, this command prints:
+
+```
+repository f96d340e opened successfully, password is correct
+ID        Time                 Host                  Tags        Paths
+----------------------------------------------------------------------------------
+858619a2  2021-10-26 15:19:33  sschlinkert-Oryx-Pro              /home/sschlinkert
+7ea938aa  2021-10-26 19:54:53  sschlinkert-Oryx-Pro              /home/sschlinkert
+----------------------------------------------------------------------------------
+2 snapshots
+```
+
+### Check integrity of a repo
 
 One thing that's nice about restic is that you can check the state or "health" of the backup.
 
@@ -100,7 +112,7 @@ which should output a block of text that should end with: `no errors were found`
 
 ### Now try restoring our data!
 
-Now let's say something bad has happened and we need to restore our files from this back-up repo. 
+Now let's say something bad has happened and we need to [restore](https://restic.readthedocs.io/en/latest/050_restore.html#restoring-from-a-snapshot) our files from this back-up repo. 
 
 Our files aren't exactly just sitting in a directory, as they are when using a tool like rsync. (This is a bit of a downside for restic, but it's fine.) Instead, we have to use restic's `restore` subcommand.
 
@@ -108,7 +120,13 @@ First, we copy the snapshot id of the snapshot we want to restore from from that
 
 ```bash
 mkdir ~/Documents_restored
-restic -r /media/sschlinkert/external_harddrive/restic-repo restore 37769142 --target ~/Documents_restored
+restic -r /media/sschlinkert/external_harddrive/restic-repo restore 7ea938aa --target ~/Documents_restored
+```
+
+Your can also have restic use the latest snapshot, but I'd assume you then have to provide a `--path`?
+
+```bash
+restic -r /media/sschlinkert/external_harddrive/restic-repo restore latest --target ~/Documents_restored --path "home/sschlinkert"
 ```
 
 This'll take a while, but when it's done our data should be restored to the location we specified, `~/Documents_restored`. At that point, we can do a sanity-check with:
@@ -129,7 +147,7 @@ It's a directory (rather than a single file), so the first thing I'm going to do
 tar -czvf important_documents.tar.gz important_documents/
 ```
 
-Running this command creates important_documents.tar.gz for us. This single, compressed file will be easier for us to encrypt. (If you need more compression, try `tar -cjvf`.)
+Running this command creates important_documents.tar.gz for us. This single, compressed file will be easier for us to encrypt. (If you need more compression, try `tar -cjvf important_documents.tar.bz2 important_documents/`.)
 
 ### Step 2: Encrypting with age
 
