@@ -136,14 +136,19 @@ This'll take a while, but when it's done our data should be restored to the loca
 ls ~/Documents_restored
 ```
 
-## Day-to-day backing up
+## Day-to-day backing up with Restic
 
-`restic -r /media/sschlinkert/external_harddrive/restic-repo --verbose backup /home/sschlinkert/` is a bit of mouthful to straight-up remember to type. I'm sure some folks set up a chron job to run their Restic backup. I might write a bash function, either next to my Restic repo or directly in my `bashrc`. 
+Phew! We're ready for day-to-day life with Restic.
+
+But `restic -r /media/sschlinkert/external_harddrive/restic-repo --verbose backup /home/sschlinkert/` is a bit of mouthful to straight-up remember to type. I'm sure some folks set up a chron job to run their Restic backup. I might write a bash function, either next to my Restic repo or directly in my `bashrc`. 
 
 There's also a tool someone mentioned called [Rustic](https://github.com/bnavetta/rustic), a Restic wrapper for easy backups, but I haven't looked into it.
 
 To remove snapshots, Restic has commands like `forget` and `prune`, which [are detailed in the docs](https://restic.readthedocs.io/en/latest/060_forget.html), so I won't go into here.
 
+## What do you use!? 
+
+Let me know on [Mastodon](https://octodon.social/@schlink) or [Twitter](https://twitter.com/sts10/).
 
 --- 
 ## Appendix: Other archiving tools I found
