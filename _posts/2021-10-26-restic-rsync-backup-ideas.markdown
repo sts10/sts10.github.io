@@ -5,7 +5,7 @@ date: 2021-10-26 16:46:00 -0400
 comments: true
 ---
 
-I've never been very good about backing up my data. Yes, I've had one external hard drive or another for more than a decade, but my back up plan for most of that time was to drag some folders to the drive every few months, or when I was migrating to a new computer.
+A confession: I've never been very good about backing up my data. Yes, I've had one external hard drive or another for more than a decade, but my back up plan for most of that time was to drag some folders to the closest USB drive every few months, or when I was migrating to a new computer.
 
 <!-- For a few years now, I've been using a command-line tool called [rsync](https://rsync.samba.org/) to perform periodic back-ups of my most important files to various external hard drives and even some USB thumb drives. --> 
 
@@ -31,23 +31,23 @@ This command basically sends a copy of my `Documents` directory to a back-up dir
 
 ## Downsides to this rsync approach
 
-The big downside here is that we only ever have one "snapshot" of data to recover with at any one time. True, it's be definition the latest snapshot, but it feels a bit scary putting all our eggs in one basket. Plus, I knew Rsync wasn't _really_ meant for backing up whole home directories like I wanted to do. It also doesn't offer any encryption, which wasn't a big deal for me but might be for you!
+The big downside here is that we only ever have one "snapshot" of data to recover with at any one time. True, it's be definition the _latest_ snapshot, but it feels a bit scary putting all our eggs in one basket. Plus, I knew Rsync wasn't _really_ meant for backing up whole home directories which I increasingly I wanted to do. It also doesn't offer any encryption, which wasn't a big deal for me but might be for you!
 
 This week, looking for a project, I decided to explore some more robust back-up options. 
 
-After asking Mastodon for recommendations and searching around just a bit, I decided to give [restic](https://restic.net/), a "modern backup program" that uses encryption, a try. (I won't get into my personal threat model, for security concerns, but Restic's docs has a section on [its threat model](https://restic.readthedocs.io/en/latest/100_references.html?highlight=threat#threat-model), if you're interested.) It's not clear to me if restic, by default, compresses your files, so if you need that you may want to look elsewhere.
+After asking Mastodon for recommendations and searching around just a bit, I decided to give [restic](https://restic.net/), a "modern backup program" that uses encryption, a try. (I won't get into my personal threat model, for security concerns, but Restic's docs has a section on [its threat model](https://restic.readthedocs.io/en/latest/100_references.html?highlight=threat#threat-model), if you're interested.) It's not clear to me if restic, by default, _compresses_ your files, so if you need that you may want to look elsewhere.
 
 ## Using restic
 
 Here's [the official user's guide from restic](https://restic.readthedocs.io/en/latest/020_installation.html), which I found pretty helpful. Since I'm just putting backups onto USB devices, I only need to follow the instructions for a "local" back up.
 
-### Installing restic on Ubuntu
+### Installing restic on Ubuntu 20.04
 
 `sudo apt install restic`
 
-Let's check the version really quick:
+Let's check the version really quick: `restic version` prints:
 
-`restic version` prints `restic 0.9.6 compiled with go1.12.12 on linux/amd64`. A little outdated -- 0.12.1 is [on Github](https://github.com/restic/restic/releases) as I write this -- but it'll do.
+`restic 0.9.6 compiled with go1.12.12 on linux/amd64`. A little outdated -- 0.12.1 is [on Github](https://github.com/restic/restic/releases) as I write this -- but it'll do.
 
 ### Getting set up with restic
 
@@ -57,7 +57,7 @@ First, let's try to gain a bare-bones conceptual understanding of how Restic wor
 
 > The place where your backups will be saved is called a “repository”. This chapter explains how to create (“init”) such a repository. The repository can be stored locally, or on some remote server or service. 
 
-Basically we use restic to pull data into these backup repositories. So for me, my repository (singular for now) will be on my external hard drive.
+Basically we use restic to "pull" data into these backup repositories. So for me, my repository (singular for now) will be on my external hard drive (for simplicity, let's pretend I only have one of those...).
 
 ### Initializing a Restic repository
 
@@ -139,6 +139,8 @@ ls ~/Documents_restored
 `restic -r /media/sschlinkert/external_harddrive/restic-repo --verbose backup /home/sschlinkert/` is a bit of mouthful to straight-up remember to type. I'm sure some folks set up a chron job to run their restic backup. I might write a bash function, either next to my Restic repo or directly in my `bashrc`. 
 
 There's also a tool someone mentioned called [Rustic](https://github.com/bnavetta/rustic), a Restic wrapper for easy backups, but I haven't looked into it.
+
+To make space, Restic has commands like `forget` and `prune`, which I won't go into here.
 
 
 --- 
