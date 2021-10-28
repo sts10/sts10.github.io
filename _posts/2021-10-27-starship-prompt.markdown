@@ -99,6 +99,8 @@ Then I launched a new window of my terminal (called Konsole) and, boom, I saw th
 
 ![Out of the box Starship prompt](/img/prompt-starship/out-of-box-starship.png)
 
+(It looks like Starship somehow "found" the icons from the Nerd Font I downloaded, despite it not being the font my Terminal uses. Cool?!)
+
 ### Upgrading Starship
 
 The docs also [helpfully notes that](https://starship.rs/guide/#%F0%9F%9A%80-installation): 
