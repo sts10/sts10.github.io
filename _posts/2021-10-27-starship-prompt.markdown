@@ -7,7 +7,7 @@ comments: true
 
 Back in 2014, while at the Flatiron School bootcamp, I configured my BASH prompt.
 
-![My old BASH prompt](img/prompt-starship/old-prompt.png)
+![My old BASH prompt](/img/prompt-starship/old-prompt.png)
 
 The configuration code has lived in directly in my `~/.bashrc` on Ubuntu and `~/.bash_profile` on macOS for years, traveling with me from install to install. 
 
@@ -116,7 +116,7 @@ eval "$(starship init bash)"
 
 Then I launched a new window of my terminal (called Konsole) and, boom, I saw the default Starship prompt!
 
-![Out of the box Starship prompt](img/prompt-starship/out-of-box-starship.png)
+![Out of the box Starship prompt](/img/prompt-starship/out-of-box-starship.png)
 
 ### Upgrading Starship
 
