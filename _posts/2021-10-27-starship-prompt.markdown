@@ -51,30 +51,11 @@ else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
 unset color_prompt force_color_prompt
-
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
-
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
 ```
 
 I liked the `✚` character right at my prompt because it made me feel like coding could be akin to helping people get things done.
 
-This hunch of code still works as well as ever, but it's 2021 and I'm up for trying something new. 
+This hunk of code still works as well as ever, but it's 2021 and I'm up for trying something new. 
 
 How about [Starship](https://starship.rs/), a "minimal, blazing-fast, and infinitely customizable prompt for any shell!" that's written in Rust!
 
@@ -123,6 +104,14 @@ Then I launched a new window of my terminal (called Konsole) and, boom, I saw th
 The docs also [helpfully notes that](https://starship.rs/guide/#%F0%9F%9A%80-installation): 
 
 > To update the Starship itself, rerun the above script. It will replace the current version without touching Starship's configuration.
+
+### Uninstalling Starshipp
+
+I appreciate that [their FAQ answers this question](https://starship.rs/faq/#how-do-i-uninstall-starship), and that the answer is a simple one-liner.
+
+```bash
+sh -c 'rm "$(which starship)"'
+```
 
 ## Basic configuration
 
