@@ -65,7 +65,7 @@ How about [Starship](https://starship.rs/), a "minimal, blazing-fast, and infini
 
 At the top of the installation page, Starship [tells me](https://starship.rs/guide/#%F0%9F%9A%80-installation) I need to install a [Nerd Font](https://www.nerdfonts.com/font-downloads) of my choice. I assume this is to ensure we have all the nice icons that Starship uses.
 
-I like [JetBrains Mono](https://www.jetbrains.com/lp/mono/) for coding, so I downloaded that Nerd Font. I extracted the downloaded file, then launched the Font Management GUI program on Ubuntu and added the font through its interface, selecting all of the files in the downloaded archive (not sure if I was supposed to be more selective). 
+While I had been using DejaVu Sans Mono for coding, I wanted to try [JetBrains Mono](https://www.jetbrains.com/lp/mono/), so I downloaded that Nerd Font. I extracted the downloaded file, then launched the Font Management GUI program on Ubuntu and added the font through its interface, selecting all of the files in the downloaded archive (not sure if I was supposed to be more selective). 
 
 ### Installing Starship itself
 
@@ -99,7 +99,7 @@ Then I launched a new window of my terminal (called Konsole) and, boom, I saw th
 
 ![Out of the box Starship prompt](/img/prompt-starship/out-of-box-starship.png)
 
-(It looks like Starship somehow "found" the icons from the Nerd Font I downloaded, despite it not being the font my Terminal uses. Cool?!)
+(Note that the above screenshot still uses DejaVu Sans Mono for the characters. I only later switched my Terminal's font to JetBrains Mono Nerd Font in Konsole's settings.)
 
 ### Upgrading Starship
 
@@ -107,7 +107,7 @@ The docs also [helpfully notes that](https://starship.rs/guide/#%F0%9F%9A%80-ins
 
 > To update the Starship itself, rerun the above script. It will replace the current version without touching Starship's configuration.
 
-### Uninstalling Starshipp
+### Uninstalling Starship
 
 I appreciate that [their FAQ answers this question](https://starship.rs/faq/#how-do-i-uninstall-starship), and that the answer is pretty simple.
 
@@ -125,19 +125,20 @@ But you can [config some things](https://starship.rs/config/#prompt) in `~/.conf
 
 ## My slightly tweaked Starship config file
 
-Following the example config, here's what I ended up with:
+Following the example config, I tried to preserve my plus sign character prompt, but it didn't display properly (only the left half I think). So I decided to stick with the default character. I did make two small changes:
 
 ```toml
 # Inserts a blank line between shell prompts
 add_newline = false
 
-[character]  
-success_symbol = "[✚](bold red)"     
-
 # Disable the package module, hiding it from the prompt completely
 [package]
 disabled = true
 ```
+
+I was also sure to change the font of my Terminal, Konsole, from DejaVu Sans Mono to JetBrains Mono Nerd Font.
+
+![My slightly tweaked Starship prompt](/img/prompt-starship/configured-starship.png)
 
 ## Questions partially answered
 
