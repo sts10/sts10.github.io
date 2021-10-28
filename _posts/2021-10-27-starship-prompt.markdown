@@ -115,35 +115,20 @@ sh -c 'rm "$(which starship)"'
 
 ## Basic configuration
 
-One of the reasons I wanted to try Starship is that it seems to give you a lot of great features right out of the box, by default. But you can [config some things](https://starship.rs/config/#prompt) in `~/.config/starship.toml`, a file I created. 
+One of the reasons I wanted to try Starship is that it seems to give you a lot of great features right out of the box, by default. And the out-of-the-box prompt is pretty robust!
 
-Here's the default configuration options they suggest you start with:
-
-```toml
-# Inserts a blank line between shell prompts
-add_newline = true
-
-# Replace the "❯" symbol in the prompt with "➜"
-[character]                            # The name of the module we are configuring is "character"
-success_symbol = "[➜](bold green)"     # The "success_symbol" segment is being set to "➜" with the color "bold green"
-
-# Disable the package module, hiding it from the prompt completely
-[package]
-disabled = true
-```
+But you can [config some things](https://starship.rs/config/#prompt) in `~/.config/starship.toml`, a file I created. 
 
 ## My slightly tweaked Starship config file
 
-I wanted to: (a) remove new line at the start, and (b) change the prompt symbol from a "bold" green `➜` to a "bold" red `✚`. So here's my tweaked version:
+Following the example config, here's what I ended up with:
 
 ```toml
 # Inserts a blank line between shell prompts
 add_newline = false
 
-# Replace the "❯" symbol in the prompt with "➜"
-[character]                            # The name of the module we are configuring is "character"
-# success_symbol = "[➜](bold green)"     # The "success_symbol" segment is being set to "➜" with the color "bold green"
-success_symbol = "[✚](bold red)"     # The "success_symbol" segment is being set to "➜" with the color "bold green"
+[character]  
+success_symbol = "[✚](bold red)"     
 
 # Disable the package module, hiding it from the prompt completely
 [package]
@@ -152,11 +137,15 @@ disabled = true
 
 ## Questions partially answered
 
-My two main questions before installing Starship were: (1) What would happen to all my prompt work in my bashrc file?; and (2) what about my terminal colors? 
+My two main questions before installing Starship were: 
 
-1. Since the init BASH line is at the way end of my bashrc, I think Starship quietly supersedes all that Bash color code at the top of this post. This is pretty much ideal, since I can now either keep it as a fall back for if/wehn Starship is not installed, or remove it, cleaning up my bashrc file that's already very long.
+_What would happen to all my prompt work in my bashrc file?_
 
-2. It seems like Starship generally kept the hex color codes I set in my terminal's settings, which is good, though it definitely uses some colors I don't recognize. These are likely colors I set in my terminal config but haven't seen in years. (It would be cool if Starship also somehow took care of these colors for you, but it's also fine that they don't.)
+Since the init BASH line is at the way end of my bashrc, I think Starship quietly supersedes all that Bash color code at the top of this post. This is pretty much ideal, since I can now either keep it as a fall back for if/wehn Starship is not installed, or remove it, cleaning up my bashrc file that's already very long.
+
+_What about my terminal colors?_
+
+It seems like Starship generally kept the hex color codes I set in my terminal's settings, which is good, though it definitely uses some colors I don't recognize. These are likely colors I set in my terminal config but haven't seen in years. (It would be cool if Starship also somehow took care of these colors for you, but it's also fine that they don't.)
 
 ## First impressions
 
