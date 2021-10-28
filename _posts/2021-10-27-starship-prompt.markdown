@@ -168,3 +168,7 @@ My two main questions before installing Starship were: (1) What would happen to 
 1. Since the init BASH line is at the way end of my bashrc, I think Starship quietly supersedes all that Bash color code at the top of this post. This is pretty much ideal, since I can now either keep it as a fall back for if/wehn Starship is not installed, or remove it, cleaning up my bashrc file that's already very long.
 
 2. It seems like Starship generally kept the hex color codes I set in my terminal's settings, which is good, though it definitely uses some colors I don't recognize. These are likely colors I set in my terminal config but haven't seen in years. (It would be cool if Starship also somehow took care of these colors for you, but it's also fine that they don't.)
+
+## First impressions
+
+There's definitely more information in the prompt than I had before, which is nice. Think I need to spend some time with it to get used to it and what each of the symbols mean.
