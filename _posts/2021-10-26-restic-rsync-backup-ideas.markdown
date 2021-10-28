@@ -126,17 +126,21 @@ mkdir ~/Documents_restored
 restic -r /media/sschlinkert/external_harddrive/restic-repo restore 7ea938aa --target ~/Documents_restored
 ```
 
+This'll take a while, but when it's done our data should be restored to the location we specified, `~/Documents_restored`. At that point, we can do a sanity-check with:
+
+```bash
+ls ~/Documents_restored
+```
+
+#### Automatically using the "latest" snapshop
+
 Your can also have restic use the "latest" snapshot, but I'm bit confused by how it decides which path to use if there are snapshots in the same repo of completely different data, like `Music/` and `Movies/`. In this case, each snapshot would have a unique "path", so maybe best practice when you need/want to use the `latest` keyword is to explicitly specify the path to the data with `--path`?
 
 ```bash
 restic -r /media/sschlinkert/external_harddrive/restic-repo restore latest --target ~/Documents_restored --path "home/sschlinkert"
 ```
 
-This'll take a while, but when it's done our data should be restored to the location we specified, `~/Documents_restored`. At that point, we can do a sanity-check with:
-
-```bash
-ls ~/Documents_restored
-```
+While I could see myself scripting a `backup` call somewhere, I don't think I'll be automating or scripting a `restore` call any time soon, so I think I'll favor giving a specific snapshot id when the time comes to restore by data (praying to the Restic gods that it goes smoothly).
 
 ## Day-to-day backing up with restic
 
