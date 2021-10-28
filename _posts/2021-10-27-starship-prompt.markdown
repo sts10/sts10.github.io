@@ -5,13 +5,13 @@ date: 2021-10-27 16:46:00 -0400
 comments: true
 ---
 
-Back in 2014, I configured my BASH prompt.
+Back in 2014, while at the Flatiron School bootcamp, I configured my BASH prompt.
 
 ![My old BASH prompt](img/prompt-starship/old-prompt.png)
 
-The configuration code lives in directly in my `~/.bashrc` on Ubuntu and `~/.bash_proifle` on macOS for years, traveling with me from install to install. 
+The configuration code has lived in directly in my `~/.bashrc` on Ubuntu and `~/.bash_profile` on macOS for years, traveling with me from install to install. 
 
-Working out the colors was hard; and the only really fancy bit is that it tells me if the git repository has uncommitted changes or not. 
+Seven years ago, I remember working out the colors was non-intuitive and particularly tricky; and the only really fancy bit is that it tells me if the git repository I'm in has uncommitted changes or not. 
 
 ```bash
 # git dirty functions for prompt
@@ -20,24 +20,14 @@ function parse_git_dirty {
 }
 
 # This function is called in your prompt to output your active git branch.
-
 function parse_git_branch {
   git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/ (\1$(parse_git_dirty))/"
 }
-# Old version
-# function parse_git_branch {
-#   git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
-# }
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;
 esac
-
-# uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
-# should be on the output of commands, not on the prompt
-#force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
@@ -51,13 +41,11 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    # PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
     RED="\[\033[0;31m\]" # This syntax is some weird bash color thing I never
     LIGHT_RED="\[\033[1;31m\]" # really understood
     BLUE="/e[0;34m"
     CHAR="✚"
     CHAR_COLOR="33"
-    # PS1="\[\e]2;\u@\h\a[\[\e[30;1m\]\t\[\e[0m\]]$RED\$(parse_git_branch) \[\e[0;34m\]\W\[\e[0m\]\n\[\e[0;31m\]$CHAR \[\e[0m\]"
     PS1="[\[\e[30;1m\]\t\[\e[0m\]]$RED\$(parse_git_branch) \[\e[0;34m\]\W\[\e[0m\]\n\[\e[0;31m\]$CHAR \[\e[0m\]"
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
@@ -77,39 +65,38 @@ esac
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
 
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
 fi
-
-# colored GCC warnings and errors
-#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 ```
 
-I liked the `✚` character as a prompt because it made me feel like coding akin to helping people get things done.
+I liked the `✚` character right at my prompt because it made me feel like coding could be akin to helping people get things done.
 
-But it's 2021 and I'm up for trying something new. How about [Starship](https://starship.rs/), a "minimal, blazing-fast, and infinitely customizable prompt for any shell!" that's written in Rust!
+This hunch of code still works as well as ever, but it's 2021 and I'm up for trying something new. 
+
+How about [Starship](https://starship.rs/), a "minimal, blazing-fast, and infinitely customizable prompt for any shell!" that's written in Rust!
 
 ## Installing Starship 
 
 ### Nerd Font prerequisite
 
-Starship tells me I need to install a [Nerd Font](https://www.nerdfonts.com/font-downloads) of my choice. I assume this is to ensure we have all the nice icons that Starship uses.
+At the top of the installation page, Starship [tells me](https://starship.rs/guide/#%F0%9F%9A%80-installation) I need to install a [Nerd Font](https://www.nerdfonts.com/font-downloads) of my choice. I assume this is to ensure we have all the nice icons that Starship uses.
 
-I like JetBrains Mono for coding, so I downloaded that Nerd Font. I extracted the downloaded file, then launched Font Management on Ubuntu and added the font, selecting all of the files in the downloaded archive (not sure if I was supposed to be more selective. 
+I like [JetBrains Mono](https://www.jetbrains.com/lp/mono/) for coding, so I downloaded that Nerd Font. I extracted the downloaded file, then launched the Font Management GUI program on Ubuntu and added the font through its interface, selecting all of the files in the downloaded archive (not sure if I was supposed to be more selective). 
 
 ### Installing Starship itself
 
-Font installed, the [guide](https://starship.rs/guide/#%F0%9F%9A%80-installation) tells me to run:
+With my desired Nerd Font installed, the Starship [guide](https://starship.rs/guide/#%F0%9F%9A%80-installation) tells me to run:
 
 ```bash
 sh -c "$(curl -fsSL https://starship.rs/install.sh)"
 ```
 
-```
+This produced this message, asking me to confirm that I wanted to install Starship to `/usr/local/bin`:
+
+```text
 Configuration
 > Bin directory: /usr/local/bin
 > Platform:      unknown-linux-musl
@@ -119,15 +106,29 @@ Configuration
 ? Install Starship latest to /usr/local/bin? [y/N
 ```
 
-I said `y`. It prompted me for my sudo password, then installed without issue. I launched a new window of my terminal and, boom, I saw the default Starship prompt!
+That sounds fine, so I said `y`. It prompted me for my sudo password, then installed without issue. 
+
+Since I use Bash, I then added the given initializing line of code to very end of my ~/.bashrc:
+
+```bash
+eval "$(starship init bash)"
+```
+
+Then I launched a new window of my terminal (called Konsole) and, boom, I saw the default Starship prompt!
 
 ![Out of the box Starship prompt](img/prompt-starship/out-of-box-starship.png)
 
+### Upgrading Starship
+
+The docs also [helpfully notes that](https://starship.rs/guide/#%F0%9F%9A%80-installation): 
+
+> To update the Starship itself, rerun the above script. It will replace the current version without touching Starship's configuration.
+
 ## Basic configuration
 
-One of the reasons I wanted to try Starship is that it seems to get a lot right out of the box. But you can [config some things](https://starship.rs/config/#prompt) in the `~/.config/starship.toml`. 
+One of the reasons I wanted to try Starship is that it seems to give you a lot of great features right out of the box, by default. But you can [config some things](https://starship.rs/config/#prompt) in `~/.config/starship.toml`, a file I created. 
 
-Here's the default they suggest you start with:
+Here's the default configuration options they suggest you start with:
 
 ```toml
 # Inserts a blank line between shell prompts
@@ -144,6 +145,8 @@ disabled = true
 
 ## My slightly tweaked Starship config file
 
+I wanted to: (a) remove new line at the start, and (b) change the prompt symbol from a "bold" green `➜` to a "bold" red `✚`. So here's my tweaked version:
+
 ```toml
 # Inserts a blank line between shell prompts
 add_newline = false
@@ -158,8 +161,10 @@ success_symbol = "[✚](bold red)"     # The "success_symbol" segment is being s
 disabled = true
 ```
 
-You can probably guess the changes I made: no new line at the start, and changed the prompt symbol from a "bold" green `➜` to a "bold" red `✚`.
-
 ## Questions partially answered
 
-My two main questions when starting this were: (1) What would happen to all my prompt work in my bashrc file?; and (2) what about my terminal colors? It seems like Starship overwrote everything except the hex color codes I set in my terminal's settings, which is good.
+My two main questions before installing Starship were: (1) What would happen to all my prompt work in my bashrc file?; and (2) what about my terminal colors? 
+
+1. Since the init BASH line is at the way end of my bashrc, I think Starship quietly supersedes all that Bash color code at the top of this post. This is pretty much ideal, since I can now either keep it as a fall back for if/wehn Starship is not installed, or remove it, cleaning up my bashrc file that's already very long.
+
+2. It seems like Starship generally kept the hex color codes I set in my terminal's settings, which is good, though it definitely uses some colors I don't recognize. These are likely colors I set in my terminal config but haven't seen in years. (It would be cool if Starship also somehow took care of these colors for you, but it's also fine that they don't.)
