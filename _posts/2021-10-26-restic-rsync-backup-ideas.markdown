@@ -82,6 +82,8 @@ restic -r /media/sschlinkert/external_harddrive/restic-repo --verbose backup /ho
 
 We will do subsequent snapshots by running the exact same command at later times. In other words this is the command you'd run every night or week to keep the backup up-to-date.
 
+Note that we can [exclude files by name or pattern](https://restic.readthedocs.io/en/latest/040_backup.html#excluding-files). Check the docs for more information.
+
 ### Ensure a snapshot was created
 
 We can do a quick check to see our first snapshot by running: 
@@ -124,7 +126,7 @@ mkdir ~/Documents_restored
 restic -r /media/sschlinkert/external_harddrive/restic-repo restore 7ea938aa --target ~/Documents_restored
 ```
 
-Your can also have restic use the latest snapshot, but I'd assume you then have to provide a `--path`?
+Your can also have restic use the "latest" snapshot, but I'm bit confused by how it decides which path to use if there are snapshots in the same repo of completely different data, like `Music/` and `Movies/`. In this case, each snapshot would have a unique "path", so maybe best practice when you need/want to use the `latest` keyword is to explicitly specify the path to the data with `--path`?
 
 ```bash
 restic -r /media/sschlinkert/external_harddrive/restic-repo restore latest --target ~/Documents_restored --path "home/sschlinkert"
