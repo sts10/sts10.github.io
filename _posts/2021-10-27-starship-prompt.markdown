@@ -107,7 +107,9 @@ The docs also [helpfully notes that](https://starship.rs/guide/#%F0%9F%9A%80-ins
 
 ### Uninstalling Starshipp
 
-I appreciate that [their FAQ answers this question](https://starship.rs/faq/#how-do-i-uninstall-starship), and that the answer is a simple one-liner.
+I appreciate that [their FAQ answers this question](https://starship.rs/faq/#how-do-i-uninstall-starship), and that the answer is pretty simple.
+
+You just remove the Starship-related line from your Bash config file, then run:
 
 ```bash
 sh -c 'rm "$(which starship)"'
