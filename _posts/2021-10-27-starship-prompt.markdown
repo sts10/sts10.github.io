@@ -140,6 +140,26 @@ I was also sure to change the font of my Terminal, Konsole, from DejaVu Sans Mon
 
 ![My slightly tweaked Starship prompt](/img/prompt-starship/configured-starship.png)
 
+## Other helpful config settings
+
+If you don't want to display the version of, say, Python, you'd do:
+
+```toml
+[python]
+format = 'via [${symbol}(\($virtualenv\) )]($style)'
+```
+
+Helpful if Starship isn't detecting the right version of Python.
+
+If you want to display an A emoji when you're connected to an AWS box:
+
+```toml
+[aws]
+format = '$symbol ($style)'
+style = "bold blue"
+symbol = "🅰 "
+```
+
 ## Questions partially answered
 
 My two main questions before installing Starship were: 
