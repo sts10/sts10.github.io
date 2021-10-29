@@ -11,9 +11,9 @@ A confession: I've never been very good about backing up my data. Yes, I've had 
 
 <!-- ## In the before times... -->
 
-For example, I would drag and drop my "code" folder from my main hard drive to a folder on my external hard drive called "back-ups", and date it like "2020-12-01-back-up-code". Every few months I'd make a new one, then maybe delete the oldest one.
+For example, I would drag and drop my "code" folder from my main hard drive to a folder on my external hard drive called "back-ups", and date it like "2020-12-01-back-up-code". Every few months I'd make a new one, then maybe delete the oldest one. I could have used a well-written `cp` command to do this, definitely adding the `-R` flag so it works recursively. This would also serve as a "restore" command when used in the opposite direction.
 
-This approach is simple and easy to perform and understand -- you move the files you want to save in one directions, and move them in the other to restore; and all GUI. But it has some real downsides. First, the external hard drive would need 2x, 3x, or 4x more space than whatever I was backing up. Second, each back-up would start from scratch, taking hours. And third, sometimes I could see where some files just wouldn't be transferred over at all!
+This approach is simple and easy to perform and understand -- you move the files you want to save in one directions, and move them in the other to restore; and you can always fall-back to an all-GUI procedure. But it has some real downsides. First, the external hard drive would need 2x, 3x, or 4x more space than whatever I was backing up. Second, each back-up would start from scratch, taking hours. And third, sometimes I could see where some files just wouldn't be transferred over at all!
 
 There had to be a better way! But I didn't want to jump into a do-it-all solution. Which brought me to [rsync](https://rsync.samba.org/), "an open source utility that provides fast incremental file transfer." 
 
