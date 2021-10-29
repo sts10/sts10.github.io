@@ -29,6 +29,8 @@ rsync -ar --delete /home/sschlinkert/Documents /media/sschlinkert/external_hardd
 
 This command basically sends a copy of my `Documents` directory to a back-up directory. It updates incrementally, so it's much better than removing an old backup and copying over the `Documents` directory every time I want to do a back up. Instead, rsync looks for _new_ and _modified_ files and just updates those in the back-up directory. (The optional `--delete` flag deletes files in the back-up that are not present in the data.)
 
+To restore data archived in this method, I think I'd just use `cp -R`.
+
 ## Downsides to this rsync approach
 
 The big downside here is that we only ever have one "snapshot" of data to recover with at any one time. True, it's be definition the _latest_ snapshot, but it feels a bit scary putting all our eggs in one basket. Plus, I knew Rsync wasn't _really_ meant for backing up whole home directories which I increasingly I wanted to do. It also doesn't offer any encryption, which wasn't a big deal for me but might be for you!
