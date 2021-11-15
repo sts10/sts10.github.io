@@ -218,6 +218,8 @@ gpg --output important_documents.tar.gz --decrypt important_documents.tar.gz.gpg
 
 This guide is by no means exhaustive of what you can already do with age. Age definitely has more features than I've outlined here, which you can read about on [the project's README](https://github.com/FiloSottile/age#readme), including some nifty things with [SSH keys](https://github.com/FiloSottile/age#ssh-keys).
 
+Also, here's [a blog post](https://seankhliao.com/blog/12020-01-09-signing-and-encrypting/) with some helpful shell scripts for using age. (h/t [Aaron Toponce](https://twitter.com/AaronToponce/status/1459225661504208900))
+
 ## To look forward to 
 
 There's an interoperable Rust port of age called [rage](https://github.com/str4d/rage/), currently at version 0.6.0. I've tried it and it seems to work well, though the syntax of the commands is now a bit different than age v1.0.
