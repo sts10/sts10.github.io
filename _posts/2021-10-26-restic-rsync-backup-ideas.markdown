@@ -162,7 +162,13 @@ Since I've decided to back-up my entire home directory, there are quite a few fi
 /home/$USER/.cargo
 ```
 
-(Note that, according to the docs at this time of writing, Restic does NOT expand `~/`, but we can access the `$USER` variable.)
+(Note that, according to the docs at this time of writing, Restic does NOT expand references to `~` as your home directory in this `exclude-file`, but we can access the `$USER` variable here.)
+
+And then my Restic command to use this file would be something like:
+
+```bash
+restic -r /media/sschlinkert/external_harddrive/restic-repo/ --verbose backup --exclude-file=/home/sschlinkert/restic-excludes.txt /home/sschlinkert/
+```
 
 ### Removing snapshots
 
