@@ -148,11 +148,29 @@ While I could see myself scripting a `backup` call somewhere, I don't think I'll
 
 Phew! We're ready for day-to-day life with restic.
 
-But `restic -r /media/sschlinkert/external_harddrive/restic-repo --verbose backup /home/sschlinkert/` is a bit of mouthful to straight-up remember to type. I'm sure some folks set up a cron job to run their restic backup. I might write a bash function, either next to my restic repo or directly in my `bashrc`. 
+But `restic -r /media/$USER/external_harddrive/restic-repo --verbose backup /home/$USER/` is a bit of mouthful to straight-up remember to type. I'm sure some folks set up a cron job to run their restic backup. I might write a bash function, either next to my restic repo or directly in my `bashrc`. 
 
-There's also a tool someone mentioned called [Rustic](https://github.com/bnavetta/rustic), a restic wrapper for easy backups, but I haven't looked into it.
+### Excluding files
 
-To remove snapshots, restic has commands like `forget` and `prune`, which [are detailed in the docs](https://restic.readthedocs.io/en/latest/060_forget.html), so I won't go into here.
+Since I've decided to back-up my entire home directory, there are quite a few files and directories I can safety exclude from back-ups. You can read [the exclude options in the documentation](https://restic.readthedocs.io/en/latest/040_backup.html#excluding-files), but I decided to use the `--exclude-file` flag, which excludes items listed in a given file. For now, that file is just `~/restic-excludes.txt` and its contents are:
+
+```text
+/home/$USER/.cache
+/home/$USER/.mozilla
+/home/$USER/.local/share/Steam
+/home/$USER/snap
+/home/$USER/.cargo
+```
+
+(Note that, according to the docs at this time of writing, Restic does NOT expand `~/`, but we can access the `$USER` variable.)
+
+### Removing snapshots
+
+To remove snapshots, restic has commands like `forget` and `prune`, which [are detailed in the docs](https://restic.readthedocs.io/en/latest/060_forget.html). I'm not 100% how these work yet, so I won't go into here!
+
+### Wrappers around Restic
+
+There's a tool someone mentioned called [Rustic](https://github.com/bnavetta/rustic), a Restic wrapper for easy backups, but I haven't looked into it.
 
 ## What do you use!? 
 
