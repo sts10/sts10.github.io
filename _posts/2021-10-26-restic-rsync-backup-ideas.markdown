@@ -155,11 +155,18 @@ But `restic -r /media/$USER/external_harddrive/restic-repo --verbose backup /hom
 Since I've decided to back-up my entire home directory, there are quite a few files and directories I can safety exclude from back-ups. You can read [the exclude options in the documentation](https://restic.readthedocs.io/en/latest/040_backup.html#excluding-files), but I decided to use the `--exclude-file` flag, which excludes items listed in a given file. For now, that file is just `~/restic-excludes.txt` and its contents are:
 
 ```text
-/home/$USER/.cache
 /home/$USER/.mozilla
+/home/$USER/.cache
+/home/$USER/.cargo
+/home/$USER/.rustup
+/home/$USER/.bundle
+/home/$USER/.gem
+/home/$USER/.rbenv
+/home/$USER/.pyenv
+/home/$USER/.npm
+/home/$USER/go
 /home/$USER/.local/share/Steam
 /home/$USER/snap
-/home/$USER/.cargo
 ```
 
 (Note that, according to the docs at this time of writing, Restic does NOT expand references to `~` as your home directory in this `exclude-file`, but we can access the `$USER` variable here.)
