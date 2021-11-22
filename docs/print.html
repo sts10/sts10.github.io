@@ -492,12 +492,20 @@ default-preference-list SHA512 SHA384 SHA256 SHA224 AES256 AES192 AES CAST5 ZLIB
 <li><a href="https://signal.org/download/">Download and install Signal</a></li>
 </ol>
 <!-- 3. Install Ricochet from [its website](https://ricochet.im/) -- not sure the procude here. You can also look in your distro's GUI app store, though check version. -->
-<ol start="4">
+<ol start="3">
 <li>Install Tor Browser (forget how exactly I did this-- maybe Tor Browser Launcher? From POP store?)</li>
-<li>To install OnionShare, I followed the &quot;Ubuntu&quot; instructions on their <a href="https://onionshare.org/#downloads">download page</a> and added their PPA. (The version in the POP store was 0.9 -- too old for me.) </li>
 <li>Install Chromium via the POP app store if you like.</li>
 <li>Install Standard Notes app from <a href="https://standardnotes.org/getting-started?downloaded=linux">their site</a></li>
 </ol>
+<h2 id="onionshare-consider-the-cli"><a class="header" href="#onionshare-consider-the-cli">Onionshare (consider the CLI)</a></h2>
+<p>If <a href="https://onionshare.org/">OnionShare</a>'s GUI installations are throwing errors, try <a href="https://docs.onionshare.org/2.4/en/advanced.html#cli">installing and using the CLI</a>. I'd recommend installing it with <a href="https://pypa.github.io/pipx/installation/">pipx</a> rather than pip. Here's an example:</p>
+<pre><code class="language-bash"># Install pipx (see: https://pypa.github.io/pipx/installation/)
+python3 -m pip install --user pipx
+python3 -m pipx ensurepath
+# Install onionshare-cli
+pipx install onionshare-cli
+onionshare-cli --help
+</code></pre>
 <h2 id="gui-markdown-editors"><a class="header" href="#gui-markdown-editors">GUI Markdown editors</a></h2>
 <p>While Neovim/Vim is fine for editing Markdown, if you want a different aesthetic, try <a href="https://typora.io/">Typora</a> (with <a href="https://github.com/sts10/Turing-CSS">my forked theme</a>), <a href="https://somas.pages.gitlab.gnome.org/apostrophe/">Apostrophe</a>, or <a href="https://wereturtle.github.io/ghostwriter/">Ghostwriter</a>.</p>
 <h2 id="standard-notes-desktop-file"><a class="header" href="#standard-notes-desktop-file">Standard Notes .desktop file</a></h2>
