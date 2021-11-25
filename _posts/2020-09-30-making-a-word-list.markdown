@@ -104,7 +104,7 @@ We can also remove a list of rejected words, like words that are a little too co
 So as an example, you could run something like this:
 
 ```bash
-tidy -o cleaned_word_list.txt -lpe -m 4 -a /usr/share/dict/words -r reject_words.txt word_list_raw.txt
+tidy -o cleaned_word_list.txt -lPe -m 4 -a /usr/share/dict/words -r reject_words.txt word_list_raw.txt
 ```
 
 ## An example of a usable word list (an end-product)
