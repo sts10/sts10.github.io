@@ -7,11 +7,10 @@ comments: true
 
 I'm excited to announce that I've add a slew of new features to [Tidy](https://github.com/sts10/tidy), my Rust command-line tool that helps users combine and clean large word lists. 
 
-The tool can now:
+Some of the more interesting new features are:
 
-- remove homophones from a provided list of comma-separated pairs of homophones
-- enforce a minimum [edit distance](https://en.wikipedia.org/wiki/Edit_distance) between words 
 - guarantee a maximum shared prefix length
+- enforce a minimum [edit distance](https://en.wikipedia.org/wiki/Edit_distance) between words 
 - print corresponding dice rolls before words, separated by a tab. E.g. `35466	ladle`
 - cut generated list to set length by randomly removing words.
 
@@ -37,7 +36,7 @@ That same [EFF short list](https://www.eff.org/deeplinks/2016/07/new-wordlists-r
 
 > All words are at least an edit distance of 3 apart. This means that future software could correct any single typo in the user's passphrase (and in many cases more than one typo).
 
-Thus, I added an option in Tidy to enforce a minimum edit distance in the generated word list. I did this by swiping [an `edit_distance` function from this repository of common algorithms written in Rust](https://github.com/TheAlgorithms/Rust/blob/master/src/dynamic_programming/edit_distance.rs) (MIT licensed!). I think it's correct! And it saved me a big headache!
+Thus, I added an option in Tidy to enforce a minimum edit distance in the generated word list (using `-d` flag). I did this by swiping [an `edit_distance` function from this repository of common algorithms written in Rust](https://github.com/TheAlgorithms/Rust/blob/master/src/dynamic_programming/edit_distance.rs) (MIT licensed!). I think it's correct! And it saved me a big headache!
 
 Again using this function, Tidy can also calculate the minimum edit distance of list (use `-AA`).
 
@@ -63,21 +62,19 @@ The EFF long list has 7,776 words on it, so we can expect that adding one word f
 
 But what if all three words we got for our passphrase were three-letter words? Or what if we used that hypothetical list that has "a" on it? Randomly selecting words from the list, we hypothetically could get a passphrase of "a-a-a". Can we claim that "a-a-a" has 38.775 bits of entropy? A brute-force alphabet attack (putting aside the hyphens) would suggest an entropy of `3 * log2(26)` which is 14.10 bits! We've greatly _over-estimated_ the amount of entropy per word.
 
-I contend that this thought experiment may be useful when we ask what the shortest word on a good word list should be. There may be an established method for determining what this minimum word length should be, but if there is I don't know about it yet. Here's the math I've worked out on my own. 
-
-<!-- Consider the story of a user who gets a passphrase compromised of only the shortest words on the list. Does this passphrase genuinely have the entropy of `log2(list_length)` per word? -->
+I contend that this edge-case thought experiment may be useful when we ask what the shortest word on a good word list should be. There may be an established method for determining what this minimum word length should be, but if there is I don't know about it yet. Here's the math I've worked out on my own. 
 
 ### Entropy per _letter_
 
-This mental experiment of taking the shortest word from the list and assuming the worst-case -- that user gets that shortest word for her entire passphrase -- gave me an idea. 
+This mental exercise of taking the shortest word from the list and assuming the worst-case -- that the user generates a passphrase entirely of words of that shortest length -- gave me an idea. 
 
 Let's return to the list with "a" on it. Given that the list is 7,776 words long, we're expecting every word to provide 12.925 bits of entropy. Since this list has at least one 1-character word on it, we're effectively claiming "The word 'a' provides 12.925 bits of entropy." We're asserting that the entropy of single _letter_ is 12.925. 
 
 This is clearly false, since there are only 26 lowercase English letters. At best, a single letter adds 4.7 bits of entropy (`log2(26)`). As we saw before, we're over-estimating entropy per word.
 
-Let's run through another example. Let's say we wise up and replace all 1-character words with longer words, but we keep some 2-character words like "of". Do we still make a bad assumption? Let's see.
+Let's run through another example. Let's say we wise up and replace all 1-character words with longer words, but we keep some 2-character words like "of", "to", "if" etc. Do we still make a bad assumption? Let's see.
 
-Now we're expecting the word "of" to provide 12.925 (`log2(7776)`) bits of entropy. But when we realize there are only 26 letters in English, we see that, at best, two of these letters only generates `2 * log2(26) == 2 * 4.7 == 9.4` bits of entropy. Again, 12.925 is an overestimate!
+In this case, we're expecting the word "of" to provide 12.925 (`log2(7776)`) bits of entropy. But when we realize there are only 26 letters in English, we see that, at best, two of these letters only generates `2 * log2(26) == 2 * 4.7 == 9.4` bits of entropy. Again, 12.925 is an overestimate!
 
 Now that we've run through two examples, let's see if we can generalize this checking process. 
 
@@ -97,19 +94,21 @@ The EFF long list clears this line, since `log2(7776) / 3 == 12.92 / 3 == 4.3` b
 
 Of course, there are many combinations of two and three letters that are not words in English, and thus, assuming the words on the list are English, have a low chance of appearing on the generated word list.
 
-If we go by [a 1951 Claude Shannon paper](https://www.princeton.edu/~wbialek/rome/refs/shannon_51.pdf), each letter in English actually only gives 2.62 bits of entropy. Users can see if their generated word list falls above this (stricter) line by using the `-A`/`--attributes` flag.
+If we go by [a 1951 Claude Shannon paper](https://www.princeton.edu/~wbialek/rome/refs/shannon_51.pdf), each letter in English actually only gives 2.62 bits of entropy. Users can see if their generated word list falls above this (stricter) line, which I'm calling the "Shannon line," by using the `-A`/`--attributes` flag.
 
 Interesting, the EFF long list does not clear this line, since `log2(7776) / 3 == 12.92 / 3 == 4.3` bits per letter, which is greater than 2.62.
 
 ### Does any of this realistically matter?
 
-I don't really know! For one thing, the odds of getting a three-word passphrase of 3-letter words from the EFF list is about 0.0001%. But more importantly, I'm not even sure how an attacker could effectively use this information.
+I don't really know! I'm not a mathematician or cryptographer. For one thing, the odds of getting a three-word passphrase of 3-letter words from the EFF list is about 0.0001%. But more importantly, I'm not even sure how an attacker could effectively use this information to crack a passphrase faster.
 
 Like, in 2018, 1Password's word list of 18,328 words had at least some 3-letter words on it, meaning it had an assumed entropy per letter of 4.72 -- above both our lines. And yet, when they [held a passphrase-cracking competition](https://blog.1password.com/how-strong-should-your-master-password-be-for-world-password-day-wed-like-to-know/) that year, I don't think any participants used a method other than [running through all 18328^3 possible combinations](https://github.com/agilebits/crackme/blob/master/write-ups/5BSLBTKR.md#writeup). (Here's [my blog post about that challenge](https://sts10.github.io/2018/05/31/1password-cracking-challenge.html).)
 
 ### How I folded some of this math into Tidy
 
-Undeterred, and assuming all the above is sound math, I went ahead and had Tidy v 0.2 calculate this "assumed entropy per letter" metric for generated lists (use the `-A` flag to see it). Here's the Rust code, [found in the `display_information.rs` file](https://github.com/sts10/tidy/blob/main/src/display_information.rs#L144-L149):
+Undeterred, and assuming all the above is sound math, I went ahead and had Tidy v 0.2 calculate this "assumed entropy per letter" metric for generated lists (use the `-A` flag to see it). It doesn't affect the generated word list in any way -- it just informs users of how their generated list measures up (and only if they use that option flag).
+
+Here's the Rust code, [found in the `display_information.rs` file](https://github.com/sts10/tidy/blob/main/src/display_information.rs#L144-L149):
 
 ```rust
 fn assumed_entropy_per_letter(list: &[String]) -> f64 {
@@ -189,7 +188,7 @@ Since dice are often used in conjunction with these word lists, I also wanted Ti
 etc.
 ```
 
-Up for a challenge, I allowed the user to set the number of sides of their dice. This involved some fun non-base-10 work, zero-padding, and a challenging off-by-one error!
+Up for a challenge, I allowed the user to set the number of sides of their dice to between 2 and 9. This involved some fun handling of non-base-10 numbers, a bit of zero-padding, and a challenging off-by-one error!
 
 ```rust
 use radix_fmt::*; // Wonder if I can ditch this dependency...
@@ -217,7 +216,7 @@ pub fn print_as_dice(n: usize, base: u8, list_length: usize) -> String {
 }
 ```
 
-However, these diceware lists are often a set length so they use every possible dice roll (6^5 == 7,776 for EFF long list, or 6^4 == 1,294 words for their short lists). Thus I also needed to implement a way to cut lists to a set length.
+However, these diceware lists are often a set length so they use every possible dice roll (to use the EFF lists as an example once again: `6^5 == 7,776` words for the long list, and `6^4 == 1,294` words for their short lists). So I also needed to implement a way to cut lists to a set length. I made sure to make these cuts randomly, rather than cut, say, the last 100 words from an alphabetized list.
 
 ```rust
 // User can cut words from nearly finished list.
