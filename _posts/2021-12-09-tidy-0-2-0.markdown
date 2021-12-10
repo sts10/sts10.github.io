@@ -90,11 +90,27 @@ If this "assumed entropy-per-letter" number is greater than 4.7, we can say that
 
 The EFF long list clears this line, since `log2(7776) / 3 == 12.92 / 3 == 4.3` bits per letter, which is less than 4.7.
 
+### Checking our work against advice from Arnold Reinhold
+
+The creator of a popular diceware list, researcher Arnold Reinhold, writes in [an FAQ on diceware passphrases](https://theworld.com/~reinhold/dicewarefaq.html#characters):
+
+> **Why shouldn't I use a Diceware passphrase shorter than 19 characters?**
+
+> One way someone might use to find your passphrase is to write a computer program that tries all combinations of characters up to some length. If your Diceware passphrase is very short, such a program would come up with you passphrase eventually. Using a passphrase that is at least 19 characters in length, including the spaces between the words, makes such an attack as difficult as searching all six word Diceware passphrases. By the way, it is very unlikely that the dice will give you a passphrase that short.
+
+First of all, it's nice to see a published researcher worrying about the same thing I am! Specifically, his warning against 6-word passphrases, created from [his 7,776-word list](https://theworld.com/%7Ereinhold/diceware.wordlist.asc), that are fewer than 19 characters. Let's see if we can explain how he got that number 19. 
+
+A 6-word passphrase from a 7,776-word list should give us 77.55 bits on entropy. Let's say we have a 6-word passphrase that just meets Reinhold's minimum of 19 characters. We can calculate the entropy per letter as `77.55/19` == about 4.08 bits per letter. This clears our brute-force line of 4.7 bits per letter, but not by a ton, offering us hope that Reinhold did some similar math when he wrote the 19-character minimum.
+
+But I'm not sure this is how Reinhold got to that 19 minimum, since both 18-character and 17-character passphrases also clears the brute-force line. (Running through that math: we assume the 18-character passphrase has 77.55 bits of entropy, which means we're assuming each letter contributes `77.55/18` == 4.31 bits of entropy, which is safely below 4.7. Likewise, a 17-character passphrase clears it with 4.56 bits per letter.) Or maybe he integrated the 5 word-separating spaces (plus the numbers and punctuation marks in his list?) into his math to get to something closer to that 4.08 number. Or maybe he just wanted to give advice with a bit of safety cushion.
+
 ### A "stricter" line
+
+Let's make yet another leap. 
 
 Of course, there are many combinations of two and three letters that are not words in English, and thus, assuming the words on the list are English, have a low chance of appearing on the generated word list.
 
-If we go by [a 1951 Claude Shannon paper](https://www.princeton.edu/~wbialek/rome/refs/shannon_51.pdf), each letter in English actually only gives 2.62 bits of entropy. Users can see if their generated word list falls above this (stricter) line, which I'm calling the "Shannon line," by using the `-A`/`--attributes` flag.
+If we go by [a 1951 Claude Shannon paper](https://www.princeton.edu/~wbialek/rome/refs/shannon_51.pdf) (page 54), each letter in English actually only gives 2.62 bits of entropy. Users can see if their generated word list falls above this (stricter) line, which I'm calling the "Shannon line," by using the `-A`/`--attributes` flag.
 
 Interesting, the EFF long list does not clear this line, since `log2(7776) / 3 == 12.92 / 3 == 4.3` bits per letter, which is greater than 2.62.
 
