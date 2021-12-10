@@ -41,7 +41,7 @@ Thus, I added an option in Tidy to enforce a minimum edit distance in the genera
 
 ## How short can the shortest word on a word list (safely) be?
 
-Through [a discussion with a fellow Fediverse user](https://cryptpad.fr/pad/#/2/pad/view/zgJRJa16NKgg+IkZaCB1p5gM5fHmmQFd21be5y9qlbg/), I started to think if there was a mathematical way to determine how short the shortest word on a word list could be while maintaining the wonderful entropy-per-word guarantees that lead us to use these word lists to create passphrases in the first place. 
+Through a discussion with a fellow Fediverse user, I started to think if there was a mathematical way to determine how short the shortest word on a word list could be while maintaining the wonderful entropy-per-word guarantees that lead us to use these word lists to create passphrases in the first place. 
 
 In fact, Joseph Bonneau, one of the creators of the EFF word lists, [writes in a 2016 blog post announcing the new word lists](https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases) that this ease of computing the entropy of resulting passphrase is a key advantage of the method:
 
