@@ -37,7 +37,9 @@ That same [EFF short list](https://www.eff.org/deeplinks/2016/07/new-wordlists-r
 
 > All words are at least an edit distance of 3 apart. This means that future software could correct any single typo in the user's passphrase (and in many cases more than one typo).
 
-Thus, I added an option in Tidy to enforce a minimum edit distance in the generated word list. Tidy can also calculate the minimum edit distance of list (use `-AA`).
+Thus, I added an option in Tidy to enforce a minimum edit distance in the generated word list. I did this by swiping [an `edit_distance` function from this repository of common algorithms written in Rust](https://github.com/TheAlgorithms/Rust/blob/master/src/dynamic_programming/edit_distance.rs) (MIT licensed!). I think it's correct! And it saved me a big headache!
+
+Again using this function, Tidy can also calculate the minimum edit distance of list (use `-AA`).
 
 ## How short can the shortest word on a word list (safely) be?
 
@@ -53,7 +55,7 @@ Later in the post, writing about the then-new EFF long list, Bonneau notes that 
 
 We can wonder: If we had a 7,776 word list had a lot of 1- and 2-character words on it, would the passphrases generated from that list be as secure as from the EFF long list (which also has 7,776 words, but a minimum word length of 3)? My gut says no, but I wanted to try to figure out an answer grounded in (my very amateur) math.
 
-### An attempt at mathematically determining a good minimum word length
+### An attempt at mathematically determining a safe minimum word length
 
 <!-- If we take the entropy per word from a list (`log2(list_length)`) and divide it by the length of the shortest word on the list, we get a value we might call "assumed entropy per letter". For example, if we're looking at the 7,776-word EFF long list, we'd assume an entropy of 12.925 bits per word. -->
 
@@ -69,7 +71,7 @@ I contend that this thought experiment may be useful when we ask what the shorte
 
 This mental experiment of taking the shortest word from the list and assuming the worst-case -- that user gets that shortest word for her entire passphrase -- gave me an idea. 
 
-Let's return to the list with "a" on it. Given that the list is 7776 words long, we're expecting every word to provide 12.925 bits of entropy. Since this list has at least one 1-character word on it, we're effectively claiming "The word 'a' provides 12.925 bits of entropy." We're asserting that the entropy of single _letter_ is 12.925. 
+Let's return to the list with "a" on it. Given that the list is 7,776 words long, we're expecting every word to provide 12.925 bits of entropy. Since this list has at least one 1-character word on it, we're effectively claiming "The word 'a' provides 12.925 bits of entropy." We're asserting that the entropy of single _letter_ is 12.925. 
 
 This is clearly false, since there are only 26 lowercase English letters. At best, a single letter adds 4.7 bits of entropy (`log2(26)`). As we saw before, we're over-estimating entropy per word.
 
@@ -87,7 +89,7 @@ Kind of feels like we should aim for an "assumed entry per letter" of, at least,
 
 ### The "brute force line"
 
-If this "assumed entropy-per-letter" number is greater than 4.7, we can say that the list falls _below_ what I'm calling the brute-force line. I call it that because the 4.7 value is a representation of a brute force attack in which an attacker would try every letter combination. 
+If this "assumed entropy-per-letter" number is greater than 4.7, we can say that the list falls _below_ what I'm calling the brute-force line (I'm using "below" here because it corresponds to the minimum word length being too low). I call the brute-force line because the 4.7 bits-per-letter is a representation of a brute force attack in which an attacker would try every letter combination. 
 
 The EFF long list clears this line, since `log2(7776) / 3 == 12.92 / 3 == 4.3` bits per letter, which is less than 4.7.
 
@@ -129,3 +131,114 @@ A word list that doesn't have any prefix words (also known as "[prefix codes](ht
 As a brief example, if a list have "boy", "hood", and "boyhood" users who specified they wanted two words worth of randomness (entropy) might end up with "boyhood", which an attacker guessing single words would try. Removing prefix words -- in this case "boy" -- prevents this possibility from occurring.
 
 You can read more about this issue [here](https://github.com/ulif/diceware#prefix-code).
+
+## Printing list attributes information
+
+Given these new features, I thought it'd also be nice if Tidy could print attributes of a given list to the terminal. 
+
+Running Tidy v 0.2 on the EFF long list with flags `-AA`, Tidy will print:
+
+```text
+List length               : 7776
+Length of shortest word   : 3 (aim)
+Length of longest word    : 9 (zoologist)
+Free of prefix words      : true
+Entropy per word          : 12.9248
+Assumed entropy per letter: 4.3083
+Above brute force line    : true
+Above Shannon line        : false
+Shortest edit distance    : 1
+Longest shared prefix     : 8
+Unique character prefix   : 9
+```
+
+Here are the same attributes on the current 1Password list:
+
+```text
+List length               : 18176
+Length of shortest word   : 3 (abe)
+Length of longest word    : 8 (zwieback)
+Free of prefix words      : false
+Entropy per word          : 14.1497
+Assumed entropy per letter: 4.7166
+Above brute force line    : false
+Above Shannon line        : false
+Shortest edit distance    : 1
+Longest shared prefix     : 7
+Unique character prefix   : 8
+```
+
+## Cutting lists down and printing dice rolls
+
+Since dice are often used in conjunction with these word lists, I also wanted Tidy to be able to print dice roll information next to words.
+
+```text
+11111	aback
+11112	abandons
+11113	abated
+11114	abbey
+11115	abbot
+11116	abbreviated
+11121	abdomen
+11122	abducted
+11123	aberrant
+11124	abide
+11125	ability
+11126	abject
+11131	abnormally
+etc.
+```
+
+Up for a challenge, I allowed the user to set the number of sides of their dice. This involved some fun non-base-10 work, zero-padding, and a challenging off-by-one error!
+
+```rust
+use radix_fmt::*; // Wonder if I can ditch this dependency...
+pub fn print_as_dice(n: usize, base: u8, list_length: usize) -> String {
+    // Set width for zero-padding
+    let pad_width = radix(list_length, base).to_string().len() - 1;
+    let as_base = radix(n, base);
+
+    // Pad dice roll numbers with zeros
+    let padded = format!(
+        "{:0width$}",
+        as_base.to_string().parse::<usize>().unwrap(),
+        width = pad_width
+    );
+    // If base is a common dice size, we'll add 1 to every 
+    // digit, to make it easier to compare to rolled dice
+    if (4..=8).contains(&base) {
+        padded
+            .chars()
+            .map(|s| (s.to_string().parse::<usize>().unwrap() + 1).to_string())
+            .collect::<String>()
+    } else {
+        padded
+    }
+}
+```
+
+However, these diceware lists are often a set length so they use every possible dice roll (6^5 == 7,776 for EFF long list, or 6^4 == 1,294 words for their short lists). Thus I also needed to implement a way to cut lists to a set length.
+
+```rust
+// User can cut words from nearly finished list.
+// Does so randomly.
+tidied_list = match req.cut_to {
+    Some(amount_to_cut) => {
+        let mut rng = thread_rng();
+        tidied_list.shuffle(&mut rng);
+        tidied_list.truncate(amount_to_cut);
+        tidied_list
+    }
+    None => tidied_list,
+};
+// Finally, sort and dedup list (for final time)
+tidied_list = sort_and_dedup(&mut tidied_list);
+```
+
+Users can do this with the `-c`/`--cut-to` flag.
+
+These two features make Tidy pretty handy! For example, here's how to make a 7,776-word list from 1Password's word list, removing prefix words and guaranteeing 4 characters can auto-complete any word, and add corresponding 6-sided dice role for each word.
+
+```bash
+tidy -P -x 4 --cut-to 7776 --dice 6 1password-2021.txt
+```
