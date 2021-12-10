@@ -1,13 +1,13 @@
 ---
 layout: post
-title: "Tidy v0.2"
+title: "Tidy v 0.2"
 date: 2021-12-09 17:22:00 -0400
 comments: true
 ---
 
-Excited to announce that I've add a slew of new features to [Tidy](https://github.com/sts10/tidy), my Rust command-line tool that helps users combine and clean large word lists. 
+I'm excited to announce that I've add a slew of new features to [Tidy](https://github.com/sts10/tidy), my Rust command-line tool that helps users combine and clean large word lists. 
 
-The new version of the tool can:
+The tool can now:
 
 - remove homophones from a provided list of comma-separated pairs of homophones
 - enforce a minimum [edit distance](https://en.wikipedia.org/wiki/Edit_distance) between words 
@@ -15,9 +15,9 @@ The new version of the tool can:
 - print corresponding dice rolls before words, separated by a tab. E.g. `35466	ladle`
 - cut generated list to set length by randomly removing words.
 
-This is in addition to being able to remove prefix words.
+This is in addition to being able to remove prefix words and other useful functionality included in earlier versions.
 
-## On maximum shared prefix length
+## What is "maximum shared prefix length"?
 
 This feature was inspired by a quality of [one of the EFF's short word lists](https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases), for which the following is true: 
 
@@ -37,19 +37,19 @@ That same [EFF short list](https://www.eff.org/deeplinks/2016/07/new-wordlists-r
 
 > All words are at least an edit distance of 3 apart. This means that future software could correct any single typo in the user's passphrase (and in many cases more than one typo).
 
-Thus, I added an option in Tidy to enforce a minimum edit distance in the generated word list.
+Thus, I added an option in Tidy to enforce a minimum edit distance in the generated word list. Tidy can also calculate the minimum edit distance of list (use `-AA`).
 
 ## How short can the shortest word on a word list (safely) be?
 
-Through a discussion with a Fediverse user, I started to think if there was a mathematical way determine how short the shortest word on a word list could be while maintaining the wonderful entropy-per-word guarantees that lead us to use these word lists to create passphrases. 
+Through [a discussion with a fellow Fediverse user](https://cryptpad.fr/pad/#/2/pad/edit/WcspCeYgcP9ClZNEKPmsdWqK/), I started to think if there was a mathematical way to determine how short the shortest word on a word list could be while maintaining the wonderful entropy-per-word guarantees that lead us to use these word lists to create passphrases in the first place. 
 
-In fact, one of the big advantages of uses word lists and passphrases is how easy it is to compute the entropy of the resulting passphrase. As Joseph Bonneau, one of the creators of the EFF word lists, [writes in a 2016 blog post announcing the new word lists](https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases):
+In fact, Joseph Bonneau, one of the creators of the EFF word lists, [writes in a 2016 blog post announcing the new word lists](https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases) that this ease of computing the entropy of resulting passphrase is a key advantage of the method:
 
 > Estimating the difficulty of guessing or cracking a human-chosen password is very difficult. It was the primary topic of [my own PhD thesis](http://jbonneau.com/doc/2012-jbonneau-phd_thesis.pdf) and remains an active area of research. (One of many difficulties when people choose passwords themselves is that people [aren't very good at making random, unpredictable choices](http://people.ischool.berkeley.edu/~nick/aaronson-oracle/).)
 
 > Measuring the security of a randomly-generated passphrase is easy. The most common approach to randomly-generated passphrases (immortalized [by XKCD](https://xkcd.com/936/)) is to simply choose several words from a list of words, at random. The more words you choose, or the longer the list, the harder it is to crack. Looking at it mathematically, for k words chosen from a list of length n, there are n^k possible passphrases of this type. It will take an adversary about (n^k)/2 guesses on average to crack this passphrase.
 
-Bonneau later notes that "We took all words between 3 and 9 characters from the list", but doesn't explain the reason they chose a 3-character minimum.
+Later in the post, writing about the then-new EFF long list, Bonneau notes that "We took all words between 3 and 9 characters from the list", but doesn't explain the reason they chose a 3-character minimum.
 
 We can wonder: If we had a 7,776 word list had a lot of 1- and 2-character words on it, would the passphrases generated from that list be as secure as from the EFF long list (which also has 7,776 words, but a minimum word length of 3)? My gut says no, but I wanted to try to figure out an answer grounded in (my very amateur) math.
 
@@ -57,11 +57,11 @@ We can wonder: If we had a 7,776 word list had a lot of 1- and 2-character words
 
 <!-- If we take the entropy per word from a list (`log2(list_length)`) and divide it by the length of the shortest word on the list, we get a value we might call "assumed entropy per letter". For example, if we're looking at the 7,776-word EFF long list, we'd assume an entropy of 12.925 bits per word. -->
 
-The EFF long list has 7,776 words on it, so we can expect that adding one word from it to our passphrase adds 12.925 bits of entropy (`log2(7776)`). So as an example, a three-word passphrase would have 38.775 bits of entropy. This is the math Bonneau is referring to when he writes "Measuring the security of a randomly-generated passphrase is easy." And I agree -- it's easy!
+The EFF long list has 7,776 words on it, so we can expect that adding one word from it to a passphrase adds about 12.925 bits of entropy (`log2(7776)`). So as an example, a three-word passphrase would have 38.775 bits of entropy. This is the math Bonneau is referring to when he writes "Measuring the security of a randomly-generated passphrase is easy." And I agree -- it's easy!
 
-But what if all three words we got for our passphrase were three-letter words? Or, what if we used that hypothetical list that has "a" on it? We could get a passphrase of "a-a-a". Can we claim that "a-a-a" has 38.775 bits of entropy? A brute-force alphabet attack (forgoing the hyphens) would suggest an entropy of `3 * log2(26)` which is 14.10 bits! We've greatly _over-estimated_ the amount of entropy per word.
+But what if all three words we got for our passphrase were three-letter words? Or what if we used that hypothetical list that has "a" on it? Randomly selecting words from the list, we hypothetically could get a passphrase of "a-a-a". Can we claim that "a-a-a" has 38.775 bits of entropy? A brute-force alphabet attack (putting aside the hyphens) would suggest an entropy of `3 * log2(26)` which is 14.10 bits! We've greatly _over-estimated_ the amount of entropy per word.
 
-I contend that this value may be useful when we ask what the shortest word on a good word list should be. There may be an established method for determining what this minimum word length should be, but if there is I don't know about it yet. Here's the math I've worked out on my own. 
+I contend that this thought experiment may be useful when we ask what the shortest word on a good word list should be. There may be an established method for determining what this minimum word length should be, but if there is I don't know about it yet. Here's the math I've worked out on my own. 
 
 <!-- Consider the story of a user who gets a passphrase compromised of only the shortest words on the list. Does this passphrase genuinely have the entropy of `log2(list_length)` per word? -->
 
@@ -69,27 +69,27 @@ I contend that this value may be useful when we ask what the shortest word on a 
 
 This mental experiment of taking the shortest word from the list and assuming the worst-case -- that user gets that shortest word for her entire passphrase -- gave me an idea. 
 
-Let's return to the list with "a" on it. Given that the list is 7776 words long, we're expecting every word to provide 12.925 bits of entropy. Since this list has at least one 1-character word on it, we're saying "The word 'a' provides 12.925 bits of entropy." We're in effect asserting that the entropy of single _letter_ is 12.925. 
+Let's return to the list with "a" on it. Given that the list is 7776 words long, we're expecting every word to provide 12.925 bits of entropy. Since this list has at least one 1-character word on it, we're effectively claiming "The word 'a' provides 12.925 bits of entropy." We're asserting that the entropy of single _letter_ is 12.925. 
 
 This is clearly false, since there are only 26 lowercase English letters. At best, a single letter adds 4.7 bits of entropy (`log2(26)`). As we saw before, we're over-estimating entropy per word.
 
 Let's run through another example. Let's say we wise up and replace all 1-character words with longer words, but we keep some 2-character words like "of". Do we still make a bad assumption? Let's see.
 
-Now we're expecting the word "of" to provide 12.925 (`log2(7776)`) bits of entropy. But when we realize there are only 26 letters in English, we see that, at best, two of these letters only generates `2 * log2(26) == 2 * 4.7 == 9.4` bits of entropy. Again, 12.925 is an over-estimate!
+Now we're expecting the word "of" to provide 12.925 (`log2(7776)`) bits of entropy. But when we realize there are only 26 letters in English, we see that, at best, two of these letters only generates `2 * log2(26) == 2 * 4.7 == 9.4` bits of entropy. Again, 12.925 is an overestimate!
 
-Now that we've run through two examples, let's see if we can generalize. If we take the entropy per word from a list (`log2(list_length)`) and divide it by the length of the shortest word on the list, we get a value we might call "assumed entropy per letter". In our first example with "a" on the list, we'd get as assumed entropy per letter of `log2(7776) / 1 == 12.925`. In the second example with "of" on the list, we'd get `log2(7776) / 2 == 6.463`. 
+Now that we've run through two examples, let's see if we can generalize this checking process. 
 
-Comparing both of these numbers (12.925 and 6.463) to the more realistic assumption of entropy per letter, `log2(26) == 4.7`, we see our same over-estimates calculated differently. 
+If we take the entropy per word from a list (`log2(list_length)`) and divide it by the length of the shortest word on the list, we get a value we might call "assumed entropy per letter". In our first example with "a" on the list, we'd get as assumed entropy per letter of `log2(7776) / 1 == 12.925`. In the second example with "of" on the list, we'd get `log2(7776) / 2 == 6.463`. 
+
+Comparing both of these numbers (12.925 and 6.463) to the more realistic assumption of entropy per letter, `log2(26) == 4.7`, we see our same overestimates calculated differently. 
 
 Kind of feels like we should aim for an "assumed entry per letter" of, at least, _under_ 4.7 bits... We might call this "the brute force line".
 
 ### The "brute force line"
 
-If this number is less than 4.7, we can say that the list falls _below_ what I'm calling the brute-force line. I call it that because the 4.7 value is a representation of a brute force attack in which an attacker would try ever letter combination. 
+If this "assumed entropy-per-letter" number is greater than 4.7, we can say that the list falls _below_ what I'm calling the brute-force line. I call it that because the 4.7 value is a representation of a brute force attack in which an attacker would try every letter combination. 
 
-The EFF long list does clear this line, since `log2(7776) / 3 == 12.92 / 3 == 4.3` bits per letter, which is less than 4.7.
-
-<!-- If the shortest word on a word list is shorter than `log26(word_list_length)`, there's a possibility that users generate a passphrase that the formula of `entropy_per_word = log2(list_length)` will _overestimate_ the entropy per word. This is because a brute-force letter attack would have fewer guesses to run through than the number of guesses we'd assume given the word list we used to create the passphrase. -->
+The EFF long list clears this line, since `log2(7776) / 3 == 12.92 / 3 == 4.3` bits per letter, which is less than 4.7.
 
 ### A "stricter" line
 
@@ -103,7 +103,7 @@ Interesting, the EFF long list does not clear this line, since `log2(7776) / 3 =
 
 I don't really know! For one thing, the odds of getting a three-word passphrase of 3-letter words from the EFF list is about 0.0001%. But more importantly, I'm not even sure how an attacker could effectively use this information.
 
-Like, in 2018, 1Password's word list of 18,328 words had at least some 3-letter words on it, meaning it had an assumed entropy per letter of 4.72 -- above both our lines. And yet, when they [held a passphrase-cracking competition](https://blog.1password.com/how-strong-should-your-master-password-be-for-world-password-day-wed-like-to-know/) that year, I don't think any participants used a method other than [running through all 18328^3 possible combinations](https://github.com/agilebits/crackme/blob/master/write-ups/5BSLBTKR.md#writeup).
+Like, in 2018, 1Password's word list of 18,328 words had at least some 3-letter words on it, meaning it had an assumed entropy per letter of 4.72 -- above both our lines. And yet, when they [held a passphrase-cracking competition](https://blog.1password.com/how-strong-should-your-master-password-be-for-world-password-day-wed-like-to-know/) that year, I don't think any participants used a method other than [running through all 18328^3 possible combinations](https://github.com/agilebits/crackme/blob/master/write-ups/5BSLBTKR.md#writeup). (Here's [my blog post about that challenge](https://sts10.github.io/2018/05/31/1password-cracking-challenge.html).)
 
 ### How I folded some of this math into Tidy
 
