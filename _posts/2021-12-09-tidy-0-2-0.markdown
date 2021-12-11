@@ -16,6 +16,8 @@ Some of the more interesting new features are:
 
 This is in addition to being able to remove prefix words and other useful functionality included in earlier versions.
 
+To **install** Tidy, [check the README](https://github.com/sts10/tidy#installation).
+
 ## What is "maximum shared prefix length"?
 
 This feature was inspired by a quality of [one of the EFF's short word lists](https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases), for which the following is true: 
@@ -151,7 +153,7 @@ You can read more about this issue [here](https://github.com/ulif/diceware#prefi
 
 Given these new features, I thought it'd also be nice if Tidy could print attributes of a given list to the terminal. 
 
-Running Tidy v 0.2 on the EFF long list with flags `-AA`, Tidy will print:
+Running Tidy v 0.2 on the EFF long list with flags `-AA` (`tidy -AA -ts --dry-run eff.txt`), Tidy will print:
 
 ```text
 List length               : 7776
@@ -250,10 +252,39 @@ tidied_list = match req.cut_to {
 tidied_list = sort_and_dedup(&mut tidied_list);
 ```
 
-Users can do this with the `-c`/`--cut-to` flag.
+Users can do this with the `-c`/`--cut-to` flag. And since I expect users to frequent use exponent math to calculate this particular value, Tidy can now take such math in this option in the form of `6**5`.
+
+```rust
+// Allow users to use Python's exponent notation (base**exponent)
+// to set cut-to length. Handy when making lists fit to dice.
+fn eval_cut_length(input: &str) -> usize {
+    match input.split("**").collect::<Vec<&str>>()[..] {
+        [] => panic!("Please specify a number."),
+        [num_string] => num_string
+            .parse::<usize>()
+            .expect("Unable to parse cut-to! Enter a number or a base**exponent"),
+        [base_string, exponent_string] => {
+            let base: usize = base_string
+                .parse::<usize>()
+                .expect("Unable to parse base of cut-to!");
+            let exponent: u32 = exponent_string
+                .parse::<u32>()
+                .expect("Unable to parse exponent of cut-to!");
+            base.pow(exponent)
+        }
+        _ => panic!("You can only specify one exponent! Use format: base**exponent"),
+    }
+}
+``` 
+
+## One last example
 
 These two features make Tidy pretty handy! For example, here's how to make a 7,776-word list from 1Password's word list, removing prefix words and guaranteeing 4 characters can auto-complete any word, and add corresponding 6-sided dice role for each word.
 
 ```bash
 tidy -P -x 4 --cut-to 7776 --dice 6 1password-2021.txt
 ```
+
+## Sold?
+
+To install Tidy, [check the README](https://github.com/sts10/tidy#installation).
