@@ -307,7 +307,7 @@ fn eval_cut_length(input: &str) -> usize {
 
 ### An example
 
-These two features make Tidy pretty handy! For example, here's how to make a 7,776-word list from 1Password's word list, removing prefix words and guaranteeing 4 characters can auto-complete any word, and add corresponding 6-sided dice role for each word.
+These two features make Tidy pretty handy! For example, here's how to make a 7,776-word list from [1Password's word list](https://1password.com/txt/agwordlist.txt), removing prefix words and guaranteeing 4 characters can auto-complete any word, and add corresponding 6-sided dice role for each word.
 
 ```bash
 tidy -P -x 4 --cut-to 6**5 --dice 6 1password-2021.txt
