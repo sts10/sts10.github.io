@@ -206,30 +206,54 @@ Since dice are often used in conjunction with these word lists, I also wanted Ti
 etc.
 ```
 
-Up for a challenge, I allowed the user to set the number of sides of their dice to between 2 and 9. This involved some fun handling of non-base-10 numbers, a bit of zero-padding, and a challenging off-by-one error!
+Up for a challenge, I allowed the user to set the number of sides of their dice to between 2 and 36. This involved some fun handling of non-base-10 numbers, a bit of zero-padding, and a challenging off-by-one error!
 
 ```rust
 use radix_fmt::*; // Wonder if I can ditch this dependency...
 pub fn print_as_dice(n: usize, base: u8, list_length: usize) -> String {
     // Set width for zero-padding
-    let pad_width = radix(list_length, base).to_string().len() - 1;
-    let as_base = radix(n, base);
+
+    // First, get the literal width of the largest number we'll be printing.
+    // This is, by definition the length of the list.
+    // We want the length of the number in the base we want to print all
+    // the numbers, so use radix function.
+    let n_as_base = radix(n, base);
 
     // Pad dice roll numbers with zeros
-    let padded = format!(
-        "{:0width$}",
-        as_base.to_string().parse::<usize>().unwrap(),
-        width = pad_width
-    );
-    // If base is a common dice size, we'll add 1 to every 
-    // digit, to make it easier to compare to rolled dice
-    if (4..=8).contains(&base) {
-        padded
+    let n_width = n_as_base.to_string().len();
+    let pad_width = radix(list_length - 1, base).to_string().len();
+
+    let mut padded_n = String::new();
+    for _i in n_width..pad_width {
+        padded_n.push('0');
+    }
+    // Now that we have the appropriate number of zeros
+    // in `padded_n`, it's time to add our number
+    padded_n += &n_as_base.to_string();
+
+    // Print the dice rolls in slightly different ways,
+    // depending on the value of the base.
+    match base {
+        // Values of 0 and 1 should have been caught earlier,
+        // so we'll panic! if we have them here
+        0 | 1 => panic!("Too few dice sides entered"),
+        // If base is 2 or 3, just print as-is, zero-indexed.
+        2 | 3 => padded_n,
+        // If base is a common dice size (between 4 and 8), we'll add
+        // one to each digit, to make it easier to compare to actual rolled dice
+        4..=8 => padded_n
             .chars()
-            .map(|s| (s.to_string().parse::<usize>().unwrap() + 1).to_string())
-            .collect::<String>()
-    } else {
-        padded
+            .map(|ch| (ch.to_string().parse::<usize>().unwrap() + 1).to_string())
+            .collect::<String>(),
+        // If base is over base 9, we'll print each digit as zero-iondex, but
+        // we'll add a hyphen _between_ digits to make it easier to read.
+        9..=36 => padded_n
+            .chars()
+            .map(|ch| ch.to_string() + "-")
+            .collect::<String>()[0..padded_n.chars().count() * 2 - 1]
+            .trim()
+            .to_string(),
+        _ => panic!("Amount of dice sides received is too high"),
     }
 }
 ```
@@ -253,33 +277,6 @@ tidied_list = sort_and_dedup(&mut tidied_list);
 ```
 
 Users can do this with the `-c`/`--cut-to` flag. And since I expect users to frequent use exponent math to calculate this particular value, Tidy can now take such math in this option in the form of `6**5`.
-
-```rust
-// Allow users to use Python's exponent notation (base**exponent)
-// to set cut-to length. Handy when making lists fit to dice.
-fn eval_cut_length(input: &str) -> usize {
-    match input.split("**").collect::<Vec<&str>>()[..] {
-        [] => panic!("Please specify a number."),
-        [num_string] => num_string
-            .parse::<usize>()
-            .expect("Unable to parse cut-to! Enter a number or a base**exponent"),
-        [base_string, exponent_string] => {
-            let base: usize = base_string
-                .parse::<usize>()
-                .expect("Unable to parse base of cut-to!");
-            let exponent: u32 = exponent_string
-                .parse::<u32>()
-                .expect("Unable to parse exponent of cut-to!");
-            base.pow(exponent)
-        }
-        _ => panic!("You can only specify one exponent! Use format: base**exponent"),
-    }
-}
-``` 
-
-### But wait, there's more
-
-Thanks to this parsing function, users can submit a `cut-to` value in the format of `6**5` and Tidy will evaluate it to `7776`
 
 ```rust
 /// Parse user's input to the `cut_to` option, either directly as a `usize`,
