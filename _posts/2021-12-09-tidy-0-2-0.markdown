@@ -277,14 +277,45 @@ fn eval_cut_length(input: &str) -> usize {
 }
 ``` 
 
-## One last example
+### But wait, there's more
+
+Thanks to this parsing function, users can submit a `cut-to` value in the format of `6**5` and Tidy will evaluate it to `7776`
+
+```rust
+/// Parse user's input to the `cut_to` option, either directly as a `usize`,
+/// or, if they entered Python exponent notation (base**exponent). Either
+/// way, return a `usize` or `expect`/`panic!`.
+///  
+/// This is useful when making lists fit to a specific amount of dice and
+/// dice sides. (As an example, five rolls of a six-sided dice would be: 6**5).
+fn eval_cut_length(input: &str) -> usize {
+    match input.split("**").collect::<Vec<&str>>().as_slice() {
+        [] => panic!("Please specify a number."),
+        [num_string] => num_string
+            .parse::<usize>()
+            .expect("Unable to parse cut-to! Enter a number or a base**exponent"),
+        [base_string, exponent_string] => {
+            let base: usize = base_string
+                .parse::<usize>()
+                .expect("Unable to parse base of cut-to!");
+            let exponent: u32 = exponent_string
+                .parse::<u32>()
+                .expect("Unable to parse exponent of cut-to!");
+            base.pow(exponent)
+        }
+        _ => panic!("You can only specify one exponent! Use format: base**exponent"),
+    }
+}
+```
+
+### An example
 
 These two features make Tidy pretty handy! For example, here's how to make a 7,776-word list from 1Password's word list, removing prefix words and guaranteeing 4 characters can auto-complete any word, and add corresponding 6-sided dice role for each word.
 
 ```bash
-tidy -P -x 4 --cut-to 7776 --dice 6 1password-2021.txt
+tidy -P -x 4 --cut-to 6**5 --dice 6 1password-2021.txt
 ```
 
 ## Sold?
 
-To install Tidy, [check the README](https://github.com/sts10/tidy#installation).
+For up-to-date instructions on how to install Tidy, [check the README](https://github.com/sts10/tidy#installation).
