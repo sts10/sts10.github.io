@@ -209,7 +209,7 @@ etc.
 Up for a challenge, I allowed the user to set the number of sides of their dice to between 2 and 36. This involved some fun handling of non-base-10 numbers, a bit of zero-padding, and a challenging off-by-one error!
 
 ```rust
-use radix_fmt::*; // Wonder if I can ditch this dependency...
+use radix_fmt::*; // Still need this dependency...
 pub fn print_as_dice(n: usize, base: u8, list_length: usize) -> String {
     // Set width for zero-padding
 
