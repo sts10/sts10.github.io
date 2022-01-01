@@ -5,9 +5,9 @@ date: 2021-12-09 17:22:00 -0400
 comments: true
 ---
 
-I'm excited to announce that I've add a slew of new features to [Tidy](https://github.com/sts10/tidy), my Rust command-line tool that helps users combine and clean large word lists. 
+I'm excited to announce that I've added a slew of new features to [Tidy](https://github.com/sts10/tidy), my Rust command-line tool that helps users combine and clean large word lists. 
 
-Some of the more interesting new features are:
+Some of the more interesting new features include the ability to:
 
 - guarantee a maximum shared prefix length
 - enforce a minimum [edit distance](https://en.wikipedia.org/wiki/Edit_distance) between words 
