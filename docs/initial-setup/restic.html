@@ -177,6 +177,26 @@ restic -r /media/sschlinkert/external_harddrive/restic-repo restore 37769142 --t
 <p>This'll take a while, but when it's done our data should be restored to the location we specified, <code>~/Documents_restored</code>. At that point, we can do a sanity-check with:</p>
 <pre><code class="language-bash">ls ~/Documents_restored
 </code></pre>
+<h2 id="decent-list-of-excludes-for-a-restic-backup-of-a-home-directory-on-linux"><a class="header" href="#decent-list-of-excludes-for-a-restic-backup-of-a-home-directory-on-linux">Decent list of excludes for a Restic backup of a home directory on Linux</a></h2>
+<p>Save the text below in a new file as something like <code>~/restic-excludes.txt</code>. </p>
+<p>You can use it like: <code>restic -r '/media/sschlinkert/external_harddrive/restic-repo/' --verbose backup --exclude-caches --exclude-file=/home/sschlinkert/restic-excludes.txt /home/sschlinkert/</code></p>
+<pre><code class="language-text">/home/$USER/.bundle
+/home/$USER/.cache
+/home/$USER/.cargo
+/home/$USER/.gem
+/home/$USER/.katrain
+/home/$USER/.local/share/Steam
+/home/$USER/.local/share/Trash
+/home/$USER/.mozilla
+/home/$USER/.npm
+/home/$USER/.pyenv
+/home/$USER/.rbenv
+/home/$USER/.rustup
+/home/$USER/.zoom
+/home/$USER/go
+/home/$USER/snap
+</code></pre>
+<hr />
 <h2 id="a-simpler-approach-for-a-small-directory"><a class="header" href="#a-simpler-approach-for-a-small-directory">A simpler approach for a small directory</a></h2>
 <p>I've got a small directory of very important documents. This directory is included in my restic snapshots, but I also want to put it in other locations as redundancies. One such location is Dropbox. However, I want it to encrypt it before I upload it to Dropbox.</p>
 <h3 id="step-1-compressing-with-tar"><a class="header" href="#step-1-compressing-with-tar">Step 1: Compressing with tar</a></h3>
