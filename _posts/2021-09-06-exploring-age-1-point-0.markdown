@@ -93,6 +93,14 @@ Here, we're telling age that we want to encrypt this file for a particular _reci
 
 Once we hit enter, age creates a new, encrypted file called `secrets.txt.age`.
 
+### Encrypting for a key-pair file you have access to (example: archiving for your future self)
+
+If you want to encrypt a file for a key-pair file that you have access to, it looks like you'd run this:
+
+```bash
+age --encrypt -i ~/age/archive_key.txt secrets.txt > secrets.txt.age
+```
+
 ### Decrypting a file with a secret key
 
 Now let's say we receive a file that's been encrypted for us, using our public key. We want to decrypt it. We'll run:
