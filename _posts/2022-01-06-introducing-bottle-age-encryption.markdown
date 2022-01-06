@@ -9,15 +9,27 @@ Now that [age, a new tool to encrypt and decrypt files,](https://github.com/Filo
 
 I found a use-case where I often wanted to compress and encrypt a directory before uploading it to a cloud service, as a sort-of casual back-up. To make this task as simple as possible, I wrote a shell script that I'm calling [Bottle](https://github.com/sts10/bottle). 
 
+## What does it do?
+
+[Bottle](https://github.com/sts10/bottle) is a shell script to compress and encrypt (and decrypt and extract) directories using age and tar or files using age.
+
+It's basically a wrapper around some age and tar commands.
+
+The idea is to compress and encrypt files and directories for your future self. 
+
 ## As simple as possible
 
-Since `age`'s command-line tool is already pretty simple, I wanted to make this program, which is essentially a wrapper around a few tar and age commands, as simple as possible. 
+Since `age`'s command-line tool is already pretty simple, I wanted to make this program as simple to use as possible. 
 
 To that end, not only is there no config, but Bottle doesn't have any flags, options, or subcommands. Users simply point the `bottle` command-line tool at a file or directory and its internal logic figures out what to do.
 
-Bottle always and only uses an age key-pair file located at `~/age/arhive.txt`.
+To that end, the current version of Bottle has:
 
-And the output of the program is always created in the current working directory and the name is wholly based on the input file.
+- No flags or options. Only accepts exactly one single parameter.
+- No subcommands
+- No config
+- No choice of what key to use. (Bottle always and only uses an age key-pair file located at `~/age/archive.txt`.)
+- No choices about output. (The output of the program is always created in the current working directory and the name is wholly based on the input file.)
 
 ## Usage
 
