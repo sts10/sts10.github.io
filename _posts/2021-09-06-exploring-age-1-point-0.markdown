@@ -208,7 +208,11 @@ tar -czv important_documents/ | age -p > important_documents.tar.gz.age
 age -d important_documents.tar.gz.age | tar -xzv
 ```
 
-### Using symmetrical GPG encryption
+### Bottle
+
+I've now written a shell script that wraps around some of these tar and age commands to make them (even) easier to use. I call it [Bottle](https://github.com/sts10/bottle).
+
+### How this would look using symmetrical GPG encryption
 
 Just for my notes, here's how we could do something similar with GPG:
 
