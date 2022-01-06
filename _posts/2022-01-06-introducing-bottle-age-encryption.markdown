@@ -48,12 +48,12 @@ I'm happy with it so far -- it seems to work as advertised! --, but I'm not a re
 
 Again, you can [check it out here](https://github.com/sts10/bottle).
 
-## Shell formatting/linting
+## Shell formatting and linting
 
 I found [a shell formatter](https://github.com/mvdan/sh#shfmt) that was very useful. I then added this to vim config file to match: 
 
 ```vim
-" tabs are 8 spaces for these files
+" tabs are 8 spaces for shell files
 autocmd FileType sh setlocal tabstop=8
 autocmd FileType sh setlocal shiftwidth=8
 ```
