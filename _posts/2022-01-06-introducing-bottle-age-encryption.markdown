@@ -25,11 +25,12 @@ To that end, not only is there no config, but Bottle doesn't have any flags, opt
 
 To that end, the current version of Bottle has:
 
-- No flags or options. Only accepts exactly one single parameter.
+- No flags or options. 
+- Only accepts exactly one single parameter.
 - No subcommands
-- No config
+- No configuration (like age)
 - No choice of what key to use. (Bottle always and only uses an age key-pair file located at `~/age/archive.txt`.)
-- No choices about output. (The output of the program is always created in the current working directory and the name is wholly based on the input file.)
+- No choices about output. The output of the program is always created in the current working directory and the name is wholly based on the input file.
 
 ## Usage
 
@@ -44,7 +45,7 @@ Users and print help information with `bottle --help`.
 
 ## Current state of the project
 
-I'm happy with it so far -- it seems to work as advertised! --, but I'm not a regular shell script writer so there's probably a bunch of improvements to make. 
+I'm happy with it at this point -- it seems to do what I wanted it to do! --, but I'm not a regular shell script writer, so there's probably a bunch of improvements to make. 
 
 Again, you can [check it out here](https://github.com/sts10/bottle).
 
@@ -59,3 +60,15 @@ autocmd FileType sh setlocal shiftwidth=8
 ```
 
 I also ran my script through this ["spellcheck" linter](https://www.shellcheck.net/), which gave me some useful tips when calling variables.
+
+## Good command for how to uninstall a binary?
+
+I wanted to include _uninstall_ instructions in the README of Bottle. 
+
+Taking a lead [from Starship.rs's docs](https://starship.rs/faq/#how-do-i-uninstall-starship), I put this command in Bottle's [README](https://github.com/sts10/bottle/blob/main/readme.markdown):
+
+```bash
+sh -c 'rm "$(which bottle)"'
+```
+
+Which I think should work well for users?
