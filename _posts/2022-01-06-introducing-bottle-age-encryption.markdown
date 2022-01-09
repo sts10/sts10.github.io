@@ -7,15 +7,13 @@ comments: true
 
 Now that [age, a new tool to encrypt and decrypt files,](https://github.com/FiloSottile/age) has [hit version 1.0](https://github.com/FiloSottile/age/releases/tag/v1.0.0), I've been trying to use it more. (I wrote [a basic exploration of age a few months ago](https://sts10.github.io/2021/09/06/exploring-age-1-point-0.html).)
 
-I found a use-case where I often wanted to compress and encrypt a directory before uploading it to a cloud service, as a sort-of casual back-up. To make this task as simple as possible, I wrote a shell script that I'm calling [Bottle](https://github.com/sts10/bottle). 
+I found a use-case where I often wanted to compress and encrypt a directory before uploading it to a cloud service, as a sort-of casual back-up. To make this task as simple as possible, I'm working on a tool I'm calling Bottle. I have published to GitHub [a shell script version](https://github.com/sts10/bottle) and [a Rust command-line tool version](https://github.com/sts10/bottle-rs).
 
 ## What does it do?
 
-[Bottle](https://github.com/sts10/bottle) is a shell script to compress and encrypt (and decrypt and extract) directories using age and tar or files using age.
+Bottle (both the shell and Rust ports) allows users to compress and encrypt (and decrypt and extract) files and directories using age and tar or files using age.
 
-It's basically a wrapper around some age and tar commands.
-
-The idea is to compress and encrypt files and directories for your future self. 
+It's basically a wrapper around some age and tar commands. The use-case is to compress and encrypt files and directories for your future self, for example on a cloud service like Dropbox.
 
 ## As simple as possible
 
@@ -34,7 +32,7 @@ To that end, the current version of Bottle has:
 
 ## Usage
 
-[Check the readme for latest on usage](https://github.com/sts10/bottle/blob/main/readme.markdown#usage), but here's a summary.
+For specific usages, be sure to check the readme of the port of Bottle you choose, but here's a port-agnostic summary.
 
 - Encrypt a file with `bottle <path/to/file>`
 - Compress and encrypt a directory with `bottle <path/to/directory>`. 
@@ -43,13 +41,15 @@ To that end, the current version of Bottle has:
 
 Users and print help information with `bottle --help`.
 
-## Current state of the project
+## Current state of the project(s)
 
-I'm happy with it at this point -- it seems to do what I wanted it to do! --, but I'm not a regular shell script writer, so there's probably a bunch of improvements to make. 
+I worked on the shell script first. It works fine on my Ubuntu machine, but a Mac user who tried it kept hitting error messages when Bottle tried to run the complex `tar` commands I included in the script. (I also haven't written that much shell, so I don't think I ever would have gotten very confident in it.)
 
-Again, you can [check it out here](https://github.com/sts10/bottle).
+In an effort to make a more compatibility tool, I started from scratch in Rust. Going forward, I think I'll focus my efforts on [the Rust port](https://github.com/sts10/bottle-rs/).
 
-## Shell formatting and linting
+## Things I learned about writing shell scripts
+
+### Shell formatting and linting
 
 I found [a shell formatter](https://github.com/mvdan/sh#shfmt) that was very useful. I then added this to vim config file to match: 
 
@@ -61,7 +61,7 @@ autocmd FileType sh setlocal shiftwidth=8
 
 I also ran my script through this ["spellcheck" linter](https://www.shellcheck.net/), which gave me some useful tips when calling variables.
 
-## Good command for how to uninstall a binary?
+### Good command for how to uninstall a binary?
 
 I wanted to include _uninstall_ instructions in the README of Bottle. 
 
