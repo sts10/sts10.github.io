@@ -13,7 +13,7 @@ I found a use-case where I often wanted to compress and encrypt a directory befo
 
 Bottle (both the shell and Rust ports) allows users to compress and encrypt (and decrypt and extract) files and directories using age and tar or files using age.
 
-It's basically a wrapper around some age and tar commands. The use-case is to compress and encrypt files and directories for your future self, for example on a cloud service like Dropbox.
+The use-case is to compress and encrypt files and directories for your future self, for example to upload to an (untrusted) cloud service like Dropbox, or even to send to a friend for safe-keeping.
 
 ## As simple as possible
 
@@ -27,7 +27,7 @@ To that end, the current version of Bottle has:
 - Only accepts exactly one single parameter.
 - No subcommands
 - No configuration (like age)
-- No choice of what key to use. (Bottle always and only uses an age key-pair file located at `~/age/archive.txt`.)
+- No choice of what key to use. (Bottle always and only uses an age key-pair file located at `~/.bottle/bottle_key.txt`.)
 - No choices about output. The output of the program is always created in the current working directory and the name is wholly based on the input file.
 
 ## Usage
@@ -47,7 +47,9 @@ I worked on the shell script first. It works fine on my Ubuntu machine, but a Ma
 
 In an effort to make a more compatibility tool, I started from scratch in Rust. Going forward, I think I'll focus my efforts on [the Rust port](https://github.com/sts10/bottle-rs/).
 
-## Things I learned about writing shell scripts
+--- 
+
+## Appendix: Things I learned about writing shell scripts
 
 ### Shell formatting and linting
 
