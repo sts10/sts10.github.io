@@ -45,7 +45,7 @@ Users and print help information with `bottle --help`.
 
 I worked on the shell script first. It works fine on my Ubuntu machine, but a Mac user who tried it kept hitting error messages when Bottle tried to run the complex `tar` commands I included in the script. (I also haven't written that much shell, so I don't think I ever would have gotten very confident in it.)
 
-In an effort to make a more compatibility tool, I started from scratch in Rust. Going forward, I think I'll focus my efforts on [the Rust port](https://github.com/sts10/bottle-rs/).
+In an effort to make a more compatibility tool, I started from scratch in Rust. I spent a few days working on [the Rust port](https://github.com/sts10/bottle-rs/), but, unlike the shell version, when dealing with directories, the Rust program currently reads the entire tar'd file into memory. This is obviously not ideal for working with files/directories over 1 GB or so! I've created [an issue about this to collect notes and relevant URLs as I gear up to tackle this issue](https://github.com/sts10/bottle-rs/issues/1). Would love any help!
 
 --- 
 
