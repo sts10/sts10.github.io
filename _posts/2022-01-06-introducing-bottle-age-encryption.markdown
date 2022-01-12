@@ -47,6 +47,10 @@ I worked on the shell script first. It works fine on my Ubuntu machine, but a Ma
 
 In an effort to make a more compatibility tool, I started from scratch in Rust. I spent a few days working on [the Rust port](https://github.com/sts10/bottle-rs/), but, unlike the shell version, when dealing with directories, the Rust program currently reads the entire tar'd file into memory. This is obviously not ideal for working with files/directories over 1 GB or so! I've created [an issue about this to collect notes and relevant URLs as I gear up to tackle this issue](https://github.com/sts10/bottle-rs/issues/1). Would love any help!
 
+## On the name
+
+This project is not affiliated with the similarly named [bitbottle](https://code.lag.net/robey/bitbottle) project, nor are the archive file formats compatible, to my knowledge. That said, it looks much more sophisticated than my tool, so it might fit your needs better. Also, sorry about the name conflict... worried I subconsciously copied it. Open an issue if you have a suggestion for a new name for this project!
+
 --- 
 
 ## Appendix: Things I learned about writing shell scripts
