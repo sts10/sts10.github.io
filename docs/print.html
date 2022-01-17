@@ -1488,6 +1488,21 @@ Command: <code>/usr/bin/setxkbmap -option &quot;ctrl:nocaps&quot;</code></li>
 <li><a href="https://github.com/rust-unofficial/awesome-rust">&quot;Awesome Rust&quot;</a></li>
 <li><a href="https://github.com/TaKO8Ki/awesome-alternatives-in-rust">Awesome Alternatives in Rust</a></li>
 </ul>
+<h2 id="tips"><a class="header" href="#tips">Tips</a></h2>
+<h3 id="exa-aliases-i-use-in-my-bashrc"><a class="header" href="#exa-aliases-i-use-in-my-bashrc"><code>exa</code> aliases I use in my <code>~/.bashrc</code></a></h3>
+<pre><code class="language-bash">if hash exa 2&gt;/dev/null; then
+    alias ls='exa'
+    alias l='exa -l --all --group-directories-first --git'
+    alias ll='exa -l --all --all --group-directories-first --git'
+    alias lt='exa -T --git-ignore --level=2 --group-directories-first'
+    alias llt='exa -lT --git-ignore --level=2 --group-directories-first'
+    alias lT='exa -T --git-ignore --level=4 --group-directories-first'
+else
+    alias l='ls -lah'
+    alias ll='ls -alF'
+    alias la='ls -A'
+fi
+</code></pre>
 <h2 id="know-a-good-one-that-i-dont-have-listed-here"><a class="header" href="#know-a-good-one-that-i-dont-have-listed-here">Know a good one that I don't have listed here?</a></h2>
 <p>Let me know on <a href="https://octodon.social/@schlink">Mastodon</a> or <a href="https://twitter.com/sts10/">Twitter</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="tips-for-e-readers"><a class="header" href="#tips-for-e-readers">Tips for e-readers</a></h1>
