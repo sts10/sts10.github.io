@@ -495,16 +495,14 @@ cert-digest-algo SHA512
 default-preference-list SHA512 SHA384 SHA256 SHA224 AES256 AES192 AES CAST5 ZLIB BZIP2 ZIP Uncompressed
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="other-apps-to-install"><a class="header" href="#other-apps-to-install">Other Apps to Install</a></h1>
-<ol>
-<li>Installed Wire desktop via <a href="https://medium.com/@wireapp/a-step-forward-for-wire-for-linux-52f0538cac15">these instructions</a></li>
+<ul>
 <li><a href="https://signal.org/download/">Download and install Signal</a></li>
-</ol>
-<!-- 3. Install Ricochet from [its website](https://ricochet.im/) -- not sure the procude here. You can also look in your distro's GUI app store, though check version. -->
-<ol start="3">
 <li>Install Tor Browser (forget how exactly I did this-- maybe Tor Browser Launcher? From POP store?)</li>
 <li>Install Chromium via the POP app store if you like.</li>
 <li>Install Standard Notes app from <a href="https://standardnotes.org/getting-started?downloaded=linux">their site</a></li>
-</ol>
+<li>Consider installing Cwtch.im</li>
+<li>Install Wire desktop via <a href="https://medium.com/@wireapp/a-step-forward-for-wire-for-linux-52f0538cac15">these instructions</a></li>
+</ul>
 <h2 id="onionshare-consider-the-cli"><a class="header" href="#onionshare-consider-the-cli">Onionshare (consider the CLI)</a></h2>
 <p>If <a href="https://onionshare.org/">OnionShare</a>'s GUI installations are throwing errors, try <a href="https://docs.onionshare.org/2.4/en/advanced.html#cli">installing and using the CLI</a>. I'd recommend installing it with <a href="https://pypa.github.io/pipx/installation/">pipx</a> rather than pip. Here's an example:</p>
 <pre><code class="language-bash"># Install pipx (see: https://pypa.github.io/pipx/installation/)
@@ -514,8 +512,12 @@ python3 -m pipx ensurepath
 pipx install onionshare-cli
 onionshare-cli --help
 </code></pre>
+<h3 id="upgrading-onionshare-cli"><a class="header" href="#upgrading-onionshare-cli">Upgrading <code>onionshare-cli</code></a></h3>
+<p>If using pipx, try <code>pipx upgrade onionshare-cli</code></p>
+<p>If using regular <code>pip3</code>, try something like <code>pip3 install --user --upgrade onionshare-cli</code></p>
 <h2 id="gui-markdown-editors"><a class="header" href="#gui-markdown-editors">GUI Markdown editors</a></h2>
-<p>While Neovim/Vim is fine for editing Markdown, if you want a different aesthetic, try <a href="https://typora.io/">Typora</a> (with <a href="https://github.com/sts10/Turing-CSS">my forked theme</a>), <a href="https://somas.pages.gitlab.gnome.org/apostrophe/">Apostrophe</a>, or <a href="https://wereturtle.github.io/ghostwriter/">Ghostwriter</a>.</p>
+<p>While Neovim/Vim is fine for editing Markdown, if you want a different aesthetic, try <a href="https://typora.io/">Typora</a> (with <a href="https://github.com/sts10/Turing-CSS">my forked theme</a>), <a href="https://somas.pages.gitlab.gnome.org/apostrophe/">Apostrophe</a>, or <a href="https://wereturtle.github.io/ghostwriter/">Ghostwriter</a>. </p>
+<p><a href="http://www.theologeek.ch/manuskript/">Manuskript</a> seems like a decent novel-writing app for Linux, but there are others.</p>
 <h2 id="standard-notes-desktop-file"><a class="header" href="#standard-notes-desktop-file">Standard Notes .desktop file</a></h2>
 <p>If you install any of the programs below, you may need to create your own &quot;desktop&quot; file, so that your Desktop Environment can &quot;find&quot; these applications. These desktop files go in <code>~/.local/share/applications</code>. </p>
 <p>And sometimes you need to go download a PNG file to serve as the <code>Icon</code>.</p>
