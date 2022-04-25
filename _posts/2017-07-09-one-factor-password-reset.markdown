@@ -5,7 +5,7 @@ date: 2017-07-09 20:00:00 -0400
 comments: true
 ---
 
-This past week someone gained access to the PayPal account a mobile applications developer named Justin Williams. 
+This past week, someone gained access to the PayPal account of a mobile applications developer named Justin Williams. 
 
 <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Someone socially engineered AT&amp;T to get a new SIM for my phone, signed into my Paypal (using 2FA) and withdrew a bunch of money.<br><br>I am livid</p>&mdash; Justin Williams (@justin) <a href="https://twitter.com/justin/status/883171036283285508">July 7, 2017</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -16,7 +16,7 @@ He later [wrote a blog post about it](https://carpeaqua.com/2017/07/07/hack-the-
 
 > So how did I, someone who is reasonably secure, have his cell phone disabled, his PayPal account compromised, and a few hundred dollars withdrawn from his bank account?
 
-It sounds like what happened is an attacker got AT&T to port his phone number to the attacker's phone. Then the attacker reset Williams' PayPal password via an SMS recovery.
+It sounds like what happened is an attacker got AT&T to port his phone number to the attacker's phone. Then the attacker reset Williams' PayPal password via an **SMS password recovery**.
 
 > You're likely wondering how my cell phone being compromised leads to my PayPal account being compromised? All you need to reset a PayPal password is an email address and a phone number to accept the verification code.
 
@@ -35,17 +35,17 @@ In concluding his blog post, Williams writes:
 
 That makes sense to me, but even so, I think PayPal should have a way to opt out of the ability SMS password reset. And ideally you could do that and still have 2-factor authentication, even if just via SMS. 
 
-In general I don't think phone numbers should be considered identification. AT&T's security doesn't seem to be built for it, as Williams' story shows: he had set up a passcode with AT&T and it only slowed the attackers down for a few hours.
+In general I don't think phone numbers should be considered identification. AT&T's security doesn't seem to be built for it, as Williams' story shows: he had set up a passcode with AT&T, and it only slowed the attackers down for a few hours.
 
 ## The Difference Between SMS as a 2nd Factor and SMS Password Recovery
 
-One important thing I'm starting to understand is that there is a difference between using SMS as a second factor for login and having SMS as a password reset option.
+One important thing I'm starting to understand is that there is a (big) difference between using SMS as a second factor for login and having SMS as a password reset option.
 
 Williams writes under a sub heading "Lessons Learned?" 
 
 > I have spent the morning trying to evaluate my security practices and there's not much I can think about that I'd do otherwise. Twitter tells me I shouldn't use SMS-based 2 factor authentication and should use app-based 2 factor instead. I agree! The problem is that some sites like PayPal don't offer the better security. The alternative is to just go back to single factor, which I am not so sure is the best solution either.
 
-My guess is that once you give PayPal a phone number, it enables SMS password recovery automatically. Maybe you gave PayPal your phone number for the first time when you enabled SMS two factor authentication, but even if that were the case, I think it's wrong to conflate SMS password reset with SMS as a 2nd factor for login. (In my case, PayPal had my phone number before I enabled SMS 2-factor.)
+My guess is that once you give PayPal a phone number, it enables SMS password recovery automatically. Maybe you gave PayPal your phone number for the first time when you enabled SMS two-factor authentication, but even if that were the case, I think it's wrong to conflate SMS password reset with SMS as a 2nd factor for login. (In my case, PayPal had my phone number before I enabled SMS 2-factor.)
 
 ### Another Example: Google 
 
@@ -58,7 +58,7 @@ I only knew (a) that it was likely turned on and (b) to turn it off because I sp
 
 Even then, last month, I knew to quickly disabled this (I explain how I did this below).
 
-A lot of people disparage SMS as a second factor for login, and the fact that it's pretty easy to attack shows that, but I'm not sure it's fair to blame it for attacks that exploit SMS password reset. These two settings can (and maybe should) be totally separate-- I'm pretty sure Google could leave SMS password recover as an option but have it turned off by default.
+A lot of people disparage SMS as a second factor for login, and the fact that it's pretty easy to attack shows that, but I'm not sure it's fair to blame it for attacks that exploit SMS _password reset_, at least directly. These two settings can (and maybe should) be totally separate -- I don't see why Google couldn't leave SMS password recover as an option but have it turned off by default.
 
 #### How to remove SMS password recovery for your Google account
 
@@ -67,7 +67,7 @@ First, go to [the "Signing in" section of Google's security page](https://myacco
 ![No recovery options](/img/no-recovery-options.jpg)
 <!-- <img src="https://pbs.twimg.com/media/DBkNOsMVoAAod2x.jpg"> -->
 
-It's your call as to whether to leave a recovery email in place-- I chose not to. (The recovery email for Honan's Gmail account plays a key part of [his story](https://www.wired.com/2012/08/apple-amazon-mat-honan-hacking/).)
+It's your call as to whether to leave a recovery email in place -- I chose not to. (The recovery email for Honan's Gmail account plays a key part of [his story](https://www.wired.com/2012/08/apple-amazon-mat-honan-hacking/).)
 
 I vaguely remember that either Facebook or Twitter enabled SMS password recovery, but I can't find proof of that in either of the settings.
 
@@ -85,18 +85,18 @@ As I mentioned, I already have my cell phone number tied to my PayPal account. T
 
 ![all set OR AM I?](/img/sms-reset/all-set.png)
 
-Again, the issue here is that these two things-- my email address (not access to it, just knowledge of the address) and access to my SMS messages-- are not very hard to get a hold of. 
+Again, the issue here is that these two things -- my email address (not access to it, just knowledge of the address) and access to my SMS messages -- are not very hard to get a hold of. 
 
-I see two possible solutions to this issue-- ideally I'd find some setting in PayPal's security page similar to Google's that allows me to disable SMS password recovery. 
+I see two possible solutions to this issue: (1) ideally I'd find some setting in PayPal's security page similar to Google's that allows me to disable SMS password recovery. 
 
-The second and less ideal solution would be to simply remove my cell phone from my PayPal account. This is a worse solution because (a) I would then not be able to use SMS 2-factor authentication and (b) PayPal would be unable to alert me of new logins and other  potentially suspicious activity via text message. But I figure my random password is more secure that my phone number, so I think I'd go for it if given the option. 
+The second and less ideal solution would be to (2) simply remove my cell phone from my PayPal account. This is a worse solution because (a) I would then not be able to use SMS 2-factor authentication and (b) PayPal would be unable to alert me of new logins and other  potentially suspicious activity via text message. But I figure my random password is more secure that my phone number, so I think I'd go for it if given the option. 
 
 I couldn't figure out how to do either of these things on my own. So I took to Twitter and asked @AskPayPal if either of these solutions were possible (maybe I was missing something).
 
 <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/AskPayPal">@AskPayPal</a> is there a way to remove the SMS recovery option? Is there a way to remove my phone number from my account completely?</p>&mdash; Sam Schlinkert (@sts10) <a href="https://twitter.com/sts10/status/883702010570313728">July 8, 2017</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-Their initial response seems to be incorrect: 
+The account's initial response seems to be incorrect: 
 
 > Great question! You should be able to remove the phone number and SMS by clicking settings and edit next to the mobile number and uncheck appropriate boxes. 
 
@@ -110,13 +110,13 @@ We then took to things to DMs.
 
 Me: "As I wrote in a series of tweets, I'm trying to ensure that an attacker CANNOT reset my password with my only my phone number. What steps can I take to ensure that happens?"
 
-Them:
+PayPal support:
 
 > Your PayPal account is more secure with a phone number registered to the account. Keep in mind that you are 100% covered for any unauthorized activity that may occur. I recommend reaching out to your service provider with your concerns and to inquire about steps to safeguard the security of your mobile phone. ^LJ
 
 This first answer claimed three things: (a) that my account was more secure with a phone number attached (dubious, considering the Williams story), (b) told me I'm covered for unauthorized activity, and \(c) told me this is more of a concern for my service provider than for PayPal (which I understand the logic of, but wasn't wholly satisfactory).
 
-In subsequent DMs the support person claimed "You can remove the phone number from the PayPal account," but I sent screenshots showing there was only a way to add a new number or edit my current number. Eventually he or she threw me their 1-800 support phone number. 
+In subsequent DMs, the support person claimed, "You can remove the phone number from the PayPal account," but I sent screenshots showing there was only a way to add a new number or edit my current number. Eventually he or she threw me their 1-800 support phone number. 
 
 On the phone, I first asked if there was a way to remove my phone number from my account. A nice woman informed me that there had to be a phone number attached to my account, and that there was no way to remove it. 
 
