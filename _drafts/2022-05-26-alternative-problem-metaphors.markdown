@@ -7,6 +7,12 @@ draft: true
 comments: true
 ---
 
+## Links
+https://medium.com/@MrAlanCooper/the-myth-of-metaphor-de16bfa1cbbe?utm_source=pocket_mylist or https://mralancooper.medium.com/the-myth-of-metaphor-de16bfa1cbbe
+https://reallifemag.com/plague-of-metaphors/?utm_source=pocket_mylist
+
+---
+
 I've been thinking about ways we use metaphor when talking about (new) technologies for a bit. Choosing the metaphor with which we describe a new technology does real work: it can help kick-start understanding, but its price is limiting how we conceptualize the technology and thus close-off our minds to possibilities we might have considered had a different metaphor been chosen.
 
 Here's a nice example of this from [a Medium post by Alan Cooper](https://mralancooper.medium.com/the-myth-of-metaphor-de16bfa1cbbe): 
