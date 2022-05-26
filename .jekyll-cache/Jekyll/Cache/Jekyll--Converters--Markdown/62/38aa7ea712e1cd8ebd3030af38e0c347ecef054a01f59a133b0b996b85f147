@@ -1,4 +1,4 @@
-I"*<p>For the past year I’ve been fumbling around with Rust (here’s <a href="https://sts10.github.io/2017/11/18/trying-go-and-rust.html">my first post on Rust</a>). In those 12 months I’ve certainly had some lulls where I wasn’t learning or writing much Rust, but I did buy two books on the relatively new language and did <a href="https://sts10.github.io/2018/05/05/compound-passphrase-list-safety-checker.html">some</a> <a href="https://sts10.github.io/2018/05/31/1password-cracking-challenge.html">cool</a> <a href="https://github.com/sts10/family_gift_list_maker">projects</a> in Rust, including one for work.</p>
+I"�)<p>For the past year I’ve been fumbling around with Rust (here’s <a href="https://sts10.github.io/2017/11/18/trying-go-and-rust.html">my first post on Rust</a>). In those 12 months I’ve certainly had some lulls where I wasn’t learning or writing much Rust, but I did buy two books on the relatively new language and did <a href="https://sts10.github.io/2018/05/05/compound-passphrase-list-safety-checker.html">some</a> <a href="https://sts10.github.io/2018/05/31/1password-cracking-challenge.html">cool</a> <a href="https://github.com/sts10/family_gift_list_maker">projects</a> in Rust, including one for work.</p>
 
 <p>While writing those programs, I realized I kept copy and pasting (or re-writing) functions to take user input or read simple files into Rust variables. Coming from Ruby, I was used to these operations be simple calls of one or maybe two methods/lines. But with Rust I was always surprised how tricky it was to get an integer from a CLI user, or read a file into a Vector.</p>
 
@@ -18,7 +18,7 @@
 
 <p>Here’s the function itself:</p>
 
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="n">ensure</span><span class="o">&lt;</span><span class="n">T</span><span class="p">:</span> <span class="n">FromStr</span><span class="o">&gt;</span><span class="p">(</span><span class="n">try_again</span><span class="p">:</span> <span class="o">&amp;</span><span class="nb">str</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nn">io</span><span class="p">::</span><span class="n">Result</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="n">ensure</span><span class="o">&lt;</span><span class="n">T</span><span class="p">:</span> <span class="n">FromStr</span><span class="o">&gt;</span><span class="p">(</span><span class="n">try_again</span><span class="p">:</span> <span class="o">&amp;</span><span class="nb">str</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nn">io</span><span class="p">::</span><span class="nb">Result</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
     <span class="k">loop</span> <span class="p">{</span>
         <span class="k">let</span> <span class="n">line</span> <span class="o">=</span> <span class="k">match</span> <span class="nf">gets</span><span class="p">()</span> <span class="p">{</span>
             <span class="nf">Ok</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="n">l</span><span class="p">,</span>
@@ -26,9 +26,9 @@
         <span class="p">};</span>
         <span class="k">match</span> <span class="n">line</span><span class="nf">.parse</span><span class="p">()</span> <span class="p">{</span>
             <span class="nf">Ok</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="k">return</span> <span class="nf">Ok</span><span class="p">(</span><span class="n">res</span><span class="p">),</span>
-            <span class="c">// otherwise, display inputted "try again" message</span>
-            <span class="c">// and continue the loop</span>
-            <span class="nf">Err</span><span class="p">(</span><span class="mi">_</span><span class="n">e</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="p">{</span>
+            <span class="c1">// otherwise, display inputted "try again" message</span>
+            <span class="c1">// and continue the loop</span>
+            <span class="nf">Err</span><span class="p">(</span><span class="n">_e</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="p">{</span>
                 <span class="nd">eprintln!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">try_again</span><span class="p">);</span>
                 <span class="k">continue</span><span class="p">;</span>
             <span class="p">}</span>
@@ -39,11 +39,11 @@
 <p>And here’s a short example of how you’d use it:</p>
 
 <div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">println!</span><span class="p">(</span><span class="s">"Enter a number"</span><span class="p">);</span>
-<span class="c">// declare a new variable and specify a type of f64</span>
+<span class="c1">// declare a new variable and specify a type of f64</span>
 <span class="k">let</span> <span class="n">num</span><span class="p">:</span> <span class="nb">f64</span> <span class="o">=</span> <span class="nf">ensure</span><span class="p">(</span><span class="s">"Please try again. Enter a number (a float)"</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
 
-<span class="c">// we're now out of the `ensure` loop, so we can be </span>
-<span class="c">// reasonably sure that `num` was parsed into a float Type</span>
+<span class="c1">// we're now out of the `ensure` loop, so we can be </span>
+<span class="c1">// reasonably sure that `num` was parsed into a float Type</span>
 <span class="nd">println!</span><span class="p">(</span>
     <span class="s">"Great, you entered {}, which I'm reasonably sure is a number"</span><span class="p">,</span>
     <span class="n">num</span>
@@ -52,13 +52,13 @@
 
 <p>This <code class="language-plaintext highlighter-rouge">ensure</code> function could have been less verbose if I used the <code class="language-plaintext highlighter-rouge">?</code> operator and the <code class="language-plaintext highlighter-rouge">if let</code> construction, as opposed to the more verbose pair of <code class="language-plaintext highlighter-rouge">match</code> statements I ended up going with.</p>
 
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">pub</span> <span class="k">fn</span> <span class="n">ensure</span><span class="o">&lt;</span><span class="n">T</span><span class="p">:</span> <span class="n">FromStr</span><span class="o">&gt;</span><span class="p">(</span><span class="n">try_again</span><span class="p">:</span> <span class="o">&amp;</span><span class="nb">str</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nn">io</span><span class="p">::</span><span class="n">Result</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">pub</span> <span class="k">fn</span> <span class="n">ensure</span><span class="o">&lt;</span><span class="n">T</span><span class="p">:</span> <span class="n">FromStr</span><span class="o">&gt;</span><span class="p">(</span><span class="n">try_again</span><span class="p">:</span> <span class="o">&amp;</span><span class="nb">str</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nn">io</span><span class="p">::</span><span class="nb">Result</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
     <span class="k">loop</span> <span class="p">{</span>
         <span class="k">let</span> <span class="n">line</span> <span class="o">=</span> <span class="nf">gets</span><span class="p">()</span><span class="o">?</span><span class="p">;</span>
         <span class="k">if</span> <span class="k">let</span> <span class="nf">Ok</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="o">=</span> <span class="n">line</span><span class="nf">.parse</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">res</span><span class="p">;</span> <span class="p">}</span>
-        <span class="c">// otherwise, display inputted "try again" message</span>
+        <span class="c1">// otherwise, display inputted "try again" message</span>
         <span class="nd">eprintln!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">try_again</span><span class="p">);</span>
-        <span class="c">// and then let the loop cycle</span>
+        <span class="c1">// and then let the loop cycle</span>
     <span class="p">}</span>
 <span class="p">}</span>
 

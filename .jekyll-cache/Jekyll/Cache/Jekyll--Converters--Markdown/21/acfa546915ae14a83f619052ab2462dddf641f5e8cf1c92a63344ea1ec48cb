@@ -43,7 +43,7 @@
 
 <span class="k">fn</span> <span class="nf">gimme_pizza</span><span class="p">(</span><span class="n">persons</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">[</span><span class="n">Person</span><span class="p">],</span> <span class="n">slices_per_pizza</span><span class="p">:</span> <span class="nb">usize</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">usize</span> <span class="p">{</span>
     <span class="k">let</span> <span class="k">mut</span> <span class="n">slices_needed</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">for</span> <span class="n">person</span> <span class="n">in</span> <span class="n">persons</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="n">person</span> <span class="k">in</span> <span class="n">persons</span> <span class="p">{</span>
         <span class="n">slices_needed</span> <span class="o">+=</span> <span class="n">person</span><span class="py">.slices_requested</span><span class="p">;</span>
     <span class="p">}</span>
     <span class="k">if</span> <span class="n">slices_needed</span> <span class="o">%</span> <span class="n">slices_per_pizza</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">{</span>

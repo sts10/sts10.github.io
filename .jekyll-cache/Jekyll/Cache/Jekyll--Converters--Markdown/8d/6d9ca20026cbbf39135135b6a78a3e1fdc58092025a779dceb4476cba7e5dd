@@ -1,4 +1,4 @@
-I"p<p><a href="https://adventofcode.com/2018/day/5">Day 5 of this year’s Advent of Code</a> involves scanning “the chemical composition of [Santa’s new suit] material. We “discover that it is formed by extremely long polymers (one of which is available as your puzzle input).” We have to take these “polymers” (strings of upper and lowercase characters) and work through their reaction.</p>
+I"p<p><a href="https://adventofcode.com/2018/day/5">Day 5 of this year’s Advent of Code</a> involves scanning “the chemical composition of [Santa’s new suit] material. We “discover that it is formed by extremely long polymers (one of which is available as your puzzle input).” We have to take these “polymers” (strings of upper and lowercase characters) and work through their reaction.</p>
 
 <p>I’ll just paste from the challenge for us:</p>
 
@@ -35,9 +35,9 @@
     <span class="k">loop</span> <span class="p">{</span>
         <span class="k">let</span> <span class="k">mut</span> <span class="n">previous_c</span><span class="p">:</span> <span class="nb">char</span> <span class="o">=</span> <span class="n">p_vec</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
         <span class="k">let</span> <span class="k">mut</span> <span class="n">indexes_to_remove</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">usize</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nd">vec!</span><span class="p">[];</span>
-        <span class="k">for</span> <span class="n">c</span> <span class="n">in</span> <span class="mi">1</span><span class="o">..</span><span class="n">p_vec_len</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="k">in</span> <span class="mi">1</span><span class="o">..</span><span class="n">p_vec_len</span> <span class="p">{</span>
             <span class="k">if</span> <span class="nf">do_these_two_chars_cancel</span><span class="p">(</span><span class="n">p_vec</span><span class="p">[</span><span class="n">c</span><span class="p">],</span> <span class="n">previous_c</span><span class="p">)</span> <span class="p">{</span>
-                <span class="c">// "found a pair: {} and {}", previous_c, p_vec[c]</span>
+                <span class="c1">// "found a pair: {} and {}", previous_c, p_vec[c]</span>
                 <span class="n">p_vec</span><span class="nf">.remove</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
                 <span class="n">p_vec</span><span class="nf">.remove</span><span class="p">(</span><span class="n">c</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
                 <span class="k">break</span><span class="p">;</span>
@@ -51,8 +51,8 @@
             <span class="n">p_vec_len</span> <span class="o">=</span> <span class="n">p_vec</span><span class="nf">.len</span><span class="p">();</span>
         <span class="p">}</span>
     <span class="p">}</span>
-    <span class="c">// let s: String = p_vec.into_iter().collect();</span>
-    <span class="c">// println!("polymer is now {:?}", s);// }</span>
+    <span class="c1">// let s: String = p_vec.into_iter().collect();</span>
+    <span class="c1">// println!("polymer is now {:?}", s);// }</span>
     <span class="n">p_vec</span>
 <span class="p">}</span>
 
@@ -179,16 +179,16 @@
   <span class="k">while</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">p_vec_len</span> <span class="p">{</span>
     <span class="n">previous_c</span> <span class="o">=</span> <span class="n">p_vec</span><span class="p">[</span><span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
     <span class="k">if</span> <span class="nf">do_these_two_chars_cancel</span><span class="p">(</span><span class="n">p_vec</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">previous_c</span><span class="p">)</span> <span class="p">{</span>
-      <span class="c">// Found a pair that react. Let's remove them!</span>
-      <span class="c">// Use drain rather than remove. Drain is also a little semantically preferable</span>
-      <span class="c">// to `splice`</span>
+      <span class="c1">// Found a pair that react. Let's remove them!</span>
+      <span class="c1">// Use drain rather than remove. Drain is also a little semantically preferable</span>
+      <span class="c1">// to `splice`</span>
       <span class="n">p_vec</span><span class="nf">.drain</span><span class="p">((</span><span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">..=</span><span class="n">index</span><span class="p">);</span>
       <span class="n">p_vec_len</span> <span class="o">-=</span> <span class="mi">2</span><span class="p">;</span>
-      <span class="c">// and, if we can, shift c back one</span>
+      <span class="c1">// and, if we can, shift c back one</span>
       <span class="n">index</span> <span class="o">=</span> <span class="k">if</span> <span class="n">index</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="p">{</span> <span class="n">index</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="n">index</span> <span class="p">};</span>
     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-      <span class="c">// these two weren't a pair. Move on to the next pair</span>
-      <span class="c">// by shifting the iterator forward one character</span>
+      <span class="c1">// these two weren't a pair. Move on to the next pair</span>
+      <span class="c1">// by shifting the iterator forward one character</span>
       <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
     <span class="p">}</span>
   <span class="p">}</span>

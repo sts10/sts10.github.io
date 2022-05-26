@@ -1,4 +1,4 @@
-I"��<p>I’ve got two days of <a href="https://adventofcode.com/2018">Advent of Code 2018</a> under my belt and four stars to show for it! But I’ll be the first to admit that I had plenty of help, so I thought it only fair that I write out some of the things I’ve <em>already</em> learned about Rust.</p>
+I"��<p>I’ve got two days of <a href="https://adventofcode.com/2018">Advent of Code 2018</a> under my belt and four stars to show for it! But I’ll be the first to admit that I had plenty of help, so I thought it only fair that I write out some of the things I’ve <em>already</em> learned about Rust.</p>
 
 <p>If you’re still working on either day 1 or 2 (and there’s no shame in that… I’ve yet to get to Day 10), heads up that there are SPOILERS below.</p>
 
@@ -17,10 +17,10 @@
 
 <p>Did you know <a href="https://doc.rust-lang.org/std/iter/struct.Cycle.html">Rust has a <code class="language-plaintext highlighter-rouge">cycle</code> method</a> (similar to Ruby’s) that you can use on Vectors? I didn’t!</p>
 
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// The cycle method is key here-- it makes the for loop go</span>
-<span class="c">// "around the horn" of frequency_changes changes</span>
-<span class="k">for</span> <span class="n">frequency_change</span> <span class="n">in</span> <span class="n">frequency_changes</span><span class="nf">.iter</span><span class="p">()</span><span class="nf">.cycle</span><span class="p">()</span> <span class="p">{</span>
-  <span class="c">// &lt;loop content here&gt;</span>
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// The cycle method is key here-- it makes the for loop go</span>
+<span class="c1">// "around the horn" of frequency_changes changes</span>
+<span class="k">for</span> <span class="n">frequency_change</span> <span class="k">in</span> <span class="n">frequency_changes</span><span class="nf">.iter</span><span class="p">()</span><span class="nf">.cycle</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// &lt;loop content here&gt;</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
@@ -31,26 +31,26 @@
 <p>On the advice of some of my livestream viewers, I replaced the Vector with a HashSet:</p>
 
 <div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">collections</span><span class="p">::</span><span class="n">HashSet</span><span class="p">;</span>
-<span class="c">// ...</span>
+<span class="c1">// ...</span>
 
-<span class="c">// To decrease look-up times, we're going to use a HashSet where I might have</span>
-<span class="c">// used a Vector</span>
+<span class="c1">// To decrease look-up times, we're going to use a HashSet where I might have</span>
+<span class="c1">// used a Vector</span>
 <span class="k">let</span> <span class="k">mut</span> <span class="n">recorded_frequencies</span> <span class="o">=</span> <span class="nn">HashSet</span><span class="p">::</span><span class="nf">new</span><span class="p">();</span>
 </code></pre></div></div>
 
 <p>A <a href="https://doc.rust-lang.org/std/collections/struct.HashSet.html">HashSet</a> is basically a HashMap with only values (no keys). Sounds like a Vector, right? It sort of is, but my understanding is that, like <a href="https://doc.rust-lang.org/std/collections/struct.HashMap.html">HashMaps</a>, it’s optimized for look-ups rather than iteration. In my case, the “look-up” was a <a href="https://doc.rust-lang.org/std/collections/struct.HashSet.html#method.contains"><code class="language-plaintext highlighter-rouge">contains</code></a> call.</p>
 
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">frequency_change</span> <span class="n">in</span> <span class="n">frequency_changes</span><span class="nf">.iter</span><span class="p">()</span><span class="nf">.cycle</span><span class="p">()</span> <span class="p">{</span>
-  <span class="c">// find the new (current) frequency</span>
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">frequency_change</span> <span class="k">in</span> <span class="n">frequency_changes</span><span class="nf">.iter</span><span class="p">()</span><span class="nf">.cycle</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// find the new (current) frequency</span>
   <span class="n">current_frequency</span> <span class="o">+=</span> <span class="n">frequency_change</span><span class="p">;</span>
 
-  <span class="c">// now check list (Vector) of recorded_frequencies to see if this new_frequency</span>
-  <span class="c">// has occurred before</span>
+  <span class="c1">// now check list (Vector) of recorded_frequencies to see if this new_frequency</span>
+  <span class="c1">// has occurred before</span>
   <span class="k">if</span> <span class="n">recorded_frequencies</span><span class="nf">.contains</span><span class="p">(</span><span class="o">&amp;</span><span class="n">current_frequency</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">answer</span> <span class="o">=</span> <span class="nf">Some</span><span class="p">(</span><span class="n">current_frequency</span><span class="p">);</span>
     <span class="k">break</span><span class="p">;</span>
   <span class="p">}</span>
-  <span class="c">// add the new_frequency to the list of recorded_frequencies</span>
+  <span class="c1">// add the new_frequency to the list of recorded_frequencies</span>
   <span class="n">recorded_frequencies</span><span class="nf">.insert</span><span class="p">(</span><span class="n">current_frequency</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div></div>
@@ -78,8 +78,8 @@
 
 <p>At first, I tried two <code class="language-plaintext highlighter-rouge">for</code> loops, each in a pattern familiar to me.</p>
 
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">box_id_vec</span> <span class="n">in</span> <span class="n">vector_of_box_ids_as_vecs</span> <span class="p">{</span>
-  <span class="k">for</span> <span class="n">box_id_vec_to_compare</span> <span class="n">in</span> <span class="n">vector_of_box_ids_as_vecs</span> <span class="p">{</span>
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">box_id_vec</span> <span class="k">in</span> <span class="n">vector_of_box_ids_as_vecs</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="n">box_id_vec_to_compare</span> <span class="k">in</span> <span class="n">vector_of_box_ids_as_vecs</span> <span class="p">{</span>
     <span class="k">if</span> <span class="nf">do_two_strs_differ_by_one_character_in_the_same_position</span><span class="p">(</span>
       <span class="n">box_id_vec</span><span class="p">,</span>
       <span class="n">box_id_vec_to_compare</span><span class="p">,</span>
@@ -102,8 +102,8 @@
 <p>Here’s my updated Part 2, using ranges/indexes:</p>
 
 <div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="n">number_of_ids</span> <span class="o">=</span> <span class="n">vector_of_box_ids</span><span class="nf">.len</span><span class="p">();</span>
-<span class="k">for</span> <span class="n">index_of_box_id</span> <span class="n">in</span> <span class="mi">0</span><span class="o">..</span><span class="n">number_of_ids</span> <span class="p">{</span>
-  <span class="k">for</span> <span class="n">index_of_box_id_to_compare</span> <span class="n">in</span> <span class="mi">0</span><span class="o">..</span><span class="n">number_of_ids</span> <span class="p">{</span>
+<span class="k">for</span> <span class="n">index_of_box_id</span> <span class="k">in</span> <span class="mi">0</span><span class="o">..</span><span class="n">number_of_ids</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="n">index_of_box_id_to_compare</span> <span class="k">in</span> <span class="mi">0</span><span class="o">..</span><span class="n">number_of_ids</span> <span class="p">{</span>
     <span class="k">if</span> <span class="nf">do_two_strs_differ_by_one_character_in_the_same_position</span><span class="p">(</span>
         <span class="o">&amp;</span><span class="n">vector_of_box_ids</span><span class="p">[</span><span class="n">index_of_box_id</span><span class="p">],</span>
         <span class="o">&amp;</span><span class="n">vector_of_box_ids</span><span class="p">[</span><span class="n">index_of_box_id_to_compare</span><span class="p">],</span>
@@ -124,9 +124,9 @@
 
 <p><em>Update</em>: With some help from a Fediverse friend, we got the original <code class="language-plaintext highlighter-rouge">for</code> loop pattern to compile and work. My original attempt was <em>sort of</em> close?</p>
 
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// new, better version of part 2</span>
-<span class="k">for</span> <span class="n">box_id_vec</span> <span class="n">in</span> <span class="o">&amp;</span><span class="n">vector_of_box_ids</span> <span class="p">{</span>
-    <span class="k">for</span> <span class="n">box_id_vec_to_compare</span> <span class="n">in</span> <span class="o">&amp;</span><span class="n">vector_of_box_ids</span> <span class="p">{</span>
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// new, better version of part 2</span>
+<span class="k">for</span> <span class="n">box_id_vec</span> <span class="k">in</span> <span class="o">&amp;</span><span class="n">vector_of_box_ids</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="n">box_id_vec_to_compare</span> <span class="k">in</span> <span class="o">&amp;</span><span class="n">vector_of_box_ids</span> <span class="p">{</span>
         <span class="k">if</span> <span class="k">let</span> <span class="nf">Some</span><span class="p">(</span><span class="n">common_characters</span><span class="p">)</span> <span class="o">=</span> <span class="nf">find_common_characters_if_there_is_only_one_that_is_different</span><span class="p">(</span>
                 <span class="n">box_id_vec</span><span class="p">,</span>
                 <span class="n">box_id_vec_to_compare</span><span class="p">,</span>
@@ -153,14 +153,14 @@
     <span class="k">let</span> <span class="k">mut</span> <span class="n">b_vec</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">char</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[]</span><span class="nf">.to_vec</span><span class="p">();</span>
     <span class="k">let</span> <span class="k">mut</span> <span class="n">common_characters</span><span class="p">:</span> <span class="nb">String</span> <span class="o">=</span> <span class="s">""</span><span class="nf">.to_string</span><span class="p">();</span>
 
-    <span class="k">for</span> <span class="n">c</span> <span class="n">in</span> <span class="n">a</span><span class="nf">.chars</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="k">in</span> <span class="n">a</span><span class="nf">.chars</span><span class="p">()</span> <span class="p">{</span>
         <span class="n">a_vec</span><span class="nf">.push</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
     <span class="p">}</span>
-    <span class="k">for</span> <span class="n">c</span> <span class="n">in</span> <span class="n">b</span><span class="nf">.chars</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="k">in</span> <span class="n">b</span><span class="nf">.chars</span><span class="p">()</span> <span class="p">{</span>
         <span class="n">b_vec</span><span class="nf">.push</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
     <span class="p">}</span>
     <span class="k">let</span> <span class="k">mut</span> <span class="n">how_many_characters_are_different</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">for</span> <span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="n">in</span> <span class="n">a_vec</span><span class="nf">.iter</span><span class="p">()</span><span class="nf">.enumerate</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="k">in</span> <span class="n">a_vec</span><span class="nf">.iter</span><span class="p">()</span><span class="nf">.enumerate</span><span class="p">()</span> <span class="p">{</span>
         <span class="k">if</span> <span class="o">*</span><span class="n">c</span> <span class="o">!=</span> <span class="n">b_vec</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="p">{</span>
             <span class="n">how_many_characters_are_different</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
         <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
@@ -186,21 +186,21 @@
     <span class="k">let</span> <span class="k">mut</span> <span class="n">common_characters</span><span class="p">:</span> <span class="nb">String</span> <span class="o">=</span> <span class="s">""</span><span class="nf">.to_string</span><span class="p">();</span>
     <span class="k">let</span> <span class="k">mut</span> <span class="n">how_many_characters_are_different</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
-    <span class="c">// make the zip</span>
+    <span class="c1">// make the zip</span>
     <span class="k">let</span> <span class="n">zipped</span> <span class="o">=</span> <span class="n">a</span><span class="nf">.chars</span><span class="p">()</span><span class="nf">.zip</span><span class="p">(</span><span class="n">b</span><span class="nf">.chars</span><span class="p">());</span>
 
-    <span class="c">// iterate through the zip</span>
-    <span class="k">for</span> <span class="p">(</span><span class="n">a_char</span><span class="p">,</span> <span class="n">b_char</span><span class="p">)</span> <span class="n">in</span> <span class="n">zipped</span> <span class="p">{</span>
+    <span class="c1">// iterate through the zip</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">a_char</span><span class="p">,</span> <span class="n">b_char</span><span class="p">)</span> <span class="k">in</span> <span class="n">zipped</span> <span class="p">{</span>
         <span class="k">if</span> <span class="n">a_char</span> <span class="o">!=</span> <span class="n">b_char</span> <span class="p">{</span>
             <span class="n">how_many_characters_are_different</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
         <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="c">// add c to the end of common_characters using format!</span>
+            <span class="c1">// add c to the end of common_characters using format!</span>
             <span class="n">common_characters</span><span class="nf">.push</span><span class="p">(</span><span class="n">b_char</span><span class="p">);</span>
         <span class="p">}</span>
 
         <span class="k">if</span> <span class="n">how_many_characters_are_different</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="p">{</span>
-            <span class="c">// there are already more than 1 character different,</span>
-            <span class="c">// so we don't need to keep checking for difference</span>
+            <span class="c1">// there are already more than 1 character different,</span>
+            <span class="c1">// so we don't need to keep checking for difference</span>
             <span class="k">break</span><span class="p">;</span>
         <span class="p">}</span>
     <span class="p">}</span>
@@ -216,8 +216,8 @@
 
 <div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="n">number_of_ids</span> <span class="o">=</span> <span class="n">vector_of_box_ids</span><span class="nf">.len</span><span class="p">();</span>
 
-<span class="k">for</span> <span class="n">index_of_box_id</span> <span class="n">in</span> <span class="mi">0</span><span class="o">..</span><span class="n">number_of_ids</span> <span class="p">{</span>
-    <span class="k">for</span> <span class="n">index_of_box_id_to_compare</span> <span class="n">in</span> <span class="mi">0</span><span class="o">..</span><span class="n">number_of_ids</span> <span class="p">{</span>
+<span class="k">for</span> <span class="n">index_of_box_id</span> <span class="k">in</span> <span class="mi">0</span><span class="o">..</span><span class="n">number_of_ids</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="n">index_of_box_id_to_compare</span> <span class="k">in</span> <span class="mi">0</span><span class="o">..</span><span class="n">number_of_ids</span> <span class="p">{</span>
         <span class="k">match</span> <span class="nf">find_common_characters_if_there_is_only_one_that_is_different</span><span class="p">(</span>
             <span class="o">&amp;</span><span class="n">vector_of_box_ids</span><span class="p">[</span><span class="n">index_of_box_id</span><span class="p">],</span>
             <span class="o">&amp;</span><span class="n">vector_of_box_ids</span><span class="p">[</span><span class="n">index_of_box_id_to_compare</span><span class="p">],</span>
@@ -238,18 +238,18 @@
 
 <p>I’ve left the <code class="language-plaintext highlighter-rouge">match</code> statement below, commented out, for reference.</p>
 
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// in main()</span>
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// in main()</span>
 <span class="k">let</span> <span class="n">number_of_ids</span> <span class="o">=</span> <span class="n">vector_of_box_ids</span><span class="nf">.len</span><span class="p">();</span>
 
-<span class="k">for</span> <span class="n">index_of_box_id</span> <span class="n">in</span> <span class="mi">0</span><span class="o">..</span><span class="n">number_of_ids</span> <span class="p">{</span>
-  <span class="k">for</span> <span class="n">index_of_box_id_to_compare</span> <span class="n">in</span> <span class="mi">0</span><span class="o">..</span><span class="n">number_of_ids</span> <span class="p">{</span>
-    <span class="c">// match find_common_characters_if_there_is_only_one_that_is_different(</span>
-    <span class="c">//     &amp;vector_of_box_ids[index_of_box_id],</span>
-    <span class="c">//     &amp;vector_of_box_ids[index_of_box_id_to_compare],</span>
-    <span class="c">// ) {</span>
-    <span class="c">//     Some(common_characters) =&gt; println!("common characters are {}", common_characters),</span>
-    <span class="c">//     None =&gt; (),</span>
-    <span class="c">// }</span>
+<span class="k">for</span> <span class="n">index_of_box_id</span> <span class="k">in</span> <span class="mi">0</span><span class="o">..</span><span class="n">number_of_ids</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="n">index_of_box_id_to_compare</span> <span class="k">in</span> <span class="mi">0</span><span class="o">..</span><span class="n">number_of_ids</span> <span class="p">{</span>
+    <span class="c1">// match find_common_characters_if_there_is_only_one_that_is_different(</span>
+    <span class="c1">//     &amp;vector_of_box_ids[index_of_box_id],</span>
+    <span class="c1">//     &amp;vector_of_box_ids[index_of_box_id_to_compare],</span>
+    <span class="c1">// ) {</span>
+    <span class="c1">//     Some(common_characters) =&gt; println!("common characters are {}", common_characters),</span>
+    <span class="c1">//     None =&gt; (),</span>
+    <span class="c1">// }</span>
     <span class="k">if</span> <span class="k">let</span> <span class="nf">Some</span><span class="p">(</span><span class="n">common_characters</span><span class="p">)</span> <span class="o">=</span>
       <span class="nf">find_common_characters_if_there_is_only_one_that_is_different</span><span class="p">(</span>
           <span class="o">&amp;</span><span class="n">vector_of_box_ids</span><span class="p">[</span><span class="n">index_of_box_id</span><span class="p">],</span>
@@ -274,7 +274,7 @@
   <span class="k">let</span> <span class="n">text</span> <span class="o">=</span> <span class="s">"aabcdeefghhhij"</span><span class="p">;</span>
 
   <span class="k">let</span> <span class="k">mut</span> <span class="n">counts_hashmap</span><span class="p">:</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="nb">char</span><span class="p">,</span> <span class="nb">usize</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nn">HashMap</span><span class="p">::</span><span class="nf">new</span><span class="p">();</span>
-  <span class="k">for</span> <span class="n">character</span> <span class="n">in</span> <span class="n">text</span><span class="nf">.chars</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="n">character</span> <span class="k">in</span> <span class="n">text</span><span class="nf">.chars</span><span class="p">()</span> <span class="p">{</span>
     <span class="n">counts_hashmap</span>
       <span class="nf">.entry</span><span class="p">(</span><span class="n">character</span><span class="p">)</span>
       <span class="nf">.and_modify</span><span class="p">(|</span><span class="n">count</span><span class="p">|</span> <span class="o">*</span><span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span>
@@ -282,11 +282,11 @@
   <span class="p">}</span>
   <span class="nd">println!</span><span class="p">(</span><span class="s">"Character counts in {}</span><span class="se">\n</span><span class="s">{:?}"</span><span class="p">,</span><span class="n">text</span><span class="p">,</span><span class="n">counts_hashmap</span><span class="p">);</span>
 
-  <span class="c">// Now let's sort by counts </span>
-  <span class="c">// best way I know how is by making a new vector of tuples</span>
+  <span class="c1">// Now let's sort by counts </span>
+  <span class="c1">// best way I know how is by making a new vector of tuples</span>
   <span class="k">let</span> <span class="k">mut</span> <span class="n">count_vec</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="p">(</span><span class="o">&amp;</span><span class="nb">char</span><span class="p">,</span> <span class="o">&amp;</span><span class="nb">usize</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">counts_hashmap</span><span class="nf">.iter</span><span class="p">()</span><span class="nf">.collect</span><span class="p">();</span>
   <span class="n">count_vec</span><span class="nf">.sort_by</span><span class="p">(|</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">|</span> <span class="n">b</span><span class="na">.1</span><span class="nf">.cmp</span><span class="p">(</span><span class="n">a</span><span class="na">.1</span><span class="p">));</span>
-  <span class="k">for</span> <span class="n">pair</span> <span class="n">in</span> <span class="o">&amp;</span><span class="n">count_vec</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="n">pair</span> <span class="k">in</span> <span class="o">&amp;</span><span class="n">count_vec</span> <span class="p">{</span>
     <span class="nd">println!</span><span class="p">(</span><span class="s">"{:?}"</span><span class="p">,</span> <span class="n">pair</span><span class="p">);</span>
   <span class="p">}</span>
 <span class="p">}</span>
@@ -294,12 +294,12 @@
 
 <p>We could also use <code class="language-plaintext highlighter-rouge">sort_by_key</code> to sort the <code class="language-plaintext highlighter-rouge">count_vec</code>. We’ll need to reverse it to get the highest counts at the top:</p>
 
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// Now let's sort by counts </span>
-<span class="c">// best way I know how is by making a new vector of tuples</span>
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Now let's sort by counts </span>
+<span class="c1">// best way I know how is by making a new vector of tuples</span>
 <span class="k">let</span> <span class="k">mut</span> <span class="n">count_vec</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="p">(</span><span class="nb">char</span><span class="p">,</span> <span class="nb">usize</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">counts_hashmap</span><span class="nf">.into_iter</span><span class="p">()</span><span class="nf">.collect</span><span class="p">();</span>
-<span class="n">count_vec</span><span class="nf">.sort_by_key</span><span class="p">(|</span><span class="o">&amp;</span><span class="p">(</span><span class="mi">_</span><span class="n">c</span><span class="p">,</span> <span class="n">num</span><span class="p">)|</span> <span class="n">num</span><span class="p">);</span>
+<span class="n">count_vec</span><span class="nf">.sort_by_key</span><span class="p">(|</span><span class="o">&amp;</span><span class="p">(</span><span class="n">_c</span><span class="p">,</span> <span class="n">num</span><span class="p">)|</span> <span class="n">num</span><span class="p">);</span>
 <span class="n">count_vec</span><span class="nf">.reverse</span><span class="p">();</span>
-<span class="k">for</span> <span class="n">pair</span> <span class="n">in</span> <span class="o">&amp;</span><span class="n">count_vec</span> <span class="p">{</span>
+<span class="k">for</span> <span class="n">pair</span> <span class="k">in</span> <span class="o">&amp;</span><span class="n">count_vec</span> <span class="p">{</span>
   <span class="nd">println!</span><span class="p">(</span><span class="s">"{:?}"</span><span class="p">,</span> <span class="n">pair</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div></div>
@@ -318,15 +318,15 @@
 
 <p>In reading others’ solutions to Day 2, I found <a href="https://github.com/anowell/advent-of-code/blob/master/src/day2.rs#L48">something strange</a>:</p>
 
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">part2</span><span class="p">(</span><span class="n">input</span><span class="p">:</span> <span class="o">&amp;</span><span class="nb">str</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="n">Result</span><span class="o">&lt;</span><span class="nb">String</span><span class="p">,</span> <span class="n">Error</span><span class="o">&gt;</span> <span class="p">{</span>
-  <span class="k">let</span> <span class="n">lines</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="mi">_</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">input</span><span class="nf">.trim</span><span class="p">()</span><span class="nf">.lines</span><span class="p">()</span><span class="nf">.collect</span><span class="p">();</span>
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">part2</span><span class="p">(</span><span class="n">input</span><span class="p">:</span> <span class="o">&amp;</span><span class="nb">str</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">Result</span><span class="o">&lt;</span><span class="nb">String</span><span class="p">,</span> <span class="n">Error</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">let</span> <span class="n">lines</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="n">_</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">input</span><span class="nf">.trim</span><span class="p">()</span><span class="nf">.lines</span><span class="p">()</span><span class="nf">.collect</span><span class="p">();</span>
   <span class="k">let</span> <span class="n">line_count</span> <span class="o">=</span> <span class="n">lines</span><span class="nf">.len</span><span class="p">();</span>
 
-  <span class="k">for</span> <span class="n">i</span> <span class="n">in</span> <span class="mi">0</span><span class="o">..</span><span class="n">line_count</span> <span class="p">{</span>
-    <span class="nv">'next_line</span><span class="p">:</span> <span class="k">for</span> <span class="n">j</span> <span class="n">in</span> <span class="n">i</span><span class="o">..</span><span class="n">line_count</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">0</span><span class="o">..</span><span class="n">line_count</span> <span class="p">{</span>
+    <span class="nv">'next_line</span><span class="p">:</span> <span class="k">for</span> <span class="n">j</span> <span class="k">in</span> <span class="n">i</span><span class="o">..</span><span class="n">line_count</span> <span class="p">{</span>
       <span class="k">let</span> <span class="k">mut</span> <span class="n">offset</span> <span class="o">=</span> <span class="nb">None</span><span class="p">;</span>
-      <span class="c">// Using bytes is about 25% faster than chars, but we :heart: UTF-8</span>
-      <span class="k">for</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span> <span class="n">in</span> <span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="nf">.chars</span><span class="p">()</span><span class="nf">.zip</span><span class="p">(</span><span class="n">lines</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="nf">.chars</span><span class="p">())</span><span class="nf">.enumerate</span><span class="p">()</span> <span class="p">{</span>
+      <span class="c1">// Using bytes is about 25% faster than chars, but we :heart: UTF-8</span>
+      <span class="k">for</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span> <span class="k">in</span> <span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="nf">.chars</span><span class="p">()</span><span class="nf">.zip</span><span class="p">(</span><span class="n">lines</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="nf">.chars</span><span class="p">())</span><span class="nf">.enumerate</span><span class="p">()</span> <span class="p">{</span>
         <span class="k">if</span> <span class="n">a</span> <span class="o">!=</span> <span class="n">b</span> <span class="p">{</span>
           <span class="k">if</span> <span class="n">offset</span><span class="nf">.is_none</span><span class="p">()</span> <span class="p">{</span>
             <span class="n">offset</span> <span class="o">=</span> <span class="nf">Some</span><span class="p">(</span><span class="n">k</span><span class="p">);</span>
@@ -336,8 +336,8 @@
         <span class="p">}</span>
       <span class="p">}</span>
 
-      <span class="c">// Only allocate new strings in the inner loop if we found the match</span>
-      <span class="c">// Previously, string allocating in the inner loop was ~90% of the execution time</span>
+      <span class="c1">// Only allocate new strings in the inner loop if we found the match</span>
+      <span class="c1">// Previously, string allocating in the inner loop was ~90% of the execution time</span>
       <span class="k">if</span> <span class="k">let</span> <span class="nf">Some</span><span class="p">(</span><span class="n">offset</span><span class="p">)</span> <span class="o">=</span> <span class="n">offset</span> <span class="p">{</span>
         <span class="k">let</span> <span class="n">a</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="nf">.chars</span><span class="p">()</span><span class="nf">.take</span><span class="p">(</span><span class="n">offset</span><span class="p">);</span>
         <span class="k">let</span> <span class="n">b</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="nf">.chars</span><span class="p">()</span><span class="nf">.skip</span><span class="p">(</span><span class="n">offset</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>

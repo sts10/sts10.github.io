@@ -1,4 +1,4 @@
-I"��<p>Midway through January, 2019, news broke of a large cache of emails and passwords, dubbed <a href="https://www.troyhunt.com/the-773-million-record-collection-1-data-reach/">“Collection #1”</a>, surfacing on the internet. Troy Hunt writes that it includes 772,904,991 unique email addresses and 21,222,975 unique passwords. Wow! Hunt cleaned and loaded the data into his service called HaveIBeenPwned, which allows (non-technical) users to enter either their <a href="https://haveibeenpwned.com/">email</a> or <a href="https://haveibeenpwned.com/Passwords">password(s)</a> to see if their data was included in the breach (or earlier breaches that he’s cataloged). Hunt’s total list of passwords now includes more than half a billion unique passwords.</p>
+I"��<p>Midway through January, 2019, news broke of a large cache of emails and passwords, dubbed <a href="https://www.troyhunt.com/the-773-million-record-collection-1-data-reach/">“Collection #1”</a>, surfacing on the internet. Troy Hunt writes that it includes 772,904,991 unique email addresses and 21,222,975 unique passwords. Wow! Hunt cleaned and loaded the data into his service called HaveIBeenPwned, which allows (non-technical) users to enter either their <a href="https://haveibeenpwned.com/">email</a> or <a href="https://haveibeenpwned.com/Passwords">password(s)</a> to see if their data was included in the breach (or earlier breaches that he’s cataloged). Hunt’s total list of passwords now includes more than half a billion unique passwords.</p>
 
 <p>While I’m reasonably OK entering my email address into the HaveIBeenPwned website, I was a bit more skeptical about entering any of my passwords. Hunt employs something called <a href="https://www.troyhunt.com/ive-just-launched-pwned-passwords-version-2/#cloudflareprivacyandkanonymity">k-anonymity</a> to make the password search safer. You can check your passwords this way either by manually entering it in <a href="https://haveibeenpwned.com/Passwords">a webpage</a>, or via <a href="https://haveibeenpwned.com/API/v2">a lovely little API</a>. If using the API, users only need to send the first 5 characters of the SHA-1 hash of their password over the internet. The API then returns all the hashes that have that 5-character prefix, and the user does the rest of the work.</p>
 
@@ -79,7 +79,7 @@ E38AD214943DAAD1D64C102FAEC29DE4AFE9DA3D:2401761
     <span class="k">let</span> <span class="n">db_pass</span> <span class="o">=</span>
         <span class="nn">rpassword</span><span class="p">::</span><span class="nf">read_password_from_tty</span><span class="p">(</span><span class="nf">Some</span><span class="p">(</span><span class="s">"Enter the password to your KeePass database: "</span><span class="p">))</span>
         <span class="nf">.unwrap</span><span class="p">();</span>
-    <span class="c">// Open KeePass database</span>
+    <span class="c1">// Open KeePass database</span>
     <span class="nd">println!</span><span class="p">(</span><span class="s">"Attempting to unlock your KeePass database..."</span><span class="p">);</span>
     <span class="k">let</span> <span class="n">db</span> <span class="o">=</span> <span class="k">match</span> <span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="nn">std</span><span class="p">::</span><span class="nn">path</span><span class="p">::</span><span class="nn">Path</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="n">file_path</span><span class="p">))</span>
         <span class="nf">.map_err</span><span class="p">(</span><span class="nn">OpenDBError</span><span class="p">::</span><span class="n">Io</span><span class="p">)</span>
@@ -90,8 +90,8 @@ E38AD214943DAAD1D64C102FAEC29DE4AFE9DA3D:2401761
         <span class="p">};</span>
 
     <span class="nd">println!</span><span class="p">(</span><span class="s">"Reading your KeePass database..."</span><span class="p">);</span>
-    <span class="c">// Iterate over all Nodes</span>
-    <span class="k">for</span> <span class="n">node</span> <span class="n">in</span> <span class="o">&amp;</span><span class="n">db</span><span class="py">.root</span> <span class="p">{</span>
+    <span class="c1">// Iterate over all Nodes</span>
+    <span class="k">for</span> <span class="n">node</span> <span class="k">in</span> <span class="o">&amp;</span><span class="n">db</span><span class="py">.root</span> <span class="p">{</span>
         <span class="k">match</span> <span class="n">node</span> <span class="p">{</span>
             <span class="nn">Node</span><span class="p">::</span><span class="nf">Entry</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="p">{</span>
                 <span class="k">let</span> <span class="n">this_entry</span> <span class="o">=</span> <span class="n">Entry</span> <span class="p">{</span>
@@ -160,11 +160,11 @@ E38AD214943DAAD1D64C102FAEC29DE4AFE9DA3D:2401761
 
     <span class="nd">println!</span><span class="p">(</span><span class="s">"Attempting to unlock your KeePass database..."</span><span class="p">);</span>
     <span class="k">let</span> <span class="n">db</span> <span class="o">=</span> <span class="nf">unlock_keepass_database</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">db_pass</span><span class="p">,</span> <span class="n">keyfile_path</span><span class="p">);</span>
-    <span class="c">// Iterate over all Groups and Nodes</span>
-    <span class="k">for</span> <span class="n">node</span> <span class="n">in</span> <span class="o">&amp;</span><span class="n">db</span><span class="py">.root</span> <span class="p">{</span>
+    <span class="c1">// Iterate over all Groups and Nodes</span>
+    <span class="k">for</span> <span class="n">node</span> <span class="k">in</span> <span class="o">&amp;</span><span class="n">db</span><span class="py">.root</span> <span class="p">{</span>
         <span class="k">match</span> <span class="n">node</span> <span class="p">{</span>
-            <span class="nn">Node</span><span class="p">::</span><span class="nf">GroupNode</span><span class="p">(</span><span class="mi">_</span><span class="n">g</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="p">{</span>
-                <span class="c">// println!("Saw group '{}'", g.name);</span>
+            <span class="nn">Node</span><span class="p">::</span><span class="nf">GroupNode</span><span class="p">(</span><span class="n">_g</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="p">{</span>
+                <span class="c1">// println!("Saw group '{}'", g.name);</span>
             <span class="p">}</span>
             <span class="nn">Node</span><span class="p">::</span><span class="nf">EntryNode</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="p">{</span>
                 <span class="k">let</span> <span class="n">this_entry</span> <span class="o">=</span> <span class="n">Entry</span> <span class="p">{</span>
@@ -187,7 +187,7 @@ E38AD214943DAAD1D64C102FAEC29DE4AFE9DA3D:2401761
     <span class="n">entries</span>
 <span class="p">}</span>
 
-<span class="c">// helper function that does the actual unlocking</span>
+<span class="c1">// helper function that does the actual unlocking</span>
 <span class="k">fn</span> <span class="nf">unlock_keepass_database</span><span class="p">(</span>
         <span class="n">path</span><span class="p">:</span> <span class="n">PathBuf</span><span class="p">,</span>
         <span class="n">db_pass</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
@@ -196,9 +196,9 @@ E38AD214943DAAD1D64C102FAEC29DE4AFE9DA3D:2401761
     <span class="k">let</span> <span class="k">mut</span> <span class="n">keyfile</span> <span class="o">=</span> <span class="n">keyfile_path</span><span class="nf">.map</span><span class="p">(|</span><span class="n">kfp</span><span class="p">|</span> <span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="n">kfp</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">());</span>
 
     <span class="k">match</span> <span class="nn">Database</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span>
-            <span class="o">&amp;</span><span class="k">mut</span> <span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">(),</span>               <span class="c">// the database</span>
-            <span class="nf">Some</span><span class="p">(</span><span class="o">&amp;</span><span class="n">db_pass</span><span class="p">),</span>                               <span class="c">// password</span>
-            <span class="n">keyfile</span><span class="nf">.as_mut</span><span class="p">()</span><span class="nf">.map</span><span class="p">(|</span><span class="n">f</span><span class="p">|</span> <span class="n">f</span> <span class="k">as</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="n">dyn</span> <span class="n">Read</span><span class="p">),</span> <span class="c">// keyfile</span>
+            <span class="o">&amp;</span><span class="k">mut</span> <span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">(),</span>               <span class="c1">// the database</span>
+            <span class="nf">Some</span><span class="p">(</span><span class="o">&amp;</span><span class="n">db_pass</span><span class="p">),</span>                               <span class="c1">// password</span>
+            <span class="n">keyfile</span><span class="nf">.as_mut</span><span class="p">()</span><span class="nf">.map</span><span class="p">(|</span><span class="n">f</span><span class="p">|</span> <span class="n">f</span> <span class="k">as</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="k">dyn</span> <span class="n">Read</span><span class="p">),</span> <span class="c1">// keyfile</span>
             <span class="p">)</span> <span class="p">{</span>
         <span class="nf">Ok</span><span class="p">(</span><span class="n">db</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="n">db</span><span class="p">,</span>
         <span class="nf">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="p">{</span>
@@ -250,7 +250,7 @@ E38AD214943DAAD1D64C102FAEC29DE4AFE9DA3D:2401761
 
 <p>In my first attempt, I brazenly <a href="https://github.com/sts10/medic/blob/1770df4d4f5383768c466847c669e95f3e0451fd/src/main.rs#L197">tried to read all 550 million hashes into a single, massive Vector</a>.</p>
 
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">read_by_line</span><span class="p">(</span><span class="n">file_path</span><span class="p">:</span> <span class="o">&amp;</span><span class="nb">str</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nn">io</span><span class="p">::</span><span class="n">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;&gt;</span> <span class="p">{</span>
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">read_by_line</span><span class="p">(</span><span class="n">file_path</span><span class="p">:</span> <span class="o">&amp;</span><span class="nb">str</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nn">io</span><span class="p">::</span><span class="nb">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;&gt;</span> <span class="p">{</span>
     <span class="k">let</span> <span class="k">mut</span> <span class="n">vec</span> <span class="o">=</span> <span class="nn">Vec</span><span class="p">::</span><span class="nf">new</span><span class="p">();</span>
     <span class="k">let</span> <span class="n">f</span> <span class="o">=</span> <span class="k">match</span> <span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="n">file_path</span><span class="nf">.trim_matches</span><span class="p">(|</span><span class="n">c</span><span class="p">|</span> <span class="n">c</span> <span class="o">==</span> <span class="sc">'\''</span> <span class="p">||</span> <span class="n">c</span> <span class="o">==</span> <span class="sc">' '</span><span class="p">))</span> <span class="p">{</span>
         <span class="nf">Ok</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="n">res</span><span class="p">,</span>
@@ -258,7 +258,7 @@ E38AD214943DAAD1D64C102FAEC29DE4AFE9DA3D:2401761
     <span class="p">};</span>
     <span class="k">let</span> <span class="n">file</span> <span class="o">=</span> <span class="nn">BufReader</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="o">&amp;</span><span class="n">f</span><span class="p">);</span>
     <span class="k">let</span> <span class="k">mut</span> <span class="n">line_number</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">for</span> <span class="n">line</span> <span class="n">in</span> <span class="n">file</span><span class="nf">.lines</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="k">in</span> <span class="n">file</span><span class="nf">.lines</span><span class="p">()</span> <span class="p">{</span>
         <span class="n">line_number</span> <span class="o">=</span> <span class="n">line_number</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
         <span class="nd">println!</span><span class="p">(</span><span class="s">"Reading line #{:?}"</span><span class="p">,</span> <span class="n">line_number</span><span class="p">);</span>
         <span class="n">vec</span><span class="nf">.push</span><span class="p">(</span><span class="n">line</span><span class="nf">.unwrap</span><span class="p">());</span>
@@ -271,7 +271,7 @@ E38AD214943DAAD1D64C102FAEC29DE4AFE9DA3D:2401761
 
 <p>I had a few ideas of how to solve this issue, but <a href="https://fosstodon.org/@codesections/101463247584610406">a Fediverse friend</a> helped me decide to split the data into chunks. After some testing I did later, I found that 10 million lines per chunk was a pretty good size.</p>
 
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">check_database_offline</span><span class="p">(</span><span class="n">passwords_file_path</span><span class="p">:</span> <span class="o">&amp;</span><span class="nb">str</span><span class="p">,</span> <span class="n">entries</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="n">Entry</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nn">io</span><span class="p">::</span><span class="n">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="n">Entry</span><span class="o">&gt;&gt;</span> <span class="p">{</span>
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">check_database_offline</span><span class="p">(</span><span class="n">passwords_file_path</span><span class="p">:</span> <span class="o">&amp;</span><span class="nb">str</span><span class="p">,</span> <span class="n">entries</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="n">Entry</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nn">io</span><span class="p">::</span><span class="nb">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="n">Entry</span><span class="o">&gt;&gt;</span> <span class="p">{</span>
   <span class="k">let</span> <span class="k">mut</span> <span class="n">this_chunk</span> <span class="o">=</span> <span class="nn">Vec</span><span class="p">::</span><span class="nf">new</span><span class="p">();</span>
   <span class="k">let</span> <span class="k">mut</span> <span class="n">breached_entries</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="n">Entry</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nn">Vec</span><span class="p">::</span><span class="nf">new</span><span class="p">();</span>
 
@@ -280,20 +280,20 @@ E38AD214943DAAD1D64C102FAEC29DE4AFE9DA3D:2401761
       <span class="nf">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="k">return</span> <span class="nf">Err</span><span class="p">(</span><span class="n">e</span><span class="p">),</span>
   <span class="p">};</span>
 
-  <span class="c">// times via `cargo test --release can_check_offline --no-run &amp;&amp; time cargo test --release can_check_offline -- --nocapture`</span>
-  <span class="c">// let chunk_size = 1_000_000; // real 1m24.709s</span>
-  <span class="c">// let chunk_size = 20_000_000; // real 1m13.159s</span>
-  <span class="k">let</span> <span class="n">chunk_size</span> <span class="o">=</span> <span class="mi">10_000_000</span><span class="p">;</span> <span class="c">// real 1m14.613s</span>
+  <span class="c1">// times via `cargo test --release can_check_offline --no-run &amp;&amp; time cargo test --release can_check_offline -- --nocapture`</span>
+  <span class="c1">// let chunk_size = 1_000_000; // real 1m24.709s</span>
+  <span class="c1">// let chunk_size = 20_000_000; // real 1m13.159s</span>
+  <span class="k">let</span> <span class="n">chunk_size</span> <span class="o">=</span> <span class="mi">10_000_000</span><span class="p">;</span> <span class="c1">// real 1m14.613s</span>
 
   <span class="k">let</span> <span class="n">file</span> <span class="o">=</span> <span class="nn">BufReader</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="o">&amp;</span><span class="n">f</span><span class="p">);</span>
-  <span class="k">for</span> <span class="n">line</span> <span class="n">in</span> <span class="n">file</span><span class="nf">.lines</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="n">line</span> <span class="k">in</span> <span class="n">file</span><span class="nf">.lines</span><span class="p">()</span> <span class="p">{</span>
     <span class="n">this_chunk</span><span class="nf">.push</span><span class="p">(</span><span class="n">line</span><span class="nf">.unwrap</span><span class="p">());</span>
     <span class="k">if</span> <span class="n">this_chunk</span><span class="nf">.len</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">chunk_size</span> <span class="p">{</span>
       <span class="k">match</span> <span class="nf">check_this_chunk</span><span class="p">(</span><span class="o">&amp;</span><span class="n">entries</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">this_chunk</span><span class="p">)</span> <span class="p">{</span>
         <span class="nf">Ok</span><span class="p">(</span><span class="k">mut</span> <span class="n">vec_of_breached_entries</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="p">{</span>
           <span class="n">breached_entries</span><span class="nf">.append</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="n">vec_of_breached_entries</span><span class="p">)</span>
         <span class="p">}</span>
-        <span class="nf">Err</span><span class="p">(</span><span class="mi">_</span><span class="n">e</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="nd">eprintln!</span><span class="p">(</span><span class="s">"found no breached entries in this chunk"</span><span class="p">),</span>
+        <span class="nf">Err</span><span class="p">(</span><span class="n">_e</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="nd">eprintln!</span><span class="p">(</span><span class="s">"found no breached entries in this chunk"</span><span class="p">),</span>
       <span class="p">}</span>
       <span class="n">this_chunk</span><span class="nf">.clear</span><span class="p">();</span>
     <span class="p">}</span>
@@ -314,12 +314,12 @@ E38AD214943DAAD1D64C102FAEC29DE4AFE9DA3D:2401761
 
 <p>Once I got this chunk thing figured out, doing the actual hash digest comparisons was relatively easier – I used nested <code class="language-plaintext highlighter-rouge">for</code> loops.</p>
 
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">check_this_chunk</span><span class="p">(</span><span class="n">entries</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">[</span><span class="n">Entry</span><span class="p">],</span> <span class="n">chunk</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">[</span><span class="nb">String</span><span class="p">])</span> <span class="k">-&gt;</span> <span class="nn">io</span><span class="p">::</span><span class="n">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="n">Entry</span><span class="o">&gt;&gt;</span> <span class="p">{</span>
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fn</span> <span class="nf">check_this_chunk</span><span class="p">(</span><span class="n">entries</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">[</span><span class="n">Entry</span><span class="p">],</span> <span class="n">chunk</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">[</span><span class="nb">String</span><span class="p">])</span> <span class="k">-&gt;</span> <span class="nn">io</span><span class="p">::</span><span class="nb">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="n">Entry</span><span class="o">&gt;&gt;</span> <span class="p">{</span>
     <span class="k">let</span> <span class="k">mut</span> <span class="n">breached_entries</span> <span class="o">=</span> <span class="nn">Vec</span><span class="p">::</span><span class="nf">new</span><span class="p">();</span>
 
-    <span class="k">for</span> <span class="n">line</span> <span class="n">in</span> <span class="n">chunk</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="k">in</span> <span class="n">chunk</span> <span class="p">{</span>
         <span class="k">let</span> <span class="n">this_hash</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">line</span><span class="p">[</span><span class="o">..</span><span class="mi">40</span><span class="p">];</span>
-        <span class="k">for</span> <span class="n">entry</span> <span class="n">in</span> <span class="n">entries</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="n">entry</span> <span class="k">in</span> <span class="n">entries</span> <span class="p">{</span>
             <span class="k">if</span> <span class="n">this_hash</span> <span class="o">==</span> <span class="n">entry</span><span class="py">.digest</span> <span class="p">{</span>
                 <span class="n">breached_entries</span><span class="nf">.push</span><span class="p">(</span><span class="n">entry</span><span class="nf">.clone</span><span class="p">());</span>
             <span class="p">}</span>
@@ -357,7 +357,7 @@ E38AD214943DAAD1D64C102FAEC29DE4AFE9DA3D:2401761
         <span class="n">passwords_file_path</span><span class="p">:</span> <span class="o">&amp;</span><span class="nb">str</span><span class="p">,</span>
         <span class="n">entries</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="n">Entry</span><span class="o">&gt;</span><span class="p">,</span>
         <span class="n">progress_bar</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-        <span class="p">)</span> <span class="k">-&gt;</span> <span class="nn">io</span><span class="p">::</span><span class="n">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="n">Entry</span><span class="o">&gt;&gt;</span> <span class="p">{</span>
+        <span class="p">)</span> <span class="k">-&gt;</span> <span class="nn">io</span><span class="p">::</span><span class="nb">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="n">Entry</span><span class="o">&gt;&gt;</span> <span class="p">{</span>
     <span class="k">let</span> <span class="k">mut</span> <span class="n">this_chunk</span> <span class="o">=</span> <span class="nn">Vec</span><span class="p">::</span><span class="nf">new</span><span class="p">();</span>
     <span class="k">let</span> <span class="k">mut</span> <span class="n">breached_entries</span><span class="p">:</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="n">Entry</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nn">Vec</span><span class="p">::</span><span class="nf">new</span><span class="p">();</span>
 
@@ -367,7 +367,7 @@ E38AD214943DAAD1D64C102FAEC29DE4AFE9DA3D:2401761
     <span class="p">};</span>
     <span class="k">let</span> <span class="n">passwords_file_size</span> <span class="o">=</span> <span class="n">f</span><span class="nf">.metadata</span><span class="p">()</span><span class="nf">.unwrap</span><span class="p">()</span><span class="nf">.len</span><span class="p">()</span> <span class="k">as</span> <span class="nb">usize</span><span class="p">;</span>
 
-    <span class="k">let</span> <span class="n">chunk_size</span> <span class="o">=</span> <span class="mi">500_000_000</span><span class="p">;</span> <span class="c">// real 1m7.686s</span>
+    <span class="k">let</span> <span class="n">chunk_size</span> <span class="o">=</span> <span class="mi">500_000_000</span><span class="p">;</span> <span class="c1">// real 1m7.686s</span>
 
     <span class="k">let</span> <span class="n">pb</span> <span class="o">=</span> <span class="nn">ProgressBar</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="n">passwords_file_size</span> <span class="k">as</span> <span class="nb">u64</span><span class="p">);</span>
     <span class="k">if</span> <span class="n">progress_bar</span> <span class="p">{</span>
@@ -378,7 +378,7 @@ E38AD214943DAAD1D64C102FAEC29DE4AFE9DA3D:2401761
     <span class="p">}</span>
 
     <span class="k">let</span> <span class="n">file</span> <span class="o">=</span> <span class="nn">BufReader</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="o">&amp;</span><span class="n">f</span><span class="p">);</span>
-    <span class="k">for</span> <span class="n">line</span> <span class="n">in</span> <span class="n">file</span><span class="nf">.lines</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="k">in</span> <span class="n">file</span><span class="nf">.lines</span><span class="p">()</span> <span class="p">{</span>
         <span class="k">let</span> <span class="n">this_line</span> <span class="o">=</span> <span class="n">line</span><span class="nf">.unwrap</span><span class="p">()[</span><span class="o">..</span><span class="mi">40</span><span class="p">]</span><span class="nf">.to_string</span><span class="p">();</span>
         <span class="n">this_chunk</span><span class="nf">.push</span><span class="p">(</span><span class="n">this_line</span><span class="p">);</span>
         <span class="k">if</span> <span class="n">this_chunk</span><span class="nf">.len</span><span class="p">()</span> <span class="o">*</span> <span class="mi">48</span> <span class="o">&gt;</span> <span class="n">chunk_size</span> <span class="p">{</span>
@@ -386,7 +386,7 @@ E38AD214943DAAD1D64C102FAEC29DE4AFE9DA3D:2401761
                 <span class="nf">Ok</span><span class="p">(</span><span class="k">mut</span> <span class="n">vec_of_breached_entries</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="p">{</span>
                     <span class="n">breached_entries</span><span class="nf">.append</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="n">vec_of_breached_entries</span><span class="p">)</span>
                 <span class="p">}</span>
-                <span class="nf">Err</span><span class="p">(</span><span class="mi">_</span><span class="n">e</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="nd">eprintln!</span><span class="p">(</span><span class="s">"found no breached entries in this chunk"</span><span class="p">),</span>
+                <span class="nf">Err</span><span class="p">(</span><span class="n">_e</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="nd">eprintln!</span><span class="p">(</span><span class="s">"found no breached entries in this chunk"</span><span class="p">),</span>
             <span class="p">}</span>
             <span class="k">if</span> <span class="n">progress_bar</span> <span class="p">{</span>
                 <span class="n">pb</span><span class="nf">.inc</span><span class="p">(</span><span class="n">chunk_size</span> <span class="k">as</span> <span class="nb">u64</span><span class="p">);</span>
@@ -411,9 +411,9 @@ E38AD214943DAAD1D64C102FAEC29DE4AFE9DA3D:2401761
 <p>Luckily, a few months ago I used Rust to make <a href="https://github.com/sts10/password-strength-checker">this little password checker</a> that uses <a href="https://github.com/shssoichiro/zxcvbn-rs">a Rust port of zxcvbn</a>. The Rust port is pretty straight-forward to use. Here are the two functions I needed:</p>
 
 <div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">pub</span> <span class="k">fn</span> <span class="nf">check_for_and_display_weak_passwords</span><span class="p">(</span><span class="n">entries</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">[</span><span class="n">Entry</span><span class="p">])</span> <span class="p">{</span>
-    <span class="k">for</span> <span class="n">entry</span> <span class="n">in</span> <span class="n">entries</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="n">entry</span> <span class="k">in</span> <span class="n">entries</span> <span class="p">{</span>
         <span class="k">let</span> <span class="n">estimate</span> <span class="o">=</span> <span class="nf">zxcvbn</span><span class="p">(</span><span class="o">&amp;</span><span class="n">entry</span><span class="py">.pass</span><span class="p">,</span> <span class="o">&amp;</span><span class="p">[</span><span class="o">&amp;</span><span class="n">entry</span><span class="py">.title</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">entry</span><span class="py">.username</span><span class="p">])</span><span class="nf">.unwrap</span><span class="p">();</span>
-        <span class="c">// estimate.score gives is a 0 to 4 score of the password</span>
+        <span class="c1">// estimate.score gives is a 0 to 4 score of the password</span>
         <span class="k">if</span> <span class="n">estimate</span><span class="py">.score</span> <span class="o">&lt;</span> <span class="mi">4</span> <span class="p">{</span>
             <span class="nd">println!</span><span class="p">(</span><span class="s">"Your password for {} is weak."</span><span class="p">,</span> <span class="n">entry</span><span class="p">);</span>
             <span class="nf">give_feedback</span><span class="p">(</span><span class="n">estimate</span><span class="py">.feedback</span><span class="p">);</span>
@@ -429,7 +429,7 @@ E38AD214943DAAD1D64C102FAEC29DE4AFE9DA3D:2401761
                 <span class="nd">println!</span><span class="p">(</span><span class="s">"Warning: {}</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">warning</span><span class="p">);</span>
             <span class="p">}</span>
             <span class="nd">println!</span><span class="p">(</span><span class="s">"Suggestions:"</span><span class="p">);</span>
-            <span class="k">for</span> <span class="n">suggestion</span> <span class="n">in</span> <span class="n">feedback</span><span class="py">.suggestions</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="n">suggestion</span> <span class="k">in</span> <span class="n">feedback</span><span class="py">.suggestions</span> <span class="p">{</span>
                 <span class="nd">println!</span><span class="p">(</span><span class="s">"   - {}"</span><span class="p">,</span> <span class="n">suggestion</span><span class="p">)</span>
             <span class="p">}</span>
         <span class="p">}</span>
@@ -448,9 +448,9 @@ E38AD214943DAAD1D64C102FAEC29DE4AFE9DA3D:2401761
 
 <p>To be a <em>little</em> safer, I decided to use the password hash digests for the keys of the HashMap (called <code class="language-plaintext highlighter-rouge">digest_map</code> below). The values are a Vector (<code class="language-plaintext highlighter-rouge">group</code>) of all the entries whose password digest is the same. So if none of your KeePass database’s entries share passwords, all of the keys of this HashMap will only have one Entry in their attached Vectors. But if, say, three entries share a password, the digest of that password will be a key and its value will be a Vector with 3 Entries in it.</p>
 
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">pub</span> <span class="k">fn</span> <span class="nf">make_digest_map</span><span class="p">(</span><span class="n">entries</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">[</span><span class="n">Entry</span><span class="p">])</span> <span class="k">-&gt;</span> <span class="nn">io</span><span class="p">::</span><span class="n">Result</span><span class="o">&lt;</span><span class="n">HashMap</span><span class="o">&lt;</span><span class="nb">String</span><span class="p">,</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="n">Entry</span><span class="o">&gt;&gt;&gt;</span> <span class="p">{</span>
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">pub</span> <span class="k">fn</span> <span class="nf">make_digest_map</span><span class="p">(</span><span class="n">entries</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">[</span><span class="n">Entry</span><span class="p">])</span> <span class="k">-&gt;</span> <span class="nn">io</span><span class="p">::</span><span class="nb">Result</span><span class="o">&lt;</span><span class="n">HashMap</span><span class="o">&lt;</span><span class="nb">String</span><span class="p">,</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="n">Entry</span><span class="o">&gt;&gt;&gt;</span> <span class="p">{</span>
     <span class="k">let</span> <span class="k">mut</span> <span class="n">digest_map</span><span class="p">:</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="nb">String</span><span class="p">,</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="n">Entry</span><span class="o">&gt;&gt;</span> <span class="o">=</span> <span class="nn">HashMap</span><span class="p">::</span><span class="nf">new</span><span class="p">();</span>
-    <span class="k">for</span> <span class="n">entry</span> <span class="n">in</span> <span class="n">entries</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="n">entry</span> <span class="k">in</span> <span class="n">entries</span> <span class="p">{</span>
         <span class="n">digest_map</span>
             <span class="nf">.entry</span><span class="p">(</span><span class="n">entry</span><span class="nf">.clone</span><span class="p">()</span><span class="py">.digest</span><span class="p">)</span>
             <span class="nf">.and_modify</span><span class="p">(|</span><span class="n">vec</span><span class="p">|</span> <span class="n">vec</span><span class="nf">.push</span><span class="p">(</span><span class="n">entry</span><span class="nf">.clone</span><span class="p">()))</span>
@@ -460,16 +460,16 @@ E38AD214943DAAD1D64C102FAEC29DE4AFE9DA3D:2401761
     <span class="nf">Ok</span><span class="p">(</span><span class="n">digest_map</span><span class="p">)</span>
 <span class="p">}</span>
 
-<span class="c">// Clippy told me "warning: parameter of type `HashMap` should be generalized over different hashers"</span>
+<span class="c1">// Clippy told me "warning: parameter of type `HashMap` should be generalized over different hashers"</span>
 <span class="k">pub</span> <span class="k">fn</span> <span class="n">present_duplicated_entries</span><span class="o">&lt;</span><span class="n">S</span><span class="p">:</span> <span class="p">::</span><span class="nn">std</span><span class="p">::</span><span class="nn">hash</span><span class="p">::</span><span class="n">BuildHasher</span><span class="o">&gt;</span><span class="p">(</span>
         <span class="n">digest_map</span><span class="p">:</span> <span class="n">HashMap</span><span class="o">&lt;</span><span class="nb">String</span><span class="p">,</span> <span class="nb">Vec</span><span class="o">&lt;</span><span class="n">Entry</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">S</span><span class="o">&gt;</span><span class="p">,</span>
         <span class="p">)</span> <span class="p">{</span>
     <span class="k">let</span> <span class="k">mut</span> <span class="n">has_duplicated_entries</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span>
-    <span class="k">for</span> <span class="n">group</span> <span class="n">in</span> <span class="n">digest_map</span><span class="nf">.values</span><span class="p">()</span> <span class="p">{</span>
-        <span class="c">// print if there is more than 1 element in the vector, since that represents a repeated password</span>
+    <span class="k">for</span> <span class="n">group</span> <span class="k">in</span> <span class="n">digest_map</span><span class="nf">.values</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// print if there is more than 1 element in the vector, since that represents a repeated password</span>
         <span class="k">if</span> <span class="n">group</span><span class="nf">.len</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="p">{</span>
             <span class="nd">println!</span><span class="p">(</span><span class="s">"The following entries have the same password:</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
-            <span class="k">for</span> <span class="n">entry</span> <span class="n">in</span> <span class="n">group</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="n">entry</span> <span class="k">in</span> <span class="n">group</span> <span class="p">{</span>
                 <span class="nd">println!</span><span class="p">(</span><span class="s">"   - {}"</span><span class="p">,</span> <span class="n">entry</span><span class="p">);</span>
             <span class="p">}</span>
             <span class="n">has_duplicated_entries</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
@@ -502,45 +502,45 @@ E38AD214943DAAD1D64C102FAEC29DE4AFE9DA3D:2401761
 
 <p><code class="language-plaintext highlighter-rouge">structopt</code> requires you to define a <code class="language-plaintext highlighter-rouge">struct</code> called <code class="language-plaintext highlighter-rouge">Opt</code> in <code class="language-plaintext highlighter-rouge">src/main.rs</code>, in which we outline the options, flags, and arguments that our CLI will take. We can also provide documentation notes (denoted by the triple <code class="language-plaintext highlighter-rouge">///</code>) that will populate the <code class="language-plaintext highlighter-rouge">--help</code> output.</p>
 
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// excerpt from src/main.rs</span>
-<span class="k">extern</span> <span class="n">crate</span> <span class="n">structopt</span><span class="p">;</span>
-<span class="c">// ...</span>
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// excerpt from src/main.rs</span>
+<span class="k">extern</span> <span class="k">crate</span> <span class="n">structopt</span><span class="p">;</span>
+<span class="c1">// ...</span>
 <span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">path</span><span class="p">::</span><span class="n">PathBuf</span><span class="p">;</span>
 <span class="k">use</span> <span class="nn">structopt</span><span class="p">::</span><span class="n">StructOpt</span><span class="p">;</span>
 
-<span class="c">/// Medic</span>
+<span class="cd">/// Medic</span>
 <span class="nd">#[derive(StructOpt,</span> <span class="nd">Debug)]</span>
 <span class="nd">#[structopt(name</span> <span class="nd">=</span> <span class="s">"medic"</span><span class="nd">)]</span>
 <span class="k">struct</span> <span class="n">Opt</span> <span class="p">{</span>
-    <span class="c">/// Give verbose output</span>
+    <span class="cd">/// Give verbose output</span>
     <span class="nd">#[structopt(short</span> <span class="nd">=</span> <span class="s">"v"</span><span class="nd">,</span> <span class="nd">long</span> <span class="nd">=</span> <span class="s">"verbose"</span><span class="nd">)]</span>
     <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
 
-    <span class="c">/// Provide key file, if unlocking the KeePass databases requires one</span>
+    <span class="cd">/// Provide key file, if unlocking the KeePass databases requires one</span>
     <span class="nd">#[structopt(short</span> <span class="nd">=</span> <span class="s">"k"</span><span class="nd">,</span> <span class="nd">long</span> <span class="nd">=</span> <span class="s">"keyfile"</span><span class="nd">,</span> <span class="nd">parse(from_os_str))]</span>
     <span class="n">keyfile</span><span class="p">:</span> <span class="nb">Option</span><span class="o">&lt;</span><span class="n">PathBuf</span><span class="o">&gt;</span><span class="p">,</span>
 
-    <span class="c">/// Check passwords against breached passwords online via the HaveIBeenPwned API. More info</span>
-    <span class="c">/// here:</span>
-    <span class="c">/// https://www.troyhunt.com/ive-just-launched-pwned-passwords-version-2/#cloudflareprivacyandkanonymity</span>
+    <span class="cd">/// Check passwords against breached passwords online via the HaveIBeenPwned API. More info</span>
+    <span class="cd">/// here:</span>
+    <span class="cd">/// https://www.troyhunt.com/ive-just-launched-pwned-passwords-version-2/#cloudflareprivacyandkanonymity</span>
     <span class="nd">#[structopt(long</span> <span class="nd">=</span> <span class="s">"online"</span><span class="nd">)]</span>
     <span class="n">online</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
 
-    <span class="c">/// Provide password hash file to check database against. To download a copy of very large list of</span>
-    <span class="c">/// password hashes from HaveIBeenPwned, go to: https://haveibeenpwned.com/Passwords</span>
+    <span class="cd">/// Provide password hash file to check database against. To download a copy of very large list of</span>
+    <span class="cd">/// password hashes from HaveIBeenPwned, go to: https://haveibeenpwned.com/Passwords</span>
     <span class="nd">#[structopt(short</span> <span class="nd">=</span> <span class="s">"h"</span><span class="nd">,</span> <span class="nd">long</span> <span class="nd">=</span> <span class="s">"hashfile"</span><span class="nd">,</span> <span class="nd">parse(from_os_str))]</span>
     <span class="n">hash_file</span><span class="p">:</span> <span class="nb">Option</span><span class="o">&lt;</span><span class="n">PathBuf</span><span class="o">&gt;</span><span class="p">,</span>
 
-    <span class="c">/// Check database for duplicate passwords</span>
+    <span class="cd">/// Check database for duplicate passwords</span>
     <span class="nd">#[structopt(short</span> <span class="nd">=</span> <span class="s">"d"</span><span class="nd">,</span> <span class="nd">long</span> <span class="nd">=</span> <span class="s">"duplicate"</span><span class="nd">)]</span>
     <span class="n">check_duplicate</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
 
-    <span class="c">/// Check database for weak passwords</span>
+    <span class="cd">/// Check database for weak passwords</span>
     <span class="nd">#[structopt(short</span> <span class="nd">=</span> <span class="s">"w"</span><span class="nd">,</span> <span class="nd">long</span> <span class="nd">=</span> <span class="s">"weak"</span><span class="nd">)]</span>
     <span class="n">check_weak</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
 
-    <span class="c">/// KeePass database to check. Can either be a kdbx file or an exported CSV version of a</span>
-    <span class="c">/// KeePass database.</span>
+    <span class="cd">/// KeePass database to check. Can either be a kdbx file or an exported CSV version of a</span>
+    <span class="cd">/// KeePass database.</span>
     <span class="nd">#[structopt(name</span> <span class="nd">=</span> <span class="s">"KEEPASS DATABASE FILE"</span><span class="nd">,</span> <span class="nd">parse(from_os_str))]</span>
     <span class="n">keepass_db</span><span class="p">:</span> <span class="n">PathBuf</span><span class="p">,</span>
 <span class="p">}</span>
@@ -548,17 +548,17 @@ E38AD214943DAAD1D64C102FAEC29DE4AFE9DA3D:2401761
 
 <p>We can access the values of these arguments by using <code class="language-plaintext highlighter-rouge">Opt::from_args()</code> like so:</p>
 
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// still in src/main.rs</span>
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// still in src/main.rs</span>
 <span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">let</span> <span class="n">opt</span> <span class="o">=</span> <span class="nn">Opt</span><span class="p">::</span><span class="nf">from_args</span><span class="p">();</span>
     <span class="nd">println!</span><span class="p">(</span><span class="s">"Detected option(s):</span><span class="se">\n</span><span class="s">{:?}"</span><span class="p">,</span> <span class="n">opt</span><span class="p">);</span>
 
-    <span class="c">// and if we like, we can stash some of them in a fresh set of variables</span>
+    <span class="c1">// and if we like, we can stash some of them in a fresh set of variables</span>
     <span class="k">let</span> <span class="n">keepass_db_file_path</span> <span class="o">=</span> <span class="n">opt</span><span class="py">.keepass_db</span><span class="p">;</span>
     <span class="k">let</span> <span class="n">hash_file</span><span class="p">:</span> <span class="nb">Option</span><span class="o">&lt;</span><span class="n">PathBuf</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">opt</span><span class="py">.hash_file</span><span class="p">;</span>
     <span class="k">let</span> <span class="n">keyfile</span><span class="p">:</span> <span class="nb">Option</span><span class="o">&lt;</span><span class="n">PathBuf</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">opt</span><span class="py">.keyfile</span><span class="p">;</span>
     <span class="k">let</span> <span class="n">check_online</span> <span class="o">=</span> <span class="n">opt</span><span class="py">.online</span><span class="p">;</span>
-    <span class="c">// ...</span>
+    <span class="c1">// ...</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
@@ -592,9 +592,9 @@ E38AD214943DAAD1D64C102FAEC29DE4AFE9DA3D:2401761
     <span class="n">passwords_file_path</span><span class="p">:</span> <span class="n">PathBuf</span><span class="p">,</span>
     <span class="n">entries</span><span class="p">:</span> <span class="o">&amp;</span><span class="p">[</span><span class="n">Entry</span><span class="p">],</span>
     <span class="n">progress_bar_visibility</span><span class="p">:</span> <span class="n">VisibilityPreference</span><span class="p">,</span>
-    <span class="p">)</span> <span class="k">-&gt;</span> <span class="nn">io</span><span class="p">::</span><span class="n">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="n">Entry</span><span class="o">&gt;&gt;</span> <span class="p">{</span>
+    <span class="p">)</span> <span class="k">-&gt;</span> <span class="nn">io</span><span class="p">::</span><span class="nb">Result</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="n">Entry</span><span class="o">&gt;&gt;</span> <span class="p">{</span>
 
-        <span class="c">//...</span>
+        <span class="c1">//...</span>
 
         <span class="k">let</span> <span class="n">pb</span> <span class="o">=</span> <span class="nn">ProgressBar</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="n">passwords_file_size</span> <span class="k">as</span> <span class="nb">u64</span><span class="p">);</span>
         <span class="k">if</span> <span class="n">progress_bar_visibility</span> <span class="o">==</span> <span class="nn">VisibilityPreference</span><span class="p">::</span><span class="n">Show</span> <span class="p">{</span>
@@ -604,16 +604,16 @@ E38AD214943DAAD1D64C102FAEC29DE4AFE9DA3D:2401761
                     <span class="p">);</span>
         <span class="p">}</span>
 
-        <span class="c">// ...</span>
+        <span class="c1">// ...</span>
     <span class="p">}</span>
 </code></pre></div></div>
 
 <p>Now, calling the function looks much more descriptive:</p>
 
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// show progress bar in production</span>
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// show progress bar in production</span>
 <span class="k">let</span> <span class="n">breached_entries</span> <span class="o">=</span> <span class="nf">check_database_offline</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">entries</span><span class="p">,</span> <span class="nn">VisibilityPreference</span><span class="p">::</span><span class="n">Show</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
 
-<span class="c">// hide progress bar for test functions</span>
+<span class="c1">// hide progress bar for test functions</span>
 <span class="k">let</span> <span class="n">breached_entries</span> <span class="o">=</span> <span class="nf">check_database_offline</span><span class="p">(</span><span class="n">passwords_file_path</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">entries</span><span class="p">,</span> <span class="nn">VisibilityPreference</span><span class="p">::</span><span class="n">Hide</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">();</span>
 </code></pre></div></div>
 
@@ -633,21 +633,21 @@ E38AD214943DAAD1D64C102FAEC29DE4AFE9DA3D:2401761
 
 <div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">keyfile_path</span><span class="nf">.is_some</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">match</span> <span class="nn">Database</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span>
-            <span class="o">&amp;</span><span class="k">mut</span> <span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">(),</span> <span class="c">// the database</span>
-            <span class="nf">Some</span><span class="p">(</span><span class="o">&amp;</span><span class="n">db_pass</span><span class="p">),</span>                 <span class="c">// password</span>
-            <span class="nf">Some</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="nn">std</span><span class="p">::</span><span class="nn">path</span><span class="p">::</span><span class="nn">Path</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="n">keyfile_path</span><span class="nf">.unwrap</span><span class="p">()))</span><span class="nf">.unwrap</span><span class="p">()),</span> <span class="c">// keyfile</span>
+            <span class="o">&amp;</span><span class="k">mut</span> <span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">(),</span> <span class="c1">// the database</span>
+            <span class="nf">Some</span><span class="p">(</span><span class="o">&amp;</span><span class="n">db_pass</span><span class="p">),</span>                 <span class="c1">// password</span>
+            <span class="nf">Some</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="nn">std</span><span class="p">::</span><span class="nn">path</span><span class="p">::</span><span class="nn">Path</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="n">keyfile_path</span><span class="nf">.unwrap</span><span class="p">()))</span><span class="nf">.unwrap</span><span class="p">()),</span> <span class="c1">// keyfile</span>
             <span class="p">)</span> <span class="p">{</span>
         <span class="nf">Ok</span><span class="p">(</span><span class="n">db</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="n">db</span><span class="p">,</span>
         <span class="nf">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="nd">panic!</span><span class="p">(</span><span class="s">"Error opening database: {}"</span><span class="p">,</span> <span class="n">e</span><span class="p">),</span>
     <span class="p">}</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
     <span class="k">match</span> <span class="nn">Database</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span>
-            <span class="o">&amp;</span><span class="k">mut</span> <span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">(),</span> <span class="c">// the database</span>
-            <span class="nf">Some</span><span class="p">(</span><span class="o">&amp;</span><span class="n">db_pass</span><span class="p">),</span>                 <span class="c">// password</span>
-            <span class="nb">None</span><span class="p">,</span>                           <span class="c">// keyfile</span>
+            <span class="o">&amp;</span><span class="k">mut</span> <span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">(),</span> <span class="c1">// the database</span>
+            <span class="nf">Some</span><span class="p">(</span><span class="o">&amp;</span><span class="n">db_pass</span><span class="p">),</span>                 <span class="c1">// password</span>
+            <span class="nb">None</span><span class="p">,</span>                           <span class="c1">// keyfile</span>
             <span class="p">)</span> <span class="p">{</span>
         <span class="nf">Ok</span><span class="p">(</span><span class="n">db</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="n">db</span><span class="p">,</span>
-        <span class="nf">Err</span><span class="p">(</span><span class="mi">_</span><span class="n">e</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="p">{</span>
+        <span class="nf">Err</span><span class="p">(</span><span class="n">_e</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="p">{</span>
             <span class="nd">println!</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">Error opening database. Maybe you have a keyfile? If so, enter its file path:"</span><span class="p">);</span>
             <span class="k">let</span> <span class="n">keyfile_path</span> <span class="o">=</span> <span class="nf">get_file_path</span><span class="p">()</span><span class="nf">.unwrap</span><span class="p">();</span>
             <span class="nf">unlock_keepass_database</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">db_pass</span><span class="p">,</span> <span class="nf">Some</span><span class="p">(</span><span class="o">&amp;</span><span class="n">keyfile_path</span><span class="p">))</span>
@@ -667,21 +667,21 @@ E38AD214943DAAD1D64C102FAEC29DE4AFE9DA3D:2401761
 
     <span class="k">if</span> <span class="k">let</span> <span class="nf">Some</span><span class="p">(</span><span class="n">keyf_path</span><span class="p">)</span> <span class="o">=</span> <span class="n">keyfile_path</span> <span class="p">{</span>
         <span class="k">match</span> <span class="nn">Database</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span>
-                <span class="o">&amp;</span><span class="k">mut</span> <span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">(),</span> <span class="c">// the database</span>
-                <span class="nf">Some</span><span class="p">(</span><span class="o">&amp;</span><span class="n">db_pass</span><span class="p">),</span>                 <span class="c">// password</span>
-                <span class="nf">Some</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="nn">std</span><span class="p">::</span><span class="nn">path</span><span class="p">::</span><span class="nn">Path</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="n">keyf_path</span><span class="p">))</span><span class="nf">.unwrap</span><span class="p">()),</span> <span class="c">// keyfile</span>
+                <span class="o">&amp;</span><span class="k">mut</span> <span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">(),</span> <span class="c1">// the database</span>
+                <span class="nf">Some</span><span class="p">(</span><span class="o">&amp;</span><span class="n">db_pass</span><span class="p">),</span>                 <span class="c1">// password</span>
+                <span class="nf">Some</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="nn">std</span><span class="p">::</span><span class="nn">path</span><span class="p">::</span><span class="nn">Path</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="n">keyf_path</span><span class="p">))</span><span class="nf">.unwrap</span><span class="p">()),</span> <span class="c1">// keyfile</span>
                 <span class="p">)</span> <span class="p">{</span>
             <span class="nf">Ok</span><span class="p">(</span><span class="n">db</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="n">db</span><span class="p">,</span>
             <span class="nf">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="nd">panic!</span><span class="p">(</span><span class="s">"Error opening database: {}"</span><span class="p">,</span> <span class="n">e</span><span class="p">),</span>
         <span class="p">}</span>
     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
         <span class="k">match</span> <span class="nn">Database</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span>
-                <span class="o">&amp;</span><span class="k">mut</span> <span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">(),</span> <span class="c">// the database</span>
-                <span class="nf">Some</span><span class="p">(</span><span class="o">&amp;</span><span class="n">db_pass</span><span class="p">),</span>                 <span class="c">// password</span>
-                <span class="nb">None</span><span class="p">,</span>                           <span class="c">// keyfile</span>
+                <span class="o">&amp;</span><span class="k">mut</span> <span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">(),</span> <span class="c1">// the database</span>
+                <span class="nf">Some</span><span class="p">(</span><span class="o">&amp;</span><span class="n">db_pass</span><span class="p">),</span>                 <span class="c1">// password</span>
+                <span class="nb">None</span><span class="p">,</span>                           <span class="c1">// keyfile</span>
                 <span class="p">)</span> <span class="p">{</span>
             <span class="nf">Ok</span><span class="p">(</span><span class="n">db</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="n">db</span><span class="p">,</span>
-            <span class="nf">Err</span><span class="p">(</span><span class="mi">_</span><span class="n">e</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="p">{</span>
+            <span class="nf">Err</span><span class="p">(</span><span class="n">_e</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="p">{</span>
                 <span class="nd">println!</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">Error opening database. Maybe you have a keyfile? If so, enter its file path:"</span><span class="p">);</span>
                 <span class="k">let</span> <span class="n">keyfile_path</span> <span class="o">=</span> <span class="nf">get_file_path</span><span class="p">()</span><span class="nf">.unwrap</span><span class="p">();</span>
                 <span class="nf">unlock_keepass_database</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">db_pass</span><span class="p">,</span> <span class="nf">Some</span><span class="p">(</span><span class="o">&amp;</span><span class="n">keyfile_path</span><span class="p">))</span>
@@ -703,9 +703,9 @@ E38AD214943DAAD1D64C102FAEC29DE4AFE9DA3D:2401761
     <span class="k">let</span> <span class="k">mut</span> <span class="n">keyfile</span> <span class="o">=</span> <span class="n">keyfile_path</span><span class="nf">.map</span><span class="p">(|</span><span class="n">kfp</span><span class="p">|</span> <span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="n">kfp</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">());</span>
 
     <span class="k">match</span> <span class="nn">Database</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span>
-            <span class="o">&amp;</span><span class="k">mut</span> <span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">(),</span>               <span class="c">// the database</span>
-            <span class="nf">Some</span><span class="p">(</span><span class="o">&amp;</span><span class="n">db_pass</span><span class="p">),</span>                               <span class="c">// password</span>
-            <span class="n">keyfile</span><span class="nf">.as_mut</span><span class="p">()</span><span class="nf">.map</span><span class="p">(|</span><span class="n">f</span><span class="p">|</span> <span class="n">f</span> <span class="k">as</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="n">dyn</span> <span class="n">Read</span><span class="p">),</span> <span class="c">// keyfile</span>
+            <span class="o">&amp;</span><span class="k">mut</span> <span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="nf">.unwrap</span><span class="p">(),</span>               <span class="c1">// the database</span>
+            <span class="nf">Some</span><span class="p">(</span><span class="o">&amp;</span><span class="n">db_pass</span><span class="p">),</span>                               <span class="c1">// password</span>
+            <span class="n">keyfile</span><span class="nf">.as_mut</span><span class="p">()</span><span class="nf">.map</span><span class="p">(|</span><span class="n">f</span><span class="p">|</span> <span class="n">f</span> <span class="k">as</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="k">dyn</span> <span class="n">Read</span><span class="p">),</span> <span class="c1">// keyfile</span>
             <span class="p">)</span> <span class="p">{</span>
         <span class="nf">Ok</span><span class="p">(</span><span class="n">db</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="n">db</span><span class="p">,</span>
         <span class="nf">Err</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="p">{</span>
