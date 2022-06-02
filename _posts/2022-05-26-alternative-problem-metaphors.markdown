@@ -120,4 +120,3 @@ This temporal element is not something I picked up on in _Metaphors We Live By_.
 <!-- > Metaphors offer a tiny boost in learnability to first time users at tremendous cost. The biggest problem is that by representing old technology, metaphors firmly nail our conceptual feet to the ground, forever limiting the power of our software. --> 
 
 <!-- So yeah, using metaphors can be limiting. But it seems like we're stuck with them for now. -->
-
