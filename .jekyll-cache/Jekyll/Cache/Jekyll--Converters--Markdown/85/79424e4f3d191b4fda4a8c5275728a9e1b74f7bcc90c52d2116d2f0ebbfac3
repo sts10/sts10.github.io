@@ -1,2 +1,0 @@
-I"�<p>On my work computer I’ve been having some trouble getting the 2015 MacBook Pro’s Terminal Vim to access the system clipboard. There is a chance that the version of Vim that shipped with the computer does not support the feature in which the <code class="language-plaintext highlighter-rouge">*</code> register is connected to the system clipboard. (I’ll note the version number next time I’m in the office.)</p>
-:ET

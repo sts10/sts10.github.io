@@ -1,2 +1,0 @@
-I"+<p>I was looking for an open-source, free, and secure way of frequently moving files between computers. <a href="https://privacytoolsio.github.io/privacytools.io/">Privacytools.io</a> pointed me to <a href="https://syncthing.net/">Syncthing</a>. I subsequently found a few <a href="https://linuxctl.com/2017/04/syncthing---why-you-should-be-using-it/">blog</a> <a href="https://blog.matthewurch.ca/?p=309">posts</a> recommending it. It doesn’t store any data in the cloud– it merely keeps a list of folders in sync across any number of computers.</p>
-:ET

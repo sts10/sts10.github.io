@@ -26,9 +26,14 @@ github_username:  sts10
 
 # Build settings
 markdown: kramdown
-theme: minima
+# theme: minima
+remote_theme: daattali/beautiful-jekyll@5.0.0
 plugins:
   - jekyll-feed
+  - jekyll-remote-theme
+
+site-css:
+  - "/assets/css/custom-styles.css"
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list

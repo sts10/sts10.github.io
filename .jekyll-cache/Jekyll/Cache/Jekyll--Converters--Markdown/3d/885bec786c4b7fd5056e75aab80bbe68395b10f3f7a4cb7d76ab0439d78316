@@ -1,2 +1,0 @@
-I"Æ<p>Sometimes I get an error on a seemingly-random iteration of a loop that occurs many times. Normally I would drop in in a <code class="language-plaintext highlighter-rouge">binding.pry</code> from the <a href="https://github.com/pry/pry">Pry Ruby gem</a>, but this is not always a sufficient solution, since Iâ€™d have to <code class="language-plaintext highlighter-rouge">exit</code> through all the successful iterations until I found the error.</p>
-:ET
