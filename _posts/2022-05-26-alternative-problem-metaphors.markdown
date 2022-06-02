@@ -51,7 +51,7 @@ It could be otherwise!
 
 ## What is Truth? Getting more radical 
 
-How far for Lakoff and Johnson go. By page 159, in a chapter called "Truth", we get:
+How far do Lakoff and Johnson go? By page 159, in a chapter called "Truth", we get:
 
 > We believe that the idea that there is absolute objective truth is not only mistaken but socially and politically dangerous. As we have seen, truth is always relative to a conceptual system that is defined in large part by metaphor. Most of our metaphors have evolved in our culture over a long period, but many are imposed upon us by people in power -- political leader, religious leaders, business leaders, advertisers, the media, etc. In a culture where the myth of objectivism is very much alive and truth is always absolute truth, the people who get to impose their metaphors on the culture get to define what we consider to be true -- absolutely and objectively true.
 
@@ -60,6 +60,8 @@ Truth, for the authors, is based on understanding through metaphor. From 184:
 > For us, meaning depends on understanding. A sentence can't mean anything to you unless you understand it. Moreover, meaning is always meaning _to_ someone. There is no such thing as a meaning of a sentence in itself...
 
 > Here our theory differs radically from standard theories of meaning. The standard theories assume that it is possible to give an account of truth in itself, free of human understanding, and that the theory of meaning will be based on such a theory of truth. We see no possibility for any such program to work and think that the only answer is to base both the theory of meaning and the theory of truth on a theory of understanding. Metaphor... plays a central role in such a program. Metaphors are basically devices for understanding and have little to do with objective reality, if there is such a thing.
+
+What a liberating notion to those of us learning a new concept: Its truth is not some objective thing, apart from your understanding, that you are chasing. The truth of it _is_ your understanding of it. In other words, the old adage of "know your audience" seems to be far more important than one might have assumed: If you want to write true things, you _must_ know where your audience is coming from (i.e. what metaphors they have access to). 
 
 ## What this means for a person who wants to explain things to other people (Metaphorical imagination)
 
