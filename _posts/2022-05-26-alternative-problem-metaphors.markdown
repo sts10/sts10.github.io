@@ -45,7 +45,7 @@ And later, on labor and leisure (66):
 
 > LABOR IS A RESOURCE and TIME IS A RESOURCE are by no means universal. They emerged naturally in our culture because of the way we [again, I take it they mean Americans] view work, our passion for quantification, and our obsession with purposeful ends. These metaphors highlight those aspect of labor and time that are centrally important in our culture. In doing this, they also deemphasize or hide certain aspects of labor and time....
 
-> The quantification of labor in terms of time, together with the view of time as serving a purposeful end, induces a notion of LEAISURE TIME, which is parallel to the concept of LABOR TIME... As a result, LEISURE TIME becomes a RESOURCE too -- to be spent productively, used wisely, saved up, budgeted, wasted, lost etc. What is hidden by the RESOURCE metaphors for labor and time is the way our concepts of LABOR and TIME affect our concept of LEISURE, turning it into something remarkably like LABOR.
+> The quantification of labor in terms of time, together with the view of time as serving a purposeful end, induces a notion of LEISURE TIME, which is parallel to the concept of LABOR TIME... As a result, LEISURE TIME becomes a RESOURCE too -- to be spent productively, used wisely, saved up, budgeted, wasted, lost etc. What is hidden by the RESOURCE metaphors for labor and time is the way our concepts of LABOR and TIME affect our concept of LEISURE, turning it into something remarkably like LABOR.
 
 It could be otherwise!
 
@@ -59,7 +59,7 @@ Truth, for the authors, is based on understanding through metaphor. From 184:
 
 > For us, meaning depends on understanding. A sentence can't mean anything to you unless you understand it. Moreover, meaning is always meaning _to_ someone. There is no such thing as a meaning of a sentence in itself...
 
-> Here our theory differs radically from standard theories of meaning. The standard theories assume that it is possible to give an account of truth in itself, free of human understanding, and that the theory of meaning will be based on such a theory of truth. We see no possibility for any such program to work and thijnk that the only answer is to base both the theory of meaning and the theory of truth on a theory of understanding. Metaphor... plays a central role in such a program. Metaphors are basically devices for understanding and have little to do with objective reality, if there is such a thing.
+> Here our theory differs radically from standard theories of meaning. The standard theories assume that it is possible to give an account of truth in itself, free of human understanding, and that the theory of meaning will be based on such a theory of truth. We see no possibility for any such program to work and think that the only answer is to base both the theory of meaning and the theory of truth on a theory of understanding. Metaphor... plays a central role in such a program. Metaphors are basically devices for understanding and have little to do with objective reality, if there is such a thing.
 
 ## What this means for a person who wants to explain things to other people (Metaphorical imagination)
 
