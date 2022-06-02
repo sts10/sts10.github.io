@@ -113,11 +113,13 @@ Using `head` and Tidy, I created [an example word list](https://github.com/sts10
 
 - Each word from this list provides an additional 14.02 bits of entropy, close to a nice round number. 
 - Thus, a 7-word passphrase provides 98.14 bits of entropy. This is pretty close to 100 bits, which is what KeePassXC labels "excellent". 
-- Since prefix words have been removed, passphrases created from this list aren't required to have punctuation between the words to maintain  its level of entropy. (Example: `spillsunmoveddissectionfadingminedtapered`)
+- Since prefix words have been removed, passphrases created from this list aren't required to have punctuation between the words to maintain  its level of entropy. (Example: We'd be safe to use `spillsunmoveddissectionfadingminedtapered` _even though_ the first two words, "spills unmoved" _could_ be 3 words -- "spill sun moved" -- because "spill" is a prefix word of "spills" and thus has been removed the list, preventing a user from ever generating the passphrase `spill sun moved dissection fading mined tapered`. Shout out to [Reddit user BlueCyber007 for asking this question](https://www.reddit.com/r/1Password/comments/ur4otq/comment/i8ylj8f/?utm_source=reddit&utm_medium=web2x&context=3).)
 
 Note that I haven't manually scrolled through this example list, so there may be some offensive words remaining. (You can use Tidy's reject words options to remove words.) 
 
 Currently, I am **not** actually using this example word list, or any product of this project, for creating passphrases or anything else. But it was a fun project!
+
+**Update from 2022**: I've created [more word lists](https://github.com/sts10/generated-wordlists) using this method and others, including [a proposed new list for 1Password](https://github.com/sts10/generated-wordlists/tree/main/lists/1password-replacement).
 
 ## Further questions to explore
 
