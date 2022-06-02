@@ -27,11 +27,11 @@ github_username:  sts10
 # Build settings
 markdown: kramdown
 # theme: minima
-theme: beautiful-jekyll-theme
-# remote_theme: daattali/beautiful-jekyll@5.0.0
+# theme: beautiful-jekyll-theme
+remote_theme: daattali/beautiful-jekyll@5.0.0
 plugins:
   - jekyll-feed
-  # - jekyll-remote-theme
+  - jekyll-remote-theme
 
 site-css:
   - "/assets/css/custom-styles.css"
