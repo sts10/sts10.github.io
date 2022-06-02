@@ -65,7 +65,9 @@ What a liberating notion to those of us learning a new concept: Its truth is not
 
 ## What this means for a person who wants to explain things to other people (Metaphorical imagination)
 
-How can we make this all a bit more practical? Let's say you're like me and are interested in explaining technical concepts to other people, either through technical writing of in-person. In general, I've found it's easier to explain something to a friend of 10 years than a new colleague. This makes sense given our new framework, since we have a ton of shared (cultural) experience to draw on and form more precise metaphors with, with more confidence the listener will "know what we're talking about".
+How can we make this all a bit more practical? Let's say you're like me and are interested in explaining technical concepts to other people, either through technical writing or in-person. 
+
+In general, I've found it's easier to explain something to a friend of 10 years than a new colleague. This makes sense given our new framework, since we have a ton of shared (cultural) experience to draw on and form more precise metaphors with, and we likely have more confidence our listener will "know what we're talking about."
 
 In a section called "Interpersonal Communication and Mutual Understanding", Lakoff and Johnson address the trickier case: 
 
@@ -75,19 +77,19 @@ Here's to cultivating a diversity of cultural and personal experience and mainta
 
 ## The canonical person
 
-Armed with this idea that two people need at least some shared experience to negotiate meaning through metaphors, I thought about if this illuminated an unexplored advantage of being in a member of a group in power. For example, business people may use sports metaphors that may be easier for sports fan to understand compared to people who don't watch sports. 
+Armed with this idea that two people need at least some shared experience to **negotiate meaning through metaphors**, I thought about if this illuminated an unexplored advantage of being in a member of a group in power. As a common example that you may have heard before (but this framework may illuminate in new ways), business people may use sports metaphors that may be easier for sports fans to understand compared to people who don't watch sports. 
 
-We might now venture even deeper. Lakoff and Johnson spend a good amount of time taking about orientations as metaphors (HAPPY IS UP, SAD IS DOWN; HEALTH IS UP, SICKNESS and DEATH are DOWN; VIRTUE IS UP, DEPRAVITY IS DOWN,). Much later in the book, they briefly acknowledge something interesting, especially when considered in light of disability: that these orientation and other "basic" metaphors rely on a "prototypical" or "canonical" person.
+We might now venture even deeper. Lakoff and Johnson spend a good amount of time taking about orientations as metaphors (HAPPY IS UP, SAD IS DOWN; HEALTH IS UP, SICKNESS and DEATH are DOWN; VIRTUE IS UP, DEPRAVITY IS DOWN,). Much later in the book, they briefly acknowledge something interesting, especially when considered in light of disability: that these foundational orientation metaphors rely on a "prototypical" or "canonical" person.
 
 > Cooper and Ross (1975) observe that our culture's view of what a prototypical member of our culture is like determines an orientation of concepts within our conceptual system. The canonical person forms a conceptual reference point, and an enormous number of concepts in our conceptual system are oriented with respect to whether or not they are similar to the properties of the prototypical person. Since people typically function in an _upright_ position, see and move _frontward_, spend most of their time performing _actions_... we have a basis in our experience for viewing ourselves as more UP than DOWN, more FRONT than BACK, more ACTIVE than PASSIVE... (132)
 
-What does this mean for a person who can't stand UP unassisted? 
+What does this mean for a person who can't stand UP unassisted, whose leg is twisted "sideways", or who requires more PASSIVE time to rest than others? Are they othered by entrenched cultural metaphors in ways that few understand?
 
 ## Computer viruses as a more modern example
 
-Obviously, in the time since 1980, computers and the internet became huge parts of our worlds. The number of metaphors we use (and, I'd say, need) seems to have grown exponentially (desktop, files, interNET, the web, recycle bin, the save icon, password vaults, distributed ledgers....). 
+Obviously in the time since 1980, computers and the internet became huge parts of our worlds. The number of metaphors we use (and, I'd say, need) seems to have grown exponentially (desktop, files, interNET, the web, recycle bin, the save icon, password vaults, distributed ledgers....). 
 
-There's a ton of interesting work we could do in applying these metaphorical concepts from the 1970s to modern technology and the world it has created. But just to take one: In 2017, Sam Zucchi explored one such example: [how the metaphor of a computer "virus" as something biological may no longer be helpful](https://reallifemag.com/plague-of-metaphors/). 
+There's a ton of interesting work we could do in applying these metaphorical concepts from the 1970s to modern technology and the world it has created. In 2017, Sam Zucchi explored one such example: [the metaphor of a computer "virus" as a biological disease](https://reallifemag.com/plague-of-metaphors/). 
 
 > The language of infection, infestation, and disease are routine ways of comprehending the digital world: Not only do computers suffer from viruses, but errors are diagnosed, bugs are found in code, and worms parasitically invade host servers. PEN America [conducted a survey](https://www.mhpbooks.com/mapping-the-language-we-use-to-describe-surveillance/) and found that some of the most frequent metaphors describing digital surveillance relied on the language of invasive biological procedures: “hemorrhaging, implanting, infect, ingest, inject,” and so on. The computer is now perceived as a biological entity; any fault in the system is now a symptom of disease.
 
@@ -95,14 +97,13 @@ Zucchi observes a sleight of hand performed by the choice of metaphor here, name
 
 > And these diseases have been seen as deserved. Your computer was infected because you did something morally objectionable, like torrenting a video game, stealing an album, or searching for porn. In opening an email attachment from a stranger, you acted foolishly and what did you think would happen? To let your machine become infected was to have been at the very least thoughtless and, at the worst, culpable — you sent the plague. The implied lesson of any such infection, then, was that you, the user, needed to be careful and responsible.
 
-
 In conclusion Zucchi offers us the idea that metaphors, as we've been discussing them, may outgrow their purposes after a time.
 
 > Sontag’s Illness and Its Metaphors ends with the notion that the kind of anxieties dealt with by metaphors of illness will likely outlast the usefulness of the metaphor itself. On our computers, viruses cannot stand for themselves — as independent agents, as actors with their own volition. They always stand in for power, and their presence is a reminder of the power that the individual user, ultimately, does not have. When the image of the computer virus is no longer useful, perhaps that apparent powerlessness will become easier to see and confront.
 
-This implies that explanatory metaphors need to be revisited occasionally to see if their explanatory power is still worth the trade-offs of what they hide. Our ("Our") understanding of either or both sides of the metaphor (computer errors and biological disease, in this case) can shift. I think it's pretty obvious that almost every culture's understanding of "plagues" or contagious diseases has shifted dramatically since 2017. 
+This implies that explanatory metaphors need to be revisited occasionally to see if their explanatory power is still worth the trade-offs of what they hide. Our ("Our") understanding of either or both sides of the metaphor (computer errors and biological disease, in this case) can shift. I think it's pretty obvious that almost every culture's understanding of "plagues" or contagious diseases has shifted dramatically since 2017, specifically how blame of disease contraction is placed on individuals vs. "society"/ "public."
 
-This temporal element is not something I picked up on in _Metaphors We Live By_. However, authors do take care to explain that these metaphors are necessarily partial, not total. "If [they] were total, once concept would actually _be_ the other, not merely understood in terms of it. For example, time isn't really money." That this already-partial explanatory power may wane as our ("our") understanding of one or both of the connected concepts (computer errors and biological disease, in this case) changes makes sense within Lakoff and Johnson's framework.
+This idea of metaphors growing out-dated over time is not something I picked up on in _Metaphors We Live By_. However, the authors do take care to explain that these metaphors are necessarily partial, not total. "If [they] were total, once concept would actually _be_ the other, not merely understood in terms of it. For example, time isn't really money." That this already-partial explanatory power may wane as our ("our") understanding of one or both of the connected concepts (computer errors and biological disease, in this case) changes makes sense within Lakoff and Johnson's framework.
 
 <!-- ### A soaked nut -->
 
