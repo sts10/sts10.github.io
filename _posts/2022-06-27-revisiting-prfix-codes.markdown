@@ -37,25 +37,27 @@ I think the answer is yes, but it's hard for me to prove it to myself at the mom
 
 For what it's worth, [the Wikipedia entry on prefix codes](https://en.wikipedia.org/wiki/Prefix_code#Related_concepts) reads "A suffix code is a set of words none of which is a suffix of any other; equivalently, a set of words which are the reverse of a prefix code. As with a prefix code, the representation of a string as a concatenation of such words is unique." 
 
+### CSafe test
+
+As a fun little test, I created a 81,345-word list that was free of suffix words using Tidy (see below). I then ran that list through [my compound passphrase list safety checker](https://github.com/sts10/csafe) (version 0.3.16) looking for problematic ambiguities. It didn't find any, which is evidence in favor of a "yes" to the question above, but not definitive proof.
+
 ### If the answer is yes...
 
 If the answer to the above question is yes, than what's interesting is that we now have two procedures for making a word list safe: remove all prefix words OR remove all suffix words. So we could make two lists: one without prefix words (`prefix-free.txt`) and another without suffix words (`suffix-free.txt`). If we're optimizing word list length, we could choose whichever list is longer.
 
+Using [Wikipedia word frequency data](https://github.com/IlyaSemenov/wikipedia-word-frequency/blob/master/results/enwiki-20190320-words-frequency.txt) as a corpus, we can do a quick test using [Tidy](https://github.com/sts10/tidy):
+
+Removing prefix words from the first 70,000 words of the Wikipedia list (`tidy -AinP -m 3 -M 12 --take-first 70000 --dry-run results/enwiki-20190320-words-frequency.txt`) creates a list of 48,523 words. Removing all suffix words (`tidy -AinU -m 3 -M 12 --take-first 70000 --dry-run results/enwiki-20190320-words-frequency.txt`) leaves us with 55,545 words. This is evidence toward a theory that, when dealing with common English words, removing all suffix words may leave us with more words than removing prefix words.
+
+### An "optimal" procedure?
+
 A natural follow-up question here is what other procedures would guarantee safety while removing the least number of words. I attempted to create an even more optimal procedure with my ["Compound Passphrase List Safety Checker"](https://github.com/sts10/csafe), but there are issues with this procedure, including three-word combinations.
-
-### CSafe test
-
-As a fun little test, I created a 81,345-word list that was free of suffix words. I then ran that list through [my compound passphrase list safety checker](https://github.com/sts10/csafe) (version 0.3.16) looking for problematic ambiguities. It didn't find any, which is evidence in favor of a "yes" to the question above, but not definitive proof.
 
 ## A new option for Tidy
 
 Undaunted, I created a new option for [my word list making command-line tool](https://github.com/sts10/tidy) to remove suffix words from an inputted word list. Tidy users can now easily create a `prefix-free.txt` list (`tidy -AP -o prefix-free.txt inputted-word-list.txt`) and `suffix-free.txt` list (`tidy -AU -o suffix-free.txt inputted-word-list.txt`) and compare them.
 
 I also opened [a GitHub issue asking for help answering this suffix codes question](https://github.com/sts10/tidy/issues/7). If you have any insights, please leave a comment!
-
-<!-- ## What is the "optimal" solution here? -->
-
-
 
 <!-- ### Can Huffman coding help us here? -->
 
