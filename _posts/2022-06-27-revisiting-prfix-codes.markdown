@@ -43,6 +43,10 @@ If the answer to the above question is yes, than what's interesting is that we n
 
 A natural follow-up question here is what other procedures would guarantee safety while removing the least number of words. I attempted to create an even more optimal procedure with my ["Compound Passphrase List Safety Checker"](https://github.com/sts10/csafe), but there are issues with this procedure, including three-word combinations.
 
+### CSafe test
+
+As a fun little test, I created a 81,345-word list that was free of suffix words. I then ran that list through [my compound passphrase list safety checker](https://github.com/sts10/csafe) (version 0.3.16) looking for problematic ambiguities. It didn't find any, which is evidence in favor of a "yes" to the question above, but not definitive proof.
+
 ## A new option for Tidy
 
 Undaunted, I created a new option for [my word list making command-line tool](https://github.com/sts10/tidy) to remove suffix words from an inputted word list. Tidy users can now easily create a `prefix-free.txt` list (`tidy -AP -o prefix-free.txt inputted-word-list.txt`) and `suffix-free.txt` list (`tidy -AU -o suffix-free.txt inputted-word-list.txt`) and compare them.
