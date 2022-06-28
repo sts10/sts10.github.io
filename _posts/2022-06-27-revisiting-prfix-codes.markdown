@@ -39,7 +39,7 @@ For what it's worth, [the Wikipedia entry on prefix codes](https://en.wikipedia.
 
 ### CSafe test
 
-As a fun little test, I created a 81,345-word list that was free of suffix words using Tidy (see below). I then ran that list through [my compound passphrase list safety checker](https://github.com/sts10/csafe) (version 0.3.16) looking for problematic ambiguities. It didn't find any, which is evidence in favor of a "yes" to the question above, but not definitive proof.
+As a fun little test, I created a 81,345-word list that was free of suffix words using [Tidy](https://sts10.github.io/2021/12/09/tidy-0-2-0.html) (see below). I then ran that list through [my compound passphrase list safety checker](https://github.com/sts10/csafe) (version 0.3.16) looking for problematic ambiguities. It didn't find any, which is evidence in favor of a "yes" to the question above, but not definitive proof.
 
 ### If the answer is yes...
 
