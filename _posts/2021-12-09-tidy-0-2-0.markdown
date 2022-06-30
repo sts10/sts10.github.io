@@ -120,7 +120,7 @@ Interesting, the EFF long list does not clear this line, since `log2(7776) / 3 =
 
 I don't really know! I'm not a mathematician or cryptographer. For one thing, the odds of getting a three-word passphrase of 3-letter words from the EFF list is about 0.0001%. But more importantly, I'm not even sure how an attacker could effectively use this information to crack a passphrase faster.
 
-Like, in 2018, 1Password's word list of 18,328 words had at least some 3-letter words on it, meaning it had an assumed entropy per letter of 4.72 -- above both our lines. And yet, when they [held a passphrase-cracking competition](https://blog.1password.com/how-strong-should-your-master-password-be-for-world-password-day-wed-like-to-know/) that year, I don't think any participants used a method other than [running through all 18328^3 possible combinations](https://github.com/agilebits/crackme/blob/master/write-ups/5BSLBTKR.md#writeup). (Here's [my blog post about that challenge](https://sts10.github.io/2018/05/31/1password-cracking-challenge.html).)
+Like, in 2018, 1Password's word list of 18,328 words had at least some 3-letter words on it, meaning it had an assumed entropy per letter of 4.72 -- below both our lines. And yet, when they [held a passphrase-cracking competition](https://blog.1password.com/how-strong-should-your-master-password-be-for-world-password-day-wed-like-to-know/) that year, I don't think any participants used a method other than [running through all 18328^3 possible combinations](https://github.com/agilebits/crackme/blob/master/write-ups/5BSLBTKR.md#writeup). (Here's [my blog post about that challenge](https://sts10.github.io/2018/05/31/1password-cracking-challenge.html).)
 
 ### How I folded some of this math into Tidy
 
@@ -209,7 +209,7 @@ etc.
 Up for a challenge, I allowed the user to set the number of sides of their dice to between 2 and 36. This involved some fun handling of non-base-10 numbers, a bit of zero-padding, and a challenging off-by-one error!
 
 ```rust
-use radix_fmt::*; // Still need this dependency...
+use radix_fmt::*;
 pub fn print_as_dice(n: usize, base: u8, list_length: usize) -> String {
     // Set width for zero-padding
 
@@ -240,13 +240,14 @@ pub fn print_as_dice(n: usize, base: u8, list_length: usize) -> String {
         // If base is 2 or 3, just print as-is, zero-indexed.
         2 | 3 => padded_n,
         // If base is a common dice size (between 4 and 8), we'll add
-        // one to each digit, to make it easier to compare to actual rolled dice
+        // one to each digit, to make it one-indexed and thus easier to 
+        // compare to actual rolled dice
         4..=8 => padded_n
             .chars()
             .map(|ch| (ch.to_string().parse::<usize>().unwrap() + 1).to_string())
             .collect::<String>(),
-        // If base is over base 9, we'll print each digit as zero-iondex, but
-        // we'll add a hyphen _between_ digits to make it easier to read.
+        // If base is over base 9, we'll print each digit as zero-index, but
+        // we'll add a hyphen _between_ values to make it easier to read.
         9..=36 => padded_n
             .chars()
             .map(|ch| ch.to_string() + "-")
@@ -272,7 +273,7 @@ tidied_list = match req.cut_to {
     }
     None => tidied_list,
 };
-// Finally, sort and dedup list (for final time)
+// Finally, sort and de-duplicate list (for final time)
 tidied_list = sort_and_dedup(&mut tidied_list);
 ```
 
