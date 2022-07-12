@@ -77,13 +77,13 @@ Later, this knowledgable Reddit user wrote:
 
 Whoa! Yes! Here is what is supposedly an algorithm that can tell you whether a given code is uniquely decodable. 
 
-Clearly, this would be a great boolean to add this the attributes of a word list that Tidy prints for users.
+Clearly, this would be a great boolean to add to the attributes of a word list that [Tidy](https://github.com/sts10/tidy) (optionally) prints for users.
 
 But the larger challenge is to go further and figure out how we might use the mechanism(s) of this algorithm to **remove the fewest number of code words to make a given list uniquely decodable**. I have a feeling that we can do better than removing all prefix words or removing all suffix words.
 
 ### Some code
 
-To this end, I've played around with implementing Sardinas-Patterson for myself in Rust, in an effort to learn more about how it works and how I/we might develop a method of removing the fewest code words to make a code uniquely decodable.
+To this end, I've played around with implementing Sardinas-Patterson for myself in Rust, in an effort to learn more about how it works and how I/we might develop a method of removing the fewest number of code words to make a code uniquely decodable.
 
 However, I've yet to accomplish the first step of getting an implementation of the algorithm working. I can't quite understand how the algorithm works in subsequent rounds. A work in progress!
 
