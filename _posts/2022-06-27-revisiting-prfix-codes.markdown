@@ -63,7 +63,15 @@ After thinking about it for a bit, I figured the field of information theory mig
 
 After a back-and-forth with u/ericGraves, I learned a couple very useful things. First of all, this quality of a word list that I've been awkwardly calling "compound safety" or "concatenation safety" is what information theory calls a **uniquely decodable code**. I was excited that this term made sense to me: we want a "code" (a collection of words, in our case), that can be "decoded" (read) in only one, unique way.
 
-As a parting gift, this knowledgable Reddit user wrote:
+### A realization
+
+In the past, I conflated two things. I thought saying a word list was "free of prefix words" was the same as saying it's uniquely decodable. But I now see that removing all prefix words is simply one method of guaranteeing that the resulting code is uniquely decodable.
+
+Understanding this difference is important for making room in our thinking for alternate procedures of creating uniquely decodable lists. It's for this reason that I'm most grateful to have learned this powerful phrase/concept.
+
+### An algorithm
+
+Later, this knowledgable Reddit user wrote:
 
 > I would suggest [Sardinas-Patterson algorithm](https://en.wikipedia.org/wiki/Sardinas%E2%80%93Patterson_algorithm) for determining if a code is uniquely decodable, and removing failure points.
 
