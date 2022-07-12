@@ -39,7 +39,7 @@ For what it's worth, [the Wikipedia entry on prefix codes](https://en.wikipedia.
 
 ### CSafe test
 
-As a fun little test, I created a 81,345-word list that was free of suffix words using [Tidy](https://sts10.github.io/2021/12/09/tidy-0-2-0.html) (see below). I then ran that list through [my compound passphrase list safety checker](https://github.com/sts10/csafe) (version 0.3.16) looking for problematic ambiguities. It didn't find any, which is evidence in favor of a "yes" to the question above, but not definitive proof.
+As a fun little test, I created a 81,345-word list that was free of suffix words using [Tidy](https://sts10.github.io/2021/12/09/tidy-0-2-0.html) (see below). I then ran that list through [my compound passphrase list safety checker](https://github.com/sts10/csafe) (version 0.3.16) looking for problematic ambiguities. It didn't find any, which is evidence in favor of a "yes" to the question above, but **not definitive proof**.
 
 ### If the answer is yes...
 
@@ -49,15 +49,37 @@ Using [Wikipedia word frequency data](https://github.com/IlyaSemenov/wikipedia-w
 
 Removing prefix words from the first 70,000 words of the Wikipedia list (`tidy -AinP -m 3 -M 12 --take-first 70000 --dry-run results/enwiki-20190320-words-frequency.txt`) creates a list of 48,523 words. Removing all suffix words (`tidy -AinU -m 3 -M 12 --take-first 70000 --dry-run results/enwiki-20190320-words-frequency.txt`) leaves us with 55,545 words. This is evidence toward a theory that, when dealing with common English words, removing all suffix words may leave us with more words than removing prefix words.
 
-### An "optimal" procedure?
-
-A natural follow-up question here is what other procedures would guarantee safety while removing the least number of words. I attempted to create an even more optimal procedure with my ["Compound Passphrase List Safety Checker"](https://github.com/sts10/csafe), but there are issues with this procedure, including three-word combinations.
-
 ## A new option for Tidy
 
 Undaunted, I created a new option for [my word list making command-line tool](https://github.com/sts10/tidy) to remove suffix words from an inputted word list. Tidy users can now easily create a `prefix-free.txt` list (`tidy -AP -o prefix-free.txt inputted-word-list.txt`) and `suffix-free.txt` list (`tidy -AU -o suffix-free.txt inputted-word-list.txt`) and compare them.
 
 I also opened [a GitHub issue asking for help answering this suffix codes question](https://github.com/sts10/tidy/issues/7). If you have any insights, please leave a comment!
+
+## An "optimal" procedure?
+
+A natural follow-up question here is what other procedures would guarantee safety while removing the least number of words. I attempted to create an even more optimal procedure with my ["Compound Passphrase List Safety Checker"](https://github.com/sts10/csafe), but there are issues with this procedure, including three-word combinations.
+
+After thinking about it for a bit, I figured the field of information theory might already have a solution to this very issue. I ventured over to r/informationtheory on Reddit and [did my best to ask my question](https://www.reddit.com/r/informationtheory/comments/vnretf/question_about_suffix_codes_and_safe_concatenation/). 
+
+After a back-and-forth with u/ericGraves, I learned a couple very useful things. First of all, this quality of a word list that I've been awkwardly calling "compound safety" or "concatenation safety" is what information theory calls a **uniquely decodable code**. I was excited that this term made sense to me: we want a "code" (a collection of words, in our case), that can be "decoded" (read) in only one, unique way.
+
+As a parting gift, this knowledgable Reddit user wrote:
+
+> I would suggest [Sardinas-Patterson algorithm](https://en.wikipedia.org/wiki/Sardinas%E2%80%93Patterson_algorithm) for determining if a code is uniquely decodable, and removing failure points.
+
+Whoa! Yes! Here is what is supposedly an algorithm that can tell you whether a given code is uniquely decodable. 
+
+Clearly, this would be a great boolean to add this the attributes of a word list that Tidy prints for users.
+
+But the larger challenge is to go further and figure out how we might use the mechanism(s) of this algorithm to **remove the fewest number of code words to make a given list uniquely decodable**. I have a feeling that we can do better than removing all prefix words or removing all suffix words.
+
+### Some code
+
+To this end, I've played around with implementing Sardinas-Patterson for myself in Rust, in an effort to learn more about how it works and how I/we might develop a method of removing the fewest code words to make a code uniquely decodable.
+
+However, I've yet to accomplish the first step of getting an implementation of the algorithm working. I can't quite understand how the algorithm works in subsequent rounds. A work in progress!
+
+You can check out [the Github repo](https://github.com/sts10/uniquely-decodable). Feel free to contribute!
 
 <!-- ### Can Huffman coding help us here? -->
 
