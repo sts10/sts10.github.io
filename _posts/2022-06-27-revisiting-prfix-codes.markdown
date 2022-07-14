@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "In pursuit of a uniquely decodable code algorithm"
+title: "In search of a uniquely decodable code algorithm"
 date: 2022-06-27 13:00:00 -0400
 comments: true
 ---
