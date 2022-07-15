@@ -25,15 +25,15 @@ At the time, the Tails setup page in the documentation advised users to use dice
 
 ## Is KeePassXC's passphrase generator acceptable for SecureDrop users?
 
-Since Tails has KeePassXC installed by default, I figured it was worth at least suggesting in a PR that users be able to trust KeePassXC's random passphrase generator. Not everyone wants to find and roll dice to make a passphrase! 
+Tails comes with a password manager called KeePassXC. As you might imagine, KeePassXC can generate random passphrases (using the EFF long list, which is 7,776 words long). I figured it was worth at least suggesting in a PR that users be able to trust KeePassXC's random passphrase generator. Not everyone wants to find and roll dice to make a passphrase! 
 
-This idea seems to have been well received. 
+This idea seems to have been uncontroversial and well received! 
 
 ## How strong should the passphrases be? 
 
-The next question in re-writing these recommendations in the docs was how **strong** to suggest these passphrases should be. I was a little surprised that there wasn't more guidance on this!
+The next question in re-writing these recommendations in the docs was how **strong** to suggest these passphrases should be. In practical terms, how many _words_ should each unique passphrase be. I was a little surprised that there wasn't more guidance on this!
 
-I'll pause here and say that most of these passphrases are for protecting 
+I'll pause here and say that most of these passphrases are for protecting encrypted storage on the Tails USB stick itself. This is necessary to store passwords and other files, since we wouldn't want Tails to delete them on shutdown.
 
 In my initial PR, I conservatively suggested a 7-word passphrase. Since KeePassXC, by default, uses the EFF long list, 7 words gives about 90 bits of entropy. I figured that was a decent balance between usability and security, but admittedly it was a bit of a shot in the dark. But I figured we could hash out the exact number in the comments of the PR on GitHub.
 
@@ -49,13 +49,23 @@ This told me a few things. First -- and I maybe should have know this beforehand
 
 Ultimately, we want to figure out how many guesses at the passphrase an attacker can make in a second. The mitigations Huerta references are steps that LUKS takes to slow these guesses down. For example, _if_ we can slow it down such that it takes, say, 1 full second for an attacker to make a guess, it'll take 11 days for them to make a million guesses. It'll take 31 years to make a billion guesses.
 
+Here's a metaphor for us to think about. Let's say the lock on your apartment door accepts 1 of 100 keys that the company makes. In this case, an attacker could buy all 100 keys and then just try every one before any one noticed. If it takes 3 seconds to try a particular key, the attacker will get through all of them in 5 minutes (and on average, will try your key about halfway through, so only 150 seconds after their first attempt). 
+
+One way we can slow this attacker down is by makes more possible keys-- say 200 or 1,000,000. Another way would be to make the lock in such a way that it takes longer than 3 seconds to try a key. For example, what if the lock required you to turn the key 5 full rotations before the key either worked or did not work. Now it takes the attacker 15 seconds per key, thus tripling expected attack time. 
+
+To tie this back to the technological issue at hand, in our LUKS encryption situation, we're looking to see how long it takes for an attacker to find out if a password is correct or incorrect. Does LUKS have some protections in place to slow guessing down? How many times do you have to turn the key in their lock?
+
 ### Learning about Tails and LUKS
 
-As I replied on Github: 
+To find out, I first had to make an encrypted volume, just like a SecureDrop admin would (obviously mine is just for testing purposes). As I replied on Github: 
 
 > I took this as a challenge to do a little investigating. I installed and started up Tails (first time!) following [these instructions](https://tails.boum.org/install/linux/index.en.html). I then created a persistent storage partition (using a trivial passphrase) following [these instructions](https://tails.boum.org/doc/first_steps/persistence/index.en.html). In both cases, I was attempting to do what I'd assume a regular SecureDrop user would do, following current documentation.
 
+Next, we need a tool to tell us about the protections on this LUKS "lock".
+
 > Then I went off-script, and I set an admin password for Tails and installed cryptsetup from [the tar file linked from this Gitlab repo](https://gitlab.com/cryptsetup/cryptsetup#download) (installing via `sudo apt install cryptsetup` was giving me issues, I assume because its Tails). I then ran `sudo ./cryptsetup luksDump /dev/sdb2` to learn more about our new encrypted partition. Here's what it output:
+
+(In other words, here's what information we got about the lock.)
 
 ```text
 LUKS header information for /dev/sdb2
@@ -87,7 +97,7 @@ Key Slot 6: DISABLED
 Key Slot 7: DISABLED
 ```
 
-This gives us a few useful pieces of information. First, that this fresh Tails persistent storage volume uses LUKS version 1. I'm pretty sure that [LUKS version 1 uses PBKDF as its key derivation function](https://infosecwriteups.com/how-luks-works-with-full-disk-encryption-in-linux-6452ad1a42e8). 
+This gives us a few useful pieces of information about our "lock". First, that this fresh Tails persistent storage volume uses LUKS version 1. I'm pretty sure that [LUKS version 1 uses PBKDF as its key derivation function](https://infosecwriteups.com/how-luks-works-with-full-disk-encryption-in-linux-6452ad1a42e8). 
 
 Next, I focused on the "Hash spec": "sha256". I guessed that that means that the partition uses PBKDF2-sha256 to hash the passphrase (the "internal hash function" is HMAC-SHA-256). 
 
@@ -95,4 +105,22 @@ Finally,
 
 > the other number we're interested in is number of iterations... I'm not sure if that's the 113,580 number or 1,820,444. If I had to guess I'd say "MK" stands for "master key", which is not the passphrase the users sets, so for our purposes, we're more concerned with the ~1.8 million number. (Obviously neither are round numbers, so my guess is that the Tails GUI uses a time-based benchmark to set this value?)
 
+For our lock metaphor, this is information about the lock I made when I created my test LUKS volume. To see if a password is correct, users (or attackers) much complete 1.8 _million_ iterations (or, turns of a key) to find out if it's the correct password (key)!!
 
+That might sound like a lot, but my same laptop can do about 1,736,052 iterations per second on this type of "lock". (Maybe we can imagine the attacker putting each key into an high-powered drill that turn 1.7 million times per second?) I don't think it's a coincidence that these numbers are relatively close: It's likely that Tails/LUKS used a one-second benchmark from my laptop when it say the 1.8 million number. 
+
+Let's call it about 1 second per guess. If users set a passphrase by randomly selecting 3 random words from a list of 7,776 words (why 7,776? That's how many words are on the list that KeePassXC uses by default), like "crook-pushover-faceted", it'd take an attacker about 156 centuries to guess them all. If the passphrase is 4 words long ("expansive-unison-carport-latter"), we get up to 121,500 millenia. 
+
+## A slightly more realistic estimate
+
+Of course, an attacker trying to break into a Tails USB drive used by a SecureDrop user is likely going to be using a bit more computer power than a 5-year-old laptop. 
+
+Luckily, [1Password held a passphrase-cracking contest back in 2018](https://blog.1password.com/how-strong-should-your-master-password-be-for-world-password-day-wed-like-to-know/) with similar goals to ours:
+
+> Our (1Password's) goals in offering these challenges is to gain a better sense of the resistance of various types of user Master Passwords to cracking if 1Password data is captured from a user's device.
+
+Even more luckily, the parameters of their challenge are similar to the LUKS defaults I found on Tails: They [published a series of hashes](https://github.com/agilebits/crackme) derived from 100,000 rounds of HMAC-SHA256 on a 3-word passphrase from their word list (about 18,000 words). [The (eventual) winners say they used 21 NVIDIA cards worth of computing power and sustained an average speed of 209.85 kH/s.](https://github.com/agilebits/crackme/blob/master/write-ups/DOHB6DC7.md) Given our formula above, and for conservative sake, maintaining the 100k iterations of the contest, that's `1/(209.85*1000) * 7776**4 /60 / 60 / 24 / 365` or 552 years to get through the entire space of a 4-word passphrase from the EFF long list. 3 words gets us down to 25 days.
+
+Thus, 3 words is a little dicey, 4 feels better... 
+
+In the end, I stuck by my recommendation of 7 words: I figured _I_ didn't want to be the reason one of these encrypted drives gets cracked. I think you'd want more user stories to make a call on whether the trade-off between security and convenience is worth knocking this down to 6 or 5 words. And obviously it'd be easy to tweak the number of the recommendation in the documentation. I'm proud that I got the ball rolling.
