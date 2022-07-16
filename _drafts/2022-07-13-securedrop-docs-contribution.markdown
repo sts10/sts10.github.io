@@ -55,11 +55,13 @@ This told me a few things. First -- and I maybe should have know this beforehand
 
 Ultimately, we want to figure out how many guesses at the passphrase an attacker can make in a second. The mitigations Huerta references are steps that LUKS takes to slow these guesses down. For example, _if_ we can slow it down such that it takes, say, 1 full second for an attacker to make a guess, it'll take 11 days for them to make a million guesses. It'll take 31 years to make a billion guesses.
 
-Here's a metaphor for us to think about. Let's say the lock on your apartment door accepts 1 of 100 keys that the lock company makes. In this case, an attacker could buy all 100 keys and then just try every one before any one noticed. If it takes 3 seconds to try a particular key, the attacker will get through all of them in 5 minutes (and on average, will try your key about halfway through, so only 150 seconds after their first attempt). 
+Here's a metaphor for us to think about. Let's say you've got a safe that requires a combination to open. To keep it simple, let's say the dial goes from 1 to 10 and the combination is just 2 numbers. 10 squared is 100, so there are only 100 possible combinations to open the safe. In this case, an attacker could do what we might call a "brute force" attack, where they start with 1-1 and work their way up to 10-10. If it takes 3 seconds to try a combination, the attacker will get through all of them in 5 minutes (and on average, will try your combination about halfway through, so only 150 seconds after their first attempt). 
 
-One way we can slow this attacker down is by making more possible keys -- say 200 or 1,000,000. Another way would be to make the lock in such a way that it takes longer than 3 seconds to try a key. For example, what if the lock required you to turn the key 5 full rotations before the key either worked or did not work. Now it takes the attacker 15 seconds per key, thus tripling expected attack time. 
+Not great! What are some ways we could make it take longer? First, we could make the dial bigger (like 1 to 100). We could also make the safe take 3 or 4 or 5 numbers instead of just 2 (kind of like making a password longer). 
 
-To tie this back to the technological issue at hand, in our LUKS encryption situation, we're looking to see how long it takes for an attacker to find out if a password is correct or incorrect. Is it a negligible amount of time? Does LUKS have some protections in place to slow guessing down? How many times do you have to turn the key in their lock?
+Another way would be to change the safe/dial in such a way that it takes longer than 3 seconds to try a combination. For example, what if the dial required you to turn the dial a few times between attempts (or between individual numbers). If we , say ,tripled the amount of time it takes to make a guess, we've tripled the time to crack the safe.
+
+To tie this back to the technological issue at hand, in our LUKS encryption situation, we can think of the LUKS encrypted volume as our safe. We're looking to see how long it takes for an attacker to find out if a given password is correct or incorrect. Is it a negligible amount of time? Does LUKS have some protections in place to slow guessing down? How many times do you have to turn the dial to make one guess?
 
 ### Learning about Tails and LUKS
 
@@ -67,11 +69,11 @@ To find out, I first had to make an encrypted volume, just like a SecureDrop adm
 
 > I took this as a challenge to do a little investigating. I installed and started up Tails (first time!) following [these instructions](https://tails.boum.org/install/linux/index.en.html). I then created a persistent storage partition (using a trivial passphrase) following [these instructions](https://tails.boum.org/doc/first_steps/persistence/index.en.html). In both cases, I was attempting to do what I'd assume a regular SecureDrop user would do, following current documentation.
 
-Next, we need a tool to tell us about the protections on this LUKS "lock".
+Next, we need a tool to tell us about the protections on this LUKS "safe".
 
 > Then I went off-script, and I set an admin password for Tails and installed cryptsetup from [the tar file linked from this Gitlab repo](https://gitlab.com/cryptsetup/cryptsetup#download) (installing via `sudo apt install cryptsetup` was giving me issues, I assume because its Tails). I then ran `sudo ./cryptsetup luksDump /dev/sdb2` to learn more about our new encrypted partition. Here's what it output:
 
-(In other words, I asked for more information about the lock I had just created. And here's what I got.)
+(In other words, I asked for more information about the safe I had just created and its lock. And here's what I got.)
 
 ```text
 LUKS header information for /dev/sdb2
@@ -103,7 +105,7 @@ Key Slot 6: DISABLED
 Key Slot 7: DISABLED
 ```
 
-This gives us a few useful pieces of information about our "lock". First, that this fresh Tails persistent storage volume uses LUKS version 1. I'm pretty sure that [LUKS version 1 uses PBKDF as its key derivation function](https://infosecwriteups.com/how-luks-works-with-full-disk-encryption-in-linux-6452ad1a42e8). 
+This gives us a few useful pieces of information about our "safe". First, that this fresh Tails persistent storage volume uses LUKS version 1. I'm pretty sure that [LUKS version 1 uses PBKDF as its key derivation function](https://infosecwriteups.com/how-luks-works-with-full-disk-encryption-in-linux-6452ad1a42e8). 
 
 Next, I focused on the "Hash spec": "sha256". I guessed that that means that the partition uses PBKDF2-SHA256 to hash the passphrase (the "internal hash function" is HMAC-SHA-256). 
 
@@ -111,11 +113,13 @@ Finally,
 
 > the other number we're interested in is number of iterations... I'm not sure if that's the 113,580 number or 1,820,444. If I had to guess I'd say "MK" stands for "master key", which is not the passphrase the users sets, so for our purposes, we're more concerned with the ~1.8 million number. (Obviously neither are round numbers, so my guess is that the Tails GUI uses a time-based benchmark to set this value?)
 
-For our lock metaphor, this is information about the lock I made when I created my test LUKS volume. To see if a password is correct, users (or attackers) much complete 1.8 _million_ iterations (or, turns of a key) to find out if it's the correct password (key)!!
+For our safe metaphor, this is information about the safe and its lock I made when I created my test LUKS volume. To see if a password is correct, users (or attackers) much complete 1.8 _million_ iterations (or, turns of the dial) to find out if it's the correct password (combination)!!
 
-That might sound like a lot, but my same laptop can do about 1,736,052 iterations per second on this type of "lock". (Maybe we can imagine the attacker putting each key into a power drill that turn 1.7 million times per second?) I don't think it's a coincidence that these numbers are relatively close: It's likely that Tails/LUKS used a one-second benchmark from my laptop when it say the 1.8 million number. 
+That might sound like a lot, but my same laptop can do about 1,736,052 iterations per second on this type of "dial". (Maybe we can imagine the attacker with a gasoline-powered dialer?) As an aside, I don't think it's a coincidence that these numbers are relatively close: It's likely that Tails/LUKS used a one-second benchmark from my laptop when it say the 1.8 million number. 
 
-Let's call it a round 1 second per guess. If users set a passphrase by randomly selecting 3 random words from the EFF list of 7,776 words, like "crook-pushover-faceted", it'd take an attacker using my laptop about 156 centuries to guess them all. If the passphrase is 4 words long ("expansive-unison-carport-latter"), this number jumps to 121,500 millenia. 
+Let's call it a round 1 second per guess. 
+
+Now let's look at a straight-word example passphrase/combination. If we make a passphrase (a password made up of words rather than characters and numbers) with words from the EFF list of 7,776 words, like "crook-pushover-faceted", it's as if the safe's dial has 7,776 numbers on it. Awesome -- the bigger the dial, the larger number of possible combinations, the more "space" the attacker has to brute-force through. Now let's say that the passphrase is 3 words long. At one second per guess , it'd take an attacker using my laptop about 156 centuries to guess them all. If the passphrase is 4 words long ("expansive-unison-carport-latter"), this number jumps to 121,500 millenia. 
 
 ## A slightly more realistic estimate
 
