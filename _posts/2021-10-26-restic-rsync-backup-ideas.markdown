@@ -155,7 +155,6 @@ Since I've decided to back-up my entire home directory, there are quite a few fi
 /home/$USER/.cache
 /home/$USER/.cargo
 /home/$USER/.gem
-/home/$USER/.katrain
 /home/$USER/.local/share/flatpak
 /home/$USER/.local/share/Steam
 /home/$USER/.local/share/Trash
