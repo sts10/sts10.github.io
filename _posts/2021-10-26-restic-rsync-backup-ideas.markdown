@@ -53,11 +53,11 @@ Let's check the version really quick: `restic version` prints:
 
 Now let's do some backing up!
 
-First, let's try to gain a bare-bones conceptual understanding of how restic works. Restic has a concept called "repositories", which is where your backup(s) will live. [From the docs](https://restic.readthedocs.io/en/latest/030_preparing_a_new_repo.html#preparing-a-new-repository):
+First, let's try to gain a bare-bones conceptual understanding of how restic works. Restic has a concept called "repositories", which is where your backup(s) will live (so like, an external hard drive, a USB stick or a cloud service). [From the docs](https://restic.readthedocs.io/en/latest/030_preparing_a_new_repo.html#preparing-a-new-repository):
 
 > The place where your backups will be saved is called a “repository”. This chapter explains how to create (“init”) such a repository. The repository can be stored locally, or on some remote server or service. 
 
-Basically we use restic to "pull" data into these backup repositories. So for me, my repository (singular for now) will be on my external hard drive (for simplicity, let's pretend I only have one of those...).
+Basically we use restic to "pull" data into these backup repositories. So for me, my repository (singular for now) will be on my external hard drive (for simplicity, let's pretend I only have one of those...). The data I want to back-up to this repository is on my laptop's hard drive.
 
 ### Initializing a restic repository
 
