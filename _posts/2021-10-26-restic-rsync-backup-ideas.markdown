@@ -7,11 +7,7 @@ comments: true
 
 A confession: I've never been very good about backing up my data. Yes, I've had one external hard drive or another for more than a decade, but my back up plan for most of that time was to drag some folders to the closest USB drive every few months, or when I was migrating to a new computer.
 
-<!-- For a few years now, I've been using a command-line tool called [rsync](https://rsync.samba.org/) to perform periodic back-ups of my most important files to various external hard drives and even some USB thumb drives. --> 
-
-<!-- ## In the before times... -->
-
-For example, I would drag and drop my "code" folder from my main hard drive to a folder on my external hard drive called "back-ups", and date it like "2020-12-01-back-up-code". Every few months I'd make a new one, then maybe delete the oldest one. I could have used a well-written `cp` command to do this, definitely adding the `-R` flag so it works recursively. This would also serve as a "restore" command when used in the opposite direction.
+For example, I would literally drag and drop -- using the GUI -- my "code" folder from my main hard drive to a folder on my external hard drive called "back-ups", and date it like "2020-12-01-back-up-code". Every few months I'd make a new one, then maybe delete the oldest one. I could have used a well-written `cp` command to do this, definitely adding the `-R` flag so it works recursively. This would also serve as a "restore" command when used in the opposite direction.
 
 This approach is simple and easy to perform and understand -- you move the files you want to save in one directions, and move them in the other to restore; and you can always fall-back to an all-GUI procedure. But it has some real downsides. First, the external hard drive would need 2x, 3x, or 4x more space than whatever I was backing up. Second, each back-up would start from scratch, taking hours. And third, sometimes I could see where some files just wouldn't be transferred over at all!
 
@@ -37,9 +33,9 @@ The big downside here is that we only ever have one "snapshot" of data to recove
 
 This week, looking for a project, I decided to explore some more robust back-up options. 
 
-After asking Mastodon for recommendations and searching around just a bit, I decided to give [restic](https://restic.net/), a "modern backup program" that uses encryption, a try. It's not clear to me if restic, by default, _compresses_ your files, so if you need that you may want to look elsewhere.
+After asking Mastodon for recommendations and searching around just a bit, I decided to give [restic](https://restic.net/), a "modern backup program" that encrypts back-ups by default, a try. It's not clear to me if restic, by default, _compresses_ your files as well as encrypts them, so if you need that you may want to look elsewhere.
 
-(Re: use of encryption: I won't get into my personal threat model here, for security reasons, but in general I believe encryption is good, and it costs me little to store yet another passphrase in [my password manager](https://sts10.github.io/2017/06/27/keepassxc-setup-guide.html). Restic's docs has a section on [its threat model](https://restic.readthedocs.io/en/latest/100_references.html?highlight=threat#threat-model), if you're interested.) 
+(Re: use of encryption: I won't get into my personal threat model here, for security reasons, but in general I believe encryption is good, and it costs me little to store yet another passphrase in [my password manager](https://sts10.github.io/2017/06/27/keepassxc-setup-guide.html). It's probably a good idea to write down your restic password somewhere physically secure. Restic's docs has a section on [its threat model](https://restic.readthedocs.io/en/latest/100_references.html?highlight=threat#threat-model), if you're interested.) 
 
 ## Using restic
 
@@ -72,7 +68,7 @@ mkdir /media/sschlinkert/external_harddrive/restic-repo
 restic init --repo /media/sschlinkert/external_harddrive/restic-repo
 ```
 
-Restic now asks us to create a password for this back-up "repo" (restic uses encryption). We'll be asked to enter the new password as second time to confirm.
+Restic now asks us to create a password for this back-up "repo" (restic uses encryption). We'll be asked to enter the new password a second time to confirm.
 
 ### Doing our first backup
 
@@ -155,17 +151,23 @@ But `restic -r /media/$USER/external_harddrive/restic-repo --verbose backup /hom
 Since I've decided to back-up my entire home directory, there are quite a few files and directories I can safety exclude from back-ups. You can read [the exclude options in the documentation](https://restic.readthedocs.io/en/latest/040_backup.html#excluding-files), but I decided to use the `--exclude-file` flag, which excludes items listed in a given file. For now, that file is just `~/restic-excludes.txt` and its contents are:
 
 ```text
-/home/$USER/.mozilla
+/home/$USER/.bundle
 /home/$USER/.cache
 /home/$USER/.cargo
-/home/$USER/.rustup
-/home/$USER/.bundle
 /home/$USER/.gem
-/home/$USER/.rbenv
-/home/$USER/.pyenv
-/home/$USER/.npm
-/home/$USER/go
+/home/$USER/.katrain
+/home/$USER/.local/share/flatpak
 /home/$USER/.local/share/Steam
+/home/$USER/.local/share/Trash
+/home/$USER/.local/share/baloo
+/home/$USER/.mozilla
+/home/$USER/.npm
+/home/$USER/.nvm
+/home/$USER/.pyenv
+/home/$USER/.rbenv
+/home/$USER/.rustup
+/home/$USER/.var/app/org.chromium.Chromium/cache/
+/home/$USER/.zoom
 /home/$USER/snap
 ```
 
