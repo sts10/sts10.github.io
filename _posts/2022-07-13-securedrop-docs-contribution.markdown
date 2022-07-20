@@ -2,8 +2,6 @@
 layout: post
 title: "Contributing passphrase guidance to SecureDrops docs"
 date: 2022-07-13 14:00:00 -0400
-draft: true
-publish: false
 comments: true
 ---
 
@@ -134,3 +132,7 @@ Even more luckily, the parameters of their challenge are similar to the LUKS def
 Thus, 3 words is a little dicey, 4 feels better... 
 
 In the end, I stuck by my recommendation of 7 words: I figured _I_ didn't want to be the reason one of these encrypted drives gets cracked. I think you'd want more user stories to make a call on whether the trade-off between security and convenience is worth knocking this down to 6 or 5 words. And obviously it'd be easy to tweak the number of the recommendation in the documentation. I'm proud that I got the ball rolling, and was able to do a little light forensic work that I _hope_ isn't too off-the-mark.
+
+## The end result
+
+You can now read my contribution to the docs [on the current "Passphrases" page](https://docs.securedrop.org/en/stable/passphrases.html#how-to-generate-a-strong-unique-passphrase).
