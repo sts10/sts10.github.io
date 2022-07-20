@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Contributing passphrase guidance to SecureDrops docs"
+title: "How strong should SecureDrop passphrases be?"
 date: 2022-07-13 14:00:00 -0400
 comments: true
 ---
