@@ -5,9 +5,9 @@ date: 2022-07-13 14:00:00 -0400
 comments: true
 ---
 
-Back in May, I was reading over [SecureDrop's documentation](https://docs.securedrop.org/en/stable/index.html) and its GitHub Issues. (If you don't know, [SecureDrop](https://securedrop.org/) "is an open-source whistleblower submission system that media organizations can use to securely accept documents from and communicate with anonymous sources." It's maintained by the Freedom of the Press Foundation.)
+Back in May, I was reading over [SecureDrop's documentation](https://docs.securedrop.org/en/stable/index.html) and its corresponding GitHub Issues. (If you don't know, [SecureDrop](https://securedrop.org/) "is an open-source whistleblower submission system that media organizations can use to securely accept documents from and communicate with anonymous sources." It's maintained by the [Freedom of the Press Foundation](https://freedom.press/).)
 
-Running SecureDrop involves generating and storing many strong, unique passphrases. In fact, [the documentation's has a page dedicated to passphrases](https://docs.securedrop.org/en/stable/passphrases.html), summarizing all of the passwords users need to create and keep track of. 
+For journalists, the actual running and maintenance of a SecureDrop "instance" involves generating and storing quite a few strong, unique passphrases. In fact, [the documentation has a page dedicated to passphrases](https://docs.securedrop.org/en/stable/passphrases.html), which first summarizes all of the passwords users need to create and keep track of. 
 
 It's my understanding that, of these passphrases, the ones that actual humans need to remember are used to protect Tails persistent storage volumes. Basically, SecureDrop makes heavy use of an operating system called [Tails](https://tails.boum.org/). The features of Tails, while awesome, are a bit beyond the scope of this blog post. What we need to know is that: if you want to any files you create or download while using Tails to exist after shutting down Tails, you need to save them in a volume or partition called "persistent storage". This volume is encrypted with a passphrase that the user enters when setting up the volume. Given [SecureDrop's threat model](https://docs.securedrop.org/en/stable/threat_model/threat_model.html), we want these persistent storage volumes to be well protected in case the USB drives that Tails is installed on get compromised.
 
@@ -135,4 +135,11 @@ In the end, I stuck by my recommendation of 7 words: I figured _I_ didn't want t
 
 ## The end result
 
-You can now read my contribution to the docs [on the current "Passphrases" page](https://docs.securedrop.org/en/stable/passphrases.html#how-to-generate-a-strong-unique-passphrase).
+You can now read my contribution to the docs [on the current "Passphrases" page](https://docs.securedrop.org/en/stable/passphrases.html#how-to-generate-a-strong-unique-passphrase). I'll recreate it below as well.
+
+> **How to Generate a Strong, Unique Passphrase**
+> We recommend using a unique, 7-word passphrase for each case described above. You can create these passphrases either by using [physical dice](https://www.eff.org/dice) or with KeePassXC, a password manager included with Tails.
+> *Using KeePassXC to Generate a Passphrase*
+> To create a random passphrase using KeePassXC, launch the application, then click the dice icon. Then click the **Passphrase** tab and set the **Word Count** to 7. You can optionally set a **Word Separator**, for example a space or hyphen.
+
+![screenshot of KeePassXC passphrase generation feature, showing a randomly generated 7-word passphrase](https://docs.securedrop.org/en/stable/_images/keepassxc-diceware.png)
