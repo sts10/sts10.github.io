@@ -150,4 +150,42 @@ To answer either of these two questions, it feels like I'd need to use some math
 
 ## Trying it out yourself
 
-You can play with the procedure yourself by [installing Tidy](https://github.com/sts10/tidy#installation). To see if a given list is uniquely decodable or not, use 4 attributes tags (`-AAAa`). To perform "Schlinkert pruning" on the given list, use the option `-K` (or `--schlinkert-prune`). 
+You can play with the procedure yourself by [installing Tidy](https://github.com/sts10/tidy#installation). To see if a given list is uniquely decodable or not, use 4 attributes tags (`-AAAA`). To perform "Schlinkert pruning" on the given list, use the option `-K` (or `--schlinkert-prune`). 
+
+## A list
+
+As a further experiment, I created [a new long word list using this pruning technique](https://github.com/sts10/generated-wordlists/blob/main/lists/experimental/ud1.txt). 
+
+<!--
+I used `tidy -AAAA --take-first 20000 -KlL -m 3 -M 15 -a /usr/share/dict/words -r ../reject-words/bad-words.txt -r ../reject-words/roman-numerals-lower.txt -r ../reject-words/meh-words.txt -o ../generated-wordlists/lists/ud1.txt word_list_raw.txt `. 
+
+Here are some attributes of the list:
+
+```text
+List length               : 17763 words
+Mean word length          : 8.01 characters
+Length of shortest word   : 3 characters (add)
+Length of longest word    : 15 characters (vulnerabilities)
+Free of prefix words?     : false
+Free of suffix words?     : false
+Uniquely decodable?       : true
+Entropy per word          : 14.117 bits
+Efficiency per character  : 1.763 bits
+Assumed entropy per char  : 4.706 bits
+Above brute force line?   : false
+Above Shannon line?       : false
+Shortest edit distance    : 1
+Mean edit distance        : 7.944
+Longest shared prefix     : 14
+Unique character prefix   : 15
+
+Pseudorandomly generated sample passphrases
+-------------------------------------------
+occur designating conserving periodicals teaspoon divorced 
+secret quote inventor affixed fluffy slug 
+stressed determined element sparingly doctor pink 
+dark glanced piper coincide bartender handling 
+crusades criminals cello actively sophisticated mono
+```
+
+-->
