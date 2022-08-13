@@ -156,7 +156,7 @@ You can play with the procedure yourself by [installing Tidy](https://github.com
 
 As a further experiment, I created [a new long word list using this pruning technique](https://github.com/sts10/generated-wordlists/blob/main/lists/experimental/ud1.txt). 
 
-In fact, this list is just about **the best list** I can produce at the moment. 
+In fact, this list is just about **the best list I can produce at the moment**.
 
 * It's initial data source, like many of my word lists, is from [my Google Book Ngram scraping project](https://github.com/sts10/common_word_list_maker).
 * It filters out a list of profane words, awkward words, and even some British spellings of English words (like "favour" and "theatre"). 
