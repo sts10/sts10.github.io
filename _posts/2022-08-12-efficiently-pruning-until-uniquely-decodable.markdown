@@ -25,7 +25,7 @@ You might be wondering how I knew "news", "newspaper" and "elephant" was uniquel
 * None of the words are "prefixes" of any other words on the list OR
 * None of the words are "suffixes" of any other words on the list
 
-For "news", "newspaper" and "elephant", we're a "no" on number 1 (the words are all different lengths), and we're a "no" on number 2, since "news" is a prefix of "newspaper"; But we're saved by option 3: None of the words are suffixes of other words on the list.Thus, it's uniquely decodable.
+For "news", "newspaper" and "elephant", we're a "no" on number 1 (the words are all different lengths), and we're a "no" on number 2, since "news" is a prefix of "newspaper"; But we're saved by option 3: None of the words are suffixes of other words on the list. Thus, it's uniquely decodable.
 
 ### Are there other ways to verify that a code in uniquely decodable?
 
@@ -74,9 +74,9 @@ And... drumroll... the function returns `true` when given `{"101", "00", "0001",
 
 ## How can we _make_ a code uniquely decodable, while preserving the most amount of words from the original list?
 
-No doubt it's powerful to be able to tell if a list in uniquely decodable. (We're going to need that later!) But what I'm really after is an "algorithm to remove the fewest number of code words to make a given list uniquely decodable."
+No doubt it's powerful to be able to tell if a list in uniquely decodable. (We're going to need that later!) But what I'm really after is an "algorithm to remove the fewest number of code words to make a given list uniquely decodable." This is because we want a nice long list of words to make passphrases from -- a longer list means (theoretically) stronger passphrases.
 
-To understand why, let's work through another example. 
+To get a better understanding of how this connects to passphrases, let's work through another example.
 
 As part of a separate project, I created [a word list of 18,694 words](https://github.com/sts10/generated-wordlists/blob/main/lists/basic.txt). It's important to note that this list is NOT uniquely decodable. 
 
@@ -86,7 +86,7 @@ What if we wanted to make this list uniquely decodable? We're going to have to e
 * We could remove all prefix words. This would leave 14,370 words.
 * We could remove all suffix words. This would leave 16,835 words on the list.
 
-If we want to preserve the most words from the original list, it looks like, in this list's particular case, we'd go with removing suffix words. 
+If we want to preserve the most words from the original list (again, to keep passphrases strong), it looks like, in this list's particular case, we'd go with removing suffix words. 
 
 But we learned earlier that there are lists that are uniquely decodable but don't follow any of these procedures. Thus, I think there must be a way to make a list uniquely decodable beyond these three procedures. 
 
@@ -135,15 +135,15 @@ Amazingly, this pruning procedure seems to work for the handful of word lists I'
 
 In my tests of this procedure, the resulting list is uniquely decodable. AND the procedure seems to preserve more words than the 3 procedures outlined above. For example, on my 18,694 word list I mentioned above, this procedure leaves 17,187 words (and is uniquely decodable).
 
-Interestingly, the resulting list includes prefix words and suffix words.
+Interestingly, the resulting list includes prefix words and suffix words, and obviously has different word lengths (the technical term is [variable-length code](https://en.wikipedia.org/wiki/Variable-length_code)).
 
 ## Limitations
 
 * I (still) don't know if this is _the_ optimal procedure for preserving words. (Or even if it always preserves more words than the other procedures.) In other words, some other procedure might preserve more words from the original list.
-* I don't know that running this procedure on every list will always give a uniquely decodable list as a result.
+* I don't know that running this procedure on any list _guarantees_ you'll get a uniquely decodable list as a result.
 
 To answer either of these two questions, it feels like I'd need to use some math that I don't know just yet. Maybe someone between 1935 and now has already figured all this out! Let me know if you know any ideas that could help!
 
 ## Trying it out yourself
 
-You can play with the procedure yourself by [installing Tidy](https://github.com/sts10/tidy#installation) and using the option `-K` or `--schlinkert-prune`.
+You can play with the procedure yourself by [installing Tidy](https://github.com/sts10/tidy#installation) and using the option `-K` or `--schlinkert-prune`, along with four attribute tags (`-AAAA`).
