@@ -40,7 +40,7 @@ What if a list fails all three of the above criteria? It actually still could be
 
 Clearly not all the same length. And "1" is a prefix of "101" and a suffix of "0001". And yet! This list is uniquely decodable.
 
-To _know_ this, We can play with some examples, like "110100001101". 
+To _know_ this, we can play with some examples, like "110100001101". 
 
 * It starts with a 1, so we know the first "word" is either "101" or "1"
 * The second digit it "1", so that "1" in the first person must be the word "1". 
@@ -50,7 +50,11 @@ To _know_ this, We can play with some examples, like "110100001101".
 
 Giving us a "decoded" message of: `1 101 00 00 1 101`. I argue that there's no _other_ way to decode this message.
 
-But we have some issues. We can't check _every_ possible message.
+### Implications of this example
+
+First of all, this example shows that the three procedures I outlined above are NOT sufficient for determining whether a code is uniquely decodable. Second, it maybe-just-maybe shows that there's a 4th procedure that might preserve more words.
+
+Let's tackle the first issue first. We need a procedure for checking if a given code is uniquely decodable or not -- this procedure should output a "yes" or "no". (We can't, realistically, check every possible message!)
 
 ### The Sardinas–Patterson algorithm
 
@@ -74,7 +78,7 @@ And... drumroll... the function returns `true` when given `{"101", "00", "0001",
 
 ## How can we _make_ a code uniquely decodable, while preserving the most amount of words from the original list?
 
-No doubt it's powerful to be able to tell if a list in uniquely decodable. (We're going to need that later!) But what I'm really after is an "algorithm to remove the fewest number of code words to make a given list uniquely decodable." This is because we want a nice long list of words to make passphrases from -- a longer list means (theoretically) stronger passphrases.
+No doubt it's powerful to be able to tell if a given list in uniquely decodable. (We're going to need that later!) But what I'm really after is an "algorithm to remove the fewest number of code words to make a given list uniquely decodable." This is because we want a nice long list of words to make passphrases from -- a longer list means (theoretically) stronger passphrases.
 
 To get a better understanding of how this connects to passphrases, let's work through another example.
 
@@ -92,7 +96,7 @@ But we learned earlier that there are lists that are uniquely decodable but don'
 
 So to recap: what we're after is some sort of procedure that makes a list uniquely decodable, while removing fewer words than any of the three strategies outlined above. 
 
-## A first guess
+## A first attempt
 
 I figured looking at, and potentially modifying, the Sardinas-Patterson code would be a good place to start exploring.
 
