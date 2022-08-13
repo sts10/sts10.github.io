@@ -152,9 +152,11 @@ To answer either of these two questions, it feels like I'd need to use some math
 
 You can play with the procedure yourself by [installing Tidy](https://github.com/sts10/tidy#installation). To see if a given list is uniquely decodable or not, use 4 attributes tags (`-AAAA`). To perform "Schlinkert pruning" on the given list, use the option `-K` (or `--schlinkert-prune`). 
 
-## A list
+## A new word list
 
-As a further experiment, I created [a new long word list using this pruning technique](https://github.com/sts10/generated-wordlists/blob/main/lists/experimental/ud1.txt). (I cut it to exactly 17,559 words so that it clears [the brute force line](https://github.com/sts10/tidy#the-brute-force-line).)
+As a further experiment, I created [a new long word list using this pruning technique](https://github.com/sts10/generated-wordlists/blob/main/lists/experimental/ud1.txt). 
+
+It also incorporates another idea I stumbled upon and named a while back, namely [the brute force line](https://github.com/sts10/tidy#the-brute-force-line). At 17,559 words, the list is the longest it can be while still including 3-character words and not being more susceptible to a brute-force letter attack than a brute-force _word_ attack (assuming no word separators are used).
 
 Here are some attributes of the list:
 
@@ -176,12 +178,44 @@ Mean edit distance        : 7.940
 Longest shared prefix     : 14
 Unique character prefix   : 15
 Kraft-McMillan inequality : satisfied
+```
 
-Pseudorandomly generated sample passphrases
--------------------------------------------
+And some pseudorandomly generated sample passphrases from the list:
+```text
 maneuvers cults governed impede startled maybe 
 powerlessness intuitive youngest inactivity centering hue 
 making copied mandarin esteem insist seed 
 judgments impeded assay strive postnatal inflamed 
 exploring remark posters enclosure troublesome drown 
+```
+
+### A new _diceware_ word list
+
+I also made [a 7,776-word diceware list using this procedure](https://github.com/sts10/generated-wordlists/blob/main/lists/experimental/diceware-ud.txt).
+```text
+List length               : 7776 words
+Mean word length          : 7.06 characters
+Length of shortest word   : 3 characters (add)
+Length of longest word    : 10 characters (worthwhile)
+Free of prefix words?     : false
+Free of suffix words?     : false
+Uniquely decodable?       : true
+Entropy per word          : 12.925 bits
+Efficiency per character  : 1.832 bits
+Assumed entropy per char  : 4.308 bits
+Above brute force line?   : true
+Above Shannon line?       : false
+Shortest edit distance    : 1
+Mean edit distance        : 6.961
+Longest shared prefix     : 9
+Unique character prefix   : 10
+Kraft-McMillan inequality : satisfied
+
+Pseudorandomly generated sample passphrases
+-------------------------------------------
+researcher moderately therein altered texture snakes 
+discursive shortage persist demon truly expectancy 
+spending archives reliable oppression weekly variance 
+legs enzymes stages resembles terminate enquiry 
+upward unwilling develop accorded exhibited bilateral 
 ```
