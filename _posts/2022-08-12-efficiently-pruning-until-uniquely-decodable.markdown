@@ -156,11 +156,11 @@ You can play with the procedure yourself by [installing Tidy](https://github.com
 
 As a further experiment, I created [a new long word list using this pruning technique](https://github.com/sts10/generated-wordlists/blob/main/lists/experimental/ud1.txt). 
 
-In fact, this list is just about the best I can produce at the moment. 
+In fact, this list is just about **the best list** I can produce at the moment. 
 
-* It's initial data source, like almost all of my word lists, is from [my Google Book Ngram scraping project](https://github.com/sts10/common_word_list_maker).
-* It filters out a list of profane words, awkward words, and even some British spellings of words ("theatre"). 
-* It then uses this "Schlinkert pruning" method I've described above. 
+* It's initial data source, like many of my word lists, is from [my Google Book Ngram scraping project](https://github.com/sts10/common_word_list_maker).
+* It filters out a list of profane words, awkward words, and even some British spellings of English words (like "favour" and "theatre"). 
+* It then uses this new "Schlinkert pruning" method I've described above. 
 * It just barely clears what I named [the brute force line](https://github.com/sts10/tidy#the-brute-force-line). At 17,559 words, the list is the longest it can be while still including 3-character words and not being more susceptible to a brute-force letter attack than a brute-force _word_ attack (assuming no word separators are used).
 
 Here are some attributes of the list:
