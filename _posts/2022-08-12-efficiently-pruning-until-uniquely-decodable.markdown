@@ -154,7 +154,7 @@ You can play with the procedure yourself by [installing Tidy](https://github.com
 
 ## A list
 
-As a further experiment, I created [a new long word list using this pruning technique](https://github.com/sts10/generated-wordlists/blob/main/lists/experimental/ud1.txt). 
+As a further experiment, I created [a new long word list using this pruning technique](https://github.com/sts10/generated-wordlists/blob/main/lists/experimental/ud1.txt). (I cut it to exactly 17,559 words so that it clears [the brute force line](https://github.com/sts10/tidy#the-brute-force-line).)
 
 Here are some attributes of the list:
 
