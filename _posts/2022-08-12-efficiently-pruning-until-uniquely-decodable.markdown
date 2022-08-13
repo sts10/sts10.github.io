@@ -150,4 +150,4 @@ To answer either of these two questions, it feels like I'd need to use some math
 
 ## Trying it out yourself
 
-You can play with the procedure yourself by [installing Tidy](https://github.com/sts10/tidy#installation) and using the option `-K` or `--schlinkert-prune`, along with four attribute tags (`-AAAA`).
+You can play with the procedure yourself by [installing Tidy](https://github.com/sts10/tidy#installation). To see if a given list is uniquely decodable or not, use 4 attributes tags (`-AAAa`). To perform "Schlinkert pruning" on the given list, use the option `-K` (or `--schlinkert-prune`). 
