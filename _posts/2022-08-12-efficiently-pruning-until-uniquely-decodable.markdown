@@ -177,7 +177,6 @@ Shortest edit distance    : 1
 Mean edit distance        : 7.940
 Longest shared prefix     : 14
 Unique character prefix   : 15
-Kraft-McMillan inequality : satisfied
 ```
 
 And some pseudorandomly generated sample passphrases from the list:
@@ -209,7 +208,6 @@ Shortest edit distance    : 1
 Mean edit distance        : 6.961
 Longest shared prefix     : 9
 Unique character prefix   : 10
-Kraft-McMillan inequality : satisfied
 
 Pseudorandomly generated sample passphrases
 -------------------------------------------
