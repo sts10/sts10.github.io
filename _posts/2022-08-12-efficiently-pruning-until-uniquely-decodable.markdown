@@ -144,3 +144,6 @@ Interestingly, the resulting list includes prefix words and suffix words.
 
 To answer either of these two questions, it feels like I'd need to use some math that I don't know just yet. Maybe someone between 1935 and now has already figured all this out! Let me know if you know any ideas that could help!
 
+## Trying it out yourself
+
+You can play with the procedure yourself by [installing Tidy](https://github.com/sts10/tidy#installation) and using the option `-K` or `--schlinkert-prune`.
