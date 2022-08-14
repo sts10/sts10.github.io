@@ -186,11 +186,11 @@ Unique character prefix   : 15
 
 And some pseudorandomly generated sample passphrases from the list:
 ```text
-acoustics adverbs invade dollar spatially erase 
-inhibit archive economies incentive integrates conceptual 
-insist pertinent misses ceremonies steadily folks 
-connector pencil vagueness bracket dunes refinery 
-iodine disastrous alphabet removing stud minimizing 
+counselor anomalous mold equip fourth canteen 
+prop dealer buzz interactions exacerbated peroxide 
+happenings detach preached pile tapped officer 
+compulsion progressives confers deaths blush republicans 
+gymnastics mammal soldier brackets defending ancestral 
 ```
 
 ### A new _diceware_ word list
@@ -205,21 +205,20 @@ Free of prefix words?     : false
 Free of suffix words?     : false
 Uniquely decodable?       : true
 Entropy per word          : 12.925 bits
-Efficiency per character  : 1.831 bits
+Efficiency per character  : 1.832 bits
 Assumed entropy per char  : 4.308 bits
 Above brute force line?   : true
 Above Shannon line?       : false
 Shortest edit distance    : 1
-Mean edit distance        : 6.963
+Mean edit distance        : 6.961
 Longest shared prefix     : 9
 Unique character prefix   : 10
-Kraft-McMillan inequality : satisfied
 
 Pseudorandomly generated sample passphrases
 -------------------------------------------
-spend hire hurry occur million businesses 
-collective wounds financing assign repertoire uranium 
-unlikely depths cerebral substrate splendid grew 
-guaranteed reviews herd understood fellow thigh 
-sessions coarse valley theme revision affiliated 
+talk premises soup par shoulder graphic 
+frequency silence candle proposes salad pie 
+assigned drained policies sprang overcome famine 
+listening perhaps dreams home extension interstate 
+granting fashion ammonia tort guidance horrible 
 ```
