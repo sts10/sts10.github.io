@@ -179,18 +179,18 @@ Assumed entropy per char  : 4.700 bits
 Above brute force line?   : true
 Above Shannon line?       : false
 Shortest edit distance    : 1
-Mean edit distance        : 7.939
+Mean edit distance        : 7.938
 Longest shared prefix     : 14
 Unique character prefix   : 15
 ```
 
 And some pseudorandomly generated sample passphrases from the list:
 ```text
-counselor anomalous mold equip fourth canteen 
-prop dealer buzz interactions exacerbated peroxide 
-happenings detach preached pile tapped officer 
-compulsion progressives confers deaths blush republicans 
-gymnastics mammal soldier brackets defending ancestral 
+cropping comment princely begun antelope capital 
+perceives extension recreation bribes pads flight 
+court acquiring deterred liberalization refraction achieve 
+groan exhibited magnetic preface bonus howl 
+thick intravenously dinosaurs resolve emphasize compensatory 
 ```
 
 ### A new _diceware_ word list
@@ -216,9 +216,9 @@ Unique character prefix   : 10
 
 Pseudorandomly generated sample passphrases
 -------------------------------------------
-talk premises soup par shoulder graphic 
-frequency silence candle proposes salad pie 
-assigned drained policies sprang overcome famine 
-listening perhaps dreams home extension interstate 
-granting fashion ammonia tort guidance horrible 
+sad feudal desk platform develops stir 
+risk counts microwave enzymes grades kernel 
+willingly theatrical volumes alarm prison protection 
+scored graphical segments bowed skip join 
+whoever spelling charging meditation diamonds alcohol 
 ```
