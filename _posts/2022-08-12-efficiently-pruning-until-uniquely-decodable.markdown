@@ -159,7 +159,7 @@ As a further experiment, I created [a new long word list using this pruning tech
 In fact, this list is just about **the best list I can produce at the moment**.
 
 * It's initial data source, like many of my word lists, is from [my Google Book Ngram scraping project](https://github.com/sts10/common_word_list_maker). It takes (approximately) the most-used 19,800 words as a starting point.
-* From that raw input, it filters out a number of profane words, awkward words, and even some British spellings of English words (like "favour" and "theatre"). 
+* From that raw input, it filters out a number of profane words, awkward words, words that are _too_ common (e.g. "she" and "also") and some British spellings of English words (like "favour" and "theatre"). 
 * It then uses this new "Schlinkert pruning" method I've described above to make the list uniquely decodable.
 * By tweaking the number of words taken from the Google Ngram data, I orchestrated the list to be exactly 17,559 words. Why 17,559 words? That list length means the list just barely clear what I named [the brute force line](https://github.com/sts10/tidy#the-brute-force-line). At 17,559 words, the list is the longest it can be while still including 3-character words and not being more susceptible to a brute-force letter attack than a brute-force _word_ attack (assuming no word separators are used).
 
@@ -179,18 +179,18 @@ Assumed entropy per char  : 4.700 bits
 Above brute force line?   : true
 Above Shannon line?       : false
 Shortest edit distance    : 1
-Mean edit distance        : 7.940
+Mean edit distance        : 7.939
 Longest shared prefix     : 14
 Unique character prefix   : 15
 ```
 
 And some pseudorandomly generated sample passphrases from the list:
 ```text
-maneuvers cults governed impede startled maybe 
-powerlessness intuitive youngest inactivity centering hue 
-making copied mandarin esteem insist seed 
-judgments impeded assay strive postnatal inflamed 
-exploring remark posters enclosure troublesome drown 
+acoustics adverbs invade dollar spatially erase 
+inhibit archive economies incentive integrates conceptual 
+insist pertinent misses ceremonies steadily folks 
+connector pencil vagueness bracket dunes refinery 
+iodine disastrous alphabet removing stud minimizing 
 ```
 
 ### A new _diceware_ word list
@@ -205,20 +205,21 @@ Free of prefix words?     : false
 Free of suffix words?     : false
 Uniquely decodable?       : true
 Entropy per word          : 12.925 bits
-Efficiency per character  : 1.832 bits
+Efficiency per character  : 1.831 bits
 Assumed entropy per char  : 4.308 bits
 Above brute force line?   : true
 Above Shannon line?       : false
 Shortest edit distance    : 1
-Mean edit distance        : 6.961
+Mean edit distance        : 6.963
 Longest shared prefix     : 9
 Unique character prefix   : 10
+Kraft-McMillan inequality : satisfied
 
 Pseudorandomly generated sample passphrases
 -------------------------------------------
-researcher moderately therein altered texture snakes 
-discursive shortage persist demon truly expectancy 
-spending archives reliable oppression weekly variance 
-legs enzymes stages resembles terminate enquiry 
-upward unwilling develop accorded exhibited bilateral 
+spend hire hurry occur million businesses 
+collective wounds financing assign repertoire uranium 
+unlikely depths cerebral substrate splendid grew 
+guaranteed reviews herd understood fellow thigh 
+sessions coarse valley theme revision affiliated 
 ```
