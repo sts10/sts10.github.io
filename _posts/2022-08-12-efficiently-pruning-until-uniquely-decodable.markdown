@@ -223,3 +223,7 @@ willingly theatrical volumes alarm prison protection
 scored graphical segments bowed skip join 
 whoever spelling charging meditation diamonds alcohol 
 ```
+
+## Links
+
+You can find [more word lists I've created](https://github.com/sts10/generated-wordlists), or [learn more about Tidy](https://github.com/sts10/tidy), the tool I wrote to make creating these word lists easier.
