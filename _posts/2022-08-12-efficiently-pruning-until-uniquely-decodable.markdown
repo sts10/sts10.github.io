@@ -162,36 +162,36 @@ In fact, this list is just about **the best list I can produce at the moment**.
 * From that raw input, it filters out a number of profane words, awkward words, words that are _too_ common (e.g. "she" and "also") and some British spellings of English words (like "favour" and "theatre"). 
     * It also filters out any words not found in `/usr/share/dict/words` (this is a bit of controversial choice, but I find that it helps weed out a lot of "words" we definitely don't want, but would take too long to find one-by-one).
 * It then uses this new "Schlinkert pruning" method I've described above to make the list uniquely decodable while cutting a minimal amount of words.
-* By tweaking the number of words taken from the Google Ngram data, I orchestrated the list to be exactly 17,559 words. Why 17,559 words? That list length means the list just barely clears what I call [the brute force line](https://github.com/sts10/tidy#the-brute-force-line). At 17,559 words, the list is the longest it can be while still including 3-character words and not being more susceptible to a brute-force _letter_ attack than a brute-force _word_ attack (assuming no word separators are used).
+* By tweaking the number of words taken from the Google Ngram data, I orchestrated the list to be exactly 17,576 words. Why 17,576 words? That list length means the list just barely clears what I call [the brute force line](https://github.com/sts10/tidy#the-brute-force-line). At 17,576 words, the list is the longest it can be while still including 3-character words and not being more susceptible to a brute-force _letter_ attack than a brute-force _word_ attack (assuming no word separators are used).
 
 Here are some (more) attributes of the list:
 
 ```text
-List length               : 17559 words
-Mean word length          : 8.00 characters
+List length               : 17576 words
+Mean word length          : 8.01 characters
 Length of shortest word   : 3 characters (add)
 Length of longest word    : 15 characters (vulnerabilities)
 Free of prefix words?     : false
 Free of suffix words?     : false
 Uniquely decodable?       : true
-Entropy per word          : 14.100 bits
-Efficiency per character  : 1.762 bits
+Entropy per word          : 14.101 bits
+Efficiency per character  : 1.761 bits
 Assumed entropy per char  : 4.700 bits
 Above brute force line?   : true
 Above Shannon line?       : false
 Shortest edit distance    : 1
-Mean edit distance        : 7.938
+Mean edit distance        : 7.942
 Longest shared prefix     : 14
 Unique character prefix   : 15
 ```
 
 And some pseudorandomly generated sample passphrases from the list:
 ```text
-cropping comment princely begun antelope capital 
-perceives extension recreation bribes pads flight 
-court acquiring deterred liberalization refraction achieve 
-groan exhibited magnetic preface bonus howl 
-thick intravenously dinosaurs resolve emphasize compensatory 
+privately metaphorical tutorial unsettling flats interchangeable 
+definitive radon impure uncles shoppers basins 
+shrunk receivable freeing meeting stacking provocation 
+repay retrospective soups forging cues butch 
+captives syndicate miss propensity alleging onions 
 ```
 
 ### A new _diceware_ word list
