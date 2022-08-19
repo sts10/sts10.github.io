@@ -82,13 +82,13 @@ No doubt it's powerful to be able to tell if a given list in uniquely decodable.
 
 To get a better understanding of how this connects to passphrases, let's work through another example.
 
-As part of a separate project, I created [a word list of 18,694 words](https://github.com/sts10/generated-wordlists/blob/main/lists/basic.txt). It's important to note that this list is NOT uniquely decodable. 
+As part of a separate project, I created [a word list of 18,250](https://github.com/sts10/generated-wordlists/blob/main/lists/basic.txt). It's important to note that this list is NOT uniquely decodable. 
 
 What if we wanted to make this list uniquely decodable? We're going to have to eliminate some words from the list. How should we go about it? 
 
 * The most frequent word length on the list is 5 characters. We could eliminate all words that are not 5 characters. This would leave 1,802 words on the list.
-* We could remove all prefix words. This would leave 14,370 words.
-* We could remove all suffix words. This would leave 16,835 words on the list.
+* We could remove all prefix words. This would leave 13,312 words.
+* We could remove all suffix words. This would leave 15,959 words on the list.
 
 If we want to preserve the most words from the original list (again, to keep passphrases strong), it looks like, in this list's particular case, we'd go with removing suffix words. 
 
@@ -137,7 +137,12 @@ This is a bit embarrassing, but for lack of a better term for now I'm calling th
 
 Amazingly, this pruning procedure seems to work for the handful of word lists I've tried it on. 
 
-In my tests of this procedure, the resulting list is uniquely decodable. AND the procedure seems to preserve more words than the 3 procedures outlined above. For example, on my 18,694 word list I mentioned above, this procedure leaves 17,187 words (and is uniquely decodable).
+In my tests of this procedure, the resulting lists are uniquely decodable, at least according to my own implementation of Sardinas-Patterson. _AND_ the procedure seems to preserve more words than the 3 procedures outlined above. 
+
+|           | length | prefix-free | suffix-free | Schlinkert-pruned |
+|-----------|:------:|:-----------:|:-----------:|:-----------------:|
+| 1Password | 18176  |    15076    |    15727    | 15841             |
+| basic.txt | 18250  |    13312    |    15958    | 16291             |
 
 Interestingly, the resulting list includes prefix words and suffix words, and obviously has different word lengths (the technical term is [variable-length code](https://en.wikipedia.org/wiki/Variable-length_code)).
 
@@ -158,7 +163,7 @@ As a further experiment, I created [a new long word list using this pruning tech
 
 In fact, this list is just about **the best list I can produce at the moment**.
 
-* It's initial data source, like many of my word lists, is from [my Google Book Ngram scraping project](https://github.com/sts10/common_word_list_maker). It takes (approximately) the 25,000 most-used words as a starting point.
+* Its initial data source, like many of my word lists, is from [my Google Book Ngram scraping project](https://github.com/sts10/common_word_list_maker). It takes (approximately) the 25,000 most-used words as a starting point.
 * From that raw input, it filters out a number of profane words, awkward words, words that are _too_ common (e.g. "she" and "also") and some British spellings of English words (like "favour" and "theatre"). 
     * It also filters out any words not found in `/usr/share/dict/words` (this is a bit of controversial choice, but I find that it helps weed out a lot of "words" we definitely don't want, but would take too long to find one-by-one).
 * It then uses this new "Schlinkert pruning" method I've described above to make the list uniquely decodable while cutting a minimal amount of words.
@@ -187,11 +192,11 @@ Unique character prefix   : 15
 
 And some pseudorandomly generated sample passphrases from the list:
 ```text
-privately metaphorical tutorial unsettling flats interchangeable 
-definitive radon impure uncles shoppers basins 
-shrunk receivable freeing meeting stacking provocation 
-repay retrospective soups forging cues butch 
-captives syndicate miss propensity alleging onions 
+sweeping relocated contradictory ornamented conscience complexion 
+publicity assesses trunk penetrates warden literature 
+undated acknowledgement histories performances scan conceit 
+succeeding contains grievous motivated minimize definitively 
+triumphed sleeping proven sadly algorithms rendered 
 ```
 
 ### A new _diceware_ word list
@@ -206,22 +211,22 @@ Free of prefix words?     : false
 Free of suffix words?     : false
 Uniquely decodable?       : true
 Entropy per word          : 12.925 bits
-Efficiency per character  : 1.832 bits
+Efficiency per character  : 1.830 bits
 Assumed entropy per char  : 4.308 bits
 Above brute force line?   : true
 Above Shannon line?       : false
 Shortest edit distance    : 1
-Mean edit distance        : 6.961
+Mean edit distance        : 6.962
 Longest shared prefix     : 9
 Unique character prefix   : 10
 
 Pseudorandomly generated sample passphrases
 -------------------------------------------
-sad feudal desk platform develops stir 
-risk counts microwave enzymes grades kernel 
-willingly theatrical volumes alarm prison protection 
-scored graphical segments bowed skip join 
-whoever spelling charging meditation diamonds alcohol 
+acquire pit tobacco religion revenues appearing 
+enabled pressures directory enable excel occurring 
+compare prohibited parties managing learns accepting 
+universal theme orderly furniture securities declined 
+youthful deficits hazard issuing disciple creek 
 ```
 
 ## Links
