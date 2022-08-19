@@ -137,7 +137,7 @@ This is a bit embarrassing, but for lack of a better term for now I'm calling th
 
 Amazingly, this pruning procedure seems to work for the handful of word lists I've tried it on. 
 
-In my tests of this procedure, the resulting lists are uniquely decodable, at least according to my own implementation of Sardinas-Patterson. _AND_ the procedure seems to preserve more words than the 3 procedures outlined above. 
+In my tests of this procedure, the resulting lists are uniquely decodable, at least according to my own implementation of Sardinas-Patterson. _AND_ the procedure seems to preserve more words than the three procedures outlined above. Here we can compare it to removing prefix words and suffix words:
 
 |           | length | prefix-free | suffix-free | Schlinkert-pruned |
 |-----------|:------:|:-----------:|:-----------:|:-----------------:|
