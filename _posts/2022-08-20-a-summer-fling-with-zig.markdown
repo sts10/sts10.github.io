@@ -81,17 +81,22 @@ I think this is a good demonstration of just how low level Zig is. While it's ne
 // checkForWinningPlayer returns an "optional", which I take to be kind of like an Option
 // in Rust. https://ziglearn.org/chapter-1/#optionals
 var winner = checkForWinningPlayer(board);
-// I _think_ you have to check/handle null first?
-if (winner != null) {
-    if (winner.? == 1) {
+// Now we "open" the winner optional to see what's inside,
+// kind of like Rust `match` statement
+if (winner) |value| {
+    if (value == 1) {
         std.debug.print("Player 1 wins!\n", .{});
         game_over = true;
-    } else if (winner.? == 2) {
+    } else if (value == 2) {
         std.debug.print("Player 2 wins!\n", .{});
         game_over = true;
     }
-}
+} 
 ```
+
+In this case, if winner is null, we don't want to do anything, so I didn't write an `else` statement, but I'm pretty sure I could have if I wanted to do something if `winner == null`, like return an error or assign it to a default value. 
+
+I like this! Readable!
 
 ## Error-handling
 
