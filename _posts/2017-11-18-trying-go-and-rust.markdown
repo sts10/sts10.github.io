@@ -461,6 +461,8 @@ I can definitely see how throwing more time into improving my JavaScript is prob
 
 ## Appendix A: Hello World in Go
 
+(Note from 2022: For Vim/Neovim users, I recommend [vim-go](https://github.com/fatih/vim-go). I ran `:GoInstallBinaries` after installing the plugin.)
+
 `touch hello.go` then...
 
 ```go
