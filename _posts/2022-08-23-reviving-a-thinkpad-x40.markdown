@@ -52,6 +52,10 @@ Once I got everything settled, I installed [Neofetch](https://github.com/dylanar
 
 ![Neofetched stats for Puppy Linux install](/img/thinkpad/neofetch.jpg)
 
+## Some things that did NOT come with Puppy Linux
+
+While Puppy comes with a nice suite of GUI software (more on this below), I was a little surprised that I couldn't run `apt` to update or install new software (despite choosing what I figure was an Ubuntu base when I downloaded the iso file). I also didn't have `git`, and didn't really want to try to figure out how to get it working. I wasn't too bummed about these limitations, since this was never going to be a machine for development for me. But I thought I'd note it here. 
+
 ## Purpose and goals for our cute lil machine
 
 Once I had learned more about the machine and how it felt with Linux on it, I could think more concretely about what I might use if for. 
@@ -87,7 +91,11 @@ Tip: If you want to install a bunch of ttf fonts at once, a nice way to do it is
 
 ## Closing Thoughts / Future Plans
 
-Think I'm going to try to stop tinkering and... just use it to write some thoughts on for a bit? I am kind of bummed that I didn't give Debian a shot. But that'll a good project for some point in the future.
+Think I'm going to try to stop tinkering and... just use it to write some thoughts on for a bit? One project might be installing and learning [TLP](https://linrunner.de/tlp/) to try to boost the battery life.
+
+I am kind of bummed that I didn't give Debian a shot. But that'll a good project for some point in the future. 
+
+I don't know if I'd _buy_ an X40? It looks like they go for anywhere [between $30 and $120+ on eBay](https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2334524.m570.l1313&_nkw=ibm+thinkpad+x220&_sacat=0&LH_TitleDesc=0&_odkw=ibm+thinkpad+x230&_osacat=0) as I write this. I'd peruse [r/thinkpad](https://www.reddit.com/r/thinkpad/) and [r/LinuxOnThinkPad](https://www.reddit.com/r/LinuxOnThinkpad/) a bit first before buying.
 
 [Let me know](https://octodon.social/@schlink) if you have any suggestions!
 
