@@ -76,11 +76,15 @@ The IBM keyboard is really the star of the show here, though. I might rate it ab
 
 ## Purpose and goals for our cute lil machine
 
-Given these features and limitations, I began to think more concretely about what I might use if for. 
+Given these features and limitations, I began to think more concretely about what I might use it for. 
 
 I figured a fun guiding star would be to make this machine specifically **a tool for writing**. I've always been a bit sentimental for typewriters -- dedicated writing machines that offer no other distractions. 
 
-As you might imagine, I'm not the only person who thinks they'd write more/better without the myriad distractions of the internet. A company called Freewrite offers [a $649 "Smart Typewriter"](https://getfreewrite.com/products/freewrite-smart-typewriter-3rd-gen) that actually looks pretty awesome. I've also seen [some](https://www.reddit.com/r/AlphaSmart) [love](https://www.inputmag.com/reviews/the-alphasmart-neo-2-is-the-best-distraction-free-writing-tool-you-can-buy-right-now) for a device called the Alphasmart Neo2 Word Processor. [This Medium post from 2021](https://medium.com/the-shadow/why-we-need-dedicated-modern-typewriters-c1597a72d25a) actually lists "An old laptop running Linux" as what the author calls a "modern typewriter." The author then, interestingly, hypothesizes what a "typewriter" Linux distro would look like -- just a text editor, a few themes and fonts, and a great sync/back-up system. Wouldn't need to worry about sound, video, or browsers. Installs on anything. I agree -- that would be cool! 
+As you might imagine, I'm not the only person who thinks they'd write more/better without the myriad distractions of the internet. I have a writer friend who goes to a cafe where she doesn't know the WiFi password to write. 
+
+There are hardware solutions to be bought and sold as well: A company called Freewrite offers [a $649 "Smart Typewriter"](https://getfreewrite.com/products/freewrite-smart-typewriter-3rd-gen) that actually looks pretty awesome. I've also seen [some](https://www.reddit.com/r/AlphaSmart) [love](https://www.inputmag.com/reviews/the-alphasmart-neo-2-is-the-best-distraction-free-writing-tool-you-can-buy-right-now) for a device called the Alphasmart Neo2 Word Processor. 
+
+[This Medium post from 2021](https://medium.com/the-shadow/why-we-need-dedicated-modern-typewriters-c1597a72d25a) actually lists "An old laptop running Linux" as what the author calls a "modern typewriter." The author then, interestingly, hypothesizes what a "typewriter" Linux distro would look like -- just a text editor, a few themes and fonts, and, I'd stress, a great sync/back-up system. Wouldn't need to worry about sound, video, or browsers. Configured to be easy to install on a wide variety of hardware (to the extent that that is possible)... I agree -- that would be cool! 
 
 In my research, I did find an article about a "Linux distro for writers" called [GhostWriter](https://www.linux.com/news/ghostwriter-linux-distro-writers/), but the site appears to be down. 
 
