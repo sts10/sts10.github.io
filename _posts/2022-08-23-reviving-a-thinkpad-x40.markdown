@@ -28,7 +28,7 @@ I admit that I didn't take great notes during this part of the process, but basi
 
 Once Puppy Linux loaded (from the USB, not the hard drive), I used GParted, a partition manager that luckily ships with Puppy, to clear out sda1, the ThinkPad's main internal hard drive. I then removed the Windows XP<sup>TM</sup> sticker from the machine -- bye, Windows<sup>TM</sup>! 
 
-### Installing Puppy Linux to the hard drive
+### Installing Puppy Linux _to the hard drive_
 
 Happy with the speed and functionality of Puppy Linux, I decided to install it to the machine's hard drive. This was less intuitive than on other, more modern Ubuntu flavors; I think because Puppy is designed to run from USB sticks, rather than hard drives (kind of like Tails). (This makes me wonder if it was a poor choice for installing on this machine's hard drive...) 
 
@@ -52,17 +52,21 @@ Once I got everything settled, I installed [Neofetch](https://github.com/dylanar
 
 ![Neofetched stats for Puppy Linux install](/img/thinkpad/neofetch.jpg)
 
-## Some things that did NOT come with Puppy Linux
+Menus and apps launch pretty quickly. Seems pretty stable after reboots. Think I've got Puppy installed well.
+
+## Limitations
+
+So far as I've discovered, the biggest limitation is its internet access, or lack thereof. This machine doesn't seem to have a WiFi card, though I'm not 100% sure. Running `lspci | egrep -i 'wifi|wireless|wlan'` only returns one entry: `Network controller Intel Corporation PRO/Wireless 2200BG [Calexico2] Network Connection (rev 05)`.
+
+It does have an Ethernet port, which worked at one point with Puppy Linux, but is being temperamental today. 
+
+Also, the battery life isn't great -- maybe 25 minutes? Though at its age, it definitely could have been 0 minutes! I'm comforting myself by telling myself that the power adapter is very light and its cord is pretty long overall.
+
+### Some software that did NOT come with Puppy Linux
 
 While Puppy comes with a nice suite of GUI software (more on this below), I was a little surprised that I couldn't run `apt` to update or install new software (despite choosing what I figure was an Ubuntu base when I downloaded the iso file). I also didn't have `git`, and didn't really want to try to figure out how to get it working. I wasn't too bummed about these limitations, since this was never going to be a machine for development for me. But I thought I'd note it here. 
 
-## Purpose and goals for our cute lil machine
-
-Once I had learned more about the machine and how it felt with Linux on it, I could think more concretely about what I might use if for. 
-
-Its biggest limitation is its internet access, or lack thereof. This machine doesn't seem to have a WiFi card, though I'm not 100% sure. It does have an Ethernet port, which worked at one point with Puppy Linux, but is being temperamental today. Partially for this reason, my goal for this machine was to make it **a tool for writing**. I always been a bit sentimental for typewriters -- dedicated writing machines that offer no other distractions. Since the internet access on this thing is iffy, it's perfect for that. Though if I really can't get the Ethernet to work, I'll need to transfer writing off of this machine using a USB stick (which I did for this blog post). (While the Ethernet port _was_ working, I used [croc](https://github.com/schollz/croc), which installed on Puppy easily, to transfer files back and forth between my main laptop and the ThinkPad. Neat!)
-
-### Notes on physical aspects of the X40 
+## Physically, the X40 is great
 
 The physical footprint of the laptop is delightfully small and close to a 8.5 by 11" sheet of paper: 10.5 x 8.3 in (268 x 211 mm). Some spec sites I've found say it weighs 2.7 pounds, which, hilariously, is about the same as [a Dell XPS 13](https://www.dell.com/en-us/shop/cty/pdp/spd/xps-13-9310-laptop) and [a MacBook Air M2](https://www.apple.com/macbook-air-m2/). (I think they called these laptops "netbooks" or ultra-portable notebooks?) 
 
@@ -70,20 +74,30 @@ Corresponding to the footprint, the display feels almost square (it's 1024x768),
 
 The IBM keyboard is really the star of the show here, though. I might rate it above any laptop keyboard I've ever used. Haven't found a key that doesn't work yet. The keyboard is probably what inspired me to see this laptop as a good candidate for a dedicated writing computer. 
 
-Unfortunately, the battery life isn't great -- maybe 25 minutes? Though at its age, it definitely could have been 0 minutes! I'm comforting myself by telling myself that the power adapter is very light and its cord is pretty long overall.
+## Purpose and goals for our cute lil machine
 
-### Software for writing
+Given these features and limitations, I began to think more concretely about what I might use if for. 
+
+I figured a fun guiding star would be to make this machine specifically **a tool for writing**. I've always been a bit sentimental for typewriters -- dedicated writing machines that offer no other distractions. 
+
+As you might imagine, I'm not the only person who thinks they'd write more/better without the myriad distractions of the internet. A company called Freewrite offers [a $649 "Smart Typewriter"](https://getfreewrite.com/products/freewrite-smart-typewriter-3rd-gen) that actually looks pretty awesome. I've also seen [some](https://www.reddit.com/r/AlphaSmart) [love](https://www.inputmag.com/reviews/the-alphasmart-neo-2-is-the-best-distraction-free-writing-tool-you-can-buy-right-now) for a device called the Alphasmart Neo2 Word Processor.
+
+Given that internet access on this thing is iffy, but the keyboard is great, I figure it's perfect for this. Just boot it up, full-screen AbiWord, pick a font, and write! 
+
+Though if I really can't get the Ethernet to work, I'll need to transfer writing off of this machine using a USB stick (which I did for this blog post). (While I was able to connect via the Ethernet port, I used [croc](https://github.com/schollz/croc), which installed on Puppy easily, to transfer files back and forth between my main laptop and the ThinkPad. Neat!)
+
+## Software for writing
 
 For word processors, my Puppy install comes with [AbiWord](http://abiword.org/) 3.0 and a basic IDE called [Geany](https://www.geany.org/) (version 1.29). Both work pretty well -- I'm writing this in Geany, but for longer, less technical writing, I'll try AbiWord. In both programs, F11 toggles a nice "full-screen" mode, which I'll probably think of as "distraction-free" mode. I changed AbiWord to save as .odt files by default, in an effort to increase compatibility. I also re-mapped Caps Lock to be another Control, something I've come to get used to. This was pretty easy to do in Puppy's GUI setting menus!
 
-I also installed Neovim just in case I need to edit more config files or even end up using that for writing. I used the built-in Puppy Package Manager to do this. Interestingly, I got Neovim version 0.2.2. I think Neovim is actually the only piece of software I've installed so far -- speaks to the nice bundle Puppy provides (though admittedly I'm thinking of this as a very single-purpose machine). 
+I also installed Neovim just in case I need to edit more config files or end up using that for writing. I used the built-in Puppy Package Manager to do this. Interestingly, this process gave me Neovim version 0.2.2 -- maybe that's the last version they packaged for 32-bit machines? Grateful to have it! I think Neovim is actually the only piece of software I've installed so far.
 
-I'd love to try more writing-focused word processors like [Manuskript](https://www.theologeek.ch/manuskript/), [NovelWriter](https://novelwriter.io/#features), [GhostWriter](https://wereturtle.github.io/ghostwriter/), [Typora](https://typora.io/), or [Focus Writer](https://gottcode.org/focuswriter/), but I can't figure out how to get them installed on this 32-bit machine. Apparently there is a way to get [Libre Office](https://www.libreoffice.org/) for 32-bit, but the install didn't work for me on this machine.
+I'd love to try more writing-focused word processors like [Manuskript](https://www.theologeek.ch/manuskript/), [NovelWriter](https://novelwriter.io/#features), [GhostWriter](https://wereturtle.github.io/ghostwriter/), [Typora](https://typora.io/), or [Focus Writer](https://gottcode.org/focuswriter/), but I can't figure out how to get them installed on this 32-bit machine. Apparently there is a way to get [Libre Office](https://www.libreoffice.org/) for 32-bit, but the install didn't work for me on this machine. I don't think my choice of distro affects this compatibility. 
 
 ### Fonts
 Puppy only came with 3 fonts: Deja Vu family of Serif, Sans, and Mono. While I like Deja Vu Sans Mono for coding, I wanted some nicer "writing" font options on this machine. 
 
-I went to Google Fonts (ugh, I know, not very free-software of me) and downloaded a bunch of serif fonts that I thought would work well for writing long documents, including [PT Serif](https://fonts.google.com/specimen/PT+Serif?query=pt+serif), [Poly](https://fonts.google.com/specimen/Poly?query=poly), [Bitter](https://fonts.google.com/specimen/Bitter?query=bitter), and [Literata](https://fonts.google.com/specimen/Literata?query=literata).
+On my main laptop, I went to Google Fonts (ugh, I know, not very free-software of me) and downloaded a bunch of serif fonts that I thought would work well for writing long documents, including [PT Serif](https://fonts.google.com/specimen/PT+Serif?query=pt+serif), [Poly](https://fonts.google.com/specimen/Poly?query=poly), [Bitter](https://fonts.google.com/specimen/Bitter?query=bitter), and [Literata](https://fonts.google.com/specimen/Literata?query=literata).
 
 I also grabbed [Fira Sans](https://github.com/mozilla/Fira), [IBM Plex Sans](https://github.com/IBM/plex/releases), [Courier Code](https://fontlibrary.org/en/font/courier-code) (which I think I like better than [Courier Prime](https://quoteunquoteapps.com/courierprime/)),  and [JetBrains Mono NL](https://www.jetbrains.com/lp/mono/), my favorite monospaced font. 
 
@@ -97,6 +111,4 @@ I am kind of bummed that I didn't give Debian a shot. But that'll a good project
 
 I don't know if I'd _buy_ an X40? It looks like they go for anywhere [between $30 and $120+ on eBay](https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2334524.m570.l1313&_nkw=ibm+thinkpad+x220&_sacat=0&LH_TitleDesc=0&_odkw=ibm+thinkpad+x230&_osacat=0) as I write this. I'd peruse [r/thinkpad](https://www.reddit.com/r/thinkpad/) and [r/LinuxOnThinkPad](https://www.reddit.com/r/LinuxOnThinkpad/) a bit first before buying.
 
-[Let me know](https://octodon.social/@schlink) if you have any suggestions!
-
-
+[Let me know](https://octodon.social/@schlink) if you have any suggestions for other distros, software, or fonts!
