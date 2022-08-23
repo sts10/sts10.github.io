@@ -15,7 +15,7 @@ I briefly considered [Debian](https://www.debian.org/) and [Alpine Linux](https:
 
 ## Installing Puppy Linux
 
-Using my main laptop, I went over to [the Puppy Linux download section](https://puppylinux-woof-ce.github.io/index.html#download) and downloaded "Ubuntu Bionic; x86 32-bit; BionicPup32 8.0". I easily flashed this onto a fresh USB thumb drive. I stuck it in the ThinkPad (thankfully, it has 2 USB-A ports), and rebooted, hitting F12 when the ThinkPad logo came up to enter the boot menu.
+Using my main laptop, I went over to [the Puppy Linux download section](https://puppylinux-woof-ce.github.io/index.html#download) and downloaded "Ubuntu Bionic; x86 32-bit; BionicPup32 8.0". I easily flashed this onto a fresh USB thumb drive with Pop_OS's "USB Flasher" app. I stuck it in the ThinkPad (thankfully, it has 2 USB-A ports), and rebooted, hitting F12 when the ThinkPad logo came up to enter the boot menu.
 
 ### Forcing PAE
 I loaded Puppy from the USB. This was a pit of a trick as I had to add the parameter `forcepae` to the series of boot commands. "PAE" stands for "Physical Address Extension". [Apparently after 12.10, Lubuntu and Xubuntu require PAE to install. Luckily, this Pentium M processor can "force" PAE, but you've got to modify the installation process a bit](https://help.ubuntu.com/community/pae). 
@@ -56,7 +56,7 @@ Once I got everything settled, I installed [Neofetch](https://github.com/dylanar
 
 Once I had learned more about the machine and how it felt with Linux on it, I could think more concretely about what I might use if for. 
 
-Its biggest limitation is its internet access, or lack thereof. This machine doesn't seem to have a WiFi card, though I'm not 100% sure. It does have an Ethernet port, which worked at one point with Puppy Linux, but is being temperamental today. Partially for this reason, my goal for this machine was to make it **a tool for writing**. I always been a bit sentimental for typewriters -- dedicated writing machines that offer no other distractions. Since the internet access on this thing is iffy, it's perfect for that. Though if I really can't get the Ethernet to work, I'll need to transfer writing off of this machine using a USB stick (which I did for this blog post). 
+Its biggest limitation is its internet access, or lack thereof. This machine doesn't seem to have a WiFi card, though I'm not 100% sure. It does have an Ethernet port, which worked at one point with Puppy Linux, but is being temperamental today. Partially for this reason, my goal for this machine was to make it **a tool for writing**. I always been a bit sentimental for typewriters -- dedicated writing machines that offer no other distractions. Since the internet access on this thing is iffy, it's perfect for that. Though if I really can't get the Ethernet to work, I'll need to transfer writing off of this machine using a USB stick (which I did for this blog post). (While the Ethernet port _was_ working, I used [croc](https://github.com/schollz/croc), which installed on Puppy easily, to transfer files back and forth between my main laptop and the ThinkPad. Neat!)
 
 ### Notes on physical aspects of the X40 
 
@@ -81,7 +81,7 @@ Puppy only came with 3 fonts: Deja Vu family of Serif, Sans, and Mono. While I l
 
 I went to Google Fonts (ugh, I know, not very free-software of me) and downloaded a bunch of serif fonts that I thought would work well for writing long documents, including [PT Serif](https://fonts.google.com/specimen/PT+Serif?query=pt+serif), [Poly](https://fonts.google.com/specimen/Poly?query=poly), [Bitter](https://fonts.google.com/specimen/Bitter?query=bitter), and [Literata](https://fonts.google.com/specimen/Literata?query=literata).
 
-I also grabbed [Fira Sans](https://github.com/mozilla/Fira), [Courier Code](https://fontlibrary.org/en/font/courier-code) (which I think I like better than [Courier Prime](https://quoteunquoteapps.com/courierprime/)),  and [JetBrains Mono NL](https://www.jetbrains.com/lp/mono/), my favorite monospaced font. 
+I also grabbed [Fira Sans](https://github.com/mozilla/Fira), [IBM Plex Sans](https://github.com/IBM/plex/releases), [Courier Code](https://fontlibrary.org/en/font/courier-code) (which I think I like better than [Courier Prime](https://quoteunquoteapps.com/courierprime/)),  and [JetBrains Mono NL](https://www.jetbrains.com/lp/mono/), my favorite monospaced font. 
 
 Tip: If you want to install a bunch of ttf fonts at once, a nice way to do it is `mkdir ~/.local/share/fonts` and then `cp` all your `*.tff` files into that directory. Next, run `fc-cache -f -v` to force a refresh of your font cache. This will also display all the locations your system looks for font files.
 
