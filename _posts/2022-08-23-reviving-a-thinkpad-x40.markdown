@@ -85,8 +85,10 @@ I also grabbed [Fira Sans](https://github.com/mozilla/Fira), [Courier Code](http
 
 Tip: If you want to install a bunch of ttf fonts at once, a nice way to do it is `mkdir ~/.local/share/fonts` and then `cp` all your `*.tff` files into that directory. Next, run `fc-cache -f -v` to force a refresh of your font cache. This will also display all the locations your system looks for font files.
 
-## Future Plans
+## Closing Thoughts / Future Plans
 
-I'm kind of bummed I didn't give Debian a shot. 
+Think I'm going to try to stop tinkering and... just use it to write some thoughts on for a bit? I am kind of bummed that I didn't give Debian a shot. But that'll a good project for some point in the future.
+
+[Let me know](https://octodon.social/@schlink) if you have any suggestions!
 
 
