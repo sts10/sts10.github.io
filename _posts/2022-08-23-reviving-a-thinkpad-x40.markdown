@@ -77,5 +77,9 @@ I also installed Neovim just in case I need to edit more config files or even en
 I'd love to try more writing-focused word processors like [Manuskript](https://www.theologeek.ch/manuskript/), [NovelWriter](https://novelwriter.io/#features), [GhostWriter](https://wereturtle.github.io/ghostwriter/), [Typora](https://typora.io/), or [Focus Writer](https://gottcode.org/focuswriter/), but I can't figure out how to get them installed on this 32-bit machine. Apparently there is a way to get [Libre Office](https://www.libreoffice.org/) for 32-bit, but the install didn't work for me on this machine.
 
 ### Fonts
-Puppy only came with 3 fonts: Deja Vu family of Serif, Sans, and Mono. While I like Deja Vu Sans Mono for coding, I wanted some nicer "writing" font options on this machine. So far I've added [Fira Sans](https://github.com/mozilla/Fira), [Courier Code](https://fontlibrary.org/en/font/courier-code) (which I think I like better than [Courier Prime](https://quoteunquoteapps.com/courierprime/)), and [JetBrains Mono NL](https://www.jetbrains.com/lp/mono/), my favorite monospaced font. 
+Puppy only came with 3 fonts: Deja Vu family of Serif, Sans, and Mono. While I like Deja Vu Sans Mono for coding, I wanted some nicer "writing" font options on this machine. 
+
+So far I've added [Fira Sans](https://github.com/mozilla/Fira), [Courier Code](https://fontlibrary.org/en/font/courier-code) (which I think I like better than [Courier Prime](https://quoteunquoteapps.com/courierprime/)), [PT Serif](https://fonts.google.com/specimen/PT+Serif?query=pt+serif), [Poly](https://fonts.google.com/specimen/Poly?query=poly), [Bitter](https://fonts.google.com/specimen/Bitter?query=bitter), and [JetBrains Mono NL](https://www.jetbrains.com/lp/mono/), my favorite monospaced font. 
+
+Tip: If you want to install a bunch of ttf fonts at once, a nice way to do it is `mkdir ~/.local/share/fonts` and then `cp` all your `*.tff` files into that directory. Next, run `fc-cache -f -v` to force a refresh of your font cache. This will also display all the locations your system looks for font files.
 
