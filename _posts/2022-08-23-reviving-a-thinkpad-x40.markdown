@@ -107,7 +107,11 @@ function export {
 
 ## Software for writing
 
-For word processors, my Puppy install comes with [AbiWord](http://abiword.org/) 3.0 and a basic IDE called [Geany](https://www.geany.org/) (version 1.29). Both work pretty well -- I'm writing this in Geany, but for longer, less technical writing, I'll try AbiWord. In both programs, F11 toggles a nice "full-screen" mode, which I'll probably think of as "distraction-free" mode. I changed AbiWord to save as .odt files by default, in an effort to increase compatibility. I also re-mapped Caps Lock to be another Control, something I've come to get used to. This was pretty easy to do in Puppy's GUI setting menus!
+For word processors, my Puppy install comes with [AbiWord](http://abiword.org/) 3.0 and a basic IDE called [Geany](https://www.geany.org/) (version 1.29). Both work pretty well -- I'm writing this in Geany, but for longer, less technical writing, I'll try AbiWord. In both programs, F11 toggles a nice "full-screen" mode, which I'll probably think of as "distraction-free" mode.  
+
+I experimented with [changing AbiWord to save as .odt files by default](https://www.abisource.com/wiki/WinFaqAlwaysSaveAsWord), but one of these resulting .odt files was unreadable by Libre Writer on my main laptop, just the issue I was attempting to avoid! So I switched the default file save type back to AbiWord (`.abw`). Back on my main laptop, Libre Writer seems to open these `.abw` AbiWord files just fine, so no compatibility issue there, really. But still a bit spook by that corrupted file... something about a line in `content.xml` being unreadable.
+
+I also re-mapped Caps Lock to be another Control, something I've come to get used to. This was pretty easy to do in Puppy's GUI setting menus!
 
 I also installed Neovim just in case I need to edit more config files or end up using that for writing. I used the built-in Puppy Package Manager to do this. Interestingly, this process gave me Neovim version 0.2.2 -- maybe that's the last version they packaged for 32-bit machines? Grateful to have it! I then whipped up [a basic, no-plugin init.vim for it](https://gist.github.com/sts10/afd5e98d4724935b55163a0d89d58878). Though I'm having some issues with colors, particularly in visual mode. I think Neovim is actually the only piece of software I've installed so far.
 
