@@ -94,7 +94,8 @@ Though if I really can't get the Ethernet to work, I'll need to transfer writing
 
 ```bash
 function export {
-    if [ -d /mnt/sdb1 ]; then
+    # check if there's an sdb1 mounted
+    if mountpoint -q /mnt/sdb1; then
         echo "USB drive found. Rsyncing documents directory..."
         rsync -a /root/my-documents/ /mnt/sdb1/thinkpad-writing
         echo "Done"
