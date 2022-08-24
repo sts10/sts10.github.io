@@ -90,13 +90,25 @@ In my research, I did find an article about a "Linux distro for writers" called 
 
 Given that internet access on this thing is iffy, but the keyboard is great, I figure it's perfect for this. Just boot it up, full-screen AbiWord, pick a font, and write! 
 
-Though if I really can't get the Ethernet to work, I'll need to transfer writing off of this machine using a USB stick (which I did for this blog post). (While I was able to connect via the Ethernet port, I used [croc](https://github.com/schollz/croc), which installed on Puppy easily, to transfer files back and forth between my main laptop and the ThinkPad. Neat!)
+Though if I really can't get the Ethernet to work, I'll need to transfer writing off of this machine using a USB stick (which I did for this blog post). (While I was able to connect via the Ethernet port, I used [croc](https://github.com/schollz/croc), which installed on Puppy easily, to transfer files back and forth between my main laptop and the ThinkPad. Neat!) Luckily, [Rsync](https://rsync.samba.org/), a tool [I've used before](https://sts10.github.io/2021/10/26/restic-rsync-backup-ideas.html#a-first-step-in-the-right-direction-rsync), came installed with Puppy, so I can add something like this to the `~/.bashrc`:
+
+```bash
+function export {
+    if [ -d /mnt/sdb1 ]; then
+        echo "USB drive found. Rsyncing documents directory..."
+        rsync -a /root/my-documents/ /mnt/sdb1/thinkpad-writing
+        echo "Done"
+    else
+        echo "USB drive not found. May not be mounted."
+    fi
+}
+```
 
 ## Software for writing
 
 For word processors, my Puppy install comes with [AbiWord](http://abiword.org/) 3.0 and a basic IDE called [Geany](https://www.geany.org/) (version 1.29). Both work pretty well -- I'm writing this in Geany, but for longer, less technical writing, I'll try AbiWord. In both programs, F11 toggles a nice "full-screen" mode, which I'll probably think of as "distraction-free" mode. I changed AbiWord to save as .odt files by default, in an effort to increase compatibility. I also re-mapped Caps Lock to be another Control, something I've come to get used to. This was pretty easy to do in Puppy's GUI setting menus!
 
-I also installed Neovim just in case I need to edit more config files or end up using that for writing. I used the built-in Puppy Package Manager to do this. Interestingly, this process gave me Neovim version 0.2.2 -- maybe that's the last version they packaged for 32-bit machines? Grateful to have it! I think Neovim is actually the only piece of software I've installed so far.
+I also installed Neovim just in case I need to edit more config files or end up using that for writing. I used the built-in Puppy Package Manager to do this. Interestingly, this process gave me Neovim version 0.2.2 -- maybe that's the last version they packaged for 32-bit machines? Grateful to have it! I then whipped up [a basic, no-plugin init.vim for it](https://gist.github.com/sts10/afd5e98d4724935b55163a0d89d58878). Though I'm having some issues with colors, particularly in visual mode. I think Neovim is actually the only piece of software I've installed so far.
 
 I'd love to try more writing-focused word processors like [Manuskript](https://www.theologeek.ch/manuskript/), [novelWriter](https://novelwriter.io/#features), [GhostWriter](https://wereturtle.github.io/ghostwriter/), [Typora](https://typora.io/), or [Focus Writer](https://gottcode.org/focuswriter/), but I can't figure out how to get them installed on this 32-bit machine. A notes app called [Laverna](https://laverna.cc/#download) offers a 32-bit Linux download, but I haven't tried installing it yet. Apparently there is a way to get [Libre Office](https://www.libreoffice.org/) for 32-bit, but the install didn't work for me on this machine. I don't think my choice of distro affects this compatibility issue. 
 
@@ -113,7 +125,7 @@ Tip: If you want to install a bunch of ttf fonts at once, a nice way to do it is
 
 Think I'm going to try to stop tinkering and... just use it to write some thoughts on for a bit? One project might be installing and learning [TLP](https://linrunner.de/tlp/) to try to boost the battery life.
 
-I am kind of bummed that I didn't give Debian a shot. But that'll a good project for some point in the future. 
+I am kind of bummed that I didn't give Debian a shot. But that'll be a good project for some point in the future.
 
 I don't know if I'd _buy_ an X40? It looks like they go for anywhere [between $30 and $120+ on eBay](https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2334524.m570.l1313&_nkw=ibm+thinkpad+x220&_sacat=0&LH_TitleDesc=0&_odkw=ibm+thinkpad+x230&_osacat=0) as I write this. I'd peruse [r/thinkpad](https://www.reddit.com/r/thinkpad/) and [r/LinuxOnThinkPad](https://www.reddit.com/r/LinuxOnThinkpad/) a bit first before buying.
 
