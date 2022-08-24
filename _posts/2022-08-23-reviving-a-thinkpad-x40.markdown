@@ -34,7 +34,7 @@ Happy with the speed and functionality of Puppy Linux, I decided to install it t
 
 I assume this design choice is why the "Install Puppy" program didn't have a shortcut on the Desktop. I found it in the Applications menu > Setup > Puppy Installer. This installer allows you to target USB sticks or hard drives. I targeted the hard drive and ended up doing a "full" install, taking over all of sda1. 
 
-Either during this process or right after, I had to add that `forcepae` argument to the boot from the hard drive so that it would be applied every time I booted Puppy from the hard drive from now on. I forget if the Puppy Installer gave me that choice, but [basically](https://oldforum.puppylinux.com/viewtopic.php?p=1006544) you need to add that `forcepae` option to a file called `/menu.lst`, which is in the root directory, `/`. Here's an excerpt of what my (working) `/menu.lst`: 
+Either during this process or right after, I had to add that `forcepae` argument to the boot from the hard drive so that it would be applied every time I booted Puppy from the hard drive from now on. I forget if the Puppy Installer gave me that choice, but [basically](https://oldforum.puppylinux.com/viewtopic.php?p=1006544) you need to add that `forcepae` option to a file called `/menu.lst`, which is in the root directory, `/`. Here's an excerpt of my (working!) `/menu.lst`: 
 
 ```
 # Full installed Linux
