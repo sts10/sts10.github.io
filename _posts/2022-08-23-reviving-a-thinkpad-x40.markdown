@@ -26,7 +26,7 @@ I admit that I didn't take great notes during this part of the process, but basi
 
 ![Working boot parameters for forcing pae](/img/thinkpad/boot-from-usb-parameters.jpg)
 
-Once Puppy Linux loaded (from the USB, not the hard drive), I used GParted, a partition manager that luckily ships with Puppy, to clear out sda1, the ThinkPad's main internal hard drive. I then removed the Windows XP<sup>TM</sup> sticker from the machine -- bye, Windows<sup>TM</sup>! 
+Once Puppy Linux loaded (from the USB, not the hard drive), I used GParted, a partition manager that luckily ships with Puppy, to clear out sda1, the ThinkPad's main internal hard drive. I chose to format both partitions on the hard drive as ext3... kind of figured it was a compromise between compatibility and working well on the old hardware (rather than ext2 or ext4). I then removed the Windows XP<sup>TM</sup> sticker from the machine -- bye, Windows<sup>TM</sup>! 
 
 ### Installing Puppy Linux _to the hard drive_
 
@@ -82,7 +82,7 @@ I figured a fun guiding star would be to make this machine specifically **a tool
 
 As you might imagine, I'm not the only person who thinks they'd write more/better without the myriad distractions of the internet. I have a writer friend who goes to a cafe where she doesn't know the WiFi password to write. 
 
-There are hardware solutions to be bought and sold as well: A company called Freewrite offers [a $649 "Smart Typewriter"](https://getfreewrite.com/products/freewrite-smart-typewriter-3rd-gen) that actually looks pretty awesome. I've also seen [some](https://www.reddit.com/r/AlphaSmart) [love](https://www.inputmag.com/reviews/the-alphasmart-neo-2-is-the-best-distraction-free-writing-tool-you-can-buy-right-now) for a device called the Alphasmart Neo2 Word Processor. 
+There are hardware solutions to be bought and sold as well: A company called Freewrite offers [a $649 "Smart Typewriter"](https://getfreewrite.com/products/freewrite-smart-typewriter-3rd-gen) that actually looks pretty awesome. I've also seen [some](https://www.reddit.com/r/AlphaSmart) [love](https://www.inputmag.com/reviews/the-alphasmart-neo-2-is-the-best-distraction-free-writing-tool-you-can-buy-right-now) for a device called the Alphasmart Neo2 Word Processor (coincidentally, [Freewrite just announced a similarly named "Alpha" product](https://alphasmart.com/reveal/) -- it's an active market, apparently).
 
 [This Medium post from 2021](https://medium.com/the-shadow/why-we-need-dedicated-modern-typewriters-c1597a72d25a) actually lists "An old laptop running Linux" as what the author calls a "modern typewriter." The author then, interestingly, hypothesizes what a "typewriter" Linux distro would look like -- just a text editor, a few themes and fonts, and, I'd stress, a great sync/back-up system. Wouldn't need to worry about sound, video, or browsers. Configured to be easy to install on a wide variety of hardware (to the extent that that is possible)... I agree -- that would be cool! 
 
@@ -125,7 +125,7 @@ Tip: If you want to install a bunch of ttf fonts at once, a nice way to do it is
 
 Think I'm going to try to stop tinkering and... just use it to write some thoughts on for a bit? One project might be installing and learning [TLP](https://linrunner.de/tlp/) to try to boost the battery life.
 
-I am kind of bummed that I didn't give Debian a shot. But that'll be a good project for some point in the future.
+I am kind of bummed that I didn't give Debian a shot (though, phew, they don't make choosing an appropriate ISO easy!). But that'll be a good project for some point in the future.
 
 I don't know if I'd _buy_ an X40? It looks like they go for anywhere [between $30 and $120+ on eBay](https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2334524.m570.l1313&_nkw=ibm+thinkpad+x220&_sacat=0&LH_TitleDesc=0&_odkw=ibm+thinkpad+x230&_osacat=0) as I write this. I'd peruse [r/thinkpad](https://www.reddit.com/r/thinkpad/) and [r/LinuxOnThinkPad](https://www.reddit.com/r/LinuxOnThinkpad/) a bit first before buying.
 
