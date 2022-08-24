@@ -124,7 +124,7 @@ On my main laptop, I went to Google Fonts (ugh, I know, not very free-software o
 
 I also grabbed [Fira Sans](https://github.com/mozilla/Fira), [IBM Plex Sans](https://github.com/IBM/plex/releases), [Courier Code](https://fontlibrary.org/en/font/courier-code) (which I think I like better than [Courier Prime](https://quoteunquoteapps.com/courierprime/)),  and [JetBrains Mono NL](https://www.jetbrains.com/lp/mono/), my favorite monospaced font. 
 
-Tip: If you want to install a bunch of ttf fonts at once, a nice way to do it is `mkdir ~/.local/share/fonts` and then `cp` all your `*.tff` files into that directory. Next, run `fc-cache -f -v` to force a refresh of your font cache. This will also display all the locations your system looks for font files.
+Tip: If you want to install a bunch of ttf fonts at once, a nice way to do it is `mkdir ~/.local/share/fonts` and then `cp` all your `*.ttf` font files into that directory. Next, run `fc-cache -f -v` to force a refresh of your font cache. This will also display all the locations your system looks for font files.
 
 ## Closing Thoughts / Future Plans
 
