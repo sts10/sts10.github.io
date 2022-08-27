@@ -109,7 +109,7 @@ function export {
 
 For word processors, my Puppy install comes with [AbiWord](http://abiword.org/) 3.0 and a basic IDE called [Geany](https://www.geany.org/) (version 1.29). Both work pretty well -- I'm writing this in Geany, but for longer, less technical writing, I'll try AbiWord. In both programs, F11 toggles a nice "full-screen" mode, which I'll probably think of as "distraction-free" mode.  
 
-I experimented with [changing AbiWord to save as .odt files by default](https://www.abisource.com/wiki/WinFaqAlwaysSaveAsWord), but one of these resulting .odt files was unreadable by Libre Writer on my main laptop, just the issue I was attempting to avoid! So I switched the default file save type back to AbiWord (`.abw`). Back on my main laptop, Libre Writer seems to open these `.abw` AbiWord files just fine, so no compatibility issue there, really. But still a bit spook by that corrupted file... something about a line in `content.xml` being unreadable.
+I experimented with [changing AbiWord to save as .odt files by default](https://www.abisource.com/wiki/WinFaqAlwaysSaveAsWord), but one of these resulting .odt files was unreadable by Libre Writer on my main laptop, just the issue I was attempting to avoid! So I switched the default file save type back to AbiWord (`.abw`). Back on my main laptop, Libre Writer seems to open these `.abw` AbiWord files just fine, so no compatibility issue there, really. But still a bit spooked by that corrupted file... something about a line in `content.xml` being unreadable.
 
 I also re-mapped Caps Lock to be another Control, something I've come to get used to. This was pretty easy to do in Puppy's GUI setting menus!
 
@@ -120,7 +120,7 @@ I'd love to try more writing-focused word processors like [Manuskript](https://w
 ### Fonts
 Puppy only came with 3 fonts: Deja Vu family of Serif, Sans, and Mono. While I like Deja Vu Sans Mono for coding, I wanted some nicer "writing" font options on this machine. 
 
-On my main laptop, I went to Google Fonts (ugh, I know, not very free-software of me) and downloaded a bunch of serif fonts that I thought would work well for writing long documents, including [PT Serif](https://fonts.google.com/specimen/PT+Serif?query=pt+serif), [Poly](https://fonts.google.com/specimen/Poly?query=poly), [Bitter](https://fonts.google.com/specimen/Bitter?query=bitter), and [Literata](https://fonts.google.com/specimen/Literata?query=literata).
+On my main laptop, I went to Google Fonts (ugh, I know, not very free-software of me) and downloaded a bunch of serif fonts that I thought would work well for writing long documents, including [PT Serif](https://fonts.google.com/specimen/PT+Serif?query=pt+serif), [Poly](https://fonts.google.com/specimen/Poly?query=poly), [Lora](https://fonts.google.com/specimen/Lora?query=lora), [Bitter](https://fonts.google.com/specimen/Bitter?query=bitter), and [Literata](https://fonts.google.com/specimen/Literata?query=literata).
 
 I also grabbed [Fira Sans](https://github.com/mozilla/Fira), [IBM Plex Sans](https://github.com/IBM/plex/releases) (feels right to use an IBM font on an IBM laptop!), [Courier Code](https://fontlibrary.org/en/font/courier-code) (which I think I like better than [Courier Prime](https://quoteunquoteapps.com/courierprime/)),  and [JetBrains Mono NL](https://www.jetbrains.com/lp/mono/), my favorite monospaced font. 
 
