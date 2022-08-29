@@ -56,9 +56,9 @@ Menus and apps launch pretty quickly. Seems pretty stable after reboots. Think I
 
 ## Limitations
 
-So far as I've discovered, the biggest limitation is its internet access, or lack thereof. This machine doesn't seem to have a WiFi card, though I'm not 100% sure. Running `lspci | egrep -i 'wifi|wireless|wlan'` only returns one entry: `Network controller Intel Corporation PRO/Wireless 2200BG [Calexico2] Network Connection (rev 05)`.
+So far as I've discovered, the biggest limitation is its lack of WiFi. This machine doesn't seem to have a WiFi card, though I'm not 100% sure. Running `lspci | egrep -i 'wifi|wireless|wlan'` only returns one entry: `Network controller Intel Corporation PRO/Wireless 2200BG [Calexico2] Network Connection (rev 05)`.
 
-It does have an Ethernet port, which worked at one point with Puppy Linux, but is being temperamental today. 
+It does have an Ethernet port, which works, but only if it's plugged in when the computer is booted. If you plug a cable in _after_ the machine is running, it won't automatically connect to the internet. (Wonder if there's a way to troubleshoot this...)
 
 Also, the battery life isn't great -- maybe 25 minutes? Though at its age, it definitely could have been 0 minutes! I'm comforting myself by telling myself that the power adapter is very light and its cord is pretty long overall.
 
@@ -80,7 +80,7 @@ Given these features and limitations, I began to think more concretely about wha
 
 I figured a fun guiding star would be to make this machine specifically **a tool for writing**. I've always been a bit sentimental for typewriters -- dedicated writing machines that offer no other distractions. 
 
-As you might imagine, I'm not the only person who thinks they'd write more/better without the myriad distractions of the internet. I have a writer friend who goes to a cafe where she doesn't know the WiFi password to write. 
+As you might imagine, I'm not the only person who thinks they'd write more/better fewer of the myriad of distractions of the (wireless) internet. I have a writer friend who goes to a cafe where she doesn't know the WiFi password to write. 
 
 There are hardware solutions to be bought and sold as well: A company called Freewrite offers [a $649 "Smart Typewriter"](https://getfreewrite.com/products/freewrite-smart-typewriter-3rd-gen) that actually looks pretty awesome. I've also seen [some](https://www.reddit.com/r/AlphaSmart) [love](https://www.inputmag.com/reviews/the-alphasmart-neo-2-is-the-best-distraction-free-writing-tool-you-can-buy-right-now) for a device called the Alphasmart Neo2 Word Processor (coincidentally, [Freewrite just announced a similarly named "Alpha" product](https://alphasmart.com/reveal/) -- it's an active market, apparently).
 
@@ -113,7 +113,7 @@ I experimented with [changing AbiWord to save as .odt files by default](https://
 
 I also re-mapped Caps Lock to be another Control, something I've come to get used to. This was pretty easy to do in Puppy's GUI setting menus!
 
-I also installed Neovim just in case I need to edit more config files or end up using that for writing. I used the built-in Puppy Package Manager to do this. Interestingly, this process gave me Neovim version 0.2.2 -- maybe that's the last version they packaged for 32-bit machines? Grateful to have it! I then whipped up [a basic, no-plugin init.vim for it](https://gist.github.com/sts10/afd5e98d4724935b55163a0d89d58878). Though I'm having some issues with colors, particularly in visual mode. I think Neovim is actually the only piece of software I've installed so far.
+I also installed Neovim just in case I need to edit more config files or end up using that for writing. I used the built-in Puppy Package Manager to do this. Interestingly, this process gave me Neovim version 0.2.2 -- maybe that's the last version they packaged for 32-bit machines? Grateful to have it! I then whipped up [a basic, no-plugin init.vim for it](https://gist.github.com/sts10/afd5e98d4724935b55163a0d89d58878). Though I'm having some issues with colors, particularly in visual mode.
 
 I'd love to try more writing-focused word processors like [Manuskript](https://www.theologeek.ch/manuskript/), [novelWriter](https://novelwriter.io/#features), [GhostWriter](https://wereturtle.github.io/ghostwriter/), [Typora](https://typora.io/), or [Focus Writer](https://gottcode.org/focuswriter/), but I can't figure out how to get them installed on this 32-bit machine. A notes app called [Laverna](https://laverna.cc/#download) offers a 32-bit Linux download, but I haven't tried installing it yet. Apparently there is a way to get [Libre Office](https://www.libreoffice.org/) for 32-bit, but the install didn't work for me on this machine. I don't think my choice of distro affects this compatibility issue. 
 
