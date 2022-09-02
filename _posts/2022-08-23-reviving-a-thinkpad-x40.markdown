@@ -11,7 +11,7 @@ I recently inherited [a ThinkPad X40](https://www.thinkwiki.org/wiki/Category:X4
 
 When I started it up it loaded Windows XP<sup>TM</sup>. After poking around the internet a bit, I decided to try installing [Puppy Linux](https://puppylinux-woof-ce.github.io/index.html), "a unique family of Linux distributions meant for the home-user computers." It seems to be aimed at old machines, so I figured its assumptions would line up well with my needs. 
 
-I briefly considered [Debian](https://www.debian.org/) and [Alpine Linux](https://www.alpinelinux.org/)+Fluxbox. [Xubuntu](https://xubuntu.org/) seems to require 64-bit now, so that was out. [Lubuntu](https://lubuntu.net/) probably would have been a fine choice, but I wanted the machine to definitely be snappy, and knew I only had 1240 MB of RAM.
+I briefly considered [Debian](https://www.debian.org/) and [Alpine Linux](https://www.alpinelinux.org/)+Fluxbox. [Xubuntu](https://xubuntu.org/) seems to require 64-bit now, so that was out. [Lubuntu](https://lubuntu.net/) probably would have been a fine choice, but I wanted the machine to definitely be snappy, and knew I only had 1240 MB of RAM. [Linux Lite](https://www.linuxliteos.com/download.php) seems to have stopped supporting 32-bit architecture in April 2021.
 
 ## Installing Puppy Linux
 
