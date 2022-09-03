@@ -9,16 +9,22 @@ I recently inherited [a ThinkPad X40](https://www.thinkwiki.org/wiki/Category:X4
 
 ![My ThinkPad X40](/img/thinkpad/full-ibm-start.jpg) 
 
-When I started it up it loaded Windows XP<sup>TM</sup>. After poking around the internet a bit, I decided to try installing [Puppy Linux](https://puppylinux-woof-ce.github.io/index.html), "a unique family of Linux distributions meant for the home-user computers." It seems to be aimed at old machines, so I figured its assumptions would line up well with my needs. 
+When I started it up it loaded Windows XP<sup>TM</sup>. While I guess I _theoretically_ could have Windows, I'm assuming there were plenty of bugs found since 2007 and I didn't know what the update process would be like. Plus, I'm pro-Linux for philosophical reasons.
 
-I briefly considered [Debian](https://www.debian.org/) and [Alpine Linux](https://www.alpinelinux.org/)+Fluxbox. [Xubuntu](https://xubuntu.org/) seems to require 64-bit now, so that was out. [Lubuntu](https://lubuntu.net/) probably would have been a fine choice, but I wanted the machine to definitely be snappy, and knew I only had 1240 MB of RAM. [Linux Lite](https://www.linuxliteos.com/download.php) seems to have stopped supporting 32-bit architecture in April 2021.
+## Which Linux distribution should I install? 
+
+I had to rule out [Xubuntu](https://xubuntu.org/), [Lubuntu](https://lubuntu.me/downloads/), and [Linux Lite](https://www.linuxliteos.com/download.php), as none them offer a 22.04 LTS for 32-bit systems.
+
+I'd been meaning to learn more about [Alpine Linux](https://www.alpinelinux.org/), but I got a bit intimidated by the installation process. I'll admit that I did not consider trying [Debian](https://www.debian.org/) for long enough... would have been interesting.
+
+Ultimately, I decided to try installing [Puppy Linux](https://puppylinux-woof-ce.github.io/index.html), "a unique family of Linux distributions meant for the home-user computers." It seems to be aimed at old machines, so I figured its assumptions would line up well with my needs. 
 
 ## Installing Puppy Linux
 
 Using my main laptop, I went over to [the Puppy Linux download section](https://puppylinux-woof-ce.github.io/index.html#download) and downloaded "Ubuntu Bionic; x86 32-bit; BionicPup32 8.0". I easily flashed this onto a fresh USB thumb drive with Pop_OS's "USB Flasher" app. I stuck it in the ThinkPad (thankfully, it has 2 USB-A ports), and rebooted, hitting F12 when the ThinkPad logo came up to enter the boot menu.
 
 ### Forcing PAE
-I loaded Puppy from the USB. This was a pit of a trick as I had to add the parameter `forcepae` to the series of boot commands. "PAE" stands for "Physical Address Extension". [Apparently after 12.10, Lubuntu and Xubuntu require PAE to install. Luckily, this Pentium M processor can "force" PAE, but you've got to modify the installation process a bit](https://help.ubuntu.com/community/pae). 
+Just running Puppy from the USB stick was a bit of a trick as I had to add the parameter `forcepae` to the series of boot commands. "PAE" stands for "Physical Address Extension". [Apparently after 12.10, Lubuntu and Xubuntu require PAE to install. Luckily, this Pentium M processor can "force" PAE, but you've got to modify the installation process a bit](https://help.ubuntu.com/community/pae). 
 
 I admit that I didn't take great notes during this part of the process, but basically, when you boot Puppy from USB, you need to edit the command. To edit the command, I think you hit tab (or 'e'?) rather than enter, at which point you're presented with one line of the command Puppy is about to run. You want to to add `forcepae` to the end: 
 
