@@ -179,7 +179,7 @@ go-engines/gnugo-3.8-lvl9
 <p>I didn't change any configurations. </p>
 <p>Then in Sabaki, I just entered the path to the <code>pachi-12.40-amd64</code> file in the unzipped directory, with no arguments or initial commands, and it seems to work. However, as I installed it, it can only do analysis on 19x19 boards I think?</p>
 <h3 id="compiling-pachi-from-source"><a class="header" href="#compiling-pachi-from-source">Compiling Pachi from Source</a></h3>
-<p>I haven't tried this, but the Pachi README says it might improve performance to build it from source. <a href="https://launchpad.net/%7Elemonsqueeze/+archive/ubuntu/pachi">Instructions here</a>.</p>
+<p>I haven't tried this, but the Pachi README says it might improve performance to build it from source. <a href="https://launchpad.net/~lemonsqueeze/+archive/ubuntu/pachi">Instructions here</a>.</p>
 <h2 id="setting-up-leelazero-ubuntu"><a class="header" href="#setting-up-leelazero-ubuntu">Setting up LeelaZero (Ubuntu)</a></h2>
 <ol>
 <li>Download and install <a href="https://github.com/SabakiHQ/Sabaki/">Sabaki</a>. Make sure it runs before proceeding.</li>
@@ -286,6 +286,22 @@ gtp -model '/home/sschlinkert/code/go-engines/katago-v1.3.5-opencl-linux-x64/g17
 
         </div>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
 
 
 
