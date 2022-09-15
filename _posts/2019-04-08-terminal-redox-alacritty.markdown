@@ -7,11 +7,13 @@ comments: true
 
 In my very slow and not very steady quest to learn the Rust programming language, I've come across a few projects written in the language that I use everyday. I thought I'd write a quick post about them, with some configuration tricks that I've made to make them suit my needs. 
 
-**Why prefer tools built with Rust?** [Rust](https://www.rust-lang.org/) is a very fast language that also works to ensure safety from a group of bugs and pitfalls. It's also the four-time-running most loved programming language, according to [a yearly Stack Overflow survey](https://insights.stackoverflow.com/survey/2019 ). Also, since Rust is only a few years old, any program written in Rust is by definition new. Of course newer doesn't always mean better, but as a non-professional developer I can afford to be on the edge a bit.
+**Why prefer tools built with Rust?** [Rust](https://www.rust-lang.org/) programs are fast. Rust's design as a language and compiler ensures safety from a group of bugs and pitfalls. It's also the four-time-running most loved programming language, according to [a yearly Stack Overflow survey](https://insights.stackoverflow.com/survey/2019 ). Also, since Rust is only a few years old, any program written in Rust is by definition new. Of course newer doesn't always mean better, but as a non-professional developer I can afford to be on the edge a bit.
 
 Do you know of other tools written in Rust that you've found useful? Leave a comment! 
 
-**Update from 2021**: [Here's a more up-to-date list of tools written in Rust](https://github.com/TaKO8Ki/awesome-alternatives-in-rust) and [a Reddit post with some more](https://www.reddit.com/r/rust/comments/nm96n1/awesome_rewrite_it_in_rust_a_curated_list_of/).
+**Update from 2022**: I now maintain [a separate curated list of command-line utilities written in Rust](https://gist.github.com/sts10/daadbc2f403bdffad1b6d33aff016c0a).
+
+<!-- **Update from 2021**: [Here's a more up-to-date list of tools written in Rust](https://github.com/TaKO8Ki/awesome-alternatives-in-rust) and [a Reddit post with some more](https://www.reddit.com/r/rust/comments/nm96n1/awesome_rewrite_it_in_rust_a_curated_list_of/). -->
 
 ## Terminal Emulator
 
