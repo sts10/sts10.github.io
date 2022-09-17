@@ -142,6 +142,7 @@ In my tests of this procedure, the resulting lists are uniquely decodable, at le
 |           | length | prefix-free | suffix-free | Schlinkert-pruned |
 |-----------|:------:|:-----------:|:-----------:|:-----------------:|
 | 1Password | 18176  |    15076    |    15727    | 15841             |
+| Niceware  | 65536  |    52276    |    54430    | 54959             |
 | basic.txt | 18250  |    13312    |    15958    | 16291             |
 
 Interestingly, the resulting list includes prefix words and suffix words, and obviously has different word lengths (the technical term is [variable-length code](https://en.wikipedia.org/wiki/Variable-length_code)).
