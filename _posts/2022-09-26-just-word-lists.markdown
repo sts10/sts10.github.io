@@ -13,7 +13,7 @@ As I learned more about different qualities a word list could have, I kept gener
  
 To do this, I would edit my local list of profane words or British spellings, then create all of the lists anew by re-running a long Tidy command. 
 
-As mentioned, these commands could get pretty long. For example, here's the command to re-built the basic.txt list: 
+As mentioned, these commands could get pretty long. For example, here's the command to re-build the basic.txt list: 
 
 ```bash
 tidy -AAAA --whittle-to 18250 -lL -m 3 -M 12 -a /usr/share/dict/words -r ../reject-words/profane-words.txt -r ../reject-words/roman-numerals-lower.txt -r ../reject-words/uncommon-words.txt -r ../reject-words/britishisms.txt -r ../reject-words/repeated-letters.txt -r ../reject-words/common_words.txt -r ../reject-words/mostly-abbreviations.txt --samples -o lists/basic.txt --force ../common_word_list_maker/word_list_raw.txt
@@ -35,9 +35,11 @@ basic:
 
 Where, earlier in the file, I define variables I use in many of my commands, including `reject_commands` and `path_to_ngram_list`.
 
-With this in place, I can simply run `just basic` to force a re-built of the basic.txt word list.
+With this in place, I can simply run `just basic` to force a re-build of the basic.txt word list.
 
 Now, when I want to make a new list, I can drop the command write in the justfile and I'm all set. I can even run `just --list` to list all of my available just commands. Nifty!
+
+(Note that, for now, I haven't pushed the justfile to the word list repo, mostly to avoid confusion.)
 
 ## Epilogue: Just publishing with Jekyll
 
