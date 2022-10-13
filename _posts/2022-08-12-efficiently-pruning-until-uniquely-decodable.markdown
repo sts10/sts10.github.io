@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Pruning a word list until its uniquely decodable, with minimal cuts"
+title: "Schlinkert Pruning: Making a word list until its uniquely decodable with minimal cuts"
 date: 2022-08-12 17:00:00 -0400
 comments: true
 ---
@@ -131,13 +131,11 @@ pub fn get_sardinas_patterson_final_intersection(c: &[String]) -> Vec<String> {
 
 Then we can run this new, modified list through the Sardinas-Patterson again and see if it's now uniquely decodable. And if it is, maybe the number of words we removed along the way will be less than the other three options outlined above. 
 
-This is a bit embarrassing, but for lack of a better term for now I'm calling this removal procedure "Schlinkert pruning" after myself.
+## Schlinkert pruning: Preliminary results
 
-## Preliminary results
+Amazingly, this pruning procedure seems to work for the handful of word lists I've tried it on, in that the resulting lists are uniquely decodable, at least according to my implementation of Sardinas-Patterson.
 
-Amazingly, this pruning procedure seems to work for the handful of word lists I've tried it on. 
-
-In my tests of this procedure, the resulting lists are uniquely decodable, at least according to my own implementation of Sardinas-Patterson. _AND_ the procedure seems to preserve more words than the three procedures outlined above. Here we can compare it to removing prefix words and suffix words:
+Not only that, but the procedure seems to preserve more words than the three procedures outlined above. Here we can compare it to removing prefix words and suffix words:
 
 |           | length | prefix-free | suffix-free | Schlinkert-pruned |
 |-----------|:------:|:-----------:|:-----------:|:-----------------:|
@@ -146,6 +144,8 @@ In my tests of this procedure, the resulting lists are uniquely decodable, at le
 | basic.txt | 18250  |    13312    |    15958    | 16291             |
 
 Interestingly, the resulting list includes prefix words and suffix words, and obviously has different word lengths (the technical term is [variable-length code](https://en.wikipedia.org/wiki/Variable-length_code)).
+
+For lack of a better term for now, I'm calling this removal procedure "Schlinkert pruning" after myself.
 
 ## Limitations
 
