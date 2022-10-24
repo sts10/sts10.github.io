@@ -7,7 +7,9 @@ comments: true
 
 Pop quiz you're at an Airbnb in Montauk with 10 friends. After a rousing game of flip cup, the party is threatening to slow down... until someone says they want to watch the new [Beyoncé live concert film](https://www.netflix.com/title/81013626). Someone else navigates to the Netflix icon on the AppleTV. But then... bam! Log in to Netflix? You want to help. You want to offer your log in, confident that in a few days you'll remember to "LOG OUT OF ALL DEVICES" so that the next guests at this Airbnb don't watch ahead of you in Peaky Blinders. But then you remember that your Excellent password, stored in your password manager that you have access to on your phone, looks something like ")9CaCAX7/t2nXFSb%=Y" or ":cn}@}>{j5p/)XV&L=?". How long will it take you to read or type out that string of characters on AppleTV's linear keyboard?
 
-We can do better. I'll walk us through a series of claims, using almost everything I've learned about passwords over the past few years, toward a process for creating a decent password for the situation described above.
+We can do better. We want a password that is both convenient to enter in the situation above, but also still relatively secure. 
+
+I'll walk us through a series of claims, using almost everything I've learned about passwords over the past few years, toward a process for creating a decent password for the situation described above.
 
 ## Use words
 
@@ -86,6 +88,8 @@ Obviously, don't use any of the passphrases published in this blog post!
 One way to securely create a passphrase is to [use dice](https://www.eff.org/dice). [Here's our final word list with corresponding dice rolls for you to use](https://gist.github.com/sts10/5083cf706cac4aab34848c71ef494657).
 
 If you want more than 51 bits of entropy, you can use more than 4 words. Please use your own threat model!
+
+To those who design password generation software (either built-in to an online service sign-up flow or a password manager), I encourage you to imagine possibilities of using word lists tailored to users' contextual needs.
 
 ## Epilogue: Other smart TV keyboard layouts? 
 
