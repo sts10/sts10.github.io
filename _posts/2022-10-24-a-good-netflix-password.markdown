@@ -5,7 +5,7 @@ date: 2022-10-24 10:00:00 -0400
 comments: true
 ---
 
-Pop quiz you're at an Airbnb in the Hamptons with 10 friends. After a rousing game of flip cup, the party is threatening to slow down... until someone says they want to watch the new [Beyoncé live concert film](https://www.netflix.com/title/81013626). Someone else navigates to the Netflix icon on the AppleTV. But then... bam! Log in to Netflix? You want to help. You want to offer your log in, confident that in a few days you'll remember to "LOG OUT OF ALL DEVICES" so that the next guests at this Airbnb don't watch ahead of you in Peaky Blinders. But then you remember that your Excellent password, stored in your password manager that you have access to on your phone, looks something like ")9CaCAX7/t2nXFSb%=Y" or ":cn}@}>{j5p/)XV&L=?". How long will it take you to read or type out that string of characters on AppleTV's linear keyboard?
+Pop quiz you're at an Airbnb in Montauk with 10 friends. After a rousing game of flip cup, the party is threatening to slow down... until someone says they want to watch the new [Beyoncé live concert film](https://www.netflix.com/title/81013626). Someone else navigates to the Netflix icon on the AppleTV. But then... bam! Log in to Netflix? You want to help. You want to offer your log in, confident that in a few days you'll remember to "LOG OUT OF ALL DEVICES" so that the next guests at this Airbnb don't watch ahead of you in Peaky Blinders. But then you remember that your Excellent password, stored in your password manager that you have access to on your phone, looks something like ")9CaCAX7/t2nXFSb%=Y" or ":cn}@}>{j5p/)XV&L=?". How long will it take you to read or type out that string of characters on AppleTV's linear keyboard?
 
 We can do better. I'll walk us through a series of claims, using almost everything I've learned about passwords over the past few years, toward a process for creating a decent password for the situation described above.
 
@@ -89,6 +89,6 @@ If you want more than 51 bits of entropy, you can use more than 4 words. Please 
 
 ## Epilogue: Other smart TV keyboard layouts? 
 
-Above, we assumed the Hamptons house had an smart TV with a particular linear keyboard. 
+Above, we assumed Montauk house had an smart TV with a particular linear keyboard. 
 
 Following the process above, we can make separate lists for other layouts. As you might expect, this results in different word lists. See [this repo for more](https://github.com/sts10/remote-words).
