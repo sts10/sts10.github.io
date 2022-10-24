@@ -47,7 +47,7 @@ If we were to remove the spaces from these passphrases ("rustgpsfearingscaled") 
 
 As a brief example, if a list has "boy", "hood", and "boyhood" on it, users who specified they wanted two words worth of randomness (entropy) might end up with "boyhood", which an attacker guessing single words would try _before_ moving on to two-word combinations. This is bad! We're picking 2 (or 4) words based on important security assumptions, namely that an attacker, even one who has our exact word list, would have to work through 7776<sup>2</sup> possible combinations (or, if we're using 4 words, 7776<sup>4</sup>).
 
-But we can solve this issue by removing certain words from the list. In this toy example, if we removed the word "boy" from our list, we'd be safe to mash the words together without a delimiter. This is because "boy" is the only "prefix word" on the list, so removing it makes the remaining list something called [a prefix code](https://en.wikipedia.org/wiki/Prefix_code), a key concept in coding theory. Lists that are free of prefix words are guaranteed to be **uniquely decodable**. This is the property we're interested in -- this is what makes it safe to combine words without a delimiter, since they can be "decoded" in only one way. 
+But we can solve this issue by removing certain words from the list. In this toy example, if we removed the word "boy" from our list, we'd be safe to mash the words together without a delimiter. This is because "boy" is the only "prefix word" on the list, so removing it makes the remaining list something called [a prefix code](https://en.wikipedia.org/wiki/Prefix_code), a key concept in coding theory. Lists that are free of prefix words are guaranteed to be **uniquely decodable**. This is the property we're interested in -- this is what makes it safe to combine words without a delimiter, since they can be "decoded" in only one way. ([This is how the EFF word lists were made safe to combine](https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases).)
 
 Cool. We could remove all prefix words from our list and go with that (an example passphrase "exotic officials flavors months" which we could safely make "exoticofficialsflavorsmonths"). The issue here is that removing all prefix words removes some great, easy-to-type words (like "boy"). Ideally, we'd **want to make our word list uniquely decodable while removing the fewest number of words possible**.
 
@@ -83,6 +83,6 @@ If you want more than 51 bits of entropy, you can use more than 4 words. Please 
 
 ## Epilogue: Other smartTV keyboard layouts? 
 
-Above, we assumed the Hamptons house had an AppleTV with a particular strange linear keyboard. 
+Above, we assumed the Hamptons house had an smartTV with a particular linear keyboard. 
 
 Following the process above, we can make separate lists for other layouts. As you might expect, this results in different word lists. See [this repo for more](https://github.com/sts10/remote-words).
