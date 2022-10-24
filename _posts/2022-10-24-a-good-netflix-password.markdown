@@ -19,7 +19,7 @@ If you're reading your password to someone inputting it into a device, it's much
 
 Plus, it's usually a pain to switch to the numbers/punctuation keyboard on SmartTVs, and it costs "clicks" (more on this below).
 
-So we could select, say, 4 random words and make that our password. But we can be a bit smarter about this...
+So we could select, say, 4 random words and make that our password -- like `carving exceeding boned legislate`. But we can be a bit smarter about this...
 
 ## Fewer button presses?
 
