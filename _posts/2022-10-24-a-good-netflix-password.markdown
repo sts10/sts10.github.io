@@ -29,7 +29,7 @@ What _list_ of words should we use to create our Netflix password? A classic cho
 
 (Some security assumptions: Going forward, we will assume that our attacker has the exact word list that we used to create our passphrase. Below, I'm going to assume that 51 bits of entropy is sufficient for Netflix, but users can increase that based on their threat model by either using more than 4 words from the final list, or by creating a longer list themselves.)
 
-But what if we made a list that is more optimized for our Hamptons party? We're trying to minimize the number of "clicks" we or a friend has to make on the remote as party enthusiasm wanes. What if we assume the linear keyboard that AppleTV uses. It looks like this:
+But what if we made a list that is more optimized for our Montauk party? We're trying to minimize the number of "clicks" we or a friend has to make on the remote as party enthusiasm wanes. What if we assume the linear keyboard that AppleTV uses. It looks like this:
 
 ```txt
 abcdefghijklmnopqrstuvwxyz
@@ -37,7 +37,7 @@ abcdefghijklmnopqrstuvwxyz
 
 Then, we could "score" a given word by how many "clicks" it takes to type, including the left-right movement between characters. So for example, "bad" would score 6 clicks. "zap" would cost 43 clicks. 
 
-As large base word list of common English words to start from, we could [scrape Google Books for frequently used words since 1975](https://github.com/sts10/common_word_list_maker). Let's arbitrarily take the 18,000 most common words. 
+As large base word list of common English words to start from, we could [scrape Google Books for frequently used words since 1975](https://github.com/sts10/common_word_list_maker). Let's arbitrarily take the 18,000 most common words that are 3 letters or longer. 
 
 We could then [sort these 18,000 words by click score (given our assumed linear keyboard)](https://github.com/sts10/remote-words/blob/main/lists/raw/alpha-line.txt), putting low click scores first. Then we could take the top 7,776 words from this list and randomly select, say, 4 words to make a decent Netflix password like "rust gps fearing scaled" or "vat tamil sly sadly".
 
@@ -51,11 +51,23 @@ As a brief example, if a list has "boy", "hood", and "boyhood" on it, users who 
 
 But we can solve this issue by removing certain words from the list. In this toy example, if we removed the word "boy" from our list, we'd be safe to mash the words together without a delimiter. This is because "boy" is the only "prefix word" on the list, so removing it makes the remaining list something called [a prefix code](https://en.wikipedia.org/wiki/Prefix_code), a key concept in coding theory. Lists that are free of prefix words are guaranteed to be **uniquely decodable**. This is the property we're interested in -- this is what makes it safe to combine words without a delimiter, since they can be "decoded" in only one way. ([This is how the EFF word lists were made safe to combine](https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases).)
 
-Cool. We could remove all prefix words from our list and go with that (an example passphrase "exotic officials flavors months" which we could safely make "exoticofficialsflavorsmonths"). The issue here is that removing all prefix words removes some great, easy-to-type words (like "boy"). Ideally, we'd **want to make our word list uniquely decodable while removing the fewest number of words possible**.
+Cool. We could remove all prefix words from our list and go with that (an example passphrase "exotic officials flavors months" which we could safely make "exoticofficialsflavorsmonths"). The issue here is that removing all prefix words removes some great, easy-to-type words (like "boy"). 
+
+### Understanding this next optimization
+
+Ideally, we'd **want to make our word list uniquely decodable while removing the fewest number of words possible**. To see why, let's dig into the procedure I'm using to create our word list. 
+
+As a constant, I want our finished list to be (a) uniquely decodable and (b) exactly 7,776 words (this is the same length as the EFF long list -- the number is a result of common dice having 6 sides). Do we need to use all 18,000 words in our starting list to achieve this? Ideally, we would only take what we need from the **top** of the list, which have the lowest click costs. 
+
+If we remove all prefix words from the 18,000 list, we get a list of 13,037. This is usable, but if we only need 7,776 words on our final list, we can take fewer words from tyhe 18,000 list. We'll take from the top, since they have the lowest click scores.
+
+It turns out that when we take the first 10,802 words from the list and remove prefix words, we get a 7,776 list. That's neat! But can we do better? What if we could fulfill requirements (a) and (b) but only use the first, say, 12,000 words on the list?
 
 ### Schlinkert pruning
 
-Is there another way to make a list uniquely decodable, besides removing al prefix words? Well, turns out we could remove all _suffix_ words ("hood", in the above example). With English words at least, removing all suffix words seems to "save" more words than removing all prefix words, so that's good. But was there an even better algorithm?
+Is there another way to make a list uniquely decodable, besides removing all prefix words? Well, turns out we could remove all _suffix_ words ("hood", in the above example). With English words at least, removing all suffix words seems to "save" more words than removing all prefix words, so that's good. If we perform the test described above, but remove all suffix words rather than all prefix words, we only need to take the first 8,996 words. An improvement!
+
+But was there an even better algorithm?
 
 To learn more about this, I read about the Sardinas–Patterson algorithm, an algorithm created in 1953 by August Albert Sardinas and George W. Patterson. [From Wikipedia](https://en.wikipedia.org/wiki/Sardinas%E2%80%93Patterson_algorithm): 
 
@@ -67,11 +79,17 @@ To accomplish this, I tweaked the Sardinas-Patterson algorithm to create a new p
 
 So, instead of removing all prefix words or all suffix words, we'll "Schlinkert prune" our word list to (finally) get a safe list of low-click-cost words that we can safely combine and use.
 
+If we "Schlinkert prune" the list, we only need to take the first 8,944 words. That's our fewest words used yet! (I don't know of any other algorithms to test, other than making all the words the same length, which is not effective for our needs.)
+
 ## Final list 
 
-Finally, we now have [a usable word list](https://github.com/sts10/remote-words/blob/main/lists/usable/alpha-line.txt) for our particular use-case. (Note that I've removed some profane words, British spellings of English words, as well as things like Roman numerals, from this final, "usable" list.)
+We've got our procedure down. And you can use a tool I made called [Tidy](https://github.com/sts10/tidy) to use this procedure on [the raw list](https://github.com/sts10/remote-words/blob/main/lists/raw/alpha-line.txt) with a command like `tidy -AAAA --whittle-to 7776 -K -lL -o my_list.txt lists/raw/alpha-line.txt`.
 
-Some example 4-word passphrases from this final list that we could use for Netflix and keep that Hamptons party going:
+But in order to make a _usable_ list, I wanted to make some cuts of my own. I decided to cut profane words, British spellings of English words, and Roman numerals. To remove some proper nouns, I also (somewhat controversially) only let through words found in the Linux list of English words found at `/usr/share/dict/words`. With all these additional cuts, I needed to take the first 11,047 words from the list of 18,000 to Schlinkert prune down to 7,776, but I think it's worth it. (I'll note here that, with these additional cuts, Schlinkert pruning was still the best method of the three!)
+
+Finally, we now have [a usable word list](https://github.com/sts10/remote-words/blob/main/lists/usable/alpha-line.txt) for our particular use-case: It's made up of relatively common words, it's uniquely decodable (and thus words can be safely combined), and it should be generally easy to input using our linear keyboard (thanks to us prioritizing words with low click scores).
+
+Some example 4-word passphrases from this final list that we could use for Netflix and keep that Montauk party going:
 
 ```
 areasfitnesscutsspotted
@@ -85,7 +103,7 @@ Obviously, don't use any of the passphrases published in this blog post!
 
 ### Making your own passphrase, securely
 
-One way to securely create a passphrase is to [use dice](https://www.eff.org/dice). [Here's our final word list with corresponding dice rolls for you to use](https://gist.github.com/sts10/5083cf706cac4aab34848c71ef494657).
+One way to securely create a passphrase is to [use physical dice](https://www.eff.org/dice), where a roll of 5 6-sided dice corresponds to each word (this is why we went for exactly 7,776 words!). [Here's my usable word list with corresponding dice rolls for you to use](https://gist.github.com/sts10/5083cf706cac4aab34848c71ef494657).
 
 If you want more than 51 bits of entropy, you can use more than 4 words. Please use your own threat model!
 
