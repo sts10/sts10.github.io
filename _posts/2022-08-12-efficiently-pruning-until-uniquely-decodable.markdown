@@ -58,7 +58,7 @@ Let's tackle the first issue first. We need a procedure for checking if a given 
 
 ### The Sardinas–Patterson algorithm
 
-Back in 1935, August Albert Sardinas and George W. Patterson published an algorithm now called Sardinas–Patterson algorithm. 
+Back in 1953, August Albert Sardinas and George W. Patterson published an algorithm now called Sardinas–Patterson algorithm. 
 
 [From Wikipedia](https://en.wikipedia.org/wiki/Sardinas%E2%80%93Patterson_algorithm): 
 
