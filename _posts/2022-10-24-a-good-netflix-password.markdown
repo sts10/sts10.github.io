@@ -96,3 +96,7 @@ To those who design password generation software (either built-in to an online s
 Above, we assumed Montauk house had an smart TV with a particular linear keyboard. 
 
 Following the process above, we can make separate lists for other layouts. As you might expect, this results in different word lists. See [this repo for more](https://github.com/sts10/remote-words).
+
+---
+
+If you liked this blog post and/or my work with passwords, I'm **currently looking for work**. Please get in touch. Here's [my website](https://www.samschlinkert.com/), [Twitter](https://www.twitter.com/sts10), [LinkedIn](https://www.linkedin.com/in/samschlinkert), and [Mastodon](https://octodon.social/@schlink).
