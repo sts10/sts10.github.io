@@ -79,6 +79,12 @@ hinderedpurpleslickchoose
 clotheddaisymotionlessoffense 
 ```
 
+Obviously, don't use any of the passphrases published in this blog post! 
+
+### Making your own passphrase, securely
+
+One way to securely create a passphrase is to [use dice](https://www.eff.org/dice). [Here's our final word list with corresponding dice rolls for you to use](https://gist.github.com/sts10/5083cf706cac4aab34848c71ef494657).
+
 If you want more than 51 bits of entropy, you can use more than 4 words. Please use your own threat model!
 
 ## Epilogue: Other smartTV keyboard layouts? 
