@@ -67,7 +67,7 @@ So, instead of removing all prefix words or all suffix words, we'll "Schlinkert 
 
 ## Final list 
 
-Finally, we now have [a usable word list](https://github.com/sts10/remote-words/blob/main/lists/usable/alpha-line.txt) for our particular use-case. (Note that I've removed some profane words, as well as things like Roman numerals, from this final, "usable" list.)
+Finally, we now have [a usable word list](https://github.com/sts10/remote-words/blob/main/lists/usable/alpha-line.txt) for our particular use-case. (Note that I've removed some profane words, British spellings of English words, as well as things like Roman numerals, from this final, "usable" list.)
 
 Some example 4-word passphrases from this final list that we could use for Netflix and keep that Hamptons party going:
 
