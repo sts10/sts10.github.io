@@ -17,7 +17,7 @@ First, we're going to use words rather than random characters.
 
 If you're reading your password to someone inputting it into a device, it's much quicker to read 4 to 6 words than 15 to 25 characters. It's also more error resistant. If your friend hears "correcb" they can probably turn that into "correct". And if you're typing the password in yourself, while using words is more characters, it's easier to "carry" a word in your head mentally as you move from the password manager app on your phone to the TV.
 
-Plus, it's usually a pain to switch to the numbers/punctuation keyboard on SmartTVs, and it costs "clicks" (more on this below).
+Plus, it's usually a pain to switch to the numbers/punctuation keyboard on smart TVs, and it costs "clicks" (more on this below).
 
 So we could select, say, 4 random words and make that our password -- like `carving exceeding boned legislate`. But we can be a bit smarter about this...
 
@@ -87,8 +87,8 @@ One way to securely create a passphrase is to [use dice](https://www.eff.org/dic
 
 If you want more than 51 bits of entropy, you can use more than 4 words. Please use your own threat model!
 
-## Epilogue: Other smartTV keyboard layouts? 
+## Epilogue: Other smart TV keyboard layouts? 
 
-Above, we assumed the Hamptons house had an smartTV with a particular linear keyboard. 
+Above, we assumed the Hamptons house had an smart TV with a particular linear keyboard. 
 
 Following the process above, we can make separate lists for other layouts. As you might expect, this results in different word lists. See [this repo for more](https://github.com/sts10/remote-words).
