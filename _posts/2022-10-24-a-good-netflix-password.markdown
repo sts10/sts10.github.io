@@ -117,7 +117,8 @@ Following the process above, we can make separate lists for other layouts. As yo
 
 ## Other links
 
-I've posted other wordlists I've created [here](https://github.com/sts10/generated-wordlists). The tool I wrote to create these lists is called [Tidy](https://github.com/sts10/tidy).
+* I've posted other wordlists I've created [here](https://github.com/sts10/generated-wordlists). 
+* The tool I wrote to create these lists is called [Tidy](https://github.com/sts10/tidy).
 
 ---
 
