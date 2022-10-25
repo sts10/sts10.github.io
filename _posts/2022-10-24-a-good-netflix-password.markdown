@@ -109,11 +109,15 @@ If you want more than 51 bits of entropy, you can use more than 4 words. Please 
 
 To those who design password generation software (either built-in to an online service sign-up flow or a password manager), I encourage you to imagine possibilities of using word lists tailored to users' contextual needs.
 
-## Epilogue: Other smart TV keyboard layouts? 
+## What about other smart TV keyboard layouts? 
 
-Above, we assumed Montauk house had an smart TV with a particular linear keyboard. 
+Above, we assumed a Montauk house that had an smart TV with a particular linear keyboard. 
 
 Following the process above, we can make separate lists for other layouts. As you might expect, this results in different word lists. See [this repo for more](https://github.com/sts10/remote-words).
+
+## Other links
+
+I've posted other wordlists I've created [here](https://github.com/sts10/generated-wordlists). The tool I wrote to create these lists is called [Tidy](https://github.com/sts10/tidy).
 
 ---
 
