@@ -144,63 +144,85 @@
                     <main>
                         <h1 id="a-curated-list-of-command-line-tools-written-in-rust"><a class="header" href="#a-curated-list-of-command-line-tools-written-in-rust">A curated list of command-line tools written in Rust</a></h1>
 <p>(This list is also <a href="https://gist.github.com/sts10/daadbc2f403bdffad1b6d33aff016c0a">available on GitHub</a>, where it'll likely be updated more regularly.)</p>
-<p>Note that I have not tried all of these personally, and <strong>cannot and do not vouch for all of the tools listed here</strong>. In most cases, the descriptions here are copied from their code repos. Some may have been abandoned. Investigate before installing/using.</p>
-<p>The ones I use regularly include: bat, dust, exa, fd, hyperfine, miniserve, ripgrep, zoxide and cargo-wipe.</p>
+<p>Note that I have not tried all of these personally, and <strong>cannot and do not vouch for all of the tools listed here</strong>. In most cases, the descriptions here are copied directly from their code repos. Some may have been abandoned. Investigate before installing/using.</p>
+<p>The ones I use regularly include: bat, dust, exa, fd, hyperfine, miniserve, ripgrep, just, zoxide and cargo-wipe.</p>
 <ul>
+<li><a href="https://github.com/ellie/atuin">atuin</a>: &quot;Magical shell history&quot;</li>
 <li><a href="https://github.com/imsnif/bandwhich">bandwhich</a>: Terminal bandwidth utilization tool </li>
-<li><a href="https://github.com/sharkdp/bat">bat</a>: a replacement for <code>cat</code> that provides syntax highlighting and other features. </li>
+<li><a href="https://github.com/sharkdp/bat">bat</a>: A replacement for <code>cat</code> that provides syntax highlighting and other features. </li>
 <li><a href="https://github.com/ClementTsang/bottom">bottom</a>: Yet another cross-platform graphical process/system monitor. </li>
 <li><a href="https://github.com/Canop/broot">broot</a>: A new way to see and navigate directory trees</li>
+<li><a href="https://github.com/nnethercote/counts">counts</a>: &quot;A tool for ad hoc profiling&quot;</li>
 <li><a href="https://github.com/theryangeary/choose">choose</a>: A human-friendly and fast alternative to <code>cut</code> and (sometimes) <code>awk</code></li>
 <li><a href="https://github.com/dandavison/delta">delta</a>: A syntax-highlighting pager for git, <code>diff</code>, and grep output </li>
-<li><a href="https://github.com/ogham/dog">dog</a>: A command-line DNS client. </li>
-<li><a href="https://github.com/bootandy/dust">dust</a>: &quot;a more intuitive version of <code>du</code> in Rust&quot;.</li>
-<li><a href="https://the.exa.website/">exa</a>: &quot;A modern version of <code>ls</code></li>
+<li><a href="https://github.com/Wilfred/difftastic/">difftastic</a>: A syntax-aware diff</li>
+<li><a href="https://github.com/ogham/dog">dog</a>: A command-line DNS client</li>
+<li><a href="https://github.com/Byron/dua-cli">dua</a>: &quot;View disk space usage and delete unwanted data, fast.&quot;</li>
+<li><a href="https://github.com/bootandy/dust">dust</a>: &quot;a more intuitive version of <code>du</code> in Rust&quot;</li>
+<li><a href="https://the.exa.website/">exa</a>: &quot;A modern version of <code>ls</code>&quot;</li>
+<li><a href="https://github.com/pkolaczk/fclones">fclones</a>: an &quot;efficient duplicate file finder&quot; </li>
 <li><a href="https://github.com/sharkdp/fd">fd</a>: &quot;A simple, fast and user-friendly alternative to <code>find</code>&quot;</li>
-<li><a href="https://github.com/TaKO8Ki/frum">frum</a> - A little bit fast and modern Ruby version manager written in Rust</li>
-<li><a href="https://github.com/extrawurst/gitui">gitui</a>: Blazing fast terminal-ui for git written in Rust.</li>
+<li><a href="https://github.com/kyoheiu/felix">felix</a>: tui file manager with vim-like key mapping </li>
+<li><a href="https://github.com/TaKO8Ki/frum">frum</a>: A modern Ruby version manager written in Rust</li>
+<li><a href="https://github.com/pemistahl/grex">grex</a>: A command-line tool and library for generating regular expressions from user-provided test cases </li>
 <li><a href="https://github.com/mgdm/htmlq">htmlq</a>: Like jq, but for HTML. Uses CSS selectors to extract bits of content from HTML files.</li>
 <li><a href="https://github.com/sharkdp/hyperfine">hyperfine</a>: Command-line benchmarking tool</li>
-<li><a href="https://github.com/yamafaktory/jql">jql</a>: A JSON Query Language CLI tool</li>
+<li><a href="https://github.com/trimental/inlyne">inlyne</a>: &quot;GPU powered yet browsless tool to help you quickly view markdown files&quot;</li>
+<li><a href="https://github.com/yamafaktory/jql">jql</a>: A JSON query language CLI tool</li>
 <li><a href="https://github.com/casey/just">just</a>: Just a command runner (seems like an alternative to <code>make</code>)</li>
-<li><a href="https://github.com/Peltoche/lsd">lsd</a>: The next generation <code>ls</code> command (I prefer <code>exa</code>)</li>
+<li><a href="https://github.com/swanandx/lemmeknow">lemmeknow</a>: Identify mysterious text or analyze hard-coded strings from captured network packets, malwares, and more.</li>
+<li><a href="https://github.com/Canop/lfs">lfs</a>: A Linux utility to get information on filesystems; like <code>df</code> but better </li>
+<li><a href="https://github.com/Peltoche/lsd">lsd</a>: The next generation <code>ls</code> command (though personally I prefer <code>exa</code>)</li>
 <li><a href="https://github.com/macchina-cli/macchina">macchina</a>: Fast, minimal and customizable system information frontend.</li>
+<li><a href="https://github.com/rust-lang/mdBook">mdBook</a>: Create books from markdown files. Like Gitbook but implemented in Rust </li>
 <li><a href="https://github.com/lunaryorn/mdcat">mdcat</a>: Fancy <code>cat</code> for Markdown</li>
 <li><a href="https://github.com/svenstaro/miniserve">miniserve</a> is “a CLI tool to serve files and dirs over HTTP”. I use this as a replacement for <code>python -m SimpleHTTPServer</code>, or whatever the latest version of that command is.</li>
+<li><a href="https://github.com/y2z/monolith">monolith</a>: Save complete web pages as a single HTML file </li>
 <li><a href="https://github.com/sharkdp/pastel">pastel</a>: A command-line tool to generate, analyze, convert and manipulate colors.</li>
-<li><a href="https://github.com/marcusbuffett/pipe-rename">pipe-rename</a>: Rename your files using your favorite text editor </li>
 <li><a href="https://github.com/dalance/procs">procs</a>: A modern replacement for <code>ps</code> written in Rust</li>
-<li><a href="https://github.com/jqnatividad/qsv">qsv</a>: CSVs sliced, diced &amp; analyzed. (A fork of xsv)</li>
+<li><a href="https://github.com/jqnatividad/qsv">qsv</a>: CSVs sliced, diced &amp; analyzed. (A fork of <code>xsv</code>)</li>
 <li><a href="https://github.com/nivekuil/rip">rip</a>: A safe and ergonomic alternative to <code>rm</code></li>
-<li><a href="https://github.com/BurntSushi/ripgrep">ripgrep</a>: a faster replacement for GNU’s <code>grep</code> command. This tool is very good.</li>
+<li><a href="https://github.com/BurntSushi/ripgrep">ripgrep</a>: A faster replacement for GNU’s <code>grep</code> command. This tool is very good.</li>
+<li><a href="https://github.com/sirwart/ripsecrets">ripsecrets</a>: Find secret keys in your code before commiting them to git. I've contributed to this one!</li>
 <li><a href="https://github.com/chmln/sd">sd</a>: Intuitive find &amp; replace CLI (<code>sed</code> alternative).</li>
 <li><a href="https://github.com/dbrgn/tealdeer">tealdear</a>: A very fast implementation of <code>tldr</code> in Rust. </li>
 <li><a href="https://github.com/vmchale/tin-summer">tin-summer</a>: Find build artifacts that are taking up disk space </li>
-<li><a href="https://github.com/XAMPPRocky/tokei">tokei</a>: Count your code, quickly. </li>
+<li><a href="https://github.com/XAMPPRocky/tokei">tokei</a>: Count your (lines of) code, quickly</li>
+<li><a href="https://github.com/topgrade-rs/topgrade">topgrade</a>: Upgrade all of your tools</li>
+<li><a href="https://github.com/watchexec/watchexec">watchexec</a>: Execute commands in response to file modifications. (Note: See <a href="https://github.com/watchexec/cargo-watch">cargo watch</a> if you want to watch a Rust project.)</li>
 <li><a href="https://github.com/tarka/xcp">xcp</a>: An extended <code>cp</code> </li>
+<li><a href="https://github.com/ducaale/xh">xh</a>: &quot;Friendly and fast tool for sending HTTP requests&quot; </li>
 <li><a href="https://github.com/BurntSushi/xsv">xsv</a>: A fast CSV command line toolkit written in Rust. (Last updated in 2018)</li>
-<li><a href="https://github.com/ajeetdsouza/zoxide">zoxide</a>: &quot;A smarter <code>cd</code> command.&quot;</li>
+<li><a href="https://github.com/ajeetdsouza/zoxide">zoxide</a>: A smarter <code>cd</code> command.</li>
 </ul>
 <h2 id="tools-to-help-working-with-rust-lang-itself"><a class="header" href="#tools-to-help-working-with-rust-lang-itself">Tools to help working with Rust lang itself</a></h2>
 <ul>
 <li><a href="https://github.com/RustSec/rustsec/tree/main/cargo-audit">cargo-audit</a>: Audit Cargo.lock files for crates with security vulnerabilities reported to the RustSec Advisory Database.</li>
 <li><a href="https://github.com/rust-secure-code/cargo-geiger">cargo-geiger</a>: Detects usage of unsafe Rust in a Rust crate and its dependencies. </li>
 <li><a href="https://github.com/mihai-dinculescu/cargo-wipe">cargo-wipe</a>: Cargo subcommand that recursively finds and optionally wipes all &quot;target&quot; or &quot;node_modules&quot; folders that are found in the current path. </li>
+<li><a href="https://github.com/crev-dev/cargo-crev">cargo-crev</a>: A cryptographically verifiable code review system for the cargo (Rust) package manager.</li>
+<li><a href="https://github.com/Canop/bacon">bacon</a>: A background Rust code checker</li>
+<li><a href="https://github.com/watchexec/cargo-watch">cargo watch</a>: Watches over your Cargo project's source. </li>
+<li><a href="https://github.com/cargo-bins/cargo-binstall">cargo-binstall</a>: &quot;Binary installation for [R]ust projects&quot;</li>
 </ul>
 <h2 id="terminal-emulators--terminal-related"><a class="header" href="#terminal-emulators--terminal-related">Terminal emulators / terminal-related</a></h2>
 <ul>
 <li><a href="https://github.com/alacritty/alacritty">Alacritty</a>: A cross-platform, OpenGL terminal emulator. </li>
+<li><a href="https://github.com/wez/wezterm">Wezterm</a>: A GPU-accelerated cross-platform terminal emulator and multiplexer written by @wez and implemented in Rust </li>
 <li><a href="https://starship.rs/">Starship</a>: Customizable prompt for any shell.</li>
+<li><a href="https://github.com/zellij-org/zellij">Zellij</a>: A terminal workspace with batteries included.</li>
 </ul>
-<h2 id="other"><a class="header" href="#other">Other</a></h2>
+<h2 id="text-editors-written-in-rust"><a class="header" href="#text-editors-written-in-rust">Text editors written in Rust</a></h2>
 <ul>
-<li><a href="https://github.com/rust-lang/mdBook">mdBook</a>: Create books from markdown files. Like Gitbook but implemented in Rust </li>
+<li><a href="https://github.com/jmacdonald/amp">amp</a></li>
+<li><a href="https://github.com/helix-editor/helix">helix</a></li>
+<li><a href="https://github.com/ilai-deutel/kibi">kibi</a>: &quot;A text editor in ≤1024 lines of code, written in Rust&quot;</li>
+<li><a href="https://github.com/lapce/lapce">lapce</a></li>
+<li><a href="https://github.com/vamolessa/pepper">pepper</a></li>
+<li><a href="https://github.com/xi-editor/xi-editor">xi</a></li>
+<li><a href="https://github.com/zee-editor/zee">zee</a></li>
 </ul>
-<h2 id="tools-that-ive-written"><a class="header" href="#tools-that-ive-written">Tools that I've written</a></h2>
-<ul>
-<li><a href="https://github.com/sts10/medic">Medic</a>: Check the &quot;health&quot; of passwords in a KeePass database </li>
-<li><a href="https://github.com/sts10/tidy">Tidy</a>: A command-line tool for combining and cleaning large word list files.</li>
-</ul>
+<p>See <a href="https://matduggan.com/battle-of-the-text-editors/">this &quot;Battle of the [Rust] text editors&quot; post from 2022</a>.</p>
 <h2 id="other-lists-of-rust-command-line-utilities"><a class="header" href="#other-lists-of-rust-command-line-utilities">Other lists of Rust command line utilities</a></h2>
 <ul>
 <li><a href="https://lib.rs/command-line-utilities">lib.rs's list</a></li>
@@ -222,7 +244,13 @@ else
     alias la='ls -A'
 fi
 </code></pre>
+<h2 id="shameless-plug-tools-that-ive-written-in-rust"><a class="header" href="#shameless-plug-tools-that-ive-written-in-rust">Shameless plug: Tools that I've written in Rust</a></h2>
+<ul>
+<li><a href="https://github.com/sts10/tidy">Tidy</a>: A command-line tool for combining and cleaning large word list files.</li>
+</ul>
 <h2 id="know-a-good-one-that-i-dont-have-listed-here"><a class="header" href="#know-a-good-one-that-i-dont-have-listed-here">Know a good one that I don't have listed here?</a></h2>
+<p>Let me know in the comments, a PR, on <a href="https://octodon.social/@schlink">Mastodon</a> or <a href="https://twitter.com/sts10/">Twitter</a>.</p>
+<h2 id="know-a-good-one-that-i-dont-have-listed-here-1"><a class="header" href="#know-a-good-one-that-i-dont-have-listed-here-1">Know a good one that I don't have listed here?</a></h2>
 <p>Let me know on <a href="https://octodon.social/@schlink">Mastodon</a> or <a href="https://twitter.com/sts10/">Twitter</a>.</p>
 
                     </main>
@@ -254,22 +282,6 @@ fi
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 
