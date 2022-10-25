@@ -59,7 +59,7 @@ Ideally, we'd **want to make our word list uniquely decodable while removing the
 
 As a constant, I want our finished list to be (a) uniquely decodable and (b) exactly 7,776 words (this is the same length as the EFF long list -- the number is a result of common dice having 6 sides). Do we need to use all 18,000 words in our starting list to achieve this? Ideally, we would only take what we need from the **top** of the list, which have the lowest click costs. 
 
-If we remove all prefix words from the 18,000 list, we get a list of 13,037. This is usable, but if we only need 7,776 words on our final list, we can take fewer words from tyhe 18,000 list. We'll take from the top, since they have the lowest click scores.
+If we remove all prefix words from the 18,000 list, we get a list of 13,037. This is usable, but if we only need 7,776 words on our final list, we can take fewer words from the 18,000 list. We'll take words from the top of the sorted list, since we know those words have the lowest click scores.
 
 It turns out that when we take the first 10,802 words from the list and remove prefix words, we get a 7,776 list. That's neat! But can we do better? What if we could fulfill requirements (a) and (b) but only use the first, say, 12,000 words on the list?
 
@@ -117,7 +117,7 @@ Following the process above, we can make separate lists for other layouts. As yo
 
 ## Other links
 
-* I've posted other wordlists I've created [here](https://github.com/sts10/generated-wordlists). 
+* I've posted other word lists I've created [here](https://github.com/sts10/generated-wordlists). 
 * The tool I wrote to create these lists is called [Tidy](https://github.com/sts10/tidy).
 
 ---
