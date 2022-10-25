@@ -118,6 +118,7 @@ Following the process above, we can make separate lists for other layouts. As yo
 ## Other links
 
 * I've posted other word lists I've created [here](https://github.com/sts10/generated-wordlists). 
+* I also [proposed a new word list for 1Password password manager to use](https://www.reddit.com/r/1Password/comments/ur4otq/proposed_new_word_list/). 
 * The tool I wrote to create these lists is called [Tidy](https://github.com/sts10/tidy).
 
 ---
