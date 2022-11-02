@@ -104,7 +104,7 @@ Obviously, don't use any of the passphrases published in this blog post!
 
 ### Making your own passphrase, securely
 
-One way to securely create a passphrase is to [use physical dice](https://www.eff.org/dice), where a roll of 5 6-sided dice corresponds to each word (this is why we went for exactly 7,776 words!). [Here's my usable word list with corresponding dice rolls for you to use](https://gist.github.com/sts10/5083cf706cac4aab34848c71ef494657).
+One way to securely create a passphrase is to [use physical dice](https://www.eff.org/dice), where a roll of 5 6-sided dice corresponds to each word (this is why we went for exactly 7,776 words!). [Here's my usable word list with corresponding dice rolls for you to use](https://github.com/sts10/remote-words/blob/main/lists/usable/alpha-line-dice.txt).
 
 If you want more than 51 bits of entropy, you can use more than 4 words. Please use your own threat model!
 
