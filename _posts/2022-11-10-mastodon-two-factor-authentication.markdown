@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Enabling two-factor authentication on your Mastodon account"
+title: "How to enable two-factor authentication on your Mastodon account"
 date: 2022-11-10 20:00:00 -0400
 comments: true
 ---
@@ -57,7 +57,7 @@ Next, you'll be presented with 10 **recovery  codes**.
 
 ![Sample recovery codes](/img/mastodon-two-factor/6-back-up-codes.png)
 
-If you lose your phone and can't get the 6-digit token, you can use one these recovery codes to regain access to your account. Store these in a safe place. For example, you may print them and store them with other important documents.
+If you lose your phone and can't get the 6-digit token, you can use one these recovery codes to regain access to your account. Store these in a safe place. For example, you may print them out (or write them down by hand on a piece of paper) and store them with other important documents.
 
 ### All done!
 
