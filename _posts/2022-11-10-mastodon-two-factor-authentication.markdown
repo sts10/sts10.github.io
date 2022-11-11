@@ -25,7 +25,9 @@ There are different ways to receive this 2nd factor code, but for most of this g
 
 First, you'll need to download an authenticator app for your smartphone or other mobile device. [Authy](https://authy.com/download/) has iOS and Android apps. There's also [andOTP](https://f-droid.org/en/packages/org.shadowice.flocke.andotp/) for Android. 
 
-With one of these authenticator apps installed, log in to your Mastodon account on a desktop browser (like Firefox, Safari, or Chrome). Then find your user **Preferences**, usually on the right side of the screen.
+With one of these authenticator apps installed, log in to your Mastodon account on a desktop browser (like Firefox, Safari, or Chrome). If you've never done this before, go to your instance's URL. For example, if your Mastodon user name is bob@mastodon.social, you'll want to go to [mastodon.social](https://mastodon.social) and find the "sign in" button to log in. I'm schlink@octodon.social, so I go to [octodon.social](https://octodon.social).
+
+Then find your user **Preferences**, usually on the right side of the screen.
 
 ![Go to Mastodon preferences](/img/mastodon-two-factor/1-preferences.png)
 
