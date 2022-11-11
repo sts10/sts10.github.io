@@ -53,9 +53,11 @@ Enter the current 6-digit token and click ENABLE to continue.
 
 ### Recovery codes
 
-Next, you'll be presented with 10 **recovery  codes**. If you lose your phone and can't get the 6-digit token, you can use one these recovery codes to regain access to your account. Store these in a safe place. For example, you may print them and store them with other important documents.
+Next, you'll be presented with 10 **recovery  codes**. 
 
 ![Sample recovery codes](/img/mastodon-two-factor/6-back-up-codes.png)
+
+If you lose your phone and can't get the 6-digit token, you can use one these recovery codes to regain access to your account. Store these in a safe place. For example, you may print them and store them with other important documents.
 
 ### All done!
 
