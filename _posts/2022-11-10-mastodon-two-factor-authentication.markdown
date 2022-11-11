@@ -23,7 +23,11 @@ There are different ways to receive this 2nd factor code, but for most of this g
 
 ## OK, I'm convinced. Let's do this.
 
-First, you'll need to download an authenticator app for your smartphone or other mobile device. [Authy](https://authy.com/download/) has iOS and Android apps. There's also [andOTP](https://f-droid.org/en/packages/org.shadowice.flocke.andotp/) for Android. 
+First, you'll need to download an authenticator app for your smartphone or other mobile device. You may already have one installed, which you can likely use for Mastodon as well. 
+
+An easy-to-use option is Google Authenticator, which is available for both [Android](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&gl=US) and [iOS](https://apps.apple.com/us/app/google-authenticator/id388497605) apps. There's also [andOTP](https://f-droid.org/en/packages/org.shadowice.flocke.andotp/) for Android. 
+
+(A slightly more involved option, which offers things like back-ups, is [Authy](https://authy.com/download/).)
 
 With one of these authenticator apps installed, log in to your Mastodon account on a desktop browser (like Firefox, Safari, or Chrome). If you've never done this before, go to your instance's URL. For example, if your Mastodon user name is bob@mastodon.social, you'll want to go to [mastodon.social](https://mastodon.social) and find the "sign in" button to log in. I'm schlink@octodon.social, so I go to [octodon.social](https://octodon.social).
 
