@@ -99,9 +99,9 @@ Assuming that went smoothly, you should be all set! If your browser has trouble 
 
 ![All done with both Authenticator app and security key](/img/mastodon-two-factor/10b-all-set-up.png)
 
-Now, when logging in to your Mastodon account, after entering your password as usual, you'll be able to use **either** use your phone's authenticator app OR your security key as your second factor. 
+Now, when logging in to your Mastodon account, after entering your password as usual, you'll be able to use **either** use your phone's authenticator app OR your security key as your second factor. (When I have both on me, I try to use the security key, due to it being harder for an attacker to phish.)
 
-I recommend keeping the authenticator app method active, since that's the easiest way to log in on a mobile device that doesn't have a USB port.
+I recommend keeping the authenticator app method enabled, since that's the easiest way to log in on a mobile device that doesn't have a USB port.
 
 ## Questions? Comments? General feedback?
 
