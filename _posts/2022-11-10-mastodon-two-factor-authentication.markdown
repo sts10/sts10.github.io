@@ -13,7 +13,7 @@ I thought I'd explain how to enable two-factor authentication on a Mastodon acco
 
 Normally, online accounts like your Mastodon account are only protected by a password. That's all that an attacker would need to know to access your account. So to make your account harder to get into, we can add what's called a "second factor". 
 
-Turning on two-factor authentication means that whenever you log into your account, you'll have to enter your regular password as usual, but then you'll also have to enter a 6-digit code displayed on an app on your phone. The idea here is that even if an attacker gets your password, they would also need your phone to get this code. 
+Turning on two-factor authentication means that whenever you log into your account, after entering your regular password as usual, you'll then have to enter a 6-digit code displayed on an app on your phone. The idea here is that even if an attacker gets your password, they would also need your phone to get this code. 
 
 There are different ways to receive this 2nd factor code, but for most of this guide, we're going to focus on what's referred to as "Authenticator-app" 2-factor (or sometimes "TOTP"). This is more secure than using SMS for [a variety of reasons](https://techcrunch.com/2016/07/25/nist-declares-the-age-of-sms-based-2-factor-authentication-over/). 
 
