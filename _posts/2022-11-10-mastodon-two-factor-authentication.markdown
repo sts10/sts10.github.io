@@ -25,7 +25,7 @@ There are different ways to receive this 2nd factor code, but for most of this g
 
 First, you'll need to download an authenticator app for your smartphone or other mobile device. You may already have one installed, which you can likely use for Mastodon as well. 
 
-An easy-to-use option is Google Authenticator, which is available for both [Android](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&gl=US) and [iOS](https://apps.apple.com/us/app/google-authenticator/id388497605) apps. There's also [andOTP](https://f-droid.org/en/packages/org.shadowice.flocke.andotp/) for Android. 
+An easy-to-use option is Google Authenticator, which is available for both [Android](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&gl=US) and [iOS](https://apps.apple.com/us/app/google-authenticator/id388497605) apps. For Android, there's also [Aegis Authenticator](https://getaegis.app/).
 
 (A slightly more involved option, which offers things like back-ups, is [Authy](https://authy.com/download/).)
 
@@ -51,7 +51,7 @@ You'll now be presented with a square QR code and a text string of uppercase let
 
 ![QR code and text codes exposed](/img/mastodon-two-factor/5-2fa-codes.png)
 
-We want to scan this QR code into your authenticator app. Get out your mobile device and open your authenticator app.Depending on the app, you'll need to tap a button to add a new account via scanning a QR code. Hold your phone up to the computer monitor, framing the QR code with your camera. Your authenticator app should add your Mastodon account and display a 6-digit number (called a "token") that changes every 30 seconds. (Optionally, you can store the text secret somewhere safe, like a piece of paper or a password manager.)
+We want to scan this QR code into your authenticator app. Get out your mobile device and open your authenticator app.Depending on the app, you'll need to tap a button to add a new account via scanning a QR code. Hold your phone up to the computer monitor, framing the QR code with your camera. Your authenticator app should add your Mastodon account and display a 6-digit number (called a "token") that changes every 30 seconds. (Optionally, you can store the text secret somewhere safe, like a piece of paper.)
 
 Enter the current 6-digit token and click ENABLE to continue.
 
