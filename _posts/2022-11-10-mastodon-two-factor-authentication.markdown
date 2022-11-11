@@ -15,7 +15,7 @@ I thought I'd explain how to enable two-factor authentication on a Mastodon acco
 
 Normally, online accounts like your Mastodon account are only protected by a password. That's all that an attacker would need to know to access your account. So to make your account harder to get into, we can add what's called a "second factor". 
 
-Turning on two-factor authentication means that whenever you log into your account, after entering your regular password as usual, you'll then have to enter a 6-digit code displayed on an app on your phone. The idea here is that even if an attacker gets your password, they would also need your phone to get this code. 
+Turning on two-factor authentication means that whenever you log into your account, after entering your regular password as usual, you'll then have to enter a 6-digit number (called a "token") displayed on an app on your phone. The idea here is that even if an attacker gets your password, they would also need your phone to get this code. 
 
 There are different ways to receive this 2nd factor code, but for most of this guide, we're going to focus on what's referred to as "Authenticator-app" 2-factor (or sometimes "TOTP"). This is more secure than using SMS for [a variety of reasons](https://techcrunch.com/2016/07/25/nist-declares-the-age-of-sms-based-2-factor-authentication-over/). 
 
@@ -35,7 +35,7 @@ On the left-hand side, find the "Account" section.
 
 ![Go to Account](/img/mastodon-two-factor/2-account.png)
 
-Next, click the "Two-factor auth" sub-section.
+Next, click in to the "Two-factor auth" sub-section.
 
 ![Go to Two-factor auth](/img/mastodon-two-factor/3-two-factor.png)
 
@@ -47,13 +47,13 @@ You'll now be presented with a square QR code and a text string of uppercase let
 
 ![QR code and text codes exposed](/img/mastodon-two-factor/5-2fa-codes.png)
 
-We want to scan this QR code into your authenticator app. Get out your mobile device and open your authenticator app.Depending on the app, you'll need to tap a button to add a new account via scanning a QR code. Hold your phone up to the computer monitor, framing the QR code with your camera. Your authenticator app should add your Mastodon account and display a 6-digit number that changes every 30 seconds. (Optionally, you can store the text secret somewhere safe, like a piece of paper or a password manager.)
+We want to scan this QR code into your authenticator app. Get out your mobile device and open your authenticator app.Depending on the app, you'll need to tap a button to add a new account via scanning a QR code. Hold your phone up to the computer monitor, framing the QR code with your camera. Your authenticator app should add your Mastodon account and display a 6-digit number (called a "token") that changes every 30 seconds. (Optionally, you can store the text secret somewhere safe, like a piece of paper or a password manager.)
 
-Enter the current 6-digit code and click ENABLE to continue.
+Enter the current 6-digit token and click ENABLE to continue.
 
 ### Recovery codes
 
-Next, you'll be presented with 10 **recovery  codes**. If you lose your phone and can't get the 6-digit code, you can use one these recovery codes to regain access to your account. Store these in a safe place. For example, you may print them and store them with other important documents.
+Next, you'll be presented with 10 **recovery  codes**. If you lose your phone and can't get the 6-digit token, you can use one these recovery codes to regain access to your account. Store these in a safe place. For example, you may print them and store them with other important documents.
 
 ![Sample recovery codes](/img/mastodon-two-factor/6-back-up-codes.png)
 
@@ -63,7 +63,7 @@ Next, you'll be presented with 10 **recovery  codes**. If you lose your phone an
 
 ![Logging in with a second factor](/img/mastodon-two-factor/11-logging-in-with-totp-code.png)
 
-If you have your mobile device, you'll read and enter the 6-digit code your authenticator app presents at the time. If you don't have access to your mobile device, you can enter one of the recovery codes.
+If you have your mobile device, you'll read and enter the 6-digit token your authenticator app presents at the time. If you don't have access to your mobile device, you can enter one of the recovery codes.
 
 ---
 
@@ -71,7 +71,7 @@ If you have your mobile device, you'll read and enter the 6-digit code your auth
 
 Recent versions of Mastodon allow you to add a security key as a alternate form of a second factor. This is totally optional, but I figured I'd cover it. 
 
-Basically, you can also use a physical piece of hardware as your 2nd factor. A popular maker of security keys is [Yubikey](https://www.yubico.com/setup/). It looks like a thin USB drive you can attach to your key chain. Instead of typing in a 6-digit code you see on your phone, you plug your YubiKey into a USB slot on the computer and the YubiKey “sends” a code to Mastodon, proving that the user has the key. This method is considered more secure and works even if you don’t have you phone or its battery is dead.
+Basically, you can also use a physical piece of hardware as your 2nd factor. A popular maker of security keys is [Yubikey](https://www.yubico.com/setup/). It looks like a thin USB drive you can attach to your key chain. Instead of typing in a 6-digit token you see on your phone, you plug your YubiKey into a USB slot on the computer and the YubiKey “sends” a code to Mastodon, proving that the user has the key. This method is considered more secure and works even if you don’t have you phone or its battery is dead.
 
 To add a security key as an alternate second-factor for your Mastodon account, head back to the "Two-factor Auth" section of your settings. 
 
