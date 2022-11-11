@@ -69,17 +69,23 @@ If you have your mobile device, you'll read and enter the 6-digit token your aut
 
 ## Optional: Adding a security key as an alternate second-factor
 
-Recent versions of Mastodon allow you to add a security key as a alternate form of a second factor. This is totally optional, but I figured I'd cover it. 
+Recent versions of Mastodon allow you to add a security key as an alternate form of a second factor. This is totally optional, but I figured I'd cover it here. 
 
-Basically, you can also use a physical piece of hardware as your 2nd factor. A popular maker of security keys is [Yubikey](https://www.yubico.com/setup/). It looks like a thin USB drive you can attach to your key chain. Instead of typing in a 6-digit token you see on your phone, you plug your YubiKey into a USB slot on the computer and the YubiKey “sends” a code to Mastodon, proving that the user has the key. This method is considered more secure and works even if you don’t have you phone or its battery is dead.
+### What's a security key?
 
-To add a security key as an alternate second-factor for your Mastodon account, head back to the "Two-factor Auth" section of your settings. 
+Basically, you can use a physical piece of hardware as your 2nd factor. A popular maker of security keys is [Yubikey](https://www.yubico.com/setup/). It looks like a thin USB drive you can attach to your key chain. Instead of typing in a 6-digit token you see on your phone, you plug your YubiKey into a USB slot on the computer and the YubiKey “sends” a code to Mastodon, proving that the user has the key. This method is considered more secure and works even if you don’t have you phone or its battery is dead.
+
+From a technical perspective, using a security key as a second factor is more secure than an authenticator app, since it's more difficult for an attacker to phish users.
+
+### Adding a security key as a second factor
+
+To add a security key as an alternate second factor for your Mastodon account, head back to the "Two-factor Auth" section of your preferences/settings. 
 
 Once you've added an authenticator app as a 2nd factor (see above), you'll "unlock" the ability to add a security key. Click "Add".
 
 ![Security key set up](/img/mastodon-two-factor/7-add-security-key.png)
 
-Next, you'll be asked to name your security key. This is helpful for folks who have multiple security keys (a good idea if their kept in secure but different locations!). Name it whatever you like.
+Next, you'll be asked to name your security key. This is helpful for folks who have multiple security keys (a good idea if they're kept in secure but different locations!). Name it whatever you like.
 
 ![Name your security key](/img/mastodon-two-factor/8-name-security-key.png)
 
@@ -91,7 +97,9 @@ Assuming that went smoothly, you should be all set! If your browser has trouble 
 
 ![All done with both Authenticator app and security key](/img/mastodon-two-factor/10b-all-set-up.png)
 
-Now, when logging in to your Mastodon account, after entering your password as usual, you'll be able to use **either** use your phone' authenticator app OR your security key as your second factor. 
+Now, when logging in to your Mastodon account, after entering your password as usual, you'll be able to use **either** use your phone's authenticator app OR your security key as your second factor. 
+
+I recommend keeping the authenticator app method active, since that's the easiest way to log in on a mobile device that doesn't have a USB port.
 
 ## Questions? 
 
