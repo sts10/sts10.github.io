@@ -104,3 +104,7 @@ I recommend keeping the authenticator app method active, since that's the easies
 ## Questions? 
 
 I'm [@schlink@octodon.social](https://octodon.social/@schlink). Please let me know if you have questions or comments on how to make this guide better!
+
+---
+
+If you liked this blog post, I'm currently looking for work. Please get in touch! Here's [my website](https://www.samschlinkert.com/), [Twitter](https://www.twitter.com/sts10), [LinkedIn](https://www.linkedin.com/in/samschlinkert), and [Mastodon](https://octodon.social/@schlink).
