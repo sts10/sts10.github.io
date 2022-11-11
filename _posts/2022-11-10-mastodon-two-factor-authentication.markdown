@@ -7,7 +7,9 @@ comments: true
 
 I don't know if you've [heard](https://www.cnn.com/2022/11/05/tech/mastodon/index.html), [but](https://www.nbcnews.com/tech/mastodon-social-media-twitter-rcna56288) [a lot](https://www.bbc.co.uk/news/technology-63534240) of [new](https://www.nytimes.com/2022/11/07/technology/mastodon-twitter-elon-musk.html) users have been joining [Mastodon](https://joinmastodon.org) these past few weeks! Awesome! 
 
-I thought I'd explain how to enable two-factor authentication on a Mastodon account. This tutorial will assume you're logged in on a desktop/laptop computer -- I think it's far easier to set-up two-factor authentication on a computer, as opposed to a mobile device.
+I thought I'd explain how to enable two-factor authentication on a Mastodon account. This tutorial will assume you're logged in on a desktop/laptop computer -- I think it's far easier to set-up two-factor authentication on a computer, as opposed to a mobile device. 
+
+**Disclaimer**: I'm not a cybersecurity professional.
 
 ## What is two-factor authentication?
 
@@ -53,17 +55,19 @@ Next, you'll be presented with 10 **recovery  codes**. If you lose your phone an
 
 ![Sample recovery codes](/img/mastodon-two-factor/6-back-up-codes.png)
 
-**All done!** You did it! Next time you have to log-in to your Mastodon account, you'll first enter your password, and then you'll be prompted to enter your "Two-factor code".
+### All done!
+
+**All done!** You did it! Next time you log-in to your Mastodon account, you'll first enter your password, and then you'll be prompted to enter your "Two-factor code".
 
 ![Logging in with a second factor](/img/mastodon-two-factor/11-logging-in-with-totp-code.png)
 
-If you have your mobile device, you'll enter the 6-digit code your authenticator app presents at the time. If you don't have access to your mobile device, you can enter one of the recovery codes.
+If you have your mobile device, you'll read and enter the 6-digit code your authenticator app presents at the time. If you don't have access to your mobile device, you can enter one of the recovery codes.
 
 ---
 
 ## Optional: Adding a security key as an alternate second-factor
 
-Recent versions of Mastodon allow you to add a security key as a different form of a second factor. This is totally optional, but I figured I'd cover it. 
+Recent versions of Mastodon allow you to add a security key as a alternate form of a second factor. This is totally optional, but I figured I'd cover it. 
 
 Basically, you can also use a physical piece of hardware as your 2nd factor. A popular maker of security keys is [Yubikey](https://www.yubico.com/setup/). It looks like a thin USB drive you can attach to your key chain. Instead of typing in a 6-digit code you see on your phone, you plug your YubiKey into a USB slot on the computer and the YubiKey “sends” a code to Mastodon, proving that the user has the key. This method is considered more secure and works even if you don’t have you phone or its battery is dead.
 
@@ -73,19 +77,19 @@ Once you've added an authenticator app as a 2nd factor (see above), you'll "unlo
 
 ![Security key set up](/img/mastodon-two-factor/7-add-security-key.png)
 
-Next, you'll be asked to name your security key. This is because some people have multiple security keys (a good idea!).
+Next, you'll be asked to name your security key. This is helpful for folks who have multiple security keys (a good idea if their kept in secure but different locations!). Name it whatever you like.
 
 ![Name your security key](/img/mastodon-two-factor/8-name-security-key.png)
 
-Next, you'll be asked to insert your security key into your computer and press the button on it.
+Next, you'll be asked to insert your security key into your computer and touch it (which usually means: press the button on it).
 
 ![Insert your security key](/img/mastodon-two-factor/9-insert-sec-key.png)
 
-If that went smoothly, you should be all set!
+Assuming that went smoothly, you should be all set! If your browser has trouble recognizing your security key, try updating your browser to the latest version, or switching to Firefox.
 
 ![All done with both Authenticator app and security key](/img/mastodon-two-factor/10b-all-set-up.png)
 
-Now you can **either** use your phone' authenticator app OR your security key as your second factor for your Mastodon account. 
+Now, when logging in to your Mastodon account, after entering your password as usual, you'll be able to use **either** use your phone' authenticator app OR your security key as your second factor. 
 
 ## Questions? 
 
