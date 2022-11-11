@@ -21,9 +21,9 @@ There are different ways to receive this 2nd factor code, but for most of this g
 
 ## OK, I'm convinced. Let's do this.
 
-First, you'll need to download an authenticator app for your mobile device. [Authy](https://authy.com/download/) has iOS and Android apps. There's also [andOTP](https://f-droid.org/en/packages/org.shadowice.flocke.andotp/) for Android. 
+First, you'll need to download an authenticator app for your smartphone or other mobile device. [Authy](https://authy.com/download/) has iOS and Android apps. There's also [andOTP](https://f-droid.org/en/packages/org.shadowice.flocke.andotp/) for Android. 
 
-With this app installed, log in to your Mastodon account on a desktop browser (like Firefox, Safari, or Chrome). Then find your user **Preferences**, usually on the right side of the screen.
+With one of these authenticator apps installed, log in to your Mastodon account on a desktop browser (like Firefox, Safari, or Chrome). Then find your user **Preferences**, usually on the right side of the screen.
 
 ![Go to Mastodon preferences](/img/mastodon-two-factor/1-preferences.png)
 
@@ -39,11 +39,11 @@ Click the big wide "SET UP" button.
 
 ![Click the big SET UP button](/img/mastodon-two-factor/4-setup-2fa.png)
 
-You'll now be presented with a square QR code and a string of uppercase letters and numbers. Both the QR code and the letter s and numbers represent your second-factor "secret".
+You'll now be presented with a square QR code and a text string of uppercase letters and numbers. Both the QR code and the text string represent your second-factor "secret".
 
 ![QR code and text codes exposed](/img/mastodon-two-factor/5-2fa-codes.png)
 
-Get out your mobile device and open your TOTP app. We want to scan this QR code into your app. Hold your phone up to the computer monitor, framing the QR code with your camera. Your TOTP app should add your Mastodon account and display a 6-digit number that changes every 30 seconds. (Optionally, you can store the text secret somewhere safe, like a piece of paper or a password manager.)
+We want to scan this QR code into your authenticator app. Get out your mobile device and open your authenticator app.Depending on the app, you'll need to tap a button to add a new account via scanning a QR code. Hold your phone up to the computer monitor, framing the QR code with your camera. Your authenticator app should add your Mastodon account and display a 6-digit number that changes every 30 seconds. (Optionally, you can store the text secret somewhere safe, like a piece of paper or a password manager.)
 
 Enter the current 6-digit code and click ENABLE to continue.
 
@@ -57,7 +57,7 @@ Next, you'll be presented with 10 **recovery  codes**. If you lose your phone an
 
 ![Logging in with a second factor](/img/mastodon-two-factor/11-logging-in-with-totp-code.png)
 
-If you have your mobile device, you'll enter the 6-digit code your TOTP app presents at the time. If you don't have access to your mobile device, you can enter one of the recovery codes.
+If you have your mobile device, you'll enter the 6-digit code your authenticator app presents at the time. If you don't have access to your mobile device, you can enter one of the recovery codes.
 
 ---
 
