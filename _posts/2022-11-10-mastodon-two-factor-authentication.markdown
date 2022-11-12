@@ -5,7 +5,7 @@ date: 2022-11-10 20:00:00 -0400
 comments: true
 ---
 
-I don't know if you've [heard](https://www.cnn.com/2022/11/05/tech/mastodon/index.html), [but](https://www.nbcnews.com/tech/mastodon-social-media-twitter-rcna56288) [a lot](https://www.bbc.co.uk/news/technology-63534240) of [new](https://www.nytimes.com/2022/11/07/technology/mastodon-twitter-elon-musk.html) users have been joining [Mastodon](https://joinmastodon.org) these past few weeks! Awesome! 
+I don't know if you've [heard](https://www.cnn.com/2022/11/05/tech/mastodon/index.html), but [a lot](https://www.bbc.co.uk/news/technology-63534240) of [new](https://www.nytimes.com/2022/11/07/technology/mastodon-twitter-elon-musk.html) users [have been](https://www.nbcnews.com/tech/mastodon-social-media-twitter-rcna56288) joining [Mastodon](https://joinmastodon.org) these past few weeks! Awesome! 
 
 I thought I'd explain how to enable two-factor authentication on a Mastodon account. This tutorial will assume you're logged in on a desktop/laptop computer -- I think it's far easier to set-up two-factor authentication on a computer, as opposed to a mobile device. 
 
@@ -75,15 +75,21 @@ If you have your mobile device, you'll read and enter the 6-digit token your aut
 
 ## Optional: Adding a security key as an alternate second-factor
 
-Recent versions of Mastodon allow you to add a security key as an alternate form of a second factor. This is totally optional, but I figured I'd cover it here. 
+If you've followed this guide so far, your account is already far more protected than it was with just a password. You can definitely close this tab and sleep a little better at night!
+
+However, I will note that recent versions of Mastodon allow you to add a security key as an alternate form of a second factor. This is method only increases your account's security relative authenticator app 2FA in certain contexts, so we can call it totally optional. But I figured I'd cover it here. 
 
 ### What's a security key?
 
-Basically, you can use a physical piece of hardware as your 2nd factor. A popular maker of security keys is [Yubikey](https://www.yubico.com/setup/). It looks like a thin USB drive you can attach to your key chain. Instead of typing in a 6-digit token you see on your phone, you plug your YubiKey into a USB slot on the computer and the YubiKey “sends” a code to Mastodon, proving that the user has the key. This method is considered more secure and works even if you don’t have you phone or its battery is dead.
+Basically, you can use a physical piece of hardware as your 2nd factor. Most of these security keys look like a thin USB drive you can attach to your key chain. Instead of typing in a 6-digit token you see on your phone, you plug your security key into a USB slot on the computer and the security key sends a code to Mastodon, proving that you, the user, has the key that you set up to correspond to your account.
 
-From a technical perspective, using a security key as a second factor is more secure than an authenticator app, since it's more difficult for an attacker to phish users.
+From a technical perspective, using a security key as a second factor can provide [extra protection against certain attacks](https://krebsonsecurity.com/2018/07/google-security-keys-neutralized-employee-phishing/).
 
-### Adding a security key as a second factor
+A popular maker of security keys is [Yubikey](https://www.yubico.com/products/).
+
+![Image of two popular Yubikey models](https://www.yubico.com/wp-content/uploads/2022/09/Security-key-set-pair-new-front@2x-768x672.png)
+
+### Adding a security key as a second factor for Mastodon
 
 To add a security key as an alternate second factor for your Mastodon account, head back to the "Two-factor Auth" section of your preferences/settings. 
 
