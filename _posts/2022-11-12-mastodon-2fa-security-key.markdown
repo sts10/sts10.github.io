@@ -1,11 +1,11 @@
 ---
 layout: post
 title: "How to use a security key as two-factor authentication on your Mastodon account"
-date: 2022-11-11 10:00:00 -0400
+date: 2022-11-12 10:00:00 -0400
 comments: true
 ---
 
-This is a continuation of [my post on enabling two-factor authentication](https://sts10.github.io/2022/11/11/mastodon-two-factor-authentication.html).
+This is a continuation of [my post on enabling two-factor authentication](https://sts10.github.io/2022/11/11/mastodon-two-factor-authentication.html). For users new to two-factor authentication, I highly recommend you start there.
 
 Recent versions of Mastodon allow you to add a security key as an alternate form of a second factor.
 
@@ -15,7 +15,7 @@ Basically, you can use a physical piece of hardware as your 2nd factor. Most of 
 
 From a technical perspective, using a security key as a second factor can provide [extra protection against certain attacks](https://krebsonsecurity.com/2018/07/google-security-keys-neutralized-employee-phishing/).
 
-A popular maker of security keys is [Yubikey](https://www.yubico.com/products/).
+A popular maker of security keys is [Yubikey](https://www.yubico.com/products/). They cost about $50 USD, which I'm definitely aware is not within the budget of all users. 
 
 ![Image of two popular Yubikey models](https://www.yubico.com/wp-content/uploads/2022/09/Security-key-set-pair-new-front@2x-768x672.png)
 
