@@ -5,7 +5,7 @@ date: 2022-11-10 20:00:00 -0400
 comments: true
 ---
 
-I don't know if you've [heard](https://www.cnn.com/2022/11/05/tech/mastodon/index.html), but [a lot](https://www.bbc.co.uk/news/technology-63534240) of [new](https://www.nytimes.com/2022/11/07/technology/mastodon-twitter-elon-musk.html) users [have been](https://www.nbcnews.com/tech/mastodon-social-media-twitter-rcna56288) joining [Mastodon](https://joinmastodon.org) these past few weeks! Awesome! 
+I don't know [if](https://mastodon.social/@Gargron/109330358838921654) you've [heard](https://www.cnn.com/2022/11/05/tech/mastodon/index.html), but [a lot](https://www.bbc.co.uk/news/technology-63534240) of [new](https://www.nytimes.com/2022/11/07/technology/mastodon-twitter-elon-musk.html) users [have been](https://www.nbcnews.com/tech/mastodon-social-media-twitter-rcna56288) joining [Mastodon](https://joinmastodon.org) these past few weeks! Awesome! 
 
 I thought I'd explain how to enable two-factor authentication on a Mastodon account. This tutorial will assume you're logged in on a desktop/laptop computer -- I think it's far easier to set-up two-factor authentication on a computer, as opposed to a mobile device. 
 
