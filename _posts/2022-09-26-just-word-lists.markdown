@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Using Just to create word lists"
+title: "Using Just to (further) automate the creation of word lists"
 date: 2022-09-26 13:00:00 -0400
 comments: true
 ---
