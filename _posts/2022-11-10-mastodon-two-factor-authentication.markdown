@@ -53,6 +53,8 @@ You'll now be presented with a square QR code and a text string of uppercase let
 
 We want to scan this QR code into your authenticator app. Get out your mobile device and open your authenticator app.Depending on the app, you'll need to tap a button to add a new account via scanning a QR code. Hold your phone up to the computer monitor, framing the QR code with your camera. Your authenticator app should add your Mastodon account and display a 6-digit number (called a "token") that changes every 30 seconds. (Optionally, you can store the text secret somewhere safe, like a piece of paper.)
 
+![Tofu displaying a 6-digit token, after proper set up](/img/mastodon-two-factor/tofu-code.PNG)
+
 Enter the current 6-digit token and click ENABLE to continue.
 
 ### Recovery codes
@@ -70,48 +72,6 @@ If you lose your phone and can't get the 6-digit token, you can use one these re
 ![Logging in with a second factor](/img/mastodon-two-factor/11-logging-in-with-totp-code.png)
 
 If you have your mobile device, you'll read and enter the 6-digit token your authenticator app presents at the time. If you don't have access to your mobile device, you can enter one of the recovery codes.
-
----
-
-## Optional: Adding a security key as an alternate second-factor
-
-If you've followed this guide so far, your account is already far more protected than it was with just a password. You can definitely close this tab and sleep a little better at night!
-
-However, I will note that recent versions of Mastodon allow you to add a security key as an alternate form of a second factor. This is method only increases your account's security relative authenticator app 2FA in certain contexts, so we can call it totally optional. But I figured I'd cover it here. 
-
-### What's a security key?
-
-Basically, you can use a physical piece of hardware as your 2nd factor. Most of these security keys look like a thin USB drive you can attach to your key chain. Instead of typing in a 6-digit token you see on your phone, you plug your security key into a USB slot on the computer and the security key sends a code to Mastodon, proving that you, the user, has the key that you set up to correspond to your account.
-
-From a technical perspective, using a security key as a second factor can provide [extra protection against certain attacks](https://krebsonsecurity.com/2018/07/google-security-keys-neutralized-employee-phishing/).
-
-A popular maker of security keys is [Yubikey](https://www.yubico.com/products/).
-
-![Image of two popular Yubikey models](https://www.yubico.com/wp-content/uploads/2022/09/Security-key-set-pair-new-front@2x-768x672.png)
-
-### Adding a security key as a second factor for Mastodon
-
-To add a security key as an alternate second factor for your Mastodon account, head back to the "Two-factor Auth" section of your preferences/settings. 
-
-Once you've added an authenticator app as a 2nd factor (see above), you'll "unlock" the ability to add a security key. Click "Add".
-
-![Security key set up](/img/mastodon-two-factor/7-add-security-key.png)
-
-Next, you'll be asked to name your security key. This is helpful for folks who have multiple security keys (a good idea if they're kept in secure but different locations!). Name it whatever you like.
-
-![Name your security key](/img/mastodon-two-factor/8-name-security-key.png)
-
-Next, you'll be asked to insert your security key into your computer and touch it (which usually means: press the button on it).
-
-![Insert your security key](/img/mastodon-two-factor/9-insert-sec-key.png)
-
-Assuming that went smoothly, you should be all set! If your browser has trouble recognizing your security key, try updating your browser to the latest version, or switching to Firefox.
-
-![All done with both Authenticator app and security key](/img/mastodon-two-factor/10b-all-set-up.png)
-
-Now, when logging in to your Mastodon account, after entering your password as usual, you'll be able to use **either** use your phone's authenticator app OR your security key as your second factor. (When I have both on me, I try to use the security key, due to it being harder for an attacker to phish.)
-
-I recommend keeping the authenticator app method enabled, since that's the easiest way to log in on a mobile device that doesn't have a USB port.
 
 ## Questions? Comments? General feedback?
 
