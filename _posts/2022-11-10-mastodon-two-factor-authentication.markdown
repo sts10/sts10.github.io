@@ -63,7 +63,7 @@ Next, you'll be presented with 10 **recovery  codes**.
 
 ![Sample recovery codes](/img/mastodon-two-factor/6-back-up-codes.png)
 
-If you lose your phone and can't get the 6-digit token, you can use one these recovery codes to regain access to your account. Store these in a safe place. For example, you may print them out (or write them down by hand on a piece of paper) and store them with other important documents.
+If you lose your phone and can't get the 6-digit token, you can use one these recovery codes to regain access to your account. Store these in a safe place. For example, you may print them out (or write them down by hand on a piece of paper) and store them with other important documents. While tempting, it's best NOT to take a photo of your recovery codes, since your photos may not be stored/backed-up in a very secure way.
 
 ### All done!
 
