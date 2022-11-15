@@ -75,6 +75,10 @@ If you have your mobile device, you'll read and enter the 6-digit token your aut
 
 If you want to add a bit more security to your account, and have ~$45 to spend, check out [my guide for adding a physical security key as an alternate second factor](https://sts10.github.io/2022/11/12/mastodon-2fa-security-key.html).
 
+## Further reading
+
+For more tips on how to protect yourself online, checkout [the EFF's Surveillance Self-Defense site](https://ssd.eff.org/).
+
 ## Questions? Comments? General feedback?
 
 I'm [@schlink@octodon.social](https://octodon.social/@schlink). Please let me know if you have questions or comments on how to make this guide better!
