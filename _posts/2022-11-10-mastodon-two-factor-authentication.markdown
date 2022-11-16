@@ -27,7 +27,7 @@ First, you'll need to download an authenticator app for your smartphone or other
 
 If you don't have an authenticator app already, an easy-to-use option is Google Authenticator, which is available for both [Android](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&gl=US) and [Apple iOS](https://apps.apple.com/us/app/google-authenticator/id388497605) apps. 
 
-Other easy-to-get-started options include: [Aegis Authenticator](https://getaegis.app/) for Android and [Tofu](https://www.tofuauth.com/) for iPhone users. (A slightly more involved option, which offers things like back-ups, is [Authy](https://authy.com/download/).) <!-- [Raivo OTP](https://raivo-otp.com/) -->
+Other easy-to-get-started options include: [Aegis Authenticator](https://getaegis.app/) for Android, [Tofu](https://www.tofuauth.com/) for iPhone users, and Free OTP ([iPhone](https://apps.apple.com/us/app/freeotp-authenticator/id872559395) or [Android](https://play.google.com/store/apps/details?id=org.fedorahosted.freeotp)). (A slightly more involved option, which offers things like back-ups, is [Authy](https://authy.com/download/).) <!-- [Raivo OTP](https://raivo-otp.com/) -->
 
 With one of these authenticator apps installed, log in to your Mastodon account on a desktop browser (like Firefox, Safari, or Chrome). If you've never done this before, go to your instance's URL. For example, if your Mastodon user name is bob@mastodon.social, you'll want to go to [mastodon.social](https://mastodon.social) and find the "sign in" button to log in. I'm schlink@octodon.social, so I go to [octodon.social](https://octodon.social).
 
