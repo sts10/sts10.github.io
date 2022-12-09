@@ -5,7 +5,7 @@ date: 2022-11-12 10:00:00 -0400
 comments: true
 ---
 
-This is a continuation of [my post on enabling two-factor authentication](https://sts10.github.io/2022/11/11/mastodon-two-factor-authentication.html). For users new to two-factor authentication, I highly recommend you start there.
+This is a continuation of [my post on enabling two-factor authentication for Mastodon accounts](https://sts10.github.io/2022/11/11/mastodon-two-factor-authentication.html). For users new to two-factor authentication, I highly recommend you start there.
 
 Recent versions of Mastodon allow you to add a security key as an alternate form of a second factor.
 
