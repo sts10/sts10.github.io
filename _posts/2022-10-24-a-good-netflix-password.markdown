@@ -37,53 +37,62 @@ abcdefghijklmnopqrstuvwxyz
 
 Then, we could "score" a given word by how many "clicks" it takes to type, including the left-right movement between characters. So for example, "bad" would score 6 clicks. "zap" would cost 43 clicks. 
 
-As large base word list of common English words to start from, we could [scrape Google Books for frequently used words since 1975](https://github.com/sts10/common_word_list_maker). Let's arbitrarily take the 18,000 most common words that are 3 letters or longer. 
+First, let's find a large list of common English words to start from. How about we [scrape Google Books for frequently used words since 1975](https://github.com/sts10/common_word_list_maker). Let's arbitrarily take the 18,000 most common words that are 3 letters or longer. 
 
-We could then [sort these 18,000 words by click score (given our assumed linear keyboard)](https://github.com/sts10/remote-words/blob/main/lists/raw/alpha-line.txt), putting low click scores first. Then we could take the top 7,776 words from this list and randomly select, say, 4 words to make a decent Netflix password like "rust gps fearing scaled" or "vat tamil sly sadly".
+We could then [sort these 18,000 words by click score (given our assumed linear keyboard)](https://github.com/sts10/remote-words/blob/main/lists/raw/alpha-line.txt), listing low click scores first. Then we could take the top 7,776 words from this list and randomly select, say, 4 words to make a decent Netflix password like "rust gps fearing scaled" or "vat tamil sly sadly".
 
-Not bad! But what about those spaces between the words? Those cost clicks! Do we need them? Can we just mash the words together?
+Not bad! But what about those spaces between the words? Those cost clicks too! Do we need them? Can't we just mash the words together?
 
 ## Uniquely decodable lists
 
-If we were to remove the spaces from these passphrases ("rustgpsfearingscaled") (i.e. remove the delimiter), we would save a bunch of clicks, but we would also expose ourselves to a subtle security issue. 
+If we were to remove the spaces from these passphrases ("rustgpsfearingscaled") (i.e. remove the delimiter), we would save a bunch of clicks (navigating to and from the "space" button), but we would also expose ourselves to a subtle security issue. Can you spot it?
 
 As a brief example, if a list has "boy", "hood", and "boyhood" on it, users who specified they wanted two words worth of randomness (entropy) might end up with "boyhood", which an attacker guessing single words would try _before_ moving on to two-word combinations. This is bad! We're picking 2 (or 4) words based on important security assumptions, namely that an attacker, even one who has our exact word list, would have to work through 7776<sup>2</sup> possible combinations (or, if we're using 4 words, 7776<sup>4</sup>).
 
-But we can solve this issue by removing certain words from the list. In this toy example, if we removed the word "boy" from our list, we'd be safe to mash the words together without a delimiter. This is because "boy" is the only "prefix word" on the list, so removing it makes the remaining list something called [a prefix code](https://en.wikipedia.org/wiki/Prefix_code), a key concept in coding theory. Lists that are free of prefix words are guaranteed to be **uniquely decodable**. This is the property we're interested in -- this is what makes it safe to combine words without a delimiter, since they can be "decoded" in only one way. ([This is how the EFF word lists were made safe to combine](https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases).)
+Thankfully, we can protect ourselves from this issue by removing certain words from the list. In this toy example, if we removed the word "boy" from our list, we'd be safe to mash the words together without a delimiter. This is because "boy" is the only "prefix word" on the list - -the only word that is a prefix of another word on the list ("boyhood"). 
 
-Cool. We could remove all prefix words from our list and go with that (an example passphrase "exotic officials flavors months" which we could safely make "exoticofficialsflavorsmonths"). The issue here is that removing all prefix words removes some great, easy-to-type words (like "boy"). 
+Removing all prefix words (in this case, just "boy") makes the remaining list something called [a prefix code](https://en.wikipedia.org/wiki/Prefix_code), a key concept in coding theory. Lists that are free of prefix words are guaranteed to be **uniquely decodable**. This is the property we're interested in -- this is what makes it safe to combine words without a delimiter, since they can be "decoded" in only one (unique) way. ([This is how the EFF word lists were made safe to combine](https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases).)
 
-### Understanding this next optimization
+Cool. We could remove all prefix words from our list and go with that (an example passphrase from such a list: "exotic officials flavors months" which we could safely make "exoticofficialsflavorsmonths"). But! As you might guess, removing all prefix words removes some great, quick-and-easy-to-type words (like "boy")....
 
-Ideally, we'd **want to make our word list uniquely decodable while removing the fewest number of words possible**. To see why, let's dig into the procedure I'm using to create our word list. 
+### A new way to create a uniquely decodable word list, cutting fewer words
 
-As a constant, I want our finished list to be (a) uniquely decodable and (b) exactly 7,776 words (this is the same length as the EFF long list -- the number is a result of common dice having 6 sides). Do we need to use all 18,000 words in our starting list to achieve this? Ideally, we would only take what we need from the **top** of the list, which have the lowest click costs. 
+Ideally, we'd **want to make our word list uniquely decodable while removing the fewest number of words possible**. To see why, let's dig into the procedure I'm using to create a uniquely decodable word list. 
 
-If we remove all prefix words from the 18,000 list, we get a list of 13,037. This is usable, but if we only need 7,776 words on our final list, we can take fewer words from the 18,000 list. We'll take words from the top of the sorted list, since we know those words have the lowest click scores.
+<!-- As a constant, I want our finished list to be (a) uniquely decodable and (b) exactly 7,776 words (this is the same length as the EFF long list -- the number is a result of common dice having 6 sides). --> 
+Let's recap. We want our list to be uniquely decodable so that users can forgo using a delimiter between words. We've got a nice list of 18,000 words from Google Books, which is sorted by click costs. Ideally, our finished list would draw from the top of the list, since those cost fewer click. (More generally, we can say it is sorted by what we might call "desireability".) But the list is _not_ uniquely decodable. 
 
-It turns out that when we take the first 10,802 words from the list and remove prefix words, we get a 7,776 list. That's neat! But can we do better? What if we could fulfill requirements (a) and (b) but only use the first, say, 12,000 words on the list?
+As established above, one way to make a given word list uniquely decodable is to remove words. One method for removal is remove all prefix words. Let's try that.
+
+<!-- Do we need to use all 18,000 words in our starting list to achieve this? Ideally, we would only take what we need from the **top** of the list, which have the lowest click costs. --> 
+
+If we remove all prefix words from the 18,000 list, we get a list of 13,037. This is usable, but if we only need 7,776 words on our final list (making it the same length as the EFF long list -- the number is a result of common dice having 6 sides), we can take _fewer_ words from the 18,000 list. We'll take words from the top of the sorted list, since we know those words have the lowest click scores.
+
+It turns out that when we take the first 10,802 words from the list and remove prefix words, we get a 7,776 list. That's neat! But can we do better? What if we could make a uniquely decodable, 7,776-word list using, say, only the first 10,000 words on the list? That resulting would list would be superior, since it couldn't possibly have those 802 "worst" words from the original list.
 
 ### Schlinkert pruning
 
 Is there another way to make a list uniquely decodable, besides removing all prefix words? Well, turns out we could remove all _suffix_ words ("hood", in the above example). With English words at least, removing all suffix words seems to "save" more words than removing all prefix words, so that's good. If we perform the test described above, but remove all suffix words rather than all prefix words, we only need to take the first 8,996 words. An improvement!
 
-But was there an even better algorithm?
+But is there an even better algorithm?
 
-To learn more about this, I read about the Sardinas–Patterson algorithm, an algorithm created in 1953 by August Albert Sardinas and George W. Patterson. [From Wikipedia](https://en.wikipedia.org/wiki/Sardinas%E2%80%93Patterson_algorithm): 
+To learn more about this, I read about the Sardinas–Patterson algorithm. [From Wikipedia](https://en.wikipedia.org/wiki/Sardinas%E2%80%93Patterson_algorithm): 
 
 > In coding theory, the Sardinas–Patterson algorithm is a classical algorithm for determining in polynomial time whether a given variable-length code is uniquely decodable, named after August Albert Sardinas and George W. Patterson, who published it in 1953. The algorithm carries out a systematic search for a string which admits two different decompositions into codewords. As Knuth reports, the algorithm was rediscovered about ten years later in 1963 by Floyd, despite the fact that it was at the time already well known in coding theory.
 
-Sardinas-Patterson only tells us whether a given list (or code) is uniquely decodable -- we want an algorithm that takes a list and spits out a list of words to remove to make it uniquely decodable (and hopefully the list of necessary removals is short!).
+Sardinas-Patterson only tells us _whether_ a given list (or "code") is uniquely decodable -- basically a "yes, it's uniquely decodable" or "nope, it's not". That's neat, but what we really want an algorithm that takes a list and spits out a list of words to remove to make it uniquely decodable (and hopefully the list of necessary removals is short!).
 
-To accomplish this, I tweaked the Sardinas-Patterson algorithm to create a new process that I call ["Schlinkert pruning"](https://sts10.github.io/2022/08/12/efficiently-pruning-until-uniquely-decodable.html). In [simple tests](https://sts10.github.io/2022/08/12/efficiently-pruning-until-uniquely-decodable.html#schlinkert-pruning-preliminary-results), Schlinkert pruning does remove fewer words than removing all prefix words or all suffix words. Awesome!
+To accomplish this, I tweaked the Sardinas-Patterson algorithm to create a new process that I call ["Schlinkert pruning"](https://sts10.github.io/2022/08/12/efficiently-pruning-until-uniquely-decodable.html). In [rather rudimentary tests](https://sts10.github.io/2022/08/12/efficiently-pruning-until-uniquely-decodable.html#schlinkert-pruning-preliminary-results), Schlinkert pruning does remove fewer words than removing all prefix words or all suffix words. Awesome!
 
 So, instead of removing all prefix words or all suffix words, we'll "Schlinkert prune" our word list to (finally) get a safe list of low-click-cost words that we can safely combine and use.
 
-If we "Schlinkert prune" the list, we only need to take the first 8,944 words. That's our fewest words used yet! (I don't know of any other algorithms to test, other than making all the words the same length, which is not effective for our needs.)
+If we "Schlinkert prune" the list, we only need to take the first 8,944 words. Admittedly that's not _much_ better than removing all suffix words (which required the first 8,996 words), but it is better! That's our fewest words used yet! (I don't know of any other algorithms to test, other than making all the words the same length, which would remove a lot of words.)
 
 ## Final list 
 
-We've got our procedure down. And you can use a tool I made called [Tidy](https://github.com/sts10/tidy) to use this procedure on [the raw list](https://github.com/sts10/remote-words/blob/main/lists/raw/alpha-line.txt) with a command like `tidy -AAAA --whittle-to 7776 -K -lL -o my_list.txt lists/raw/alpha-line.txt`.
+We've got our procedure down. I built it into my word list manipulation tool, [Tidy](https://github.com/sts10/tidy), so you can actually do it yourself by taking [the raw list](https://github.com/sts10/remote-words/blob/main/lists/raw/alpha-line.txt) and running `tidy -AAAA --whittle-to 7776 -K -lL -o my_list.txt lists/raw/alpha-line.txt`.
+
+The resulting list is uniquely decodable and 7,776-words long, just as we wanted.
 
 But in order to make a _usable_ list, I wanted to make some cuts of my own. I decided to cut profane words, British spellings of English words, and Roman numerals. To remove some proper nouns, I also (somewhat controversially) only let through words found in the Linux list of English words found at `/usr/share/dict/words`. With all these additional cuts, I needed to take the first 11,047 words from the list of 18,000 to Schlinkert prune down to 7,776, but I think it's worth it. (I'll note here that, with these additional cuts, Schlinkert pruning was still the best method of the three!)
 
@@ -101,13 +110,13 @@ clotheddaisymotionlessoffense
 
 Obviously, don't use any of the passphrases published in this blog post! 
 
-### Making your own passphrase, securely
+### How to make your own passphrase, securely
 
-One way to securely create a passphrase is to [use physical dice](https://www.eff.org/dice), where a roll of 5 6-sided dice corresponds to each word (this is why we went for exactly 7,776 words!). [Here's my usable word list with corresponding dice rolls for you to use](https://github.com/sts10/remote-words/blob/main/lists/usable/alpha-line-dice.txt).
+One way to securely create a passphrase is to [use physical dice](https://www.eff.org/dice), where a roll of 5 6-sided dice corresponds to one word (this is why we went for exactly 7,776 words!). [Here's my usable word list with corresponding dice rolls for you to use](https://github.com/sts10/remote-words/blob/main/lists/usable/alpha-line-dice.txt).
 
 If you want more than 51 bits of entropy, you can use more than 4 words. Please use your own threat model!
 
-To those who design password generation software (either built-in to an online service sign-up flow or a password manager), I encourage you to imagine possibilities of using word lists tailored to users' contextual needs.
+To those who work on password generation software (either built-in to an online service sign-up flow or a password manager), I encourage you to imagine possibilities of using word lists tailored to users' contextual needs.
 
 ## What about other smart TV keyboard layouts? 
 
@@ -117,8 +126,8 @@ Following the process above, we can make separate lists for other layouts. As yo
 
 ## Other links
 
-* I've posted other word lists I've created [here](https://github.com/sts10/generated-wordlists). 
-* I also [proposed a new word list for 1Password password manager to use](https://www.reddit.com/r/1Password/comments/ur4otq/proposed_new_word_list/). 
+* [Other word lists I've created](https://github.com/sts10/generated-wordlists). 
+* [My proposed word list for the 1Password password manager to use](https://www.reddit.com/r/1Password/comments/ur4otq/proposed_new_word_list/). 
 * The tool I wrote to create these lists is called [Tidy](https://github.com/sts10/tidy).
 
 ---
