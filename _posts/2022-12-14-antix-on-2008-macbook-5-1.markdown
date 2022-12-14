@@ -31,7 +31,7 @@ Ultimately I found [antiX Linux](https://antixlinux.com/), which is based on Deb
 
 ## The iMac
 
-I started with the iMac. 
+I started with the iMac. (I think [these are roughly the correct specs](https://igotoffer.com/apple/imac-core-2-duo-2-16-20-inch).)
 
 Step 1: I needed to find out it had a 64-bit processor or a 32-bit one, so that I could attempt to install the corresponding version of antiX (which is available in both, slightly rare for Linux distros these days). 
 
@@ -45,7 +45,7 @@ With the USB stick and a keyboard plugged in, I turned on the iMac, pressing and
 
 I was greeted by the antiX boot screen loaded just fine. So far so good.
 
-![antiX UEFI boot screen](https://www.antixforum.com/wp-content/uploads/2022/12/my-antiX-boot-screen-640x360.jpg)
+![antiX UEFI boot screen](/img/antix/bootscreen.jpg)
 
 But when I chose to launch antiX I was taken to a black (but lit) screen. 
 
@@ -65,7 +65,11 @@ So unfortunately, I'm leaving the iMac in a broken state. I would permanently ru
 
 ## The MacBook
 
-I had more success with the MacBook. Using my same USB stick with antiX 22 full/64-bit flashed, I rebooted the Macbook, holding alt/option when I heard the boot-up sound. I selected the EFI and got to the now-familiar antiX boot screen. I hit 'e' to edit GRUB options and added `nosplash`, anticipating issues that I'd need information on, but the live demo GUI loaded right up! (Note that I don't think anmtiX is using the NVIDIA graphics card...)
+![a MacBook5,1](/img/antix/macbook-5-1.png)
+
+I had more success with the MacBook. (Here are what I think are [some accurate specs](https://igotoffer.com/apple/macbook-5).)
+
+Using my same USB stick with antiX 22 full/64-bit flashed, I rebooted the Macbook, holding alt/option when I heard the boot-up sound. I selected the EFI and got to the now-familiar antiX boot screen. I hit 'e' to edit GRUB options and added `nosplash`, anticipating issues that I'd need information on, but the live demo GUI loaded right up! (Note that I don't think anmtiX is using the NVIDIA graphics card...)
 
 Excited, I clicked the GUI installer. Unfortunately, I think I hit an error around 12% of the way through the installation: something about an error while attempting to format the internal hard drive (`/sda`). On a tip I found somewhere on the internet, I closed the installer and launched GParted, which is helpfully included in the antiX 22 live demo.
 
@@ -78,6 +82,8 @@ Using GParted, I re-partitioned the hard drive to the following:
 Then I clicked the check mark button at the top of GParted to have it do all this re-formatting, which took maybe 2 minutes. This had the bonus effect of deleting (maybe not very securely) the old data on the hard drive.
 
 Once that was done, I relaunched the GUI antiX installer. I chose a custom install and, using drop-down menus, matched each partition with its assignment (root, swap, home, etc.). Once the installer was done, I rebooted the system and it launched right into antiX! Very cool. 
+
+![antiX installed](/img/antix/antix.jpg)
 
 ### AntiX 
 
