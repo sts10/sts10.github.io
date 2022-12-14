@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Reving old Macs with antiX Linux"
+title: "Reviving some old Macs with antiX Linux"
 date: 2022-12-14 10:00:00 -0400
 comments: true
 ---
