@@ -5,7 +5,7 @@ date: 2022-12-14 10:00:00 -0400
 comments: true
 ---
 
-I was home visiting family this past weekend and saw an old iMac (best guess: from 2007) and MacBook (2008) destined for the trash. As the tech nerd of the family, I was asked if these machines were still useful at all.
+I was home visiting family this past weekend and saw an iMac from 2007 and MacBook (2008) destined for the trash. As the tech nerd of the family, I was asked if these machines were still useful at all.
 
 As you might expect, neither of these machines can run a version of mac OS that is currently supported by Apple. 
 
@@ -45,17 +45,17 @@ I rebooted and held option/alt again to get back to the antiX boot menu. At this
 
 After [looking up other boot parameter options](https://download.tuxfamily.org/antix/docs-antiX-22/Boot_Menu/antiX-gfxboot.html#bo_antix) and a lot of trial and error, I finally added the `nosplash failsafe disable=lxF` parameters and antiX's GUI live demo booted. Success! 
 
-However, when I went to actually install antiX to this hard drive, I hit a new set of issues. Plus, I think the `failsafe` options tells antiX not to use the computers' video card, which negatively affects performance. 
+However, when I went to actually install antiX to this hard drive, I hit a new set of issues. Plus, I think the `failsafe` options tells antiX not to use the computer's *video card*, which negatively affects performance. 
 
-I think what I really need to do is to get the computer to use the correct Radeon driver, but as of this writing I'm not sure how to do that. 
+I think what I really need to do is to get the computer to use the correct AMD/Radeon driver (it has a AMD RV530/M56-P [Mobility Radeon X1600] graphic card), but as of this writing I'm not sure how to do that. 
 
-As of Dec. 14th, I'm leaving the iMac in a broken state. I would permanently run antiX from a USB stick in `failsafe` mode, but it's pretty sluggish. I'm considering loading ShredOS, wiping the hard drive as much as possible, and tossing it.
+So unfortunately, I'm leaving the iMac in a broken state. I would permanently run antiX from a USB stick in `failsafe` mode, but it's pretty sluggish. I'm considering loading [ShredOS](https://github.com/PartialVolume/shredos.x86_64), wiping the hard drive as much as possible, and tossing it.
 
 ## The MacBook
 
-I had much more success with the MacBook. Using my same USB stick with antiX 22 full/64-bit, I added the `nosplash` option anticipating issues, but the live demo loaded right up. 
+I had more success with the MacBook. Using my same USB stick with antiX 22 full/64-bit flashed, I rebooted the Macbook, holding alt/option when I heard the boot-up sound. I selected the EFI and got to the now-familiar antiX boot screen. I added the `nosplash` option anticipating issues, but the live demo GUI loaded right up. 
 
-Excited, I clicked the GUI installer. Unfortunately, I think I hit an error around 12% of the way through the installation: something about an error while attempting to format the hard drive (`/sda`). On a tip I found somewhere on the internet, I closed the installer and launched GParted, which is helpfully included in the antiX 22 live demo.
+Excited, I clicked the GUI installer. Unfortunately, I think I hit an error around 12% of the way through the installation: something about an error while attempting to format the internal hard drive (`/sda`). On a tip I found somewhere on the internet, I closed the installer and launched GParted, which is helpfully included in the antiX 22 live demo.
 
 Using GParted, I re-partitioned the hard drive to the following:
 * `/dev/sda1` as the EFI partition. File system: fat 32; Mount Point: `/boot/efi`; Size: 256MB
@@ -65,15 +65,15 @@ Using GParted, I re-partitioned the hard drive to the following:
 
 Then I clicked the check mark button at the top of GParted to have it do all this re-formatting, which took maybe 2 minutes. This had the bonus effect of deleting (maybe not very securely) the old data on the hard drive.
 
-Once that was done, I relaunched the GUI antiX installer. I chose a custom install and matched each partition with its assignment (root, swap, home, etc.). Once the installer was done, I rebooted the system and it launched right into antiX! So cool. 
+Once that was done, I relaunched the GUI antiX installer. I chose a custom install and, using drop-down menus, matched each partition with its assignment (root, swap, home, etc.). Once the installer was done, I rebooted the system and it launched right into antiX! So cool. 
 
 ### RAM-saving tweaks
 
 Next, in order to be able to do some multi-tasking on this 2 GB RAM machine, I took the following steps:
 
 1. AntiX specific: Run `sudo cp /usr/local/bin/zram /etc/init.d && sudo update-rc.d zram default` then reboot to enable zram at start-up. ([source](https://www.antixforum.com/forums/topic/making-a-pentium-4-laptop-useful-with-antix/))
-2. AntiX comes with Firefox ESR as the default browser. That felt a bit heavy for my purposes, so I used the included package manager to install [Pale Moon browser](https://www.palemoon.org/) and made it the default and preferred browser. (I tried SeaMonkey first but it didn't play audio out of the box and I didn't feel like fixing that.)
-3. In the antiX (Start) menu, go to Desktop and switch to Minimal-IceWM desktop environment (this change will occur immediately AND, I believe, automatically persist through reboots -- very nifty). Note that with the Minimal version of IceWM, among other things, you do lose the GUI volume control (which gives you an idea of just how minimal the window manager is). So that's a trade-off.
+2. AntiX comes with Firefox ESR as the default browser. While I support that choice generally, it felt a bit heavy for my purposes, so I used the included package manager to install [Pale Moon browser](https://www.palemoon.org/) and made it the default and preferred browser. (I tried [SeaMonkey](https://www.seamonkey-project.org/) first but it didn't play audio out of the box and I didn't feel like fixing that.)
+3. In the antiX (Start) menu, go to Desktop and switch to Minimal-IceWM desktop environment (this change will occur immediately AND, I believe, automatically persist through reboots -- very nifty). Note that with the Minimal version of IceWM you do lose, among other things, the GUI volume control in the bottom left of the main task bar (this gives you an idea of just how minimal the window manager is). So that's a trade-off.
 
 After taking these steps, with the default terminal open, running `free -m` informs that I have 131MB used. With Pale Moon open and playing a YouTube video, usage bumps up to 485MB. Impressive!
 
