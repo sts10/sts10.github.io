@@ -127,5 +127,11 @@ As for themes and icons, [in the past](https://sts10.github.io/2017/04/18/xfce-a
 
 For a dock I might I've heard a lot about [Plank](https://github.com/ricotz/plank), but have also seen that it eats about 25 mb of RAM.
 
+## Epilogue 
+
+Brimming with confidence, I tried to install antiX on my old MacBook Pro 3,1, which was still running Ubuntu 16.04 from [this post](https://sts10.github.io//2016/11/08/installing-ubuntu-on-my-old-macbook-pro.html). 
+
+After a couple of failed boots and install attempts (the last of which was trying to use antiX 19.5 because apparently I could get the right Nvidia driver (legacy-340xx) with Debian Buster?), I seem to have **deleted GRUB**, which I think is recoverable, but seems like a pain. I just add this note to say that (a) I'm far from an expert, (b) antiX is not advertised as a beginner-friendly distro and now I know a bit more why that is. 
+
 ---
 If you know of any other RAM-saving techniques, ideas for the iMac, or other lightweight Linux distros you like, feel free to [let me know](https://hachyderm.io/@schlink)!
