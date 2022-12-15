@@ -105,4 +105,17 @@ Next, in order to be able to do some multi-tasking on this 2 GB RAM laptop, I to
 
 After taking these steps, with the default terminal open, running `free -m` informs that I have 131MB used. With Pale Moon open and playing a YouTube video, usage bumps up to 485MB. Impressive!
 
+### Theming 
+
+Given how often I was re-installing distros this weekend, I couldn't really bring myself to start working on a theme/aesthetic for the laptop (in case I had to soon after start over with a new installation or something). But I think that'd be a fun follow-up project.
+
+The [antiX forum](https://www.antixforum.com) has some posts about looks, including [how to model it after macOS](https://www.antixforum.com/forums/topic/how-to-make-antix-look-like-macos-with-jwm/).
+
+First, I want to try out the other built-in Desktops (window managers) to see if I like any more than Rox IceWM, starting with plain ol' "IceWM" (which I think is a choice).
+
+As for themes and icons, [in the past](https://sts10.github.io/2017/04/18/xfce-and-other-linux-notes.html) I used the now-defunct Paper theme and icons for Xfce. This time around I might try [Papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme), [Flat Remix](https://github.com/daniruiz/flat-remix-gnome), or [We10X](https://github.com/yeyushengfan258/We10X-icon-theme). To be honest I'm not sure which of these general "Linux" themes (maybe they're GTK?) will work on antiX, but I figure it's worth a shot.
+
+For a dock I might I've heard a lot about [Plank](https://github.com/ricotz/plank), but have also seen that it eats about 25 mb of RAM.
+
+---
 If you know of any other RAM-saving techniques, ideas for the iMac, or other lightweight Linux distros you like, feel free to [let me know](https://hachyderm.io/@schlink)!
