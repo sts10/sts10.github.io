@@ -73,6 +73,8 @@ Using my same USB stick with antiX 22 full/64-bit flashed, I rebooted the Macboo
 
 Excited, I clicked the GUI installer. Unfortunately, I think I hit an error around 12% of the way through the installation: something about an error while attempting to format the internal hard drive (`/sda`). On a tip I found somewhere on the internet, I closed the installer and launched GParted, which is helpfully included in the antiX 22 live demo.
 
+When you launch GParted in the antiX demo, it may ask for a system password. Apparently it's `demo` (or maybe `root`). 
+
 Using GParted, I re-partitioned the hard drive to the following:
 * `/dev/sda1` as the EFI partition. File system: fat 32; Mount Point: `/boot/efi`; Size: 256MB
 * `/dev/sda2` as the root partition. File system: ext4; Mount Point: `/`; Label: `rootantix22`; Size: 48.3 GB (could likely get away with closer to 6GB, but I had plenty of storage to spare...)
