@@ -87,6 +87,14 @@ Once that was done, I relaunched the GUI antiX installer. I chose a custom insta
 
 ![antiX installed](/img/antix/antix.jpg)
 
+### Troubleshooting (at this point)
+
+If, with the USB stick removed, you reboot the computer and it takes you to a command line login, don't panic. Login in the credentials you set while installing antiX. 
+
+Once the prompt says `<your_username>@<computername>`, run `suco nano /etc/default/grub` to edit GRUB setting. You'll likely want them to match the settings you used to get the demo running (in my case, `nosplash failsafe disable=lxF`). Save the changes to the file (`Ctrl-O`, then enter) and exit nano (`Ctrl-X`), then run `sudo update-grub` to make the changes to the actual GRUB config files. Finally, run `sudo reboot` to restart the computer.
+
+Note that, while the USB live demo uses the "Legacy" kernel, the installed version will try to use the **latest** kernal included in the antiX iso. So if you still have issues with the installed version of antiX that you _didn't_ with the live USB demo, it might be because of the use of the newer kernel. Currently, I'm not sure how to change this...
+
 ### AntiX 
 
 AntiX seems perfect for my needs. The default IceWM window manager is light but modern-looking. The stability of Debian and its familiar `apt` CLI tool is comforting. I loved the choice of many window managers, which ranged in their feel and resource usage (and it's wonderful that you can switch between them "live", with little delay). And [the user forum](https://www.antixforum.com/forums/topic/another-case-of-waiting-for-dev-to-be-fully-populated/) was super helpful when I had questions. 
