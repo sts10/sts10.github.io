@@ -76,7 +76,7 @@ Excited, I clicked the GUI installer. Unfortunately, I think I hit an error arou
 When you launch GParted in the antiX demo, it may ask for a system password. Apparently it's `demo` (or maybe `root`). 
 
 Using GParted, I re-partitioned the hard drive to the following:
-* `/dev/sda1` as the EFI partition. File system: fat 32; Mount Point: `/boot/efi`; Size: 256MB
+* `/dev/sda1` as the EFI partition. File system: fat 32; Mount Point: `/boot/efi`; Size: 256MB. Note that I think you need make this the "ESP" partition during the antiX Custom Installation wizard...
 * `/dev/sda2` as the root partition. File system: ext4; Mount Point: `/`; Label: `rootantix22`; Size: 48.3 GB (could likely get away with closer to 6GB, but I had plenty of storage to spare...)
 * `/dev/sda3` as the swap partition. File system: `linux-swap`; Mount Point is blank(?); Label: `swapantix`; Size: 2.62 GB (think you want this to match size of system RAM? I gave it a bit extra just in case)
 * `/dev/sda4` as the home partition. File system: `ext4`; Mount Point: `/home`; Label: `home`; Size: 181.7GB.
