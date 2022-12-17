@@ -188,7 +188,7 @@ There's a tool someone mentioned called [Rustic](https://github.com/bnavetta/rus
 
 ## What do you use!? 
 
-Let me know on [Mastodon](https://octodon.social/@schlink) or [Twitter](https://twitter.com/sts10/).
+Let me know on [Mastodon](https://hachyderm.io/@schlink) or [Twitter](https://twitter.com/sts10/).
 
 --- 
 ## Appendix: Other archiving tools I found

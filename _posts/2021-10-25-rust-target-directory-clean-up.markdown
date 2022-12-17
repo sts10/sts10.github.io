@@ -47,4 +47,4 @@ With a slightly more sophisticated version [from Kevin Hoffman](https://twitter.
 
 If we want to use a Rust replacement for `find`, there's [fd](https://github.com/sharkdp/fd): `fd -Ig -t d target`. To do the actual removing, I think it'd be: `fd -Ig -t d target | xargs rm -r`
 
-How do you handle this issue? Let me know on [Mastodon](https://octodon.social/@schlink) or [Twitter](https://twitter.com/sts10/).
+How do you handle this issue? Let me know on [Mastodon](https://hachyderm.io/@schlink) or [Twitter](https://twitter.com/sts10/).

@@ -107,4 +107,4 @@ fn get_result5(initial: usize) -> Option<usize> {
 
 And obviously could tighten that down to one line if we wanted: `[initial + 2, initial + 4, initial + 12].iter().find_map(|value| sub_five_from(*value))`. But that seems a bit excessive. 
 
-If you have other ideas please let me know via [Mastodon](https://octodon.social/@schlink) or [Twitter](https://twitter.com/sts10). Here's [a playground with the example code](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=0f46d9161e3df7c3099d41f632783f4b) if you want to tinker.
+If you have other ideas please let me know via [Mastodon](https://hachyderm.io.social/@schlink) or [Twitter](https://twitter.com/sts10). Here's [a playground with the example code](https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=0f46d9161e3df7c3099d41f632783f4b) if you want to tinker.

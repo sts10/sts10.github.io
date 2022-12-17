@@ -9,7 +9,7 @@ I've got two days of [Advent of Code 2018](https://adventofcode.com/2018) under 
 
 If you're still working on either day 1 or 2 (and there's no shame in that... I've yet to get to Day 10), heads up that there are SPOILERS below.
 
-Note: Almost all of these lessons/tricks I snagged from either the code of others or Fediverse friends, some of whom I credit below and some of whom I don't. I don't think the uncredited will be upset, but if so please drop me a line on [Octodon](https://octodon.social/@schlink) or [elsewhere](https://gist.github.com/sts10/4a4e01021b3a5ad42e9b73e0abd7b7e3).
+Note: Almost all of these lessons/tricks I snagged from either the code of others or Fediverse friends, some of whom I credit below and some of whom I don't. I don't think the uncredited will be upset, but if so please drop me a line on [Mastodon](https://hachyderm.io/@schlink) or [elsewhere](https://gist.github.com/sts10/4a4e01021b3a5ad42e9b73e0abd7b7e3).
 
 Here's [my AoC 2018 repo](https://github.com/sts10/advent-of-code-2018) that you might want open as you read.
 

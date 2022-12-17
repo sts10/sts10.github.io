@@ -185,4 +185,4 @@ I haven't tried Ion myself, but readers of this post might be interested!
 
 And, as mentioned above, there are a number of command line tools written in Rust not mentioned here. In fact there's [a Rust working group just for CLIs](https://github.com/rust-lang-nursery/cli-wg) (they're [on Twitter](https://twitter.com/CliRust) and [Mastodon](https://fosstodon.org/@clirust)). Separately, here's a [casual list of tools from a Mastodon user](https://mastodon.social/@wezm/101824862524557850)). 
 
-If you know of other cool tools written in Rust, let me know in the comments, on [Mastodon](https://octodon.social/@schlink), or on [Twitter](https://twitter.com/sts10).
+If you know of other cool tools written in Rust, let me know in the comments, on [Mastodon](https://hachyderm.io/@schlink), or on [Twitter](https://twitter.com/sts10).

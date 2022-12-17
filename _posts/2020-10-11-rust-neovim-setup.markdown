@@ -9,7 +9,7 @@ I've been writing a fair amount of mediocre Rust in Neovim. I finally have a set
 
 This post represents my best-effort at reproducing the procedure I'd take to get my current setup on a new machine, for when I need to in the future. I broke it into two versions: The first presents a BASH script and a section of my init.vim file (what Neovim uses in place of Vim's vimrc). The second is a more written-out version of the same procedure.
 
-If you have ideas for how to simplify it, or see redundancies, please let me know on [Twitter](https://www.twitter.com/sts10) or [Mastodon](https://octodon.social/@schlink)!
+If you have ideas for how to simplify it, or see redundancies, please let me know on [Twitter](https://www.twitter.com/sts10) or [Mastodon](https://hachyderm.io/@schlink)!
 
 ## What I'm using
 

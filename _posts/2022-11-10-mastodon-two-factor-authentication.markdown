@@ -29,7 +29,7 @@ If you don't have an authenticator app already, an easy-to-use option is Google 
 
 Other easy-to-get-started options include: [Aegis Authenticator](https://getaegis.app/) for Android, [Tofu](https://www.tofuauth.com/) for iPhone users, and Free OTP ([iPhone](https://apps.apple.com/us/app/freeotp-authenticator/id872559395) or [Android](https://play.google.com/store/apps/details?id=org.fedorahosted.freeotp)). (A slightly more involved option, which offers things like back-ups, is [Authy](https://authy.com/download/).) <!-- [Raivo OTP](https://raivo-otp.com/) -->
 
-With one of these authenticator apps installed, log in to your Mastodon account on a desktop browser (like Firefox, Safari, or Chrome). If you've never done this before, go to your instance's URL. For example, if your Mastodon user name is bob@mastodon.social, you'll want to go to [mastodon.social](https://mastodon.social) and find the "sign in" button to log in. I'm schlink@octodon.social, so I go to [octodon.social](https://octodon.social).
+With one of these authenticator apps installed, log in to your Mastodon account on a desktop browser (like Firefox, Safari, or Chrome). If you've never done this before, go to your instance's URL. For example, if your Mastodon user name is bob@mastodon.social, you'll want to go to [mastodon.social](https://mastodon.social) and find the "sign in" button to log in. I'm schlink@hachyderm.io, so I go to [hachyderm.io](https://hachyderm.io).
 
 Then find your user **Preferences**, usually on the right side of the screen.
 
@@ -81,8 +81,8 @@ For more tips on how to protect yourself online, checkout [the EFF's Surveillanc
 
 ## Questions? Comments? General feedback?
 
-I'm [@schlink@octodon.social](https://octodon.social/@schlink). Please let me know if you have questions or comments on how to make this guide better!
+I'm [@schlink@hachyderm.io](https://hachyderm.io/@schlink). Please let me know if you have questions or comments on how to make this guide better!
 
 ---
 
-If you liked this blog post, I'm currently looking for work. Please get in touch! Here's [my website](https://www.samschlinkert.com/), [Github](https://github.com/sts10/), [Twitter](https://www.twitter.com/sts10), [LinkedIn](https://www.linkedin.com/in/samschlinkert), and [Mastodon](https://octodon.social/@schlink).
+If you liked this blog post, I'm currently looking for work. Please get in touch! Here's [my website](https://www.samschlinkert.com/), [Github](https://github.com/sts10/), [Twitter](https://www.twitter.com/sts10), [LinkedIn](https://www.linkedin.com/in/samschlinkert), and [Mastodon](https://hachyderm.io/@schlink).

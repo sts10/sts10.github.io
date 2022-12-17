@@ -132,4 +132,4 @@ Following the process above, we can make separate lists for other layouts. As yo
 
 ---
 
-If you liked this blog post and/or my work with passwords, I'm **currently looking for work**. Please get in touch. Here's [my website](https://www.samschlinkert.com/), [Twitter](https://www.twitter.com/sts10), [LinkedIn](https://www.linkedin.com/in/samschlinkert), and [Mastodon](https://octodon.social/@schlink).
+If you liked this blog post and/or my work with passwords, I'm **currently looking for work**. Please get in touch. Here's [my website](https://www.samschlinkert.com/), [Twitter](https://www.twitter.com/sts10), [LinkedIn](https://www.linkedin.com/in/samschlinkert), and [Mastodon](https://hachyderm.io/@schlink).
