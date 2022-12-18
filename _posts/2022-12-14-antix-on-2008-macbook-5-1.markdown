@@ -136,7 +136,17 @@ For a dock I might I've heard a lot about [Plank](https://github.com/ricotz/plan
 
 Brimming with confidence, I tried to install antiX on my old MacBook Pro 3,1, which was still running Ubuntu 16.04 from [this post](https://sts10.github.io//2016/11/08/installing-ubuntu-on-my-old-macbook-pro.html). 
 
-After a couple of failed boots and install attempts (the last of which was trying to use antiX 19.5 because apparently I could get the right Nvidia driver (legacy-340xx) with Debian Buster?), I seem to have **deleted GRUB**, which I think is recoverable, but seems like a pain. I just add this note to say that (a) I'm far from an expert, (b) antiX is not advertised as a beginner-friendly distro and now I know a bit more why that is. 
+After a couple of failed boots and install attempts (the last of which was trying to use antiX 19.5 because apparently I could get the right Nvidia driver (legacy-340xx) with Debian Buster?), I seem to have somehow deleted or corrupted **GRUB**. I think during one of my failed install attempts, I unchecked the box to "install GRUB" (still wondering why that's possible?). Either that or I told the installer to install GRUB on a partition that didn't exist?
+
+This situation was, for me, very tricky and frustrating to fix. Eventually, I used the antiX 22 live demo to install a fresh copy of antiX 22, paying special attention to create a partition for "/boot" and telling the installer to install GRUB on "MBR". I think this did what I wanted: give me a clean installation of GRUB and a /boot partition upon which to install an "easier" distro that would hopefully clean up the remaining artifacts from my failed antiX install.
+
+So, rather than try to boot antiX again (it hadn't been working on that machine), I stuck in a different USB that I had flashed with a simpler (but still lightweight) distro called [Bodhi Linux](https://www.bodhilinux.com/), one I had wanted to try anyway. I figured an easy-to-install distro (based on Ubuntu) would **install easily** AND hopefully resolve any remaining issues from my failed antiX installations. 
+
+Sure enough, after a bit longer than I would have guessed, Bodhi Linux installed successfully! I ran a `sudo apt update && sudo apt dist-upgrade` to get it up-to-date, then crossed my fingers and rebooted. I don't think I had to use any special GRUB boot parameters. All good! 
+
+![Bodhi Linux installed](/img/antix/bodhi.jpeg)
+
+My takeaway here is that antiX is _not_ advertised as a beginner-friendly distro for a reason. (I was relieved that the Bodhi Linux installer didn't ask me any confusing questions!) If you're not paying attention, it can bite ya!
 
 ---
 If you know of any other RAM-saving techniques, ideas for the iMac, or other lightweight Linux distros you like, feel free to [let me know](https://hachyderm.io/@schlink)!
