@@ -78,10 +78,13 @@ This part below I'm not 100% sure on. Actually, it **may misconfigure your hard 
 When you launch GParted in the antiX demo, it may ask for a system password. Apparently it's `demo` (or maybe `root`). 
 
 Using GParted, I re-partitioned the hard drive to the following:
-* `/dev/sda1` as the EFI partition. File system: fat 32; Mount Point: `/boot/efi`; Size: 256MB. Note that I think you need make this the "ESP" partition during the antiX Custom Installation wizard...
+<!-- * `/dev/sda1` as the EFI partition. File system: fat 32; Mount Point: `/boot/efi`; Size: 256MB. Note that I think you need make this the "ESP" partition during the antiX Custom Installation wizard... -->
+* `/dev/sda1` as the boot partition. File system: ext4; Mount Point: `/boot`; Size: 2GB. 
 * `/dev/sda2` as the root partition. File system: ext4; Mount Point: `/`; Label: `rootantix22`; Size: 48.3 GB (could likely get away with closer to 6GB, but I had plenty of storage to spare...)
 * `/dev/sda3` as the swap partition. File system: `linux-swap`; Mount Point is blank(?); Label: `swapantix`; Size: 2.62 GB (think you want this to match size of system RAM? I gave it a bit extra just in case)
-* `/dev/sda4` as the home partition. File system: `ext4`; Mount Point: `/home`; Label: `home`; Size: 181.7GB.
+* `/dev/sda4` as the home partition. File system: `ext4`; Mount Point: `/home`; Label: `home`; Size: 179.7GB.
+
+In the subsequent menus, I chose to, yes, install GRUB and to do it on MBR, which I think is important! (MBR is not the default.)
 
 Then I clicked the check mark button at the top of GParted to have it do all this re-formatting, which took maybe 2 minutes. This had the bonus effect of deleting (maybe not very securely) the old data on the hard drive.
 
