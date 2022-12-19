@@ -2,8 +2,6 @@
 layout: post
 title: "Reading and Writing TOTP URIs into and out of QR Codes for Fun and Profit"
 date: 2018-11-26 19:42:30 -0400
-published: false
-comments: false
 ---
 
 If you're like me you've got a lot of [time-based one-time passwords](https://en.wikipedia.org/wiki/Time-based_One-time_Password_algorithm) (aka "TOTP") in a smartphone app like Google Authenticator. This system works pretty well: The service presents you with a QR code, you scan it with Google Authenticator, and then every 30 seconds you get a fresh 6-digit code to use as your second factor when logging in to the service. It's more secure than using SMS for reasons I won't spell out here.
