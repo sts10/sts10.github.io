@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Schlinkert Pruning: Making a word list until its uniquely decodable with minimal cuts"
+title: "Schlinkert Pruning: Making a word list uniquely decodable with minimal cuts"
 date: 2022-08-12 17:00:00 -0400
 comments: true
 ---
