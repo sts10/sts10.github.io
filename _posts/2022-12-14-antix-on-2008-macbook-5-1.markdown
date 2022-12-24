@@ -57,17 +57,44 @@ I rebooted and held option/alt again to get back to the antiX boot menu. At this
 
 After [looking up other boot parameter options](https://download.tuxfamily.org/antix/docs-antiX-22/Boot_Menu/antiX-gfxboot.html#bo_antix) and a lot of trial and error, I finally added the `nosplash failsafe disable=lxF` parameters and antiX's GUI live demo booted. Success! However, I think the `failsafe` options tells antiX not to use the computer's *video card*, which negatively affects performance. But at this point I'm not sure of another way to make the GUI launch....
 
-I think what I really need to do is to get the computer to use the correct AMD/Radeon driver (it has a AMD RV530/M56-P [Mobility Radeon X1600] graphic card), but as of this writing I'm not sure how to do that. 
+(I think what I ultimately need to do is to get the computer to use the correct AMD/Radeon driver (it has a AMD RV530/M56-P [Mobility Radeon X1600] graphic card), but as of this writing I'm not sure how to do that.)
 
-Then, when I went to actually install antiX to this hard drive, I hit a new set of issues that I won't bother laying out here. 
+Excited, when I went to actually install antiX to this hard drive, I hit a new set of issues that I won't bother laying out here. 
 
 Then I remembered something: In my search for a suitable distro, I tried [MX Linux](https://mxlinux.org/), "a cooperative venture between the antiX and MX Linux communities." The live USB worked well once I simply added `nomodeset` to the GRUB options. But once the GUI booted, I realized why MX Linux is branded as a "middle-weight" distro: it was indeed sluggish. I then switched to trying to install antiX, hopeful that it would work as smoothly as MX, but without the weight. As I learned, for whatever (video-related?) reason, antiX just wasn't easily installing on this machine.
 
+## MX+Fluxbox to the rescue
+
 But! Later I learned that MX officially supports a Fluxbox desktop option. With fingers crossed, I tried installing the 32-bit version and, once I added `nomodeset nosplash` to the GRUB options (bit hitting 'e'), it worked pretty well. Fluxbox+MX turned out to be just lightweight enough to work decently on the iMac. 
 
-When installing, I had some drive formatting issues pop up. I then used GParted to re-partition the drive to one big ext4 partition. Then in the MX installer, I think I chose the simple partition option, making the entire harddrive `/root`. I waited for the install to complete, then the system rebooted and I was good to go (and remove the live USB). 
+When installing, I had some drive formatting issues pop up. 
+
+I then used GParted to re-partition the drive to one big ext4 partition. Then in the MX installer, I think I chose the simple partition option, making the entire harddrive `/root`. (I don't remember if the installer gave me the choice of where to install GRUB, but if it did I almost certainly chose MBR.) 
+
+I then waited for the install to complete, then the system rebooted and I was good to go (and remove the live USB). 
 
 I am still curious why MX worked where antiX did not. Maybe a kernel version difference?
+
+Here's some `inxi` output from the installed MX+Fluxbox for the record:
+```
+System:    Kernel: 5.10.0-20-686-pae [5.10.158-2] i686 bits: 32 compiler: gcc v: 10.2.1 
+parameters: BOOT_IMAGE=/boot/vmlinuz-5.10.0-20-686-pae 
+root=UUID=<filter> ro nomodeset quiet splash 
+Desktop: Fluxbox 1.3.7 info: tint2 vt: 7 dm: LightDM 1.26.0 
+Distro: MX-21.2.1_fluxbox_386 Wildflower September 18  2022 
+base: Debian GNU/Linux 11 (bullseye) 
+```
+```
+Graphics:  Device-1: AMD RV530/M56-P [Mobility Radeon X1600] vendor: Apple MacBook Pro driver: N/A 
+alternate: radeon bus-ID: 01:00.0 chip-ID: 1002:71c5 class-ID: 0300 
+Display: x11 server: X.Org 1.20.11 driver: loaded: ati,vesa 
+unloaded: fbdev,modesetting,radeon display-ID: :0.0 screens: 1 
+Screen-1: 0 s-res: 1680x1050 s-dpi: 96 s-size: 445x278mm (17.5x10.9") 
+s-diag: 525mm (20.7") 
+Monitor-1: default res: 1680x1050 hz: 77 
+OpenGL: renderer: llvmpipe (LLVM 11.0.1 128 bits) v: 4.5 Mesa 20.3.5 compat-v: 3.1 
+direct render: Yes 
+```
 
 <!-- So unfortunately, I'm leaving the iMac in a broken state. I would permanently run antiX from a USB stick in `failsafe` mode, but it's pretty sluggish. I'm considering loading [ShredOS](https://github.com/PartialVolume/shredos.x86_64), wiping the hard drive as thoroughly as I can, and tossing it. -->
 
@@ -75,7 +102,7 @@ I am still curious why MX worked where antiX did not. Maybe a kernel version dif
 
 ![a MacBook5,1](/img/antix/macbook-5-1.png)
 
-I had more success with the MacBook. (Here are what I think are [some accurate specs](https://igotoffer.com/apple/macbook-5).)
+I had easier success with antiX and the MacBook. (Here are what I think are [some accurate specs](https://igotoffer.com/apple/macbook-5).)
 
 Using my same USB stick with antiX 22 full/64-bit flashed, I rebooted the Macbook, holding alt/option when I heard the boot-up sound. I selected the EFI and got to the now-familiar antiX boot screen. I hit 'e' to edit GRUB options and added `nosplash`, anticipating issues that I'd need information on, but the live demo GUI loaded right up! (Note that I don't think anmtiX is using the NVIDIA graphics card...)
 
