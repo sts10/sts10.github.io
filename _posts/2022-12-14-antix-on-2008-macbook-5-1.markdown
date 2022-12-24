@@ -83,8 +83,28 @@ root=UUID=<filter> ro nomodeset quiet splash
 Desktop: Fluxbox 1.3.7 info: tint2 vt: 7 dm: LightDM 1.26.0 
 Distro: MX-21.2.1_fluxbox_386 Wildflower September 18  2022 
 base: Debian GNU/Linux 11 (bullseye) 
-```
-```
+Machine:   Type: Desktop System: Apple product: iMac5,1 v: 1.0 serial: <filter> Chassis: type: 13 
+v: Mac-F4228EC8 serial: <filter> 
+Mobo: Apple model: Mac-F4228EC8 v: DVT serial: <filter> UEFI: Apple 
+v: IM51.88Z.0090.B09.0706270921 date: 06/27/07 
+Battery:   Device-1: hidpp_battery_0 model: Logitech Wireless Gaming Mouse serial: <filter> 
+charge: 55% (should be ignored) rechargeable: yes status: Discharging 
+CPU:       Info: Dual Core model: Intel Core2 T7400 bits: 64 type: MCP arch: Core Merom family: 6 
+model-id: F (15) stepping: 6 microcode: D1 cache: L2: 4 MiB 
+flags: lm nx pae sse sse2 sse3 ssse3 vmx bogomips: 8655 
+Speed: 999 MHz min/max: 1000/2167 MHz Core speeds (MHz): 1: 999 2: 999 
+Vulnerabilities: Type: itlb_multihit status: KVM: VMX disabled 
+Type: l1tf mitigation: PTE Inversion; VMX: EPT disabled 
+Type: mds status: Vulnerable: Clear CPU buffers attempted, no microcode; SMT disabled 
+Type: meltdown mitigation: PTI 
+Type: mmio_stale_data status: Unknown: No mitigations 
+Type: retbleed status: Not affected 
+Type: spec_store_bypass status: Vulnerable 
+Type: spectre_v1 mitigation: usercopy/swapgs barriers and __user pointer sanitization 
+Type: spectre_v2 
+mitigation: Retpolines, STIBP: disabled, RSB filling, PBRSB-eIBRS: Not affected 
+Type: srbds status: Not affected 
+Type: tsx_async_abort status: Not affected 
 Graphics:  Device-1: AMD RV530/M56-P [Mobility Radeon X1600] vendor: Apple MacBook Pro driver: N/A 
 alternate: radeon bus-ID: 01:00.0 chip-ID: 1002:71c5 class-ID: 0300 
 Display: x11 server: X.Org 1.20.11 driver: loaded: ati,vesa 
