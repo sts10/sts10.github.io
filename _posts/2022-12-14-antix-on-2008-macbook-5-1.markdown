@@ -61,7 +61,15 @@ I think what I really need to do is to get the computer to use the correct AMD/R
 
 Then, when I went to actually install antiX to this hard drive, I hit a new set of issues that I won't bother laying out here. 
 
-So unfortunately, I'm leaving the iMac in a broken state. I would permanently run antiX from a USB stick in `failsafe` mode, but it's pretty sluggish. I'm considering loading [ShredOS](https://github.com/PartialVolume/shredos.x86_64), wiping the hard drive as thoroughly as I can, and tossing it.
+Then I remembered something: In my search for a suitable distro, I tried [MX Linux](https://mxlinux.org/), "a cooperative venture between the antiX and MX Linux communities." The live USB worked well once I simply added `nomodeset` to the GRUB options. But once the GUI booted, I realized why MX Linux is branded as a "middle-weight" distro: it was indeed sluggish. I then switched to trying to install antiX, hopeful that it would work as smoothly as MX, but without the weight. As I learned, for whatever (video-related?) reason, antiX just wasn't easily installing on this machine.
+
+But! Later I learned that MX officially supports a Fluxbox desktop option. With fingers crossed, I tried installing the 32-bit version and, once I added `nomodeset nosplash` to the GRUB options (bit hitting 'e'), it worked pretty well. Fluxbox+MX turned out to be just lightweight enough to work decently on the iMac. 
+
+When installing, I had some drive formatting issues pop up. I then used GParted to re-partition the drive to one big ext4 partition. Then in the MX installer, I think I chose the simple partition option, making the entire harddrive `/root`. I waited for the install to complete, then the system rebooted and I was good to go (and remove the live USB). 
+
+I am still curious why MX worked where antiX did not. Maybe a kernel version difference?
+
+<!-- So unfortunately, I'm leaving the iMac in a broken state. I would permanently run antiX from a USB stick in `failsafe` mode, but it's pretty sluggish. I'm considering loading [ShredOS](https://github.com/PartialVolume/shredos.x86_64), wiping the hard drive as thoroughly as I can, and tossing it. -->
 
 ## The MacBook
 
