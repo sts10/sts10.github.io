@@ -61,7 +61,7 @@ After [looking up other boot parameter options](https://download.tuxfamily.org/a
 
 (I think what I ultimately need to do is to get the computer to use the correct AMD/Radeon driver -- it has a AMD RV530/M56-P [Mobility Radeon X1600] graphic card--, but as of this writing I'm not sure how to do that.)
 
-Excited, I went to actually install antiX to this hard drive; but I quickly hit a new set of issues that I won't bother laying out here. 
+Excited, I went to actually install antiX to this hard drive. After some fooling around with the partition sizing, I got antiX to install on the hard drive successfully. But every time I'd reboot the computer (now with the USB stick unplugged) I would always get thrown into a CLI (no GUI desktop). This happened seemingly no matter what GRUB parameters or kernel version I tried. Frustrating that I could get the live USB to work, but not the installed-on-harddrive antiX to work...
 
 ### MX+Fluxbox to the rescue
 
