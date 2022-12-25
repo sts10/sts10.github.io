@@ -76,11 +76,11 @@ The live USB booted once I added `nomodeset` to the GRUB options. But once the G
 
 But! Later I learned that MX officially supports a Fluxbox desktop option, which is lighter than Xfce. With fingers crossed, I tried installing the 32-bit version and, once I added `nomodeset nosplash` to the GRUB options (by hitting 'e'), it worked pretty well on the machine. Not exactly speedy, but usable. Given the age of this machine and other issues I had trying to install any Linux distro on it, I figure it was worth trying to install a distro that I knew was at least functional.
 
-When I went to install, I did have some drive formatting issues pop up ("Could not format `/root`" or something similar.) I used GParted to re-partition the drive to one big ext4 partition. Once that was done, I re-launched the MX installer and chose the simple partition option, making the entire harddrive `/root`. (I don't remember if the installer gave me the choice of where to install GRUB, but if it did I almost certainly chose MBR.) 
+When I went to install, I did have some drive formatting issues pop up ("Could not format `/root`" or something similar.) I used GParted to re-partition the drive to one big ext4 partition. Once that was done, I re-launched the MX installer and chose the simple partition option, making the entire hard drive `/root`. (I don't remember if the installer gave me the choice of where to install GRUB, but if it did I almost certainly chose MBR.) 
 
 I then waited for the install to complete, then the system rebooted and I was good to go (and remove the live USB)!
 
-I am still curious why MX worked where antiX did not. Maybe a kernel version difference? I would also be curious to compare performance of Mx+Fluxbox vs. antiX with, say, IceWM on the same hardware...
+I am still curious why MX worked where antiX did not. Maybe a kernel version difference? <!-- I would also be curious to compare performance of MX+Fluxbox vs. antiX with, say, IceWM on the same hardware...-->
 
 Here's some `inxi` output from the installed MX+Fluxbox for the record:
 ```
@@ -127,7 +127,7 @@ direct render: Yes
 
 ### Comparing MX+Fluxbox vs. antiX
 
-One interesting question this brings up is Comparing MX+Fluxbox with antiX (using its defeault IceWM desktop), especially with regard to resource usage. My gut is that Fluxbox isn't quite as light as IceWM, so a better comparison might be with both running Fluxbox, something I haven't had a chance to do. 
+One interesting question this brings up is how MX+Fluxbox compares with antiX (using its defeault IceWM desktop), especially with regard to resource usage. My gut is that Fluxbox isn't as light as IceWM, so a better comparison might be with both MX and antiX running Fluxbox, something I haven't had a chance to do. 
 
 Regardless, if even to say I've done it, I wanted to get antiX running on some hardware. This is the attitude with which I turned to the MacBook5,1.
 
