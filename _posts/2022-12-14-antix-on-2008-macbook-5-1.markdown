@@ -7,11 +7,9 @@ comments: true
 
 I was visiting family this past weekend and saw an iMac from 2007 and MacBook from 2008 destined for the trash. As the tech nerd of the family, I was asked if these machines were still useful at all.
 
-As you might expect, neither of these machines can run a version of mac OS that is currently supported by Apple. 
-
-The iMac is an iMac5,1, which apparently can only be upgraded to 10.7.5 Lion ([source](https://discussions.apple.com/thread/6584536)), which stopped getting support years ago. It has 1 GB of RAM.
-
-I _think_, based on serial number, the MacBook is a MacBook5,1. The latest OS it can handle is [apparently OS X 10.11 El Capitan](https://igotoffer.com/apple/macbook-5#Specifications), which is also no longer supported.
+As you might expect, neither of these machines can run a version of mac OS that is currently supported by Apple:
+* The iMac, an iMac5,1, can only be upgraded to 10.7.5 Lion ([source](https://discussions.apple.com/thread/6584536)), which stopped being supported by Apple years ago. It has 1 GB of RAM (I think [these are roughly the correct specs](https://igotoffer.com/apple/imac-core-2-duo-2-16-20-inch)).
+* The MacBook is a MacBook5,1. The latest OS it can handle is [apparently OS X 10.11 El Capitan](https://igotoffer.com/apple/macbook-5#Specifications), which is also no longer supported. It has 2 GB of RAM. (Here are what I think are [some accurate specs](https://igotoffer.com/apple/macbook-5).)
 
 ## A note on securely erasing old data
 
@@ -19,28 +17,31 @@ For a variety of reasons, including my own laziness, I didn't worry too much abo
 
 If I do end up either donating or trashing them, I may take steps to more securely erase everything on them, hopefully effectively securely deleting everything that's _ever_ been on them.
 
-Note: If you need to wipe a computer with a solid-state drive, I'd point you to [this guide](https://www.nytimes.com/wirecutter/guides/how-to-securely-wipe-your-computer-devices/).
+Note: If you need to wipe a computer that has a solid-state drive, I'd point you to [this guide](https://www.nytimes.com/wirecutter/guides/how-to-securely-wipe-your-computer-devices/).
 
 ## A lightweight Linux distro? 
 
-So, with no support from Apple, I looked to Linux. Given that the iMac has only 1 GB of RAM and the Macbook has 2 GB, I knew I needed a lightweight Linux distribution (aka "distro").
+So, with no support from Apple for either of these computers, I looked to Linux. Given that the iMac has only 1 GB of RAM and the Macbook has 2 GB, I knew I needed a _lightweight_ Linux distribution (aka "distro").
 
-In a past situations like this I have [used Lubuntu](https://sts10.github.io/2016/11/08/installing-ubuntu-on-my-old-macbook-pro.html) and [Puppy Linux](https://sts10.github.io/2022/08/23/reviving-a-thinkpad-x40.html), but figured I should look around for something new to me and maybe more challenging. (Besides, Lubuntu felt _a little_ too heavy for 1 GB of RAM, and I'm not sure if Puppy installs well with UEFI.)
-
-Ultimately I found [antiX Linux](https://antixlinux.com/), which is based on Debian (awesome), and recently [published a new release called, logically, antiX-22](https://antixlinux.com/antix-22-released/) based on [Debian bullseye](https://www.debian.org/releases/bullseye/).
+In a past situations like this I have [used Lubuntu](https://sts10.github.io/2016/11/08/installing-ubuntu-on-my-old-macbook-pro.html) and [Puppy Linux](https://sts10.github.io/2022/08/23/reviving-a-thinkpad-x40.html), but figured I should look for something new to me and maybe more challenging. (Besides, Lubuntu felt _a little_ too heavy for 1 GB of RAM, and I'm not sure if Puppy installs well with [UEFI](https://en.wikipedia.org/wiki/UEFI).)
 
 ## The iMac
 
-I started with the iMac. (I think [these are roughly the correct specs](https://igotoffer.com/apple/imac-core-2-duo-2-16-20-inch).)
+I started with the iMac. 
 
-Step 1: I needed to find out it had a 64-bit processor or a 32-bit one, so that I could attempt to install the corresponding version of antiX (which is available in both, slightly rare for Linux distros these days). 
+Step 1: I needed to find out if it has a 64-bit processor or a 32-bit one, something I'd need to know in order to pick a suitable distro and version of Linux.
 
 [It turns out that iMac5,1s have a 64-bit processor, BUT "it has a 32-bit EFI and is not capable of booting into 64-bit mode."](https://discussions.apple.com/thread/6584536), which sounds like a real nightmare for someone facing the either/or choice of trying to install a 64- or 32-bit version of Linux. (In hindsight I would have been safe just to go with a 32-bit version.)
 
-I decided to try the 64-bit first, figuring that it was preferable for finding software to install down the road.
+I decided to try a 64-bit iso first, figuring that it was preferable for finding software to install down the road.
+
+### antiX Linux
+
+After a bit of research, I found [antiX Linux](https://antixlinux.com/), which is based on Debian (awesome), and recently [published a new release called, logically, antiX-22](https://antixlinux.com/antix-22-released/) based on [Debian bullseye](https://www.debian.org/releases/bullseye/).
 
 I [downloaded](https://antixlinux.com/download/) the 64-bit "full" antiX Linux iso file from Sourceforge and flashed it onto a USB stick using Pop_OS's "USB Flasher" program (you can use [Etcher](https://www.balena.io/etcher/) or something similar). My first goal was to try a live demo version of antiX to see how well it worked before installing it on to the computer hard drive.
 
+### Getting antiX to boot from USB stick
 With the USB stick and a keyboard plugged in, I turned on the iMac, pressing and holding down the Alt/Option key when I heard the familiar Apple start-up sound. I then clicked on the "EFI" boot option. 
 
 I was greeted by the antiX boot screen loaded just fine. So far so good.
@@ -55,25 +56,24 @@ I rebooted and held option/alt again to get back to the antiX boot menu. At this
 
 <!-- Adding `nomodeset nosplash` to the GRUB options got me to a command line, giving me a clue that the issue had to do with the video card in the machine. --> 
 
-### Getting antiX to boot from USB stick
-
+#### Success
 After [looking up other boot parameter options](https://download.tuxfamily.org/antix/docs-antiX-22/Boot_Menu/antiX-gfxboot.html#bo_antix) and a lot of trial and error, I added the `nosplash failsafe disable=lxF` parameters and antiX's GUI live demo booted. Success! However, I think the `failsafe` options tells antiX not to use the computer's *video card*, which negatively affects performance. But at this point I'm not sure of another way to make the GUI launch....
 
 (I think what I ultimately need to do is to get the computer to use the correct AMD/Radeon driver -- it has a AMD RV530/M56-P [Mobility Radeon X1600] graphic card--, but as of this writing I'm not sure how to do that.)
 
-Excited, I went to actually install antiX to this hard drive; but I hit a new set of issues that I won't bother laying out here. 
+Excited, I went to actually install antiX to this hard drive; but I quickly hit a new set of issues that I won't bother laying out here. 
 
 ### MX+Fluxbox to the rescue
 
-Then I remembered something: In my search for a suitable distro, I tried [MX Linux](https://mxlinux.org/) (with its default Xfce desktop), "a cooperative venture between the antiX and MX Linux communities." The live USB booted once I simply added `nomodeset` to the GRUB options. But once the GUI booted, I realized why MX Linux is branded as a "middle-weight" distro: running the Xfce desktop, it was indeed sluggish with just 1 GB of RAM. So at that point I switched to trying to install antiX, hopeful that it would work as smoothly as MX, but with less weight. As I learned, for whatever (video-related?) reasons, antiX just wasn't easily installing on this machine.
+Then I remembered something: In my search for a suitable distro, I tried [MX Linux](https://mxlinux.org/), "a cooperative venture between the antiX and MX Linux communities" with its default Xfce desktop. 
 
-But! Later I learned that MX officially supports a Fluxbox desktop option, which is lighter than Xfce. With fingers crossed, I tried installing the 32-bit version and, once I added `nomodeset nosplash` to the GRUB options (by hitting 'e'), it worked pretty well: Fluxbox+MX turned out to be just lightweight enough to work decently on the iMac. 
+The live USB booted once I added `nomodeset` to the GRUB options. But once the GUI booted, I realized why MX Linux is branded as a "middle-weight" distro: running the Xfce desktop, it was indeed sluggish with just 1 GB of RAM. So at that point I switched to trying to install antiX, hopeful that it would work as smoothly as MX, but with less weight. As I learned, for whatever (video-related?) reasons, antiX just wasn't easily installing on this machine.
 
-When installing, I had some drive formatting issues pop up. 
+But! Later I learned that MX officially supports a Fluxbox desktop option, which is lighter than Xfce. With fingers crossed, I tried installing the 32-bit version and, once I added `nomodeset nosplash` to the GRUB options (by hitting 'e'), it worked pretty well on the machine. Not exactly speedy, but usable. Given the age of this machine and other issues I had trying to install any Linux distro on it, I figure it was worth trying to install a distro that I knew was at least functional.
 
-I then used GParted to re-partition the drive to one big ext4 partition. Then in the MX installer, I think I chose the simple partition option, making the entire harddrive `/root`. (I don't remember if the installer gave me the choice of where to install GRUB, but if it did I almost certainly chose MBR.) 
+When I went to install, I did have some drive formatting issues pop up ("Could not format `/root`" or something similar.) I used GParted to re-partition the drive to one big ext4 partition. Once that was done, I re-launched the MX installer and chose the simple partition option, making the entire harddrive `/root`. (I don't remember if the installer gave me the choice of where to install GRUB, but if it did I almost certainly chose MBR.) 
 
-I then waited for the install to complete, then the system rebooted and I was good to go (and remove the live USB). 
+I then waited for the install to complete, then the system rebooted and I was good to go (and remove the live USB)!
 
 I am still curious why MX worked where antiX did not. Maybe a kernel version difference?
 
@@ -122,7 +122,7 @@ direct render: Yes
 
 ### I like MX Linux! 
 
-I actually installed MX Linux with its Xfce desktop on a 2012 MacBook Air after all of this (it installed pretty easily), and in both the Xfce and Fluxbox desktops, I found the defaults to be sane. 
+I actually installed MX Linux with its Xfce desktop on a 2012 MacBook Air (with a luxurious 8 GB of RAM) after all of this. The install itself went smoothly (no GRUB parameter edits needed), and I was pretty happy with what I got out of the box with the Xfce desktop it comes with. The Fluxbox version gave a similar out-of-the-box completeness, though I will note that it didn't include an office suite (no biggie for me).
 
 --- 
 
@@ -130,13 +130,13 @@ I actually installed MX Linux with its Xfce desktop on a 2012 MacBook Air after 
 
 ![a MacBook5,1](/img/antix/macbook-5-1.png)
 
-I had easier success with antiX and the MacBook 5,1. (Here are what I think are [some accurate specs](https://igotoffer.com/apple/macbook-5).)
+I had easier success with antiX and the rather beefy MacBook 5,1. 
 
 Using a USB stick with antiX 22 full/64-bit flashed, I rebooted the Macbook, holding alt/option when I heard the boot-up sound. I selected the EFI and got to the now-familiar antiX boot screen. I hit 'e' to edit GRUB options and added `nosplash`, anticipating issues that I'd need information on, but the live demo GUI loaded right up! (Note that I don't think antiX is using the NVIDIA graphics card...)
 
-Excited, I clicked the GUI installer. Unfortunately, I think I hit an error around 12% of the way through the installation: something about an error while attempting to format the internal hard drive (`/sda`). On a tip I found somewhere on the internet, I closed the installer and launched GParted, which is helpfully included in the antiX 22 live demo.
+Excited, I clicked the GUI installer. Unfortunately, I think I hit an error around 12% of the way through the installation: something about an error while attempting to format the internal hard drive (`/sda`). 
 
-This part below I'm not 100% sure on. Actually, it **may misconfigure your hard drive in such a way that is difficult to recover from**, so I would proceed with lots of **CAUTION**.
+On a tip I found somewhere on the internet, I closed the installer and launched GParted, which is helpfully included in the antiX 22 live demo. This part below I'm not 100% sure on. Actually, it **may misconfigure your hard drive in such a way that is difficult to recover from**, so I would proceed with lots of **CAUTION**.
 
 When you launch GParted in the antiX demo, it may ask for a system password. Apparently it's `demo` (or maybe `root`). 
 
@@ -163,9 +163,9 @@ Once the prompt says `<your_username>@<computername>`, run `sudo nano /etc/defau
 
 Note that, while the USB live demo uses the "Legacy" kernel, the installed version will try to use the **latest** kernel included in the antiX iso. So if you still have issues with the installed version of antiX that you _didn't_ with the live USB demo, it might be because of the use of the newer kernel. Currently, I'm not quite sure how to change this...
 
-### AntiX 
+### Using AntiX 
 
-On this old MacBook and its relatively low-RAM, AntiX seems pretty perfect for my needs. The default IceWM window manager is lightweight but modern-looking. The stability of Debian and its familiar `apt` CLI tool is comforting. I loved the choice of many window managers, which ranged in their feel and resource usage (and it's wonderful that you can switch between them "live", with little delay). And [the user forum](https://www.antixforum.com/forums/topic/another-case-of-waiting-for-dev-to-be-fully-populated/) was super helpful when I had questions. 
+On this old MacBook and its relatively low 2 GB of RAM, AntiX seems pretty perfect for my needs. The default IceWM window manager is lightweight but modern-looking. The stability of Debian and its familiar `apt` CLI tool is comforting. I loved the choice of many window managers, which ranged in their feel and resource usage (and it's wonderful that you can switch between them "live", with little delay). And [the user forum](https://www.antixforum.com/forums/topic/another-case-of-waiting-for-dev-to-be-fully-populated/) was super helpful when I had questions. 
 
 I will note that the default UI (with the IceWM window manager) is definitely more Windows-inspired than Mac-inspired -- for example, a lot of user actions start with clicking the "antiX" button in the bottom left, a la the Windows "Start" button. While this is great for folks coming from (older versions of) Windows, I was a bit slow to get used to it. There are (of course) ways to make antiX look more like Mac OS (see [here](https://www.antixforum.com/forums/topic/how-to-make-antix-look-like-macos-with-jwm/) and [here](https://www.antixforum.com/forums/topic/make-antix-look-like-macos/)), e.g. I could have added a dock like [Plank](https://launchpad.net/plank), but I worried about increased RAM usage. Not a big deal.
 
@@ -187,21 +187,22 @@ After taking these steps, with the default terminal open, running `free -m` info
 
 Given how often I was re-installing distros this weekend, I couldn't really bring myself to start working on a theme/aesthetic for the laptop (in case I had to soon after start over with a new installation or something). But I think that'd be a fun follow-up project.
 
-The [antiX forum](https://www.antixforum.com) has some posts about looks, including [how to model it after macOS](https://www.antixforum.com/forums/topic/how-to-make-antix-look-like-macos-with-jwm/).
+The [antiX forum](https://www.antixforum.com) has some posts about looks, including [how to model it after macOS](https://www.antixforum.com/forums/topic/how-to-make-antix-look-like-macos-with-jwm/). I generally liked how MX Linux looks out of the box, especially the flagship Xfce version, which I think uses a modified version of [Papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme), a theme I had used before.
 
-First, I want to try out the other built-in Desktops (window managers) to see if I like any more than Rox IceWM, starting with plain ol' "IceWM" (which I think is a choice).
+<!-- First, I want to try out the other built-in Desktops (window managers) to see if I like any more than Rox IceWM, starting with plain ol' "IceWM" (which I think is a choice). -->
 
-As for themes and icons, [in the past](https://sts10.github.io/2017/04/18/xfce-and-other-linux-notes.html) I used the now-defunct Paper theme and icons for Xfce. This time around I might try [Papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme), [Flat Remix](https://github.com/daniruiz/flat-remix-gnome), or [We10X](https://github.com/yeyushengfan258/We10X-icon-theme). To be honest I'm not sure which of these general "Linux" themes (maybe they're GTK?) will work on antiX, but I figure it's worth a shot.
+<!-- As for themes and icons, [in the past](https://sts10.github.io/2017/04/18/xfce-and-other-linux-notes.html) I used the now-defunct Paper theme and icons for Xfce. This time around I might try [Papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme), [Flat Remix](https://github.com/daniruiz/flat-remix-gnome), or [We10X](https://github.com/yeyushengfan258/We10X-icon-theme). To be honest I'm not sure which of these general "Linux" themes (maybe they're GTK?) will work on antiX, but I figure it's worth a shot. -->
 
-For a dock I might I've heard a lot about [Plank](https://github.com/ricotz/plank), but have also seen that it eats about 25 mb of RAM.
+For a dock for antiX, I might I've heard a lot about [Plank](https://github.com/ricotz/plank), but have also seen that it eats about 25 mb of RAM.
 
-## Epilogue 
+## Epilogue: A Lesson Learned 
 
-Brimming with confidence, I tried to install antiX on my old MacBook Pro 3,1, which was still running Ubuntu 16.04 from [this post](https://sts10.github.io//2016/11/08/installing-ubuntu-on-my-old-macbook-pro.html). 
+Brimming with confidence, I tried to install antiX on my old MacBook Pro 3,1, which was still running Ubuntu 16.04 from [this post](https://sts10.github.io/2016/11/08/installing-ubuntu-on-my-old-macbook-pro.html). 
 
 After a couple of failed boots and install attempts (the last of which was trying to use antiX 19.5 because apparently I could get the right Nvidia driver (legacy-340xx) with Debian Buster?), I seem to have somehow deleted or corrupted **GRUB**. I think during one of my failed install attempts, I unchecked the box to "install GRUB" (still wondering why that's possible?). Either that or I told the installer to install GRUB on a partition that didn't exist?
 
-This situation was, for me, very tricky and frustrating to fix. Eventually, I used the antiX 22 live demo to install a fresh copy of antiX 22, paying special attention to create a partition for "/boot" and telling the installer to install GRUB on "MBR". I think this did what I wanted: give me a clean installation of GRUB and a /boot partition upon which to install an "easier" distro that would hopefully clean up the remaining artifacts from my failed antiX install.
+### Recovering
+This situation was, for me, very tricky and frustrating to recover from. Eventually, I used the antiX 22 live demo to install a fresh copy of antiX 22, paying special attention to create a partition for "/boot" and telling the installer to install GRUB on "MBR". I think this did what I wanted: give me a clean installation of GRUB and a /boot partition upon which to install an "easier" distro that would hopefully clean up the remaining artifacts from my failed antiX install.
 
 So, rather than try to boot antiX again (it hadn't been working on that machine), I stuck in a different USB that I had flashed with a simpler (but still lightweight) distro called [Bodhi Linux](https://www.bodhilinux.com/), one I had wanted to try anyway. I figured an easy-to-install distro (based on Ubuntu) would **install easily** AND hopefully resolve any remaining issues from my failed antiX installations. 
 
@@ -209,7 +210,8 @@ Sure enough, after a bit longer than I would have guessed, Bodhi Linux installed
 
 ![Bodhi Linux installed](/img/antix/bodhi.jpeg)
 
-My takeaway here is that antiX is _not_ advertised as a beginner-friendly distro for a reason. (I was relieved that the Bodhi Linux installer didn't ask me any confusing questions!) If you're not paying attention, it can bite ya!
+My takeaway here is that antiX is _not_ advertised as a beginner-friendly distro for a reason. (I was relieved that the Bodhi Linux installer didn't ask me any confusing questions!) If you're not paying attention, it can bite ya! MX Linux may be a bit more beginner friendly, but I wouldn't install it on auto-pilot, if that makes sense.
 
 ---
-If you know of any other RAM-saving techniques, ideas for the iMac, or other lightweight Linux distros you like, feel free to [let me know](https://hachyderm.io/@schlink)!
+
+If you know of any other RAM-saving techniques or other lightweight Linux distros you like, feel free to [let me know](https://hachyderm.io/@schlink)!
