@@ -124,6 +124,8 @@ direct render: Yes
 
 I actually installed MX Linux with its Xfce desktop on a 2012 MacBook Air (with a luxurious 8 GB of RAM) after all of this. The install itself went smoothly (no GRUB parameter edits needed), and I was pretty happy with what I got out of the box with the Xfce desktop it comes with. The Fluxbox version gave a similar out-of-the-box completeness, though I will note that it didn't include an office suite (no biggie for me).
 
+Here's [a great video on setting up and customizing MX+Xfce](https://www.youtube.com/watch?v=EO7yd5yWN7c).
+
 --- 
 
 ## The MacBook
