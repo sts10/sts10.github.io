@@ -75,7 +75,7 @@ When I went to install, I did have some drive formatting issues pop up ("Could n
 
 I then waited for the install to complete, then the system rebooted and I was good to go (and remove the live USB)!
 
-I am still curious why MX worked where antiX did not. Maybe a kernel version difference?
+I am still curious why MX worked where antiX did not. Maybe a kernel version difference? I would also be curious to compare performance of Mx+Fluxbox vs. antiX with, say, IceWM on the same hardware...
 
 Here's some `inxi` output from the installed MX+Fluxbox for the record:
 ```
