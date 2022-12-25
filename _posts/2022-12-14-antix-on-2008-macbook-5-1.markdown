@@ -120,11 +120,12 @@ direct render: Yes
 
 <!-- So unfortunately, I'm leaving the iMac in a broken state. I would permanently run antiX from a USB stick in `failsafe` mode, but it's pretty sluggish. I'm considering loading [ShredOS](https://github.com/PartialVolume/shredos.x86_64), wiping the hard drive as thoroughly as I can, and tossing it. -->
 
-### I like MX Linux! 
+### Comparing MX+Fluxbox vs. antiX
 
-I actually installed MX Linux with its Xfce desktop on a 2012 MacBook Air (with a luxurious 8 GB of RAM) after all of this. The install itself went smoothly (no GRUB parameter edits needed), and I was pretty happy with what I got out of the box with the Xfce desktop it comes with. The Fluxbox version gave a similar out-of-the-box completeness, though I will note that it didn't include an office suite (no biggie for me).
+One interesting question this brings up is Comparing MX+Fluxbox with antiX (using its defeault IceWM desktop), especially with regard to resource usage. My gut is that Fluxbox isn't quite as light as IceWM, so a better comparison might be with both running Fluxbox, something I haven't had a chance to do. 
 
-Here's [a great video on setting up and customizing MX+Xfce](https://www.youtube.com/watch?v=EO7yd5yWN7c).
+Regardless, if even for experiemntal purposes, I still wanted to get antiX running on some hardware. This is the attitude I took to the MacBook5,1.
+<!-- I actually installed MX Linux with its Xfce desktop on a 2012 MacBook Air (with a luxurious 8 GB of RAM) after all of this. The install itself went smoothly (no GRUB parameter edits needed), and I was pretty happy with what I got out of the box with the Xfce desktop it comes with. The Fluxbox version gave a similar out-of-the-box completeness, though I will note that it didn't include an office suite (no biggie for me). -->
 
 --- 
 
@@ -177,7 +178,11 @@ I can't back this up with evidence, but in general I felt a bit more sure of mys
 
 ## Bonus Mac install: A 2012 MacBook Air
 
-I also had a MacBookAir5,2 (13-inch, mid 2012, 1.8 GHz Intel Core i5, 8 GB of DDR3 RAM) kicking around. Given the 8 GB of RAM, and my good experience with MX Linux, I went with a MX+Xfce install. Installation went very smoothly -- don't think I even needed to edit the GRUB parameters.
+I also had a MacBookAir5,2 (13-inch, mid 2012, 1.8 GHz Intel Core i5, 8 GB of DDR3 RAM) kicking around. Despite it being 5 years newer than these other two machines, I think it could only run macOS High Sierra, which is also no longer supported by Apple. 
+
+Given the 8 GB of RAM, and my good experience with MX Linux, I went with MX's "flagship" Xfce install. Installation went very smoothly -- don't think I even needed to edit the GRUB parameters.
+
+Here's [a great video on setting up and customizing MX+Xfce](https://www.youtube.com/watch?v=EO7yd5yWN7c).
 
 ## A group photo of all three
 
