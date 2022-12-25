@@ -56,7 +56,7 @@ I rebooted and held option/alt again to get back to the antiX boot menu. At this
 
 <!-- Adding `nomodeset nosplash` to the GRUB options got me to a command line, giving me a clue that the issue had to do with the video card in the machine. --> 
 
-#### Success
+#### Partial success?
 After [looking up other boot parameter options](https://download.tuxfamily.org/antix/docs-antiX-22/Boot_Menu/antiX-gfxboot.html#bo_antix) and a lot of trial and error, I added the `nosplash failsafe disable=lxF` parameters and antiX's GUI live demo booted. Success! However, I think the `failsafe` options tells antiX not to use the computer's *video card*, which negatively affects performance. But at this point I'm not sure of another way to make the GUI launch....
 
 (I think what I ultimately need to do is to get the computer to use the correct AMD/Radeon driver -- it has a AMD RV530/M56-P [Mobility Radeon X1600] graphic card--, but as of this writing I'm not sure how to do that.)
@@ -173,33 +173,51 @@ I will note that the default UI (with the IceWM window manager) is definitely mo
 
 I was also a bit confused about how to use antiX as a "live USB", by which I understand you load it onto a USB stick and carry it around to fire up on any computer you might have access to. As I understand it (a) this type of USB is distinct from just loading up the ISO on a USB stick (maybe since it includes persistence of storage and/or preferences), and (b) the best/easiest way to create one of these special "live" USBs is to use a normal antiX-flashed USB? It was a bit confusing to me. FWIW, [I encountered a similar confusion with Puppy Linux](https://sts10.github.io//2022/08/23/reviving-a-thinkpad-x40.html#installing-puppy-linux-to-the-hard-drive).
 
-But in general I definitely recommend antiX! 
+I can't back this up with evidence, but in general I felt a bit more sure of myself dealing with MX Linux than with antiX.
 
-### RAM-saving tweaks
+## Bonus Mac install: A 2012 MacBook Air
 
-Next, in order to be able to do some multi-tasking on this 2 GB RAM laptop, I took the following steps:
+I also had a MacBookAir5,2 (13-inch, mid 2012, 1.8 GHz Intel Core i5, 8 GB of DDR3 RAM) kicking around. Given the 8 GB of RAM, and my good experience with MX Linux, I went with a MX+Xfce install. Installation went very smoothly -- don't think I even needed to edit the GRUB parameters.
+
+## A group photo of all three
+
+![All 3 Macs, with Linux successfully installed](/img/antix/all_3.jpg)
+
+Phew! So to recap, I got: 
+
+* antiX (using the IceWM desktop) on a MacBook5,1 (bottom left in photo, sorry about the glare)
+* MX+Fluxbox on an iMac5,1 (top middle)
+* MX+Xfce on a MacBookAir5,2 (bottom right)
+
+
+## Appendix A: RAM-saving tweaks for antiX
+
+Later, I looked into some ways to conserve RAM on the antiX MacBook. Here are some of the steps I took:
 
 1. AntiX specific: Run `sudo cp /usr/local/bin/zram /etc/init.d && sudo update-rc.d zram default` then reboot to enable zram at start-up. ([source](https://www.antixforum.com/forums/topic/making-a-pentium-4-laptop-useful-with-antix/))
-2. AntiX comes with Firefox ESR as the default browser. While I support that choice generally, it felt a bit heavy for my purposes, so I used the included package manager to install [Pale Moon browser](https://www.palemoon.org/) and made it the default and preferred browser. (I tried [SeaMonkey](https://www.seamonkey-project.org/) first but it didn't play audio out of the box and I didn't feel like fixing that.)
+2. AntiX comes with Firefox ESR as the default browser. While I support that choice generally, it felt a bit heavy for my purposes, so I used the included package manager to install [Pale Moon browser](https://www.palemoon.org/) and made it the default and preferred browser. I also did this on the iMac. (I tried [SeaMonkey](https://www.seamonkey-project.org/) first but it didn't play audio out of the box and I didn't feel like fixing that.)
 3. In the antiX (Start) menu, go to Desktop and switch to Minimal-IceWM desktop environment (this change will occur immediately AND, I believe, automatically persist through reboots -- very nifty). Note that with the Minimal version of IceWM you do lose, among other things, the GUI volume control in the bottom left of the main task bar (this gives you an idea of just how minimal the window manager is). So that's a trade-off.
 
-After taking these steps, with the default terminal open, running `free -m` informs that I have 131MB used. With Pale Moon open and playing a YouTube video, usage bumps up to 485MB. Impressive!
+After taking these steps on the antiX MacBook, with the default terminal open, running `free -m` informs that I have 131MB used. With Pale Moon open and playing a YouTube video, usage bumps up to 485MB. Impressive!
 
-### Theming 
+## Appendix B: Theming 
 
 Given how often I was re-installing distros this weekend, I couldn't really bring myself to start working on a theme/aesthetic for the laptop (in case I had to soon after start over with a new installation or something). But I think that'd be a fun follow-up project.
 
-The [antiX forum](https://www.antixforum.com) has some posts about looks, including [how to model it after macOS](https://www.antixforum.com/forums/topic/how-to-make-antix-look-like-macos-with-jwm/). I generally liked how MX Linux looks out of the box, especially the flagship Xfce version, which I think uses a modified version of [Papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme), a theme I had used before.
+The [antiX forum](https://www.antixforum.com) has some posts about looks, including [how to model it after macOS](https://www.antixforum.com/forums/topic/how-to-make-antix-look-like-macos-with-jwm/). For a dock for antiX, I might I've heard a lot about [Plank](https://github.com/ricotz/plank), but have also seen that it eats about 25 mb of RAM.
+
+I generally liked how MX Linux looks out of the box, especially the flagship Xfce version on the MacBook Air. The theme is called mx-comfort, and the icons are [Papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme), an icon set I actually had admired and used before.
 
 <!-- First, I want to try out the other built-in Desktops (window managers) to see if I like any more than Rox IceWM, starting with plain ol' "IceWM" (which I think is a choice). -->
 
 <!-- As for themes and icons, [in the past](https://sts10.github.io/2017/04/18/xfce-and-other-linux-notes.html) I used the now-defunct Paper theme and icons for Xfce. This time around I might try [Papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme), [Flat Remix](https://github.com/daniruiz/flat-remix-gnome), or [We10X](https://github.com/yeyushengfan258/We10X-icon-theme). To be honest I'm not sure which of these general "Linux" themes (maybe they're GTK?) will work on antiX, but I figure it's worth a shot. -->
 
-For a dock for antiX, I might I've heard a lot about [Plank](https://github.com/ricotz/plank), but have also seen that it eats about 25 mb of RAM.
+
+---
 
 ## Epilogue: A Lesson Learned 
 
-Brimming with confidence, I tried to install antiX on my old MacBook Pro 3,1, which was still running Ubuntu 16.04 from [this post](https://sts10.github.io/2016/11/08/installing-ubuntu-on-my-old-macbook-pro.html). 
+Brimming with confidence, I tried to install antiX on yet another old Mac: a MacBook Pro 3,1, which was still running Ubuntu 16.04 from [this post](https://sts10.github.io/2016/11/08/installing-ubuntu-on-my-old-macbook-pro.html). 
 
 After a couple of failed boots and install attempts (the last of which was trying to use antiX 19.5 because apparently I could get the right Nvidia driver (legacy-340xx) with Debian Buster?), I seem to have somehow deleted or corrupted **GRUB**. I think during one of my failed install attempts, I unchecked the box to "install GRUB" (still wondering why that's possible?). Either that or I told the installer to install GRUB on a partition that didn't exist?
 
