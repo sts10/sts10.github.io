@@ -240,7 +240,7 @@ Sure enough, after a bit longer than I would have guessed, Bodhi Linux installed
 
 ![Bodhi Linux installed](/img/antix/bodhi.jpeg)
 
-My takeaway here is that antiX is _not_ advertised as a beginner-friendly distro for a reason. (I was relieved that the Bodhi Linux installer didn't ask me any confusing questions!) If you're not paying attention, it can bite ya! MX Linux may be a bit more beginner friendly, but I wouldn't install it on auto-pilot, if that makes sense.
+My takeaway here is that antiX is _not_ advertised as a beginner-friendly distro for a reason. (I was relieved that the Bodhi Linux installer didn't ask me any confusing questions!) If you're not paying attention, it can bite ya! MX Linux may be a bit more beginner friendly, but you still need to read the installation wizard carefully!
 
 ---
 
