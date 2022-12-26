@@ -184,11 +184,11 @@ I can't back this up with evidence, but in general I felt a bit more sure of mys
 
 ## The 2012 MacBook Air
 
-I also had a MacBookAir5,2 (13-inch, mid 2012, 1.8 GHz Intel Core i5, 8 GB of DDR3 RAM) kicking around. Despite it being 5 years newer than these other two machines, I think it could only run macOS High Sierra, which is also no longer supported by Apple. 
+I also had a MacBookAir5,2 (13-inch, mid 2012, 1.8 GHz Intel Core i5, 8 GB of DDR3 RAM) kicking around. Despite it being 5 years younger than these other two machines, I think it could only run macOS High Sierra, which is also no longer supported by Apple. Linux time!
 
-Given the 8 GB of RAM, and my good experience with MX Linux, I went with MX's "flagship" Xfce install. Installation went very smoothly -- don't think I even needed to edit the GRUB parameters. I even liked the theming out the box. So this section of this post is pretty short! Given its newer age and its 8 GB of RAM, this is a pretty capable machine now! 
+Given the 8 GB of RAM, and my good experience with MX Linux, I went with MX's "flagship" Xfce install. Installation went very smoothly -- don't think I even needed to edit the GRUB parameters. I even liked the theming out the box. So this section of this post is pretty short! Given its younger age and its 8 GB of RAM, this is a pretty capable machine now! 
 
-Most of the small changes I did end up making were from this [great video on setting up and customizing MX+Xfce](https://www.youtube.com/watch?v=EO7yd5yWN7c).
+Most of the small changes I ended up making were from this [great video on setting up and customizing MX+Xfce](https://www.youtube.com/watch?v=EO7yd5yWN7c).
 
 ## A group photo of all three
 
@@ -196,18 +196,17 @@ Most of the small changes I did end up making were from this [great video on set
 
 Phew! So to recap, I got: 
 
-* antiX (using the IceWM desktop) on a MacBook5,1 (bottom left in photo, sorry about the glare)
-* MX+Fluxbox on an iMac5,1 (top middle)
+* antiX (photographed using the IceWM desktop) on a MacBook5,1 (bottom left in photo, sorry about the glare)
+* MX+Fluxbox on an iMac5,1 desktop (top middle)
 * MX+Xfce on a MacBookAir5,2 (bottom right)
-
 
 ## Appendix A: RAM-saving tweaks for antiX
 
-Later, I looked into some ways to conserve RAM on the antiX MacBook. Here are some of the steps I took:
+Later on, I looked into some ways to conserve RAM on the MacBook5,1 with antiX on it. Here are some of the steps I took:
 
 1. AntiX specific: Run `sudo cp /usr/local/bin/zram /etc/init.d && sudo update-rc.d zram default` then reboot to enable zram at start-up. ([source](https://www.antixforum.com/forums/topic/making-a-pentium-4-laptop-useful-with-antix/))
 2. AntiX comes with Firefox ESR as the default browser. While I support that choice generally, it felt a bit heavy for my purposes, so I used the included package manager to install [Pale Moon browser](https://www.palemoon.org/) and made it the default and preferred browser. I also did this on the iMac. (I tried [SeaMonkey](https://www.seamonkey-project.org/) first but it didn't play audio out of the box and I didn't feel like fixing that.)
-3. In the antiX (Start) menu, go to Desktop and switch to Minimal-IceWM desktop environment (this change will occur immediately AND, I believe, automatically persist through reboots -- very nifty). Note that with the Minimal version of IceWM you do lose, among other things, the GUI volume control in the bottom left of the main task bar (this gives you an idea of just how minimal the window manager is). So that's a trade-off.
+3. Try alternate desktops! AntiX makes it pretty darn easy to try other desktops: In fact, you can switch _without_ rebooting or even logging out, something I don't think I've seen before. In the antiX (Start) menu, you just go to Desktop and pick a desktop to try. I tried Minimal-IceWM desktop environment, which did lower RAM consumption, but removed, among other things, the GUI volume control in the bottom left of the main task bar (this gives you an idea of just how minimal the window manager is). 
 
 After taking these steps on the antiX MacBook, with the default terminal open, running `free -m` informs that I have 131MB used. With Pale Moon open and playing a YouTube video, usage bumps up to 485MB. Impressive!
 
