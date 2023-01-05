@@ -81,14 +81,18 @@ Clearly, this would be a great boolean to add to the attributes of a word list t
 
 But the larger challenge is to go further and figure out how we might use the mechanism(s) of this algorithm to **remove the fewest number of code words to make a given list uniquely decodable**. I have a feeling that we can do better than removing all prefix words or removing all suffix words.
 
-### Some code
+<!-- ### Some code -->
 
-To this end, I've played around with implementing Sardinas-Patterson for myself in Rust, in an effort to learn more about how it works and how I/we might develop a method of removing the fewest number of code words to make a code uniquely decodable.
+<!-- To this end, I've played around with implementing Sardinas-Patterson for myself in Rust, in an effort to learn more about how it works and how I/we might develop a method of removing the fewest number of code words to make a code uniquely decodable. -->
 
-However, I've yet to accomplish the first step of getting an implementation of the algorithm working. I can't quite understand how the algorithm works in subsequent rounds. A work in progress!
+<!-- However, I've yet to accomplish the first step of getting an implementation of the algorithm working. I can't quite understand how the algorithm works in subsequent rounds. A work in progress! -->
 
-You can check out [the Github repo](https://github.com/sts10/uniquely-decodable). Feel free to contribute!
+<!-- You can check out [the Github repo](https://github.com/sts10/uniquely-decodable). Feel free to contribute! -->
 
 <!-- ### Can Huffman coding help us here? -->
 
 <!-- https://www.youtube.com/watch?v=dM6us854Jk0 -->
+
+### Epilogue: Schlinkert pruning
+
+I eventually found a solution to this that I proudly have dubbed ["Schlinkert pruning"](https://sts10.github.io/2022/08/12/efficiently-pruning-until-uniquely-decodable.html).
