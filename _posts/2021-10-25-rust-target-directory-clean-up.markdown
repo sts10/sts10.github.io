@@ -33,6 +33,8 @@ Instead, I ran a more `du`-like command to find large directories in my `code/` 
 
 ## Other tools
 
+- [kondo](https://github.com/tbillington/kondo) is a newer clean-up tool. One nice advantage it offers is that it supports projects in Rust, Node, Unity, Haskell, Python, Jupyter Notebook, [and more](https://github.com/tbillington/kondo#supports).
+
 - [Broot](https://dystroy.org/broot/) seems similar to Dust, but it's got a lot of documentation that I couldn't grok quickly. 
 
 - [Durt](https://github.com/cauebs/durt) seems like a simpler version of the tools described above. It aims to calculate the size of files and directories.
