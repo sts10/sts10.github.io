@@ -103,6 +103,10 @@ Then:
 restic -r b2:bucketname:path/to/repo init
 ```
 
+## The paranoia sets in? 
+
+Last night in bed, Tarsnap's motto came back to me: "Online backups for the truly paranoid". I wondered if I shouldn't be relying on Restic's encryption and instead pay the ~$8 per month for Tarsnap. Maybe that'll be enough impetus for me to learn and explore Tarsnap in the future (there's [a book on mastering it](https://www.tiltedwindmillpress.com/product/tarsnap-mastery-online-backups-for-the-truly-paranoid/)). No rule that I can't do both for a few months before deleting the S3 bucket.
+
 ## Bonus: A use-case for Bottle
 
 A while back, I wrote a shell wrapper around age and tar that I called [Bottle](https://github.com/sts10/bottle). Given a directory, it tar's it, compressing it with [Zstandard](https://facebook.github.io/zstd/), then encrypts the resulting file using [age](https://github.com/FiloSottile/age) using a set key file.
