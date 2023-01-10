@@ -78,7 +78,7 @@ In my research and on the fediverse, I saw a few mentions of something called [S
 This does seem like a service that would be good for my use-case. 
 > Amazon Simple Storage Service Glacier (Amazon S3 Glacier) is a storage service optimized for infrequently used data, or "cold data." The service provides durable and extremely low-cost storage with security features for data archiving and backup. With Amazon S3 Glacier, you can store your data cost effectively for months, years, or even decades. Amazon S3 Glacier enables you to offload the administrative burdens of operating and scaling storage to AWS, so you don't have to worry about capacity planning, hardware provisioning, data replication, hardware failure detection and recovery, or time-consuming hardware migrations.
 
-And it looks to be [cheaper per Gb](https://aws.amazon.com/s3/pricing/?nc=sn&loc=4) than the "S3 Standard" set-up that (I think) I went with above. Sounds good, especially considering my use-case!
+And it looks to be [cheaper per Gb](https://aws.amazon.com/s3/pricing/?nc=sn&loc=4) than the "S3 Standard" set-up that (I think) I went with above. You can read more about Glacier [here](https://aws.amazon.com/s3/faqs/#Amazon_S3_Glacier_Instant_Retrieval_storage_class). It sounds good considering my use-case!
 
 But then, [elsewhere in the Glacier docs](https://docs.aws.amazon.com/amazonglacier/latest/dev/amazon-glacier-getting-started.html), I spotted this line:
 
