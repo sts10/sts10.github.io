@@ -40,11 +40,11 @@ If I was indeed going to use Restic for my cloud back-ups, I wanted to choose so
 ## Choosing Amazon S3
 At this point I figured Amazon S3 was a solid choice, and the experience of using it might be helpful to me professionally. And [at $0.023 per GB](https://aws.amazon.com/s3/pricing/?nc=sn&loc=4), assuming that's per month, I was looking at about $11 per year.
 
-I followed [this example](https://restic.readthedocs.io/en/stable/080_examples.html#initializing-the-restic-repository) almost exactly.
+To set up my AWS account and the bucket itself, I followed [this example](https://restic.readthedocs.io/en/stable/080_examples.html#initializing-the-restic-repository) almost exactly.
 
 ### Initializing a new Restic repo on Amazon S3
 
-Once I had my AWS bucket all set up through their web app (see above), I initialized my Restic repo by running the following commands on my local machine:
+Once I had my AWS account, a user with the correct permissions, and an S3 bucket all set up through their web app (see above), I initialized my Restic repo by running the following commands on my local machine:
 
 ```bash
 unset HISTFILE
