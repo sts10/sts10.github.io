@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Cloud back-ups"
+title: "Cloud back-ups with Restic and Amazon S3"
 date: 2023-01-10 10:00:00 -0400
 comments: true
 ---
