@@ -113,9 +113,10 @@ A while back, I wrote a shell wrapper around age and tar that I called [Bottle](
 
 I built this tool to quickly encrypt directories (or files) for my future self. As long as I could access the "bottle" key file, I could decrypt the file and extract the original directory when needed. I envisioned this as handy for arching things to less-than-trusted online cloud services.
 
-Partially as an experiment, I Bottle'd a directory of family photos with `bottle family-photos-archives/`, then added it to the S3 Restic repo by running: 
+Partially as an experiment, I Bottle'd a directory of family photos with `bottle family-photos-archives`, then added it to the S3 Restic repo by running: 
 ```bash
 restic -r s3:s3.amazonaws.com/<MY-S3_BUCKET-NAME> backup family-photos-archives.tar.zst.age
 ```
 
-Seems to have worked! (I should probably do a full restore/recovery of the data as a test, but maybe later.) Neat!
+Seems to have worked! (I should probably do a full restore/recovery of the data as a test, but maybe later.) Neat! This file is encrypted twice, once with age and then once with Restic, but I think that's fine? Double safe!
+
