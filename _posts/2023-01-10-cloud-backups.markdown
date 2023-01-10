@@ -38,7 +38,7 @@ I also found [a more fleshed out example using Amazon S3](https://restic.readthe
 If I was indeed going to use Restic for my cloud back-ups, I wanted to choose something listed in these docs, for simplicity's sake. I was tempted to try the Google option, since I already pay them $1.99 per month for a 100Gb email inbox, but (a) I saw some meh things about their cloud services and (b) I kind of didn't want my inbox and back-ups to share space. 
 
 ## Choosing Amazon S3
-At this point I figured Amazon S3 was a solid choice, and the experience of using it might be helpful to me professionally. And [at $0.023 per GB](https://aws.amazon.com/s3/pricing/?nc=sn&loc=4), assuming that's per month, I was looking at about $11 per year.
+At this point I figured Amazon S3 was a solid choice, and the experience of using it might be helpful to me professionally. And [at $0.023 per GB](https://aws.amazon.com/s3/pricing/?nc=sn&loc=4), assuming that's per month, I was looking at about $11 per year for my ~45 Gb of data. (They've got [a price calculator web app](https://calculator.aws/#/) if you want to investigate your own use-case.)
 
 To set up my AWS account and the bucket itself, I followed [this example](https://restic.readthedocs.io/en/stable/080_examples.html#initializing-the-restic-repository) almost exactly.
 
