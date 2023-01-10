@@ -120,3 +120,6 @@ restic -r s3:s3.amazonaws.com/<MY-S3_BUCKET-NAME> backup family-photos-archives.
 
 Seems to have worked! (I should probably do a full restore/recovery of the data as a test, but maybe later.) Neat! This file is encrypted twice, once with age and then once with Restic, but I think that's fine? Double safe!
 
+## Next archive-related tasks on my to-do list
+
+Next, I'm on the lookout for a tool to find and deal with **duplicate photos** in a given directory or drive. If you have recommendations for this (or other cloud back-up solutions), feel free to mention me [on Mastodon](https://hachyderm.io/@schlink).
