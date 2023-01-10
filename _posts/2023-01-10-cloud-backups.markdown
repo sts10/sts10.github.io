@@ -5,7 +5,7 @@ date: 2023-01-10 10:00:00 -0400
 comments: true
 ---
 
-A few months ago I had a 4TB external hard drive fail. It got me thinking that it might be time for me to explore cloud (or online) back-ups. 
+A few months ago I had a 4TB external hard drive fail on me (it _may_ have been because I stored it on top of a medium-sized speaker...). It got me thinking that it might be time for me to explore cloud (or online) back-ups. 
 
 I'll note right off the back that I'm not a typical computer user. I'm very comfortable on the command line and am pretty privacy-conscious.
 
