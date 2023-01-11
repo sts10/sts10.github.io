@@ -131,7 +131,9 @@ Even more luckily, the parameters of their challenge are similar to the LUKS def
 
 Thus, 3 words is a little dicey, 4 feels better... 
 
-In the end, I stuck by my recommendation of 7 words: I figured _I_ didn't want to be the reason one of these encrypted drives gets cracked. I think you'd want more user stories to make a call on whether the trade-off between security and convenience is worth knocking this down to 6 or 5 words. And obviously it'd be easy to tweak the number of the recommendation in the documentation. I'm proud that I got the ball rolling, and was able to do a little light forensic work that I _hope_ isn't too off-the-mark.
+If we 20x the assumed guesses per section to 4.2 million guess per second, we get 27.6 years for 4 words, 214 millennia for 5 words.
+
+In the end, I stuck by my recommendation of 7 words. I figured _I_ didn't want to be the reason one of these encrypted drives gets cracked. I think you'd want more user stories to make a call on whether the trade-off between security and convenience is worth knocking this down to 6 or 5 words. And obviously it'd be easy to tweak the number of the recommendation in the documentation. I'm proud that I got the ball rolling, and was able to do a little light forensic work that I _hope_ isn't too off-the-mark.
 
 ## The end result
 
