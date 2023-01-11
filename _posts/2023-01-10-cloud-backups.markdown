@@ -65,7 +65,7 @@ Now I was ready to run my first backup to this S3 bucket.
 restic -r s3:s3.amazonaws.com/<My-S3-Bucket-name> --verbose backup --exclude-caches --exclude-file=/home/sschlinkert/restic-excludes.txt /home/sschlinkert/Documents /home/sschlinkert/Pictures
 ```
 
-This sent about 7.5Gb to the bucket. Sweet. (Still not exactly sure what this will cost me...)
+This sent about 7.12Gb to the bucket. Sweet. (Still not exactly sure what this will cost me...)
 
 I chose to only send my Documents and Pictures since (a) it wasn't clear what my AWS charges would be and (b) I'm not really sure how much I trust Restic encryption.
 
