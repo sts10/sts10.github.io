@@ -71,6 +71,19 @@ I chose to only send my Documents and Pictures since (a) it wasn't clear what my
 
 I then ran a quick `restic -r s3:s3.amazonaws.com/<MY-S3_BUCKET-NAME> snapshots` and `restic -r s3:s3.amazonaws.com/<MY-S3_BUCKET-NAME> check` to make sure everything went well. Looks good!
 
+### Managing these environment variables
+
+I think by setting these environmental variables like this:
+
+```bash
+export AWS_ACCESS_KEY_ID="<access_key_id>"
+export AWS_SECRET_ACCESS_KEY="<secret_key>"
+```
+
+the variables only last for the terminal session/window I'm currently in. This means that, if I fire up a new terminal window to do a back-up, I need to re- export these two secret variables. Kind of a pain, but I see how setting the environmentally more permanently (maybe with `set`?) could be a security concern for some.
+
+For now, I guess I'll just run `unset HISTFILE && export AWS_ACCESS_KEY_ID="<access_key_id>" && export AWS_SECRET_ACCESS_KEY="<secret_key>"` as a one-liner before I access the AWS Restic repo in any way, including running a `backup` or checking `snapshots`.
+
 ### What about Amazon S3 Glacier?
 
 In my research and on the fediverse, I saw a few mentions of something called [S3 Glacier](https://docs.aws.amazon.com/glacier/index.html). 
