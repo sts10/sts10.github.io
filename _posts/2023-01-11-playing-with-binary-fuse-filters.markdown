@@ -254,11 +254,17 @@ At this point I'm not sure why this method is so much slower. Obviously if we ge
 
 I think the biggest cost is _building_ each filter, rather than that `contains` calls against them. This is part of the reason I chose the BinaryFuse8 filter, rather than 16-bit or 32-bit, since it's my understanding that the 8-bit version has the quickest built time (at cost of slightly more false positives).
 
-## Little improvements I could make?
+## Little improvements I could make to the binary fuse implementation?
 
 * Give each Entry object a `truncated_digest` field, so I only have to compute those once per entry. But I don't think this will be a game-changer. Basically turn `if filter.contains(&truncate_hash_to_u64(&entry.digest))` into `if filter.contains(&entry.truncated_digest) {`.
 * Could also try to further improve the `truncate_hash_to_u64` function somehow...
 * I could have the filter function pass back a Vector of Entries that are maybe-breached, so that the thorough check only has to check those, but again I don't think that'll 2x or 10x the speed.
+
+## Improvements I could make to Medic that don't directly involve the filter
+
+I could explore threading with Radon or using a HashSet rather than a Vector for each chunk.
+
+I did a quick try with HashSets (and no binary fuse filter) and I'm getting times between 8 and 10 minutes. I think the big slow-down is `inserting` into the HashSet, rather than the contains calls.
 
 ## Pausing for now
 
