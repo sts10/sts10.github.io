@@ -49,7 +49,7 @@ fn truncate_hash_to_u64(hash: &str) -> u64 {
         .unwrap()
         .try_into()
         .expect("slice with incorrect length");
-    u64::from_be_bytes(as_bytes)
+    u64::from_be_bytes(as_bytes) // I kind of guessed that big-endian (network) byte order was OK here?
 }
 ```
 
