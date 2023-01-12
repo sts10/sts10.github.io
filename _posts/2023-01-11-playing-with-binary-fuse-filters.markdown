@@ -39,15 +39,21 @@ From [the xorf crate docs](https://docs.rs/xorf/latest/xorf/), I found [this rel
 
 One catch I encountered is that the way xorf set up its binary fuse filter, it only excepts elements of 64-bit unsigned integers (`u64` in Rust speak). This is an issue since each password digest from HIBP is given in the form of a SHA-1 digest, which is by definition 120 bits.
 
-So I wrote a function that takes the first 13 characters of a SHA-1 hash digest and converts that into a `u64`: 
+So I wrote a function that takes the first 16 characters of a SHA-1 hash digest and converts that into a `u64`: 
 ```rust
+/// Takes a SHA1 hash digest as a slice and converts its first
+/// 16 characters into a u64
 fn truncate_hash_to_u64(hash: &str) -> u64 {
-    let truncated_hash = hash[..13].to_string();
-    u64::from_str_radix(&truncated_hash, 32).unwrap()
+    let truncated_hash = hash[..16].to_string();
+    let as_bytes: [u8; 8] = hex::decode(truncated_hash)
+        .unwrap()
+        .try_into()
+        .expect("slice with incorrect length");
+    u64::from_be_bytes(as_bytes)
 }
 ```
 
-I figure if the first 13 characters of the SHA-1 hash match, it's OK calling that a "maybe". 
+I figure if the first 16 characters of the SHA-1 hash match, it's OK calling that a "maybe". 
 
 With that understood, here's the entire toy Rust program I wrote:
 
@@ -62,16 +68,14 @@ use xorf::{BinaryFuse8, Filter};
 // From https://docs.rs/xorf/latest/xorf/struct.BinaryFuse32.html
 fn main() {
     let mut rng = thread_rng();
-    const SAMPLE_SIZE: usize = 5_000_000; // Only take first 5 million digests
+    const SAMPLE_SIZE: usize = 5_000_000;
 
     let hash_file = "../hibp/pwned-passwords-sha1-ordered-by-count-v8.txt";
     let f = File::open(hash_file).expect("Unable to open file");
     let file = BufReader::new(&f);
     let mut keys = vec![];
     for line in file.lines() {
-        let truncated_hash = line.unwrap()[..13].to_string();
-        let hash_as_decimal: u64 = u64::from_str_radix(&truncated_hash, 32).unwrap();
-        keys.push(hash_as_decimal);
+        keys.push(truncate_hash_to_u64(&line.unwrap()));
         if keys.len() >= SAMPLE_SIZE {
             break;
         }
@@ -95,12 +99,14 @@ fn main() {
     let fp_rate: f64 = (false_positives * 100) as f64 / SAMPLE_SIZE as f64;
     assert!(fp_rate < 0.406, "False positive rate is {}", fp_rate);
 
-    // Actually test the filter
+    // More filter tests...
 
     // a SHA1 hash of a definitely breached password:
     let hash_a = "9AC20922B054316BE23842A5BCA7D69F29F69D77";
     // a SHA1 hash of a definitely NOT breached password:
     let hash_b = "D909947C92C711A285AC8480A116A20CA20460B6";
+    println!("Truncated hash_a is {}", truncate_hash_to_u64(hash_a));
+
     if filter.contains(&truncate_hash_to_u64(hash_a)) {
         println!("hash_a might be breached");
     } else {
@@ -114,12 +120,29 @@ fn main() {
 }
 
 fn truncate_hash_to_u64(hash: &str) -> u64 {
+    let truncated_hash = hash[..16].to_string();
+    let as_bytes: [u8; 8] = hex::decode(truncated_hash)
+        .unwrap()
+        .try_into()
+        .expect("slice with incorrect length");
+    u64::from_be_bytes(as_bytes)
+}
+```
+
+This runs and finishes correctly and pretty quickly (1.927 seconds), which is pretty awesome! But it's of course only checking the 2 hard-coded sample passwords against 5 million digests. [Version 7 of the HIBP password database](https://haveibeenpwned.com/Passwords) has 613 million. If it takes 1.927 seconds to check against 5 million, that's 3.9 minutes for all 613 million, and plus we still have to go back to check any and all "maybes" we find. 
+
+### An aside: A little shortcut?
+
+While I was working out that `truncate_hash_to_u64` function, I had an earlier version that just used the first 13 characters of the SHA1 digest, but did not require a hex decode call.
+
+```rust
+fn truncate_hash_to_u64(hash: &str) -> u64 {
     let truncated_hash = hash[..13].to_string();
     u64::from_str_radix(&truncated_hash, 32).unwrap()
 }
 ```
 
-This runs and finishes correctly and pretty quickly (1.521 seconds), which is pretty awesome! But it's of course only checking the 2 hard-coded sample passwords against 5 million digests. [Version 7 of the HIBP password database](https://haveibeenpwned.com/Passwords) has 613 million. If it takes 1.521 seconds to check against 5 million, that's 3 minutes for all 613 million, and plus we still have to go back to check any and all "maybes" we find. 
+I'd guess that using 3 fewer hexadecimal characters means there's a slightly higher chance of getting a false positive, but it may ultimately make the overall process faster.
 
 ## Putting this code into Medic
 
@@ -180,10 +203,10 @@ But it was actually slower than the old Medic code that just plows through each 
 
 ## Informal benchmarks
 
-My informal benchmark involved running 
+My informal benchmarking of filter vs. no filter involved running 
 
 ```bash
-cargo test --release can_check_keepass_db_against_full_haveibeenpwned_local_list_of_hashes --no-run && time cargo test --release can_check_keepass_db_against_full_haveibeenpwned_local_list_of_hashes`
+cargo test --release can_check_keepass_db_against_full_haveibeenpwned_local_list_of_hashes --no-run && time cargo test --release can_check_keepass_db_against_full_haveibeenpwned_local_list_of_hashes
 ```
 
 Here are some quick results:
@@ -219,6 +242,7 @@ I think the biggest cost is _building_ each filter, rather than that `contains` 
 ## Little improvements I could make?
 
 * Give each Entry object a `truncated_digest` field, so I only have to compute those once per entry. But I don't think this will be a game-changer. Basically turn `if filter.contains(&truncate_hash_to_u64(&entry.digest))` into `if filter.contains(&entry.truncated_digest) {`.
+* Could also try to further improve the `truncate_hash_to_u64` function somehow...
 * I could have the filter function pass back a Vector of Entries that are maybe-breached, so that the thorough check only has to check those, but again I don't think that'll 2x or 10x the speed.
 
 ## Pausing for now
