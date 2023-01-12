@@ -271,6 +271,10 @@ I could explore threading with Radon or using a HashSet rather than a Vector for
 
 I did a quick try with HashSets (and no binary fuse filter) and I'm getting times between 8 and 10 minutes. I think the big slow-down is `inserting` into the HashSet, rather than the contains calls.
 
+## Is this in fact a data-reading speed problem?
+
+Part of me now thinks that most of the check time is taken up by reading 827M records into system memory, in chunks or not in chunks. To speed this up, I think I can (a) change the file format of the listed of breached databases (here's an example where they [used a SQLite database](https://gist.github.com/timmc/df5fbb6e069fb8c1c4e181a29930ace3#file-pwned-passwords-sqlite-md)) and/or (b) use some trick like [memmap](https://docs.rs/memmap/latest/memmap/struct.Mmap.html) to not have to read the entire file into system memory.
+
 ## Pausing for now
 
 I'll keep playing with this this week, cuz I think it's interesting stuff (and if that C++ example is anything to go on, I chose a good tool for my problem). 
