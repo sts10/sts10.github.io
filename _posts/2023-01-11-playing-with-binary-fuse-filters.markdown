@@ -129,7 +129,7 @@ fn truncate_hash_to_u64(hash: &str) -> u64 {
 }
 ```
 
-This runs and finishes correctly and pretty quickly (1.927 seconds), which is pretty awesome! But it's of course only checking the 2 hard-coded sample passwords against 5 million digests. [Version 7 of the HIBP password database](https://haveibeenpwned.com/Passwords) has 613 million. If it takes 1.927 seconds to check against 5 million, that's 3.9 minutes for all 613 million, and plus we still have to go back to check any and all "maybes" we find. 
+This runs and finishes correctly and pretty quickly (1.927 seconds), which is pretty awesome! But it's of course only checking the 2 hard-coded sample passwords against 5 million digests. [Version 8 of the HIBP password database](https://haveibeenpwned.com/Passwords) has 847,223,402 passwords in it. If it takes 1.927 seconds to check against 5 million, that's 5.4 minutes for all 613 million, and plus we still have to go back to check any and all "maybes" we find. 
 
 ### An aside: A little shortcut?
 
