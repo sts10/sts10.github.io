@@ -8,31 +8,36 @@ comments: true
 I was reading some Amazon S3 documentation and they recommended a program called apg for generating strong passwords. I wanted to learn more about it, so I ran `man apg`, where I learned about apgbfm, which 
 > is used to manage Bloom filter that is used to restrict password generation in APG pasword generation software. Usage of the Bloom filter allows to speed up password check for large dictionaries and has some other benefits.
 
-This reminded me of my project Medic, which, among other things, can check a KeePass database's passwords against the very large list of breached passwords stored in HaveIBeenPwned. Medic takes 1 to 4 minutes or 5 minutes to check a KeePass database's passwords against the text file. Naturally, I wondered if I could use a Bloom filter to cut this time down. 
+This reminded me of my project [**Medic**](https://github.com/sts10/medic), which, among other things, can check a KeePass database's passwords against [the very large list of breached passwords stored in HaveIBeenPwned](https://haveibeenpwned.com/Passwords). 
+
+Medic currently takes from 1 to 4 minutes or 5 minutes to check a KeePass database's passwords against the text file. Naturally, I wondered if I could use a Bloom filter to cut this time down. 
+
+## A foothold
 
 I posted about Bloom filters on Mastodon and Graydon Hoare pointed me to [this paper](https://arxiv.org/pdf/2201.01174.pdf), which details an improved version of a Bloom filter called a "binary fuse filter". Hoare also pointed me to [a C++ project on GitHub called FilterPassword](https://github.com/FastFilter/FilterPassword), which, amazingly, tests a binary fuse filter against other filters on the HaveIBeenPwned list of passwords! What luck! 
 
 I haven't written C++ since high school, so I had trouble even grokking the FilterPassword code, but thankfully I easily found [a Rust crate called xorf](https://github.com/ayazhafiz/xorf) that offers an API for a variety of these filters, including the latest and greatest binary fuse filter.
 
-## What's a binary fuse filter?
+## What is a binary fuse filter?
 
 I'm not a mathematician, so I won't pretend that I've already learned how these filters work. But I do understand the idea behind them: 
 
-1. Create the "filter" by push a large array/Vector of elements into it
-2. Now you can ask the filter "Do you contain element foo"? If it says "no" it's 100% that foo is not in the filter. If it says "yes" it's more like a "maybe", with a varying probably of that "maybe" being a "no" (but never 100%). In other words, if never has false negatives, but sometimes has false positives.
+1. Create the "filter" by pushing a large array/Vector of elements into it.
+2. Now you can ask the filter "Do you contain element 'foo'"? If it says "no" it's 100% that foo is not in the filter. If it says "yes" it's more like a "maybe", with a varying probability of that "maybe" being a "no" (but never 100%). In other words, if never has false negatives, but sometimes has false positives.
 
 The **key advantage** is that these "contains" look-ups are significantly faster than if we ran contains on a normal Vector or hash.
 
-So here was my idea for using one of these filters for Medic: 
+So here was my idea for using one of these filters with my Medic program: 
+
 1. Make a filter of all the breached password hash digests
 2. Check all the given KeePass entry digests against the filter
 3. If Medic gets all "No"s, we're golden-- we know none of the user's passwords are in the breached list, so we can quickly print "No passwords breached" and exit (hopefully much faster than the current checking code). If we get some "Maybes", we still have to go check those more thoroughly the old way, but at least it'll be fewer entries to check.
 
 ## Some code
 
-From the xorf crate docs, I found [this relevant example](https://docs.rs/xorf/latest/xorf/struct.BinaryFuse32.html). I adapted it to use the first 5 million lines of the HIBP password file.
+From [the xorf crate docs](https://docs.rs/xorf/latest/xorf/), I found [this relevant example](https://docs.rs/xorf/latest/xorf/struct.BinaryFuse32.html). For testing purposes, I adapted it to use the first 5 million lines of the [HIBP password file](https://haveibeenpwned.com/Passwords).
 
-One catch I encountered is that the way xorf set up its binary fuse filter, it only excepts elements of `u64` or a 64-bit unsigned integer. This is an issue since each password digest is a SHA-1 digest, which is by definition 120 bits.
+One catch I encountered is that the way xorf set up its binary fuse filter, it only excepts elements of 64-bit unsigned integers (`u64` in Rust speak). This is an issue since each password digest from HIBP is given in the form of a SHA-1 digest, which is by definition 120 bits.
 
 So I wrote a function that takes the first 13 characters of a SHA-1 hash digest and converts that into a `u64`: 
 ```rust
@@ -41,6 +46,8 @@ fn truncate_hash_to_u64(hash: &str) -> u64 {
     u64::from_str_radix(&truncated_hash, 32).unwrap()
 }
 ```
+
+I figure if the first 13 characters of the SHA-1 hash match, it's OK calling that a "maybe". 
 
 With that understood, here's the entire toy Rust program I wrote:
 
@@ -112,17 +119,17 @@ fn truncate_hash_to_u64(hash: &str) -> u64 {
 }
 ```
 
-This runs pretty quick (1.521 seconds), but it's of course only checking the 2 hard-coded sample passwords against 5 million digests. [Version 7 of the HIBP password database](https://haveibeenpwned.com/Passwords) has 613 million. If it takes 1.521 seconds to check against 5 million, that's 3 minutes for all 613 million, and plus we have to go back to check any "maybes" we find. 
+This runs and finishes correctly and pretty quickly (1.521 seconds), which is pretty awesome! But it's of course only checking the 2 hard-coded sample passwords against 5 million digests. [Version 7 of the HIBP password database](https://haveibeenpwned.com/Passwords) has 613 million. If it takes 1.521 seconds to check against 5 million, that's 3 minutes for all 613 million, and plus we still have to go back to check any and all "maybes" we find. 
 
 ## Putting this code into Medic
 
 Undeterred, I opened Medic and adapted the code above into the project.
 
-A note here: In order not to to use too much system memory, Medic reads 5.5 million password digests into system memory at a time. Each of these batches is 5.5 million is called a "chunk" in the code. I figured that was about a good size for a filter, so I would be making a filter of each chunk, then checking every entry against that filter in search of "maybes".
+A note here: In order not to to use too much system memory, Medic reads 5.5 million password digests into system memory at a time. Each of these batches of 5.5 million is called a "chunk" in the code. I figured that was also a good size for a filter(?), so I would be making a filter of each chunk, then checking every entry against that filter in search of "maybes".
 
-To keep things simple, I wanted to use a binary fuse filter to return a `bool`, where `false` meant there is definitely no matches found (i.e. none of the passwords in this chunk were found in the breached password file) and `true` meant there was at least one "maybe."
+To keep things simple, I wanted to use a binary fuse filter to return a `bool`, where `false` meant there is definitely no matches found in the given chunk (i.e. none of the passwords in this chunk were found in the breached password file) and where `true` meant there was at least one "maybe." 
 
-First, I inserted an `if` statement at the top of my `check_this_chunk` function: 
+First, I inserted an `if` statement at the top of my `check_this_chunk` function to act as a sort of short circuit: 
 
 ```rust
 fn check_this_chunk(entries: &[Entry], chunk: &[String]) -> io::Result<Vec<Entry>> {
@@ -147,7 +154,7 @@ fn check_this_chunk(entries: &[Entry], chunk: &[String]) -> io::Result<Vec<Entry
 }
 ```
 
-Then I adapted the toy program code to write the `are_there_maybes_in_this_chunk` function:
+Then I adapted the toy program code above to write the `are_there_maybes_in_this_chunk` function:
 ```rust
 use xorf::{BinaryFuse8, Filter};
 fn are_there_maybes_in_this_chunk(entries: &[Entry], chunk: &[String]) -> bool {
@@ -160,7 +167,7 @@ fn are_there_maybes_in_this_chunk(entries: &[Entry], chunk: &[String]) -> bool {
     let filter = BinaryFuse8::try_from(&keys).unwrap();
     for entry in entries {
         if filter.contains(&truncate_hash_to_u64(&entry.digest)) {
-            return true;
+            return true; // got one maybe, so let's return true and end this 
         }
     }
     false
@@ -211,9 +218,11 @@ I think the biggest cost is _building_ each filter, rather than that `contains` 
 
 ## Little improvements I could make?
 
-* Give each Entry object a `truncated_digest` field, so I only have to compute those once per entry. But I don't think this will be a game-changer.
+* Give each Entry object a `truncated_digest` field, so I only have to compute those once per entry. But I don't think this will be a game-changer. Basically turn `if filter.contains(&truncate_hash_to_u64(&entry.digest))` into `if filter.contains(&entry.truncated_digest) {`.
 * I could have the filter function pass back a Vector of Entries that are maybe-breached, so that the thorough check only has to check those, but again I don't think that'll 2x or 10x the speed.
 
 ## Pausing for now
 
-I'll keep playing with this this week, cuz I think it's interesting stuff. If you spot any mistakes that are slowing this code down, or have any tips or ideas or questions, [let me know on Mastodon](https://hachyderm.io/@schlink).
+I'll keep playing with this this week, cuz I think it's interesting stuff (and if that C++ example is anything to go on, I chose a good tool for my problem). 
+
+If you spot any mistakes that are slowing this code down, or have any tips or ideas or questions, [let me know on Mastodon](https://hachyderm.io/@schlink).
