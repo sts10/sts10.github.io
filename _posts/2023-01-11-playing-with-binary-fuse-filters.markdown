@@ -35,7 +35,7 @@ So here was my idea for using one of these filters with my Medic program:
 
 ## Some code
 
-From [the xorf crate docs](https://docs.rs/xorf/latest/xorf/), I found [this relevant example](https://docs.rs/xorf/latest/xorf/struct.BinaryFuse32.html). For testing purposes, I adapted it to use the first 5 million lines of the [HIBP password file](https://haveibeenpwned.com/Passwords).
+From [the xorf crate docs](https://docs.rs/xorf/latest/xorf/), I found [this relevant example](https://docs.rs/xorf/latest/xorf/struct.BinaryFuse32.html). For testing purposes, I adapted it to use the first 10.4 million lines of the [HIBP password file](https://haveibeenpwned.com/Passwords).
 
 One catch I encountered is that the way xorf set up its binary fuse filter, it only excepts elements of 64-bit unsigned integers (`u64` in Rust speak). This is an issue since each password digest from HIBP is given in the form of a SHA-1 digest, which is by definition 120 bits.
 
@@ -148,7 +148,7 @@ I'd guess that using 3 fewer hexadecimal characters means there's a slightly hig
 
 Undeterred, I opened Medic and adapted the code above into the project.
 
-A note here: In order not to to use too much system memory, Medic reads 5.5 million password digests into system memory at a time. Each of these batches of 5.5 million is called a "chunk" in the code. I figured that was also a good size for a filter(?), so I would be making a filter of each chunk, then checking every entry against that filter in search of "maybes".
+A note here: In order not to to use too much system memory, Medic reads 10.4 million password digests into system memory at a time. Each of these batches of 10.4 million is called a "chunk" in the code. I figured that was also a good size for a filter(?), so I would be making a filter of each chunk, then checking every entry against that filter in search of "maybes".
 
 To keep things simple, I wanted to use a binary fuse filter to return a `bool`, where `false` meant there is definitely no matches found in the given chunk (i.e. none of the passwords in this chunk were found in the breached password file) and where `true` meant there was at least one "maybe." 
 
@@ -212,12 +212,12 @@ cargo test --release can_check_keepass_db_against_full_haveibeenpwned_local_list
 Here are some quick results:
 
 ```text
-On the main branch of Medic currently on Github, with chunk_size set to 500_000_000:
+Without binary fuse filter (Medic's main branch); chunk_size set to 10_416_666:
 real	3m5.987s
 user	2m34.868s
 sys	0m20.961s
 
-On binary fuse branch (chunk_size = 500_000_000):
+Using binary fuse filter (chunk_size = 10_416_666):
 real	7m20.932s
 user	6m3.067s
 sys	0m44.298s
@@ -226,7 +226,7 @@ sys	0m44.298s
 Interestingly, when I switched to the 13-character u64-truncating function, I got better times from the binary fuse code:
 
 ```text
-On binary fuse branch (chunk_size = 500_000_000):
+Using binary fuse filter; 13-character truncating; chunk_size = 10_416_666:
 real	6m11.824s
 user	4m58.728s
 sys	0m44.431s
@@ -235,12 +235,12 @@ sys	0m44.431s
 Next, I experimented with different chunk sizes, but 6m11s remained my best time with the filter.
 
 ```text
-On binary fuse branch (chunk_size = 10_000_000):
+Using binary fuse filter; 13-character truncating; chunk_size = 208_333:
 real	6m17.165s
 user	4m49.884s
 sys	0m36.258s
 
-On binary fuse branch (chunk_size = 2_000_000_000):
+Using binary fuse filter; 13-character truncating; chunk_size = 41_666_666:
 real	6m47.406s
 user	5m20.949s
 sys	0m47.862s
