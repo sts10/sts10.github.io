@@ -211,12 +211,17 @@ cargo test --release can_check_keepass_db_against_full_haveibeenpwned_local_list
 
 Here are some quick results:
 
+First, let's get a baseline read against the current version on Medic (which doesn't use a filter):
 ```text
 Without binary fuse filter (Medic's main branch); chunk_size set to 10_416_666:
 real	3m5.987s
 user	2m34.868s
 sys	0m20.961s
+```
+(FYI, on other runs, the real time ranged from 2m34s to 3m45s.)
 
+Now let's do a run with our binary fuse code:
+```text
 Using binary fuse filter (chunk_size = 10_416_666):
 real	7m20.932s
 user	6m3.067s
