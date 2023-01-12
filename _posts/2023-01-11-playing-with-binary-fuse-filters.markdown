@@ -5,7 +5,7 @@ date: 2023-01-11 10:00:00 -0400
 comments: true
 ---
 
-I was reading some Amazon S3 documentation and they recommended a program called apg for generating strong passwords. I wanted to learn more about it, so I ran `man apg`, where I learned about apgbfm, which 
+I was reading [some Restic documentation](https://restic.readthedocs.io/en/stable/080_examples.html#initializing-the-restic-repository) and it recommends using a program called apg for generating strong passwords. I wanted to learn more about it, so I ran `man apg`, where I learned about a related program called apgbfm, which 
 > is used to manage Bloom filter that is used to restrict password generation in APG pasword generation software. Usage of the Bloom filter allows to speed up password check for large dictionaries and has some other benefits.
 
 This reminded me of my project [**Medic**](https://github.com/sts10/medic), which, among other things, can check a KeePass database's passwords against [the very large list of breached passwords stored in HaveIBeenPwned](https://haveibeenpwned.com/Passwords). 
