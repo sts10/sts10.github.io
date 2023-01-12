@@ -218,10 +218,23 @@ user	2m34.868s
 sys	0m20.961s
 
 On binary fuse branch (chunk_size = 500_000_000):
+real	7m20.932s
+user	6m3.067s
+sys	0m44.298s
+```
+
+Interestingly, when I switched to the 13-character u64-truncating function, I got better times from the binary fuse code:
+
+```text
+On binary fuse branch (chunk_size = 500_000_000):
 real	6m11.824s
 user	4m58.728s
 sys	0m44.431s
+```
 
+Next, I experimented with different chunk sizes, but 6m11s remained my best time with the filter.
+
+```text
 On binary fuse branch (chunk_size = 10_000_000):
 real	6m17.165s
 user	4m49.884s
@@ -233,7 +246,9 @@ user	5m20.949s
 sys	0m47.862s
 ```
 
-As you can see, the binary fuse implementation above took about twice as long as the straight-forward, check-them-all method currently in use on the main branch of the project. This held even when I varied the chunk size a bit in either direction. 
+As you can see, none of these tweaks get the binary fuse implementation better than twice as long as the straight-forward, check-them-all method currently in use on the main branch of the project. This held even when I varied the chunk size a bit in either direction. 
+
+---
 
 At this point I'm not sure why this method is so much slower. Obviously if we get any "maybe"s in a given chunk, we've got to iterate through every line in the chunk again to do the "thorough" check. But the test database doesn't have that many breached passwords in it -- the majority of chunks should have `are_there_maybes_in_this_chunk == false`, and thus give us that promised speed-up.
 
