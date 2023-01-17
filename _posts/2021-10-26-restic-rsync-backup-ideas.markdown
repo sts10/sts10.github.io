@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Exploring restic for backing up data"
+title: "Using Restic to back-up data"
 date: 2021-10-26 16:46:00 -0400
 comments: true
 ---
