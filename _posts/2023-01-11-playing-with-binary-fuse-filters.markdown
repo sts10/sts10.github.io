@@ -5,8 +5,9 @@ date: 2023-01-11 10:00:00 -0400
 comments: true
 ---
 
-I was reading [some Restic documentation](https://restic.readthedocs.io/en/stable/080_examples.html#initializing-the-restic-repository) and it recommends using a program called apg for generating strong passwords. I wanted to learn more about it, so I ran `man apg`, where I learned about a related program called apgbfm, which 
-> is used to manage Bloom filter that is used to restrict password generation in APG pasword generation software. Usage of the Bloom filter allows to speed up password check for large dictionaries and has some other benefits.
+I was reading [some Restic documentation](https://restic.readthedocs.io/en/stable/080_examples.html#initializing-the-restic-repository) and at one point it recommends using a program called "Automated Password Generator
+" (apg) to generate strong passwords. I wanted to learn more about it, so I ran `man apg`, where I learned about a related program called apgbfm, which 
+> is used to manage Bloom filter that is used to restrict password generation in APG pasword [sic] generation software. Usage of the Bloom filter allows to speed up password check for large dictionaries and has some other benefits.
 
 This reminded me of my project [**Medic**](https://github.com/sts10/medic), which, among other things, can check a KeePass database's passwords against [the very large list of breached passwords stored in HaveIBeenPwned](https://haveibeenpwned.com/Passwords). 
 
@@ -273,7 +274,7 @@ I did a quick try with HashSets (and no binary fuse filter) and I'm getting time
 
 ## Is this in fact a data-reading speed problem?
 
-Part of me now thinks that most of the check time is taken up by reading 827M records into system memory, in chunks or not in chunks. To speed this up, I think I can (a) change the file format of the listed of breached databases (here's an example where they [used a SQLite database](https://gist.github.com/timmc/df5fbb6e069fb8c1c4e181a29930ace3#file-pwned-passwords-sqlite-md)) and/or (b) use some trick like [memmap](https://docs.rs/memmap/latest/memmap/struct.Mmap.html) to not have to read the entire file into system memory.
+Part of me now thinks that most of the check time is taken up by reading 847M records into system memory, in chunks or not in chunks. To speed this up, I think I can (a) change the file format of the listed of breached databases (here's an example where they [used a SQLite database](https://gist.github.com/timmc/df5fbb6e069fb8c1c4e181a29930ace3#file-pwned-passwords-sqlite-md)) and/or (b) use some trick like [memmap](https://docs.rs/memmap/latest/memmap/struct.Mmap.html) to not have to read the entire file into system memory.
 
 ## Pausing for now
 
