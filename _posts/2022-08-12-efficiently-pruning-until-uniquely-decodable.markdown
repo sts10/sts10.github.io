@@ -52,9 +52,9 @@ Giving us a "decoded" message of: `1 101 00 00 1 101`. I argue that there's no _
 
 ### Implications of this example
 
-First of all, this example shows that the three procedures I outlined above are NOT sufficient for determining whether a code is uniquely decodable. Second, it maybe-just-maybe shows that there's a 4th procedure that might preserve more words.
+This example shows that the three procedures I outlined above are NOT sufficient for determining whether a code is uniquely decodable. And, we hope, this so-far-unknown procedure (or procedures) may preserve more words when making a code uniquely decodable. 
 
-Let's tackle the first issue first. We need a procedure for checking if a given code is uniquely decodable or not -- this procedure should output a "yes" or "no". (We can't, realistically, check every possible message!)
+<!-- Let's tackle the first issue first. We need a procedure for checking if a given code is uniquely decodable or not -- this procedure should output a "yes" or "no". (We can't, realistically, check every possible message!) -->
 
 ### The Sardinas–Patterson algorithm
 
@@ -66,7 +66,7 @@ Back in 1953, August Albert Sardinas and George W. Patterson published an algori
 
 I learned about it from [a helpful Redditor who pointed to it answer to a question of mine](https://www.reddit.com/r/informationtheory/comments/vnretf/comment/iecfbxz/).
 
-I won't lie, I had some trouble understanding the algorithm or how to implement it in code. And I won't try to explain it here, but I found some helpful resources, including [two](https://www.youtube.com/watch?v=SkrLnr-KVOE) different [videos](https://www.youtube.com/watch?v=8YNEVyHCIjs) where presenters walk through the algorithm by hand. For me, I needed to see it in code, so this [Jupyter Notebook](https://github.com/danhales/blog-sardinas-patterson/blob/master/index.ipynb) and [blog post](https://towardsdatascience.com/the-sardinas-patterson-algorithm-in-simple-python-9718242752c3) by Dan Hales helped me get some working code.
+I won't lie, I had some trouble understanding the algorithm or how to implement it in code. And I won't try to explain it here, but I found some helpful resources, including [two](https://www.youtube.com/watch?v=SkrLnr-KVOE) different [videos](https://www.youtube.com/watch?v=8YNEVyHCIjs) where presenters walk through the algorithm by hand. For me, I needed to see it in code, so this [Jupyter Notebook](https://github.com/danhales/blog-sardinas-patterson/blob/master/index.ipynb) and [blog post](https://towardsdatascience.com/the-sardinas-patterson-algorithm-in-simple-python-9718242752c3) by Dan Hales helped me get start writing a Rust implementation.
 
 ### My code
 
@@ -82,9 +82,9 @@ No doubt it's powerful to be able to tell if a given list in uniquely decodable.
 
 To get a better understanding of how this connects to passphrases, let's work through another example.
 
-As part of a separate project, I created [a word list of 18,250](https://github.com/sts10/generated-wordlists/blob/main/lists/basic.txt). It's important to note that this list is NOT uniquely decodable. 
+As part of a separate project, I created [a word list of 18,250 words](https://github.com/sts10/generated-wordlists/blob/main/lists/basic.txt). It's important to note that this list is NOT uniquely decodable. 
 
-What if we wanted to make this list uniquely decodable? We're going to have to eliminate some words from the list. How should we go about it? 
+What if we wanted to make this list uniquely decodable? We're going to have to eliminate some words from the list. But how should we go about picking which words to remove?
 
 * The most frequent word length on the list is 5 characters. We could eliminate all words that are not 5 characters. This would leave 1,802 words on the list.
 * We could remove all prefix words. This would leave 13,312 words.
@@ -131,7 +131,7 @@ pub fn get_sardinas_patterson_final_intersection(c: &[String]) -> Vec<String> {
 
 Then we can run this new, modified list through the Sardinas-Patterson again and see if it's now uniquely decodable. And if it is, maybe the number of words we removed along the way will be less than the other three options outlined above. 
 
-You can find this procedure implemented in Rust code in context of a larger tool, Tidy, [here](https://github.com/sts10/tidy/blob/main/src/sardinas_patterson_pruning.rs).
+(Spoiler alert: This is the method I went with. You can find this procedure implemented in Rust code in context of a larger tool, Tidy, [here](https://github.com/sts10/tidy/blob/main/src/sardinas_patterson_pruning.rs).)
 
 ## Schlinkert pruning: Preliminary results
 
@@ -147,20 +147,20 @@ Not only that, but the procedure seems to preserve more words than the three pro
 
 Interestingly, the resulting list includes prefix words and suffix words, and obviously has different word lengths (the technical term is [variable-length code](https://en.wikipedia.org/wiki/Variable-length_code)).
 
-For lack of a better term for now, I'm calling this removal procedure "Schlinkert pruning" after myself.
+For lack of a better term for now, I'm calling this removal procedure "Schlinkert pruning", after myself.
 
 ## Limitations
 
-* I (still) don't know if this is _the_ optimal procedure for preserving words. (Or even if it always preserves more words than the other procedures.) In other words, some other procedure might preserve more words from the original list.
+* I (still) don't know if this is _the_ optimal procedure for preserving words. (Or even if it always preserves more words than the other procedures.) In other words, some other procedure, known or unknown to me, may preserve more words from the original list.
 * I don't know that running this procedure on any list _guarantees_ you'll get a uniquely decodable list as a result.
 
-To answer either of these two questions, it feels like I'd need to use some math that I don't know just yet. Maybe someone between 1935 and now has already figured all this out! Let me know if you know any ideas that could help!
+To answer either of these two questions, it feels like I'd need to use some math that I don't know just yet. Maybe someone between 1953 and now has already figured all this out! Let me know if you know any ideas that could help!
 
 ## Trying it out yourself
 
-You can play with the procedure yourself by [installing Tidy](https://github.com/sts10/tidy#installation). To see if a given list is uniquely decodable or not, use 4 attributes tags (`-AAAA`). To perform "Schlinkert pruning" on the given list, use the option `-K` (or `--schlinkert-prune`). 
+You can play with the procedure yourself by [installing Tidy](https://github.com/sts10/tidy#installation). To see if a given list is uniquely decodable or not, use 4 attributes flags (`-AAAA`). To perform "Schlinkert pruning" on the given list, use the option `-K` (or `--schlinkert-prune`). 
 
-Again, [here's the file with the pruning functions](https://github.com/sts10/tidy/blob/main/src/sardinas_patterson_pruning.rs).
+Again, [here's my code file with the pruning functions on GitHub](https://github.com/sts10/tidy/blob/main/src/sardinas_patterson_pruning.rs).
 
 ## A new word list
 
