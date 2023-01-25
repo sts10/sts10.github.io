@@ -93,9 +93,9 @@ To get a better understanding of how this connects to passphrases, let's work th
 
 As part of a separate project, I created [a word list of 18,250 words](https://github.com/sts10/generated-wordlists/blob/main/lists/basic.txt). It's important to note that this list is NOT uniquely decodable. 
 
-What if we wanted to make this list uniquely decodable? We're going to have to eliminate some words from the list. But how should we go about picking which words to remove?
+What if we wanted to make this list uniquely decodable? We're going to have to eliminate some words from the list. But in order to keep passphrases generated from list strong, we want to **eliminate the fewest number of words possible**. With that goal in mind, how should we go about picking which words to remove?
 
-* The most frequent word length on the list is 5 characters. We could eliminate all words that are not 5 characters. This would leave 1,802 words on the list.
+* The most common word length on the list is 5 characters. We could eliminate all words that are not 5 characters. This would leave 1,802 words on the list.
 * We could remove all prefix words. This would leave 13,312 words.
 * We could remove all suffix words. This would leave 15,959 words on the list.
 
