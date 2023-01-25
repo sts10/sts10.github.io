@@ -7,7 +7,7 @@ comments: true
 
 I read _Privacy at the Margins_ by Scott Skinner-Thompson a few weeks ago. One idea from the book has been bouncing around my head ever since: performative privacy. 
 
-I think this passage, from pages 56 and 57) summarizes it best:
+I think this passage (from pages 56 and 57) summarizes it best:
 
 > Individuals' efforts to maintain privacy, anonymity, or obscurity while simultaneously engaged in public activity ought to be understood as performative, expressive acts -- expressions that may often be protected directly by the Free Speech Clause of the First Amendment. Certainly, as outlined at the outset of this chapter, maintaining anonymity while in public by wearing a hoodie or using internet obfuscation technology instrumentally aids one's freedom of thought, movement and association without being identified by public surveillance. But it is more than that. As government, corporate, and individual surveillance of both out physical and cyber activities becomes ubiquitous, efforts taken to shield activities from surveillance are not always just a means to an end -- a means to effectuate other constitutional values. Instead, they are often a direct statement of resistance to the pervasive surveillance society. In such instances, they are entitled to First Amendment protections from government infringement...
 
