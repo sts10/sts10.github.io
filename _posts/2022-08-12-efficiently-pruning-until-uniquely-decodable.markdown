@@ -66,7 +66,16 @@ Back in 1953, August Albert Sardinas and George W. Patterson published an algori
 
 I learned about it from [a helpful Redditor who pointed to it answer to a question of mine](https://www.reddit.com/r/informationtheory/comments/vnretf/comment/iecfbxz/).
 
-I won't lie, I had some trouble understanding the algorithm or how to implement it in code. And I won't try to explain it here, but I found some helpful resources, including [two](https://www.youtube.com/watch?v=SkrLnr-KVOE) different [videos](https://www.youtube.com/watch?v=8YNEVyHCIjs) where presenters walk through the algorithm by hand. For me, I needed to see it in code, so this [Jupyter Notebook](https://github.com/danhales/blog-sardinas-patterson/blob/master/index.ipynb) and [blog post](https://towardsdatascience.com/the-sardinas-patterson-algorithm-in-simple-python-9718242752c3) by Dan Hales helped me get start writing a Rust implementation.
+I won't lie, I had some trouble understanding the algorithm or how to implement it in code. And I won't try to explain it here, but I found some helpful resources, including [two](https://www.youtube.com/watch?v=SkrLnr-KVOE) different [videos](https://www.youtube.com/watch?v=8YNEVyHCIjs) where presenters walk through the algorithm by hand. 
+
+#### My amateur summary of how the Sardinas-Patterson algorithm does
+Here is what I have gathered: In broad strokes, the algorithm involves repeatedly finding "dangling suffixes" between words on the initial list: the left over from removing a prefix word from a word. An example is if a list has "accident" and "accidental" on it, a dangling suffix would be "al". We then check if any of these dangling suffixes are on the list as words ("al" likely isn't, but "accident" and "accidentally" gives a dangling suffix of "ally", which we could imagine could be on the list). 
+
+If any of these dangling suffixes _ARE_ on the original list, we now know the list is NOT uniquely decodable. This makes sense to me: we're basically cutting words in half and seeing if they make two words that are also on the list (a problem for unique decodability!). But that's just the first iteration. Next, we add these dangling suffixes to the (original) list and make _more_ dangling suffixes from this _new_ list. Then we again check _these_ latest dangling suffixes against the original list. Again: any overlap means the list is not uniquely decodable. 
+
+A list is uniquely decodable by this method only if, after repeating this process **infinitely**, there's never a dangling suffix that is also on the original list. As you might expect, things get a bit... math-y once we throw in infinity, but \* waves hands \* math!
+
+For me, I needed to see it in code, so this [Jupyter Notebook](https://github.com/danhales/blog-sardinas-patterson/blob/master/index.ipynb) and [blog post](https://towardsdatascience.com/the-sardinas-patterson-algorithm-in-simple-python-9718242752c3) by Dan Hales helped me get start writing a Rust implementation.
 
 ### My code
 
