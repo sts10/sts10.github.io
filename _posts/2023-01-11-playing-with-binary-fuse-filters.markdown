@@ -11,11 +11,11 @@ I was reading [some Restic documentation](https://restic.readthedocs.io/en/stabl
 
 This reminded me of my project [**Medic**](https://github.com/sts10/medic), which, among other things, can check a KeePass database's passwords against [the very large list of breached passwords stored in HaveIBeenPwned](https://haveibeenpwned.com/Passwords). 
 
-Medic currently takes from 1 to 4 minutes or 5 minutes to check a KeePass database's passwords against the text file. Naturally, I wondered if I could use a Bloom filter to cut this time down. 
+Medic currently takes from 1 to 5 minutes to check a KeePass database's passwords against the text file. Naturally, I wondered if I could use a Bloom filter to cut this time down. 
 
 ## A foothold
 
-I posted about Bloom filters on Mastodon and Graydon Hoare pointed me to [this paper](https://arxiv.org/pdf/2201.01174.pdf), which details an improved version of a Bloom filter called a "binary fuse filter". Hoare also pointed me to [a C++ project on GitHub called FilterPassword](https://github.com/FastFilter/FilterPassword), which, amazingly, tests a binary fuse filter against other filters on the HaveIBeenPwned list of passwords! What luck! 
+I posted about Bloom filters on Mastodon and Graydon Hoare pointed me to [this paper](https://arxiv.org/pdf/2201.01174.pdf), which details an new and improved version of a Bloom filter called a "binary fuse filter". Hoare also pointed me to [a C++ project on GitHub called FilterPassword](https://github.com/FastFilter/FilterPassword), which, amazingly, tests a binary fuse filter against other filters on the HaveIBeenPwned list of passwords! What luck! 
 
 I haven't written C++ since high school, so I had trouble even grokking the FilterPassword code, but thankfully I easily found [a Rust crate called xorf](https://github.com/ayazhafiz/xorf) that offers an API for a variety of these filters, including the latest and greatest binary fuse filter.
 
@@ -149,11 +149,11 @@ I'd guess that using 3 fewer hexadecimal characters means there's a slightly hig
 
 Undeterred, I opened Medic and adapted the code above into the project.
 
-A note here: In order not to to use too much system memory, Medic reads 10.4 million password digests into system memory at a time. Each of these batches of 10.4 million is called a "chunk" in the code. I figured that was also a good size for a filter(?), so I would be making a filter of each chunk, then checking every entry against that filter in search of "maybes".
+A note here: In order not to to use too much system memory, Medic doesn't read all of the password digests into memory at a time. Instead, it reads just 10.4 million password digests into system memory at a time. Each of these batches of 10.4 million is called a "chunk" in the code. I figured that was also a good size for a filter(?), so I would be making a filter of each chunk, then checking every entry against that filter in search of "maybes".
 
 To keep things simple, I wanted to use a binary fuse filter to return a `bool`, where `false` meant there is definitely no matches found in the given chunk (i.e. none of the passwords in this chunk were found in the breached password file) and where `true` meant there was at least one "maybe." 
 
-First, I inserted an `if` statement at the top of my `check_this_chunk` function to act as a sort of short circuit: 
+First, I inserted an `if` statement at the top of my `check_this_chunk` function to act as a sort of short circuit for whenever the filer returned all "no"s (in other words, no "maybe"s): 
 
 ```rust
 fn check_this_chunk(entries: &[Entry], chunk: &[String]) -> io::Result<Vec<Entry>> {
