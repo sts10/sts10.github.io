@@ -33,6 +33,10 @@ To be more blunt, paraphrasing ["Choose a License,"](https://choosealicense.com/
 
 So I knew about MIT, GPL, and AGPL. But the MIT License -- really the only permissive license I was familiar with -- is from the 1980s. While I still think the MIT License is a fine choice, I figured there must be some new licenses with interesting ideas and protections. 
 
+* Open Source Initiative has [a list of "approved" licenses](https://opensource.org/licenses/category). 
+* A few years back I heard about [the Hippocratic License](https://firstdonoharm.dev/), which I thought was an interesting idea. 
+* Fossa.com has a list of [the "Top 6 Out-There Open Source Licenses"](https://fossa.com/blog/top-6-most-out-there-open-source-licenses/), which I appreciate!
+
 ## The Blue Oak Model License, a permissive license published in 2019
 
 Ever helpful, the Blue Oak Council website has [a list of permissive licenses, which they rated from Gold to Lead](https://blueoakcouncil.org/list). Apparently during this process, the group of lawyers wrote their own permissive license that became [Blue Oak Model License 1.0.0](https://blueoakcouncil.org/license/1.0.0).
@@ -45,6 +49,10 @@ What's good about the Blue Model License 1.0.0? The project creators [explained 
 ## Finding more new-to-me licenses
 
 I found more licenses by the executive director of the Blue Oak Council, Kyle Mitchell, listed in [one of his blog posts](https://writing.kemitchell.com/2021/06/20/License-Round-Up). As you'd expect Blue Oak Model License is listed, but there are many other interesting ones. I made note of the [Big Time Public License](https://bigtimelicense.com/versions/2.0.1) and [the Prosperity License](https://prosperitylicense.com/) in particular.
+
+## Obligatory note on license compatibility
+
+One potential issue with using a new or just less-than-popular license is that, even if the license you choose is pretty permissive, it may not legally jibe well with the licenses of other software that developers may use in tandem with your code in their project. This is a big point in favor of sticking with the older, much more common licenses like MIT or Apache. But to me that is just not as fun as finding and using the hot new thing.
 
 ## Changing the license of an existing project
 
