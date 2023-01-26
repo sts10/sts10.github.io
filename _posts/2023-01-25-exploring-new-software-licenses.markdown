@@ -11,7 +11,7 @@ And second: for the first time ever, [one of my open source Rust projects, Tidy,
 
 [The MIT License](https://en.wikipedia.org/wiki/MIT_License) is known as a "permissive" license, meaning that users and other would-be contributors have lots of permission about what they can do with the project's code. This is the license I was slapping on most of my projects between 2014 and 2021-ish, mostly on recommendation from the Flatiron School instructors.
 
-(Before I continue, for those who do not know, I am NOT a lawyer.)
+(Before I continue, for those who do not know, I am NOT a lawyer. And this post is not intended to be an overview of all open software licenses out there.)
 
 ## Permissive vs. Copyleft
 
@@ -31,9 +31,9 @@ To be more blunt, paraphrasing ["Choose a License,"](https://choosealicense.com/
 
 ## What other licenses are out there?
 
-So I knew about MIT, GPL, and AGPL. There's also [Apache 2.0 License](https://apache.org/licenses/LICENSE-2.0) and [Mozilla Public License](https://www.mozilla.org/en-US/MPL/). 
+So I knew about MIT, GPL, and AGPL. There's also [Apache 2.0 License](https://apache.org/licenses/LICENSE-2.0) and [Mozilla Public License](https://www.mozilla.org/en-US/MPL/), a weak copyleft license that I should probably check out further? 
 
-But the MIT License -- really the only permissive license I was familiar with -- is from the 1980s. While I still think the MIT License is a fine choice, I figured there must be some new licenses with interesting ideas and protections. 
+But the MIT License -- really the only permissive license I was familiar with -- is from the 1980s. While I still think the MIT License is a fine choice, I figured there must be some new licenses with interesting ideas and protections.
 
 Below is a grab-bag list of licenses I was either reminded of or found in my research.
 
@@ -45,11 +45,11 @@ Below is a grab-bag list of licenses I was either reminded of or found in my res
 * Open Source Initiative has [a list of "approved" licenses](https://opensource.org/licenses/category).
 * Fossa.com has a list of [the "Top 6 Out-There Open Source Licenses"](https://fossa.com/blog/top-6-most-out-there-open-source-licenses/), which I appreciate!
 
-But what else is out there!?
+Ever helpful, the Blue Oak Council website has [a list of permissive licenses, which they rated from Gold to Lead](https://blueoakcouncil.org/list). Apparently during this process, the group of lawyers wrote their own permissive license that became [Blue Oak Model License 1.0.0](https://blueoakcouncil.org/license/1.0.0).
+
+Let's take a look at that one.
 
 ## The Blue Oak Model License, a permissive license published in 2019
-
-Ever helpful, the Blue Oak Council website has [a list of permissive licenses, which they rated from Gold to Lead](https://blueoakcouncil.org/list). Apparently during this process, the group of lawyers wrote their own permissive license that became [Blue Oak Model License 1.0.0](https://blueoakcouncil.org/license/1.0.0).
 
 As Blue Oak Council [notes](https://blueoakcouncil.org/license-faq):
 > The Council didn't set out to write a model license. While preparing the first version of the permissive license list, members ended up trading notes about the features of a good permissive license they were using to judge existing terms. No existing license boasted all of those features. Rather than simply list them out, the Council found it easier just to write out a new, model license showing what's possible.
