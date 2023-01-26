@@ -7,7 +7,7 @@ comments: true
 
 I've been thinking about software licenses this month for two reasons. First, I saw [this blog post](https://daniel.haxx.se/blog/2023/01/08/copyright-without-years/) from Daniel Stenberg, who created [curl](https://github.com/curl/curl), about whether developers really have to update the years in their copies of software licenses. He concludes "I don’t think we risk much by" removing the years from most of curl's license-related files, and thus, on January 3rd, Stenberg [removed the years on almost all of the relevant curl project files](https://github.com/curl/curl/commit/2bc1d775f510196154283374284f98d3eae03544). Interesting!
 
-And second: for the first time ever, [one of my open source Rust projects, Tidy,](https://github.com/sts10/tidy) passed 25 stars on Github. Woohoo! Now that one of my projects was gaining a modicum of popularity, I wondered if I was satisfied with [its license](https://github.com/sts10/tidy/blob/main/LICENSE), which is the MIT License. 
+And second: for the first time ever, [one of my open source Rust projects, Tidy,](https://github.com/sts10/tidy) passed 25 stars on Github. Woohoo! Now that one of my projects was gaining a modicum of popularity, I wondered if I was satisfied with [its license](https://github.com/sts10/tidy/blob/main/LICENSE), which is the MIT License. I also have a at-this-point-private repo that I would make public if I was assured it wouldn't be used for illegal hacking...
 
 [The MIT License](https://en.wikipedia.org/wiki/MIT_License) is known as a "permissive" license, meaning that users and other would-be contributors have lots of permission about what they can do with the project's code. This is the license I was slapping on most of my projects between 2014 and 2021-ish, mostly on recommendation from the Flatiron School instructors.
 
@@ -29,12 +29,18 @@ During my research, I found a nonprofit called [Blue Oak Council](https://blueoa
 
 To be more blunt, paraphrasing ["Choose a License,"](https://choosealicense.com/) if you want a simple license that lets people do almost anything they want with your work, go with MIT. If you want people to be able to do whatever they want, but have those changes remain public, go with GNU GPL v3.
 
-## What's new?
+## What other licenses are out there?
 
 So I knew about MIT, GPL, and AGPL. But the MIT License -- really the only permissive license I was familiar with -- is from the 1980s. While I still think the MIT License is a fine choice, I figured there must be some new licenses with interesting ideas and protections. 
 
-* Open Source Initiative has [a list of "approved" licenses](https://opensource.org/licenses/category). 
-* A few years back I heard about [the Hippocratic License](https://firstdonoharm.dev/), which I thought was an interesting idea. 
+Below is a grab-bag list of licenses I was either reminded of or found in my research.
+
+* [The Unlicense](https://unlicense.org/) seems to seek to be a super permissive license. I know of [a prominent developer in the Rust community uses and supports the Unlicense](https://github.com/BurntSushi/notes/blob/master/2020-10-29_licensing-and-copyleft.md).
+* There's a family of licenses called [BSD licenses](https://en.wikipedia.org/wiki/BSD_licenses) that I've seen used on projects, including [age encryption](https://github.com/FiloSottile/age).
+* The [JSON License](https://www.json.org/license.html) was the fun clause of "The Software shall be used for Good, not Evil."
+* Here's a list of [ethical licenses](https://ethicalsource.dev/licenses/), which includes [the Hippocratic License](https://firstdonoharm.dev/).
+* [Creative Commons](https://creativecommons.org/choose/) offers a family of licenses, but I understand that they're not written _just_ for software.
+* Open Source Initiative has [a list of "approved" licenses](https://opensource.org/licenses/category).
 * Fossa.com has a list of [the "Top 6 Out-There Open Source Licenses"](https://fossa.com/blog/top-6-most-out-there-open-source-licenses/), which I appreciate!
 
 ## The Blue Oak Model License, a permissive license published in 2019
@@ -62,6 +68,10 @@ For what it's worth, [The Blue Oak Model License authors write on their site](ht
 
 which is reassuring!
 
+### Other reasonable advice: Stick with your community's license
+
+Choose a License reminds developers [to consider what licenses your related projects use when selecting a license](https://choosealicense.com/community/), which seems like solid advice. For example, it notes that "Rust crates are overwhelmingly licensed under both MIT and Apache License 2.0." This is part of the reason I initially chose MIT for Tidy and most of my other Rust projects. It's also the reason [I chose the BSD-3-Clause license for a project of mine that works with and depends on age file encryption](https://github.com/sts10/bottle).
+
 ## Changing the license of an existing project
 
 Can a developer change the license of an existing project? Mitchell [addresses that question specifically in a more recent post](https://writing.kemitchell.com/2022/03/07/Switching-Open-Software-Terms). I won't attempt to summarize, but it sounds like a "Yes, with these notes" on things like "license revocation."
@@ -81,7 +91,7 @@ Since none of these had licenses as of a few hours ago, I figured they'd be exce
 
 ### What about Tidy's license?
 
-I'm a bit more precious with Tidy! A little more hesitant to make changes so quickly, and I want to be sure I'm doing things more by-the-book with what is my most popular project (not counting [my Vim colorscheme](https://github.com/sts10/vim-pink-moon)).
+After all of this, I've found myself a bit more precious with Tidy! A little more hesitant to make changes so quickly. I want to be sure I'm doing things more by-the-book with what is my most popular project (not counting [my Vim colorscheme](https://github.com/sts10/vim-pink-moon)).
 
 Plus, Tidy _just_ got its [first contribution by a human other than me just this past weekend](https://github.com/sts10/tidy/commits?author=bugaevc&since=2023-01-01&until=2023-01-27), while licensed under MIT! Thankfully, I interact with this contributor on Mastodon often, so I could get in contact with him, but I'm not even sure how to get his legal permission to change the license of his contribution retroactively. I think I could add something called a [contributor license agreement](https://en.wikipedia.org/wiki/Contributor_License_Agreement) to the project, but I'm guessing that would only apply to future contributions? Also, I'm not decided whether I want to move away from MIT -- Blue Oak is cool, but I think this is one of those things that is fine to move slow on.
 
