@@ -90,6 +90,14 @@ Can a developer change the license of an existing project? Mitchell [addresses t
 
 I _think_ the risk one takes in straight up "revoking" an existing license and plopping a new one into your code repository is that you theoretically could be sued by past contributors to the project. Thus, I think for my projects to which I am the sole contributor (hopefully not counting [GitHub's Dependabot](https://docs.github.com/en/code-security/dependabot/dependabot-security-updates/configuring-dependabot-security-updates)?!), I could just switch to Blue Oak or GPL v3 or whatever I want, whenever I want since I'd only be violating my own rights (and I won't sue myself). 
 
+### A more practical example 
+
+More practically, a Fedi friend pointed me to [an open-source project that is currently in the process of changing its license from from GPL 2.0 to BSD-3-Clause](https://github.com/10up/wp_mock/issues/198). This "process" appears to be manifested in a GitHub issue, in which a contributor states the reasons for the proposed change. They then write "Since this change would affect past contributors, I need to ask for their agreement. I will ping them below in case they'd like to discuss this" and tag about two dozen fellow GitHub users (presumably all other contributors to the project). 
+
+This makes sense to me, but one question I _still_ have about this situation is: let's say you get all past contributors to agree to a license change. I'm assuming what they're effectively agreeing to is something like "Are you OK with future versions of this project, which will include your past contributions, to be licensed in this new way?" My question is: Can future versions of the project be solely available under the new license (BSD-3 in this case), or will they have to be dual licensed? Or is that what this Github issue is seeking to prevent by getting buy-in from past contributors? Lastly, will _older_ versions of the project still be available under the previous license (assuming yes)? 
+
+## Slapping the Blue Oak Model License on a few of my projects that did not have an explicit license specified
+
 I did find a few of my public Github repositories did not have a license on them at all, which feels like a loophole when worrying about whether you can _change_ the license of a project. These included 
 * [the repo for my personal website](https://github.com/sts10/samschlinkert_com)
 * [a homophones scraper](https://github.com/sts10/homophones) 
