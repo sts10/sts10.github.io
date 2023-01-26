@@ -60,7 +60,15 @@ Can a developer change the license of an existing project? Mitchell [addresses t
 
 I _think_ the risk one takes in straight up "revoking" an existing license and plopping a new one into your code repository is that you theoretically could be sued by past contributors to the project. Thus, I think for my projects to which I am the sole contributor (hopefully not counting [GitHub's Dependabot](https://docs.github.com/en/code-security/dependabot/dependabot-security-updates/configuring-dependabot-security-updates)?!), I could just switch to Blue Oak or GPL v3 or whatever I want, whenever I want since I'd only be violating my own rights (and I won't sue myself). 
 
-I did find a few of my public Github repositories did not have a license on them at all, which feels like a loophole when worrying about whether you can _change_ the license of a project. These included [the repo for my personal website](https://github.com/sts10/samschlinkert_com), [a homophones scraper](https://github.com/sts10/homophones), [a little passphrase guesser](https://github.com/sts10/passphrase-guesser), and command-line tic-tac-toe games in [Go](https://github.com/sts10/tic-tac-go), [Rust](https://github.com/sts10/rusty-tac), and [Zig](https://github.com/sts10/zig-zac-zoe). Since none of these had licenses this morning, I figured they'd be excellent candidates for me to use the Blue Oak Model License 1.0.0. So I did it! Done!
+I did find a few of my public Github repositories did not have a license on them at all, which feels like a loophole when worrying about whether you can _change_ the license of a project. These included 
+* [the repo for my personal website](https://github.com/sts10/samschlinkert_com)
+* [a homophones scraper](https://github.com/sts10/homophones) 
+* [a little passphrase guesser](https://github.com/sts10/passphrase-guesser)
+* command-line tic-tac-toe games in [Go](https://github.com/sts10/tic-tac-go), [Rust](https://github.com/sts10/rusty-tac), and [Zig](https://github.com/sts10/zig-zac-zoe)
+* [a card-game scoring web app](https://github.com/sts10/contract_score_card)
+* [two](https://github.com/sts10/switch) JavaScript [games](https://github.com/sts10/strike-9) I wrote years ago
+
+Since none of these had licenses as of a few hours ago, I figured they'd be excellent candidates for me to (safely) use the Blue Oak Model License 1.0.0. So I did it! Neat!
 
 ### What about Tidy's license?
 
