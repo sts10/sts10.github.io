@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "A new permissive software license to try?"
+title: "Trying a new permissive software license"
 date: 2023-01-25 23:00:00 -0400
 comments: true
 ---
@@ -67,11 +67,14 @@ I did find a few of my public Github repositories did not have a license on them
 * command-line tic-tac-toe games in [Go](https://github.com/sts10/tic-tac-go), [Rust](https://github.com/sts10/rusty-tac), and [Zig](https://github.com/sts10/zig-zac-zoe)
 * [a card-game scoring web app](https://github.com/sts10/contract_score_card)
 * [two](https://github.com/sts10/switch) JavaScript [games](https://github.com/sts10/strike-9) I wrote years ago
+* [An exploration of Lemire's nearly divisionless random using Rust](https://github.com/sts10/lemire_nearly_divisionless_random)
 
 Since none of these had licenses as of a few hours ago, I figured they'd be excellent candidates for me to (safely) use the Blue Oak Model License 1.0.0. So I did it! Neat!
 
 ### What about Tidy's license?
 
-Unfortunately, Tidy _just_ got its [first contribution by a human other than me just this past weekend](https://github.com/sts10/tidy/commits?author=bugaevc&since=2023-01-01&until=2023-01-27), while licensed under MIT! Thankfully, I interact with this contributor on Mastodon often, so I could get in contact with him, but I'm not even sure how to get his legal permission to change the license of his contribution retroactively. I think I could add something called a [contributor license agreement](https://en.wikipedia.org/wiki/Contributor_License_Agreement) to the project, but I'm guessing that would only apply to future contributions? Also, I'm not decided whether I want to move away from MIT -- Blue Oak is cool, but I think this is one of those things that is fine to move slow on.
+I'm a bit more precious with Tidy! A little more hesitant to make changes so quickly, and I want to be sure I'm doing things more by-the-book with what is my most popular project (not counting [my Vim colorscheme](https://github.com/sts10/vim-pink-moon)).
+
+Plus, Tidy _just_ got its [first contribution by a human other than me just this past weekend](https://github.com/sts10/tidy/commits?author=bugaevc&since=2023-01-01&until=2023-01-27), while licensed under MIT! Thankfully, I interact with this contributor on Mastodon often, so I could get in contact with him, but I'm not even sure how to get his legal permission to change the license of his contribution retroactively. I think I could add something called a [contributor license agreement](https://en.wikipedia.org/wiki/Contributor_License_Agreement) to the project, but I'm guessing that would only apply to future contributions? Also, I'm not decided whether I want to move away from MIT -- Blue Oak is cool, but I think this is one of those things that is fine to move slow on.
 
 As usual, feel free to [mention or DM me on Mastodon](https://hachyderm.io/@schlink) if you know of a license you like, or spotted an error in this post.
