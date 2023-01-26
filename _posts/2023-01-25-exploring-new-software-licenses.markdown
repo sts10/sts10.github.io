@@ -31,17 +31,21 @@ To be more blunt, paraphrasing ["Choose a License,"](https://choosealicense.com/
 
 ## What other licenses are out there?
 
-So I knew about MIT, GPL, and AGPL. But the MIT License -- really the only permissive license I was familiar with -- is from the 1980s. While I still think the MIT License is a fine choice, I figured there must be some new licenses with interesting ideas and protections. 
+So I knew about MIT, GPL, and AGPL. There's also [Apache 2.0 License](https://apache.org/licenses/LICENSE-2.0) and [Mozilla Public License](https://www.mozilla.org/en-US/MPL/). 
+
+But the MIT License -- really the only permissive license I was familiar with -- is from the 1980s. While I still think the MIT License is a fine choice, I figured there must be some new licenses with interesting ideas and protections. 
 
 Below is a grab-bag list of licenses I was either reminded of or found in my research.
 
-* [The Unlicense](https://unlicense.org/) seems to seek to be a super permissive license. I know of [a prominent developer in the Rust community uses and supports the Unlicense](https://github.com/BurntSushi/notes/blob/master/2020-10-29_licensing-and-copyleft.md).
-* There's a family of licenses called [BSD licenses](https://en.wikipedia.org/wiki/BSD_licenses) that I've seen used on projects, including [age encryption](https://github.com/FiloSottile/age).
+* [The Unlicense](https://unlicense.org/) seems to seek to be a super permissive license. I know of [a prominent developer in the Rust community who uses and supports the Unlicense](https://github.com/BurntSushi/notes/blob/master/2020-10-29_licensing-and-copyleft.md).
+* There's a family of licenses called [BSD licenses](https://en.wikipedia.org/wiki/BSD_licenses) that I've seen used on projects, including [age encryption](https://github.com/FiloSottile/age). I don't know much about them!
 * The [JSON License](https://www.json.org/license.html) was the fun clause of "The Software shall be used for Good, not Evil."
 * Here's a list of [ethical licenses](https://ethicalsource.dev/licenses/), which includes [the Hippocratic License](https://firstdonoharm.dev/).
 * [Creative Commons](https://creativecommons.org/choose/) offers a family of licenses, but I understand that they're not written _just_ for software.
 * Open Source Initiative has [a list of "approved" licenses](https://opensource.org/licenses/category).
 * Fossa.com has a list of [the "Top 6 Out-There Open Source Licenses"](https://fossa.com/blog/top-6-most-out-there-open-source-licenses/), which I appreciate!
+
+But what else is out there!?
 
 ## The Blue Oak Model License, a permissive license published in 2019
 
@@ -50,7 +54,13 @@ Ever helpful, the Blue Oak Council website has [a list of permissive licenses, w
 As Blue Oak Council [notes](https://blueoakcouncil.org/license-faq):
 > The Council didn't set out to write a model license. While preparing the first version of the permissive license list, members ended up trading notes about the features of a good permissive license they were using to judge existing terms. No existing license boasted all of those features. Rather than simply list them out, the Council found it easier just to write out a new, model license showing what's possible.
 
-What's good about the Blue Model License 1.0.0? The project creators [explained their reasoning in a post](https://blueoakcouncil.org/2019/03/06/model.html). To me it seems like the authors were concerned about how, with most existing permissive licenses, ["patent owners [may be able to] sue users and distributors of open software."](https://blueoakcouncil.org/primer#patent). I don't quite follow this legal concern completely, but these folks seem smart, so I'm almost ready to take them at their word and try this license for my next open code project.
+What's good about the Blue Model License 1.0.0? The project creators [explained their reasoning in a post](https://blueoakcouncil.org/2019/03/06/model.html). Some notes from my non-legal mind:
+
+* To me it seems like the authors were concerned about how, with most existing permissive licenses, ["patent owners [may be able to] sue users and distributors of open software."](https://blueoakcouncil.org/primer#patent). I don't quite follow this legal concern completely, but these folks seem smart. 
+* Their license also clearly states that "No contributor can revoke this license," which I presume is (or may be) an issue with licenses that don't explicitly state this. 
+* And of course, there's a "No Liability" section to protect me from the consequences my janky Rust code, especially the projects that COULD, theoretically, be used for illegal activities.
+
+All good, smart ideas, as far as I can tell.
 
 ## Finding more new-to-me licenses
 
