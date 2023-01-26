@@ -29,6 +29,10 @@ During my research, I found a nonprofit called [Blue Oak Council](https://blueoa
 
 To be more blunt, paraphrasing ["Choose a License,"](https://choosealicense.com/) if you want a simple license that lets people do almost anything they want with your work, go with MIT. If you want people to be able to do whatever they want, but have those changes remain public, go with GNU GPL v3.
 
+### I still think using Copyleft is good
+
+In general, [my early free software training](https://sts10.github.io/2018/01/06/switching-to-linux.html) from books like [Gabriella Coleman's _Coding Freedom_](https://www.amazon.com/Coding-Freedom-Ethics-Aesthetics-Hacking-ebook/dp/B009PD9LA8/ref=sr_1_fkmr0_1?ie=UTF8&qid=1547610006&sr=8-1-fkmr0&keywords=coleman+ethics+code+gabriella) and _Two Bits: The Cultural Significance of Free Software_ by Chris Kelty tells me I should always prefer to use copyleft licenses, since they keep software free and open, a universal good thing in the eyes of some. And I'm not disagreeing with that here. But I do think -- hot, uniformed take coming -- there seems to be more innovation on the more permissive side of the spectrum than on the copyleft side, where GPL v3 and AGPL v3 and the other GPL licenses still reign. And thus I generally was exploring permissive license when writing this post.
+
 ## What other licenses are out there?
 
 So I knew about MIT, GPL, and AGPL. There's also [Apache 2.0 License](https://apache.org/licenses/LICENSE-2.0) and [Mozilla Public License](https://www.mozilla.org/en-US/MPL/), a weak copyleft license that I should probably check out further? 
@@ -39,8 +43,8 @@ Below is a grab-bag list of licenses I was either reminded of or found in my res
 
 * [The Unlicense](https://unlicense.org/) seems to seek to be a super permissive license. I know of [a prominent developer in the Rust community who uses and supports the Unlicense](https://github.com/BurntSushi/notes/blob/master/2020-10-29_licensing-and-copyleft.md).
 * There's a family of licenses called [BSD licenses](https://en.wikipedia.org/wiki/BSD_licenses) that I've seen used on projects, including [age encryption](https://github.com/FiloSottile/age). I don't know much about them!
-* The [JSON License](https://www.json.org/license.html) was the fun clause of "The Software shall be used for Good, not Evil."
 * Here's a list of [ethical licenses](https://ethicalsource.dev/licenses/), which includes [the Hippocratic License](https://firstdonoharm.dev/).
+* The [JSON License](https://www.json.org/license.html) has the fun and likely legally tricky clause: "The Software shall be used for Good, not Evil."
 * [Creative Commons](https://creativecommons.org/choose/) offers a family of licenses, but I understand that they're not written _just_ for software.
 * Microsoft(!) has a license called the [Microsoft Public License](https://choosealicense.com/licenses/ms-pl/).
 * GitHub's "Choose a License" site has [an "Appendix" page that lists about two dozens licenses in a convenient chart form](https://choosealicense.com/appendix/).
