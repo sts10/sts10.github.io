@@ -54,6 +54,14 @@ I found more licenses by the executive director of the Blue Oak Council, Kyle Mi
 
 One potential issue with using a new or just less-than-popular license is that, even if the license you choose is pretty permissive, it may not legally jibe well with the licenses of other software that developers may use in tandem with your code in their project. This is a big point in favor of sticking with the older, much more common licenses like MIT or Apache. But to me that is just not as fun as finding and using the hot new thing.
 
+For what it's worth, [The Blue Oak Model License authors write on their site](https://blueoakcouncil.org/license-faq):
+
+> The Council doesn't see any reason why software licensed under the Blue Oak Model License 1.0.0 can’t be used, combined, and distributed with software under GPLv2, LGPLv2.1, GPLv3, LGPLv3, or AGPLv3.
+
+> Some have argued that GPLv2 and Apache 2.0 are incompatible, because if a patent claim was brought against the software, Apache 2.0’s patent grant would terminate, leaving the recipient with fewer rights than required by GPLv2. Without commenting on the accuracy of this analysis, the Council notes that the Blue Oak Model License doesn't have patent termination, so this hypothetical conflict cannot occur between the Model License and the GPL.
+
+which is reassuring!
+
 ## Changing the license of an existing project
 
 Can a developer change the license of an existing project? Mitchell [addresses that question specifically in a more recent post](https://writing.kemitchell.com/2022/03/07/Switching-Open-Software-Terms). I won't attempt to summarize, but it sounds like a "Yes, with these notes" on things like "license revocation."
