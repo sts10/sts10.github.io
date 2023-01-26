@@ -35,17 +35,19 @@ So I knew about MIT, GPL, and AGPL. There's also [Apache 2.0 License](https://ap
 
 But the MIT License -- really the only permissive license I was familiar with -- is from the 1980s. While I still think the MIT License is a fine choice, I figured there must be some new licenses with interesting ideas and protections.
 
-Below is a grab-bag list of licenses I was either reminded of or found in my research.
+Below is a grab-bag list of licenses I was either reminded of or found in my research (by no means comprehensive!).
 
 * [The Unlicense](https://unlicense.org/) seems to seek to be a super permissive license. I know of [a prominent developer in the Rust community who uses and supports the Unlicense](https://github.com/BurntSushi/notes/blob/master/2020-10-29_licensing-and-copyleft.md).
 * There's a family of licenses called [BSD licenses](https://en.wikipedia.org/wiki/BSD_licenses) that I've seen used on projects, including [age encryption](https://github.com/FiloSottile/age). I don't know much about them!
 * The [JSON License](https://www.json.org/license.html) was the fun clause of "The Software shall be used for Good, not Evil."
 * Here's a list of [ethical licenses](https://ethicalsource.dev/licenses/), which includes [the Hippocratic License](https://firstdonoharm.dev/).
 * [Creative Commons](https://creativecommons.org/choose/) offers a family of licenses, but I understand that they're not written _just_ for software.
+* Microsoft(!) has a license called the [Microsoft Public License](https://choosealicense.com/licenses/ms-pl/).
+* GitHub's "Choose a License" site has [an "Appendix" page that lists about two dozens licenses in a convenient chart form](https://choosealicense.com/appendix/).
 * Open Source Initiative has [a list of "approved" licenses](https://opensource.org/licenses/category).
 * Fossa.com has a list of [the "Top 6 Out-There Open Source Licenses"](https://fossa.com/blog/top-6-most-out-there-open-source-licenses/), which I appreciate!
 
-Ever helpful, the Blue Oak Council website has [a list of permissive licenses, which they rated from Gold to Lead](https://blueoakcouncil.org/list). Apparently during this process, the group of lawyers wrote their own permissive license that became [Blue Oak Model License 1.0.0](https://blueoakcouncil.org/license/1.0.0).
+Ever helpful, the Blue Oak Council website has [a list of permissive licenses, which they rated from Gold to Lead](https://blueoakcouncil.org/list), including a few I listed above. Apparently during this process, the group of lawyers wrote their own permissive license that became [Blue Oak Model License 1.0.0](https://blueoakcouncil.org/license/1.0.0).
 
 Let's take a look at that one.
 
