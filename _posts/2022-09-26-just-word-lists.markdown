@@ -30,7 +30,7 @@ Now, my command for re-building basic.txt lives in a "justfile" and looks like t
 ```just
 # re-build basic.txt
 basic:
-  tidy -AAAA --whittle-to 18250 -lL -m 3 -M 12 -a /usr/share/dict/words {{reject_commands}} --samples -o lists/basic.txt --force {{path_to_ngram_list}}
+  tidy -AA --whittle-to 18250 -lL -z nfkd -m 3 -M 12 -a /usr/share/dict/words {{reject_commands}} --samples -o lists/basic.txt --force {{path_to_ngram_list}}
 ```
 
 Where, earlier in the file, I define variables I use in many of my commands, including `reject_commands` and `path_to_ngram_list`.
@@ -40,6 +40,9 @@ With this in place, I can simply run `just basic` to force a re-build of the bas
 Now, when I want to make a new list, I can drop the command write in the justfile and I'm all set. I can even run `just --list` to list all of my available just commands. Nifty!
 
 (Note that, for now, I haven't pushed the justfile to the word list repo, mostly to avoid confusion.)
+
+## A Just plugin for Vim
+For improved Just syntax in Vim, I installed up [this vim-just plugin](https://github.com/NoahTheDuke/vim-just). Though Just was usable even before I installed this plugin.
 
 ## Why not use BASH/Shell?
 
