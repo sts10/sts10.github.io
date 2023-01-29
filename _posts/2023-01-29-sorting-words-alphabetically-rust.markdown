@@ -254,10 +254,17 @@ I think this is probably a great use-case for [Cows](https://doc.rust-lang.org/s
 
 Since I had decided to NOT have Tidy normalize Unicode by default, I wanted to try to make the rest of Tidy's functions more robust if/when they have to handle non-normalized Unicode. 
 
-One basic function that Tidy relies on quite a bit is counting the number of characters in a word. But, as we saw above, this seemingly simple task can be tricky. I had been relying on `word.chars().count()`, but this now felt a bit naive. I had seen too much! 
+One basic function that Tidy relies on quite a bit is counting the number of characters in a word. For example, when a user specifies that a list should have a certain minimum and/or maximum word length, Tidy counts characters and removes words based on that count. 
 
-At first, I was going to have Tidy count characters with `word.nfc().chars().count()`, normalizing the Unicode before counting. But this didn't seem quite right. Then, a Fediverse friend recommended I instead what's called [grapheme clusters](https://www.unicode.org/reports/tr29/#Grapheme_Cluster_Boundaries) instead. To do this, I had to add yet another crate called [unicode_segmentation](https://docs.rs/unicode-segmentation/latest/unicode_segmentation/), but the API is pretty simple.
+But, as we saw above, this seemingly simple task can be tricky. I had been relying on `word.chars().count()`, but this now felt a bit naive. I had seen too much! 
 
+My goal was to align Tidy's character counting with what a human would expect.
+
+At first, I was going to have Tidy count characters with `word.nfc().chars().count()`, normalizing the Unicode before counting. This would give each accented character a character count of 1, which I argue is inline with human expectation.
+
+But this didn't seem quite right. While the accented characters I had seen and tested with did give a count of 1 when run through `.nfc().chars().count()`, I wasn't sure this was the case for _every_ character users might throw at it. To my knowledge, this isn't what NFC normalization was made for.
+
+Then, a Fediverse friend recommended I count what's called [grapheme clusters](https://www.unicode.org/reports/tr29/#Grapheme_Cluster_Boundaries) instead. To do this, I had to add yet another crate called [unicode_segmentation](https://docs.rs/unicode-segmentation/latest/unicode_segmentation/), but its API is pretty simple.
 
 ```rust
 use unicode_segmentation::UnicodeSegmentation;
