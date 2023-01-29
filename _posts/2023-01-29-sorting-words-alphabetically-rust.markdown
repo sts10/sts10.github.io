@@ -89,7 +89,7 @@ It got the French right (yay!), and it's mixing capitalized with lowercase, whic
 
 At this point, I was willing to do something I had been resisting during this project: Add an option for users to specify which language their word list is in. I had been resisting it because I thought it was an unnecessary complication. But if I wanted Tidy to be able to work well with non-English word lists, I think getting the alphabetical sort right is important enough to take this step. 
 
-For example, if a user wants to work on an established non-English word list, like [the French BIPS--039 list](https://github.com/bitcoin/bips/blob/master/bip-0039/french.txt), Tidy needs to get everything right, so that the Tidy user's submitted changes reflect only and exactly what they want to change (and not, for example, re-order the list incorrectly).
+For example, if a user wants to work on an established non-English word list, like [the French BIP-0039 list](https://github.com/bitcoin/bips/blob/master/bip-0039/french.txt), Tidy needs to get everything right, so that the Tidy user's submitted changes reflect only and exactly what they want to change (and not, for example, re-order the list incorrectly).
 
 ## Adding a locale option to Tidy
 
@@ -305,11 +305,11 @@ Now, Tidy diligently uses this `count_characters` function every time it needs t
 
 ## A real-world test
 
-Remember earlier when I slyly referred to [the French BIPS--039 list](https://github.com/bitcoin/bips/blob/master/bip-0039/french.txt) as an example of a French word list? Let's return to it now as a sort of real-world test of Tidy's new worldliness. 
+Remember earlier when I slyly referred to [the French BIP-0039 list](https://github.com/bitcoin/bips/blob/master/bip-0039/french.txt) as an example of a French word list? Let's return to it now as a sort of real-world test of Tidy's new worldliness. 
 
 As per [the BIP-0039 specification](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki#wordlist), this list needs to be normalized using the NFKD form. It should also, presumably, alphabetize the French words correctly.
 
-As a test of our new version of Tidy, let's run the list through Tidy, doing an NFKD normalization and a sort using the French locale. If we got everything right, **the list _should_ come out exactly the same as it came in** (on the assumption that the BIPS list is correctly normalized and correctly sorted, which seems like a pretty safe assumption).
+As a test of our new version of Tidy, let's run the list through Tidy, doing an NFKD normalization and a sort using the French locale. If we got everything right, **the list _should_ come out exactly the same as it came in** (on the assumption that the BIP list is correctly normalized and correctly sorted, which seems like a pretty safe assumption).
 
 So, using our two new options, we run: `tidy -z nfkd --locale fr -o bip-0039/french.txt --force bip-0039/french.txt`. 
 
