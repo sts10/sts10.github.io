@@ -338,3 +338,7 @@ As we saw earlier, [the BIP-0039 specification](https://github.com/bitcoin/bips/
 I have an inkling that, while decomposed Unicode may be better for computers handling strings, I _think_ composed Unicode is better for preventing what I'd call a human-perceived duplicate. This is based on the assumption that we may lose information in the conversion from decomposed to composed, but that's not the case in the other direction. By this I mean that two different decomposed Unicode characters (called them A and B) may be converted to one single composed character (C). I am further assuming that all three of these character A, B, and C, likely look pretty similar to a human. So we wouldn't want words with A and B on the list, when we could instead risk losing a few words and only have these similar characters represented as C in all cases.
 
 But I fully admit that (a) I don't have a specific example of such a case, and (b) I'm in not position to say whether a speaker of this hypothetical language would have an issue distinguishing between characters A and B.
+
+For now, I'm normalizing my word lists with NFKD, following the BIPS spec.
+
+I [welcome arguments for or against NFKD, though](https://github.com/sts10/generated-wordlists/issues).
