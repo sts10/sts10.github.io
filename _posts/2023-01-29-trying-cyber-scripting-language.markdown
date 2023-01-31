@@ -41,6 +41,20 @@ I did have trouble getting a `for` loop to work in the `check_for_winner` functi
 
 As I alluded to above, I've been [writing Rust almost exclusively since this past summer](https://github.com/sts10?tab=repositories&q=&type=&language=rust&sort=). So Cyber's lack of strong typing felt a bit like running on ice in tap-dancing shoes. But again, scripting languages are for quick tasks, not slowly built-up complex systems (Rust!). Choose the right tool for the task! And after all, part of why I'm looking at new languages in the first place is because I think Rust is ultimately too low-level for me...
 
+### Handling local variables and scope
+
+I was a bit alarmed to read [this issue](https://github.com/fubark/cyber/issues/11) describing some local variable leakage issues in an early version of Cyber. It seems to resolved now, but I was then on my guard for other related weirdness with regard to local variables and scope.
+
+<!-- One weirdness that still exists as I wrote this can be illustrated by this example: -->
+
+<!-- ```text -->
+<!-- if true: -->
+<!--     a = 123 -->
+<!-- print a -- prints "123" -->
+<!-- ``` -->
+
+<!-- In my mind, an `if` block should have an isolated local scope (this is the case in Rust), so the above code should throw an "Error: `a` undefined on line 3". But apparently Python prints "123" in a similar situation, so maybe that's just what users expect from scripting languages! -->
+
 ## Finding and reporting bugs in Cyber v 0.1
 
 Cyber is not even three months old as of this writing(!), so I expected bugs. 
