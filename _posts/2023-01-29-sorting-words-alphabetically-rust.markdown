@@ -226,7 +226,7 @@ pub fn normalize_unicode(word: &str) -> String {
 }
 ```
 
-But later I convinced myself that I should, as with locales, let the user choose from any of the four forms, or, if not specific, perform no normalization at all. This is a risk that I'm trusting Tidy users with, but at this point I feel OK with it.
+But later I convinced myself that I should, as with locales, let the user choose from any of the four forms, or, if not specified by the user, perform no normalization at all. This is a risk that I'm trusting Tidy users with, since if their inputted word lists are not normalized, they could have the "apple" problem. But at this point I feel OK with this.
 
 Here's how I wrote the choose-your-own-normalization-form function:
 
@@ -248,7 +248,7 @@ pub fn normalize_unicode(word: &str, nf: &str) -> Result<String, String> {
 }
 ```
 
-I think this is probably a great use-case for [Cows](https://doc.rust-lang.org/std/borrow/enum.Cow.html), as most `word`s will NOT change from input to output through this function, but I haven't refactored this code yet.
+(For Rust folks: I think this is probably a great use-case for [Cows](https://doc.rust-lang.org/std/borrow/enum.Cow.html), as most `word`s will NOT change from input to output through this function, but I haven't refactored this code yet.)
 
 ## A better way to count characters?
 
@@ -260,11 +260,11 @@ But, as we saw above, this seemingly simple task can be tricky. I had been relyi
 
 My goal was to align Tidy's character counting with what a human would expect.
 
-At first, I was going to have Tidy count characters with `word.nfc().chars().count()`, normalizing the Unicode before counting. This would give each accented character a character count of 1, which I argue is inline with human expectation.
+At first, I was going to have Tidy count characters with `word.nfc().chars().count()`, normalizing the Unicode before counting. This would give each accented character a character count of 1, which I argue is reasonably in-line with human expectation.
 
-But this didn't seem quite right. While the accented characters I had seen and tested with did give a count of 1 when run through `.nfc().chars().count()`, I wasn't sure this was the case for _every_ character users might throw at it. To my knowledge, this isn't what NFC normalization was made for.
+But this didn't seem quite right. While the accented characters I had seen and tested with did give a count of 1 when run through `.nfc().chars().count()`, I wasn't sure this was the case for _every_ character users might throw at it. From what I've gathered, this isn't what NFC normalization was made for.
 
-Then, a Fediverse friend recommended I count what's called [grapheme clusters](https://www.unicode.org/reports/tr29/#Grapheme_Cluster_Boundaries) instead. To do this, I had to add yet another crate called [unicode_segmentation](https://docs.rs/unicode-segmentation/latest/unicode_segmentation/), but its API is pretty simple.
+Then, a Fediverse friend recommended I count what's called [grapheme clusters](https://www.unicode.org/reports/tr29/#Grapheme_Cluster_Boundaries) instead. To do this, I had to add yet another crate called [unicode_segmentation](https://docs.rs/unicode-segmentation/latest/unicode_segmentation/), but its API is thankfully pretty simple.
 
 ```rust
 use unicode_segmentation::UnicodeSegmentation;
@@ -278,7 +278,7 @@ pub fn count_characters(word: &str) -> usize {
 }
 ```
 
-Not only does this count accented characters exactly as `.nfc().chars().count()` does, it also counts each and any emoji as one character. In the test of this function, I went back to our example word from earlier:
+Not only does this count accented characters exactly as `.nfc().chars().count()` does (good), I'm pretty sure it also counts each and any emoji as one character. In the test of this function, I went back to our example word from earlier (and had some fun in the comments):
 
 ```rust
 #[test]
@@ -308,7 +308,7 @@ fn can_accurately_count_characters() {
 }
 ```
 
-Now, Tidy diligently uses this `count_characters` function every time it needs to get the length of a String, as a standard. Hurray for standardizations!
+Now, Tidy diligently uses this `count_characters` function every time it needs to get the length of a string slice, as a standard. Hurray for standardizations!
 
 ## A real-world test
 
@@ -316,7 +316,7 @@ Remember earlier when I slyly referred to [the French BIP-0039 list](https://git
 
 As per [the BIP-0039 specification](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki#wordlist), this list needs to be normalized using the NFKD form. It should also, presumably, alphabetize the French words correctly.
 
-As a test of our new version of Tidy, let's run the list through Tidy, doing an NFKD normalization and a sort using the French locale. If we got everything right, **the list _should_ come out exactly the same as it came in** (on the assumption that the BIP list is correctly normalized and correctly sorted, which seems like a pretty safe assumption).
+As a test of our new version of Tidy, let's run the French list through Tidy, doing an NFKD normalization and a sort using the French locale. If we got everything right, **the list _should_ come out exactly the same as it came in** (on the assumption that the BIP list is correctly normalized and correctly sorted, which seems like a pretty safe assumption).
 
 So, using our two new options, we run: `tidy -z nfkd --locale fr -o bip-0039/french.txt --force bip-0039/french.txt`. 
 
