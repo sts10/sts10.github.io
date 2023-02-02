@@ -85,25 +85,27 @@ Here's [my Rust implementation](https://github.com/sts10/tidy/blob/main/src/disp
 
 The public function in my module is a function called `check_decodability`. It takes a word list and returns a boolean: `true` for uniquely decodable, `false` for not.
 
-And... drumroll... the function returns `true` when given `{"101", "00", "0001", "1"}`.
+And... drumroll... the function returns `true` when given `["101", "00", "0001", "1"]`.
 
-## How can we _make_ a code uniquely decodable, while preserving the most amount of words from the original list?
+## How can we _make_ a not uniquely decodable code uniquely decodable, while preserving the most amount of words from the original list?
 
-No doubt it's powerful to be able to tell if a given list in uniquely decodable. (We're going to need that later!) But what I'm really after is an "algorithm to remove the fewest number of code words to make a given list uniquely decodable." This is because we want a nice long list of words to make passphrases from -- a longer list means (theoretically) stronger passphrases.
+No doubt it's powerful to be able to tell if a given list in uniquely decodable. (We're going to need that later!) But what I'm really after is an "algorithm to remove the fewest number of code words to make a given list uniquely decodable." This is because we want to preserve the most number of words for our long list of words to make passphrases from -- a longer list means (theoretically) stronger passphrases.
 
 To get a better understanding of how this connects to passphrases, let's work through another example.
 
 As part of a separate project, I created [a word list of 18,250 words](https://github.com/sts10/generated-wordlists/blob/main/lists/basic.txt). It's important to note that this list is NOT uniquely decodable. 
 
-What if we wanted to make this list uniquely decodable? We're going to have to eliminate some words from the list. But in order to keep passphrases generated from list strong, we want to **eliminate the fewest number of words possible**. With that goal in mind, how should we go about picking which words to remove?
+What if we wanted to make this list uniquely decodable? We're going to have to eliminate some words from the list. Let's assume that all 18,250 are pretty good words for passphrases, like "canal phrase disrupted trappings coincides translator". 
 
-* The most common word length on the list is 5 characters. We could eliminate all words that are not 5 characters. This would leave 1,802 words on the list.
+This six-word passphrase, like all six-word passphrases generated form a list of 18,250 words, has almost 85 bits of entropy. Every word we cut from the list decreases this number. So in order to keep passphrases generated from list strong, we want to **eliminate the fewest number of words possible**. With that goal in mind, how should we go about picking which words to remove?
+
+* The most common word length on the list is 5 characters. We could eliminate all words that are not 5 characters. This would leave 1,802 words on the list. Not great.
 * We could remove all prefix words. This would leave 13,312 words.
 * We could remove all suffix words. This would leave 15,959 words on the list.
 
 If we want to preserve the most words from the original list (again, to keep passphrases strong), it looks like, in this list's particular case, we'd go with removing suffix words. 
 
-But we learned earlier that there are lists that are uniquely decodable but don't follow any of these procedures. Thus, I think there must be a way to make a list uniquely decodable beyond these three procedures. 
+But we learned earlier that there are lists that are uniquely decodable but don't follow any of these procedures. Thus, I posit there must be another way to make a list uniquely decodable beyond these three procedures. 
 
 So to recap: what we're after is some sort of procedure that makes a list uniquely decodable, while removing fewer words than any of the three strategies outlined above. 
 
@@ -122,7 +124,7 @@ fn sardinas_patterson_theorem(c: HashSet<String>) -> bool {
 }
 ```
 
-So I figured, why not run the entire Sardinas-Patterson algorithm up until that point. Then, instead of returning a boolean (true/false), return the intersection (overlap) of the two sets, then remove those words from the original list.
+So I figured, why not run the entire Sardinas-Patterson algorithm up until that point. Then, instead of returning a boolean (true/false), return the intersection (overlap) of the two sets, which will, by definition, be some subset of words on our original word list. What if we then just... removed those words from the original list?
 
 ```rust
 pub fn get_sardinas_patterson_final_intersection(c: &[String]) -> Vec<String> {
@@ -158,7 +160,7 @@ Not only that, but the procedure seems to preserve more words than the three pro
 
 Interestingly, the resulting list includes prefix words and suffix words, and obviously has different word lengths (the technical term is [variable-length code](https://en.wikipedia.org/wiki/Variable-length_code)).
 
-For lack of a better term for now, I'm calling this removal procedure "Schlinkert pruning", after myself.
+For lack of a better term for now, I'm calling this removal procedure "Schlinkert pruning," after myself.
 
 ## Limitations
 
