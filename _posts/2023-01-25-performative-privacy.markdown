@@ -19,7 +19,11 @@ Traditionally, I'd refute this as I would the "nothing to hide" argument: We wan
 
 ## Using Signal for grocery lists
 
-To expand a bit further, this also reminds me of the idea of "If everyone uses [privacy measure], it will look less suspicious for those who really need to use [said privacy measure]." Use envelopes instead of postcards! I have thought of this as a reason for using Signal for sharing grocery lists. We should take privacy steps early, when we're boring and/or privileged enough to likely not be the subject of intense surveillance, so that we and others have access and knowledge of such methods when we need them. But I think Skinner-Thompson is adding something still new here.
+To expand a bit further, this also reminds me of the idea of "If everyone uses [given privacy measure], it will look less suspicious for those who really need to use [said privacy measure]." Use envelopes instead of postcards! 
+
+I have thought of this as a reason for using Signal for sharing grocery lists. We should take privacy steps early, when we're boring and/or privileged enough to likely not be the subject of intense surveillance, so that we and others have access and knowledge of such methods when we need them. 
+
+I'm personally fascinated by the work of social normalization at work here. But I think Skinner-Thompson is adding something still new here.
 
 For Skinner-Thompson, taking privacy (or security) measures is a form of _expression_. Indeed, Skinner-Thompson takes this far enough that he argues that privacy rights should rely not on the Fourth Amendment but on the First!
 
@@ -31,7 +35,7 @@ and later:
 
 ## A note on metadata
 
-Interestingly, both of the privacy-increasing measures that Skinner-Thompson cites give off a specific type of metadata, namely the data of whether ot not the measures are being taken: Even if they can't see the hoodie-wearers face, everyone can see that _someone_ there on the street or at a protest is wearing a hoodie, and ISPs can tell when users are connected to Tor nodes (but not what they're looking at). 
+Interestingly, both of the privacy-increasing measures that Skinner-Thompson cites give off a specific type of metadata, namely the data of whether or not the measures are being taken: Even if they can't see the hoodie-wearers face, everyone can see that _someone_ there on the street or at a protest is wearing a hoodie, and ISPs can tell when users are connected to Tor nodes (but not what they're looking at). 
 
 Given that metadata [can be as valuable to surveillers as the actual data itself](https://abcnews.go.com/blogs/headlines/2014/05/ex-nsa-chief-we-kill-people-based-on-metadata), it's little surprise that privacy tools like [Signal](https://signal.org/blog/sealed-sender/) and [Cwtch](https://cwtch.im) are very careful with regard to how they handle metadata. Putting aside the more technical/theoretical question of whether it's even possible to not generate _any_ metadata describing a data transfer, I wonder if this lack of expressive metadata would undercut Skinner-Thompson's idea of privacy-measures-as-expressive. Though I suppose the boring and privileged can always blog about using Signal and Tor and have the apps on their phones!
 
