@@ -211,7 +211,7 @@ For better or worse, [there are 4 normalization forms](https://www.unicode.org/r
 
 <!-- In our How have been "normalized" with [Unicode Normalization Form C](https://www.unicode.org/glossary/#normalization_form_c). The es-with-accents in `version2` use a different Normalization Form, I think [Form D](https://www.unicode.org/glossary/#normalization_form_d) or [Form ND](https://www.unicode.org/glossary/#normalization_form_kd). -->
 
-In our example, `version1` is probably NFC, with `version2` is probably NFKD. (I'm too lazy right now verify, but I can later. The point is, they're not the same.)
+In our example, `version1` is NFC, with `version2` is NFD. (I'm too lazy right now verify, but I can later. The point is, they're not the same.)
 
 ### Performing Unicode normalization in Rust
 
