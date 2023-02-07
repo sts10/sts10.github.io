@@ -7,9 +7,9 @@ comments: true
 
 A few months ago I had a 4TB external hard drive fail on me (it _may_ have been because I stored it on top of a medium-sized speaker...). It got me thinking that it might be time for me to explore cloud (or online) back-ups. 
 
-I'll note right off the back that I'm not a typical computer user. I'm very comfortable on the command line and am pretty privacy-conscious.
+I'll note right off the bat that I'm not a typical computer user. I'm very comfortable on the command line and am pretty privacy-conscious.
 
-For some context, [back in 2021 I started using a command line tool called Restic for local back-ups](https://sts10.github.io/2021/10/26/restic-rsync-backup-ideas.html). I've used it ever since and really like it. I did a Restic restore after switching Linux distros last year and it worked well. But, as I've been reminded, drives fail, and while I'm now considering buying a NAS, I also wanted to see what cloud storage I could figure out here in 2023. 
+For some context, [back in 2021 I started using a command line tool called Restic for local back-ups](https://sts10.github.io/2021/10/26/restic-rsync-backup-ideas.html). I've used it ever since and really like it. I did a Restic restore after switching Linux distros last year and it worked well. But, as I've been reminded, drives fail, and while I'm now considering buying a [NAS](https://en.wikipedia.org/wiki/Network-attached_storage), I also wanted to see what cloud storage I could figure out here in 2023. 
 
 ## Starting my research (or, if you're not comfortable with the command line)
 
