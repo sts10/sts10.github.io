@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "Mini PC Buying Guide"
+title: "Mini PC buying guide"
 date: 2022-11-12 10:00:00 -0400
 comments: true
 ---
 
-Do you have a (family) house with one or two mediocre computer monitors, speakers, keyboards and mice? Do you want a decent, cheap desktop for browsing the 'net, watching videos, maybe some light document editing work? I did!
+Do you have a (family) house with one or two mediocre computer monitors, speakers, keyboards and mice? Do you want a decent, cheap desktop for browsing the 'net, watching videos, maybe some light document editing work? I did! So I decided to do some research.
 
 ## Why a mini PC
 
