@@ -342,3 +342,7 @@ But I fully admit that (a) I don't have a specific example of such a case, and (
 For now, I'm normalizing my word lists with NFKD, following the BIPS spec.
 
 I [welcome arguments for or against NFKD, though](https://github.com/sts10/generated-wordlists/issues).
+
+## Bibliography
+
+If you're interested in the _history_ of alphabetization (which, yes, is a thing), I recommend [_A Place for Everything: The Curious History of Alphabetical Order_ by Judith Flanders](https://bookshop.org/p/books/a-place-for-everything-the-curious-history-of-alphabetical-order-judith-flanders/14458009?ean=9781541601161).
