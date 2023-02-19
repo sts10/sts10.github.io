@@ -51,7 +51,7 @@ You'll now be presented with a square QR code and a text string of uppercase let
 
 ![QR code and text codes exposed](/img/mastodon-two-factor/5-2fa-codes.png)
 
-We want to scan this QR code into your authenticator app. Get out your mobile device and open your authenticator app.Depending on the app, you'll need to tap a button to add a new account via scanning a QR code. Hold your phone up to the computer monitor, framing the QR code with your camera. Your authenticator app should add your Mastodon account and display a 6-digit number (called a "token") that changes every 30 seconds. (Optionally, you can store the text secret somewhere safe, like a piece of paper.)
+We want to scan this QR code into your authenticator app. Get out your mobile device and open your authenticator app. Depending on the app, you'll need to tap a button to add a new account via scanning a QR code. Hold your phone up to the computer monitor, framing the QR code with your camera. Your authenticator app should add your Mastodon account and display a 6-digit number (called a "token") that changes every 30 seconds. (Optionally, you can store the text secret somewhere safe, like a piece of paper.)
 
 ![Tofu displaying a 6-digit token, after proper set up](/img/mastodon-two-factor/tofu-code.PNG)
 
