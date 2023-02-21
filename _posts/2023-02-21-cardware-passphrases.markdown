@@ -14,7 +14,7 @@ If we compress spade and clubs suits into their color, black, and diamonds and h
 ## How use playing cards to create a strong passphrase
 
 ### Set-up
-1. Open [this cardware word list](https://github.com/sts10/generated-wordlists/blob/main/lists/experimental/cardware.txt) in your browser, or print it out.
+1. Open [this cardware word list](https://raw.githubusercontent.com/sts10/generated-wordlists/main/lists/experimental/cardware.txt) in your browser, or print it out.
 2. Prepare any deck of playing cards by removing any jokers. There should be 52 cards in the deck.
 
 ### Getting a word
