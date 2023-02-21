@@ -17,7 +17,7 @@ If we compress spade and clubs suits into their color, black, and diamonds and h
 1. Open [this cardware word list](https://raw.githubusercontent.com/sts10/generated-wordlists/main/lists/experimental/cardware.txt) in your browser, or print it out.
 2. Prepare any deck of playing cards by removing any jokers. There should be 52 cards in the deck.
 
-### Getting a word
+### Getting a random word
 1. Shuffle the deck
 2. Pick a random card, say a 7 of diamonds. 
 3. Write down "R07" (for red 7) on a sheet of paper. (The list uses "Ja" for jacks, "Qu" for queens, "Ki" for kings, and "Ac" for aces.)
@@ -25,4 +25,6 @@ If we compress spade and clubs suits into their color, black, and diamonds and h
 
 Repeat these steps 3 times until you've written down codes for 3 cards, for example something like "R07-BKi-RJa" ("Red 7, Black King, Red Jack"). Consulting the cardware list, we see this example correlates to the word "replies". This is the first word of your passphrase. 
 
-Repeat these steps as many times as you like to create a strong passphrases. Six word is a decently strong passphrase (about 84 bits).
+Repeat these steps as many times as you like to create a strong passphrase, like `replies tunnels deteriorating repository regeneration treatise` (6 words gives about 84 bits of entropy). 
+
+Note that you can use any delimiter you like between the words, or none at all (`repliestunnelsdeterioratingrepositoryregenerationtreatise`). 
