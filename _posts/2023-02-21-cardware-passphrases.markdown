@@ -20,7 +20,7 @@ If we compress spade and clubs suits into their color, black, and diamonds and h
 ### Getting a word
 1. Shuffle the deck
 2. Pick a random card, say a 7 of diamonds. 
-3. Write down "R07" (for red 7) on a sheet of paper. 
+3. Write down "R07" (for red 7) on a sheet of paper. (The list uses "Ja" for jacks, "Qu" for queens, "Ki" for kings, and "Ac" for aces.)
 4. Re-insert the selected card back into the deck. This step is crucial.
 
 Repeat these steps 3 times until you've written down codes for 3 cards, for example something like "R07-BKi-RJa" ("Red 7, Black King, Red Jack"). Consulting the cardware list, we see this example correlates to the word "replies". This is the first word of your passphrase. 
