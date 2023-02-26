@@ -39,3 +39,7 @@ Astute readers may notice that the above process "collapses" hearts and diamonds
 The short answer to why I still choose to use colors rather than suits is that 2 cards out of a 52-card deck would correspond to a word list of 2,704 words. I argue that a 7,776 word list for use with dice is a better choice. And using 3 cards from a 52-card deck would require a list of 140,608 words, which is impractical for English.
 
 A longer answer is that 17,576 nicely clears something I call the ["brute force line."](https://github.com/sts10/tidy#the-brute-force-line)
+
+### Can I, a human, shuffle a deck well enough to ensure randomness?
+
+I admit I'm not sure. It seems much easy for most humans to roll a number of dice "well" than to shuffle and "randomly" pick out a single card.
