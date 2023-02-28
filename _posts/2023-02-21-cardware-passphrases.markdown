@@ -43,3 +43,7 @@ A longer answer is that 17,576 nicely clears something I call the ["brute force 
 ### Can I, a human, shuffle a deck well enough to ensure randomness?
 
 I admit I'm not sure. It seems much easy for most humans to roll a number of dice "well" than to shuffle and "randomly" pick out a single card.
+
+## Related projects
+
+* [Pokerware Secure Passphrase Generation](https://github.com/skeeto/pokerware) 
