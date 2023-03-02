@@ -47,3 +47,4 @@ I admit I'm not sure. It seems much easy for most humans to roll a number of dic
 ## Related projects
 
 * [Pokerware Secure Passphrase Generation](https://github.com/skeeto/pokerware) 
+* [Deckware, a 224-bit entropy extractor](https://pthree.org/2021/02/18/introducing-deckware-a-224-bit-entropy-extractor/) ([Github](https://github.com/atoponce/deckware))
