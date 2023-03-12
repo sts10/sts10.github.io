@@ -31,20 +31,24 @@ To be more blunt, paraphrasing ["Choose a License,"](https://choosealicense.com/
 
 ### I still think using Copyleft is good
 
-In general, [my early free software training](https://sts10.github.io/2018/01/06/switching-to-linux.html) from books like [Gabriella Coleman's _Coding Freedom_](https://www.amazon.com/Coding-Freedom-Ethics-Aesthetics-Hacking-ebook/dp/B009PD9LA8/ref=sr_1_fkmr0_1?ie=UTF8&qid=1547610006&sr=8-1-fkmr0&keywords=coleman+ethics+code+gabriella) and _Two Bits: The Cultural Significance of Free Software_ by Chris Kelty tells me I should always prefer to use copyleft licenses, since they keep software free and open, a universal good thing in the eyes of some. And I'm not disagreeing with that here. But I do think -- hot, uniformed take coming -- there seems to be more innovation on the more permissive side of the spectrum than on the copyleft side, where GPL v3 and AGPL v3 and the other GPL licenses still reign. And thus I generally was exploring permissive license when writing this post.
+In general, [my early free software training](https://sts10.github.io/2018/01/06/switching-to-linux.html) from books like [Gabriella Coleman's _Coding Freedom_](https://www.amazon.com/Coding-Freedom-Ethics-Aesthetics-Hacking-ebook/dp/B009PD9LA8/ref=sr_1_fkmr0_1?ie=UTF8&qid=1547610006&sr=8-1-fkmr0&keywords=coleman+ethics+code+gabriella) and _Two Bits: The Cultural Significance of Free Software_ by Chris Kelty tells me I should always prefer to use copyleft licenses, since they keep software free and open, a universal good thing in the eyes of some. And I'm not disagreeing with that here. 
+
+But from what I've seen in the world of software licenses, there seems to be more movement and innovation on the permissive side of the spectrum, as opposed to on the copyleft side, where GPL v3 and AGPL v3 and the other GPL licenses still reign. And thus I generally was exploring permissive license when writing this post.
 
 ## What other licenses are out there?
 
-So I knew about MIT, GPL, and AGPL. There's also [Apache 2.0 License](https://apache.org/licenses/LICENSE-2.0) and [Mozilla Public License](https://www.mozilla.org/en-US/MPL/), a weak copyleft license that I should probably check out further? 
+The MIT License -- the only permissive license I had ever used personally -- is from the 1980s. While I still think the MIT License is a fine choice, I figured there must be some new licenses with interesting ideas and protections.
 
-But the MIT License -- really the only permissive license I was familiar with -- is from the 1980s. While I still think the MIT License is a fine choice, I figured there must be some new licenses with interesting ideas and protections.
+<!-- Coming into this informal study, I knew about MIT, GPL, and AGPL. --> 
 
-Below is a grab-bag list of licenses I was either reminded of or found in my research (by no means comprehensive!).
+I'd heard of [Apache 2.0 License](https://apache.org/licenses/LICENSE-2.0) and [Mozilla Public License](https://www.mozilla.org/en-US/MPL/), a weak copyleft license that I've always meant to understand better...
+
+But I hadn't sat down and surveyed software licenses. Below is a grab-bag list of licenses I was either reminded of or found in my research (by no means comprehensive!).
 
 * [The Unlicense](https://unlicense.org/) seems to seek to be a super permissive license. I know of [a prominent developer in the Rust community who uses and supports the Unlicense](https://github.com/BurntSushi/notes/blob/master/2020-10-29_licensing-and-copyleft.md).
 * There's a family of licenses called [BSD licenses](https://en.wikipedia.org/wiki/BSD_licenses) that I've seen used on projects, including [age encryption](https://github.com/FiloSottile/age). I don't know much about them!
 * Here's a list of [ethical licenses](https://ethicalsource.dev/licenses/), which includes [the Hippocratic License](https://firstdonoharm.dev/).
-* The [JSON License](https://www.json.org/license.html) has the fun and likely legally tricky clause: "The Software shall be used for Good, not Evil."
+* The [JSON License](https://www.json.org/license.html) has the fun and likely legally murky clause: "The Software shall be used for Good, not Evil."
 * [Creative Commons](https://creativecommons.org/choose/) offers a family of licenses, but I understand that they're not written _just_ for software.
 * Microsoft(!) has a license called the [Microsoft Public License](https://choosealicense.com/licenses/ms-pl/).
 * GitHub's "Choose a License" site has [an "Appendix" page that lists about two dozens licenses in a convenient chart form](https://choosealicense.com/appendix/).
@@ -62,15 +66,15 @@ As Blue Oak Council [notes](https://blueoakcouncil.org/license-faq):
 
 What's good about the Blue Model License 1.0.0? The project creators [explained their reasoning in a post](https://blueoakcouncil.org/2019/03/06/model.html). Some notes from my non-legal mind:
 
-* To me it seems like the authors were concerned about how, with most existing permissive licenses, ["patent owners [may be able to] sue users and distributors of open software."](https://blueoakcouncil.org/primer#patent). I don't quite follow this legal concern completely, but these folks seem smart. 
+* To me it seems like the authors were concerned about how, with most existing permissive licenses, ["patent owners [may be able to] sue users and distributors of open software."](https://blueoakcouncil.org/primer#patent) I _think_ the worry that the Blue Model License authors are attempting to squash here is that if software user A files a patent that involves the software, user B might be in legal trouble.
 * Their license also clearly states that "No contributor can revoke this license," which I presume is (or may be) an issue with licenses that don't explicitly state this. 
-* And of course, there's a "No Liability" section to protect me from the consequences my janky Rust code, especially the projects that COULD, theoretically, be used for illegal activities.
+* And of course, there's a "No Liability" section to protect me from the consequences, especially the projects that COULD, theoretically, be used for illegal activities.
 
 All good, smart ideas, as far as I can tell.
 
 ## Finding more new-to-me licenses
 
-I found more licenses by the executive director of the Blue Oak Council, Kyle Mitchell, listed in [one of his blog posts](https://writing.kemitchell.com/2021/06/20/License-Round-Up). As you'd expect Blue Oak Model License is listed, but there are many other interesting ones. I made note of the [Big Time Public License](https://bigtimelicense.com/versions/2.0.1) and [the Prosperity License](https://prosperitylicense.com/) in particular.
+I found more licenses by the executive director of the Blue Oak Council, Kyle Mitchell, listed in [one of his blog posts](https://writing.kemitchell.com/2021/06/20/License-Round-Up). As you'd expect, Blue Oak Model License is listed, but there are many other interesting ones. I made note of the [Big Time Public License](https://bigtimelicense.com/versions/2.0.1) and [the Prosperity License](https://prosperitylicense.com/) in particular.
 
 ## Obligatory note on license compatibility
 
@@ -102,7 +106,7 @@ This makes sense to me, but one question I _still_ have about this situation is:
 
 ## Slapping the Blue Oak Model License on a few of my projects that did not have an explicit license specified
 
-I did find a few of my public Github repositories did not have a license on them at all, which feels like a loophole when worrying about whether you can _change_ the license of a project. These included 
+I did find a few of my public Github repositories that did not have a license on them at all, which feels like a loophole when worrying about whether you can _change_ the license of a project. These included:
 * [the repo for my personal website](https://github.com/sts10/samschlinkert_com)
 * [a homophones scraper](https://github.com/sts10/homophones) 
 * [a little passphrase guesser](https://github.com/sts10/passphrase-guesser)
@@ -115,8 +119,8 @@ Since none of these had licenses as of a few hours ago, I figured they'd be exce
 
 ### What about Tidy's license?
 
-After all of this, I've found myself a bit more precious with Tidy! A little more hesitant to make changes so quickly. I want to be sure I'm doing things more by-the-book with what is my most popular project (not counting [my Vim colorscheme](https://github.com/sts10/vim-pink-moon)).
+After all of this research, I've found myself a bit slower to change the license on my most popular project, Tidy. I want to be sure I'm doing things more by-the-book with what is likely my most-used project (not counting [my Vim colorscheme](https://github.com/sts10/vim-pink-moon)).
 
-Plus, Tidy _just_ got its [first contribution by a human other than me just this past weekend](https://github.com/sts10/tidy/commits?author=bugaevc&since=2023-01-01&until=2023-01-27), while licensed under MIT! Thankfully, I interact with this contributor on Mastodon often, so I could get in contact with him, but I'm not even sure how to get his legal permission to change the license of his contribution retroactively. I think I could add something called a [contributor license agreement](https://en.wikipedia.org/wiki/Contributor_License_Agreement) to the project, but I'm guessing that would only apply to future contributions? Also, I'm not decided whether I want to move away from MIT -- Blue Oak is cool, but I think this is one of those things that is fine to move slow on.
+Plus, Tidy _just_ got its [first contribution by a human other than me just this past weekend](https://github.com/sts10/tidy/commits?author=bugaevc&since=2023-01-01&until=2023-01-27), while licensed under MIT! Thankfully, I interact with this contributor on Mastodon often, so I could get in contact with him, but I'm not even sure how to get his legal permission to change the license of his contribution retroactively. I think I could add something called a [contributor license agreement](https://en.wikipedia.org/wiki/Contributor_License_Agreement) to the project, but I'm guessing that would only apply to future contributions? 
 
 As usual, feel free to [mention or DM me on Mastodon](https://hachyderm.io/@schlink) if you know of a license you like, or spotted an error in this post.
