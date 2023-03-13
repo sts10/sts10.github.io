@@ -79,11 +79,11 @@ Here's to cultivating a diversity of cultural and personal experience and mainta
 
 Armed with this idea that two people need at least some shared experience to **negotiate meaning through metaphors**, I thought about if this illuminated an unexplored advantage of being in a member of a group in power. As a common example that you may have heard before (but this framework may illuminate in new ways), business people may use sports metaphors that may be easier for sports fans to understand compared to people who don't watch sports. 
 
-We might now venture even deeper. Lakoff and Johnson spend a good amount of time taking about orientations as metaphors (HAPPY IS UP, SAD IS DOWN; HEALTH IS UP, SICKNESS and DEATH are DOWN; VIRTUE IS UP, DEPRAVITY IS DOWN,). Much later in the book, they briefly acknowledge something interesting, especially when considered in light of disability: that these foundational orientation metaphors rely on a "prototypical" or "canonical" person.
+We might now venture even deeper. Lakoff and Johnson spend a good amount of time taking about orientations as metaphors (HAPPY IS UP, SAD IS DOWN; HEALTH IS UP, SICKNESS and DEATH are DOWN; VIRTUE IS UP, DEPRAVITY IS DOWN). Much later in the book, they briefly acknowledge something interesting, especially when considered in light of disability: that these foundational orientation metaphors rely on a "prototypical" or "canonical" person.
 
 > Cooper and Ross (1975) observe that our culture's view of what a prototypical member of our culture is like determines an orientation of concepts within our conceptual system. The canonical person forms a conceptual reference point, and an enormous number of concepts in our conceptual system are oriented with respect to whether or not they are similar to the properties of the prototypical person. Since people typically function in an _upright_ position, see and move _frontward_, spend most of their time performing _actions_... we have a basis in our experience for viewing ourselves as more UP than DOWN, more FRONT than BACK, more ACTIVE than PASSIVE... (132)
 
-What does this mean for a person who can't stand UP unassisted, whose leg is twisted "sideways", or who requires more PASSIVE time to rest than others? Are they othered by entrenched cultural metaphors in ways that few understand?
+What does this mean for a person who can't stand UP unassisted, whose leg is twisted "sideways", or who requires more PASSIVE time to rest than others? Are they othered by entrenched cultural metaphors in ways that few understand? What insight can this provide for Disability Studies?
 
 ## Computer viruses as a more modern example
 
@@ -105,11 +105,13 @@ This implies that explanatory metaphors need to be revisited occasionally to see
 
 This idea of metaphors growing out-dated over time is not something I picked up on in _Metaphors We Live By_. However, the authors do take care to explain that these metaphors are necessarily partial, not total. "If [they] were total, once concept would actually _be_ the other, not merely understood in terms of it. For example, time isn't really money." That this already-partial explanatory power may wane as our ("our") understanding of one or both of the connected concepts (computer errors and biological disease, in this case) changes makes sense within Lakoff and Johnson's framework.
 
-## Crime and (un)puzzlement
+## Crime and (Un)Puzzlement: Metaphor as activism battleground
 
 I've also learned that John Perry Barlow, in a 1990 essay called ["Crime and Puzzlement"](https://www.eff.org/pages/crime-and-puzzlement), specifically mentioned the conveyance of metaphors "to both the public and the policy-makers" "metaphors which will illuminate the more general stake in liberating Cyberspace" as a founding goal of the [Electronic Frontier Foundation](https://www.eff.org):
 
 > In addition, we will work with the Computer Professionals for Social Responsibility and other organizations to convey to both the public and the policy-makers metaphors which will illuminate the more general stake in liberating Cyberspace. 
+
+Barlow knew the power of metaphors at the intersection of policy, politics, and technology. I don't think much has changed since the early '90s.
 
 <!-- ### A soaked nut -->
 
