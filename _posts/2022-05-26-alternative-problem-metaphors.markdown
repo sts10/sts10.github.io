@@ -105,7 +105,7 @@ This implies that explanatory metaphors need to be revisited occasionally to see
 
 This idea of metaphors growing out-dated over time is not something I picked up on in _Metaphors We Live By_. However, the authors do take care to explain that these metaphors are necessarily partial, not total. "If [they] were total, once concept would actually _be_ the other, not merely understood in terms of it. For example, time isn't really money." That this already-partial explanatory power may wane as our ("our") understanding of one or both of the connected concepts (computer errors and biological disease, in this case) changes makes sense within Lakoff and Johnson's framework.
 
-## The Electronic Frontier Foundation 
+## Crime and (un)puzzlement
 
 I've also learned that John Perry Barlow, in a 1990 essay called ["Crime and Puzzlement"](https://www.eff.org/pages/crime-and-puzzlement), specifically mentioned the conveyance of metaphors "to both the public and the policy-makers" "metaphors which will illuminate the more general stake in liberating Cyberspace" as a founding goal of the [Electronic Frontier Foundation](https://www.eff.org):
 
