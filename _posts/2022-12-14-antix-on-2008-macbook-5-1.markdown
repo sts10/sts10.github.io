@@ -222,6 +222,9 @@ I generally liked how MX Linux looks out of the box, especially the flagship Xfc
 
 <!-- As for themes and icons, [in the past](https://sts10.github.io/2017/04/18/xfce-and-other-linux-notes.html) I used the now-defunct Paper theme and icons for Xfce. This time around I might try [Papirus](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme), [Flat Remix](https://github.com/daniruiz/flat-remix-gnome), or [We10X](https://github.com/yeyushengfan258/We10X-icon-theme). To be honest I'm not sure which of these general "Linux" themes (maybe they're GTK?) will work on antiX, but I figure it's worth a shot. -->
 
+---
+
+If you know of any other RAM-saving techniques or other lightweight Linux distros you like, feel free to [let me know](https://hachyderm.io/@schlink)!
 
 ---
 
@@ -244,4 +247,7 @@ My takeaway here is that antiX is _not_ advertised as a beginner-friendly distro
 
 ---
 
-If you know of any other RAM-saving techniques or other lightweight Linux distros you like, feel free to [let me know](https://hachyderm.io/@schlink)!
+## Appendix: Resources and notes
+
+* [Linux DVD images (and how-to) for 32-bit EFI Macs (late 2006 models)](https://mattgadient.com/linux-dvd-images-and-how-to-for-32-bit-efi-macs-late-2006-models/)
+* I also am wondering if performance on some or all of these machines would be significantly improved if I had taken the time to find the correct drivers for their GPUs. A fediverse friend points me to [NVIDIA driver 304.108](https://www.nvidia.com/download/driverResults.aspx/156163/en-us/).
