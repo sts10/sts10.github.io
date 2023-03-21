@@ -97,7 +97,7 @@ As part of a separate project, I created [a word list of 18,250 words](https://g
 
 What if we wanted to make this list uniquely decodable? We're going to have to eliminate some words from the list. Let's assume that all 18,250 are pretty good words for passphrases, like "canal phrase disrupted trappings coincides translator". 
 
-This six-word passphrase, like all six-word passphrases generated form a list of 18,250 words, has almost 85 bits of entropy. Every word we cut from the list decreases this number. So in order to keep passphrases generated from list strong, we want to **eliminate the fewest number of words possible**. With that goal in mind, how should we go about picking which words to remove?
+This six-word passphrase, like all six-word passphrases generated from a list of 18,250 words, has almost 85 bits of entropy. Every word we cut from the list decreases this number. So in order to keep passphrases generated from list strong, we want to **eliminate the fewest number of words possible**. With that goal in mind, how should we go about picking which words to remove?
 
 * The most common word length on the list is 5 characters. We could eliminate all words that are not 5 characters. This would leave 1,802 words on the list. Not great.
 * We could remove all prefix words. This would leave 13,312 words.
