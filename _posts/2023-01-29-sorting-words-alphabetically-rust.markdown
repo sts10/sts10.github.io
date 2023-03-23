@@ -31,11 +31,19 @@ assert_eq!(foods, ["apple", "banana", "carrot", "zucchini"]);
 
 What if we capitalize the 'b' in "banana"? Any guesses if the `.sort()`ed list will change?
 
-It does! `.sort()` gives us: `["Banana", "apple", "carrot", "zuccini"]` 
+It does! `.sort()` gives us: `["Banana", "apple", "carrot", "zucchini"]` 
 
 But that's fine; it's a chosen default to place all capitalized letters _before_ all lowercase characters. As long as it's consistent, I'm fine with that. Plus, most passphrase lists are all lowercase, hence Tidy's `--to-lowercase` option.
 
-At the moment, I don't know if you can change this default sorting behavior without using a crate. For now, we're going to press on, because we have bigger issues...
+We could use [Rust's `sort_by`](https://doc.rust-lang.org/std/primitive.slice.html#method.sort_by) method to "mix" uppercase and lowercase letters, with [something like this](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=fbe69028b42ce8a233ea11a04dae3fe9): 
+
+```rust
+let mut foods = ["apple", "Banana", "carrot", "zucchini"];
+foods.sort_by(|a, b| a.to_lowercase().partial_cmp(&b.to_lowercase()).unwrap());
+assert_eq!(foods, ["apple", "Banana", "carrot", "zucchini"]);
+```
+
+We could stop here, content, but what about languages that aren't English?
 
 ## There are language besides English
 
