@@ -35,11 +35,12 @@ It does! `.sort()` gives us: `["Banana", "apple", "carrot", "zucchini"]`
 
 But that's fine; it's a chosen default to place all capitalized letters _before_ all lowercase characters. As long as it's consistent, I'm fine with that. Plus, most passphrase lists are all lowercase, hence Tidy's `--to-lowercase` option.
 
-We could use [Rust's `sort_by`](https://doc.rust-lang.org/std/primitive.slice.html#method.sort_by) method to "mix" uppercase and lowercase letters, with [something like this](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=fbe69028b42ce8a233ea11a04dae3fe9): 
+We could use [Rust's `sort_by`](https://doc.rust-lang.org/std/primitive.slice.html#method.sort_by) method to "mix" uppercase and lowercase letters, with [something like this](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=83a749525554af0f42b5b3991643efe8): 
 
 ```rust
 let mut foods = ["apple", "Banana", "carrot", "zucchini"];
-foods.sort_by(|a, b| a.to_lowercase().partial_cmp(&b.to_lowercase()).unwrap());
+foods.sort_by(|a, b| a.to_lowercase().cmp(&b.to_lowercase()));
+// or foods.sort_by_key(|a| a.to_lowercase());
 assert_eq!(foods, ["apple", "Banana", "carrot", "zucchini"]);
 ```
 
