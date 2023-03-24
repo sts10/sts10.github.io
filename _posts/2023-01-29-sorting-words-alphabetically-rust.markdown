@@ -348,7 +348,7 @@ I have an inkling that, while decomposed Unicode may be better for computers han
 
 But I fully admit that (a) I don't have a specific example of such a case, and (b) I'm in not position to say whether a speaker of this hypothetical language would have an issue distinguishing between characters A and B.
 
-For now, I'm normalizing my word lists with NFKD, following the BIPS spec.
+For now, I'm normalizing [my word lists](https://github.com/sts10/generated-wordlists) with NFKD, following [the "Bitcoin Improvement Proposals" BIP39 spec](https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki#wordlist).
 
 I [welcome arguments for or against NFKD, though](https://github.com/sts10/generated-wordlists/issues).
 
