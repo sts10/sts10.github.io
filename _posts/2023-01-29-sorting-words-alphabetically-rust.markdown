@@ -48,11 +48,11 @@ We could stop here, content, but what about languages that aren't English?
 
 ## There are language besides English
 
-What about a list of words like: `["énigme", "enlever", "abbey", "zoo", "Zambia", "eager", "ezra", "año", "antena"]`?
+What about a list of words like: `["énigme", "enlever", "abbey", "zoo", "Zambia", "eager", "ezra", "año", "antena", "anaconda", "aptitude"]`?
 
-`.sort()` gives us `["Zambia", "abbey", "antena", "año", "eager", "enlever", "ezra", "zoo", "énigme"]`
+`.sort()` gives us `["Zambia", "abbey", "anaconda", "antena", "aptitude", "año", "eager", "enlever", "ezra", "zoo", "énigme"]`
 
-We knew "Zambia" would be first from our capitalization example above. But now we learn that, luckily, "año" is sorted correctly after "antena" -- as I understand it (and correct me if I'm wrong) in Spanish, 'ñ' is a letter distinct from 'n' and comes after 'n' in Spanish. 
+We knew "Zambia" would be first from our capitalization example above. But now we learn that, luckily, "año" is sorted correctly after "antena" and "aptitude"; as I understand it (and correct me if I'm wrong) in Spanish, 'ñ' is a letter distinct from 'n' and comes after 'n' in Spanish. 
 
 But! The French word "énigme" is way at the end, as if 'é' is a unique letter that goes at the end of the alphabet! As I understand it (and I know even less French than Spanish), 'é' should be sorted as if it is a regular 'e'. In other words, this list should be sorted: "eager", "énigme", "enlever", "ezra". 
 
@@ -86,7 +86,7 @@ pub fn sort_carefully(list: Vec<String>) -> Vec<String> {
 }
 ```
 
-With this change, here's how it sorts our list: 
+With this change, here's how it sorts a slightly shortened version of our list: 
 
 `"abbey", "año", "antena", "eager", "énigme", "enlever", "ezra", "Zambia", "zoo"`
 
@@ -136,8 +136,6 @@ use icu_collator::CollatorOptions;
 /// Sort a Vector of words a bit more carefully than Rust's
 /// default .sort(), treating capitalized letters and accented letters a
 /// bit more smart.
-/// `.sorted()` words -> ["Zambia", "abbey", "eager", "enlever", "ezra", "zoo", "énigme"]
-/// sort_carefully words -> ["abbey", "eager", "énigme", "enlever", "ezra", "Zambia", "zoo"]
 pub fn sort_carefully(list: Vec<String>, locale: Locale) -> Vec<String> {
     let mut options_l2 = CollatorOptions::new();
     options_l2.strength = Some(Strength::Secondary);
