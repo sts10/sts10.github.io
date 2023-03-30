@@ -96,7 +96,7 @@ The resulting list is uniquely decodable and 7,776-words long, just as we wanted
 
 But in order to make a _usable_ list, I wanted to make some cuts of my own. I decided to cut profane words, British spellings of English words, and Roman numerals. To remove some proper nouns, I also (somewhat controversially) only let through words found in the Linux list of English words found at `/usr/share/dict/words`. With all these additional cuts, I needed to take the first 11,047 words from the list of 18,000 to Schlinkert prune down to 7,776, but I think it's worth it. (I'll note here that, with these additional cuts, Schlinkert pruning was still the best method of the three!)
 
-Finally, we now have [a usable word list](https://github.com/sts10/remote-words/blob/main/lists/usable/alpha-line.txt) for our particular use-case: It's made up of relatively common words, it's uniquely decodable (and thus words can be safely combined), and it should be generally easy to input using our linear keyboard (thanks to us prioritizing words with low click scores).
+Finally, we now have [a usable word list](https://github.com/sts10/remote-words/blob/main/lists/usable/long/alpha-line.txt) for our particular use-case: It's made up of relatively common words, it's uniquely decodable (and thus words can be safely combined), and it should be generally easy to input using our linear keyboard (thanks to us prioritizing words with low click scores).
 
 Some example 4-word passphrases from this final list that we could use for Netflix and keep that Montauk party going:
 
@@ -112,9 +112,9 @@ Obviously, don't use any of the passphrases published in this blog post!
 
 ### How to make your own passphrase, securely
 
-One way to securely create a passphrase is to [use physical dice](https://www.eff.org/dice), where a roll of 5 6-sided dice corresponds to one word (this is why we went for exactly 7,776 words!). [Here's my usable word list with corresponding dice rolls for you to use](https://github.com/sts10/remote-words/blob/main/lists/usable/alpha-line-dice.txt).
+One way to securely create a passphrase is to [use physical dice](https://www.eff.org/dice), where a roll of 5 6-sided dice corresponds to one word from the long lists. [Here's my usable word list with corresponding dice rolls for you to use](https://github.com/sts10/remote-words/blob/main/lists/usable/long/alpha-line-dice.txt). If you use one of the short lists, you just need 4 6-sided dice.
 
-If you want more than 51 bits of entropy, you can use more than 4 words. Please use your own threat model!
+If you want more than 51 bits of entropy, you can use more than 4 words from one of the long lists (more than 5 from one of the short lists -- see below). Please use your own threat model!
 
 To those who work on password generation software (either built-in to an online service sign-up flow or a password manager), I encourage you to imagine possibilities of using word lists tailored to users' contextual needs.
 
@@ -123,6 +123,20 @@ To those who work on password generation software (either built-in to an online 
 Above, we assumed a Montauk house that had an smart TV with a particular linear keyboard. 
 
 Following the process above, we can make separate lists for other layouts. As you might expect, this results in different word lists. See [this repo for more](https://github.com/sts10/remote-words).
+
+## Short lists
+
+I've also used this process to create [shorter, 1,296-word versions of these lists](https://github.com/sts10/remote-words/tree/main/lists/usable/short). This number of words corresponds to rolls of 4 dice. 
+
+Each word from these lists adds about 10 bits of entropy to a passphrase, so you'd need to use 5 words from these shorter lists to get the same security as 4 words from the long lists. What makes the short lists appealing is that the words cost fewer clicks. Here are some sample passphrases from the short alpha-line list, each of which has 62 bits of entropy:
+
+```
+gloom propped sit cup tub fir 
+ache prone sly tied fled tip 
+four glad hog define boon cast 
+also tug abide skins lupus hike 
+cuts boron outputs utmost leg bet 
+```
 
 ## Other links
 
