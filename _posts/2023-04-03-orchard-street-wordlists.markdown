@@ -7,7 +7,7 @@ comments: true
 
 About five years ago I started thinking about passphrases and the word lists used to generate them. At first, I just built [tools](https://sts10.github.io/2018/05/05/compound-passphrase-list-safety-checker.html) to create word lists, rather than actual word lists. [In 2020, I finally started working on making lists](https://sts10.github.io/2020/09/30/making-a-word-list.html). 
 
-Today, I've polished up four of my word lists and am freshly publishing them as ["Orchard Street Wordlists"](https://github.com/sts10/orchard-street-wordlists), named after the first street I lived on in Manhattan. I'm hoping that a little branding will help them get some attention and use.
+Today, I've polished up four of my word lists and am freshly publishing them as [Orchard Street Wordlists](https://github.com/sts10/orchard-street-wordlists), named after the first street I lived on in Manhattan. I'm hoping that a little branding will help them get some attention and use.
 
 ## The Lists
 
