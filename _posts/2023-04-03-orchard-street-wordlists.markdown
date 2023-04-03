@@ -7,7 +7,7 @@ comments: true
 
 About five years ago I started thinking about passphrases and the word lists used to generate them. At first, I just built [tools](https://sts10.github.io/2018/05/05/compound-passphrase-list-safety-checker.html) to create word lists, rather than actual word lists. [In 2020, I finally started working on making lists](https://sts10.github.io/2020/09/30/making-a-word-list.html). 
 
-Today, I've polished four of my word lists and am freshly publishing them as ["Orchard Street Wordlists"](https://github.com/sts10/orchard-street-wordlists). 
+Today, I've polished up four of my word lists and am freshly publishing them as ["Orchard Street Wordlists"](https://github.com/sts10/orchard-street-wordlists), named after the first street I lived on in Manhattan. I'm hoping that a little branding will help them get some attention and use.
 
 ## The Lists
 
@@ -21,6 +21,6 @@ And lastly, I included two short lists from [my Remote Words project](https://gi
 
 I also created included versions of the Medium and Short lists with their dice roll numbers (e.g. `34565	holiday`), if users want to use dice to create passphrases (see [EFF's guide](https://www.eff.org/dice)).
 
-I decided to call them Orchard Street Wordlists because my first apartment in New York was on Orchard Street. 
+---
 
 Hitting `git push` on this particular project felt like a culmination of my work with word lists. After five years thinking about very niche questions surrounding word lists, part of me hopes I can let these lists be as they are now and find something else to think about.
