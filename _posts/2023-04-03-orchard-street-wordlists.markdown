@@ -21,4 +21,6 @@ And lastly, I included two short lists from [my Remote Words project](https://gi
 
 I also created included versions of the Medium and Short lists with their dice roll numbers (e.g. `34565	holiday`), if users want to use dice to create passphrases (see [EFF's guide](https://www.eff.org/dice)).
 
+I decided to call them Orchard Street Wordlists because my first apartment in New York was on Orchard Street. 
+
 Hitting `git push` on this particular project felt like a culmination of my work with word lists. After five years thinking about very niche questions surrounding word lists, part of me hopes I can let these lists be as they are now and find something else to think about.
