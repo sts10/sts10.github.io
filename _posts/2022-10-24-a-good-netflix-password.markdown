@@ -131,11 +131,11 @@ I've also used this process to create [shorter, 1,296-word versions of these lis
 Each word from these lists adds about 10 bits of entropy to a passphrase, so you'd need to use 5 words from these shorter lists to get the same security as 4 words from the long lists. What makes the short lists appealing is that the words cost fewer clicks. Here are some sample passphrases from the short alpha-line list, each of which has 62 bits of entropy:
 
 ```
-gloom propped sit cup tub fir 
-ache prone sly tied fled tip 
-four glad hog define boon cast 
-also tug abide skins lupus hike 
-cuts boron outputs utmost leg bet 
+gloom propped sit cup tub fir
+ache prone sly tied fled tip
+four glad hog define boon cast
+also tug abide skins lupus hike
+cuts boron outputs utmost leg bet
 ```
 
 ## Other links
