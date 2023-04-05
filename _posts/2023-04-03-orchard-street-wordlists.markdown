@@ -5,7 +5,7 @@ date: 2023-04-03 10:00:00 -0400
 comments: true
 ---
 
-About five years ago I started thinking about passphrases and the word lists used to generate them. At first, I just built [tools](https://sts10.github.io/2018/05/05/compound-passphrase-list-safety-checker.html) to create word lists, rather than actual word lists. [In 2020, I finally started working on making lists](https://sts10.github.io/2020/09/30/making-a-word-list.html). 
+About five years ago I started thinking about passphrases and the word lists used to generate them. At first, I just built [tools](https://sts10.github.io/2018/05/05/compound-passphrase-list-safety-checker.html) to create word lists, rather than actual word lists. [In 2020, I finally started working on making lists](https://sts10.github.io/2020/09/30/making-a-word-list.html).
 
 My work building word list tools has culminated in the latest versions of [Tidy](https://github.com/sts10/tidy), which, among other things, incorporates [a pretty neat process I created along the way for making a list uniquely decodable](https://sts10.github.io/2022/08/12/efficiently-pruning-until-uniquely-decodable.html).
 
