@@ -7,7 +7,7 @@ comments: true
 
 I've been thinking about software licenses this month for two reasons. First, I saw [this blog post](https://daniel.haxx.se/blog/2023/01/08/copyright-without-years/) from Daniel Stenberg, who created [curl](https://github.com/curl/curl), about whether developers really have to update the years in their copies of software licenses. He concludes "I don’t think we risk much by" removing the years from most of curl's license-related files, and thus, on January 3rd, Stenberg [removed the years on almost all of the relevant curl project files](https://github.com/curl/curl/commit/2bc1d775f510196154283374284f98d3eae03544). Interesting!
 
-And second: for the first time ever, [one of my open source Rust projects, Tidy,](https://github.com/sts10/tidy) passed 25 stars on Github. Woohoo! Now that one of my projects was gaining a modicum of popularity, I wondered if I was satisfied with [its license](https://github.com/sts10/tidy/blob/main/LICENSE), which is the MIT License. I also have a at-this-point-private repo that I would make public if I was assured it wouldn't be used for illegal hacking...
+And second: for the first time ever, [one of my open source Rust projects, Tidy,](https://github.com/sts10/tidy) passed 25 stars on Github. Woohoo! Now that one of my projects was gaining a modicum of popularity, I wondered if I was satisfied with [its license](https://github.com/sts10/tidy/blob/main/LICENSE), which is the MIT License. I also have an at-this-point-private repo that I would make public if I was assured it wouldn't be used for illegal hacking...
 
 [The MIT License](https://en.wikipedia.org/wiki/MIT_License) is known as a "permissive" license, meaning that users and other would-be contributors have lots of permission about what they can do with the project's code. This is the license I was slapping on most of my projects between 2014 and 2021-ish, mostly on recommendation from the Flatiron School instructors.
 
@@ -41,21 +41,30 @@ The MIT License -- the only permissive license I had ever used personally -- is 
 
 <!-- Coming into this informal study, I knew about MIT, GPL, and AGPL. --> 
 
-I'd heard of [Apache 2.0 License](https://apache.org/licenses/LICENSE-2.0) and [Mozilla Public License](https://www.mozilla.org/en-US/MPL/), a weak copyleft license that I've always meant to understand better...
+I'd heard of [Apache 2.0 License](https://apache.org/licenses/LICENSE-2.0), a permissive license, notable because the Rust programming language [is dual-licensed under it and MIT](https://github.com/rust-lang/rust#license); and [Mozilla Public License](https://www.mozilla.org/en-US/MPL/), a "weak" copyleft license that I've always meant to understand better...
 
-But I hadn't sat down and surveyed software licenses. Below is a grab-bag list of licenses I was either reminded of or found in my research (by no means comprehensive!).
+But I hadn't really ever sat down and surveyed the world of software licenses. Below is a grab-bag list of licenses I was either reminded of or found in my research (by no means comprehensive!).
 
-* [The Unlicense](https://unlicense.org/) seems to seek to be a super permissive license. I know of [a prominent developer in the Rust community who uses and supports the Unlicense](https://github.com/BurntSushi/notes/blob/master/2020-10-29_licensing-and-copyleft.md).
 * There's a family of licenses called [BSD licenses](https://en.wikipedia.org/wiki/BSD_licenses) that I've seen used on projects, including [age encryption](https://github.com/FiloSottile/age). I don't know much about them!
-* Here's a list of [ethical licenses](https://ethicalsource.dev/licenses/), which includes [the Hippocratic License](https://firstdonoharm.dev/).
+* [The Unlicense](https://unlicense.org/) seems to seek to be a super permissive license. I know of [a prominent developer in the Rust community who uses and supports the Unlicense](https://github.com/BurntSushi/notes/blob/master/2020-10-29_licensing-and-copyleft.md).
+* [Creative Commons](https://creativecommons.org/choose/) offers a family of licenses, but as I understand it they are not meant for software.
+
+### Stranger licenses
 * The [JSON License](https://www.json.org/license.html) has the fun and likely legally murky clause: "The Software shall be used for Good, not Evil."
-* [Creative Commons](https://creativecommons.org/choose/) offers a family of licenses, but I understand that they're not written _just_ for software.
 * Microsoft(!) has a license called the [Microsoft Public License](https://choosealicense.com/licenses/ms-pl/).
-* GitHub's "Choose a License" site has [an "Appendix" page that lists about two dozens licenses in a convenient chart form](https://choosealicense.com/appendix/).
+
+### Other lists of licenses
 * Open Source Initiative has [a list of "approved" licenses](https://opensource.org/licenses/category).
+* Here's a list of [ethical licenses](https://ethicalsource.dev/licenses/), which includes [the Hippocratic License](https://firstdonoharm.dev/).
+* GitHub's "Choose a License" site has [an "Appendix" page that lists about two dozens licenses in a convenient chart form](https://choosealicense.com/appendix/).
 * Fossa.com has a list of [the "Top 6 Out-There Open Source Licenses"](https://fossa.com/blog/top-6-most-out-there-open-source-licenses/), which I appreciate!
 
-Ever helpful, the Blue Oak Council website has [a list of permissive licenses, which they rated from Gold to Lead](https://blueoakcouncil.org/list), including a few I listed above. Apparently during this process, the group of lawyers wrote their own permissive license that became [Blue Oak Model License 1.0.0](https://blueoakcouncil.org/license/1.0.0).
+## Which licenses does the Blue Oak Council like?
+Ever helpful, the Blue Oak Council website has [a list of permissive licenses, which they rated from Gold to Lead](https://blueoakcouncil.org/list), including a few I listed above. 
+
+Among established licenses, [they like](https://blueoakcouncil.org/list#gold) BSD-2-Clause Plus Patent License (also known as BSD-2-Clause-Patent). I also got the sense that Apache License 2.0 was well-liked by them.
+
+But in their survey, the Council decided to write their own license, which they named the [Blue Oak Model License 1.0.0](https://blueoakcouncil.org/license/1.0.0).
 
 Let's take a look at that one.
 
@@ -80,7 +89,7 @@ I found more licenses by the executive director of the Blue Oak Council, Kyle Mi
 
 One potential issue with using a new or just less-than-popular license is that, even if the license you choose is pretty permissive, it may not legally jibe well with the licenses of other software that developers may use in tandem with your code in their project. This is a big point in favor of sticking with the older, much more common licenses like MIT or Apache. But to me that is just not as fun as finding and using the hot new thing.
 
-For what it's worth, [The Blue Oak Model License authors write on their site](https://blueoakcouncil.org/license-faq):
+For what it's worth, [the Blue Oak Model License authors address this](https://blueoakcouncil.org/license-faq):
 
 > The Council doesn't see any reason why software licensed under the Blue Oak Model License 1.0.0 can’t be used, combined, and distributed with software under GPLv2, LGPLv2.1, GPLv3, LGPLv3, or AGPLv3.
 
@@ -88,9 +97,9 @@ For what it's worth, [The Blue Oak Model License authors write on their site](ht
 
 which is reassuring!
 
-### Other reasonable advice: Stick with your community's license
+## Other reasonable advice: Stick with your community's license
 
-Choose a License reminds developers [to consider what licenses your related projects use when selecting a license](https://choosealicense.com/community/), which seems like solid advice. For example, it notes that "Rust crates are overwhelmingly licensed under both MIT and Apache License 2.0." This is part of the reason I initially chose MIT for Tidy and most of my other Rust projects. It's also the reason [I chose the BSD-3-Clause license for a project of mine that works with and depends on age file encryption](https://github.com/sts10/bottle).
+GitHub's Choose a License website reminds developers [to consider what licenses your related projects use when selecting a license](https://choosealicense.com/community/), which seems like solid advice. For example, it notes that "Rust crates are overwhelmingly licensed under both MIT and Apache License 2.0." This is part of the reason I initially chose MIT for Tidy and most of my other Rust projects (though in hindsight I could have dual-licensed with MIT and Apache v2). It's also the reason [I chose the BSD-3-Clause license for a project of mine that works with and depends on age file encryption](https://github.com/sts10/bottle).
 
 ## Changing the license of an existing project
 
@@ -98,9 +107,11 @@ Can a developer change the license of an existing project? Mitchell [addresses t
 
 I _think_ the risk one takes in straight up "revoking" an existing license and plopping a new one into your code repository is that you theoretically could be sued by past contributors to the project. Thus, I think for my projects to which I am the sole contributor (hopefully not counting [GitHub's Dependabot](https://docs.github.com/en/code-security/dependabot/dependabot-security-updates/configuring-dependabot-security-updates)?!), I could just switch to Blue Oak or GPL v3 or whatever I want, whenever I want since I'd only be violating my own rights (and I won't sue myself). 
 
-### A more practical example 
+### A more real-world example 
 
-More practically, a Fedi friend pointed me to [an open-source project that is currently in the process of changing its license from from GPL 2.0 to BSD-3-Clause](https://github.com/10up/wp_mock/issues/198). This "process" appears to be manifested in a GitHub issue, in which a contributor states the reasons for the proposed change. They then write "Since this change would affect past contributors, I need to ask for their agreement. I will ping them below in case they'd like to discuss this" and tag about two dozen fellow GitHub users (presumably all other contributors to the project). 
+What about a project that already has a number of contributors?
+
+A Fedi friend pointed me to [an open-source project that is currently in the process of changing its license from from GPL 2.0 to BSD-3-Clause](https://github.com/10up/wp_mock/issues/198). This "process" appears to be being organized as a GitHub issue, in which a contributor states the reasons for the proposed change. They then write "Since this change would affect past contributors, I need to ask for their agreement. I will ping them below in case they'd like to discuss this" and tag about two dozen fellow GitHub users (presumably all other contributors to the project). 
 
 This makes sense to me, but one question I _still_ have about this situation is: let's say you get all past contributors to agree to a license change. I'm assuming what they're effectively agreeing to is something like "Are you OK with future versions of this project, which will include your past contributions, to be licensed in this new way?" My question is: Can future versions of the project be solely available under the new license (BSD-3 in this case), or will they have to be dual licensed? Or is that what this Github issue is seeking to prevent by getting buy-in from past contributors? Lastly, will _older_ versions of the project still be available under the previous license (assuming yes)? 
 
@@ -119,8 +130,24 @@ Since none of these had licenses as of a few hours ago, I figured they'd be exce
 
 ### What about Tidy's license?
 
+Hey, remember by 25-star project, Tidy?
+
 After all of this research, I've found myself a bit slower to change the license on my most popular project, Tidy. I want to be sure I'm doing things more by-the-book with what is likely my most-used project (not counting [my Vim colorscheme](https://github.com/sts10/vim-pink-moon)).
 
 Plus, Tidy _just_ got its [first contribution by a human other than me just this past weekend](https://github.com/sts10/tidy/commits?author=bugaevc&since=2023-01-01&until=2023-01-27), while licensed under MIT! Thankfully, I interact with this contributor on Mastodon often, so I could get in contact with him, but I'm not even sure how to get his legal permission to change the license of his contribution retroactively. I think I could add something called a [contributor license agreement](https://en.wikipedia.org/wiki/Contributor_License_Agreement) to the project, but I'm guessing that would only apply to future contributions? 
 
 As usual, feel free to [mention or DM me on Mastodon](https://hachyderm.io/@schlink) if you know of a license you like, or spotted an error in this post.
+
+## Epilogue: Some movement on the copyleft side?
+
+I wrote above that there doesn't seem to be much innovation in the copyleft space. It seems I may have been wrong!
+
+Another Fediverse friend points me to a copyleft license (confusingly) called [copyleft-next](http://next.copyleft.org/pages/current-release.html). It was [apparently written in 2012, but it seems to be on the cusp of a "re-launch"](http://next.copyleft.org/). Here's [a recent article about one of the people behind it](https://lwn.net/Articles/926788/).
+
+Semi-relatedly, [developer Drew DeVault has written a blog post](https://drewdevault.com/2023/04/11/2023-04-11-The-FSF-is-dying.html) criticizing the Free Software Foundation.
+
+> The GPL family of licenses are essential for our movement, but few people understand its dense and esoteric language, despite the 16,000-word FAQ which supplements it. And hip new software isn’t using copyleft: over 1 million npm packages use a permissive license while fewer than 20,000 use the GPL; cargo sports a half-million permissive packages and another 20,000 or so GPL’d.
+
+He also explicitly calls for the creation of new copyleft licenses: 
+
+> **Develop new copyleft licenses.** The GPL family of licenses has served us well, but we need to do better. The best copyleft license today is the [MPL](https://www.mozilla.org/en-US/MPL/), whose terse form and accessible language outperforms the GPL in many respects. However, it does not provide a comprehensive answer to the needs of copyleft, and new licenses are required to fill other niches in the market...
