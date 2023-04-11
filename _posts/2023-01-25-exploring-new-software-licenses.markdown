@@ -142,7 +142,11 @@ As usual, feel free to [mention or DM me on Mastodon](https://hachyderm.io/@schl
 
 I wrote above that there doesn't seem to be much innovation in the copyleft space. It seems I may have been wrong!
 
-Another Fediverse friend points me to a copyleft license (confusingly) called [copyleft-next](http://next.copyleft.org/pages/current-release.html). It was [apparently written in 2012, but it seems to be on the cusp of a "re-launch"](http://next.copyleft.org/). Here's [a recent article about one of the people behind it](https://lwn.net/Articles/926788/).
+Another Fediverse friend points me to a copyleft license (confusingly) called [copyleft-next](http://next.copyleft.org/pages/current-release.html). It was [apparently written in 2012, but it seems to be on the cusp of a "re-launch"](http://next.copyleft.org/). Here's [a recent article about one of the people behind it](https://lwn.net/Articles/926788/) that provides some great and useful historical context on software and software licensing that  I won't try to quote here. Instead, the exciting news about the near future:
+
+> Kuhn has decided to help relaunch the [copyleft-next](https://lwn.net/Articles/926788/) project that was [started by Richard Fontana](https://lwn.net/Articles/505589/) a little over ten years ago. The project is going to try to write a copyleft license in an open and transparent way; "write a free-software license the way we write free software". That is really how it should be done. 
+
+I kind of hope they pick a new name! 
 
 Semi-relatedly, [developer Drew DeVault has written a blog post](https://drewdevault.com/2023/04/11/2023-04-11-The-FSF-is-dying.html) criticizing the Free Software Foundation.
 
