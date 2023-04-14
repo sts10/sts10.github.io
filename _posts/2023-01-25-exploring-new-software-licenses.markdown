@@ -73,9 +73,9 @@ Let's take a look at that one.
 As Blue Oak Council [notes](https://blueoakcouncil.org/license-faq):
 > The Council didn't set out to write a model license. While preparing the first version of the permissive license list, members ended up trading notes about the features of a good permissive license they were using to judge existing terms. No existing license boasted all of those features. Rather than simply list them out, the Council found it easier just to write out a new, model license showing what's possible.
 
-What's good about the Blue Model License 1.0.0? The project creators [explained their reasoning in a post](https://blueoakcouncil.org/2019/03/06/model.html). Some notes from my non-legal mind:
+What's good about the Blue Oak Model License 1.0.0? The project creators [explained their reasoning in a post](https://blueoakcouncil.org/2019/03/06/model.html). Some notes from my non-legal mind:
 
-* To me it seems like the authors were concerned about how, with most existing permissive licenses, ["patent owners [may be able to] sue users and distributors of open software."](https://blueoakcouncil.org/primer#patent) I _think_ the worry that the Blue Model License authors are attempting to squash here is that if software user A files a patent that involves the software, user B might be in legal trouble.
+* To me it seems like the authors were concerned about how, with most existing permissive licenses, ["patent owners [may be able to] sue users and distributors of open software."](https://blueoakcouncil.org/primer#patent) I _think_ the worry that the Blue Oak Model License authors are attempting to squash here is that if software user A files a patent that involves the software, user B might be in legal trouble.
 * Their license also clearly states that "No contributor can revoke this license," which I presume is (or may be) an issue with licenses that don't explicitly state this. 
 * And of course, there's a "No Liability" section to protect me from the consequences, especially the projects that COULD, theoretically, be used for illegal activities.
 
