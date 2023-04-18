@@ -74,8 +74,8 @@ default = "deny"
 confidence-threshold = 0.8
 ```
 
-I basically decided to allow a selection of permissive licenses that I think are compatible with [the MIT License (which Tidy uses)](https://github.com/sts10/tidy/blob/main/LICENSE) (remember: I'm not lawyer!). I _think_ it's OK to use an Apache 2.0-licensed library in an MIT-licensed project.?
+I basically decided to allow a selection of permissive licenses that I think are compatible with [the MIT License (which Tidy uses)](https://github.com/sts10/tidy/blob/main/LICENSE) (remember: I'm not lawyer!). I'm _pretty sure_ it's OK to use an Apache 2.0-licensed library in an MIT-licensed project.
 
-I also think it's unfortunately important to "deny" all copyleft licenses like GPL, since that would require me to offer Tidy under the same (copyleft) license.
+I also think it's (unfortunately) important to "deny" all copyleft licenses like GPL, since that would require me to offer Tidy under the same (copyleft) license, rather than the permissive MIT license. I'm _not_ sure if I can allow [Mozilla Public License 2](https://www.mozilla.org/en-US/MPL/), a "weak" copyleft license, dependencies here.
 
 Overall, I think this exercise has been a solid illustration of the potential issues of releasing code that will generally be used in other code ("libraries") under copyleft licenses.
