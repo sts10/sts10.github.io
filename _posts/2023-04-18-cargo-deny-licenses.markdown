@@ -42,16 +42,11 @@ unlicensed = "deny"
 # [possible values: any SPDX 3.11 short identifier (+ optional exception)].
 allow = [
     "Apache-2.0",
-    "BSD-2-Clause",
-    "BSD-2-Clause-Patent",
-    "BSD-3-Clause",
-    "BlueOak-1.0.0",
     "MIT",
     "Unicode-DFS-2016",
     "Unlicense"
 ]
-# It's fine if any of the above allowed licenses are NOT found.
-unused-allowed-license = "allow"
+unused-allowed-license = "warn"
 # List of explicitly disallowed licenses
 # See https://spdx.org/licenses/ for list of possible licenses
 # [possible values: any SPDX 3.11 short identifier (+ optional exception)].
@@ -79,6 +74,8 @@ default = "deny"
 confidence-threshold = 0.8
 ```
 
-I basically decided to allow a selection of permissive licenses that I think are compatible with [the MIT License (which Tidy uses)](https://github.com/sts10/tidy/blob/main/LICENSE) (remember: I'm not lawyer!). I think it's unfortunately important to "deny" all copyleft licenses like GPL, since that would require me to offer Tidy under the same (copyleft) license.
+I basically decided to allow a selection of permissive licenses that I think are compatible with [the MIT License (which Tidy uses)](https://github.com/sts10/tidy/blob/main/LICENSE) (remember: I'm not lawyer!). I _think_ it's OK to use an Apache 2.0-licensed library in an MIT-licensed project.?
+
+I also think it's unfortunately important to "deny" all copyleft licenses like GPL, since that would require me to offer Tidy under the same (copyleft) license.
 
 Overall, I think this exercise has been a solid illustration of the potential issues of releasing code that will generally be used in other code ("libraries") under copyleft licenses.
