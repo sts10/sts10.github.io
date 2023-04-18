@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Using cargo deny to check license compatibility"
+title: "Using cargo deny to check license compatibility of your Rust project's dependencies"
 date: 2023-04-18 10:00:00 -0400
 comments: true
 ---
