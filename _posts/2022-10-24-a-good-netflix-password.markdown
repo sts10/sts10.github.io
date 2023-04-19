@@ -140,9 +140,10 @@ cuts boron outputs utmost leg bet
 
 ## Other links
 
-* [Other word lists I've created](https://github.com/sts10/generated-wordlists). 
+* If you want some longer word lists, see [Orchard Street Wordlists](https://github.com/sts10/orchard-street-wordlists) and [this blog post](https://sts10.github.io/2023/04/03/orchard-street-wordlists.html).
+* [More word lists I've created](https://github.com/sts10/generated-wordlists). 
 * [My proposed word list for the 1Password password manager to use](https://www.reddit.com/r/1Password/comments/ur4otq/proposed_new_word_list/). 
-* The tool I wrote to create these lists is called [Tidy](https://github.com/sts10/tidy).
+* [Tidy](https://github.com/sts10/tidy) is a more general tool I wrote to create word lists.
 
 ---
 
