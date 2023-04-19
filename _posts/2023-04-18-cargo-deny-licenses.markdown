@@ -79,3 +79,11 @@ I basically decided to allow a selection of permissive licenses that I think are
 I also think it's (unfortunately) important to "deny" all copyleft licenses like GPL, since that would require me to offer Tidy under the same (copyleft) license, rather than the permissive MIT license. I'm _not_ sure if I can allow [Mozilla Public License 2](https://www.mozilla.org/en-US/MPL/), a "weak" copyleft license, dependencies here.
 
 Overall, I think this exercise has been a solid illustration of the potential issues of releasing code that will generally be used in other code ("libraries") under copyleft licenses.
+
+## Toward generated deny.toml automatically based on a project's license
+
+Given that the only relevant variable about my project in creating the license section of the deny.toml config file is the project's license (MIT), and that that is specified in `Carog.toml` already, it seems like we could make `cargo deny init` a bit smarter. It could generate a template `deny.toml` based on the project's license. 
+
+For example, if the Rust project is licensed under MIT, it would "know" to allow all license that are compatible with MIT and to deny all licenses that are not (like GPL).
+
+
