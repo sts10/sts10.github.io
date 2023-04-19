@@ -157,3 +157,5 @@ Semi-relatedly, [developer Drew DeVault has written a blog post](https://drewdev
 He also explicitly calls for the creation of new copyleft licenses: 
 
 > **Develop new copyleft licenses.** The GPL family of licenses has served us well, but we need to do better. The best copyleft license today is the [MPL](https://www.mozilla.org/en-US/MPL/), whose terse form and accessible language outperforms the GPL in many respects. However, it does not provide a comprehensive answer to the needs of copyleft, and new licenses are required to fill other niches in the market...
+
+Partially on DeVault's recommendation, I looked a bit more into the Mozilla Public License 2.0 and it seems really intuitive. It seems like it applies copyleft restrictions by _file_ rather than the entire project.
