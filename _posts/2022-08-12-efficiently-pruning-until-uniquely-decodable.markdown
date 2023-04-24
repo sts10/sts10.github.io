@@ -169,6 +169,10 @@ For lack of a better term for now, I'm calling this removal procedure "Schlinker
 
 To answer either of these two questions, it feels like I'd need to use some math that I don't know just yet. Maybe someone between 1953 and now has already figured all this out! Let me know if you know any ideas that could help!
 
+### 2023 Update: The strange case of BIPS39
+
+I just tried Schlinkert pruning [the BIPS39 English word list](https://github.com/bitcoin/bips/blob/master/bip-0039/english.txt). It's got 2,048 words on it. Schlinkert pruning this list gives us 1914 words. BUT what's strange is that removing all prefix words save 1999 words! A head-scratcher! I kind of thought this situation wasn't possible. Perhaps users would be wise to Schlinkert prune, remove all prefix words, and remove all suffix words, and then see which process saves the most words.
+
 ## Trying it out yourself
 
 You can play with the procedure yourself by [installing Tidy](https://github.com/sts10/tidy#installation). To see if a given list is uniquely decodable or not, use 4 attributes flags (`-AAAA`). To perform "Schlinkert pruning" on the given list, use the option `-K` (or `--schlinkert-prune`).
