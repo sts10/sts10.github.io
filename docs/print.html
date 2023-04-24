@@ -71,10 +71,12 @@
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
             var html = document.querySelector('html');
-            var sidebar = 'hidden';
+            var sidebar = null;
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
             }
             html.classList.remove('sidebar-visible');
             html.classList.add("sidebar-" + sidebar);
@@ -805,6 +807,8 @@ Categories=Network;InstantMessaging;Internet
 </ul>
 <h3 id="pipx"><a class="header" href="#pipx">pipx</a></h3>
 <p>Specifically, if you've been using pip to install packages solely for use on the command-line (as opposed to active development using Python), like the <code>neovim</code> package, I'm hoping that <a href="https://pypi.org/project/pipx/">pipx</a> may be a better, more self-contained solution. Though given that you need either Homebrew or pip to install pipx, it might not be as strong of a solution on Ubuntu as it is on MacOS.</p>
+<h2 id="2023-updates"><a class="header" href="#2023-updates">2023 updates</a></h2>
+<p><a href="https://github.com/mitsuhiko/rye">Rye</a> looks cool?</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="ruby-and-rbenv"><a class="header" href="#ruby-and-rbenv">Ruby and rbenv</a></h1>
 <ol>
 <li>Install <a href="https://github.com/rbenv/rbenv#basic-github-checkout">rbenv (via &quot;basic github checkout&quot;)</a> </li>
