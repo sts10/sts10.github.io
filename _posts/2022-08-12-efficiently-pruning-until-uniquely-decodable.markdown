@@ -169,9 +169,46 @@ For lack of a better term for now, I'm calling this removal procedure "Schlinker
 
 To answer either of these two questions, it feels like I'd need to use some math that I don't know just yet. Maybe someone between 1953 and now has already figured all this out! Let me know if you know any ideas that could help!
 
-<!-- ### 2023 Update: The strange case of BIPS39 -->
+### 2023 Update: The strange case of BIPS39
 
-<!-- I just tried Schlinkert pruning [the BIPS39 English word list](https://github.com/bitcoin/bips/blob/master/bip-0039/english.txt). It's got 2,048 words on it. Schlinkert pruning this list gives us 1914 words. BUT what's strange is that removing all prefix words save 1999 words! A head-scratcher! I kind of thought this situation wasn't possible. Perhaps users would be wise to Schlinkert prune, remove all prefix words, and remove all suffix words, and then see which process saves the most words. -->
+I just tried Schlinkert pruning [the BIPS39 English word list](https://github.com/bitcoin/bips/blob/master/bip-0039/english.txt). It's got 2,048 words on it. Schlinkert pruning this list gives us 1914 words. BUT what's strange is that removing all prefix words save 1999 words! A head-scratcher! 
+
+The reason is that the BIPS39 list happens to have more prefix words than suffix words on it. If we reverse all the words on the list, and _then_ run Schlinkert pruning on it, we save 2011 words. The end product (un-reversed) still passes the test of being uniquely decodable by Sardinas-Patterson.
+
+Rather than have to check both ways every time, we should amend the Schlinkert pruning algorithm and say: "Run the algorithm as is twice, once with the words in given order, and once with all given words reversed. Then use whichever 'saves' more words." So here's our new `schlinkert_prune` function, as of April 2023 (v0.2.90):
+
+```rust
+/// Executes Schlinkert prune. Attempts to make list uniquely decodable
+/// by removing the fewest number of code words possible. Adapted from
+/// Sardinas-Patterson algorithm.
+/// Runs word list in both as given and reversed, prefering which ever
+/// preserves more words from the given list.
+pub fn schlinkert_prune(list: &[String]) -> Vec<String> {
+    let offenders_to_remove_forwards = get_sardinas_patterson_final_intersection(list);
+    // Reversing all words before running the Schlinkert prune gives a
+    // different list of offending words. (We then have to un-reverse all the
+    // offending words.)
+    let offenders_to_remove_backwards = reverse_all_words(
+        &get_sardinas_patterson_final_intersection(&reverse_all_words(list)),
+    );
+    let mut new_list = list.to_owned();
+    // If running the prune on the reversed words yielded fewer offenders
+    // we'll use that list, since our assumed goal is to remove the fewest
+    // number of words as possible.
+    if offenders_to_remove_forwards.len() <= offenders_to_remove_backwards.len() {
+        new_list.retain(|x| !offenders_to_remove_forwards.contains(x));
+    } else {
+        new_list.retain(|x| !offenders_to_remove_backwards.contains(x));
+    }
+    new_list
+}
+```
+
+To recap:
+
+|           | length | prefix-free | suffix-free | Schlinkert-pruned | Reverse Schlinkert-pruned |
+|-----------|:------:|:-----------:|:-----------:|:-----------------:|:-------------------------:|
+| BIPS39    |  2048  |    1999     |    1881     | 1914              | 2011                      |
 
 ## Trying it out yourself
 
