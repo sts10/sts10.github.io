@@ -25,7 +25,7 @@ I also created included versions of the Medium and Short lists with correspondin
 
 ## Licensing
 
-Currently, I'm licensing all of the lists under [a Creative Commons Attribution-ShareAlike 3.0 Unported License](http://creativecommons.org/licenses/by-sa/3.0/), since that's what [Wikipediaa's text is licensed under](https://foundation.wikimedia.org/wiki/Policy:Terms_of_Use#7._Licensing_of_Content). I'd prefer to use CC-BY-SA 4.0 if possible, but I'm not sure if that's technically legal. If you have thoughts on this, I've created [a GitHub Issue](https://github.com/sts10/orchard-street-wordlists/issues/1) or welcome input on [Mastodon](https://hachyderm.io/@schlink).
+Currently, I'm licensing all of the lists under [a Creative Commons Attribution-ShareAlike 3.0 Unported License](http://creativecommons.org/licenses/by-sa/3.0/), since that's what [Wikipedia's text is licensed under](https://foundation.wikimedia.org/wiki/Policy:Terms_of_Use#7._Licensing_of_Content). I'd prefer to use CC-BY-SA 4.0 if possible, but I'm not sure if that's technically legal. If you have thoughts on this, I've created [a GitHub Issue](https://github.com/sts10/orchard-street-wordlists/issues/1) or welcome input on [Mastodon](https://hachyderm.io/@schlink).
 
 ---
 
