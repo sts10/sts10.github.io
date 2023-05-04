@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Performative Privacy"
+title: "Performative privacy"
 date: 2023-01-25 17:00:00 -0400
 comments: true
 ---
