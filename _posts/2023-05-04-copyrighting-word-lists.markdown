@@ -26,3 +26,5 @@ Ironically, I wouldn't be upset if I could not copyright my word lists. While my
 In practical terms, I think replacing the current CC BY-SA 3.0 Unported license with the [CC0 license](https://creativecommons.org/share-your-work/public-domain/cc0/) would be a proper way to show/assert/embrace this lack of originality and thus lack of copyright.
 
 Unfortunately I just don't have enough information to know exactly what to do. Leaving the CC BY-SA 3.0 license on there feels safe, but part of me wants to slap the CC0 on there and not think about this anymore!
+
+Feel free to comment on [this GitHub issue](https://github.com/sts10/orchard-street-wordlists/issues/1) or [find me on the Fediverse](https://hachyderm.io/@schlink) if you have thoughts!
