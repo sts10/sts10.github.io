@@ -19,7 +19,8 @@ But setting even that question aside: We should also ask if any alphabetized wor
 
 Clearly everything is not copyrightable, even under Creative Commons. I can't write a very simple programming function that, say, lower-cases any string given to it and then license it under GPL or write a simple a sentence and offer it under CC 4.0 BY.
 
-And of the popular word lists I know of, like [EFF's](https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases), I don't think I've seen any that are copyrighted and licensed, though they are frequently included among codebases that are licensed under code licenses like MIT, GPL, etc. 
+While most word lists I know of are not copyrighted or licensed, the [EFF fandom word lists](https://www.eff.org/deeplinks/2018/08/dragon-con-diceware) are licensed under Creative Commons Attribution 3.0 United States license ([proof](https://www.eff.org/files/2018/08/29/gameofthrones_8k-2018.txt)). However that seems to the exception. Most word lists included in code projects seem to just sit under the project's overall code license, like MIT or GPL, etc.
+<!-- And of the popular word lists I know of, like [EFF's](https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases), I don't think I've seen any that are copyrighted and licensed, though they are frequently included among codebases that are licensed under code licenses like MIT, GPL, etc. --> 
 
 While my pride might be a little hurt if I couldn't copyright my word lists, it would make sharing the lists easier. 
 
