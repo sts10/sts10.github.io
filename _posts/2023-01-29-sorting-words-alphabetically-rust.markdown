@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "How hard could it be? Sorting words alphabetically in Rust"
+title: "How hard could it be? Sorting words alphabetically with Rust"
 date: 2023-01-29 11:00:00 -0400
 comments: true
 ---
