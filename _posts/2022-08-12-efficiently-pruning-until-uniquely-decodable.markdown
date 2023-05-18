@@ -43,8 +43,8 @@ Clearly not all the same length. And "1" is a prefix of "101" and a suffix of "0
 To _know_ this, we can play with some examples, like "110100001101".
 
 * It starts with a 1, so we know the first "word" is either "101" or "1"
-* The second digit it "1", so that "1" in the first person must be the word "1".
-* Now we're looking at digits 2 and on... we see that digits 2 through 4 are "101", which can only be word "101"
+* The second digit it "1", so that "1" in the first position must be the word "1". Done.
+* Now we're looking at digits 2 and on... we see that digits 2 through 4 are "101", which can only be word "101" (there's no other way to make a 0 surrounded by 1s)
 * Next, we're got a lot of 0s: 4 of them. This could only be "00" twice.
 * Coincidentally, we finish how we start: "1" + "101"
 
