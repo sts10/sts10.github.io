@@ -148,3 +148,9 @@ You can now read my contribution to the docs [on the current "Passphrases" page]
 > To create a random passphrase using KeePassXC, launch the application, then click the dice icon. Then click the **Passphrase** tab and set the **Word Count** to 7. You can optionally set a **Word Separator**, for example a space or hyphen.
 
 ![screenshot of KeePassXC passphrase generation feature, showing a randomly generated 7-word passphrase](https://docs.securedrop.org/en/stable/_images/keepassxc-diceware.png)
+
+## 2023 Update
+
+[Tails 5.13 uses "LUKS2 by default for all new Persistent Storage and LUKS encrypted volumes. LUKS2 provide stronger cryptography by default."](https://tails.boum.org/news/version_5.13/index.en.html) 
+
+This change likely changes all of the math above. Hopefully a shorter passphrase can provide the same amount of protect for SecureDrop users!
