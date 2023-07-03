@@ -17,7 +17,7 @@ Here's Rauschmayer on the question of whether JavaScript is elegant:
 
 >Yes and no. I've written fair amounts of code in several programming languages from different paradigms. Therefore, I'm well aware that JavaScript isn't the pinnacle of elegance. However, it is a very flexible language has a reasonably elegant core, and enables you to use a mixture of object-oriented programming and functional programming. 
 
-In this blog post I'll explore the very basics of object-oriented JavaScript, since that aspect of the language is new to me. There may be some mistakes-- I'm new to this pattern (if you see anything incorrect or weird please [shoot me a note!](http://samschlinkert.com/#contact)). All 3 code examples are [up on GitHub](https://github.com/sts10/animal_prototype).
+In this blog post I'll explore the very basics of object-oriented JavaScript, since that aspect of the language is new to me. There may be some mistakes-- I'm new to this pattern (if you see anything incorrect or weird please [shoot me a note!](http://samschlinkert.com/#contact)). All 3 code examples are [up on GitHub](https://github.com/sts10/animal-prototype).
 
 I'm going to lay out a basic Animal prototype (like a Ruby class) with variables and methods, then create two instances of it. This "prototype" (lowercase 'p') pattern seems to be just one way or _pattern_ of creating an "object factory" in JavaScript. Maybe there's a better or more Ruby-like alternative, but this way seems to work and makes sense to me so let's run with it at least for today. 
 
@@ -281,7 +281,7 @@ Some larger things I ran into to:
 
 (4) In JavaScript the method definitions are separated by commas, which kind of sucks if you're re-ordering them often. But again, nothing crazy. 
 
-Again, here's all of the code [on GitHub](https://github.com/sts10/animal_prototype). 
+Again, here's all of the code [on GitHub](https://github.com/sts10/animal-prototype). 
 
 
 
