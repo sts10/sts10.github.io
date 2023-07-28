@@ -251,3 +251,5 @@ My takeaway here is that antiX is _not_ advertised as a beginner-friendly distro
 
 * [Linux DVD images (and how-to) for 32-bit EFI Macs (late 2006 models)](https://mattgadient.com/linux-dvd-images-and-how-to-for-32-bit-efi-macs-late-2006-models/)
 * I also am wondering if performance on some or all of these machines would be significantly improved if I had taken the time to find the correct drivers for their GPUs. A fediverse friend points me to [NVIDIA driver 304.108](https://www.nvidia.com/download/driverResults.aspx/156163/en-us/).
+
+Update from April 2023: [List of lightweight Linux distros from It's Floss](https://itsfoss.com/super-lightweight-distros/).
