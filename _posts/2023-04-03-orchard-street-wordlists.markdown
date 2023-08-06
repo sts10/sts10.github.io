@@ -13,7 +13,7 @@ Today, I've polished up four of my word lists and am freshly publishing them as 
 
 ## The Lists
 
-The lists are comprised of words taken from two sources: [Google Books Ngram data](https://storage.googleapis.com/books/ngrams/books/datasetsv3.html) and [a Wikipedia word frequency project](https://github.com/IlyaSemenov/wikipedia-word-frequency/). I basically blended the most frequently used words from both sources, then cut profane and strange words. I then made all of the lists uniquely decodable, using [Schlinkert pruning](https://sts10.github.io/2022/08/12/efficiently-pruning-until-uniquely-decodable.html). Crucially, this attribute means that users can create passphrases without separators between words (e.g. "adjudicationhisssynodmanlyacculturationinextricably"). This means the lists are suitable for use with password managers like KeePassXC, which allow users to not use a word separator.
+The lists are comprised of words taken from two sources: [Google Books Ngram data](https://storage.googleapis.com/books/ngrams/books/datasetsv3.html) and [a Wikipedia word frequency project](https://github.com/IlyaSemenov/wikipedia-word-frequency/). I basically blended the most frequently used words from both sources, then cut profane and strange words. I then made all of the lists **uniquely decodable**, using [Schlinkert pruning](https://sts10.github.io/2022/08/12/efficiently-pruning-until-uniquely-decodable.html). Crucially, this attribute means that users can create passphrases without separators between words (e.g. "adjudicationhisssynodmanlyacculturationinextricably"). This means the lists are suitable for use with password managers like KeePassXC, which allow users to not use a word separator. I also removed some strange words, profane words, some (but not all) homophones, and as many British spellings of English words (like "colour") that I could find/think of.
 
 The [**Orchard Street Long List**](https://github.com/sts10/orchard-street-wordlists/blob/main/lists/orchard-street-long.txt) is a 17,576-word list. It provides a robust 14.1 bits of entropy per word, meaning a 7-word passphrase gives almost 99 bits of entropy. (It is a new version of [my UD1 list](https://github.com/sts10/generated-wordlists/blob/main/lists/experimental/ud1.txt).) I think it's a pretty solid choice for using with KeePassXC if the user wants an extra bump in security (about 1.1 bits per word more than if you used the EFF long list).
 
@@ -25,7 +25,7 @@ I also created included versions of the Medium and Short lists with correspondin
 
 ## Licensing
 
-Currently, I'm licensing all of the lists under [a Creative Commons Attribution-ShareAlike 3.0 Unported License](http://creativecommons.org/licenses/by-sa/3.0/), since that's what [Wikipedia's text is licensed under](https://foundation.wikimedia.org/wiki/Policy:Terms_of_Use#7._Licensing_of_Content). I'd prefer to use CC-BY-SA 4.0 if possible, but I'm not sure if that's technically legal. 
+Currently, I'm licensing all of the lists under [a Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/), since that's what [Wikipedia's text is licensed under](https://foundation.wikimedia.org/wiki/Policy:Terms_of_Use#7._Licensing_of_Content).
 
 However, I admit that it may not be possible to copyright a list of alphabetical words, no matter their source or what manipulations I have performed on them beforehand. If this is the case, maybe I should use [CC0](https://creativecommons.org/share-your-work/public-domain/cc0/). Again, I'm not a lawyer!
 
