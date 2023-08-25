@@ -68,7 +68,7 @@ I learned about it from [a helpful Redditor who pointed to it answer to a questi
 
 I won't lie, I had some trouble understanding the algorithm or how to implement it in code. Before we get to my amateur attempt at an explanation, here are [two](https://www.youtube.com/watch?v=SkrLnr-KVOE) different [videos](https://www.youtube.com/watch?v=8YNEVyHCIjs) where presenters more qualified than me walk through the algorithm by hand.
 
-#### My amateur summary of how the Sardinas-Patterson algorithm does
+#### My amateur summary of how the Sardinas-Patterson algorithm works
 Here is what I have gathered:
 
 In broad strokes, the algorithm involves repeatedly finding "dangling suffixes" between words on the initial list: the left over from removing a prefix word from a word. An example is if a list has "accident" and "accidental" on it, a dangling suffix would be "al". We then check if any of these dangling suffixes are on the list as words ("al" likely isn't, but "accident" and "accidentally" gives a dangling suffix of "ally", which we could imagine could be on the list).
