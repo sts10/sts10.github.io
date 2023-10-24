@@ -154,6 +154,14 @@ fn make_list(list_to_use: List) -> Vec<&'static str> {
 
 I'm guessing this function could be refined and refactored further, but I do like that it only reads in one list, not all of them.
 
+## On licensing
+
+Kind of just for fun, I decided to license Phraze using [the Mozilla Public License (version 2.0)](https://github.com/sts10/phraze/blob/main/LICENSE.txt), a "weak copyleft" license that I like and that I think strikes a nice balance between "strong" copyleft licenses, like the GPL, and permissive licenses, like MIT license.
+
+Interestingly, only later did I realize that two of the word lists I might have wanted to include in Phraze -- [KeePassXC's word list](https://github.com/keepassxreboot/keepassxc/blob/develop/share/wordlists/eff_large.wordlist) and [SecureDrop's French word list](https://github.com/freedomofpress/securedrop/blob/develop/securedrop/wordlists/fr.txt) -- are licensed under the Affero General Public License (AGPL). I _think_ this means I could only integrate them in to Phraze if I offered Phraze under the GPL or AGPL. (If you have thoughts on this, I have opened [an issue](https://github.com/sts10/phraze/issues/5).)
+
+I could of course still switch to a GPL license... still considering. 
+
 ## Wrap up
 
 I enjoyed writing a Rust project from scratch! It had been a minute since I ran `cargo new --bin`! 
