@@ -152,7 +152,7 @@ fn make_list(list_to_use: List) -> Vec<&'static str> {
 }
 ```
 
-I'm guessing this function could be refined and refactored further, but I do like that it only reads in one list, not all of them.
+I'm guessing this function could be refined and refactored further! Maybe a case for benchmarking...
 
 ## On licensing
 
