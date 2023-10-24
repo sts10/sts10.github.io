@@ -152,7 +152,9 @@ fn make_list(list_to_use: List) -> Vec<&'static str> {
 }
 ```
 
-I'm guessing this function could be refined and refactored further! Maybe a case for benchmarking...
+## Using a build script
+
+However, once I implemented benchmarking with [Criterion.rs](https://github.com/bheisler/criterion.rs), I saw that using [a build script](https://doc.rust-lang.org/cargo/reference/build-scripts.html#case-study-code-generation) to load in the word list files is about 99% faster than the above method. Nice! See [the build.rs file](https://github.com/sts10/phraze/blob/main/build.rs) for the gist of how that works.
 
 ## On licensing
 
