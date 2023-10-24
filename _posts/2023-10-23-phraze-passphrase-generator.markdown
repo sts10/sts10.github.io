@@ -152,6 +152,10 @@ fn make_list(list_to_use: List) -> Vec<&'static str> {
 }
 ```
 
-I enjoyed writing a Rust project from scratch! It had been a minute.I'll probably keep making tweaks, and maybe adding more features for a bit.
+I'm guessing this function could be refined and refactored further, but I do like that it only reads in one list, not all of them.
 
-Feel free to create Issues or Pull Requests! I'm sure there are more bugs in my code, but hopefully none that affect the security of the produced passphrases.
+## Wrap up
+
+I enjoyed writing a Rust project from scratch! It had been a minute since I ran `cargo new --bin`! 
+
+I'll probably keep making tweaks to Phraze, and maybe adding more features for a bit. Feel free to create Issues or Pull Requests! I'm sure there are more bugs in my code, but hopefully none that (drastically) affect the security of the produced passphrases.
