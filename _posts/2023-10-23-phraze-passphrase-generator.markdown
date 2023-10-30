@@ -24,16 +24,18 @@ Usually when I generate a passphrase or password, I put it right into my passwor
 
 So what use does a tool like Phraze serve? Honestly I'm not totally sure. And maybe there's a reason I haven't found [a passphrase generator with over 300 stars on GitHub](https://github.com/topics/passphrase-generator). 
 
-But if there's a password you DON'T want to put in your password manager for whatever reason, you'd likely want it to be one you could memorize or write on a piece of paper with accuracy. For those two use-cases, I think passphrases made up of words serve better than a shorter string of random characters. One example might be for things like Bitcoin wallets, which I believe [uses a short word list](https://github.com/bitcoin/bips/blob/master/bip-0039/english.txt). But I don't know if even I am ready to trust Phraze for something like that?
+But if there's a password you DON'T want to put in your password manager for whatever reason, you'd likely want it to be one you could memorize or write on a piece of paper with accuracy. For those two use-cases, I think passphrases made up of words serve better than a shorter string of random characters. One example might be for things like Bitcoin wallets, which I believe [uses a short word list](https://github.com/bitcoin/bips/blob/master/bip-0039/english.txt). But I'd probably use physical dice for something like that. Anyway, we push on.
 
 ## Some feature creep, as a treat
 At least initially, I wanted to try to keep the Rust code simple and straight-forward.
 
-But over the hours I couldn't resist and kept adding features. Multiple "built-in" word lists, word separator choice, set minimum entropy, allow users to provide their own word list... with the result that it's up to 529 lines of Rust!
+But over time, I couldn't resist and kept adding features, like providing multiple "built-in" word lists, word separator choice, set minimum entropy, allow users to provide their own word list... with the result that the project is currently up to 529 lines of Rust!
 
 ## Different ways of including a word list text file within a Rust project
 
-Phraze currently includes 7 "built-in" word lists. By built-in, I mean that the word lists are included during compile time, in the `cargo`-generated binary. This not only improves security, but also performance. But figuring out exactly how to do this to maximize performance became the most interesting part of the project so far. Let's go through my approaches in the order that I used them.
+Phraze currently includes [7 "built-in" word lists](https://github.com/sts10/phraze/tree/main/word-lists). By built-in, I mean that the word lists are included during compile time, in the `cargo`-generated binary. This improves performance at runtime, but also probably improves security. 
+
+Figuring out exactly how to do this to maximize performance became the most interesting part of the project so far. Let's go through my approaches in the order that I used them.
 
 ### Approach #1: `include_str!` macro
 
@@ -112,7 +114,7 @@ But we're still needing to parse each line at runtime. Wouldn't it be great if w
 
 ### Approach #2: Using a build script
 
-Sure, once I implemented benchmarking with [Criterion.rs](https://github.com/bheisler/criterion.rs), I saw that using [a build script](https://doc.rust-lang.org/cargo/reference/build-scripts.html#case-study-code-generation) to load in the word list files is about 99% faster than the above method. Nice! See [the build.rs file](https://github.com/sts10/phraze/blob/main/build.rs) for the gist of how that works.
+Sure enough, once I implemented benchmarking with [Criterion.rs](https://github.com/bheisler/criterion.rs), I saw that using [a build script](https://doc.rust-lang.org/cargo/reference/build-scripts.html#case-study-code-generation) to load in the word list files is about 99% faster than the above method. Nice! See [the build.rs file](https://github.com/sts10/phraze/blob/main/build.rs) for the gist of how that works.
 
 ```rust
 use std::env;
@@ -175,7 +177,7 @@ But, as Alan Evans [persuasively argued](https://github.com/sts10/phraze/pull/17
 
 ### Approach #3: `includes_lines!`
 
-Instead, Evans [suggested](https://github.com/sts10/phraze/pull/17) using a macro like the one exposed in [this crate called `includes_lines!`](https://crates.io/crates/include-lines).
+Instead, Evans [suggested](https://github.com/sts10/phraze/pull/17) returning to the macro approach, but instead of `include_str!`, find one like the one offered by [the crate `includes_lines!`](https://crates.io/crates/include-lines).
 
 Now we get to go back to using just a normal function (rather than a build script, which we can now delete), which I renamed to `fetch_list`:
 
@@ -195,15 +197,17 @@ pub fn fetch_list(list_choice: ListChoice) -> &'static [&'static str] {
 }
 ```
 
-As you can hopefully see, contra the `include_str!` approach, we don't have to parse/find line endings at runtime. Besides some cleaner code, we also maintain the performance of the build script method, without the build script file/overhead. Sweet. 
+As you can hopefully see, contra the `include_str!` approach, we don't have to parse/find line endings at runtime. the macro returns `&'static [&'static str]` -- just what we want. 
+
+In addition to cleaner code, we also maintain the performance of the build script method, without the build script file/overhead. Sweet. 
 
 My informal, non-Criterion, benchmark of `hyperfine -N -w 1000 -m 1000 phraze` clocks in at under 2 ms again. Awesome!
 
-## Having a function accept Strings or str slices
+## Having a function accept either Strings or str slices
 
-The part I've hidden till now is that, at the end of the day, to take advantage of reading the built-in lists as string slices, but also being able to graceful handle user-provided word list files (which we'll need to use `String`s for), is that we need a function that can take both types in its input. 
+The part I've hidden till now is that, at the end of the day, to take advantage of reading the built-in lists as string slices, but also being able to graceful handle user-provided word list files (which we'll need to use `String`s for), is that we need a function that can take either type in its input. 
 
-To do this, we need to use this super ugly Rust syntax that I kind of hate -- the `T` business.
+To do this, we need to use this ugly Rust syntax that I kind of hate -- the `T` business.
 
 ```rust
 /// Actually generate the passphrase, given a couple necessary parameters.
