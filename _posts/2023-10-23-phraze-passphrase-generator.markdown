@@ -33,7 +33,7 @@ But over the hours I couldn't resist and kept adding features. Multiple "built-i
 
 ## Different ways of including a word list text file within a Rust project
 
-Phraze currently includes 7 "built-in" word lists. By built-in, I mean that the word lists are included during compile time, in the `cargo`-generated binary. This not only improves security, but also performance.
+Phraze currently includes 7 "built-in" word lists. By built-in, I mean that the word lists are included during compile time, in the `cargo`-generated binary. This not only improves security, but also performance. But figuring out exactly how to do this to maximize performance became the most interesting part of the project so far. Let's go through my approaches in the order that I used them.
 
 ### Approach #1: `include_str!` macro
 
@@ -99,9 +99,11 @@ fn make_list(list_to_use: List) -> Vec<&'static str> {
 }
 ```
 
+The issue with `include_str!` is that we still have to parse each line at runtime. Wouldn't it be great if we could do that at compile time, thus speeding up the runtime that by much?
+
 ### Approach #2: Using a build script
 
-However, once I implemented benchmarking with [Criterion.rs](https://github.com/bheisler/criterion.rs), I saw that using [a build script](https://doc.rust-lang.org/cargo/reference/build-scripts.html#case-study-code-generation) to load in the word list files is about 99% faster than the above method. Nice! See [the build.rs file](https://github.com/sts10/phraze/blob/main/build.rs) for the gist of how that works.
+Sure, once I implemented benchmarking with [Criterion.rs](https://github.com/bheisler/criterion.rs), I saw that using [a build script](https://doc.rust-lang.org/cargo/reference/build-scripts.html#case-study-code-generation) to load in the word list files is about 99% faster than the above method. Nice! See [the build.rs file](https://github.com/sts10/phraze/blob/main/build.rs) for the gist of how that works.
 
 ```rust
 use std::env;
@@ -158,7 +160,9 @@ fn main() {
 }
 ```
 
-This works pretty well! But, as Alan Evans [persuasively argued](https://github.com/sts10/phraze/pull/17#issuecomment-1784313115), it's a bit "smelly" that I'd have to edit this build script every time I wanted to (a) add or remove or a word list or (b) change the length of a word list. 
+This works pretty well! You can stop reading this section now and go with this!
+
+But, as Alan Evans [persuasively argued](https://github.com/sts10/phraze/pull/17#issuecomment-1784313115), it's a bit "smelly" that I'd have to edit this build script every time I wanted to (a) add or remove or a word list or (b) change the length of a word list. 
 
 ### Approach #3: `includes_lines!`
 
@@ -182,7 +186,9 @@ pub fn fetch_list(list_choice: ListChoice) -> &'static [&'static str] {
 }
 ```
 
-Nifty!
+Contra the `include_str!` approach, we don't have to parse/find line endings at runtime, thus maintaining the performance of the build script method, without the build script file/overhead. Sweet.
+
+My informal, non-Criterion, benchmark of `hyperfine -N -w 1000 -m 1000 phraze` clocks in at under 2 ms again. Awesome!
 
 ## On licensing
 
