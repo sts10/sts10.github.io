@@ -241,10 +241,12 @@ pub fn generate_a_passphrase<T: AsRef<str> + std::fmt::Display>(
 }
 ```
 
-### A hot take about Rust!
-It's probably on me, but obtuse function signatures like this -- which I think of as "Ugly Rust" -- make me want to stop writing and maintaining Rust code. (This and async Rust.) But for this project, I held my nose and tried a mix of `'`s and `<`s till it compiled and the tests passed.
+If you have ideas for these functions or the project in general, feel free to [create an issue or PR](https://github.com/sts10/phraze).
 
-I would much rather have the ability to define a type called List that holds multiple "string like" objects, then use this type declaration everywhere and anywhere I want (function inputs, outputs, variables, etc.) Maybe you can effectively do this in Rust with Structs and Traits, but it doesn't seem to be the encouraged approach.
+## A hot take about Rust!
+It's probably on me, but obtuse function signatures like the one I needed for `generate_a_passphrase` -- which I think of as "Ugly Rust" -- make me think it's time for me to stop writing and maintaining Rust code. (This and async Rust.) But for this project, I held my nose and tried a mix of `'`s and `<`s till it compiled and the tests passed.
+
+I would much rather have the ability to define a type called List that holds multiple "string like" objects, then use this type declaration everywhere and anywhere I want (function inputs, outputs, variables, etc.) I learned to code writing Ruby, so maybe I'm forever object-oriented. Maybe you can effectively do this in Rust with Structs and Traits, but it doesn't seem to be the encouraged approach.
 
 Could I have just using `Vec<String>`s for the built-in lists and sprinkled `to_string()` calls around to make the code more readable (less obtuse)? Yes. Would that have only increased runtime from 1.8 ms to about 4 ms? Yes. Am I making unrealistic demands on a language, expecting the performance of a low-level language with the aesthetics of a high-level one? Maybe. But it's 2023, and I want it all! Or at least, I don't want these "hard parts" to appear most commonly in the already-claustrophobic space of function signatures.
 
@@ -252,18 +254,14 @@ I've been [playing with Rust for six years now!](https://sts10.github.io/2017/11
 
 I'm super grateful for my experience with Rust -- its strict and descriptive compiler makes working alone an educational experience. And it's clearly ideal for writing command-line tools that don't touch the web much -- just the type of programs that I'm interested in. Lastly, I'm sure I'm a better programmer in all languages for it. But maybe it's time to put the mighty hammer away -- my education from the Rust compiler at a stopping point? A passphrase generator does feel a bit like the culmination of [my work on passphrases](https://www.samschlinkert.com/#passphrases), which has roughly overlapped with my time writing Rust (starting in 2018).
 
-If you have suggestions for other languages I might migrate to as a hobby language, [I'm all ears](https://hachyderm.io/@schlink). (Though I'm a little worried Rust, particularly it's errors and toolchain, has set my expectations too high.) I'm actually curious about [trying Zig again](https://sts10.github.io/2022/08/20/a-summer-fling-with-zig.html), as maybe a slightly lower level language(?) could use more explicit and less obtuse code syntax and patterns(?). I'm still afraid of real functional languages like OCaml and F#. The realistic answer is probably (still) Go or Python...
+If you have suggestions for other languages I might migrate to as a hobby language, [I'm all ears](https://hachyderm.io/@schlink). (Though I'm a little worried Rust, particularly it's errors and toolchain, has set my expectations too high.) I'm actually curious about [trying Zig again](https://sts10.github.io/2022/08/20/a-summer-fling-with-zig.html), as maybe a slightly lower level language(?) could use more explicit and less obtuse code syntax and patterns(?). I'm still afraid of real functional languages like OCaml and F#. The realistic answer is probably (still) Go or Python... 
 
-## On licensing
+I'm aware that the better way to frame this question is "What kind of programs do you want to write?" and then find a language that is the best tool for that job. Rust was and is a great tool for projects like [a KeePass database checker](https://github.com/sts10/medic), [a word list maker](https://github.com/sts10/tidy), a TOTP converter, and a passphrase generator. Maybe the question is: What do I want to write next?!
+
+## Appendix: On licensing
 
 Kind of just for fun, I decided to license Phraze using [the Mozilla Public License (version 2.0)](https://github.com/sts10/phraze/blob/main/LICENSE.txt), a "weak copyleft" license that I like and that I think strikes a nice balance between "strong" copyleft licenses, like the GPL, and permissive licenses, like MIT license.
 
 Interestingly, only later did I realize that two of the word lists I might have wanted to include in Phraze -- [KeePassXC's word list](https://github.com/keepassxreboot/keepassxc/blob/develop/share/wordlists/eff_large.wordlist) and [SecureDrop's French word list](https://github.com/freedomofpress/securedrop/blob/develop/securedrop/wordlists/fr.txt) -- are licensed under the Affero General Public License (AGPL). I _think_ this means I could only integrate them in to Phraze if I offered Phraze under the GPL or AGPL. (If you have thoughts on this, I have opened [an issue](https://github.com/sts10/phraze/issues/5).)
 
 I could of course still switch to a GPL license... still considering. 
-
-## Wrap up
-
-I enjoyed writing a Rust project from scratch! It had been a minute since I ran `cargo new --bin`! 
-
-I'll probably keep making tweaks to Phraze, and maybe adding more features for a bit. Feel free to create Issues or Pull Requests! I'm sure there are more bugs in my code, but hopefully none that (drastically) affect the security of the produced passphrases.
