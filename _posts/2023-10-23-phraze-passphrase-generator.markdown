@@ -12,15 +12,14 @@ $ phraze
 northern-ruined-recruited-profound-vectors-drive-bringing
 ```
 
-By default, it uses my [Orchard Street Medium list](https://github.com/sts10/orchard-street-wordlists#orchard-street-medium-list), but users have their choice of most of the other [Orchard Street lists](https://github.com/sts10/orchard-street-wordlists).
+By default, it uses my [Orchard Street Medium list](https://github.com/sts10/orchard-street-wordlists#orchard-street-medium-list), but users have their choice of most of the other [Orchard Street lists](https://github.com/sts10/orchard-street-wordlists) or to use their own word list.
 
 ## Why I hadn't written a passphrase generator this before
 Despite having written [a tool to create passphrase word lists](https://github.com/sts10/tidy) and later [my own passphrase word lists](https://github.com/sts10/orchard-street-wordlists), I had been hesitant to write my own passphrase generator. Why? Because I was worried about writing a real security tool. And there already is [a relatively popular one written in Rust called Pgen](https://github.com/ctsrc/Pgen) and Michah Lee's [passphraseme](https://github.com/micahflee/passphraseme). 
 
 But I figured it'd be fun to try! And that the tool wouldn't get much _real_ use before it had been combed over by well-informed users looking for security issues. And I figured it might be a good way to spread my Orchard Street Wordlists.
 
-## When would you use a standalone, command-line passphrase generator?
-
+## When would you use a standalone, command-line passphrase generator? Who is the user?
 Usually when I generate a passphrase or password, I put it right into my password manager. As you would guess, it makes sense for password managers to include password and passphrase generators, and thus many do.
 
 So what use does a tool like Phraze serve? Honestly I'm not totally sure. And maybe there's a reason I haven't found [a passphrase generator with over 300 stars on GitHub](https://github.com/topics/passphrase-generator). 
@@ -28,65 +27,15 @@ So what use does a tool like Phraze serve? Honestly I'm not totally sure. And ma
 But if there's a password you DON'T want to put in your password manager for whatever reason, you'd likely want it to be one you could memorize or write on a piece of paper with accuracy. For those two use-cases, I think passphrases made up of words serve better than a shorter string of random characters. One example might be for things like Bitcoin wallets, which I believe [uses a short word list](https://github.com/bitcoin/bips/blob/master/bip-0039/english.txt). But I don't know if even I am ready to trust Phraze for something like that?
 
 ## Some feature creep, as a treat
-That said, as a result of these worries, I very much wanted to try to keep the Rust code simple and straight-forward.
+At least initially, I wanted to try to keep the Rust code simple and straight-forward.
 
-But over the hours I couldn't resist and kept adding features. Word list choice, word separator choice, set minimum entropy... with the result that the it's up to 182 lines of Rust.
+But over the hours I couldn't resist and kept adding features. Multiple "built-in" word lists, word separator choice, set minimum entropy, allow users to provide their own word list... with the result that it's up to 529 lines of Rust!
 
-As an example, here's the core `generate_passphrase` function, which itself has gotten a little longer and more complex than I'd like:
+## Different ways of including a word list text file within a Rust project
 
-```rust
-/// Actually generate the passphrase, give a couple necessary parameters.
-pub fn generate_passphrase(
-    number_of_words: Option<usize>,
-    minimum_entropy: Option<usize>,
-    separator: &str,
-    title_case: bool,
-    list_to_use: List,
-) -> String {
-    // Make our word list based on user choice
-    let list = make_list(list_to_use);
+Phraze currently includes 7 "built-in" word lists. By built-in, I mean that the word lists are included during compile time, in the `cargo`-generated binary. This not only improves security, but also performance.
 
-    let number_of_words =
-        calculate_number_words_needed(number_of_words, minimum_entropy, list.len());
-
-    let mut rng = thread_rng();
-    // Create a blank String for our passphrase
-    let mut passphrase = String::new();
-    for i in 0..number_of_words {
-        // Check if we're doing title_case
-        let random_word = if title_case {
-            make_title_case(&get_random_element(&mut rng, &list))
-        } else {
-            get_random_element(&mut rng, &list)
-        };
-        // Add random_word to our passphrase
-        passphrase += &random_word;
-        // Add a separator
-        if i != number_of_words - 1 {
-            passphrase += &make_separator(&mut rng, separator);
-        }
-    }
-    passphrase.to_string()
-}
-```
-
-## Non-features
-
-In an effort to keep things simple and safe, I've resisted implementing a few features. (But we'll see if I cave and implement them soon!)
-
-### Not letting users use their own word lists
-
-One feature I haven't added yet is allowing the user to use any word list they want. This is mostly because I'm proud of the included Orchard Street Wordlists, but also that all of them are uniquely decodable, meaning that they are safe to use without a separator between words. I figure it's one less thing for a user to worry about.
-
-However this is a bummer for users who want a passphrase in a different language. I could add a "custom word list" option and just assume that list is not uniquely decodable, so have the code not allow a lack of word separator.
-
-### Can only generate one passphrase at a time
-
-Currently, you can only generate one passphrase at a time with Phraze. I know other password/phrase generators allow users to ask for a certain number of passphrases at once. But that seems like a pretty niche feature to need? Is it word the extra lines of code and complexity?
-
-## Despite these precautions... a bug that affected security
-
-Obviously the crucial thing is for this program to do what it says on the tin: Give a passphrase of the desired entropy.
+### Approach #1: `include_str!` macro
 
 Here's how, in early versions, I read in word list files:
 
@@ -115,11 +64,9 @@ fn make_list(list_to_use: List) -> Vec<&'static str> {
 
 For some reason, these `split('\n')` calls, which I've used in the past, give one extra blank (`""`) string at the end of the returned Vector.
 
-For Phraze, this is a pretty serious problem because it means that one "word" in every list is a blank list. Thus a user could ask for a 6-word passphrase and get what is effectively a 5-word passphrase if one of the words is the blank word.
+For Phraze, this is a pretty serious problem because it means that one "word" in every list is a blank list. Thus a user could ask for a 6-word passphrase and get what is effectively a 5-word passphrase if one of the words is the blank word. A tricky bug to discover!
 
-This was a difficult bug to discover. And I even had trouble recreating it. But given the stakes, I had to fix it somehow.
-
-### Fixing it
+#### Fixing this bug
 
 I could have written in a check for blank words, but that felt like treating the symptom rather than the underlying cause. And I knew that none of the included lists had any blank lines.
 
@@ -152,9 +99,90 @@ fn make_list(list_to_use: List) -> Vec<&'static str> {
 }
 ```
 
-## Using a build script
+### Approach #2: Using a build script
 
 However, once I implemented benchmarking with [Criterion.rs](https://github.com/bheisler/criterion.rs), I saw that using [a build script](https://doc.rust-lang.org/cargo/reference/build-scripts.html#case-study-code-generation) to load in the word list files is about 99% faster than the above method. Nice! See [the build.rs file](https://github.com/sts10/phraze/blob/main/build.rs) for the gist of how that works.
+
+```rust
+use std::env;
+use std::fs::File;
+use std::io::{BufRead, BufReader, Write};
+use std::path::Path;
+
+// Docs:
+// https://doc.rust-lang.org/cargo/reference/build-scripts.html#case-study-code-generation
+
+/// Write the words from the word list file into a Rust Array for program's use.
+fn words(mut f_dest: &File, const_name: &str, fname_src: &str, list_size: usize) {
+    // Declare a new Rust constant that is an array of slices.
+    // To maximize efficiency, make it the exact size of this word list.
+    write!(f_dest, "const {const_name}: &[&str; {list_size}] = &[").unwrap();
+
+    // Read words in and add them to this array
+    let f_src = BufReader::new(File::open(fname_src).unwrap());
+    for word in f_src.lines() {
+        match word {
+            // We're writing a Rust Array programmtically, so need the word to be surround by
+            // double quotes and have a comma between words.
+            Ok(word) => write!(f_dest, "\"{word}\",").unwrap(),
+            Err(_e) => panic!("Error reading line from built-in list"),
+        }
+    }
+
+    // Close array syntax
+    f_dest.write_all(b"];").unwrap();
+}
+
+fn main() {
+    let out_dir = env::var("OUT_DIR").unwrap();
+    let dest_path = Path::new(&out_dir).join("wordlists.rs");
+    let f = File::create(dest_path).unwrap();
+
+    words(&f, "WL_LONG", "word-lists/orchard-street-long.txt", 17576);
+    words(
+        &f,
+        "WL_MEDIUM",
+        "word-lists/orchard-street-medium.txt",
+        8192,
+    );
+    words(
+        &f,
+        "WL_QWERTY",
+        "word-lists/orchard-street-qwerty.txt",
+        1296,
+    );
+    words(&f, "WL_ALPHA", "word-lists/orchard-street-alpha.txt", 1296);
+    words(&f, "WL_EFF", "word-lists/eff-long.txt", 7776);
+    words(&f, "WL_EFFSHORT", "word-lists/eff-short-1.txt", 1296);
+    words(&f, "WL_MNEMONICODE", "word-lists/mnemonicode.txt", 1633);
+}
+```
+
+This works pretty well! But, as Alan Evans [persuasively argued](https://github.com/sts10/phraze/pull/17#issuecomment-1784313115), it's a bit "smelly" that I'd have to edit this build script every time I wanted to (a) add or remove or a word list or (b) change the length of a word list. 
+
+### Approach #3: `includes_lines!`
+
+Instead, Evans [suggested](https://github.com/sts10/phraze/pull/17) using a macro like the one exposed in [this crate called `includes_lines!`](https://crates.io/crates/include-lines).
+
+Now we get to go back to using just a normal function (rather than a build script, which we can now delete), which I renamed to `fetch_list`:
+
+```rust
+/// Take enum of list_choice and use the `include_lines!` macro to read-in the appropriate word
+/// list in.
+pub fn fetch_list(list_choice: ListChoice) -> &'static [&'static str] {
+    match list_choice {
+        ListChoice::Long => &include_lines!("word-lists/orchard-street-long.txt"),
+        ListChoice::Medium => &include_lines!("word-lists/orchard-street-medium.txt"),
+        ListChoice::Qwerty => &include_lines!("word-lists/orchard-street-qwerty.txt"),
+        ListChoice::Alpha => &include_lines!("word-lists/orchard-street-alpha.txt"),
+        ListChoice::Eff => &include_lines!("word-lists/eff-long.txt"),
+        ListChoice::Effshort => &include_lines!("word-lists/eff-short-1.txt"),
+        ListChoice::Mnemonicode => &include_lines!("word-lists/mnemonicode.txt"),
+    }
+}
+```
+
+Nifty!
 
 ## On licensing
 
