@@ -248,7 +248,11 @@ I would much rather have the ability to define a type called List that holds mul
 
 Could I have just using `Vec<String>`s for the built-in lists and sprinkled `to_string()` calls around to make the code more readable (less obtuse)? Yes. Would that have only increased runtime from 1.8 ms to about 4 ms? Yes. Am I making unrealistic demands on a language, expecting the performance of a low-level language with the aesthetics of a high-level one? Maybe. But it's 2023, and I want it all! Or at least, I don't want these "hard parts" to appear most commonly in the already-claustrophobic space of function signatures.
 
-If you have suggestions for other languages I might migrate to as a hobby language, [I'm all ears](https://hachyderm.io/@schlink). I'm curious about [trying Zig again](https://sts10.github.io/2022/08/20/a-summer-fling-with-zig.html), as maybe a slightly lower level language(?) could favor more explicit and less obtuse code syntax and patterns(?), but the answer is probably Go or Python...
+I've been [playing with Rust for six years now!](https://sts10.github.io/2017/11/18/trying-go-and-rust.html), and it stills feel like I'm a small child swinging around a hammer that's too heavy for me to use comfortably; that when I hit the nail there's still quite a bit of luck involved. 
+
+I'm super grateful for my experience with Rust -- its strict and descriptive compiler makes working alone an educational experience. And it's clearly ideal for writing command-line tools that don't touch the web much -- just the type of programs that I'm interested in. Lastly, I'm sure I'm a better programmer in all languages for it. But maybe it's time to put the mighty hammer away -- my education from the Rust compiler at a stopping point? A passphrase generator does feel a bit like the culmination of [my work on passphrases](https://www.samschlinkert.com/#passphrases), which has roughly overlapped with my time writing Rust (starting in 2018).
+
+If you have suggestions for other languages I might migrate to as a hobby language, [I'm all ears](https://hachyderm.io/@schlink). (Though I'm a little worried Rust, particularly it's errors and toolchain, has set my expectations too high.) I'm actually curious about [trying Zig again](https://sts10.github.io/2022/08/20/a-summer-fling-with-zig.html), as maybe a slightly lower level language(?) could use more explicit and less obtuse code syntax and patterns(?). I'm still afraid of real functional languages like OCaml and F#. The realistic answer is probably (still) Go or Python...
 
 ## On licensing
 
