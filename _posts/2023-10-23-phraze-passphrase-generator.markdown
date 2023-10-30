@@ -242,7 +242,9 @@ It's probably on me, but obtuse function signatures like this -- which I think o
 
 I would much rather have the ability to define a type called List that holds multiple "string like" objects, then use this type declaration everywhere and anywhere I want (function inputs, outputs, variables, etc.) Maybe you can effectively do this in Rust with Structs and Traits, but it doesn't seem to be the encouraged approach.
 
-If you have suggestions for other languages I might migrate to as a hobby language, [I'm all ears](https://hachyderm.io/@schlink) (I'm curious about [trying Zig again](https://sts10.github.io/2022/08/20/a-summer-fling-with-zig.html), but the answer is probably Go or Python...). 
+Could I have just using `Vec<String>`s for the built-in lists and sprinkled `to_string()` calls around to make the code more readable (less obtuse)? Yes. Would that have only increased runtime from 1.8 ms to about 4 ms? Yes. Am I making unrealistic demands on a language, expecting the performance of a low-level language with the aesthetics of a high-level one? Maybe. But it's 2023, and I want it all! Or at least, I don't want these "hard parts" to appear most commonly in the already-claustrophobic space of function signatures.
+
+If you have suggestions for other languages I might migrate to as a hobby language, [I'm all ears](https://hachyderm.io/@schlink). I'm curious about [trying Zig again](https://sts10.github.io/2022/08/20/a-summer-fling-with-zig.html), as maybe a slightly lower level language(?) could favor more explicit and less obtuse code syntax and patterns(?), but the answer is probably Go or Python...
 
 ## On licensing
 
