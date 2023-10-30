@@ -62,7 +62,16 @@ fn make_list(list_to_use: List) -> Vec<&'static str> {
 }
 ```
 
-For some reason, these `split('\n')` calls, which I've used in the past, give one extra blank (`""`) string at the end of the returned Vector.
+This handy [`include_str!` macro](https://doc.rust-lang.org/std/macro.include_str.html) "Includes a UTF-8 encoded file as a string." Since these lists are effectively constants (they're not provided by the user), we want to read them in as string slices rather than `String`s for improved performance.
+
+However! If I had read [the provided example of `include_str!`](https://doc.rust-lang.org/std/macro.include_str.html#examples) more carefully, I would have realized something! 
+
+```rust
+let my_str = include_str!("spanish.in");
+assert_eq!(my_str, "adiós\n");
+```
+
+As you can see, the `\n` comes along with every word. This means that my `split('\n')` calls, which I've used in the past, will give one extra blank (`""`) string at the end of the returned Vector.
 
 For Phraze, this is a pretty serious problem because it means that one "word" in every list is a blank list. Thus a user could ask for a 6-word passphrase and get what is effectively a 5-word passphrase if one of the words is the blank word. A tricky bug to discover!
 
@@ -70,7 +79,7 @@ For Phraze, this is a pretty serious problem because it means that one "word" in
 
 I could have written in a check for blank words, but that felt like treating the symptom rather than the underlying cause. And I knew that none of the included lists had any blank lines.
 
-Thanks to some help from a Fediverse friend, I tried simply using the `lines()` method rather than `splt('\n')`. I believe that solves the problem.
+Thanks to some help from a Fediverse friend, I tried simply using the `lines()` method rather than `split('\n')`. I believe that solves the problem (maybe `lines()` is a bit smarter in handling the last lines of files?).
 
 ```rust
 /// Read in the appropriate word list, given the enum of the desired list
@@ -99,7 +108,7 @@ fn make_list(list_to_use: List) -> Vec<&'static str> {
 }
 ```
 
-The issue with `include_str!` is that we still have to parse each line at runtime. Wouldn't it be great if we could do that at compile time, thus speeding up the runtime that by much?
+But we're still needing to parse each line at runtime. Wouldn't it be great if we could do that at compile time, thus speeding up the runtime that by much?
 
 ### Approach #2: Using a build script
 
@@ -160,9 +169,9 @@ fn main() {
 }
 ```
 
-This works pretty well! You can stop reading this section now and go with this!
+This works pretty well! You could stop reading this section now and go with this!
 
-But, as Alan Evans [persuasively argued](https://github.com/sts10/phraze/pull/17#issuecomment-1784313115), it's a bit "smelly" that I'd have to edit this build script every time I wanted to (a) add or remove or a word list or (b) change the length of a word list. 
+But, as Alan Evans [persuasively argued](https://github.com/sts10/phraze/pull/17#issuecomment-1784313115), it's a bit "smelly" that I'd have to edit this build script every time I wanted to (a) add or remove or a word list or (b) change the length of a word list. Plus, writing Rust is hard enough -- writing Rust that writes Rust feels like it could get complicated quickly.
 
 ### Approach #3: `includes_lines!`
 
@@ -186,9 +195,54 @@ pub fn fetch_list(list_choice: ListChoice) -> &'static [&'static str] {
 }
 ```
 
-Contra the `include_str!` approach, we don't have to parse/find line endings at runtime, thus maintaining the performance of the build script method, without the build script file/overhead. Sweet.
+As you can hopefully see, contra the `include_str!` approach, we don't have to parse/find line endings at runtime. Besides some cleaner code, we also maintain the performance of the build script method, without the build script file/overhead. Sweet. 
 
 My informal, non-Criterion, benchmark of `hyperfine -N -w 1000 -m 1000 phraze` clocks in at under 2 ms again. Awesome!
+
+## Having a function accept Strings or str slices
+
+The part I've hidden till now is that, at the end of the day, to take advantage of reading the built-in lists as string slices, but also being able to graceful handle user-provided word list files (which we'll need to use `String`s for), is that we need a function that can take both types in its input. 
+
+To do this, we need to use this super ugly Rust syntax that I kind of hate -- the `T` business.
+
+```rust
+/// Actually generate the passphrase, given a couple necessary parameters.
+/// This function uses some Rust magic to be able to accept a word list as
+/// either a &[&str] (built-in word lists) or as a &[String] if user provides a file
+/// as word list.
+pub fn generate_a_passphrase<T: AsRef<str> + std::fmt::Display>(
+    number_of_words_to_put_in_passphrase: usize,
+    separator: &str,
+    title_case: bool,
+    list: &[T], // Either type!
+) -> String {
+    let mut rng = thread_rng();
+    // Create a blank String to put words into to create our passphrase
+    let mut passphrase = String::new();
+    for i in 0..number_of_words_to_put_in_passphrase {
+        // Check if we're doing title_case
+        let random_word = if title_case {
+            make_title_case(&get_random_element(&mut rng, list))
+        } else {
+            get_random_element(&mut rng, list)
+        };
+        // Add this word to our passphrase
+        passphrase += &random_word;
+        // Add a separator
+        if i != number_of_words_to_put_in_passphrase - 1 {
+            passphrase += &make_separator(&mut rng, separator);
+        }
+    }
+    passphrase.to_string()
+}
+```
+
+### A hot take about Rust!
+It's probably on me, but obtuse function signatures like this -- which I think of as "Ugly Rust" -- make me want to stop writing and maintaining Rust code. (This and async Rust.) But for this project, I held my nose and tried a mix of `'`s and `<`s till it compiled and the tests passed.
+
+I would much rather have the ability to define a type called List that holds multiple "string like" objects, then use this type declaration everywhere and anywhere I want (function inputs, outputs, variables, etc.) Maybe you can effectively do this in Rust with Structs and Traits, but it doesn't seem to be the encouraged approach.
+
+If you have suggestions for other languages I might migrate to as a hobby language, [I'm all ears](https://hachyderm.io/@schlink) (I'm curious about [trying Zig again](https://sts10.github.io/2022/08/20/a-summer-fling-with-zig.html), but the answer is probably Go or Python...). 
 
 ## On licensing
 
