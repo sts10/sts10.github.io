@@ -181,7 +181,7 @@
 </ol>
 <h2 id="initializing-cargo-dist"><a class="header" href="#initializing-cargo-dist">Initializing cargo dist</a></h2>
 <ol>
-<li>In your Rust project's directory, run <code>cargo dist init</code>. This launches a lil interactive install guide. The defaults are good, so just type <code>y</code> a bunch. Be sure to enable the GitHub CI. </li>
+<li>In your Rust project's directory, run <code>cargo dist init</code>. This launches a lil interactive install guide. The defaults are good, so just type <code>y</code> a bunch. Be sure to enable the GitHub CI. Alternatively, you can just do <code>cargo dist init --yes</code> to use the defaults, which seem good for my purposes.</li>
 <li>This will create a new file at <code>.github/workflows/release.yml</code>, which tells GitHub what magic to do later, and edit your Cargo.toml. Don't worry about it.</li>
 <li>Commit these changes (<code>git add . &amp;&amp; git commit -m &quot;init cargo dist&quot;</code>)</li>
 </ol>
