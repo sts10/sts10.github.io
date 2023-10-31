@@ -209,6 +209,7 @@
 <li>Get your main branch into a good, working place. Commit changes, at least locally.</li>
 <li>Run <code>cargo test</code>, etc. as well as the tests described above (<code>cargo dist build</code> and <code>cargo dist plan</code>).</li>
 <li>Increment that <code>version</code> in <code>Cargo.toml</code> to a new highest version. Let's say we're going from <code>v0.3.8</code> to <code>v0.3.9</code>.</li>
+<li>Optional: Add release notes to a file called <code>CHANGELOG.md</code>, under a heading like <code>## Version 0.3.9</code>, which Cargo Dist will auto-detect.</li>
 <li>Run another <code>cargo build</code> to make sure <code>Cargo.lock</code> is up-to-date.</li>
 <li>Commit changes -- message can be something like &quot;Release v0.3.9&quot; -- and <code>git push origin main</code></li>
 <li>Create a git tag for this release. Match the version number to the one in <code>Cargo.toml</code>. So in our case: <code>git tag v0.3.9</code>. (Obviously make sure this tag has not been seen by git or GitHub before.)</li>
