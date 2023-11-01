@@ -1486,6 +1486,20 @@ fi
 <p>At this point you're done! The generated CI script should pick up the ball and create a Github Release with all your builds over the next few minutes!</p>
 </blockquote>
 <p>(FYI This is the point where you'd run <code>cargo publish</code> to push to crates.io, if your project is hosted there.)</p>
+<h2 id="upgrading-cargo-dist-itself"><a class="header" href="#upgrading-cargo-dist-itself">Upgrading cargo-dist itself</a></h2>
+<p>If and when you upgrade cargo-dist (using <code>carog install cargo-dist</code>), you'll need to take some steps within the project that you use cargo-dist to distribute. </p>
+<ol>
+<li>In your project's <code>Cargo.toml</code> file, edit the <code>cargo-dist-version</code> variable to match the version of cargo-dist you now have installed on your system.</li>
+<li>Re-run <code>cargo dist init</code>. (You may also need to run <code>cargo dist generate</code> afterward for changes to take affect.)</li>
+<li>Try <code>cargo dist built</code> and <code>cargo dist plan</code>, as usual, to see if everything is in working order.</li>
+</ol>
+<h2 id="suggested-markdown-to-add-to-readme-of-project-that-uses-cargo-dist"><a class="header" href="#suggested-markdown-to-add-to-readme-of-project-that-uses-cargo-dist">Suggested Markdown to add to README of project that uses cargo-dist</a></h2>
+<pre><code class="language-markdown">## For developers: How to create a release
+
+This project uses [cargo-dist](https://opensource.axo.dev/cargo-dist/) to create releases. 
+
+Some of [my personal docs are here](https://sts10.github.io/docs/cargo-dist-tips.html); but basically, `cargo install cargo-dist`. When you're ready to cut a new release, test the current state of the project with `cargo dist build` and `cargo dist plan`. If that went well, create a new git tag that matches the current project version in `Cargo.toml` with `git tag vX.X.X`. Finally, run `git push --tags` to kick off the release process. GitHub will handle it from here -- check your project's GitHub Releases page in about 5 to 10 minutes.
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="installing-ubuntu-on-my-2009-macbook-pro"><a class="header" href="#installing-ubuntu-on-my-2009-macbook-pro">Installing Ubuntu on my 2009 MacBook Pro</a></h1>
 <p>I had an old 17-inch MacBook Pro from 2009 (college) lying around and I figured it'd be a fun challenge to install Linux on it. I had never installed or even used Linux before (to my knowledge). I also, confusingly, hadn't found a clean, step-by-step guide for doing this, so I promised I'd write my process out as thoroughly but simply as I could once I got it done. </p>
 <p>I now realize, I think, that the reason the process of installing even a popular Linux distribution on a common (if old) model computer isn't written out or easily findable is that the process is a bit different for everyone, depending on the distro, the version, and the hardware you're starting with. Note that I didn't want to partition my hard drive to allow myself to dual-boot either in OS X or Ubuntu-- I was going for a full replacement, and thus would and did lose all the files on applications I had on the old Mac.</p>
