@@ -12,7 +12,7 @@ $ phraze
 northern-ruined-recruited-profound-vectors-drive-bringing
 ```
 
-By default, it uses my [Orchard Street Medium list](https://github.com/sts10/orchard-street-wordlists#orchard-street-medium-list), but users have their choice of most of the other [Orchard Street lists](https://github.com/sts10/orchard-street-wordlists) or to use their own word list.
+If you have Rust installed, you can install Phraze with `cargo install phraze`. If you don't have Rust installed, check [the latest releases](https://github.com/sts10/phraze/releases). See [the project's README](https://github.com/sts10/phraze/blob/main/readme.markdown) for more information on installation and usage.
 
 ## Why I hadn't written a passphrase generator this before
 Despite having written [a tool to create passphrase word lists](https://github.com/sts10/tidy) and later [my own passphrase word lists](https://github.com/sts10/orchard-street-wordlists), I had been hesitant to write my own passphrase generator. Why? Because I was worried about writing a real security tool. And there already is [a relatively popular one written in Rust called Pgen](https://github.com/ctsrc/Pgen) and Michah Lee's [passphraseme](https://github.com/micahflee/passphraseme). 
@@ -26,10 +26,13 @@ So what use does a tool like Phraze serve? Honestly I'm not totally sure. And ma
 
 But if there's a password you DON'T want to put in your password manager for whatever reason, you'd likely want it to be one you could memorize or write on a piece of paper with accuracy. For those two use-cases, I think passphrases made up of words serve better than a shorter string of random characters. One example might be for things like Bitcoin wallets, which I believe [uses a short word list](https://github.com/bitcoin/bips/blob/master/bip-0039/english.txt). But I'd probably use physical dice for something like that. Anyway, we push on.
 
+## What word lists does Phraze use? 
+By default, Phraze uses my [Orchard Street Medium list](https://github.com/sts10/orchard-street-wordlists#orchard-street-medium-list), but users have their choice of most of the other [Orchard Street lists](https://github.com/sts10/orchard-street-wordlists) or to use their own word list.
+
 ## Some feature creep, as a treat
 At least initially, I wanted to try to keep the Rust code simple and straight-forward.
 
-But over time, I couldn't resist and kept adding features, like providing multiple "built-in" word lists, word separator choice, set minimum entropy, allow users to provide their own word list... with the result that the project is currently up to 529 lines of Rust!
+But over time, I couldn't resist and kept adding features, like providing multiple "built-in" word lists, word separator choice, set minimum entropy, allow users to provide their own word list... with the result that the project is currently up to 529 lines of Rust (though I assume this includes tests and benchmarks)!
 
 ## Different ways of including a word list text file within a Rust project
 
