@@ -144,7 +144,7 @@ pub fn get_sardinas_patterson_final_intersection(c: &[String]) -> Vec<String> {
 
 Then we can run this new, modified list through the Sardinas-Patterson again and see if it's now uniquely decodable. And if it is, maybe the number of words we removed along the way will be less than the other three options outlined above.
 
-(Spoiler alert: This is the method I went with. You can find this procedure implemented in Rust code in context of a larger tool, Tidy, [here](https://github.com/sts10/tidy/blob/main/src/sardinas_patterson_pruning.rs).)
+(Spoiler alert: This is the method I went with. You can find this procedure implemented in Rust code in context of a larger tool, Tidy, [here](https://github.com/sts10/tidy/blob/main/src/schlinkert_pruning.rs).)
 
 ## Schlinkert pruning: Preliminary results
 
@@ -214,7 +214,7 @@ To recap:
 
 You can play with the procedure yourself by [installing Tidy](https://github.com/sts10/tidy#installation). To see if a given list is uniquely decodable or not, use 4 attributes flags (`-AAAA`). To perform "Schlinkert pruning" on the given list, use the option `-K` (or `--schlinkert-prune`).
 
-Again, [here's my code file with the pruning functions on GitHub](https://github.com/sts10/tidy/blob/main/src/sardinas_patterson_pruning.rs).
+Again, [here's my code file with the pruning functions on GitHub](https://github.com/sts10/tidy/blob/main/src/schlinkert_pruning.rs).
 
 ## A new word list
 
