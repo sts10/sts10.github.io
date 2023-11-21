@@ -64,7 +64,7 @@ Rather than try to reinvent the wheel here, I figured it was time to look at add
 
 The brilliant [Wesley Moore suggested](https://github.com/sts10/tidy/pull/25#issuecomment-1406013696) [icu_collator](https://docs.rs/icu_collator/1.1.0/icu_collator/).
 
-Here's how I adapted one of the crate's examples for us:
+Here's how I adapted one of the crate's examples for us (in [`tidy/src/list_manipulations.rs`](https://github.com/sts10/tidy/blob/main/src/list_manipulations.rs)):
 
 ```rust
 use icu::collator::*;
@@ -150,6 +150,33 @@ pub fn sort_carefully(list: Vec<String>, locale: Locale) -> Vec<String> {
 As the comment states, we now sort both French and Spanish correctly, though to do so, the user must specify the correct locale, either "fr" or "es-ES" in these cases. I find this an acceptable solution for Tidy and its users!
 
 The above is [the version that exists today in Tidy 0.2.82](https://github.com/sts10/tidy/blob/main/src/list_manipulations.rs#L23-L45).
+
+## November 2023 update: A single crate dependency
+
+It turns out we can get the same functionality as above while only using one crate as a dependency. Here's the relevant code in Tidy v0.3.5:
+
+```rust
+use icu::collator::*;
+use icu::locid::Locale;
+/// Sort a Vector of words alphabetically, taking into account the locale of the words
+/// `.sorted()` words -> ["Zambia", "abbey", "eager", "enlever", "ezra", "zoo", "énigme"]
+/// sort_carefully words -> ["abbey", "eager", "énigme", "enlever", "ezra", "Zambia", "zoo"]
+pub fn sort_carefully(list: Vec<String>, locale: Locale) -> Vec<String> {
+    // https://github.com/unicode-org/icu4x/tree/main/components/collator#examples
+    let mut options = CollatorOptions::new();
+    options.strength = Some(Strength::Secondary);
+    let collator: Collator = Collator::try_new(&locale.into(), options).unwrap();
+
+    let mut newly_sorted_list = list;
+    newly_sorted_list.sort_by(|a, b| collator.compare(a, b));
+    newly_sorted_list
+}
+```
+
+In `Cargo.toml`, we need only:
+```toml
+icu = "1.4.0"
+```
 
 ## Unicode normalization
 
