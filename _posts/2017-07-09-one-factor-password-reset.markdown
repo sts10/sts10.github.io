@@ -143,3 +143,7 @@ Today Russel Brandom wrote [an article](https://www.theverge.com/2017/7/10/15946
 > None of this means two-factor is pointless, but it isn't the silver bullet that it seemed to be in 2012. Adding an authentication code hardens the login page, but smart attackers will just find another angle of approach, whether it's a carrier account, a preregistered device, or just a customer service department that's a little too eager to reset the password. Those weak points are the real measure of how secure an account is, but they're impossible to spot from the outside. The result is that, if you're looking for the chat app that's hardest to hijack, it's hard for even sophisticated users to know what to look for.
 
 So we beat on, boats against the current, etc.
+
+## Update: November 2023
+
+PayPal emailed me this month, informing me that they now support security keys for 2-factor authentication. It seems they also now support regular TOTP for use with an authenticator app like Google Authenticator. Finally!
