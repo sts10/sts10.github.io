@@ -5,9 +5,9 @@ date: 2023-05-17 13:00:00 -0400
 comments: true
 ---
 
-The [SecureDrop project](https://github.com/freedomofpress/securedrop/) uses a few different word lists that are within it's codebase. One of them is located at [`securedrop/wordlists/en.txt`](https://github.com/freedomofpress/securedrop/tree/develop/securedrop/wordlists). 
+The [SecureDrop project](https://securedrop.org/) uses a few different (English) word lists. One of them is located [in their public repo](https://github.com/freedomofpress/securedrop/) at [`securedrop/wordlists/en.txt`](https://github.com/freedomofpress/securedrop/tree/develop/securedrop/wordlists). 
 
-Since its initial publication to GitHub in October of 2017, the list has been changed twice. Below, I make some observations about these changes that I think of are interest and illuminate how a word list might come to have prefix words on it, but remain uniquely decodable.
+Since its initial publication to GitHub in October of 2017, the list has been changed twice. Below, I make some observations about these changes that I think are of interest and illuminate how a word list might come to have prefix words on it, but remain uniquely decodable.
 
 ## The original list
 
@@ -71,7 +71,7 @@ Before we move on, I'll note now that, after raising these questions with Secure
 
 Later in 2022, [I removed a few more awkward/inappropriate words from the list](https://github.com/freedomofpress/securedrop/commit/7c7dada9e0e8ad62e5a52f2d3d5c2fcf816e7223), like "gonad", "grope"," junky", "opium", and "rectal". As one of my replacement words, I added "gala" to the list, not realizing at the time that this was a prefix word of "galaxy". Now the list has two prefix words on it: "impress" and "gala".
 
-I did not check to see if the words as was adding as replacements were prefix words of words already on the list, nor did I check that the end resulting list was free of prefix words or uniquely decodable. And yet, luckily enough, [the list as it stands today](https://github.com/freedomofpress/securedrop/blob/develop/securedrop/wordlists/en.txt) is still uniquely decodable. 
+I did not check to see if the words I was adding as replacements were prefix words of words already on the list, nor did I check that the end resulting list was free of prefix words or uniquely decodable. And yet, luckily enough, [the list as it stands today](https://github.com/freedomofpress/securedrop/blob/develop/securedrop/wordlists/en.txt) is still uniquely decodable. 
 
 ```text
 List length               : 7603 words
@@ -93,7 +93,7 @@ Unique character prefix   : 9
 
 ## Why this _could have_ been a security issue
 
-As covered, SecureDrop uses delimiters between words in their passphrases, but if they _didn't_, this is why I'd be raising this issue.
+As covered, SecureDrop uses delimiters between words in their passphrases. But if they did not use delimiters, here are some interesting issues that could come up.
 
 Imagine if the words "neighbor" and "hood" had been on the original list. Next, imagine that, when replacing one of the vulgar words, the word "neighborhood" had been added to the list. If a user randomly generated a 3-word passphrase or username, expecting 12.892 * 3 == 38.7 bits of entropy, they might get "chip", "neighbor", and "hood". If these words were **combined without a delimiter**, the resultant passphrase or username would be "chipneighborhood", indistinguishable from the (25.78 bit) passphrase "chip" + "neighborhood".
 
@@ -101,6 +101,6 @@ We can then imagine an attacker brute forcing their way through the list, guessi
 
 ## Conclusions
 
-The two tweaks made to the word list, both in spring of 2022, clearly did not ensure that the list remained free of prefix words. Interestingly, through both of these changes the list remained uniquely decodable, despite additions.
+The two tweaks made to the word list, both in spring of 2022, clearly did not ensure that the list remained free of prefix words. Interestingly, despite word additions, the list remained uniquely decodable.
 
-To the best of my knowledge, the list has never been not uniquely decodable through its existence, at least on GitHub since 2017. And, as mentioned above, SecureDrop's passwords are delimited, so it wouldn't even be an issue if the list was not uniquely decodable at any point, (and thus I do not think I'm reporting a security issue here). But I still think that it's an interesting story!
+To the best of my knowledge, the list has never been not uniquely decodable through its existence, at least on GitHub since 2017. And, as mentioned above, SecureDrop's passwords are delimited, so it wouldn't even be an issue if the list was not uniquely decodable at some point, (and thus I do not think I'm reporting a security issue here). But I still think that it's an interesting illustration of the above concepts!
