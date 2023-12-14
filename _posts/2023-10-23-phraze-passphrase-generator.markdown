@@ -180,7 +180,7 @@ But, as Alan Evans [persuasively argued](https://github.com/sts10/phraze/pull/17
 
 ### Approach #3: `includes_lines!`
 
-Instead, Evans [suggested](https://github.com/sts10/phraze/pull/17) returning to the macro approach, but instead of `include_str!`, find one like the one offered by [the crate `includes_lines!`](https://crates.io/crates/include-lines).
+Instead, Evans [suggested](https://github.com/sts10/phraze/pull/17) returning to the macro approach, but instead of `include_str!`, find one like the one offered by [the crate includes_lines](https://crates.io/crates/include-lines).
 
 Now we get to go back to using just a normal function (rather than a build script, which we can now delete), which I renamed to `fetch_list`:
 
@@ -200,9 +200,9 @@ pub fn fetch_list(list_choice: ListChoice) -> &'static [&'static str] {
 }
 ```
 
-As you can hopefully see, contra the `include_str!` approach, we don't have to parse/find line endings at runtime. the macro returns `&'static [&'static str]` -- just what we want. 
+As you can hopefully see, contra the `include_str!` approach, we don't have to parse/find line endings at runtime. And the `include_lines!` macro returns `&'static [&'static str]` -- just what we want. 
 
-In addition to cleaner code, we also maintain the performance of the build script method, without the build script file/overhead. Sweet. 
+In addition to cleaner code, we also maintain the performance of the build script method, without the build script file/overhead. Phenomenal!
 
 My informal, non-Criterion, benchmark of `hyperfine -N -w 1000 -m 1000 phraze` clocks in at under 2 ms again. Awesome!
 
@@ -266,7 +266,7 @@ I'm aware that the better way to frame this question is "What kind of programs d
 
 ## Appendix: On licensing
 
-Kind of just for fun, I decided to license Phraze using [the Mozilla Public License (version 2.0)](https://github.com/sts10/phraze/blob/main/LICENSE.txt), a "weak copyleft" license that I like and that I think strikes a nice balance between "strong" copyleft licenses, like the GPL, and permissive licenses, like MIT license.
+Kind of just for fun, I decided to license Phraze using [the Mozilla Public License (version 2.0)](https://github.com/sts10/phraze/blob/main/LICENSE.txt), a "weak copyleft" license that I like and that I think strikes a nice balance between "strong" copyleft licenses, like the GNU Public License (GPL), and permissive licenses, like the MIT license.
 
 Interestingly, only later did I realize that two of the word lists I might have wanted to include in Phraze -- [KeePassXC's word list](https://github.com/keepassxreboot/keepassxc/blob/develop/share/wordlists/eff_large.wordlist) and [SecureDrop's French word list](https://github.com/freedomofpress/securedrop/blob/develop/securedrop/wordlists/fr.txt) -- are licensed under the Affero General Public License (AGPL). I _think_ this means I could only integrate them in to Phraze if I offered Phraze under the GPL or AGPL. (If you have thoughts on this, I have opened [an issue](https://github.com/sts10/phraze/issues/5).)
 
