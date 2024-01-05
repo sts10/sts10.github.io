@@ -1489,7 +1489,10 @@ fi
 </blockquote>
 <p>(FYI This is the point where you'd run <code>cargo publish</code> to push to crates.io, if your project is hosted there.)</p>
 <h2 id="upgrading-cargo-dist-itself"><a class="header" href="#upgrading-cargo-dist-itself">Upgrading cargo-dist itself</a></h2>
-<p>If and when you upgrade cargo-dist (using <code>carog install cargo-dist</code>), you'll need to take some steps within the project that you use cargo-dist to distribute. </p>
+<p>If and when you upgrade cargo-dist (using <code>cargo install cargo-dist</code>), you'll need to take some steps within the project that you use cargo-dist to distribute. </p>
+<h3 id="new-way-of-doing-this-as-of-cargo-dist-v070"><a class="header" href="#new-way-of-doing-this-as-of-cargo-dist-v070">New way of doing this (as of cargo-dist v0.7.0)</a></h3>
+<p>Just run <code>cargo dist init</code>, as per <a href="https://opensource.axo.dev/cargo-dist/book/updating.html">these cargo-dist docs</a>.</p>
+<h3 id="my-old-notes-on-how-to-do-this"><a class="header" href="#my-old-notes-on-how-to-do-this">My old notes on how to do this</a></h3>
 <ol>
 <li>In your project's <code>Cargo.toml</code> file, edit the <code>cargo-dist-version</code> variable to match the version of cargo-dist you now have installed on your system.</li>
 <li>Re-run <code>cargo dist init</code>. (You may also need to run <code>cargo dist generate</code> afterward for changes to take affect.)</li>
@@ -2200,22 +2203,6 @@ autocmd BufEnter * set mouse=
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 
