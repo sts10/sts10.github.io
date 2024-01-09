@@ -113,11 +113,13 @@ fn make_list(list_to_use: List) -> Vec<&'static str> {
 }
 ```
 
-But we're still needing to parse each line at runtime. Wouldn't it be great if we could do that at compile time, thus speeding up the runtime that by much?
+But we're still needing to parse each line at runtime. Wouldn't it be great if we could do that at compile time, thus speeding up the runtime by that much?
 
 ### Approach #2: Using a build script
 
-Sure enough, once I implemented benchmarking with [Criterion.rs](https://github.com/bheisler/criterion.rs), I saw that using [a build script](https://doc.rust-lang.org/cargo/reference/build-scripts.html#case-study-code-generation) to load in the word list files is about 99% faster than the above method. Nice! See [the build.rs file](https://github.com/sts10/phraze/blob/main/build.rs) for the gist of how that works.
+Luckily, Rust has a thing/feature called a [build script](https://doc.rust-lang.org/cargo/reference/build-scripts.html#case-study-code-generation), which I could use to read-in or "load" the "built-in" word list files.
+
+And sure enough, once I implemented benchmarking with [Criterion.rs](https://github.com/bheisler/criterion.rs), I saw that using this approach is about 99% faster than the `include_str!` method described above. Nice! See [the build.rs file](https://github.com/sts10/phraze/blob/main/build.rs) for the gist of how that works.
 
 ```rust
 use std::env;
