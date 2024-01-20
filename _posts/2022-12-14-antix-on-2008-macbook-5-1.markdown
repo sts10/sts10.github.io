@@ -253,3 +253,5 @@ My takeaway here is that antiX is _not_ advertised as a beginner-friendly distro
 * I also am wondering if performance on some or all of these machines would be significantly improved if I had taken the time to find the correct drivers for their GPUs. A fediverse friend points me to [NVIDIA driver 304.108](https://www.nvidia.com/download/driverResults.aspx/156163/en-us/).
 
 Update from April 2023: [List of lightweight Linux distros from It's Floss](https://itsfoss.com/super-lightweight-distros/).
+
+Lastly, this post garnered [some comments on Hacker News](https://news.ycombinator.com/item?id=38565629).
