@@ -18,6 +18,8 @@ As you might expect, none of these machines can run a version of mac OS that is 
 * The latest OS a MacBook5,1 can handle is [apparently OS X 10.11 El Capitan](https://igotoffer.com/apple/macbook-5#Specifications), which is also no longer supported. It has 2 GB of RAM. (Here are what I think are [some accurate specs](https://igotoffer.com/apple/macbook-5).)
 * I think the 2012 Air can handle High Sierra, but even that is not currently supported.
 
+(Note that I was not interested in making hardware upgrades to any of these machines, though that may be a good option for you!)
+
 ## A note on securely erasing old data
 
 For a variety of reasons, including my own laziness, I didn't worry too much about securely erasing the existing data on these particular computers. That was probably a mistake. I think the older two machines have rotating drives (HDDs), which are easier to erase securely than the more modern solid state drive found on the 2012 Air. I don't have enough confidence to point you to a resource, other than maybe [ShredOS](https://github.com/PartialVolume/shredos.x86_64) (which I kind of want to use just for the experience) and this [this Wirecutter guide](https://www.nytimes.com/wirecutter/guides/how-to-securely-wipe-your-computer-devices/) on scrubbing solid state drives.
@@ -32,7 +34,7 @@ In a past situations like this I have [used Lubuntu](https://sts10.github.io/201
 
 ## The iMac
 
-I started with the iMac. 
+I started with the iMac5,1 (from 2007, 1 GB of RAM).
 
 Step 1: I needed to find out if it has a 64-bit processor or a 32-bit one, something I'd need to know in order to pick a suitable distro and version of Linux.
 
@@ -243,11 +245,11 @@ Sure enough, after a bit longer than I would have guessed, Bodhi Linux installed
 
 ![Bodhi Linux installed](/img/antix/bodhi.jpeg)
 
-My takeaway here is that antiX is _not_ advertised as a beginner-friendly distro for a reason. (I was relieved that the Bodhi Linux installer didn't ask me any confusing questions!) If you're not paying attention, it can bite ya! MX Linux may be a bit more beginner friendly, but you still need to read the installation wizard carefully!
+My takeaway here is that antiX is not advertised as a beginner-friendly distro for a reason. (I was relieved that the Bodhi Linux installer didn't ask me any confusing questions!) If you're not paying attention, it can bite ya! MX Linux may be a bit more beginner friendly, but you still need to read the installation wizard carefully!
 
 ---
 
-## Appendix: Resources and notes
+## Appendix C: Resources and notes
 
 * [Linux DVD images (and how-to) for 32-bit EFI Macs (late 2006 models)](https://mattgadient.com/linux-dvd-images-and-how-to-for-32-bit-efi-macs-late-2006-models/)
 * I also am wondering if performance on some or all of these machines would be significantly improved if I had taken the time to find the correct drivers for their GPUs. A fediverse friend points me to [NVIDIA driver 304.108](https://www.nvidia.com/download/driverResults.aspx/156163/en-us/).
