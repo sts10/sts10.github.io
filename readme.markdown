@@ -1,5 +1,6 @@
+Code repository for [my blog](https://sts10.github.io/). I currently use [Jekyll](https://jekyllrb.com/) to create it (though I'm always looking for other options).
 
-## Installing and setting up Jekyll on Ubuntu 17.10
+## Installing and setting up Jekyll on Ubuntu
    1. Be sure rbenv is set up and a modern version of Ruby is set to global.
    2. `gem install jekyll bundler`
    3. `git clone git@github.com:sts10/sts10.github.io.git`
