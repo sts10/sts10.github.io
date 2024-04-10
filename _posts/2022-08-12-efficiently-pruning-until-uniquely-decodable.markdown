@@ -216,78 +216,10 @@ You can play with the procedure yourself by [installing Tidy](https://github.com
 
 Again, [here's my code file with the pruning functions on GitHub](https://github.com/sts10/tidy/blob/main/src/schlinkert_pruning.rs).
 
-## A new word list
+## Creating actual, usable word lists using this technique
 
-As a further experiment, I created [a new long word list using this pruning technique](https://github.com/sts10/generated-wordlists/blob/main/lists/experimental/ud1.txt).
+Eventually, I used English word frequency data from Google Ngram project and Wikipedia to create a series of word lists that I call the [Orchard Street Wordlists](https://github.com/sts10/orchard-street-wordlists). All of the lists were made uniquely decodable using the pruning method described in this post. I argue that these lists are able to keep more common words in them due to the higher efficiency of Schlinkert pruning when compared to alternative methods like removing all prefix words.
 
-In fact, this list is just about **the best list I can produce at the moment**.
+## More Links
 
-* Its initial data source, like many of my word lists, is from [my Google Book Ngram scraping project](https://github.com/sts10/common_word_list_maker). It takes (approximately) the 25,000 most-used words as a starting point.
-* From that raw input, it filters out a number of profane words, awkward words, words that are _too_ common (e.g. "she" and "also") and some British spellings of English words (like "favour" and "theatre").
-    * It also filters out any words not found in `/usr/share/dict/words` (this is a bit of controversial choice, but I find that it helps weed out a lot of "words" we definitely don't want, but would take too long to find one-by-one).
-* It then uses this new "Schlinkert pruning" method I've described above to make the list uniquely decodable while cutting a minimal amount of words.
-* By tweaking the number of words taken from the Google Ngram data, I orchestrated the list to be exactly 17,576 words. Why 17,576 words? That list length means the list just barely clears what I call [the brute force line](https://github.com/sts10/tidy#the-brute-force-line). At 17,576 words, the list is the longest it can be while still including 3-character words and not being more susceptible to a brute-force _letter_ attack than a brute-force _word_ attack (assuming no word separators are used).
-
-Here are some (more) attributes of the list:
-
-```text
-List length               : 17576 words
-Mean word length          : 8.01 characters
-Length of shortest word   : 3 characters (add)
-Length of longest word    : 15 characters (vulnerabilities)
-Free of prefix words?     : false
-Free of suffix words?     : false
-Uniquely decodable?       : true
-Entropy per word          : 14.101 bits
-Efficiency per character  : 1.761 bits
-Assumed entropy per char  : 4.700 bits
-Above brute force line?   : true
-Above Shannon line?       : false
-Shortest edit distance    : 1
-Mean edit distance        : 7.942
-Longest shared prefix     : 14
-Unique character prefix   : 15
-```
-
-And some pseudorandomly generated sample passphrases from the list:
-```text
-sweeping relocated contradictory ornamented conscience complexion
-publicity assesses trunk penetrates warden literature
-undated acknowledgement histories performances scan conceit
-succeeding contains grievous motivated minimize definitively
-triumphed sleeping proven sadly algorithms rendered
-```
-
-### A new _diceware_ word list
-
-I also made [a 7,776-word diceware list using this procedure](https://github.com/sts10/generated-wordlists/blob/main/lists/experimental/diceware-ud.txt).
-```text
-List length               : 7776 words
-Mean word length          : 7.06 characters
-Length of shortest word   : 3 characters (add)
-Length of longest word    : 10 characters (worthwhile)
-Free of prefix words?     : false
-Free of suffix words?     : false
-Uniquely decodable?       : true
-Entropy per word          : 12.925 bits
-Efficiency per character  : 1.830 bits
-Assumed entropy per char  : 4.308 bits
-Above brute force line?   : true
-Above Shannon line?       : false
-Shortest edit distance    : 1
-Mean edit distance        : 6.962
-Longest shared prefix     : 9
-Unique character prefix   : 10
-
-Pseudorandomly generated sample passphrases
--------------------------------------------
-acquire pit tobacco religion revenues appearing
-enabled pressures directory enable excel occurring
-compare prohibited parties managing learns accepting
-universal theme orderly furniture securities declined
-youthful deficits hazard issuing disciple creek
-```
-
-## Links
-
-You can find [more word lists I've created](https://github.com/sts10/generated-wordlists), or [learn more about Tidy](https://github.com/sts10/tidy), the tool I wrote to make creating these word lists easier.
+You can find [more word lists I've created](https://github.com/sts10/generated-wordlists), or [learn more about Tidy](https://github.com/sts10/tidy), the tool I wrote to make creating these word lists easier (which now has a Schlinkert-prune option built in).
