@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Strongbox X Orchard Street Wordlist"
+title: "Strongbox X Orchard Street Wordlists"
 date: 2023-05-23 10:00:00 -0400
 comments: true
 ---
