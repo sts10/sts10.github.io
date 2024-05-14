@@ -14,7 +14,7 @@ northern-ruined-recruited-profound-vectors-drive-bringing
 
 If you have Rust installed, you can install Phraze with `cargo install phraze`. If you don't have Rust installed, check [the latest releases](https://github.com/sts10/phraze/releases). See [the project's README](https://github.com/sts10/phraze/blob/main/readme.markdown) for more information on installation and usage.
 
-## Why I hadn't written a passphrase generator this before
+## Why I hadn't written a passphrase generator like this before
 Despite having written [a tool to create passphrase word lists](https://github.com/sts10/tidy) and later [my own passphrase word lists](https://github.com/sts10/orchard-street-wordlists), I had been hesitant to write my own passphrase generator. Why? Because I was worried about writing a real security tool. And there already is [a relatively popular one written in Rust called Pgen](https://github.com/ctsrc/Pgen) and Michah Lee's [passphraseme](https://github.com/micahflee/passphraseme). 
 
 But I figured it'd be fun to try! And that the tool wouldn't get much _real_ use before it had been combed over by well-informed users looking for security issues. And I figured it might be a good way to spread my Orchard Street Wordlists.
