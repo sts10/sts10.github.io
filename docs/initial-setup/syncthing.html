@@ -181,21 +181,21 @@
 <pre><code class="language-bash"># Via: https://sts10.github.io/2018/11/27/syncthing-and-tmux.html
 function ss {
   if tmux has-session -t synct 2&gt;/dev/null; then
-    echo &quot;Syncthing session already started at http://127.0.0.1:8384/&quot; &gt;&amp;2
+    echo "Syncthing session already started at http://127.0.0.1:8384/" &gt;&amp;2
     return 1
   fi
   
-  echo &quot;Starting up Syncthing at http://127.0.0.1:8384/&quot;
-  tmux new-session -d -s synct &quot;syncthing -no-browser&quot;
+  echo "Starting up Syncthing at http://127.0.0.1:8384/"
+  tmux new-session -d -s synct "syncthing -no-browser"
 }
 
 function se {
   if ! tmux has-session -t synct 2&gt;/dev/null; then
-    echo &quot;No Syncthing session to end.&quot; &gt;&amp;2
+    echo "No Syncthing session to end." &gt;&amp;2
     return 1
   fi
   
-  echo &quot;Stopping Syncthing and killing the tmux session&quot;
+  echo "Stopping Syncthing and killing the tmux session"
   tmux send-keys -t synct C-c
 }
 

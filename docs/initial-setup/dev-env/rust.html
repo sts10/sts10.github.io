@@ -177,7 +177,7 @@
 <p>This assumes you have <a href="../neovim.html">Neovim</a> installed already.</p>
 <ol>
 <li>
-<p><a href="https://www.rust-lang.org/en-US/install.html">Install Rust</a>. Make sure to add <code>export PATH=&quot;$HOME/.cargo/bin:$PATH&quot;</code> to end of <code>~/.bashrc</code>. Note: you can uninstall at anytime with <code>rustup self uninstall</code>.</p>
+<p><a href="https://www.rust-lang.org/en-US/install.html">Install Rust</a>. Make sure to add <code>export PATH="$HOME/.cargo/bin:$PATH"</code> to end of <code>~/.bashrc</code>. Note: you can uninstall at anytime with <code>rustup self uninstall</code>.</p>
 </li>
 <li>
 <p>Install <a href="https://github.com/rust-lang-nursery/rustfmt">rustfmt</a> and <a href="https://github.com/rust-lang/rust.vim#formatting-with-rustfmt">its Vim counterpart, rust.vim</a></p>
@@ -189,15 +189,15 @@
 <h2 id="getting-autocomplete-in-neovim-with-deoplete"><a class="header" href="#getting-autocomplete-in-neovim-with-deoplete">Getting Autocomplete in Neovim with Deoplete</a></h2>
 <p>Install <a href="https://github.com/Shougo/deoplete.nvim#install">Deoplete</a></p>
 <ul>
-<li>You may first be required to install some Python stuff. You may want to get your <a href="python-pyenv.html">pyenv setup</a> working first. However, in a pinch, these commands have worked for me in the past: 
+<li>You may first be required to install some Python stuff. You may want to get your <a href="python-pyenv.html">pyenv setup</a> working first. However, in a pinch, these commands have worked for me in the past:
 <ul>
-<li>Install pip3 with <code>sudo apt-get install python3-pip</code> </li>
+<li>Install pip3 with <code>sudo apt-get install python3-pip</code></li>
 <li>and then <code>pip3 install neovim</code></li>
 </ul>
 </li>
 </ul>
 <p>Then make sure you've got all this (or something similar) in your init.vim file:</p>
-<pre><code class="language-vim">&quot; Auto-complete
+<pre><code class="language-vim">" Auto-complete
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
@@ -206,7 +206,7 @@ else
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
 
-&quot; then further down
+" then further down
 let g:deoplete#enable_at_startup = 1
 </code></pre>
 <h2 id="rust-analyzer-and-languageserver"><a class="header" href="#rust-analyzer-and-languageserver">rust-analyzer and LanguageServer</a></h2>
@@ -229,7 +229,7 @@ cargo xtask install --server
 \ 'do': 'bash install.sh',
 \ }
 
-&quot; (Optional) Multi-entry selection UI.
+" (Optional) Multi-entry selection UI.
 Plug 'junegunn/fzf'
 </code></pre>
 <p>Then down below the <code>g:LanguageClient_serverCommands</code> bit, let's add some mappings. The <a href="https://github.com/autozimu/LanguageClient-neovim#quick-start">plugin's readme provides some ideas</a>, but as a minimum:</p>
@@ -237,12 +237,12 @@ Plug 'junegunn/fzf'
 </code></pre>
 <h3 id="4-install-plugins"><a class="header" href="#4-install-plugins">4. Install plugins</a></h3>
 <p>Back in the terminal, run <code>nvim +PlugInstall +UpdateRemotePlugins +qa</code></p>
-<p>Think you should now be good-to go? F5 will give you some options for analysis. </p>
+<p>Think you should now be good-to go? F5 will give you some options for analysis.</p>
 <h2 id="notes-on-alternative-approaches-to-making-neovim-more-of-a-rust-ide"><a class="header" href="#notes-on-alternative-approaches-to-making-neovim-more-of-a-rust-ide">Notes on alternative approaches to making Neovim more of a Rust IDE</a></h2>
 <h3 id="alternative-methods-of-installing-rust-analyzer"><a class="header" href="#alternative-methods-of-installing-rust-analyzer">Alternative methods of installing rust-analyzer</a></h3>
 <p>For rust-analyzer, there is <a href="https://rust-analyzer.github.io/manual.html#coc-rust-analyzer">an alternative installation process described</a> where it's integrated with <a href="https://github.com/neoclide/coc.nvim">coc.nvim</a>, which you might be using anyway, or like for its other features. To me, right now, it seems a bit intense, and requires Node to be installed.</p>
 <h3 id="racer"><a class="header" href="#racer">Racer</a></h3>
-<p>There also seems to be another way to &quot;teach&quot; Neovim about the Rust language using <a href="https://github.com/racer-rust/racer"><strong>Racer</strong> (&quot;code completion for Rust&quot;)</a> and its <a href="https://github.com/racer-rust/vim-racer">associated Vim plugin</a>, but I think I tried it before and it through halting errors as I was typing code.</p>
+<p>There also seems to be another way to "teach" Neovim about the Rust language using <a href="https://github.com/racer-rust/racer"><strong>Racer</strong> ("code completion for Rust")</a> and its <a href="https://github.com/racer-rust/vim-racer">associated Vim plugin</a>, but I think I tried it before and it through halting errors as I was typing code.</p>
 
                     </main>
 

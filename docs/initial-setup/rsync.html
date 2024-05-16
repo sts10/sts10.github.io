@@ -176,23 +176,23 @@
                         <h1 id="rsync"><a class="header" href="#rsync">Rsync</a></h1>
 <p>Rsync is a nifty back-up CLI tool. I likely installed it with <code>sudo apt install rsync</code>.</p>
 <h2 id="handy-bash-function"><a class="header" href="#handy-bash-function">Handy Bash function</a></h2>
-<p>Throw this in your <code>~/.bashrc</code>: </p>
+<p>Throw this in your <code>~/.bashrc</code>:</p>
 <pre><code class="language-bash">function rsync_all {
   if [ -d /media/sschlinkert/Seagate\ 4TB ]
   then
-    echo &quot;External hard drive is mounted&quot;
-    echo &quot;Running a couple rsync commands:&quot;
-    echo &quot;Syncing keepass-databases...&quot;
+    echo "External hard drive is mounted"
+    echo "Running a couple rsync commands:"
+    echo "Syncing keepass-databases..."
     rsync -arAX /home/sschlinkert/keepass-databases '/media/sschlinkert/Seagate 4TB/back-ups-rsync/'
-    echo &quot;Syncing pgp data...&quot;
+    echo "Syncing pgp data..."
     rsync -arAX /home/sschlinkert/pgp '/media/sschlinkert/Seagate 4TB/back-ups-rsync/'
-    echo &quot;Syncing Documents, with --delete flag&quot;
+    echo "Syncing Documents, with --delete flag"
     rsync -arAX --delete /home/sschlinkert/Documents '/media/sschlinkert/Seagate 4TB/back-ups-rsync/'
-    echo &quot;Syncing code, with --delete flag&quot;
+    echo "Syncing code, with --delete flag"
     rsync -arAX --delete /home/sschlinkert/code '/media/sschlinkert/Seagate 4TB/back-ups-rsync/'
-    echo &quot;All done running rsync&quot;
+    echo "All done running rsync"
   else
-    echo &quot;Could not find Seagate 4 TB. It may not be mounted&quot;
+    echo "Could not find Seagate 4 TB. It may not be mounted"
   fi
 }
 </code></pre>

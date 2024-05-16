@@ -174,16 +174,16 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="using-restic-to-back-up-files"><a class="header" href="#using-restic-to-back-up-files">Using restic to back up files</a></h1>
-<p>Here's <a href="https://restic.readthedocs.io/en/latest/020_installation.html">the official user's guide from restic</a>, which I found pretty helpful. Since I'm just putting backups onto USB devices, I only need to follow the instructions for a &quot;local&quot; back up.</p>
+<p>Here's <a href="https://restic.readthedocs.io/en/latest/020_installation.html">the official user's guide from restic</a>, which I found pretty helpful. Since I'm just putting backups onto USB devices, I only need to follow the instructions for a "local" back up.</p>
 <h3 id="installing-restic-on-ubuntu"><a class="header" href="#installing-restic-on-ubuntu">Installing restic on Ubuntu</a></h3>
 <p><code>sudo apt install restic</code></p>
 <p>Let's check the version really quick:</p>
 <p><code>restic version</code> prints <code>restic 0.9.6 compiled with go1.12.12 on linux/amd64</code>. A little outdated -- 0.12.1 is <a href="https://github.com/restic/restic/releases">on Github</a> as I write this -- but it'll do.</p>
 <h3 id="getting-set-up-with-restic"><a class="header" href="#getting-set-up-with-restic">Getting set up with restic</a></h3>
 <p>Now let's do some backing up!</p>
-<p>First, let's try to gain a bare-bones conceptual understanding of how Restic works. Restic has a concept called &quot;repositories&quot;, which is where your backup(s) will live. <a href="https://restic.readthedocs.io/en/latest/030_preparing_a_new_repo.html#preparing-a-new-repository">From the docs</a>:</p>
+<p>First, let's try to gain a bare-bones conceptual understanding of how Restic works. Restic has a concept called "repositories", which is where your backup(s) will live. <a href="https://restic.readthedocs.io/en/latest/030_preparing_a_new_repo.html#preparing-a-new-repository">From the docs</a>:</p>
 <blockquote>
-<p>The place where your backups will be saved is called a “repository”. This chapter explains how to create (“init”) such a repository. The repository can be stored locally, or on some remote server or service. </p>
+<p>The place where your backups will be saved is called a “repository”. This chapter explains how to create (“init”) such a repository. The repository can be stored locally, or on some remote server or service.</p>
 </blockquote>
 <p>Basically we use restic to pull data into these backup repositories. So for me, my repository (singular for now) will be on my external hard drive.</p>
 <h3 id="initializing-a-restic-repository"><a class="header" href="#initializing-a-restic-repository">Initializing a Restic repository</a></h3>
@@ -191,23 +191,23 @@
 <pre><code class="language-bash">mkdir /media/sschlinkert/external_harddrive/restic-repo
 restic init --repo /media/sschlinkert/external_harddrive/restic-repo
 </code></pre>
-<p>Restic now asks us to create a password for this back-up &quot;repo&quot; (restic uses encryption). We'll be asked to enter the new password as second time to confirm.</p>
+<p>Restic now asks us to create a password for this back-up "repo" (restic uses encryption). We'll be asked to enter the new password as second time to confirm.</p>
 <h3 id="doing-our-first-backup"><a class="header" href="#doing-our-first-backup">Doing our first backup</a></h3>
 <p>Finally, time to back-up some data. Following <a href="https://restic.readthedocs.io/en/latest/040_backup.html">the docs</a>, I composed this command using the <code>backup</code> subcommand to backup my entire <code>home/</code> directory:</p>
 <pre><code class="language-bash">restic -r /media/sschlinkert/external_harddrive/restic-repo --verbose backup /home/sschlinkert/
 </code></pre>
 <p>We will do subsequent snapshots by running the exact same command at later times. In other words this is the command you'd run every night or week to keep the backup up-to-date.</p>
 <h3 id="ensure-a-snapshot-was-created"><a class="header" href="#ensure-a-snapshot-was-created">Ensure a snapshot was created</a></h3>
-<p>We can do a quick check to see our first snapshot by running: </p>
+<p>We can do a quick check to see our first snapshot by running:</p>
 <pre><code class="language-bash">restic -r /media/sschlinkert/external_harddrive/restic-repo snapshots
 </code></pre>
 <h3 id="check-integrity-of-that-snapshot"><a class="header" href="#check-integrity-of-that-snapshot">Check integrity of that snapshot</a></h3>
-<p>One thing that's nice about restic is that you can check the state or &quot;health&quot; of the backup.</p>
+<p>One thing that's nice about restic is that you can check the state or "health" of the backup.</p>
 <pre><code class="language-bash">restic -r /media/sschlinkert/external_harddrive/restic-repo check
 </code></pre>
 <p>which should output a block of text that should end with: <code>no errors were found</code>. Awesome!</p>
 <h3 id="now-try-restoring-our-data"><a class="header" href="#now-try-restoring-our-data">Now try restoring our data!</a></h3>
-<p>Now let's say something bad has happened and we need to restore our files from this back-up repo. </p>
+<p>Now let's say something bad has happened and we need to restore our files from this back-up repo.</p>
 <p>Our files aren't exactly just sitting in a directory, as they are when using a tool like rsync. (This is a bit of a downside for restic, but it's fine.) Instead, we have to use restic's <code>restore</code> subcommand.</p>
 <p>First, we copy the snapshot id of the snapshot we want to restore from from that <code>snapshot</code> command. Then we'll make a new directory to restore to, and restore to it using restic's restore subcommand:</p>
 <pre><code class="language-bash">mkdir ~/Documents_restored
@@ -217,7 +217,7 @@ restic -r /media/sschlinkert/external_harddrive/restic-repo restore 37769142 --t
 <pre><code class="language-bash">ls ~/Documents_restored
 </code></pre>
 <h2 id="decent-list-of-excludes-for-a-restic-backup-of-a-home-directory-on-linux-made-in-dec-2021"><a class="header" href="#decent-list-of-excludes-for-a-restic-backup-of-a-home-directory-on-linux-made-in-dec-2021">Decent list of excludes for a Restic backup of a home directory on Linux (Made in Dec 2021)</a></h2>
-<p>Save the text below in a new file as something like <code>~/restic-excludes.txt</code>. </p>
+<p>Save the text below in a new file as something like <code>~/restic-excludes.txt</code>.</p>
 <p>You can use it like: <code>restic -r '/media/$USER/external_harddrive/restic-repo/' --verbose backup --exclude-caches --exclude-file=/home/$USER/restic-excludes.txt /home/sschlinkert/</code></p>
 <pre><code class="language-text">/home/$USER/.bundle
 /home/$USER/.cache
@@ -252,7 +252,7 @@ restic -r /media/sschlinkert/external_harddrive/restic-repo restore 37769142 --t
 <p>I've chosen to use an encryption tool called <a href="https://github.com/FiloSottile/age">age</a> to encrypt and decrypt this file. <a href="https://sts10.github.io/2021/09/06/exploring-age-1-point-0.html">I wrote a short guide here</a>, but this'll work for our purposes:</p>
 <pre><code class="language-bash">age -p important_documents.tar.gz &gt; important_documents.tar.gz.age
 </code></pre>
-<p>Enter a new passphrase twice. Age will create an encrypted file called <code>important_documents.tar.gz.age</code>. </p>
+<p>Enter a new passphrase twice. Age will create an encrypted file called <code>important_documents.tar.gz.age</code>.</p>
 <p>We can safely upload this <code>important_documents.tar.gz.age</code> file to Dropbox or another unencrypted cloud provider (I do this through the website, but I'm sure there's a way to do it through the command line...).</p>
 <h3 id="step-3-decrypting-and-decompressing"><a class="header" href="#step-3-decrypting-and-decompressing">Step 3: Decrypting and decompressing</a></h3>
 <p>We of course need to be able to restore these files. First we decrypt:</p>
@@ -271,7 +271,7 @@ age -d important_documents.tar.gz.age | tar -xzv
 <h3 id="couldnt-we-just-make-this-a-shell-script"><a class="header" href="#couldnt-we-just-make-this-a-shell-script">Couldn't we just make this a shell script?</a></h3>
 <p>I attempted to wed all these commands into a handy shell script called <a href="https://github.com/sts10/bottle">Bottle</a>, if you want to try that.</p>
 <h3 id="using-symmetrical-gpg-encryption"><a class="header" href="#using-symmetrical-gpg-encryption">Using symmetrical GPG encryption</a></h3>
-<p>If you don't want to use age (it's new), you can use gpg. </p>
+<p>If you don't want to use age (it's new), you can use gpg.</p>
 <p>Encrypting:</p>
 <pre><code class="language-bash">gpg -c important_documents.tar.gz
 </code></pre>

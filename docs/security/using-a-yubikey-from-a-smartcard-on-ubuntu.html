@@ -176,19 +176,19 @@
                         <h1 id="using-a-pgp-private-key-from-a-smartcard-on-ubuntu"><a class="header" href="#using-a-pgp-private-key-from-a-smartcard-on-ubuntu">Using a PGP private key from a Smartcard on Ubuntu</a></h1>
 <p>I think I need to :</p>
 <ol>
-<li>add the key's public half 
-a. get the .asc file onto your system. 
+<li>add the key's public half
+a. get the .asc file onto your system.
 b. run <code>gpg2 --import &lt;file-name&gt;.asc</code></li>
 <li>Plug in the card</li>
 <li>try <code>gpg2 --card-status</code> If that doesn't work try installing scdaemon and pcscd with <code>sudo apt install scdaemon</code> and then <code>sudo apt install pcscd</code>. You may also need to <code>sudo apt install gpgsm</code></li>
 </ol>
 <ul>
-<li>you may also need to kill and restart scdaemon with: </li>
+<li>you may also need to kill and restart scdaemon with:</li>
 </ul>
 <pre><code>killall scdaemon
 pgrep scdaemon
 </code></pre>
-<p>You can now encrypt and decrypt files with the pgp keys on your martkey using the <code>gpg2</code> command line tool. </p>
+<p>You can now encrypt and decrypt files with the pgp keys on your martkey using the <code>gpg2</code> command line tool.</p>
 <h2 id="gui"><a class="header" href="#gui">GUI</a></h2>
 <p>To add GUI support on Xfce, while using Thunar file manager, it looks like I'm going to need to build some <a href="https://help.ubuntu.com/community/ThunarCustomActions">Thunar custom actions</a>, which doesn't seem ideal. Xcfe doesn't use Nautilus by default, so I doubt installing <code>seahorse-nautilus</code> is going to do me any good.</p>
 

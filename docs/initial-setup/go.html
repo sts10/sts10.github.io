@@ -180,16 +180,16 @@
 <p>For an all-in-one training software solution, I strongly recommend <a href="https://github.com/sanderland/katrain">Katrain</a>. You'll probably need pipx or pip3 to install it, and I've yet to get the audio to work on Ubuntu, but otherwise it's great.</p>
 <h2 id="sabaki-a-desktop-go-app-for-linux"><a class="header" href="#sabaki-a-desktop-go-app-for-linux">Sabaki, a desktop Go app for Linux</a></h2>
 <p>A good desktop app that works for Linux is <a href="https://sabaki.yichuanshen.de/">Sabaki</a> (<a href="https://github.com/SabakiHQ/Sabaki">GitHub repo</a>). To install it, I went with the x64 AppImage, probably from <a href="https://github.com/SabakiHQ/Sabaki/releases">the GitHub Releases tab</a>).</p>
-<p>In Sabaki you can play against yourself or load and go through SGF files. But you can also &quot;attach&quot; <a href="https://github.com/SabakiHQ/Sabaki/blob/master/docs/guides/engines.md">a number of &quot;game engines&quot;</a> to Sabaki to either play against or have analyze games. You can manage the engines available to Sabaki by going to &quot;Engines&quot; &gt; &quot;Manage Engines&quot;. </p>
+<p>In Sabaki you can play against yourself or load and go through SGF files. But you can also "attach" <a href="https://github.com/SabakiHQ/Sabaki/blob/master/docs/guides/engines.md">a number of "game engines"</a> to Sabaki to either play against or have analyze games. You can manage the engines available to Sabaki by going to "Engines" &gt; "Manage Engines".</p>
 <h2 id="setting-up-the-gnu-go-engine"><a class="header" href="#setting-up-the-gnu-go-engine">Setting up the GNU Go engine</a></h2>
 <p><a href="https://www.gnu.org/software/gnugo/gnugo.html">GNU Go</a> is an engine that's nice in that it can (a) play on multiple board sizes out of the box, and (b) has multiple levels to choose from (1 through 10 or 1 through 9, I'm not sure).</p>
 <h3 id="installing-gnu-go-on-ubuntu"><a class="header" href="#installing-gnu-go-on-ubuntu">Installing GNU Go on Ubuntu</a></h3>
-<p>Go to the <a href="https://www.gnu.org/software/gnugo/download.html">Download page</a> and download the source code to the latest version of GNU Go. It's likely to be a <code>tar.gz</code> file. Once downloaded, expand it. </p>
+<p>Go to the <a href="https://www.gnu.org/software/gnugo/download.html">Download page</a> and download the source code to the latest version of GNU Go. It's likely to be a <code>tar.gz</code> file. Once downloaded, expand it.</p>
 <p>Inside that directory, there should be a README and an INSTALL documentation text file for you. But basically, to make the executable for a specific level, I'm pretty sure you run:</p>
 <pre><code>./configure --enable-level=4; make
 </code></pre>
-<p>To build a level 4 binary. (There are plenty of other options explained in one of the documentation text files.) This binary will be created and placed at <code>./interface/gnugo</code>. Cool. </p>
-<p>Now in Sabaki, go to Engines &gt; Manage Engines and click the &quot;Add&quot; button. For path, enter <code>path/to/interface/gnugo</code>, and then for &quot;arguments&quot; I'm pretty sure you want to put <code>--mode gtp</code>. Leave &quot;Initial commands&quot; blank. Note that after Adding an engine, you may need to restart Sabaki to use it.</p>
+<p>To build a level 4 binary. (There are plenty of other options explained in one of the documentation text files.) This binary will be created and placed at <code>./interface/gnugo</code>. Cool.</p>
+<p>Now in Sabaki, go to Engines &gt; Manage Engines and click the "Add" button. For path, enter <code>path/to/interface/gnugo</code>, and then for "arguments" I'm pretty sure you want to put <code>--mode gtp</code>. Leave "Initial commands" blank. Note that after Adding an engine, you may need to restart Sabaki to use it.</p>
 <p>To build/attach <strong>multiple levels</strong> of GNU Go, I just duplicated the entire <code>gnudo</code> directory and rebuilt with the level I want. So in <code>go-engines</code> I've got:</p>
 <pre><code class="language-txt">go-engines/gnugo-3.8-lvl1
 go-engines/gnugo-3.8-lvl2
@@ -198,16 +198,16 @@ go-engines/gnugo-3.8-lvl5
 go-engines/gnugo-3.8-lvl7
 go-engines/gnugo-3.8-lvl9
 </code></pre>
-<p>each of which have their own executables at <code>interface/gnugo</code> to attach in Sabaki. For example, my engine named &quot;GNUGo_lvl_3&quot; has a path of <code>go-engines/gnugo-3.8-lvl3/interface/gnugo</code> (&quot;arguments&quot; for all of them are (still) <code>--mode gtp</code>).</p>
+<p>each of which have their own executables at <code>interface/gnugo</code> to attach in Sabaki. For example, my engine named "GNUGo_lvl_3" has a path of <code>go-engines/gnugo-3.8-lvl3/interface/gnugo</code> ("arguments" for all of them are (still) <code>--mode gtp</code>).</p>
 <h2 id="pachi"><a class="header" href="#pachi">Pachi</a></h2>
 <p><a href="https://github.com/pasky/pachi">Pachi</a> is a pretty strong engine, but that, unlike LeelaZero, can play smaller board sizes out-of-the-box, so to speak. The developers note:</p>
 <blockquote>
 <p>The default engine plays by Chinese rules and should be about 7d KGS strength on 9x9. On 19x19 it can hold a solid KGS 2d rank on modest hardware (Raspberry Pi, dcnn) or faster machine (e.g. six-way Intel i7) without dcnn.</p>
 </blockquote>
 <h3 id="install-pachi-via-pre-compiled-binary"><a class="header" href="#install-pachi-via-pre-compiled-binary">Install Pachi via pre-compiled binary</a></h3>
-<p>To install Pachi via pre-compiled binary, head over to <a href="https://github.com/pasky/pachi/releases">GitHub Releases page</a> and download the latest <code>-linux-static.zip</code>. Extract this. </p>
+<p>To install Pachi via pre-compiled binary, head over to <a href="https://github.com/pasky/pachi/releases">GitHub Releases page</a> and download the latest <code>-linux-static.zip</code>. Extract this.</p>
 <h3 id="connecting-pachi-to-sabaki"><a class="header" href="#connecting-pachi-to-sabaki">Connecting Pachi to Sabaki</a></h3>
-<p>I didn't change any configurations. </p>
+<p>I didn't change any configurations.</p>
 <p>Then in Sabaki, I just entered the path to the <code>pachi-12.40-amd64</code> file in the unzipped directory, with no arguments or initial commands, and it seems to work. However, as I installed it, it can only do analysis on 19x19 boards I think?</p>
 <h3 id="compiling-pachi-from-source"><a class="header" href="#compiling-pachi-from-source">Compiling Pachi from Source</a></h3>
 <p>I haven't tried this, but the Pachi README says it might improve performance to build it from source. <a href="https://launchpad.net/~lemonsqueeze/+archive/ubuntu/pachi">Instructions here</a>.</p>
@@ -215,49 +215,49 @@ go-engines/gnugo-3.8-lvl9
 <ol>
 <li>Download and install <a href="https://github.com/SabakiHQ/Sabaki/">Sabaki</a>. Make sure it runs before proceeding.</li>
 <li><a href="https://github.com/leela-zero/leela-zero#example-of-compiling---ubuntu--similar">Build LeelaZero from source</a></li>
-<li>Get a &quot;network hash file&quot; for LeelaZero, &quot;likely the best network is the one you want&quot;. <a href="http://zero.sjeng.org/best-network">Download it here</a> or find <a href="https://github.com/SabakiHQ/Sabaki/blob/master/docs/guides/engines.md">more instructions here</a>.</li>
-<li>In Sabaki, go to Engines &gt; Manage Engines. Enter the absolute file path to the <code>leelaz</code> binary file you just built, which is probably at something like <code>leela-zero/build/leelaz</code>. For &quot;Arguments&quot;, enter <code>--gtp -w path/to/weightsfile</code> (which I think is the &quot;network hash file&quot;?)</li>
-<li>Restart Sabaki </li>
+<li>Get a "network hash file" for LeelaZero, "likely the best network is the one you want". <a href="http://zero.sjeng.org/best-network">Download it here</a> or find <a href="https://github.com/SabakiHQ/Sabaki/blob/master/docs/guides/engines.md">more instructions here</a>.</li>
+<li>In Sabaki, go to Engines &gt; Manage Engines. Enter the absolute file path to the <code>leelaz</code> binary file you just built, which is probably at something like <code>leela-zero/build/leelaz</code>. For "Arguments", enter <code>--gtp -w path/to/weightsfile</code> (which I think is the "network hash file"?)</li>
+<li>Restart Sabaki</li>
 <li>Find the Game Info menu item. For White, in the drop-down menu, select Leela Zero. Make sure you choose a 19 by 19 board. And you're probably going to want a large handicap.</li>
 </ol>
 <h2 id="katago"><a class="header" href="#katago">KataGo</a></h2>
 <p><a href="https://github.com/lightvector/KataGo">KataGo</a> is another new engine. I think I like it best of these options since it works on smaller board sizes and, apparently, it works well with handicaps.</p>
-<p>To run it on Linux (or Windows), I think you want to download the appropriate binary from <a href="https://github.com/lightvector/KataGo/releases">the GitHub release page</a>. On my System76 Oryx Pro, I apparently prefer the <code>katago-v1.X.X-opencl-linux-x64.zip</code> version. And you also need one of the &quot;block network&quot; files, which I think are called &quot;models&quot;. These files end in <code>bin.gz</code> or <code>txt.gz</code>. I think I've chosen the &quot;40 block network&quot; before, though I don't fully understand what that number means. </p>
-<p>Next, you may want to have the binary create a config file tuned to your computer. From <a href="https://github.com/lightvector/KataGo#how-to-use">the README's &quot;How to Use&quot; section</a>:</p>
-<p>&quot;To automatically tune threads and other settings for you based on asking simple questions, and generate a GTP config for you: <code>./katago genconfig -model &lt;NEURALNET&gt;.gz -output &lt;PATH_TO_SAVE_GTP_CONFIG&gt;.cfg</code>&quot;</p>
+<p>To run it on Linux (or Windows), I think you want to download the appropriate binary from <a href="https://github.com/lightvector/KataGo/releases">the GitHub release page</a>. On my System76 Oryx Pro, I apparently prefer the <code>katago-v1.X.X-opencl-linux-x64.zip</code> version. And you also need one of the "block network" files, which I think are called "models". These files end in <code>bin.gz</code> or <code>txt.gz</code>. I think I've chosen the "40 block network" before, though I don't fully understand what that number means.</p>
+<p>Next, you may want to have the binary create a config file tuned to your computer. From <a href="https://github.com/lightvector/KataGo#how-to-use">the README's "How to Use" section</a>:</p>
+<p>"To automatically tune threads and other settings for you based on asking simple questions, and generate a GTP config for you: <code>./katago genconfig -model &lt;NEURALNET&gt;.gz -output &lt;PATH_TO_SAVE_GTP_CONFIG&gt;.cfg</code>"</p>
 <p>Answer the questions as you like. It'll create a fresh text config file that we'll point Sabaki to (see below).</p>
 <p>At some point, you'll want to run something like <code>chmod a+x ./katago</code>.</p>
 <h3 id="settings-for-katago-for-sabaki"><a class="header" href="#settings-for-katago-for-sabaki">Settings for KataGo for Sabaki</a></h3>
 <pre><code>/home/sschlinkert/code/go-engines/katago-v1.3.5-opencl-linux-x64/katago
 gtp -model '/home/sschlinkert/code/go-engines/katago-v1.3.5-opencl-linux-x64/g170-b30c320x2-s2846858752-d829865719.bin.gz' -config '/home/sschlinkert/code/go-engines/katago-v1.3.5-opencl-linux-x64/my_oryx_pro_config.cfg'
 </code></pre>
-<p>and no &quot;initial commands&quot; </p>
+<p>and no "initial commands"</p>
 <p>Note that you may need to run <code>chmod a+x</code> on the executable before it'll work.</p>
 <h2 id="how-to-play-against-a-game-engine-in-sabaki"><a class="header" href="#how-to-play-against-a-game-engine-in-sabaki">How to play against a game engine in Sabaki</a></h2>
-<p>To play against one of these engines, open Sabaki. Be sure you're on a blank, new game. Then go to &quot;File&quot; &gt; &quot;Game Info&quot;. If you want Balck, make the engine take Whtie by clicking the down arrow next to &quot;White&quot; and selecting the engine you want to play. Fill out the other fields as desired, then hit the OK button. If you're Black, place a stone to start the game, and the engine should respond. To see what the engine is doing, go to &quot;Engines&quot; &gt; &quot;Toggle GTP console&quot;.</p>
-<p>Alternatively you can manually attach an engine by going to Engines &gt; &quot;Attach&quot;. </p>
+<p>To play against one of these engines, open Sabaki. Be sure you're on a blank, new game. Then go to "File" &gt; "Game Info". If you want Balck, make the engine take Whtie by clicking the down arrow next to "White" and selecting the engine you want to play. Fill out the other fields as desired, then hit the OK button. If you're Black, place a stone to start the game, and the engine should respond. To see what the engine is doing, go to "Engines" &gt; "Toggle GTP console".</p>
+<p>Alternatively you can manually attach an engine by going to Engines &gt; "Attach".</p>
 <h2 id="recommended-sabaki-preferences"><a class="header" href="#recommended-sabaki-preferences">Recommended Sabaki preferences</a></h2>
-<p>To prevent engines from making moves <em>right</em> when you initially attach them (which can be annoying if you just want to use the engine to analyze possible moves [see below]), I would go to File &gt; Preferences and uncheck &quot;Start game right after attaching engines&quot;. The con to this is that to start playing a game against an engine, you have to first attach it (&quot;Engines&quot; &gt; &quot;Attach&quot;), then (sometimes) tell it to start playing (&quot;Engines&quot; &gt; &quot;Start Playing&quot;).</p>
+<p>To prevent engines from making moves <em>right</em> when you initially attach them (which can be annoying if you just want to use the engine to analyze possible moves [see below]), I would go to File &gt; Preferences and uncheck "Start game right after attaching engines". The con to this is that to start playing a game against an engine, you have to first attach it ("Engines" &gt; "Attach"), then (sometimes) tell it to start playing ("Engines" &gt; "Start Playing").</p>
 <h2 id="using-a-game-engine-to-do-analysis-of-a-game-in-sabaki"><a class="header" href="#using-a-game-engine-to-do-analysis-of-a-game-in-sabaki">Using a game engine to do analysis of a game in Sabaki</a></h2>
 <p>Some of these engines  -- like LeelaZero and Pachi -- allow you to analyze next moves (though usually only on 19x19 games it seems?). To do this:</p>
 <ol>
-<li>&quot;Engines&quot; &gt; &quot;Toggle Analysis&quot; gives you a heat map of what the engine likes for the next move. Leela will do both show the analysis of its moves <em>as well as</em> provide analysis for your move (you can accept by clicking on the green blob, or move somewhere else)</li>
-<li>With &quot;Analysis&quot; toggled on, you can also hover a piece over a space and the engine will play out the game from there, if you were to move there.</li>
+<li>"Engines" &gt; "Toggle Analysis" gives you a heat map of what the engine likes for the next move. Leela will do both show the analysis of its moves <em>as well as</em> provide analysis for your move (you can accept by clicking on the green blob, or move somewhere else)</li>
+<li>With "Analysis" toggled on, you can also hover a piece over a space and the engine will play out the game from there, if you were to move there.</li>
 </ol>
-<p>If the GPU load gets to be too much, you can always make the engine suspend by going to &quot;Engines&quot; &gt; &quot;Suspend&quot;. Toggling Analysis off will help too, as the engine won't think during your move.</p>
+<p>If the GPU load gets to be too much, you can always make the engine suspend by going to "Engines" &gt; "Suspend". Toggling Analysis off will help too, as the engine won't think during your move.</p>
 <h2 id="appendix-go-resources"><a class="header" href="#appendix-go-resources">Appendix: Go resources</a></h2>
 <p>If you're here and want to learn more about Go, I've pasted some of my notes on general Go resources below.</p>
 <h3 id="learning-the-rules"><a class="header" href="#learning-the-rules">Learning the rules</a></h3>
 <p>To learn how to play Go, I'd recommend watching YouTube videos (links below), but obviously there are other ways.</p>
 <ul>
-<li>YouTube videos I liked: <a href="https://www.youtube.com/watch?v=Vov_keBQOJ8&amp;list=PL5mVjO5OFYSzIlp0aTDsE_1Xsx16AaUej">&quot;How to Play Go&quot; YouTube series</a>. Here's <a href="https://www.youtube.com/watch?v=xMshtO8h7RU">another one I watched</a>, and <a href="https://www.youtube.com/watch?v=eNpJF0BzUig">one from the New York Institute of Go</a>. </li>
-<li>The <a href="https://www.reddit.com/r/baduk">r/baduk subreddit</a> (&quot;Baduk&quot; is what they call the game in Korean, and has much better search-ability online) has <a href="https://www.reddit.com/r/baduk/comments/4c8xs5/learning_links_for_newcomers_after_alphago/">a pinned post full of links for newcomers</a>, including to YouTube resources.</li>
-<li>There's also <a href="http://playgo.to/iwtg/en/">this interactive tutorial</a>, though I had to fiddle with my browser settings a bit to make it work. </li>
+<li>YouTube videos I liked: <a href="https://www.youtube.com/watch?v=Vov_keBQOJ8&amp;list=PL5mVjO5OFYSzIlp0aTDsE_1Xsx16AaUej">"How to Play Go" YouTube series</a>. Here's <a href="https://www.youtube.com/watch?v=xMshtO8h7RU">another one I watched</a>, and <a href="https://www.youtube.com/watch?v=eNpJF0BzUig">one from the New York Institute of Go</a>.</li>
+<li>The <a href="https://www.reddit.com/r/baduk">r/baduk subreddit</a> ("Baduk" is what they call the game in Korean, and has much better search-ability online) has <a href="https://www.reddit.com/r/baduk/comments/4c8xs5/learning_links_for_newcomers_after_alphago/">a pinned post full of links for newcomers</a>, including to YouTube resources.</li>
+<li>There's also <a href="http://playgo.to/iwtg/en/">this interactive tutorial</a>, though I had to fiddle with my browser settings a bit to make it work.</li>
 <li>Here's <a href="http://www.learngo.co.uk/GoTutor/Tutor.php">a non-interactive slideshow of sorts</a> that looks good.</li>
 </ul>
 <h3 id="actually-playing-games"><a class="header" href="#actually-playing-games">Actually playing games</a></h3>
 <ul>
-<li>On desktop web: I like <a href="https://online-go.com/">online-go.com</a> for actually playing Go games online. You can play both other humans and a variety of bots with different skill levels. 
+<li>On desktop web: I like <a href="https://online-go.com/">online-go.com</a> for actually playing Go games online. You can play both other humans and a variety of bots with different skill levels.
 <ul>
 <li>If you don't want to be bothered to create an account, there's <a href="https://www.cosumi.net/en/">this site</a>, though it doesn't offer handicaps on smaller boards like 9 by 9, so you're probably going to lose way more than half the time.</li>
 </ul>
@@ -267,10 +267,10 @@ gtp -model '/home/sschlinkert/code/go-engines/katago-v1.3.5-opencl-linux-x64/g17
 <li>There are more software options listed <a href="https://www.reddit.com/r/cbaduk/comments/c0o8f1/go_software/">here</a>.</li>
 </ul>
 <h3 id="exercises"><a class="header" href="#exercises">Exercises</a></h3>
-<p>If you're don't want to play full games, you can find apps and websites that provide small exercises or puzzles to play through. </p>
+<p>If you're don't want to play full games, you can find apps and websites that provide small exercises or puzzles to play through.</p>
 <ul>
 <li>The iOS app SmartGo that I've mentioned above has a tutorial of live exercises somewhere in the menus.</li>
-<li>online-go.com has <a href="https://online-go.com/puzzle/2625">a &quot;playlist&quot; of puzzles for beginners</a>, though I found them a bit too difficult?</li>
+<li>online-go.com has <a href="https://online-go.com/puzzle/2625">a "playlist" of puzzles for beginners</a>, though I found them a bit too difficult?</li>
 </ul>
 <h3 id="more-english-language-youtube-channels"><a class="header" href="#more-english-language-youtube-channels">More English-language YouTube channels</a></h3>
 <ul>

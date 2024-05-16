@@ -176,13 +176,13 @@
                         <h1 id="pgp--gpg"><a class="header" href="#pgp--gpg">PGP / GPG</a></h1>
 <p>Note from 2022: Consider using <a href="https://github.com/FiloSottile/age">age</a>, especially for file encryption, rather than PGP.</p>
 <h2 id="gnu-privacy-assistant"><a class="header" href="#gnu-privacy-assistant">GNU Privacy Assistant</a></h2>
-<p>For a GPG GUI application for Linux/Ubuntu for key management etc., try <code>sudo apt install gpa</code> which installs a program called <a href="https://help.ubuntu.com/community/GnuPrivacyGuardHowto#Graphical_Interfaces">&quot;GNU Privacy Assistant&quot;</a></p>
+<p>For a GPG GUI application for Linux/Ubuntu for key management etc., try <code>sudo apt install gpa</code> which installs a program called <a href="https://help.ubuntu.com/community/GnuPrivacyGuardHowto#Graphical_Interfaces">"GNU Privacy Assistant"</a></p>
 <h2 id="gpg-conf"><a class="header" href="#gpg-conf">GPG conf</a></h2>
-<p>Let's make sure we've got good GPG settings. To do this, create a new file at <code>~/.gnupg/gpg.conf</code>. </p>
+<p>Let's make sure we've got good GPG settings. To do this, create a new file at <code>~/.gnupg/gpg.conf</code>.</p>
 <p>Then do one or all of the following:</p>
 <ol>
 <li>Trust the decent gpg.conf I made for myself in 2021 below.</li>
-<li>Copy <a href="https://github.com/drduh/YubiKey-Guide#harden-configuration">this guide's &quot;hardened&quot; config</a> (<a href="https://github.com/drduh/config/blob/master/gpg.conf">actual gpg.conf file</a>) </li>
+<li>Copy <a href="https://github.com/drduh/YubiKey-Guide#harden-configuration">this guide's "hardened" config</a> (<a href="https://github.com/drduh/config/blob/master/gpg.conf">actual gpg.conf file</a>)</li>
 <li>Read through <a href="https://riseup.net/en/security/message-security/openpgp/best-practices#putting-it-all-together">this guide</a>, which points to <a href="https://github.com/ioerror/duraconf/tree/master/configs/gnupg">this Github repo</a>.</li>
 </ol>
 <h3 id="a-decent-gpgconf"><a class="header" href="#a-decent-gpgconf">A decent gpg.conf</a></h3>
@@ -264,14 +264,14 @@ personal-digest-preferences SHA512 SHA384 SHA256 SHA224
 cert-digest-algo SHA512
 
 # This preference list is used for new keys and becomes the default for
-# &quot;setpref&quot; in the edit menu
+# "setpref" in the edit menu
 default-preference-list SHA512 SHA384 SHA256 SHA224 AES256 AES192 AES CAST5 ZLIB BZIP2 ZIP Uncompressed
 </code></pre>
 <h2 id="using-a-pgp-private-key-from-a-smartcard-on-ubuntu"><a class="header" href="#using-a-pgp-private-key-from-a-smartcard-on-ubuntu">Using a PGP private key from a Smartcard on Ubuntu</a></h2>
 <ol>
 <li>Add the public key to your system: Get the .asc file onto your system, then run <code>gpg2 --import &lt;file-name&gt;.asc</code></li>
 <li>Plug the smartcard into your computer.</li>
-<li>Try running <code>gpg2 --card-status</code>. </li>
+<li>Try running <code>gpg2 --card-status</code>.</li>
 </ol>
 <p><strong>Troubleshooting</strong></p>
 <ul>

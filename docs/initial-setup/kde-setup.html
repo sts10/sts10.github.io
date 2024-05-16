@@ -174,19 +174,19 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="kde-setup-and-troubleshooting"><a class="header" href="#kde-setup-and-troubleshooting">KDE Setup and Troubleshooting</a></h1>
-<p>Basically, if you go with the Kubuntu &quot;Minimal Install&quot;, configure KDE with your heart.</p>
+<p>Basically, if you go with the Kubuntu "Minimal Install", configure KDE with your heart.</p>
 <h2 id="keyboard-stuff"><a class="header" href="#keyboard-stuff">Keyboard Stuff</a></h2>
-<p>In &quot;Systems Settings&quot;, under Hardware, click &quot;Input Devices&quot;. Make sure you're on the &quot;Keyboard&quot; section (you should see a menu titled &quot;Keyboard Hardware and Layout&quot;). Go to the &quot;Advanced&quot; tab. In this tab...</p>
+<p>In "Systems Settings", under Hardware, click "Input Devices". Make sure you're on the "Keyboard" section (you should see a menu titled "Keyboard Hardware and Layout"). Go to the "Advanced" tab. In this tab...</p>
 <ol>
-<li>Under &quot;Caps Lock behavior&quot;, check &quot;Caps Lock is also a Ctrl&quot;</li>
-<li>Under &quot;Position of Compose key&quot;, I like &quot;Right Win&quot; (aka Right Meta or Right Apple Command). This means you can insert special characters like an em dash (hold right meta/mac/win key and press the hyphen key three times). More info about the Compose Key <a href="https://wiki.ubuntu.com/ComposeKey#KDE_4.x_configuration">here</a> and <a href="https://cyberborean.wordpress.com/2008/01/06/compose-key-magic/">here</a> and <a href="https://userbase.kde.org/Tutorials/ComposeKey">here</a>. (An alternative method: Under &quot;Key to choose the 3rd level&quot; check &quot;Right Alt; Shift+Right Alt as Compose&quot;. This allows you to insert an em dash by holding Right Alt + Shift and then inserting three hyphens in a row.)</li>
+<li>Under "Caps Lock behavior", check "Caps Lock is also a Ctrl"</li>
+<li>Under "Position of Compose key", I like "Right Win" (aka Right Meta or Right Apple Command). This means you can insert special characters like an em dash (hold right meta/mac/win key and press the hyphen key three times). More info about the Compose Key <a href="https://wiki.ubuntu.com/ComposeKey#KDE_4.x_configuration">here</a> and <a href="https://cyberborean.wordpress.com/2008/01/06/compose-key-magic/">here</a> and <a href="https://userbase.kde.org/Tutorials/ComposeKey">here</a>. (An alternative method: Under "Key to choose the 3rd level" check "Right Alt; Shift+Right Alt as Compose". This allows you to insert an em dash by holding Right Alt + Shift and then inserting three hyphens in a row.)</li>
 </ol>
 <h2 id="kde-troubleshooting"><a class="header" href="#kde-troubleshooting">KDE Troubleshooting</a></h2>
 <h3 id="everything-looks-big"><a class="header" href="#everything-looks-big">Everything looks big!</a></h3>
-<p>If, after installing the proper NVIDIA drivers and restarting the machine, everything looks big, go to Fonts settings menu and &quot;Force&quot; the DPI to 96.</p>
+<p>If, after installing the proper NVIDIA drivers and restarting the machine, everything looks big, go to Fonts settings menu and "Force" the DPI to 96.</p>
 <h3 id="if-external-monitors-arent-being-recognized-by-your-laptop"><a class="header" href="#if-external-monitors-arent-being-recognized-by-your-laptop">If external monitors aren't being recognized by your laptop</a></h3>
-<p>If external monitors aren't being recognized by your laptop, try opening &quot;NVIDIA X Server Settings&quot;, then select &quot;X Server Display Configuration&quot; from the menu you on the left. Try clicking &quot;Detect Displays&quot;. </p>
-<p>If the external monitor appears in the layout, it may just be &quot;disabled&quot;. If that's the case, go to the drop-down menu on the right side of the window labeled &quot;Configuration&quot; and try choosing &quot;X screen 0&quot;.</p>
+<p>If external monitors aren't being recognized by your laptop, try opening "NVIDIA X Server Settings", then select "X Server Display Configuration" from the menu you on the left. Try clicking "Detect Displays".</p>
+<p>If the external monitor appears in the layout, it may just be "disabled". If that's the case, go to the drop-down menu on the right side of the window labeled "Configuration" and try choosing "X screen 0".</p>
 <p><a href="https://askubuntu.com/questions/1083733/kubuntu-18-04-laptop-wont-recognize-external-monitor">An AskUbuntu question about this issue</a></p>
 <h4 id="are-your-drivers-up-to-date"><a class="header" href="#are-your-drivers-up-to-date">Are your drivers up-to-date?</a></h4>
 <p>If your machine isn't recognizing an external monitor, another possible issue may be that you need to upgrade your NVIDIA to match your current Linux kernel. For example, at one point I needed to upgrade to 515 by running <code>sudo apt install nvidia-driver-515</code>. How could I have known I needed to do this? <a href="https://chat.pop-os.org/pop-os/pl/c8c6qrkfztdbujy5js8wc6gg9o">A helpful Mattermost users writes</a>:</p>

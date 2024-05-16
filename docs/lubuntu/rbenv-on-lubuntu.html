@@ -174,10 +174,10 @@
                 <div id="content" class="content">
                     <main>
                         <h2 id="installing-rbenv-on-lubuntu-1604"><a class="header" href="#installing-rbenv-on-lubuntu-1604">Installing rbenv on Lubuntu 16.04</a></h2>
-<p>We're attempting to install <a href="https://github.com/rbenv/rbenv">rbenv</a> via the <a href="https://github.com/rbenv/rbenv#basic-github-checkout">&quot;Basic GitHub Checkout&quot; method</a>.</p>
+<p>We're attempting to install <a href="https://github.com/rbenv/rbenv">rbenv</a> via the <a href="https://github.com/rbenv/rbenv#basic-github-checkout">"Basic GitHub Checkout" method</a>.</p>
 <p>I think we're also going to want <a href="https://github.com/rbenv/ruby-build#readme">ruby-build</a> plugin. I DON'T think I'm going to want <a href="https://github.com/jf/rbenv-gemset">rbenv-gemset</a>?</p>
 <h3 id="installing-rbenv"><a class="header" href="#installing-rbenv">Installing rbenv</a></h3>
-<p>As mentioned above, we're going to install rbenv via the <a href="https://github.com/rbenv/rbenv#basic-github-checkout">&quot;Basic GitHub Checkout&quot; method</a>. I reproduce them below, but you should consult the latest instructions for Ubuntu on that GitHub page.</p>
+<p>As mentioned above, we're going to install rbenv via the <a href="https://github.com/rbenv/rbenv#basic-github-checkout">"Basic GitHub Checkout" method</a>. I reproduce them below, but you should consult the latest instructions for Ubuntu on that GitHub page.</p>
 <p>Clone down rbenv:</p>
 <pre><code>git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 </code></pre>
@@ -185,30 +185,30 @@
 <pre><code>cd ~/.rbenv &amp;&amp; src/configure &amp;&amp; make -C src
 </code></pre>
 <p>Add rbenv to your PATH:</p>
-<pre><code>echo 'export PATH=&quot;$HOME/.rbenv/bin:$PATH&quot;' &gt;&gt; ~/.bashrc
+<pre><code>echo 'export PATH="$HOME/.rbenv/bin:$PATH"' &gt;&gt; ~/.bashrc
 </code></pre>
 <p>And finally run this init script:</p>
 <pre><code>~/.rbenv/bin/rbenv init
 </code></pre>
-<p>Following instructions from the init script run, I added <code>eval &quot;$(rbenv init -)&quot;</code> to my <code>~/.bashrc</code>, just <em>below</em> the <code>export PATH=&quot;$HOME/.rbenv/bin:$PATH&quot;</code> line that we added with the echo command above.</p>
+<p>Following instructions from the init script run, I added <code>eval "$(rbenv init -)"</code> to my <code>~/.bashrc</code>, just <em>below</em> the <code>export PATH="$HOME/.rbenv/bin:$PATH"</code> line that we added with the echo command above.</p>
 <p>Now restart your terminal and/or run <code>source ~/.bashrc</code>.</p>
-<p>Check your rbenv installation by running <code>type rbenv</code>. It should say it's a function. </p>
+<p>Check your rbenv installation by running <code>type rbenv</code>. It should say it's a function.</p>
 <h3 id="installing-the-ruby-build-plugin"><a class="header" href="#installing-the-ruby-build-plugin">Installing the ruby-build plugin</a></h3>
 <p>Wanting to build the latest version of Ruby a nice and clean way, I installed <a href="https://github.com/rbenv/ruby-build#readme">ruby-build</a> by running <code>git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build</code></p>
 <h3 id="installing-a-version-of-ruby-using-rbenv-some-problems"><a class="header" href="#installing-a-version-of-ruby-using-rbenv-some-problems">Installing a version of Ruby using rbenv (some problems)</a></h3>
 <p>Now we can install some versions of Ruby using rbenv.</p>
-<p><code>rbenv install --list</code> gives us all available versions to install. </p>
-<p>I'm going with 2.3.3, so I ran <code>rbenv install 2.3.3</code>. It took a long time to install and then told my the build failed. It suggested running <code>apt-get install -y libreadline-dev</code> so I did that (prefaced with <code>sudo</code>) and that software seemed to install successfully. </p>
+<p><code>rbenv install --list</code> gives us all available versions to install.</p>
+<p>I'm going with 2.3.3, so I ran <code>rbenv install 2.3.3</code>. It took a long time to install and then told my the build failed. It suggested running <code>apt-get install -y libreadline-dev</code> so I did that (prefaced with <code>sudo</code>) and that software seemed to install successfully.</p>
 <p>On second attempt I ran <code>rbenv install --verbose 2.3.3</code> so that I could better see what's going on (turns out, it's a lot!). Success this time!</p>
-<p>Once that's all installed, I opened a new gnome-terminal window. I was greeted by this shitty message at the top of the terminal window: </p>
+<p>Once that's all installed, I opened a new gnome-terminal window. I was greeted by this shitty message at the top of the terminal window:</p>
 <blockquote>
 <p>The program 'rbenv' is currently not installed. You can install it by typing: <code>sudo apt install rbenv</code></p>
 </blockquote>
 <p>but I learned that this can be temporarily solved be running <code>source ~/.profile</code>. And that it will be solved permanently once you restart Ubuntu/Lubuntu (source: <a href="https://github.com/rbenv/rbenv/issues/424">this GitHub issue</a>).</p>
 <p>Then I had to set Ruby v. 2.3.3 as my global version of Ruby, which I did with <code>rbenv global 2.3.3</code>. After that, <code>ruby --version</code> gave me the familiar: <code>ruby 2.3.3p222 (2016-11-21 revision 56859) [x86_64-linux]</code></p>
 <h3 id="installing-gems-with-rbenv"><a class="header" href="#installing-gems-with-rbenv">Installing gems with rbenv</a></h3>
-<p>I definitely want to install the &quot;bundler&quot; gem. To do this, I ran: <code>gem install bundler</code>, just like with RVM. </p>
-<p>From there things seem to be just fine. Installed gems just work so far. </p>
+<p>I definitely want to install the "bundler" gem. To do this, I ran: <code>gem install bundler</code>, just like with RVM.</p>
+<p>From there things seem to be just fine. Installed gems just work so far.</p>
 
                     </main>
 

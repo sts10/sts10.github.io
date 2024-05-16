@@ -178,7 +178,7 @@
 <p>Some notes on cargo-dist v0.4.2; following <a href="https://opensource.axo.dev/cargo-dist/book/way-too-quickstart.html">this documentation</a></p>
 <h2 id="preparation"><a class="header" href="#preparation">Preparation</a></h2>
 <ol>
-<li>Make sure the <code>repository</code> variable is specified in your <code>Cargo.toml</code>. It takes the URL of your GitHub repo (<code>repository = &quot;https://github.com/sts10/password-strength-checker&quot;</code>). You should probably also specifiy a <code>license</code> or <code>license-file</code> (but not both), and the location of the <code>readme</code> file. (See here for more things to specify: <a href="https://doc.rust-lang.org/cargo/reference/manifest.html">https://doc.rust-lang.org/cargo/reference/manifest.html</a>.)</li>
+<li>Make sure the <code>repository</code> variable is specified in your <code>Cargo.toml</code>. It takes the URL of your GitHub repo (<code>repository = "https://github.com/sts10/password-strength-checker"</code>). You should probably also specifiy a <code>license</code> or <code>license-file</code> (but not both), and the location of the <code>readme</code> file. (See here for more things to specify: <a href="https://doc.rust-lang.org/cargo/reference/manifest.html">https://doc.rust-lang.org/cargo/reference/manifest.html</a>.)</li>
 <li>Install or update cargo-dist with something like <code>cargo install cargo-dist</code></li>
 <li>Run a <code>git push --tags</code> to push any and all local tags you've created up to GitHub. If any local tags are rejected for already existing on GitHub, I recommend you just delete the local tags with <code>git tag --delete &lt;tag_name&gt;</code>.</li>
 </ol>
@@ -186,7 +186,7 @@
 <ol>
 <li>In your Rust project's directory, run <code>cargo dist init</code>. This launches a lil interactive install guide. Be sure to enable the GitHub CI; and you probably want the SHELL installer, which I'm not sure is enabled by default?</li>
 <li>This will create a new file at <code>.github/workflows/release.yml</code>, which tells GitHub what magic to do later, and edit your Cargo.toml. Don't worry about it.</li>
-<li>Commit these changes (<code>git add . &amp;&amp; git commit -m &quot;init cargo dist&quot;</code>)</li>
+<li>Commit these changes (<code>git add . &amp;&amp; git commit -m "init cargo dist"</code>)</li>
 </ol>
 <p>A note on that nifty <code>cargo dist init</code> command from the official cargo-dist docs:</p>
 <blockquote>
@@ -196,15 +196,15 @@
 <p>Just to really emphasize that: <code>cargo dist init</code> is designed to be rerun over and over, and will preserve your settings while handling any necessary updates and migrations. Always Be Initing.</p>
 </blockquote>
 <h2 id="getting-ready-to-create-a-release-testing-builds"><a class="header" href="#getting-ready-to-create-a-release-testing-builds">Getting ready to create a release (testing builds)</a></h2>
-<p>Let's see if your code is going to make for a non-broken release. </p>
+<p>Let's see if your code is going to make for a non-broken release.</p>
 <p>First, run <code>cargo dist build</code> to try building for the platform (OS) you're currently using. cargo-dist will print the version it assume you want to release, plus paths to the files it created, so you can inspect their contents.</p>
 <p>If that's all good, next try <code>cargo dist plan</code>. This too will print the version of the project it assumes you want to release -- check that it's right. Further info:</p>
 <blockquote>
 <p>The plan command should be running the exact same logic that cargo-dist's generated CI will run, but without actually building anything. This lets you quickly check what cutting a new release will produce. It will also try to catch any inconsistencies that could make the CI error out.</p>
 </blockquote>
-<p>Note that: </p>
+<p>Note that:</p>
 <blockquote>
-<p>As of cargo-dist 0.3.0, we now by default run the &quot;plan&quot; step of your release CI on every pull-request so that we can catch breakage to your release process as early as possible. This will work even for a pull-request that sets up cargo-dist for the first time, so you can be confident you're landing something that works.</p>
+<p>As of cargo-dist 0.3.0, we now by default run the "plan" step of your release CI on every pull-request so that we can catch breakage to your release process as early as possible. This will work even for a pull-request that sets up cargo-dist for the first time, so you can be confident you're landing something that works.</p>
 </blockquote>
 <p>Basically, now for every PR to your project, GitHub will run part of this <code>cargo dist plan</code> command for you before you merge, to see if building goes well. I don't really know what happens if this build process fails... hopefully it doesn't get in the way of any troubleshooting.</p>
 <h2 id="create-a-new-release"><a class="header" href="#create-a-new-release">Create a new release!</a></h2>
@@ -214,7 +214,7 @@
 <li>Increment that <code>version</code> in <code>Cargo.toml</code> to a new highest version. Let's say we're going from <code>v0.3.8</code> to <code>v0.3.9</code>.</li>
 <li>Optional: Add release notes to a file called <code>CHANGELOG.md</code>, under a heading like <code>## Version 0.3.9</code>, which Cargo Dist will auto-detect.</li>
 <li>Run another <code>cargo build</code> to make sure <code>Cargo.lock</code> is up-to-date.</li>
-<li>Commit changes -- message can be something like &quot;Release v0.3.9&quot; -- and <code>git push origin main</code></li>
+<li>Commit changes -- message can be something like "Release v0.3.9" -- and <code>git push origin main</code></li>
 <li>Create a git tag for this release. Match the version number to the one in <code>Cargo.toml</code>. So in our case: <code>git tag v0.3.9</code>. (Obviously make sure this tag has not been seen by git or GitHub before.)</li>
 <li>Push your tags to GitHub: <code>git push --tags</code></li>
 </ol>
@@ -223,7 +223,7 @@
 </blockquote>
 <p>(FYI This is the point where you'd run <code>cargo publish</code> to push to crates.io, if your project is hosted there.)</p>
 <h2 id="upgrading-cargo-dist-itself"><a class="header" href="#upgrading-cargo-dist-itself">Upgrading cargo-dist itself</a></h2>
-<p>If and when you upgrade cargo-dist (using <code>cargo install cargo-dist</code>), you'll need to take some steps within the project that you use cargo-dist to distribute. </p>
+<p>If and when you upgrade cargo-dist (using <code>cargo install cargo-dist</code>), you'll need to take some steps within the project that you use cargo-dist to distribute.</p>
 <h3 id="new-way-of-doing-this-as-of-cargo-dist-v070"><a class="header" href="#new-way-of-doing-this-as-of-cargo-dist-v070">New way of doing this (as of cargo-dist v0.7.0)</a></h3>
 <p>Just run <code>cargo dist init</code>, as per <a href="https://opensource.axo.dev/cargo-dist/book/updating.html">these cargo-dist docs</a>.</p>
 <h3 id="my-old-notes-on-how-to-do-this"><a class="header" href="#my-old-notes-on-how-to-do-this">My old notes on how to do this</a></h3>

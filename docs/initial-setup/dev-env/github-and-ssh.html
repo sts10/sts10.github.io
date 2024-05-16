@@ -174,12 +174,12 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="github-and-ssh-keys"><a class="header" href="#github-and-ssh-keys">GitHub and ssh keys</a></h1>
-<p>Make sure Git is installed </p>
+<p>Make sure Git is installed</p>
 <h2 id="1-set-git-username-email-and-email-locally"><a class="header" href="#1-set-git-username-email-and-email-locally">1. Set git username (email) and email locally</a></h2>
 <p>Via <a href="https://linuxize.com/post/how-to-configure-git-username-and-email/">this post</a>:</p>
 <p>To set your global commit name and email address run the git config command with the --global option:</p>
-<pre><code>git config --global user.name &quot;Your Name&quot;
-git config --global user.email &quot;youremail@yourdomain.com&quot;
+<pre><code>git config --global user.name "Your Name"
+git config --global user.email "youremail@yourdomain.com"
 </code></pre>
 <p>Once done, you can confirm that the information is set by running: <code>git config --list</code></p>
 <p>These commands save the values in the global configuration file, ~/.gitconfig:</p>
@@ -187,19 +187,19 @@ git config --global user.email &quot;youremail@yourdomain.com&quot;
 <p>I followed <a href="https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/">these instructions</a>, creating an ssh key locally, with a passphrase that I stored in my Keepass database.</p>
 <h2 id="3-ssh-agent-stuff"><a class="header" href="#3-ssh-agent-stuff">3. ssh-agent stuff</a></h2>
 <p>In the <code>bashrc</code> included in this repo is some code that handles your <code>ssh-agent</code>. I got it from <a href="https://wiki.archlinux.org/index.php/SSH_keys#ssh-agent">this section of the Arch Linux wiki</a>. Here's the bash code if you need:</p>
-<pre><code class="language-bash">if ! pgrep -u &quot;$USER&quot; ssh-agent &gt; /dev/null; then
-    ssh-agent -t 1h &gt; &quot;$XDG_RUNTIME_DIR/ssh-agent.env&quot;
+<pre><code class="language-bash">if ! pgrep -u "$USER" ssh-agent &gt; /dev/null; then
+    ssh-agent -t 1h &gt; "$XDG_RUNTIME_DIR/ssh-agent.env"
 fi
-if [[ ! &quot;$SSH_AUTH_SOCK&quot; ]]; then
-    source &quot;$XDG_RUNTIME_DIR/ssh-agent.env&quot; &gt;/dev/null
+if [[ ! "$SSH_AUTH_SOCK" ]]; then
+    source "$XDG_RUNTIME_DIR/ssh-agent.env" &gt;/dev/null
 fi
 </code></pre>
 <p>It was once this:</p>
-<pre><code class="language-bash">if ! pgrep -u &quot;$USER&quot; ssh-agent &gt; /dev/null; then
+<pre><code class="language-bash">if ! pgrep -u "$USER" ssh-agent &gt; /dev/null; then
     ssh-agent &gt; ~/.ssh-agent-thing
 fi
-if [[ &quot;$SSH_AGENT_PID&quot; == &quot;&quot; ]]; then
-    eval &quot;$(&lt;~/.ssh-agent-thing)&quot;
+if [[ "$SSH_AGENT_PID" == "" ]]; then
+    eval "$(&lt;~/.ssh-agent-thing)"
 fi
 </code></pre>
 <h2 id="4-ssh-config"><a class="header" href="#4-ssh-config">4. ssh config</a></h2>

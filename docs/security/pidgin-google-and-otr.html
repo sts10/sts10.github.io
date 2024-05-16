@@ -174,13 +174,13 @@
                 <div id="content" class="content">
                     <main>
                         <h2 id="using-pidgin-with-a-google-account-and-setting-up-otr"><a class="header" href="#using-pidgin-with-a-google-account-and-setting-up-otr">Using Pidgin with a Google Account, and Setting Up OTR</a></h2>
-<p>Note that I would no longer advise using any the tools described here. Just use Signal! </p>
+<p>Note that I would no longer advise using any the tools described here. Just use Signal!</p>
 <p>That said, I wrote out these instructions at some point so I'll leave them here for now.</p>
 <h2 id="pidgin"><a class="header" href="#pidgin">Pidgin</a></h2>
 <p>Pidgin comes installed with Ubuntu 16.04. To add my existing Google Account, I followed the steps outlined in <a href="https://stackoverflow.com/questions/28681341/how-to-add-google-talk-hangouts-to-pidgin-chat-client/33898893#33898893">this Stack Overflow answer</a>.</p>
-<p>To summarize: </p>
-<p>In Pidgin, add a new account. Set the Protocol to &quot;Google Talk&quot;, username to your Google username, and the Domain to &quot;gmail.com&quot;. </p>
-<p>For the password you'll need to create a dedicated app password. You can do that <a href="https://security.google.com/settings/security/apppasswords">in your Google accounts Security &gt; App Passwords section</a>. When creating the new app password, set &quot;app&quot; to &quot;other&quot; and call it something like &quot;linux pidgin&quot;-- it doesn't matter what you call it. Optionally, if on a secure computer, tick the &quot;Remember password&quot; checkmark. (Warning: This will mean your new app password will be stored in plain text in <code>~/.purple/accounts.xml</code>.) Leave &quot;Resource&quot; and &quot;Local Alias&quot; blank.</p>
+<p>To summarize:</p>
+<p>In Pidgin, add a new account. Set the Protocol to "Google Talk", username to your Google username, and the Domain to "gmail.com".</p>
+<p>For the password you'll need to create a dedicated app password. You can do that <a href="https://security.google.com/settings/security/apppasswords">in your Google accounts Security &gt; App Passwords section</a>. When creating the new app password, set "app" to "other" and call it something like "linux pidgin"-- it doesn't matter what you call it. Optionally, if on a secure computer, tick the "Remember password" checkmark. (Warning: This will mean your new app password will be stored in plain text in <code>~/.purple/accounts.xml</code>.) Leave "Resource" and "Local Alias" blank.</p>
 <h3 id="installing-and-enabling-otr"><a class="header" href="#installing-and-enabling-otr">Installing and Enabling OTR</a></h3>
 <p>Once my Google account was successfully added, I installed the Pidgin-otr plugin by running <code>sudo apt-get install pidgin-otr</code> in terminal. To enable and setup OTR, I followed <a href="https://ssd.eff.org/en/module/how-use-otr-linux">this EFF guide</a>. That guide also describes how to install the otr plugin through the Ubuntu Software manager if you're more into GUIs (see the early steps of that EFF guide).</p>
 <h3 id="further-pidgin-customizations"><a class="header" href="#further-pidgin-customizations">Further Pidgin Customizations</a></h3>
