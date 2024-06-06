@@ -256,4 +256,8 @@ My takeaway here is that antiX is not advertised as a beginner-friendly distro f
 
 Update from April 2023: [List of lightweight Linux distros from It's Floss](https://itsfoss.com/super-lightweight-distros/).
 
+Here's [a post from November 2023 by another user who did something very similar, installing antiX on an old netbook](https://jahed.dev/2023/11/21/running-linux-on-an-ancient-netbook/). The author includes a bunch of helpful configuration tips that I didn't know about.
+
 Lastly, this post garnered [some comments on Hacker News](https://news.ycombinator.com/item?id=38565629).
+
+
