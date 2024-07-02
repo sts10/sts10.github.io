@@ -7,29 +7,35 @@ comments: true
 
 Earlier this summer, [I wrote about uniquely decodable codes](https://sts10.github.io/2022/06/27/revisiting-prfix-codes.html).
 
-To re-cap, we're, as usual, talking about word lists that can be used to create passphrases. I've been working on [a tool that aids in the creation of these lists](https://github.com/sts10/tidy) and been making [some word lists of my own](https://github.com/sts10/generated-wordlists).
+To re-cap, we're, as usual, talking about word lists that can be used to create passphrases like wall-seems-manners-safe-killing-filmmaker-carried.
+
+I've been working on [a tool that aids in the creation of these lists](https://github.com/sts10/tidy) and using it to create [some word lists of my own](https://github.com/sts10/generated-wordlists).
 
 ## Uniquely decodable lists
 
-One interesting quality that some word lists have is they're "uniquely decodable". That means that if you pick words and concatenate them (like `efficientsliderrented`), they can only be "read" or "decoded" in one way -- the way they were assembled.
+One interesting quality that some word lists have is they're **"uniquely decodable"**. 
 
-As an example: the word list "news" "newspaper" and "paper" is NOT uniquely decodable. To see why, let's say we have the "message" "newspaper". Interestingly, we wouldn't be able to tell if "newspaper" is a combination of the two word "news" + "paper" or the word "newspaper". You can think of this as an ambiguity.
+That means that if you pick a few words from the list and concatenate them (like `efficientsliderrented`), you're guaranteed that they can only be "read" or "decoded" in one way -- the way they were assembled.
 
-In contrast, let's say our list was the word "news", "newspaper" and "elephant". Now, if we got the "message' "newspaper", we'd know, unambiguously it's the word "newspaper". In fact, we'd be able to read (or decode) _any_ combination of words from this 3-word list without ambiguity. This is because "news", "newspaper" and "elephant" is a **uniquely decodable code**.
+As an example: the word list "news" "newspaper" and "paper" is NOT uniquely decodable. To see why, let's say we have the "message" "newspaper". Interestingly, we wouldn't be able to tell if "newspaper" (which, say, is code for some other meaning) is a combination of the two word "news" + "paper" or the word "newspaper". You can think of this as an **ambiguity**.
 
-## How can we know if a code is uniquely decodable?
+In contrast, let's say our list was the word "news", "newspaper" and "elephant". Now, if we got the "message" "newspaper", we'd know, unambiguously it's the word "newspaper". In fact, we'd be able to read (or decode) _any_ combination of words from this 3-word list without ambiguity. This is because "news", "newspaper" and "elephant" is a **uniquely decodable code**.
 
-You might be wondering how I knew "news", "newspaper" and "elephant" was uniquely decodable. I know of three basic ways that prove a given code is uniquely decodable. If one of the following 3 conditions are met, you know you have a uniquely decodable code:
+## How can we know if a code (a word list) is uniquely decodable?
+
+You might be wondering how I knew "news", "newspaper" and "elephant" was uniquely decodable. For a small list, we can kind of brute force it, checking for compound and overlapping words. But for longer lists that we could realistically use to create secure passwords (say, at least 1,000 words), we might want a more mathematical answer.
+
+So far, I know of three ways to check/prove that a given code (wordlist) is uniquely decodable. If one of the following 3 conditions are met, you know you have a uniquely decodable code:
 
 * All the words are the same length OR
 * None of the words are "prefixes" of any other words on the list OR
 * None of the words are "suffixes" of any other words on the list
 
-For "news", "newspaper" and "elephant", we're a "no" on number 1 (the words are all different lengths), and we're a "no" on number 2, since "news" is a prefix of "newspaper"; But we're saved by option 3: None of the words are suffixes of other words on the list. Thus, it's uniquely decodable.
+For "news", "newspaper" and "elephant", we're a "no" on number 1 (the words are all different lengths, so it could still be either uniquely decodable or not), and we're a "no" on number 2, since "news" is a prefix of "newspaper"; But we're saved by option 3: None of the words are suffixes of other words on the list. Thus, it's uniquely decodable.
 
 ### Are there other ways to verify that a code in uniquely decodable?
 
-What if a list fails all three of the above criteria? It actually still could be uniquely decodable. Consider the list:
+What if a list fails all three of the above criteria? Is it definitely _not_ uniquely decodable? Consider the list:
 
 ```text
 101
@@ -38,7 +44,7 @@ What if a list fails all three of the above criteria? It actually still could be
 1
 ```
 
-Clearly not all the same length. And "1" is a prefix of "101" and a suffix of "0001". And yet! This list is uniquely decodable.
+Clearly not all the same length. And "1" is a prefix of "101" and a suffix of "0001". And yet! I argue that this list is uniquely decodable.
 
 To _know_ this, we can play with some examples, like "110100001101".
 
@@ -48,7 +54,7 @@ To _know_ this, we can play with some examples, like "110100001101".
 * Next, we're got a lot of 0s: 4 of them. This could only be "00" twice.
 * Coincidentally, we finish how we start: "1" + "101"
 
-Giving us a "decoded" message of: `1 101 00 00 1 101`. I argue that there's no _other_ way to decode this message.
+Giving us a "decoded" message of: `1 101 00 00 1 101`. I argue that there's no _other_ way to decode this message, and, in a much larger jump, that there is no message you could write with this code such that it would create an ambiguity.
 
 ### Implications of this example
 
@@ -77,19 +83,18 @@ If any of these dangling suffixes _ARE_ on the original list, we now know the li
 
 A list is uniquely decodable by this method only if, after repeating this process **infinitely**, there's never a dangling suffix that is also on the original list. As you might expect, things get a bit... math-y once we throw in infinity, but \* waves hands \* math!
 
-For me, I needed to see it in code, so this [Jupyter Notebook](https://github.com/danhales/blog-sardinas-patterson/blob/master/index.ipynb) and [blog post](https://towardsdatascience.com/the-sardinas-patterson-algorithm-in-simple-python-9718242752c3) by Dan Hales helped me get start writing a Rust implementation.
+For me, I needed to see it in computer code, so this [Jupyter Notebook](https://github.com/danhales/blog-sardinas-patterson/blob/master/index.ipynb) and [blog post](https://towardsdatascience.com/the-sardinas-patterson-algorithm-in-simple-python-9718242752c3) by Dan Hales helped me get start writing a Rust implementation.
 
 ### My code
-
 Here's [my Rust implementation](https://github.com/sts10/tidy/blob/main/src/display_information/uniquely_decodable.rs), closely adapted from Hales' Python.
 
 The public function in my module is a function called `check_decodability`. It takes a word list and returns a boolean: `true` for uniquely decodable, `false` for not.
 
-And... drumroll... the function returns `true` when given `["101", "00", "0001", "1"]`.
+And... drumroll... the function returns `true` when given our tricky code of `["101", "00", "0001", "1"]`.
 
 ## How can we _make_ a not uniquely decodable code uniquely decodable, while preserving the most amount of words from the original list?
 
-No doubt it's powerful to be able to tell if a given list in uniquely decodable. (We're going to need that later!) But what I'm really after is an "algorithm to remove the fewest number of code words to make a given list uniquely decodable." This is because we want to preserve the most number of words for our long list of words to make passphrases from -- a longer list means (theoretically) stronger passphrases.
+No doubt it's powerful to be able to tell if a given list in uniquely decodable. (We're going to need that later!) But what I'm really after is an **algorithm to remove the fewest number of code words to make a given list uniquely decodable**. Why "the fewest number"? Because we want to _preserve_ the most number of words possible for our long list of words to make passphrases from -- a longer list means (theoretically) stronger passphrases.
 
 To get a better understanding of how this connects to passphrases, let's work through another example.
 
@@ -220,6 +225,8 @@ Again, [here's my code file with the pruning functions on GitHub](https://github
 
 Eventually, I used English word frequency data from Google Ngram project and Wikipedia to create a series of word lists that I call the [Orchard Street Wordlists](https://github.com/sts10/orchard-street-wordlists). All of the lists were made uniquely decodable using the pruning method described in this post. I argue that these lists are able to keep more common words in them due to the higher efficiency of Schlinkert pruning when compared to alternative methods like removing all prefix words.
 
-## More Links
+## 2024 update: A passphrase generator using word lists created by this method
+I've at this point created [a command line passphrase generator called Phraze](https://github.com/sts10/phraze) that includes word lists I made using this pruning technique. 
 
+## More Links
 You can find [more word lists I've created](https://github.com/sts10/generated-wordlists), or [learn more about Tidy](https://github.com/sts10/tidy), the tool I wrote to make creating these word lists easier (which now has a Schlinkert-prune option built in).
