@@ -3,12 +3,11 @@ layout: post
 title: "Sorting a word list by word length and then alphabetically"
 date: 2024-07-06 20:00:00 -0400
 comments: true
-draft: true
 ---
 
-I recently learned about a secrets manager called Passbolt. Given my interest in word lists, I asked them on Mastodon if they use one. They promptly replied that, yes, they do, and provided me with [the GitHub URL to their word list](https://github.com/passbolt/passbolt_styleguide/blob/master/src/shared/lib/SecretGenerator/PassphraseGeneratorWords.js).
+I recently learned about a secrets manager called [Passbolt](https://www.passbolt.com/). Given my interest in word lists, I asked [them on Mastodon](https://mastodon.social/@passbolt) if they use one. They promptly replied that, yes, they do, and provided me with [the GitHub URL to their word list](https://github.com/passbolt/passbolt_styleguide/blob/master/src/shared/lib/SecretGenerator/PassphraseGeneratorWords.js).
 
-As is common, they seem to be using the EFF long list. What was kind of interesting was that, for whatever reason, they sort the list by word length, and then alphabetically. In other words, all the 9-letter words are placed at the top, sorted alphabetically, then the 8-letter words, and so on.
+As is common, they seem to be using the [EFF long list](https://www.eff.org/dice). What was more interesting to me, as a possible contributor, was that, for whatever reason, they sort the list by word length, and then alphabetically. In other words, all the 9-letter words are placed at the top, sorted alphabetically, then the 8-letter words, and so on.
 
 ```text
 "abdominal",
@@ -30,7 +29,7 @@ As is common, they seem to be using the EFF long list. What was kind of interest
 "zit"
 ```
 
-I toyed with the idea of opening a PR suggesting [my Orchard Street Diceware list](https://github.com/sts10/orchard-street-wordlists) instead. But in order to make this PR match their sorting method, I need to write some code. (I of course first trying running a series of Vim commands, but I couldn't figure it out.)
+I toyed with the idea of opening a PR suggesting [my Orchard Street Diceware list](https://github.com/sts10/orchard-street-wordlists) as a replacement. But in order to make this PR match their sorting method, I needed to write some code. (I of course first trying running a series of Vim commands, but I couldn't figure it out.)
 
 Since I already have [a word list manipulation tool written in Rust](https://github.com/sts10/tidy), I figured I'd go ahead and add it as a feature to that program, since I might need to sort lists like this again, or some other user of the tool might appreciation the feature.
 
@@ -51,12 +50,12 @@ pub fn sort_by_length(list: Vec<String>, locale: Locale) -> Vec<String> {
 
 However, this requires the second sort to be a "stable sort." From [a popular Stack Overflow answer](https://stackoverflow.com/a/1517824) I just found:
 
-> A sorting algorithm is said to be stable if two objects with equal keys appear in the same order in sorted output as they appear in the input array to be sorted
+> A sorting algorithm is said to be stable if two objects with equal keys appear in the same order in sorted output as they appear in the input array to be sorted.
 
 This is a downside, since at a later time we might want to make the second sort an unstable sort, something we might want to do to speed the process up.
 
 ## Custom Ordering function
-I figured it would be better to do both comparisons "at the same time". This led me to interrogate that little [`cmp`](https://doc.rust-lang.org/std/cmp/) method and see how to open it up for more customization. 
+I figured it would be better to do both comparisons "at the same time". This led me to interrogate that little [`cmp`](https://doc.rust-lang.org/std/cmp/) method and see how to open it up for more customization or replace it with something lower level.
 
 I landed on this solution, where I defined a helper function that returns an [`Ordering`](https://doc.rust-lang.org/std/cmp/enum.Ordering.html) enum just how I want it.
 
@@ -92,8 +91,7 @@ fn compare_by_length_then_alphabetically(
 ```
 
 ## A more concise version
-
-Thanks to [a Fediverse friend](https://mastodon.online/@latk), we were able to make this code more concise by using [`then_with`](https://doc.rust-lang.org/std/cmp/enum.Ordering.html#method.then_with), which allows us to "chains the ordering with the given function." I couldn't quite get a handle on this at first, but here's what it looks like:
+Thanks to [a Fediverse friend](https://mastodon.online/@latk), we were able to make this code more concise by using [`then_with`](https://doc.rust-lang.org/std/cmp/enum.Ordering.html#method.then_with), which allows us to "chains the ordering with the given function." I couldn't quite get a handle on this at first, but with some more help here's what it looks like:
 
 ```rust
 /// Sort by word length, with longest words first. For words of equal length, sorts
@@ -115,7 +113,10 @@ pub fn sort_by_length(list: Vec<String>, locale: Locale) -> Vec<String> {
 }
 ```
 
-This more concise solution seems to work just as well as the second solution, so I'll take it. [Here it is in the project, Tidy](https://github.com/sts10/tidy/blob/95cc57c576f72372344f62ef2b9289e284422eeb/src/list_manipulations.rs#L35-L43). 
+This more concise solution seems to work just as well as the second solution, so let's use it! [Here it is in the project, Tidy](https://github.com/sts10/tidy/blob/main/src/list_manipulations.rs#L35-L52). 
 
 But I did want to paste that second, longer solution somewhere I could find it later if I needed to get down into the nitty gritty of writing a helper function that returns an Ordering enum again.
 
+## Epilogue
+
+I did end up submitting [a PR to the relevant Passbolt repository, proposing my Orchard Street Diceware list, nicely sorted](https://github.com/passbolt/passbolt_styleguide/pull/39), but they want me to sign a Contributor License Agreement (CLA), and I'm still mulling over whether to sign it.
