@@ -382,3 +382,7 @@ I [welcome arguments for or against NFKD, though](https://github.com/sts10/gener
 If you're interested in the _history_ of alphabetization (which, yes, is a thing), I recommend [_A Place for Everything: The Curious History of Alphabetical Order_ by Judith Flanders](https://bookshop.org/p/books/a-place-for-everything-the-curious-history-of-alphabetical-order-judith-flanders/14458009?ean=9781541601161).
 
 After writing the post, I found [this blog post that seems like a very thorough on Unicode](https://tonsky.me/blog/unicode/).
+
+## Further reading
+
+[I recently wrote another post about sorting words with Rust if you want more.](https://sts10.github.io/2024/07/06/double-sorting.html) 
