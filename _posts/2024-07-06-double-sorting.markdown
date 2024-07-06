@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Sorting a word list by word length and then alphabetically"
-date: 2024-07-06 20:00:00 -0400
+date: 2024-07-05 20:00:00 -0400
 comments: true
 ---
 
