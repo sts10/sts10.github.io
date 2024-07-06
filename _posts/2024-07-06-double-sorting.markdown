@@ -33,6 +33,8 @@ I toyed with the idea of opening a PR suggesting [my Orchard Street Diceware lis
 
 Since I already have [a word list manipulation tool written in Rust](https://github.com/sts10/tidy), I figured I'd go ahead and add it as a feature to that program, since I might need to sort lists like this again, or some other user of the tool might appreciation the feature.
 
+Also, if you're interested in sorting words using Rust, you might like [this post I wrote last year that's sort of a Part 1 to this post](https://sts10.github.io/2023/01/29/sorting-words-alphabetically-rust.html).
+
 ## A naive, twice-sorting approach
 I'm not a computer science student, so I don't know much about the ins and outs of different approaches to sorting and the different results you may get. But apparently, you can get this desired order by first sorting the inputted words alphabetically, and _then_ by word length.
 
