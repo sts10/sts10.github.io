@@ -119,4 +119,4 @@ But I did want to paste that second, longer solution somewhere I could find it l
 
 ## Epilogue
 
-I did end up submitting [a PR to the relevant Passbolt repository, proposing my Orchard Street Diceware list, nicely sorted](https://github.com/passbolt/passbolt_styleguide/pull/39), but they want me to sign a Contributor License Agreement (CLA), and I'm still mulling over whether to sign it.
+I did end up submitting [a PR to the relevant Passbolt repository, proposing my Orchard Street Diceware list, nicely sorted](https://github.com/passbolt/passbolt_styleguide/pull/39), but they want me to sign a Contributor License Agreement (CLA), and I'm still mulling over whether to sign it. But at least we got a new feature for Tidy out of this little adventure!
