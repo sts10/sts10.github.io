@@ -38,7 +38,7 @@ So here was my idea for using one of these filters with my Medic program:
 
 From [the xorf crate docs](https://docs.rs/xorf/latest/xorf/), I found [this relevant example](https://docs.rs/xorf/latest/xorf/struct.BinaryFuse32.html). For testing purposes, I adapted it to use the first 10.4 million lines of the [HIBP password file](https://haveibeenpwned.com/Passwords).
 
-One catch I encountered is that the way xorf set up its binary fuse filter, it only excepts elements of 64-bit unsigned integers (`u64` in Rust speak). This is an issue since each password digest from HIBP is given in the form of a SHA-1 digest, which is by definition 120 bits.
+One catch I encountered is that the way xorf set up its binary fuse filter, it only accepts elements of 64-bit unsigned integers (`u64` in Rust speak). This is an issue since each password digest from HIBP is given in the form of a SHA-1 digest, which is by definition 120 bits.
 
 So I wrote a function that takes the first 16 characters of a SHA-1 hash digest and converts that into a `u64`: 
 ```rust
@@ -281,3 +281,6 @@ Part of me now thinks that most of the check time is taken up by reading 847M re
 I'll keep playing with this this week, cuz I think it's interesting stuff (and if that C++ example is anything to go on, I chose a good tool for my problem). 
 
 If you spot any mistakes that are slowing this code down, or have any tips or ideas or questions, [let me know on Mastodon](https://hachyderm.io/@schlink).
+
+Note from 2024: Here's [a "fast Bloom filter implementation in Rust"](https://github.com/jedisct1/rust-bloom-filter) that might be helpful to check out.
+
