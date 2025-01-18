@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" class="light" dir="ltr">
+<html lang="en" class="light sidebar-visible" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -7,7 +7,7 @@
 
 
         <!-- Custom HTML head -->
-        
+
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
@@ -30,15 +30,17 @@
 
         <!-- Custom theme stylesheets -->
 
-    </head>
-    <body class="sidebar-visible no-js">
-    <div id="body-container">
+
         <!-- Provide site root to javascript -->
         <script>
             var path_to_root = "../";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
-
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script>
             try {
@@ -60,19 +62,16 @@
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
-            var html = document.querySelector('html');
+            const html = document.documentElement;
             html.classList.remove('light')
             html.classList.add(theme);
-            var body = document.querySelector('body');
-            body.classList.remove('no-js')
-            body.classList.add('js');
+            html.classList.add("js");
         </script>
 
         <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var body = document.querySelector('body');
             var sidebar = null;
             var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
@@ -82,45 +81,25 @@
                 sidebar = 'hidden';
             }
             sidebar_toggle.checked = sidebar === 'visible';
-            body.classList.remove('sidebar-visible');
-            body.classList.add("sidebar-" + sidebar);
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../welcome.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../installing-on-oryx.html"><strong aria-hidden="true">2.</strong> Installing a Fresh Distro on Oryx Pro</a></li><li class="chapter-item expanded "><a href="../initial-setup/index.html"><strong aria-hidden="true">3.</strong> Initial Setup</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../initial-setup/basics.html"><strong aria-hidden="true">3.1.</strong> Basics</a></li><li class="chapter-item expanded "><a href="../initial-setup/bashrc-and-konsole.html"><strong aria-hidden="true">3.2.</strong> bashrc and terminal</a></li><li class="chapter-item expanded "><a href="../initial-setup/git.html"><strong aria-hidden="true">3.3.</strong> Git</a></li><li class="chapter-item expanded "><a href="../initial-setup/neovim.html"><strong aria-hidden="true">3.4.</strong> Neovim</a></li><li class="chapter-item expanded "><a href="../initial-setup/keepassxc.html"><strong aria-hidden="true">3.5.</strong> KeePassXC</a></li><li class="chapter-item expanded "><a href="../initial-setup/syncthing.html"><strong aria-hidden="true">3.6.</strong> Syncthing</a></li><li class="chapter-item expanded "><a href="../initial-setup/standard-notes.html"><strong aria-hidden="true">3.7.</strong> Standard Notes</a></li><li class="chapter-item expanded "><a href="../initial-setup/pgp.html"><strong aria-hidden="true">3.8.</strong> PGP</a></li><li class="chapter-item expanded "><a href="../initial-setup/other-apps.html"><strong aria-hidden="true">3.9.</strong> Other Apps to Install</a></li><li class="chapter-item expanded "><a href="../initial-setup/chrome-and-flash.html"><strong aria-hidden="true">3.10.</strong> Chrome and Flash</a></li><li class="chapter-item expanded "><a href="../initial-setup/dev-env/index.html"><strong aria-hidden="true">3.11.</strong> Development Environment</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../initial-setup/dev-env/python-pyenv.html"><strong aria-hidden="true">3.11.1.</strong> Python and pyenv</a></li><li class="chapter-item expanded "><a href="../initial-setup/dev-env/ruby-and-rbenv.html"><strong aria-hidden="true">3.11.2.</strong> Ruby and rbenv</a></li><li class="chapter-item expanded "><a href="../initial-setup/dev-env/rust.html"><strong aria-hidden="true">3.11.3.</strong> Rust</a></li><li class="chapter-item expanded "><a href="../initial-setup/dev-env/golang.html"><strong aria-hidden="true">3.11.4.</strong> Golang</a></li><li class="chapter-item expanded "><a href="../initial-setup/dev-env/github-and-ssh.html"><strong aria-hidden="true">3.11.5.</strong> GitHub and ssh keys</a></li><li class="chapter-item expanded "><a href="../initial-setup/dev-env/jekyll.html"><strong aria-hidden="true">3.11.6.</strong> GitHub blog with Jekyll</a></li></ol></li><li class="chapter-item expanded "><a href="../initial-setup/gnome-setup.html"><strong aria-hidden="true">3.12.</strong> GNOME Setup</a></li><li class="chapter-item expanded "><a href="../initial-setup/kde-setup.html"><strong aria-hidden="true">3.13.</strong> KDE Setup and Troubleshooting</a></li><li class="chapter-item expanded "><a href="../initial-setup/redshift.html"><strong aria-hidden="true">3.14.</strong> Redshift</a></li><li class="chapter-item expanded "><a href="../initial-setup/battery-management.html"><strong aria-hidden="true">3.15.</strong> Battery and TLP</a></li><li class="chapter-item expanded "><a href="../initial-setup/rsync.html"><strong aria-hidden="true">3.16.</strong> rsync</a></li><li class="chapter-item expanded "><a href="../initial-setup/restic.html" class="active"><strong aria-hidden="true">3.17.</strong> restic</a></li><li class="chapter-item expanded "><a href="../initial-setup/images-and-video.html"><strong aria-hidden="true">3.18.</strong> Images and Video</a></li><li class="chapter-item expanded "><a href="../initial-setup/go.html"><strong aria-hidden="true">3.19.</strong> Go and Sabaki</a></li></ol></li><li class="chapter-item expanded "><a href="../rust-command-line-tools.html"><strong aria-hidden="true">4.</strong> Rust Command Line Tools</a></li><li class="chapter-item expanded "><a href="../cargo-dist-tips.html"><strong aria-hidden="true">5.</strong> Cargo-dist tips</a></li><li class="chapter-item expanded "><a href="../installing-ubuntu-on-an-old-macbook-pro.html"><strong aria-hidden="true">6.</strong> Installing Ubuntu on my 2009 MacBook Pro</a></li><li class="chapter-item expanded "><a href="../security/index.html"><strong aria-hidden="true">7.</strong> Security Apps and Tools</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../security/moving-files.html"><strong aria-hidden="true">7.1.</strong> Tools for moving files between computers</a></li><li class="chapter-item expanded "><a href="../security/using-a-yubikey-from-a-smartcard-on-ubuntu.html"><strong aria-hidden="true">7.2.</strong> YubiKey</a></li><li class="chapter-item expanded "><a href="../security/pidgin-google-and-otr.html"><strong aria-hidden="true">7.3.</strong> Pidgin, Gchat, and OTR</a></li></ol></li><li class="chapter-item expanded "><a href="../other-des/index.html"><strong aria-hidden="true">8.</strong> Other DEs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../other-des/customizing-appearance-of-xfce-ubuntu.html"><strong aria-hidden="true">8.1.</strong> Customizing XFCE (Ubuntu base)</a></li><li class="chapter-item expanded "><a href="../other-des/notes-on-i3.html"><strong aria-hidden="true">8.2.</strong> Notes on i3</a></li><li class="chapter-item expanded "><a href="../other-des/other-desktop-environments.html"><strong aria-hidden="true">8.3.</strong> Other DEs</a></li></ol></li><li class="chapter-item expanded "><a href="../e-reader.html"><strong aria-hidden="true">9.</strong> E-reader Tips</a></li><li class="chapter-item expanded "><a href="../lubuntu/index.html"><strong aria-hidden="true">10.</strong> Lubuntu</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../lubuntu/switching-to-lubuntu.html"><strong aria-hidden="true">10.1.</strong> Switching to Lubuntu</a></li><li class="chapter-item expanded "><a href="../lubuntu/improving-lubuntu.html"><strong aria-hidden="true">10.2.</strong> Improving Lubuntu</a></li><li class="chapter-item expanded "><a href="../lubuntu/remapping-control-and-caps-lock-lubuntu.html"><strong aria-hidden="true">10.3.</strong> Remapping Caps Lock to Control</a></li><li class="chapter-item expanded "><a href="../lubuntu/using-neovim-in-lubuntu.html"><strong aria-hidden="true">10.4.</strong> Using Neovim</a></li><li class="chapter-item expanded "><a href="../lubuntu/rbenv-on-lubuntu.html"><strong aria-hidden="true">10.5.</strong> Using Rbenv</a></li><li class="chapter-item expanded "><a href="../lubuntu/configuring-openbox-on-lubuntu.html"><strong aria-hidden="true">10.6.</strong> Configuring OpenBox</a></li></ol></li></ol>
-            </div>
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
             </div>
         </nav>
 
-        <!-- Track and set sidebar scroll position -->
-        <script>
-            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
-            sidebarScrollbox.addEventListener('click', function(e) {
-                if (e.target.tagName === 'A') {
-                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
-                }
-            }, { passive: true });
-            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
-            sessionStorage.removeItem('sidebar-scroll');
-            if (sidebarScrollTop) {
-                // preserve sidebar scroll position when navigating via links within sidebar
-                sidebarScrollbox.scrollTop = sidebarScrollTop;
-            } else {
-                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
-                var activeSection = document.querySelector('#sidebar .active');
-                if (activeSection) {
-                    activeSection.scrollIntoView({ block: 'center' });
-                }
-            }
-        </script>
-
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
                         <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -308,6 +287,22 @@ age -d important_documents.tar.gz.age | tar -xzv
 
         </div>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
 
 
 
