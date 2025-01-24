@@ -15,4 +15,4 @@ Exciting news! One of my Orchard Street Wordlists in now available to users of t
 
 Since Strongbox is [open source](https://github.com/strongbox-password-safe/Strongbox), we can [see the Orchard Street Medium list in this GitHub repository](https://github.com/strongbox-password-safe/Strongbox/blob/master/resources/wordlists/orchard-street-medium.txt).
 
-Hopefully the first of many programs to use my Orchard Street Wordlists, [which are available on GitHub](https://github.com/sts10/orchard-street-wordlists).
+This will hopefully be the first of many programs to use my Orchard Street Wordlists, [which are available on GitHub](https://github.com/sts10/orchard-street-wordlists)!
