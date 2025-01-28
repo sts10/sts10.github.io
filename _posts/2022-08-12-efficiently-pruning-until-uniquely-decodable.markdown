@@ -226,7 +226,7 @@ Again, [here's my code file with the pruning functions on GitHub](https://github
 Eventually, I used English word frequency data from Google Ngram project and Wikipedia to create a series of word lists that I call the [Orchard Street Wordlists](https://github.com/sts10/orchard-street-wordlists). All of the lists were made uniquely decodable using the pruning method described in this post. I argue that these lists are able to keep more common words in them due to the higher efficiency of Schlinkert pruning when compared to alternative methods like removing all prefix words.
 
 ## 2024 update: A passphrase generator using word lists created by this method
-I've at this point created [a command line passphrase generator called Phraze](https://github.com/sts10/phraze) that includes word lists I made using this pruning technique. 
+In 2024, I created [a command line passphrase generator called Phraze](https://github.com/sts10/phraze) that includes word lists I made using this pruning technique. 
 
 ## More Links
 You can find [more word lists I've created](https://github.com/sts10/generated-wordlists), or [learn more about Tidy](https://github.com/sts10/tidy), the tool I wrote to make creating these word lists easier (which now has a Schlinkert-prune option built in).
