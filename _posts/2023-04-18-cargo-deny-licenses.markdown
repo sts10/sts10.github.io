@@ -13,7 +13,7 @@ Naturally, I wondered if any of my personal coding projects, mostly released und
 
 I knew that Rust's `Cargo.toml` provides the ability to specify the project's license. So it followed that there very likely existed a programmatic way to check the licenses of all of a project's dependencies. 
 
-Sure enough, a tool called [cargo-deny](https://github.com/EmbarkStudios/cargo-deny) offers such a check. To sue cargo-deny's phrasing, the tool provides [a "licenses check"](https://github.com/EmbarkStudios/cargo-deny#licenses) that allows users to "verify that every crate you use has license terms you find acceptable." [More info here](https://embarkstudios.github.io/cargo-deny/checks/licenses/index.html).
+Sure enough, a tool called [cargo-deny](https://github.com/EmbarkStudios/cargo-deny) offers such a check. To use cargo-deny's phrasing, the tool provides [a "licenses check"](https://github.com/EmbarkStudios/cargo-deny#licenses) that allows users to "verify that every crate you use has license terms you find acceptable." [More info here](https://embarkstudios.github.io/cargo-deny/checks/licenses/index.html).
 
 ## How to use cargo-deny to check "that every crate you use has license terms you find acceptable"
 
