@@ -141,3 +141,7 @@ I am kind of bummed that I didn't give Debian a shot (though, phew, they don't m
 I don't know if I'd _buy_ an X40? It looks like they go for anywhere [between $30 and $120+ on eBay](https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2334524.m570.l1313&_nkw=ibm+thinkpad+x220&_sacat=0&LH_TitleDesc=0&_odkw=ibm+thinkpad+x230&_osacat=0) as I write this. I'd peruse [r/thinkpad](https://www.reddit.com/r/thinkpad/) and [r/LinuxOnThinkPad](https://www.reddit.com/r/LinuxOnThinkpad/) a bit first before buying.
 
 [Let me know](https://hachyderm.io/@schlink) if you have any suggestions for other distros, software, or fonts!
+
+### Update from 2025
+
+Just learned about [Tinker Writer Deck](https://tinker.sh/), which promises to "Convert any laptop and most chromebooks into a writer deck. A device designed solely for writing." It probably won't work on my particular ThinkPad due to its chip architecture, but I figure folks finding this article might be interested in it! Neat idea!
