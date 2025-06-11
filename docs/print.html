@@ -1022,7 +1022,8 @@ fi
 <p>If the external monitor appears in the layout, it may just be "disabled". If that's the case, go to the drop-down menu on the right side of the window labeled "Configuration" and try choosing "X screen 0".</p>
 <p><a href="https://askubuntu.com/questions/1083733/kubuntu-18-04-laptop-wont-recognize-external-monitor">An AskUbuntu question about this issue</a></p>
 <h4 id="are-your-drivers-up-to-date"><a class="header" href="#are-your-drivers-up-to-date">Are your drivers up-to-date?</a></h4>
-<p>If your machine isn't recognizing an external monitor, another possible issue may be that you need to upgrade your NVIDIA to match your current Linux kernel. For example, at one point I needed to upgrade to 515 by running <code>sudo apt install nvidia-driver-515</code>. How could I have known I needed to do this? <a href="https://chat.pop-os.org/pop-os/pl/c8c6qrkfztdbujy5js8wc6gg9o">A helpful Mattermost users writes</a>:</p>
+<p>If your machine isn't recognizing an external monitor, another possible issue may be that you need to upgrade your NVIDIA to match your current Linux kernel. For example, at one point I needed to upgrade to 515 by running <code>sudo apt install nvidia-driver-515</code>. Probably should run <code>flatpak update</code> right after.</p>
+<p>How could I have known I needed to do this? <a href="https://chat.pop-os.org/pop-os/pl/c8c6qrkfztdbujy5js8wc6gg9o">A helpful Mattermost users writes</a>:</p>
 <blockquote>
 <p>From the apt upgrade output, it probably said something about the Nvidia DKMS module not working with the 6.0.2 kernel. From there you'd have to know to try other Nvidia driver versions. Also we just released some updates that should make this not happen as much. It's definitely not ideal for this to happen.</p>
 </blockquote>
