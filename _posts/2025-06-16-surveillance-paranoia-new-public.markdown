@@ -5,13 +5,13 @@ date: 2025-06-16 14:00:00 -0400
 comments: true
 ---
 
-The first time I read Virginia Woolf's Mrs. Dalloway, in the spring of 2023, I admit that I don't think I quite understood it.
+The first time I read Virginia Woolf's _Mrs. Dalloway_, in the spring of 2023, I admit that I don't think I quite understood it.
 
 Wanting another shot at it, I attended a seminar to learn more about the classic tale of Woolf’s famous hostess. Luckily, the edition that the seminar read was [the beautiful Norton Annotated edition](https://wwnorton.com/books/9781631496769?_bhlid=14ec2da06c31377ab855b6edc55e79604e794818) with introduction and extensive annotations by [Merve Emre](https://www.merveemre.com/?_bhlid=54607afe572e46f0e97d0b7ba6318c98c9255536), a favorite critic of mine.
 
 Emre's annotations really helped me keep track of what was going on, as well as where we were, physically, in London.
 
-Obviously tons of essays and reviews have been written on Woolf and Mrs. Dalloway, and there will be a slew more this spring/year for the book’s 100th anniversary. I'm not an expert, but I did want to get down a few notes from this particular re-read and seminar, if for no one else than my future self. 
+Obviously tons of essays and reviews have been written on Woolf and _Mrs. Dalloway_, and there will be a slew more this spring/year for the book’s 100th anniversary. I'm not an expert, but I did want to get down a few notes from this particular re-read and seminar, if for no one else than my future self. 
 
 ## The invention of (public) space
 One of the scenes that we focused on in the seminar was the sky-writing scene. In it, a variety of Londoners, from a variety of stations of life, stop their day to look up at an airplane writing something with smoke in the air. These Londoners do not know each other, and yet they have now had a shared experience.
