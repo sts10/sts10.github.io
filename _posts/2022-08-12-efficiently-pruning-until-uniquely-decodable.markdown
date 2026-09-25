@@ -186,13 +186,13 @@ Rather than have to check both ways every time, we should amend the Schlinkert p
 /// Executes Schlinkert prune. Attempts to make list uniquely decodable
 /// by removing the fewest number of code words possible. Adapted from
 /// Sardinas-Patterson algorithm.
-/// Runs word list in both as given and reversed, prefering which ever
+/// Runs word list both as given and reversed, returning which ever
 /// preserves more words from the given list.
 pub fn schlinkert_prune(list: &[String]) -> Vec<String> {
     let offenders_to_remove_forwards = get_sardinas_patterson_final_intersection(list);
     // Reversing all words before running the Schlinkert prune gives a
-    // different list of offending words. (We then have to un-reverse all the
-    // offending words.)
+    // different list of offending words. (We then have to un-reverse 
+    all the // offending words.)
     let offenders_to_remove_backwards = reverse_all_words(
         &get_sardinas_patterson_final_intersection(&reverse_all_words(list)),
     );
